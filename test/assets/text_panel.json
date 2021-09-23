@@ -1,0 +1,12 @@
+[
+	{
+		"CommandType": "SetTextPanelValue",
+		"TextPanelId": "TextPanel-0",
+		"Value": "Text"
+	},
+	{
+		"CommandType": "SetTextPanelTitle",
+		"TextPanelId": "TextPanel-0",
+		"Value": "Title"
+	}
+]

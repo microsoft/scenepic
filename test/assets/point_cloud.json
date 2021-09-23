@@ -1,0 +1,20 @@
+{
+	"CameraSpace": false,
+	"CommandType": "DefineMesh",
+	"Definition": {
+		"IndexBufferType": "UInt16",
+		"InstanceBuffer": "eAF1k4ENxCAMA9nsV/vNulobhKOLE5Cqd/U2tR1Y6/+s9izibyX+gXdw4eJ946PdmHxh7h2LWNpY5AvDS+DUBpY2MPnSWI7MAO3G5JPnOacMvu+gKc/RqqvkC7NLcrXQVfKF0T33VleJyZd/aEsOaNVV8tnj4L3N2Htnj57VM7sP7kvetMgXVl79T0wd+fIPbZmbf4f8886z3O4MfZHP3qfZeg6bU7sr6sqzWubUmqfyDWrIxy/vZTl37JV86HiPyznlHMjHd9qd9FmZr3am0VWbLb3Ly21mt05vmW+eRs0L16vf1X0AAAAD",
+		"InstanceBufferHasColors": false,
+		"InstanceBufferHasRotations": false,
+		"LineBuffer": "eAEDAAAAAAEAAAAAAg==",
+		"PrimitiveType": "MultiColorMesh",
+		"TriangleBuffer": "eAENxEkCQDAQALDYKYqi/v9Tc0hotIRObzDGo8lskeJktdnlODucLiUubo9XjavPDycwAZkMAAAAAw==",
+		"VertexBuffer": "eAGN0ssNgCAQBFBvJhRBYh0kcrME66EBq7AB7x4owAJsxyCfbEhmBxNPvDDDgnnP25R/al+Ix7X7xT7rbDdf1h0xaX3EsCxhgq8KZ1HjiPnPNmZaZ4+zoKkzZIZlCRMi6CyyqEkz1Ey9i4F9cl+9DzTdDFXDssQMc298Lmi6t6oamPUBziMCEBgAAAAJ"
+	},
+	"DoubleSided": false,
+	"IsBillboard": false,
+	"IsLabel": false,
+	"LayerId": null,
+	"MeshId": "point_cloud",
+	"VRWorldLocked": false
+}

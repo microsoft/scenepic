@@ -1,0 +1,217 @@
+[
+	{
+		"CommandType": "SetFPS",
+		"Value": 30.0
+	},
+	{
+		"CameraSpace": false,
+		"CommandType": "DefineMesh",
+		"Definition": {
+			"IndexBufferType": "UInt16",
+			"LineBuffer": "eAEDAAAAAAEAAAAAAg==",
+			"PrimitiveType": "MultiColorMesh",
+			"TriangleBuffer": "eAEBBgD5/wAAAQACAAAOAAQBAAAAAw==",
+			"VertexBuffer": "eAGFijENADAIBNnqgqRG+lslVE8N4AUfmCKElcBtdzmiig/Rh812Fl+Ez0+27nGm+w8IAwAAAAk="
+		},
+		"DoubleSided": false,
+		"IsBillboard": false,
+		"IsLabel": false,
+		"LayerId": null,
+		"MeshId": "base",
+		"VRWorldLocked": false
+	},
+	{
+		"BaseMeshId": "base",
+		"CommandType": "UpdateMesh",
+		"FrameIndex": 0,
+		"MeshId": "Mesh-1",
+		"VertexBuffer": "eAFtiLEJAAAAgvqs1zq9oaGGBBEEHmJ8f9tvaP8DvAMAAAAG"
+	},
+	{
+		"BaseMeshId": "base",
+		"CommandType": "UpdateMesh",
+		"FrameIndex": 19,
+		"MeshId": "Mesh-20",
+		"VertexBuffer": "eAFtiLEJAAAIw/pTD/AoH/B0dVJKAyEQwFGxkjnV/3u/AZdJBNQDAAAABg=="
+	},
+	{
+		"BaseMeshId": "base",
+		"CommandType": "UpdateMesh",
+		"FrameIndex": 1,
+		"KeyframeIndex": 0,
+		"MaxValue": 0.05000000074505806,
+		"MeshId": "Mesh-2",
+		"MinValue": 0.0,
+		"QuantizedBuffer": "eAFjYEAG//+jcKEAACr5Af8DAAAABg=="
+	},
+	{
+		"BaseMeshId": "base",
+		"CommandType": "UpdateMesh",
+		"FrameIndex": 2,
+		"KeyframeIndex": 0,
+		"MaxValue": 0.10000000149011612,
+		"MeshId": "Mesh-3",
+		"MinValue": 0.0,
+		"QuantizedBuffer": "eAFjYEAG//+jcKEAACr5Af8DAAAABg=="
+	},
+	{
+		"BaseMeshId": "base",
+		"CommandType": "UpdateMesh",
+		"FrameIndex": 3,
+		"KeyframeIndex": 0,
+		"MaxValue": 0.15000000596046448,
+		"MeshId": "Mesh-4",
+		"MinValue": 0.0,
+		"QuantizedBuffer": "eAFjYEAG//6jcKEAACrjAf4DAAAABg=="
+	},
+	{
+		"BaseMeshId": "base",
+		"CommandType": "UpdateMesh",
+		"FrameIndex": 4,
+		"KeyframeIndex": 0,
+		"MaxValue": 0.20000000298023224,
+		"MeshId": "Mesh-5",
+		"MinValue": 0.0,
+		"QuantizedBuffer": "eAFjYEAG//+jcKEAACr5Af8DAAAABg=="
+	},
+	{
+		"BaseMeshId": "base",
+		"CommandType": "UpdateMesh",
+		"FrameIndex": 5,
+		"KeyframeIndex": 0,
+		"MaxValue": 0.25,
+		"MeshId": "Mesh-6",
+		"MinValue": 0.0,
+		"QuantizedBuffer": "eAFjYEAG//+jcKEAACr5Af8DAAAABg=="
+	},
+	{
+		"BaseMeshId": "base",
+		"CommandType": "UpdateMesh",
+		"FrameIndex": 6,
+		"KeyframeIndex": 0,
+		"MaxValue": 0.30000001192092896,
+		"MeshId": "Mesh-7",
+		"MinValue": 0.0,
+		"QuantizedBuffer": "eAFjYEAG//6jcKEAACrjAf4DAAAABg=="
+	},
+	{
+		"BaseMeshId": "base",
+		"CommandType": "UpdateMesh",
+		"FrameIndex": 7,
+		"KeyframeIndex": 0,
+		"MaxValue": 0.34999999403953552,
+		"MeshId": "Mesh-8",
+		"MinValue": 0.0,
+		"QuantizedBuffer": "eAFjYEAG//+jcKEAACr5Af8DAAAABg=="
+	},
+	{
+		"BaseMeshId": "base",
+		"CommandType": "UpdateMesh",
+		"FrameIndex": 8,
+		"KeyframeIndex": 0,
+		"MaxValue": 0.40000000596046448,
+		"MeshId": "Mesh-9",
+		"MinValue": 0.0,
+		"QuantizedBuffer": "eAFjYEAG//+jcKEAACr5Af8DAAAABg=="
+	},
+	{
+		"BaseMeshId": "base",
+		"CommandType": "UpdateMesh",
+		"FrameIndex": 9,
+		"KeyframeIndex": 0,
+		"MaxValue": 0.44999998807907104,
+		"MeshId": "Mesh-10",
+		"MinValue": 0.0,
+		"QuantizedBuffer": "eAFjYEAG//+jcKEAACr5Af8DAAAABg=="
+	},
+	{
+		"BaseMeshId": "base",
+		"CommandType": "UpdateMesh",
+		"FrameIndex": 10,
+		"KeyframeIndex": 19,
+		"MaxValue": 0.0,
+		"MeshId": "Mesh-11",
+		"MinValue": -0.44999998807907104,
+		"QuantizedBuffer": "eAH7/x8ZMDCgcKEAAGzTId8DAAAABg=="
+	},
+	{
+		"BaseMeshId": "base",
+		"CommandType": "UpdateMesh",
+		"FrameIndex": 11,
+		"KeyframeIndex": 19,
+		"MaxValue": 0.0,
+		"MeshId": "Mesh-12",
+		"MinValue": -0.39999997615814209,
+		"QuantizedBuffer": "eAH7/x8ZMDCgcKEAAGzTId8DAAAABg=="
+	},
+	{
+		"BaseMeshId": "base",
+		"CommandType": "UpdateMesh",
+		"FrameIndex": 12,
+		"KeyframeIndex": 19,
+		"MaxValue": 0.0,
+		"MeshId": "Mesh-13",
+		"MinValue": -0.34999996423721313,
+		"QuantizedBuffer": "eAH7/x8ZMDCgcKEAAGzTId8DAAAABg=="
+	},
+	{
+		"BaseMeshId": "base",
+		"CommandType": "UpdateMesh",
+		"FrameIndex": 13,
+		"KeyframeIndex": 19,
+		"MaxValue": 0.0,
+		"MeshId": "Mesh-14",
+		"MinValue": -0.30000001192092896,
+		"QuantizedBuffer": "eAH79/8fEmRgQObBIABrkyHOAwAAAAY="
+	},
+	{
+		"BaseMeshId": "base",
+		"CommandType": "UpdateMesh",
+		"FrameIndex": 14,
+		"KeyframeIndex": 19,
+		"MaxValue": 0.0,
+		"MeshId": "Mesh-15",
+		"MinValue": -0.25,
+		"QuantizedBuffer": "eAH7/x8ZMDCgcKEAAGzTId8DAAAABg=="
+	},
+	{
+		"BaseMeshId": "base",
+		"CommandType": "UpdateMesh",
+		"FrameIndex": 15,
+		"KeyframeIndex": 19,
+		"MaxValue": 0.0,
+		"MeshId": "Mesh-16",
+		"MinValue": -0.19999998807907104,
+		"QuantizedBuffer": "eAH7/x8ZMDCgcKEAAGzTId8DAAAABg=="
+	},
+	{
+		"BaseMeshId": "base",
+		"CommandType": "UpdateMesh",
+		"FrameIndex": 16,
+		"KeyframeIndex": 19,
+		"MaxValue": 0.0,
+		"MeshId": "Mesh-17",
+		"MinValue": -0.14999997615814209,
+		"QuantizedBuffer": "eAH7/x8ZMDCgcKEAAGzTId8DAAAABg=="
+	},
+	{
+		"BaseMeshId": "base",
+		"CommandType": "UpdateMesh",
+		"FrameIndex": 17,
+		"KeyframeIndex": 19,
+		"MaxValue": 0.0,
+		"MeshId": "Mesh-18",
+		"MinValue": -0.099999964237213135,
+		"QuantizedBuffer": "eAH7/x8ZMDCgcKEAAGzTId8DAAAABg=="
+	},
+	{
+		"BaseMeshId": "base",
+		"CommandType": "UpdateMesh",
+		"FrameIndex": 18,
+		"KeyframeIndex": 19,
+		"MaxValue": 0.0,
+		"MeshId": "Mesh-19",
+		"MinValue": -0.050000011920928955,
+		"QuantizedBuffer": "eAH7/x8ZMDCgcKEAAGzTId8DAAAABg=="
+	}
+]

@@ -1,0 +1,3 @@
+"""SVT version."""
+
+__version__ = "@SCENEPIC_VERSION@"

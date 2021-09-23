@@ -1,0 +1,92 @@
+{
+	"CanvasId": "Canvas-0",
+	"CommandType": "CanvasCommands",
+	"Commands": [
+		{
+			"CommandType": "SetCamera",
+			"Value": {
+				"Projection": "eAFtiLEJADAIBL/KEKkySuayClnFNQRrd3EIETvx4Dg4+vuiQcOz8xRIi+Us2QDh0AhlBAAAAAQ=",
+				"WorldToCamera": "eAGNyDERAAAMArF3VmtIqzSOmYWMAR1lOX3OZYQEPQQAAAAE"
+			}
+		},
+		{
+			"CommandType": "SetShading",
+			"Value": {
+				"AmbientLightColor": "eAEzNja2N4ZiABBKAokDAAAAAQ==",
+				"BackgroundColor": "eAFjYEAAAAAMAAEDAAAAAQ==",
+				"DirectionalLightColor": "eAGbNXOm3SwoBgApbQYfAwAAAAE=",
+				"DirectionalLightDir": "eAEBDADz/wAAAEAAAIA/AAAAQAbHAUABAAAAAw=="
+			}
+		},
+		{
+			"CommandType": "ConfigureUserInterface",
+			"MouseWheelTranslationSpeed": 0.0050000000000000001,
+			"PointerAltKeyMultiplier": 0.20000000000000001,
+			"PointerRotationSpeed": 0.01
+		},
+		{
+			"CommandType": "SetLayerSettings",
+			"Value": {
+				"one": {
+					"filled": true,
+					"opacity": 0.5,
+					"renderOrder": 1,
+					"wireframe": false
+				},
+				"two": {
+					"filled": true,
+					"opacity": 0.90000000000000002,
+					"wireframe": false
+				}
+			}
+		},
+		[
+			{
+				"CommandType": "AddFrame",
+				"FrameId": "0"
+			},
+			{
+				"CommandType": "FrameCommands",
+				"Commands": [
+					{
+						"CommandType": "AddMesh",
+						"MeshId": "null"
+					},
+					{
+						"CommandType": "AddMesh",
+						"MeshId": "one"
+					},
+					{
+						"CommandType": "AddMesh",
+						"MeshId": "two"
+					}
+				],
+				"FrameId": "0"
+			}
+		],
+		[
+			{
+				"CommandType": "AddFrame",
+				"FrameId": "1"
+			},
+			{
+				"CommandType": "FrameCommands",
+				"Commands": [
+					{
+						"CommandType": "AddMesh",
+						"MeshId": "null"
+					},
+					{
+						"CommandType": "AddMesh",
+						"MeshId": "one"
+					},
+					{
+						"CommandType": "AddMesh",
+						"MeshId": "two"
+					}
+				],
+				"FrameId": "1"
+			}
+		]
+	]
+}

@@ -1,0 +1,17 @@
+{
+	"CameraSpace": false,
+	"CommandType": "DefineMesh",
+	"Definition": {
+		"IndexBufferType": "UInt16",
+		"LineBuffer": "eAEDAAAAAAEAAAAAAg==",
+		"PrimitiveType": "MultiColorMesh",
+		"TriangleBuffer": "eAENy1sCQgAABdHpTXmTJCFJ2v8Gm4977tfAmQ24rW7Z6Y697jnogaMeOemJQANCDe0uXIk0ItaYRBNSTck0I9ecQgtKLam0shuoGd2Nl2uY3J23a5ndg4/rWNyTr+tZ3cDPjVpbjraT31hOtrPfWs62i99ZLrar39us/AEFdQmJKAAAAAM=",
+		"VertexBuffer": "eAGFkjFuwkAQRYcqhwgg5QKhoI7dpUqdJspRovgCVi7BAYJcpEDZNOlShA4a7oCoQWZ2mWFHK/7gxl+rJ9n7/ieiHzo/Tcr334tp+/lc343/qpvxY81H8Ty+Xebt9rdatLOAmAEz/8v5w+tw7zIDasKq20Amfqv72IZ6NIFM3/dhzszTaFJ5zKF/D+tu4zI7/ueX4d5lGr77VzuDjDrk885hxHHyfM4XGO0CMtJF/B/ISBcuI124jHThMtJF7Asy0oXLSBcuI124jHQxdRiz+fSkDDbPdyfSXDLZM5HmksmeiTSDzSdGc8lkz0SaSyZ7JtJcMtkzkeaSyZ7ZomSwefZ8cgg2f82z2TP0bPYMPZs9Q89mz9Cz2TP0bPYMPZs9Q89mz9Cz2fNlz0eeacw3KgAAAAk="
+	},
+	"DoubleSided": false,
+	"IsBillboard": false,
+	"IsLabel": false,
+	"LayerId": null,
+	"MeshId": "cylinder",
+	"VRWorldLocked": false
+}

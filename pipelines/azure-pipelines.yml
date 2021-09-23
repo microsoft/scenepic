@@ -1,0 +1,19 @@
+trigger:
+  - main
+
+jobs:
+  - template: templates/windows-job.yml
+    parameters:
+      vmImage: 'windows-latest'
+      publish: true
+  
+  - template: templates/linux-job.yml
+    parameters:
+      vmImage: 'ubuntu-latest'
+      publish: true
+  
+  - template: templates/mac-job.yml
+    parameters:
+      vmImage: 'macOS-latest'
+      publish: true
+  

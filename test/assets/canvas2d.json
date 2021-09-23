@@ -1,0 +1,101 @@
+{
+	"CanvasId": "canvas2d",
+	"CommandType": "CanvasCommands",
+	"Commands": [
+		{
+			"CommandType": "SetBackgroundStyle",
+			"Value": "#000000"
+		},
+		[
+			{
+				"CommandType": "AddFrame",
+				"FrameId": "0"
+			},
+			{
+				"CommandType": "FrameCommands",
+				"Commands": [
+					{
+						"CommandType": "SetCoordinates",
+						"CoordinateBuffer": "eAEDAAAAAAEAAAAAAg=="
+					},
+					{
+						"CommandType": "AddCircles",
+						"InfoBuffer": "eAFjYICBBQ4MDA32AAZPAaABAAAABA==",
+						"StyleBuffer": "eAEBCAD3/wAAAAABAAAAAAwAAgEAAAAI"
+					}
+				],
+				"FrameId": "0"
+			}
+		],
+		[
+			{
+				"CommandType": "AddFrame",
+				"FrameId": "1"
+			},
+			{
+				"CommandType": "FrameCommands",
+				"Commands": [
+					{
+						"CommandType": "SetCoordinates",
+						"CoordinateBuffer": "eAFjYFjgwMBwAIgdHBF0AhCDxBMcAWNMBgUEAAAAAg=="
+					},
+					{
+						"CommandType": "AddLines",
+						"InfoBuffer": "eAEBBgD5/wAABAABAAAYAAYBAAAAAw==",
+						"StyleBuffer": "eAEBCAD3/wAAAAABAAAAAAwAAgEAAAAI",
+						"WidthBuffer": "eAEBBAD7/wAAgD8BQwDAAQAAAAE="
+					}
+				],
+				"FrameId": "1"
+			}
+		],
+		[
+			{
+				"CommandType": "AddFrame",
+				"FrameId": "2"
+			},
+			{
+				"CommandType": "FrameCommands",
+				"Commands": [
+					{
+						"CommandType": "SetCoordinates",
+						"CoordinateBuffer": "eAEBCAD3/wAAgD8AAIA/BYIBfwEAAAAC"
+					},
+					{
+						"CommandType": "AddText",
+						"FillStyle": "#ffffff",
+						"Font": "sans-serif",
+						"Index": 0,
+						"SizeInPixels": 12.0,
+						"Text": "test"
+					}
+				],
+				"FrameId": "2"
+			}
+		],
+		[
+			{
+				"CommandType": "AddFrame",
+				"FrameId": "3"
+			},
+			{
+				"CommandType": "FrameCommands",
+				"Commands": [
+					{
+						"CommandType": "SetCoordinates",
+						"CoordinateBuffer": "eAFjYIAAAAAIAAEBAAAAAg=="
+					},
+					{
+						"CommandType": "AddImage",
+						"ImageId": "rand",
+						"Index": null,
+						"PositionType": "fit",
+						"Scale": 1.0,
+						"Smoothed": false
+					}
+				],
+				"FrameId": "3"
+			}
+		]
+	]
+}

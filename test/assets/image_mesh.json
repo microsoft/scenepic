@@ -1,0 +1,21 @@
+{
+	"CameraSpace": false,
+	"CommandType": "DefineMesh",
+	"Definition": {
+		"Color": "eAFjYGiwZ4BiAAy9Aj4DAAAAAQ==",
+		"IndexBufferType": "UInt16",
+		"LineBuffer": "eAEDAAAAAAEAAAAAAg==",
+		"NearestNeighborTexture": true,
+		"PrimitiveType": "SingleColorMesh",
+		"TextureId": "rand",
+		"TriangleBuffer": "eAFjYGBkYGJgAGJmBhYGNgZWIMkOpAEBdAApBAAAAAM=",
+		"UseTextureAlpha": false,
+		"VertexBuffer": "eAFtjYEJADAIw/qZr/WzvTacIME5ECepRtJRFZ4DQ/4X3pnszIO/TO4uvDv9rjJ99IOv/sE//7jvuCgVGeEIAAAACA=="
+	},
+	"DoubleSided": false,
+	"IsBillboard": false,
+	"IsLabel": false,
+	"LayerId": null,
+	"MeshId": "image",
+	"VRWorldLocked": false
+}

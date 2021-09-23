@@ -1,0 +1,38 @@
+[
+	{
+		"CommandType": "SetFPS",
+		"Value": 30.0
+	},
+	{
+		"CameraSpace": false,
+		"CommandType": "DefineMesh",
+		"Definition": {
+			"Color": "eAFjYGiwZ4BiAAy9Aj4DAAAAAQ==",
+			"IndexBufferType": "UInt16",
+			"LineBuffer": "eAEDAAAAAAEAAAAAAg==",
+			"NearestNeighborTexture": false,
+			"PrimitiveType": "SingleColorMesh",
+			"TextureId": "Label-0",
+			"TriangleBuffer": "eAEBDADz/wAAAQACAAAAAgADAAA0AAkCAAAAAw==",
+			"UseTextureAlpha": false,
+			"VertexBuffer": "eAFti8EJAAAIAt2s1dqs1cKE8GEQFncCGGhtuuzhHfg7TPeNn8Nu4MoFYNYJ8QQAAAAI"
+		},
+		"DoubleSided": false,
+		"IsBillboard": false,
+		"IsLabel": true,
+		"LayerId": null,
+		"MeshId": "Mesh-0",
+		"VRWorldLocked": false
+	},
+	{
+		"CommandType": "DefineLabel",
+		"FillStyle": "#ffffff",
+		"FontFamily": "sans-serif",
+		"FontSizePx": 12.0,
+		"HorizontalAlign": -1,
+		"LabelId": "Label-0",
+		"OffsetDistance": 0.10000000000000001,
+		"Text": "Text",
+		"VerticalAlign": 0
+	}
+]

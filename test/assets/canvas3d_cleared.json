@@ -1,0 +1,22 @@
+{
+	"CanvasId": "canvas3d",
+	"CommandType": "CanvasCommands",
+	"Commands": [
+		[
+			{
+				"CommandType": "AddFrame",
+				"FrameId": "4"
+			},
+			{
+				"CommandType": "FrameCommands",
+				"Commands": [
+					{
+						"CommandType": "AddMesh",
+						"MeshId": "cone"
+					}
+				],
+				"FrameId": "4"
+			}
+		]
+	]
+}

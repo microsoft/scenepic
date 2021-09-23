@@ -1,0 +1,17 @@
+{
+	"CameraSpace": false,
+	"CommandType": "DefineMesh",
+	"Definition": {
+		"IndexBufferType": "UInt16",
+		"LineBuffer": "eAEDAAAAAAEAAAAAAg==",
+		"PrimitiveType": "MultiColorMesh",
+		"TriangleBuffer": "eAEdi0kOACEMw1xgyvb//47pwY6UKHD5QEIHU0+OPi5hv+Uy5NBkkhIsutvQw75L6qx+1fKerZ5Zz1XPbQY/StYBSxQAAAAD",
+		"VertexBuffer": "eAF1kL0NgCAUhO3cgsRFHlbWVI5kZ+scTkBl5wRuI5BA7v1RXcj3vlwuXUden4+m8hLk897jEl6awxbLPwEzsmDqbQZPy4anMyMjI3v0bDCqk+NhnRwP64SMtU3NDsM6CUZtY3jUNtLzA+nMk6kMAAAACQ=="
+	},
+	"DoubleSided": false,
+	"IsBillboard": false,
+	"IsLabel": false,
+	"LayerId": null,
+	"MeshId": "icosphere",
+	"VRWorldLocked": false
+}

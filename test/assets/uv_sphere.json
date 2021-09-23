@@ -1,0 +1,17 @@
+{
+	"CameraSpace": false,
+	"CommandType": "DefineMesh",
+	"Definition": {
+		"IndexBufferType": "UInt16",
+		"LineBuffer": "eAEDAAAAAAEAAAAAAg==",
+		"PrimitiveType": "MultiColorMesh",
+		"TriangleBuffer": "eAEVzcVWIwAURME3PoO7u7sFh+AQHIJDcNf/307l9Lm17Zz4Frn2PfLsR+TbzyiwX1Fov6PI/kSx/Y0S+xelFpFjuVFmuVGuPJazQvmsYKUKWMkqFbKK1SpiNWtUzBrWqoS1rFMp61ivHNYz+1geDVYejapgI5tUySY2q4rNbFE1W9iqGrayTbVsY7vq2M4O1bODnSpjJ7OPjdFljdGtJnazR83sYa9a2Ms+tbKP/WpjPwfUzgEOqoODHFInhzisBg4z+9gdI9YdCfUwwVH1cpRj6uMYx9XPcU5ogBOc1CAnOaUhTnFaw5zmjLo4w+xjImYtEUmNMsk5jXGO8xrnPBc0wQUuapKLXNIUl7isaS5zRTNc4apGuMrsYzLWLBkpzTHFdc1znRta4AY3tchNbmmJW9zWMre5oxXucFer3OWeZrnH7GMq9i0Vaa0zzQNt8ICH2uQhj7TFIx5rm8c80Q5PeKpdnvJMezzjudZ4zuxjOi4sHRkdMMNLHfKSVzriFa91zGve6IQ3vNUpb3mnM97xXue854P2+cDsYyYeLRNPuuQTn3XFZ77omi981Q1f+aZbvvFdd3znh+75wU898JNfuuAXH+M/YdZ+0r4AAAAD",
+		"VertexBuffer": "eAG9lj9rVFEQxVMpBBY7iSwkiBvSiUkTtsi+IiLp0vkJBGvJFiY228TuIWlshDRusJOktHj3Faaz8BuszYJFSptAIDhn9p7H3H+FIqbJze4vc2bOnTdvlpb0p1r8ws9Ez/X58+rh6rfR3dVn/O5fMBPDyPm/MPhNZvIXDOsCw7r+mDnaXh29ev1rhG+Ptk/lfJDLWZmL2y878u/KXNwOR5bpnezugFk5vD/qnXyV80G1cvg+ZhrDyDllRMsZLTmnWpKzMlfHnx9JzspcHT8eFOI0Jo4r5ONMPjHDusCwroAx/kCL/gQM6mz639VniVU1/f3EZ/k/ZXbnTzQemN35eVA7fAHT9N+J3lCZpn+vipjGMC7HiJZ83mkpE2uhTjDDm/WB5NyCGd6cBT6bOPCbcYLaTT7O5NMW6gLDugLG+KN3m9PC9/Aa3uJ7eB37PKs/KYN4s3pDGcSL7xTM5fWlxJrg/qvL66eBh+gxw8g5ZURLGa/V5rQkZ2U2xi8GkrMyG+N54LOJ40ycuA+ZjzP5BB6ausCwroAx/kCL/gRaqAGzA96i3zE7Yp/hCxj0IXwBE/chZgGYWf1z9EA03wjzo34ZM84wLsegHqPV5rRQA5i1vbcDyVmZtb0764U4zsQJ/DH5OJNPzLAuMKwrYIw/0KI/8X1VW5u9Aef31mat57jnwSxmzL4yuLN4zoNZ3NupnGt4EDPOMHJOGfSq0WpzWpKefN4bLHKdKCN/Bz6bOJgHjBPUbvIRv7t8YoZ1gWFdAWP80dmT0/L9LM9E1896ztyXxOj6Wc7ZfpbnputnV+hnMuifhPF9SC30YaLl+9mZfpZztp8Rh/2MOLl+Rj7sZ+ST62cyrCvXz9SiP8ld4B7MfG4L8xnvbM7ntjCfRaebz21hPpPBPEwYP1ephbmaaPn57Mx8bgvzGXE4nxEnN5+RD+cz8snNZzKsKzefqUV/cvuG+uz3jcRn/z51Zt9oC/uG9qF/L8sekN03yOjzXNg3qKVMYd9wZt9oC/sG4nDfQJzcvqF9aPLJ7RtkWFdu36AW/Qm0/P6sPvv9OfHZ74ei0+3PbWF/Rk9wf5Yeyu7PZLCvJozfe6mFHkm0/P7szP7cFvZnxOH+jDi5/Rn5cH9GPrn9mQzryu3P1KI/AePfe+ot3iV4r8Q+4/kEg/7B8wkm7h/UDAYzEzWDiWemMB8NM80xoiWfd1rKxFqSszJj11+WnM/AjN2H5UKcqYkzLeQzNfmcFeoCw7oCxvgDLfoTaP0GGbmoqW4AAAAJ"
+	},
+	"DoubleSided": false,
+	"IsBillboard": false,
+	"IsLabel": false,
+	"LayerId": null,
+	"MeshId": "uv_sphere",
+	"VRWorldLocked": false
+}

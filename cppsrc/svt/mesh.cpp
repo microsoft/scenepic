@@ -1,0 +1,929 @@
+/** File containing all non-primitive creation methods for Mesh (see primitives.cpp) */
+
+#include <climits>
+#include <exception>
+#include <map>
+#include <array>
+#include <utility>
+
+#include <Eigen/Geometry>
+
+#include "mesh.h"
+#include "transforms.h"
+#include "util.h"
+
+namespace svt
+{
+
+    Vector compute_triangle_normal(const Vector &pos0, const Vector &pos1, const Vector &pos2)
+    {
+        Vector p01 = pos1 - pos0;
+        Vector p02 = pos2 - pos0;
+        Vector normal = p01.cross(p02);
+        return normal.normalized();
+    }
+
+    Mesh::Mesh(const Color &shared_color, const std::string &texture_id) : Mesh("")
+    {
+        this->shared_color(shared_color);
+        this->texture_id(texture_id);
+    }
+
+    Mesh::Mesh(const std::string &mesh_id) : m_mesh_id(mesh_id),
+                                             m_shared_color(Color::None()),
+                                             m_texture_id(""),
+                                             m_layer_id(""),
+                                             m_camera_space(false),
+                                             m_vr_world_locked(false),
+                                             m_double_sided(false),
+                                             m_is_billboard(false),
+                                             m_is_label(false),
+                                             m_nn_texture(true),
+                                             m_use_texture_alpha(true),
+                                             m_vertices(VertexBuffer::Zero(0, 6)),
+                                             m_triangles(TriangleBuffer::Zero(0, 3)),
+                                             m_lines(LineBuffer::Zero(0, 2))
+    {
+        bool vertex_colors = this->m_shared_color.is_none();
+        bool vertex_uvs = !this->m_texture_id.empty();
+        if (vertex_colors && vertex_uvs)
+        {
+            throw std::invalid_argument("Cannot have both vertex colors and vertex UVs");
+        }
+        else if (vertex_colors)
+        {
+            this->m_vertices = VertexBuffer::Zero(0, 9);
+        }
+        else if (vertex_uvs)
+        {
+            this->m_vertices = VertexBuffer::Zero(0, 8);
+        }
+    }
+
+    std::uint32_t Mesh::count_vertices() const
+    {
+        return static_cast<std::uint32_t>(this->m_vertices.rows());
+    }
+
+    Vector Mesh::center_of_mass() const
+    {
+        return this->m_vertices.leftCols(3).rowwise().mean();
+    }
+
+    void Mesh::reverse_triangle_order()
+    {
+        this->m_triangles.col(1).swap(this->m_triangles.col(2));
+        this->m_vertices.block(0, 3, this->count_vertices(), 3) *= -1;
+    }
+
+    void Mesh::apply_transform(const Transform &transform)
+    {
+        WorldVectorMatrix positions(this->count_vertices(), 4);
+        positions.leftCols(3) = this->m_vertices.leftCols(3);
+        positions.col(3).setConstant(1.0);
+        positions *= transform.transpose();
+        this->m_vertices.leftCols(3) = positions.leftCols(3);
+
+        auto norm_transform = transform.topLeftCorner(3, 3).inverse();
+        this->vertex_normals() *= norm_transform;
+        this->vertex_normals().rowwise().normalize();
+    }
+
+    void Mesh::apply_rotation(const Transform &transform)
+    {
+        auto rotation = transform.topLeftCorner(3, 3).transpose();
+        this->vertex_positions() *= rotation;
+        this->vertex_normals() *= rotation;
+    }
+
+    Mesh Mesh::get_transformed(const Transform &transform)
+    {
+        Mesh mesh = *this;
+        mesh.apply_transform(transform);
+        return mesh;
+    }
+
+    Mesh Mesh::get_rotated(const Transform &transform)
+    {
+        Mesh mesh = *this;
+        mesh.apply_rotation(transform);
+        return mesh;
+    }
+
+    void Mesh::append_mesh(const Mesh &mesh)
+    {
+        auto vert_offset = this->count_vertices();
+        append_matrix(this->m_vertices, mesh.m_vertices);
+        TriangleBuffer triangles = mesh.m_triangles.array() + vert_offset;
+        LineBuffer lines = mesh.m_lines.array() + vert_offset;
+        append_matrix(this->m_triangles, triangles);
+        append_matrix(this->m_lines, lines);
+    }
+
+    void Mesh::add_triangle(const Color &color,
+                            const Vector &p0,
+                            const Vector &p1,
+                            const Vector &p2,
+                            const Vector &n,
+                            bool fill_triangles,
+                            bool add_wireframe,
+                            const UV &uv0,
+                            const UV &uv1,
+                            const UV &uv2)
+    {
+        this->check_instances();
+        this->check_color(color);
+        Vector normal = n;
+        if (normal == VectorNone())
+        {
+            normal = compute_triangle_normal(p0, p1, p2);
+        }
+
+        std::uint32_t i0, i1, i2;
+        if (this->m_texture_id.empty())
+        {
+            i0 = this->append_vertex(p0, normal, color);
+            i1 = this->append_vertex(p1, normal, color);
+            i2 = this->append_vertex(p2, normal, color);
+        }
+        else
+        {
+            i0 = this->append_vertex(p0, normal, uv0);
+            i1 = this->append_vertex(p1, normal, uv1);
+            i2 = this->append_vertex(p2, normal, uv2);
+        }
+
+        if (fill_triangles)
+        {
+            this->append_triangle(i0, i1, i2);
+        }
+
+        if (add_wireframe)
+        {
+            this->append_line(i0, i1);
+            this->append_line(i1, i2);
+            this->append_line(i2, i0);
+        }
+    }
+
+    void Mesh::add_quad(const Color &color,
+                        const Vector &p0,
+                        const Vector &p1,
+                        const Vector &p2,
+                        const Vector &p3,
+                        const Vector &n,
+                        bool fill_triangles,
+                        bool add_wireframe,
+                        const Transform &transform,
+                        const UV &uv0,
+                        const UV &uv1,
+                        const UV &uv2,
+                        const UV &uv3)
+    {
+        this->check_instances();
+        this->check_color(color);
+        Vector normal = n;
+        if (normal == VectorNone())
+        {
+            normal = compute_triangle_normal(p0, p1, p2);
+        }
+
+        Mesh m = Mesh("").shared_color(this->m_shared_color).texture_id(this->m_texture_id);
+
+        std::uint32_t i0, i1, i2, i3;
+        if (this->m_texture_id.empty())
+        {
+            i0 = m.append_vertex(p0, normal, color);
+            i1 = m.append_vertex(p1, normal, color);
+            i2 = m.append_vertex(p2, normal, color);
+            i3 = m.append_vertex(p3, normal, color);
+        }
+        else
+        {
+            i0 = m.append_vertex(p0, normal, uv0);
+            i1 = m.append_vertex(p1, normal, uv1);
+            i2 = m.append_vertex(p2, normal, uv2);
+            i3 = m.append_vertex(p3, normal, uv3);
+        }
+
+        if (fill_triangles)
+        {
+            m.append_triangle(i0, i1, i2);
+            m.append_triangle(i0, i2, i3);
+        }
+
+        if (add_wireframe)
+        {
+            m.append_line(i0, i1);
+            m.append_line(i1, i2);
+            m.append_line(i2, i3);
+            m.append_line(i3, i0);
+        }
+
+        if (!transform.isIdentity())
+        {
+            m.apply_transform(transform);
+        }
+
+        this->append_mesh(m);
+    }
+
+    void Mesh::add_image(const Vector &origin,
+                         const Vector &x_axis,
+                         const Vector &y_axis,
+                         const Vector &n,
+                         const UV &uv0,
+                         const UV &uv1,
+                         const UV &uv2,
+                         const UV &uv3,
+                         bool double_sided,
+                         const Transform &transform)
+    {
+        this->check_instances();
+        if (this->m_texture_id.length() == 0)
+        {
+            throw std::logic_error("Must set mesh's texture_id property first");
+        }
+
+        Vector p0 = origin;
+        Vector p1 = p0 + x_axis;
+        Vector p2 = p1 + y_axis;
+        Vector p3 = p0 + y_axis;
+        Vector normal = n;
+        if (normal == VectorNone())
+        {
+            normal = compute_triangle_normal(p0, p1, p2);
+        }
+
+        Mesh m = Mesh("").texture_id(this->m_texture_id);
+
+        // Front face
+        auto i0 = m.append_vertex(p0, normal, uv0);
+        auto i1 = m.append_vertex(p1, normal, uv1);
+        auto i2 = m.append_vertex(p2, normal, uv2);
+        auto i3 = m.append_vertex(p3, normal, uv3);
+        m.append_triangle(i0, i1, i2);
+        m.append_triangle(i0, i2, i3);
+
+        // Back face
+        if (double_sided)
+        {
+            i0 = m.append_vertex(p0, -normal, uv0);
+            i1 = m.append_vertex(p1, -normal, uv1);
+            i2 = m.append_vertex(p2, -normal, uv2);
+            i3 = m.append_vertex(p3, -normal, uv3);
+            m.append_triangle(i0, i2, i1);
+            m.append_triangle(i0, i3, i2);
+        }
+
+        if (!transform.isIdentity())
+        {
+            m.apply_transform(transform);
+        }
+
+        this->append_mesh(m);
+    }
+
+    void Mesh::add_mesh(const std::shared_ptr<MeshInfo> &mesh_info,
+                        const Transform &transform,
+                        bool reverse_triangle_order,
+                        bool fill_triangles,
+                        bool add_wireframe)
+    {
+        this->add_mesh_without_normals(mesh_info->position_buffer(),
+                                       mesh_info->triangle_buffer(),
+                                       mesh_info->color_buffer(),
+                                       mesh_info->uv_buffer(),
+                                       transform,
+                                       reverse_triangle_order,
+                                       fill_triangles,
+                                       add_wireframe);
+    }
+
+    VectorBuffer Mesh::compute_normals(const ConstVectorBufferRef &vertices,
+                                       const ConstTriangleBufferRef &triangles,
+                                       bool reverse_triangle_order)
+    {
+        // Calculate per-face normals for the entire mesh, and normalize them
+        VectorBuffer per_face_normals(triangles.rows(), 3);
+        for (auto index = 0; index < triangles.rows(); ++index)
+        {
+            const Triangle &triangle = triangles.row(index);
+            const Vector &p0 = vertices.row(triangle(0));
+            const Vector &p1 = vertices.row(triangle(1));
+            const Vector &p2 = vertices.row(triangle(2));
+            per_face_normals.row(index) = (p1 - p0).cross(p2 - p0);
+        }
+
+        per_face_normals.rowwise().normalize();
+
+        if (reverse_triangle_order)
+        {
+            per_face_normals *= -1;
+        }
+
+        // For each triangle, add that triangle's normal to each vertex in the triangle
+        VectorBuffer normals = VectorBuffer::Zero(vertices.rows(), 3);
+        for (auto index = 0; index < triangles.rows(); ++index)
+        {
+            const Triangle &triangle = triangles.row(index);
+            const Vector &normal = per_face_normals.row(index);
+            normals.row(triangle(0)) += normal;
+            normals.row(triangle(1)) += normal;
+            normals.row(triangle(2)) += normal;
+        }
+
+        normals.rowwise().normalize();
+
+        return normals;
+    }
+
+    void Mesh::add_mesh_without_normals(const ConstVectorBufferRef &vertices,
+                                        const ConstTriangleBufferRef &triangles,
+                                        const ConstColorBufferRef &colors,
+                                        const ConstUVBufferRef &uvs,
+                                        const Transform &transform,
+                                        bool reverse_triangle_order,
+                                        bool fill_triangles,
+                                        bool add_wireframe)
+    {
+        this->check_instances();
+
+        auto normals = Mesh::compute_normals(vertices, triangles);
+
+        this->add_mesh_with_normals(vertices,
+                                    normals,
+                                    triangles,
+                                    colors,
+                                    uvs,
+                                    transform,
+                                    reverse_triangle_order,
+                                    fill_triangles,
+                                    add_wireframe);
+    }
+
+    void Mesh::add_mesh_with_normals(const ConstVectorBufferRef &vertices,
+                                     const ConstVectorBufferRef &normals,
+                                     const ConstTriangleBufferRef &triangles,
+                                     const ConstColorBufferRef &colors,
+                                     const ConstUVBufferRef &uvs,
+                                     const Transform &transform,
+                                     bool reverse_triangle_order,
+                                     bool fill_triangles,
+                                     bool add_wireframe)
+    {
+        assert(vertices.rows() == normals.rows());
+        this->check_instances();
+
+        bool has_texture = this->m_texture_id.length() > 0;
+        bool has_vertex_colors = this->m_shared_color.is_none();
+        bool has_uvs = uvs.rows() > 0;
+
+        if (!has_texture && has_uvs)
+        {
+            throw std::invalid_argument("Must create Mesh with texture_id in order to use uvs");
+        }
+
+        if (has_vertex_colors && has_uvs)
+        {
+            throw std::invalid_argument("The use of vertex colors and uvs together is not supported");
+        }
+
+        if (has_vertex_colors && colors.rows() == 0)
+        {
+            throw std::invalid_argument("Per-vertex colors must be provided unless the mesh has a single color or texture map");
+        }
+
+        if (has_vertex_colors && colors.rows() != vertices.rows())
+        {
+            throw std::invalid_argument("Expecting per-vertex colors");
+        }
+
+        if (has_uvs && (uvs.rows() != vertices.rows()))
+        {
+            throw std::invalid_argument("Expecting per-vertex uvs stored in uvs");
+        }
+
+        Mesh m = Mesh("").shared_color(this->m_shared_color).texture_id(this->m_texture_id);
+        if (has_uvs)
+        {
+            m.m_vertices = VertexBuffer(vertices.rows(), 8);
+            m.vertex_positions() = vertices;
+            m.vertex_normals() = normals;
+            m.vertex_uvs() = uvs;
+        }
+        else if (has_vertex_colors)
+        {
+            m.m_vertices = VertexBuffer(vertices.rows(), 9);
+            m.vertex_positions() = vertices;
+            m.vertex_normals() = normals;
+            m.vertex_colors() = colors;
+        }
+        else
+        {
+            m.m_vertices = VertexBuffer(vertices.rows(), 6);
+            m.vertex_positions() = vertices;
+            m.vertex_normals() = normals;
+        }
+
+        if (add_wireframe)
+        {
+            m.m_lines = LineBuffer(triangles.rows() * 3, 2);
+            m.m_lines.topRows(triangles.rows()) = triangles.leftCols(2);
+            m.m_lines.block(triangles.rows(), 0, triangles.rows(), 2) = triangles.block(0, 1, triangles.rows(), 2);
+            m.m_lines.block(2 * triangles.rows(), 0, triangles.rows(), 1) = triangles.col(0);
+            m.m_lines.block(2 * triangles.rows(), 1, triangles.rows(), 1) = triangles.col(2);
+        }
+
+        if (fill_triangles)
+        {
+            m.m_triangles = triangles;
+            if (reverse_triangle_order)
+            {
+                m.m_triangles.col(1).swap(m.m_triangles.col(2));
+            }
+        }
+
+        if (!transform.isIdentity())
+        {
+            m.apply_transform(transform);
+        }
+
+        this->append_mesh(m);
+    }
+
+    void Mesh::add_lines(const ConstVertexBufferRef &start_points,
+                         const ConstVertexBufferRef &end_points,
+                         const Color &color,
+                         const Transform &transform)
+    {
+        assert(start_points.rows() == end_points.rows());
+        assert(start_points.cols() == end_points.cols());
+
+        bool per_point_color = this->m_shared_color.is_none() && color.is_none();
+        if (per_point_color && start_points.cols() != 6)
+        {
+            throw std::invalid_argument("Expecting either single-color mesh, or shared color for whole set of lines, or per-point color stored in start_points and end_points");
+        }
+
+        Mesh m = Mesh("").shared_color(this->m_shared_color).texture_id(this->m_texture_id);
+        const std::uint32_t num_lines = static_cast<const std::uint32_t>(start_points.rows());
+
+        if (per_point_color)
+        {
+            m.m_vertices = VertexBuffer(num_lines * 2, 9);
+            m.vertex_colors().topRows(num_lines) = start_points.rightCols(3);
+            m.vertex_colors().bottomRows(num_lines) = end_points.rightCols(3);
+        }
+        else if (!color.is_none())
+        {
+            m.m_vertices = VertexBuffer(num_lines * 2, 9);
+            m.vertex_colors().col(0).fill(color.r());
+            m.vertex_colors().col(1).fill(color.g());
+            m.vertex_colors().col(2).fill(color.b());
+        }
+        else
+        {
+            m.m_vertices = VertexBuffer(num_lines * 2, 6);
+        }
+        
+        m.vertex_positions().topRows(num_lines) = start_points.leftCols(3);
+        m.vertex_positions().bottomRows(num_lines) = end_points.leftCols(3);
+        m.vertex_normals().col(0).fill(1);
+        m.vertex_normals().col(1).fill(0);
+        m.vertex_normals().col(2).fill(0);
+
+        typedef Eigen::Array<std::uint32_t, Eigen::Dynamic, 1> LineInit;
+        m.m_lines = LineBuffer(num_lines, 2);
+        for (std::uint32_t row = 0; row < num_lines; ++row)
+        {
+            m.m_lines(row, 0) = row;
+            m.m_lines(row, 1) = row + num_lines;
+        }
+
+        if (!transform.isIdentity())
+        {
+            m.apply_transform(transform);
+        }
+
+        this->append_mesh(m);
+    }
+
+    void Mesh::enable_instancing(const ConstVectorBufferRef &positions,
+                                 const ConstQuaternionBufferRef &rotations,
+                                 const ConstColorBufferRef &colors)
+    {
+        if (this->m_instance_buffer.rows())
+        {
+            std::cerr << "WARNING: multiple calls to enable_instancing will replace existing instance_buffers." << std::endl;
+        }
+
+        this->m_instance_buffer_has_rotations = false;
+        this->m_instance_buffer_has_colors = false;
+        if (rotations.size() && colors.size())
+        {
+            assert(rotations.rows() == positions.rows());
+            assert(colors.rows() == positions.rows());
+            this->m_instance_buffer_has_rotations = true;
+            this->m_instance_buffer_has_colors = true;
+            this->m_instance_buffer = InstanceBuffer(positions.rows(), 10);
+            this->m_instance_buffer.leftCols(3) = positions;
+            this->m_instance_buffer.block(0, 3, positions.rows(), 4) = rotations;
+            this->m_instance_buffer.rightCols(3) = colors;
+        }
+        else if (rotations.size())
+        {
+            assert(rotations.rows() == positions.rows());
+            this->m_instance_buffer_has_rotations = true;
+            this->m_instance_buffer = InstanceBuffer(positions.rows(), 7);
+            this->m_instance_buffer.leftCols(3) = positions;
+            this->m_instance_buffer.rightCols(4) = rotations;
+        }
+        else if (colors.size())
+        {
+            assert(colors.rows() == positions.rows());
+            this->m_instance_buffer_has_colors = true;
+            this->m_instance_buffer = InstanceBuffer(positions.rows(), 6);
+            this->m_instance_buffer.leftCols(3) = positions;
+            this->m_instance_buffer.rightCols(3) = colors;
+        }
+        else
+        {
+            this->m_instance_buffer = positions;
+        }
+    }
+
+    JsonValue Mesh::definition_to_json() const
+    {
+        std::string data_type;
+        JsonValue obj;
+
+        obj["VertexBuffer"] = matrix_to_json(this->m_vertices);
+
+        if (this->m_vertices.rows() < 0xFFFF)
+        {
+            TriangleShortBuffer triangles = this->m_triangles.cast<std::uint16_t>();
+            LineShortBuffer lines = this->m_lines.cast<std::uint16_t>();
+            obj["IndexBufferType"] = "UInt16";
+            obj["TriangleBuffer"] = matrix_to_json(triangles);
+            obj["LineBuffer"] = matrix_to_json(lines);
+        }
+        else
+        {
+            obj["IndexBufferType"] = "UInt32";
+            obj["TriangleBuffer"] = matrix_to_json(this->m_triangles);
+            obj["LineBuffer"] = matrix_to_json(this->m_lines);
+        }
+
+        if (!this->m_shared_color.is_none())
+        {
+            obj["PrimitiveType"] = "SingleColorMesh";
+            obj["Color"] = matrix_to_json(this->m_shared_color);
+        }
+        else
+        {
+            obj["PrimitiveType"] = "MultiColorMesh";
+        }
+
+        if (this->m_texture_id.length() > 0)
+        {
+            obj["TextureId"] = this->m_texture_id;
+            obj["NearestNeighborTexture"] = this->m_nn_texture;
+            obj["UseTextureAlpha"] = this->m_use_texture_alpha;
+        }
+
+        if (this->m_instance_buffer.rows() > 0)
+        {
+            obj["InstanceBuffer"] = matrix_to_json(this->m_instance_buffer);
+            obj["InstanceBufferHasRotations"] = this->m_instance_buffer_has_rotations;
+            obj["InstanceBufferHasColors"] = this->m_instance_buffer_has_colors;
+        }
+
+        return obj;
+    }
+
+    JsonValue Mesh::to_json() const
+    {
+        JsonValue root;
+        root["CommandType"] = "DefineMesh";
+        root["MeshId"] = this->m_mesh_id;
+        if (this->m_layer_id.empty())
+        {
+            root["LayerId"] = JsonValue::nullSingleton();
+        }
+        else
+        {
+            root["LayerId"] = this->m_layer_id;
+        }
+        root["DoubleSided"] = this->m_double_sided;
+        root["Definition"] = this->definition_to_json();
+        root["CameraSpace"] = this->m_camera_space;
+        root["IsBillboard"] = this->m_is_billboard;
+        root["IsLabel"] = this->m_is_label;
+        root["VRWorldLocked"] = this->m_vr_world_locked;
+        return root;
+    }
+
+    std::uint32_t Mesh::append_vertex(const Vector &pos, const Vector &normal, const Color &color)
+    {
+        if (color.is_none())
+        {
+            return this->append_vertex(pos, normal);
+        }
+
+        std::uint32_t index = this->count_vertices();
+        Vertex vertex(1, 9);
+        vertex.segment(0, 3) = pos;
+        vertex.segment(3, 3) = normal.normalized();
+        vertex.segment(6, 3) = color;
+        append_row(this->m_vertices, vertex);
+
+        return index;
+    }
+
+    std::uint32_t Mesh::append_vertex(const Vector &pos, const Vector &normal, UV texture_uv)
+    {
+        std::uint32_t index = this->count_vertices();
+        Vertex vertex(1, 8);
+        vertex.segment(0, 3) = pos;
+        vertex.segment(3, 3) = normal.normalized();
+        vertex.segment(6, 2) = texture_uv;
+        append_row(this->m_vertices, vertex);
+        return index;
+    }
+
+    std::uint32_t Mesh::append_vertex(const Vector &pos, const Vector &normal)
+    {
+        std::uint32_t index = this->count_vertices();
+        Vertex vertex(1, 6);
+        vertex.segment(0, 3) = pos;
+        vertex.segment(3, 3) = normal.normalized();
+        append_row(this->m_vertices, vertex);
+        return index;
+    }
+
+    void Mesh::append_triangle(std::uint32_t index0, std::uint32_t index1, std::uint32_t index2)
+    {
+        append_row(this->m_triangles, Triangle(index0, index1, index2));
+    }
+
+    void Mesh::append_line(std::uint32_t index0, std::uint32_t index1)
+    {
+        append_row(this->m_lines, Line(index0, index1));
+    }
+
+    void Mesh::check_instances()
+    {
+        if (this->m_instance_buffer.rows() > 0)
+        {
+            std::cerr << "WARNING: Editing Mesh after calling enable_instancing"
+                      << "(used for point/line clouds) can lead to unexpected results."
+                      << std::endl;
+        }
+    }
+
+    void Mesh::check_color(const Color &color)
+    {
+        if (color.is_none() && this->m_shared_color.is_none())
+        {
+            throw std::invalid_argument("Expected a vertex color");
+        }
+    }
+
+    Color Mesh::shared_color() const
+    {
+        return this->m_shared_color;
+    }
+
+    Mesh &Mesh::shared_color(const Color &shared_color)
+    {
+        if (this->m_shared_color.is_none() && !shared_color.is_none())
+        {
+            // remove per-vertex color
+            this->m_vertices = this->m_vertices.leftCols(6);
+        }
+        else if (!this->m_shared_color.is_none() && shared_color.is_none())
+        {
+            // attempt to add per-vertex color.
+            if (this->count_vertices() == 0)
+            {
+                this->m_vertices = VertexBuffer::Zero(0, 9);
+            }
+            else
+            {
+                // this behavior is undefined if vertices exist
+                throw std::invalid_argument("Cannot add per-vertex color to a non-empty shared color mesh");
+            }
+        }
+
+        this->m_shared_color = shared_color;
+        return *this;
+    }
+
+    const std::string &Mesh::texture_id() const
+    {
+        return this->m_texture_id;
+    }
+
+    Mesh &Mesh::texture_id(const std::string &texture_id)
+    {
+        this->m_texture_id = texture_id;
+        if (!texture_id.empty())
+        {
+            // convert this to a UV mesh
+            if (this->count_vertices() == 0)
+            {
+                this->m_shared_color = Color(1, 1, 1);
+                this->m_vertices = VertexBuffer::Zero(0, 8);
+            }
+            else
+            {
+                // behavior not defined if vertices exist
+                throw std::invalid_argument("Cannot convert a per-vertex color mesh to a UV mesh");
+            }
+        }
+        else
+        {
+            if (!this->m_shared_color.is_none())
+            {
+                // Remove the texture coordinates
+                this->m_vertices = this->m_vertices.leftCols(6);
+            }
+        }
+
+        return *this;
+    }
+
+    const std::string &Mesh::mesh_id() const
+    {
+        return this->m_mesh_id;
+    }
+
+    const std::string &Mesh::layer_id() const
+    {
+        return this->m_layer_id;
+    }
+
+    Mesh &Mesh::layer_id(const std::string &layer_id)
+    {
+        this->m_layer_id = layer_id;
+        return *this;
+    }
+
+    bool Mesh::double_sided() const
+    {
+        return this->m_double_sided;
+    }
+
+    Mesh &Mesh::double_sided(bool double_sided)
+    {
+        this->m_double_sided = double_sided;
+        return *this;
+    }
+
+    bool Mesh::camera_space() const
+    {
+        return this->m_camera_space;
+    }
+
+    Mesh &Mesh::camera_space(bool camera_space)
+    {
+        this->m_camera_space = camera_space;
+        return *this;
+    }
+
+    bool Mesh::vr_world_locked() const
+    {
+        return this->m_vr_world_locked;
+    }
+
+    Mesh &Mesh::vr_world_locked(bool vr_world_locked)
+    {
+        this->m_vr_world_locked = vr_world_locked;
+        return *this;
+    }
+
+    bool Mesh::nn_texture() const
+    {
+        return this->m_nn_texture;
+    }
+
+    Mesh &Mesh::nn_texture(bool nn_texture)
+    {
+        this->m_nn_texture = nn_texture;
+        return *this;
+    }
+
+    bool Mesh::use_texture_alpha() const
+    {
+        return this->m_use_texture_alpha;
+    }
+
+    Mesh &Mesh::use_texture_alpha(bool use_texture_alpha)
+    {
+        this->m_use_texture_alpha = use_texture_alpha;
+        return *this;
+    }
+
+    bool Mesh::is_billboard() const
+    {
+        return this->m_is_billboard;
+    }
+
+    Mesh &Mesh::is_billboard(bool is_billboard)
+    {
+        this->m_is_billboard = is_billboard;
+        return *this;
+    }
+
+    bool Mesh::is_label() const
+    {
+        return this->m_is_label;
+    }
+
+    Mesh &Mesh::is_label(bool is_label)
+    {
+        this->m_is_label = is_label;
+        return *this;
+    }
+
+    const ConstTriangleBufferRef Mesh::triangles() const
+    {
+        return ConstTriangleBufferRef(this->m_triangles);
+    }
+
+    VertexBlock Mesh::vertex_positions()
+    {
+        return this->m_vertices.leftCols(3);
+    }
+
+    Mesh &Mesh::vertex_positions(const VertexBlock &vertices)
+    {
+        this->vertex_positions() = vertices;
+        return *this;
+    }
+
+    const ConstVertexBlock Mesh::vertex_positions() const
+    {
+        return this->m_vertices.leftCols(3);
+    }
+
+    VertexBlock Mesh::vertex_normals()
+    {
+        return this->m_vertices.block(0, 3, this->count_vertices(), 3);
+    }
+
+    Mesh &Mesh::vertex_normals(const VertexBlock &normals)
+    {
+        this->vertex_normals() = normals;
+        return *this;
+    }
+
+    const ConstVertexBlock Mesh::vertex_normals() const
+    {
+        return this->m_vertices.block(0, 3, this->count_vertices(), 3);
+    }
+
+    VertexBlock Mesh::vertex_colors()
+    {
+        return this->m_vertices.rightCols(3);
+    }
+
+    Mesh &Mesh::vertex_colors(const VertexBlock &colors)
+    {
+        this->vertex_colors() = colors;
+        return *this;
+    }
+
+    const ConstVertexBlock Mesh::vertex_colors() const
+    {
+        return this->m_vertices.rightCols(3);
+    }
+
+    VertexBlock Mesh::vertex_uvs()
+    {
+        return this->m_vertices.rightCols(2);
+    }
+
+    Mesh &Mesh::vertex_uvs(const VertexBlock &uvs)
+    {
+        this->vertex_uvs() = uvs;
+        return *this;
+    }
+
+    const ConstVertexBlock Mesh::vertex_uvs() const
+    {
+        return this->m_vertices.rightCols(2);
+    }
+
+    VertexBufferRef Mesh::vertex_buffer()
+    {
+        return VertexBufferRef(this->m_vertices);
+    }
+
+    std::string Mesh::to_string() const
+    {
+        return this->to_json().to_string();
+    }
+
+} // namespace svt

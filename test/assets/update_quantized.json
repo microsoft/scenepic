@@ -1,0 +1,10 @@
+{
+	"BaseMeshId": "base",
+	"CommandType": "UpdateMesh",
+	"FrameIndex": 1,
+	"KeyframeIndex": 1,
+	"MaxValue": 2.5,
+	"MeshId": "update1",
+	"MinValue": -3.5,
+	"QuantizedBuffer": "eAELmboqa1VWyFR8EAA4axC5AwAAAAY="
+}

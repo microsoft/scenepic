@@ -1,0 +1,13 @@
+Point release adding minor features and fixing some small bugs:
+
+Features:
+- There is now an `add_camera_image` method in `Mesh` that adds an image to a mesh at a camera's
+  image plane.
+- `JsonValue` now supports parsing and has an `as_float` convenience method.
+- There is a new tutorial/example showing how to create a Multi-view Stereo visualization
+
+Bugs:
+- The documentation for `gl_world_to_camera` has been clarified
+- The default value for `use_texture_alpha` is now `false`
+- Fixing some sign errors in `gl_projection`
+- Fixed bug when passing normals into `update_mesh`

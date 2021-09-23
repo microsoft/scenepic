@@ -1,0 +1,38 @@
+[
+	{
+		"CommandType": "SetFPS",
+		"Value": 30.0
+	},
+	{
+		"CanvasId": "Canvas-0",
+		"CommandType": "CanvasCommands",
+		"Commands": []
+	},
+	{
+		"CanvasId": "Canvas-1",
+		"CommandType": "CanvasCommands",
+		"Commands": [
+			[
+				{
+					"CommandType": "AddFrame",
+					"FrameId": "5"
+				},
+				{
+					"CommandType": "FrameCommands",
+					"Commands": [
+						{
+							"CommandType": "AddMesh",
+							"MeshId": "Mesh-1",
+							"Transform": "eAFtiDERAAAEAM1KUcGkgxTC6KEaA2fx0/+zIIUpwdCe3G/78PcVL3MG+wQAAAAE"
+						},
+						{
+							"CommandType": "SetFocusPoint",
+							"Position": "eAFjYACBhi0MDJ5mAAdYAbQBAAAAAw=="
+						}
+					],
+					"FrameId": "5"
+				}
+			]
+		]
+	}
+]

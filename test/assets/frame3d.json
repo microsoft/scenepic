@@ -1,0 +1,20 @@
+[
+	{
+		"CommandType": "AddFrame",
+		"FrameId": "0"
+	},
+	{
+		"CommandType": "FrameCommands",
+		"Commands": [
+			{
+				"CommandType": "AddMesh",
+				"MeshId": "cube"
+			},
+			{
+				"CommandType": "SetFocusPoint",
+				"Position": "eAFjYGiwZ4ACAAdDAMABAAAAAw=="
+			}
+		],
+		"FrameId": "0"
+	}
+]

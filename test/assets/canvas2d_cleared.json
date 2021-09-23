@@ -1,0 +1,32 @@
+{
+	"CanvasId": "canvas2d",
+	"CommandType": "CanvasCommands",
+	"Commands": [
+		{
+			"CommandType": "SetBackgroundStyle",
+			"Value": "#000000"
+		},
+		[
+			{
+				"CommandType": "AddFrame",
+				"FrameId": "4"
+			},
+			{
+				"CommandType": "FrameCommands",
+				"Commands": [
+					{
+						"CommandType": "SetCoordinates",
+						"CoordinateBuffer": "eAFjYICBBnsIZnAAYQATAgH/AwAAAAI="
+					},
+					{
+						"CommandType": "AddLines",
+						"InfoBuffer": "eAEBBgD5/wAAAwAAAAASAAQBAAAAAw==",
+						"StyleBuffer": "eAEBCAD3/wAAAAABAAAAAAwAAgEAAAAI",
+						"WidthBuffer": "eAEBBAD7/wAAgD8BQwDAAQAAAAE="
+					}
+				],
+				"FrameId": "4"
+			}
+		]
+	]
+}
