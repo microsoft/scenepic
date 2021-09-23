@@ -8,8 +8,8 @@
 //
 // ----------------------------------------------------------------------------
 
-#ifndef _SP_MATRIX_H_
-#define _SP_MATRIX_H_
+#ifndef _SCENEPIC_MATRIX_H_
+#define _SCENEPIC_MATRIX_H_
 
 #include <cstdint>
 #include <limits>
@@ -20,7 +20,7 @@
 #include "base64.h"
 #include "compression.h"
 
-namespace svt
+namespace scenepic
 {
 typedef Eigen::Matrix4f Transform;
 typedef Eigen::Matrix<float, 3, 3, Eigen::RowMajor> Intrinsic;
@@ -130,6 +130,6 @@ Eigen::Array<typename Derived::Scalar, Eigen::Dynamic, 1> roll(const Eigen::Arra
     result.tail(remainder) = values.head(remainder);
     return result;
 }
-} // namespace svt
+} // namespace scenepic
 
 #endif

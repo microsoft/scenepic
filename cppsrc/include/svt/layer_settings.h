@@ -8,15 +8,15 @@
 //
 // ----------------------------------------------------------------------------
 
-#ifndef _SP_LAYER_SETTINGS_H_
-#define _SP_LAYER_SETTINGS_H_
+#ifndef _SCENEPIC_LAYER_SETTINGS_H_
+#define _SCENEPIC_LAYER_SETTINGS_H_
 
 #include <limits>
 #include <string>
 
 #include "json_value.h"
 
-namespace svt
+namespace scenepic
 {
     /** Settings used for customizing canvas drawing by layer */
     class LayerSettings
@@ -75,6 +75,6 @@ namespace svt
         bool m_wireframe;
         double m_opacity;
     };
-} // namespace svt
+} // namespace scenepic
 
 #endif

@@ -111,7 +111,7 @@ license you like.
  * It is an internal header that must not be exposed.
  */
 
-namespace svt { namespace Json {
+namespace scenepic { namespace Json {
 static inline char getDecimalPoint() {
 #ifdef JSONCPP_NO_LOCALE_SUPPORT
   return '\0';
@@ -216,7 +216,7 @@ template <typename Iter> Iter fixZerosInTheEnd(Iter begin, Iter end) {
 }
 
 } // namespace Json
-} // namespace svt
+} // namespace scenepic
 
 #endif // LIB_JSONCPP_JSON_TOOL_H_INCLUDED
 
@@ -283,7 +283,7 @@ template <typename Iter> Iter fixZerosInTheEnd(Iter begin, Iter end) {
 static size_t const stackLimit_g =
     JSONCPP_DEPRECATED_STACK_LIMIT; // see readValue()
 
-namespace svt { namespace Json {
+namespace scenepic { namespace Json {
 
 #if __cplusplus >= 201103L || (defined(_CPPLIB_VER) && _CPPLIB_VER >= 520)
 typedef std::unique_ptr<CharReader> CharReaderPtr;
@@ -2250,7 +2250,7 @@ IStream& operator>>(IStream& sin, Value& root) {
 }
 
 } // namespace Json
-} // namespace svt
+} // namespace scenepic
 
 // //////////////////////////////////////////////////////////////////////
 // End of content of file: src/lib_json/json_reader.cpp
@@ -2272,7 +2272,7 @@ IStream& operator>>(IStream& sin, Value& root) {
 
 // included by json_value.cpp
 
-namespace svt { namespace Json {
+namespace scenepic { namespace Json {
 
 // //////////////////////////////////////////////////////////////////
 // //////////////////////////////////////////////////////////////////
@@ -2424,7 +2424,7 @@ ValueIterator& ValueIterator::operator=(const SelfType& other) {
 }
 
 } // namespace Json
-} // namespace svt
+} // namespace scenepic
 
 // //////////////////////////////////////////////////////////////////////
 // End of content of file: src/lib_json/json_valueiterator.inl
@@ -2494,7 +2494,7 @@ int JSON_API msvc_pre1900_c99_snprintf(char* outBuf,
 
 #define JSON_ASSERT_UNREACHABLE assert(false)
 
-namespace svt { namespace Json {
+namespace scenepic { namespace Json {
 template <typename T>
 static std::unique_ptr<T> cloneUnique(const std::unique_ptr<T>& p) {
   std::unique_ptr<T> r;
@@ -2652,7 +2652,7 @@ static inline void releaseStringValue(char* value, unsigned) { free(value); }
 #endif // JSONCPP_USING_SECURE_MEMORY
 
 } // namespace Json
-} // namespace svt
+} // namespace scenepic
 
 // //////////////////////////////////////////////////////////////////
 // //////////////////////////////////////////////////////////////////
@@ -2666,7 +2666,7 @@ static inline void releaseStringValue(char* value, unsigned) { free(value); }
 #include "json_valueiterator.inl"
 #endif // if !defined(JSON_IS_AMALGAMATION)
 
-namespace svt { namespace Json {
+namespace scenepic { namespace Json {
 
 #if JSON_USE_EXCEPTION
 Exception::Exception(String msg) : msg_(std::move(msg)) {}
@@ -4145,7 +4145,7 @@ Value& Path::make(Value& root) const {
 }
 
 } // namespace Json
-} // namespace svt
+} // namespace scenepic
 
 // //////////////////////////////////////////////////////////////////////
 // End of content of file: src/lib_json/json_value.cpp
@@ -4243,7 +4243,7 @@ Value& Path::make(Value& root) const {
 #pragma warning(disable : 4996)
 #endif
 
-namespace svt { namespace Json {
+namespace scenepic { namespace Json {
 
 #if __cplusplus >= 201103L || (defined(_CPPLIB_VER) && _CPPLIB_VER >= 520)
 typedef std::unique_ptr<StreamWriter> StreamWriterPtr;
@@ -5413,7 +5413,7 @@ OStream& operator<<(OStream& sout, Value const& root) {
 }
 
 } // namespace Json
-} // namespace svt
+} // namespace scenepic
 
 // //////////////////////////////////////////////////////////////////////
 // End of content of file: src/lib_json/json_writer.cpp

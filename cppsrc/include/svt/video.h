@@ -8,12 +8,12 @@
 //
 // ----------------------------------------------------------------------------
 
-#ifndef _SP_VIDEO_H_
-#define _SP_VIDEO_H_
+#ifndef _SCENEPIC_VIDEO_H_
+#define _SCENEPIC_VIDEO_H_
 
 #include "json_value.h"
 
-namespace svt
+namespace scenepic
 {
 /** Video that can be connected to a canvas. */
 class Video
@@ -62,6 +62,6 @@ private:
     std::string m_video_id;
     std::string m_ext;
 };
-} // namespace svt
+} // namespace scenepic
 
 #endif

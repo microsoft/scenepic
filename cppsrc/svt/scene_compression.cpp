@@ -54,7 +54,7 @@ namespace
     }
 } // namespace
 
-namespace svt
+namespace scenepic
 {
     QuantizationInfo::QuantizationInfo(std::uint32_t keyframe_count, float estimated_size_ratio, float mean_error, float max_error) :
         keyframe_count(keyframe_count), estimated_size_ratio(estimated_size_ratio), mean_error(mean_error), max_error(max_error)
@@ -205,4 +205,4 @@ namespace svt
         return info;
     }
 
-} // namespace svt
+} // namespace scenepic

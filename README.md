@@ -4,14 +4,14 @@
 
 Primary Contact: <matjoh@microsoft.com>
 
-[API Documentation](http://aka.ms/svtdocs)
+[API Documentation](http://aka.ms/scenepicdocs)
 
 ## License
 ScenePic is (for now) a Microsoft internal tool only, and without proper CELA
 review, results should not be shipped or shared externally.  For example, to
 minimize library size, several open source dependencies are pulled in
 by `npm install` and then minified into a single output file
-"dist/svt.min.js" which removes license information.
+"dist/scenepic.min.js" which removes license information.
 
 The C++ client library uses four open source components:
 - [`jsoncpp`](https://github.com/open-source-parsers/jsoncpp), a lightweight
@@ -71,7 +71,7 @@ Here is an animation of the Getting Started tutorial (
 ## Overview
 
 The core SVT library is written in TypeScript and based on WebGL.  This 
-is compiled down to `dist/svt.min.js` which is a 'minified' JavaScript
+is compiled down to `dist/scenepic.min.js` which is a 'minified' JavaScript
 library that can be loaded in HTML pages to enable SVT to display data.
 
 The core API for SVT is a JSON-based scripting file format.  The
@@ -95,7 +95,7 @@ scripts.  Currently supported are:
 ### C++
 Users can either clone this repository and
 [build the client library](#c-client-build-how-to)
-directly, or download one of the [pre-built binaries](https://svtdocs.azurewebsites.net/svt/binaries/)
+directly, or download one of the [pre-built binaries](https://scenepicdocs.azurewebsites.net/scenepic/binaries/)
 
 ### Python
 As the Python interface is provided via a wrapper around the C++
@@ -135,13 +135,13 @@ jupyter to prevent an IOPub error.  To do this, call
 `jupyter notebook --generate-config` to generate a config file, and then edit
 the appropriate line to increase the value until it works.
 
-We provide a website with full Python API documentation [here](https://svtdocs.azurewebsites.net/svt/python/index.html)
+We provide a website with full Python API documentation [here](https://scenepicdocs.azurewebsites.net/scenepic/python/index.html)
 
 ### Getting started with C++
 
 To see an example of how to use the library from C++ look at 
 [the example code](https://microsoft.visualstudio.com/Analog/_git/analog.science.SVT?path=%2Fcppsrc%2Fexamples).
-You can find the API documentation [here](https://svtdocs.azurewebsites.net/svt/cpp/index.html)
+You can find the API documentation [here](https://scenepicdocs.azurewebsites.net/scenepic/cpp/index.html)
 
 ## Using the HTML Client
 
@@ -158,7 +158,7 @@ You can slow any of the mouse controls by holding down the Alt key. If you
 accidentally transform the camera too wildly, you can reset by pressing 'r'.
 
 In the top right of each canvas a *Layer* control will appear (when
-programmatically enabled via `svt.py/Canvas/set_layer_visibilities()`).
+programmatically enabled via `scenepic.py/Canvas/set_layer_visibilities()`).
 This allows the user to toggle certain layers of meshes on and off
 interactively. 
 
@@ -179,7 +179,7 @@ to select different frames.
 You can globally toggle wireframe using 'w' and transparency using 't'.
 
 You can programmatically link all input events across multiple
-*Canvas*es by using `svt.py/Scene/link_canvas_events()`.
+*Canvas*es by using `scenepic.py/Scene/link_canvas_events()`.
 
 ## Client-server mode
 
@@ -189,7 +189,7 @@ the HTML front-end webpage will connect to a specified server
 to the HTML client, and keypresses in the HTML client will be
 reported back to the server.
 
-For an example, see `examples/Interactive Example/svt_interactive.py`.
+For an example, see `examples/Interactive Example/scenepic_interactive.py`.
 
 
 ## Building SVT core library from source
@@ -261,7 +261,7 @@ you should navigate to the cloned repository and run the following commands:
 mkdir build
 cd build
 cmake ..
-cmake --build . --config Debug --target svt_tests
+cmake --build . --config Debug --target scenepic_tests
 ```
 
 CMake will attempt to find the dependencies on your system, and will tell

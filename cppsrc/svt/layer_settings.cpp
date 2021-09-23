@@ -1,7 +1,7 @@
 #include "layer_settings.h"
 #include "util.h"
 
-namespace svt
+namespace scenepic
 {
     LayerSettings::LayerSettings(bool filled, bool wireframe, double opacity, int render_order)
         : m_render_order(render_order),
@@ -74,4 +74,4 @@ namespace svt
         return *this;
     }
 
-} // namespace svt
+} // namespace scenepic

@@ -131,7 +131,7 @@ license you like.
 
 #pragma pack(push, 8)
 
-namespace svt { namespace Json {
+namespace scenepic { namespace Json {
 template <typename T> class SecureAllocator {
 public:
   // Type definitions
@@ -203,7 +203,7 @@ bool operator!=(const SecureAllocator<T>&, const SecureAllocator<U>&) {
 }
 
 } // namespace Json
-} // namespace svt
+} // namespace scenepic
 
 #pragma pack(pop)
 
@@ -339,7 +339,7 @@ msvc_pre1900_c99_snprintf(char* outBuf, size_t size, const char* format, ...);
 
 #endif // if !defined(JSON_IS_AMALGAMATION)
 
-namespace svt { namespace Json {
+namespace scenepic { namespace Json {
 typedef int Int;
 typedef unsigned int UInt;
 #if defined(JSON_NO_INT64)
@@ -374,7 +374,7 @@ using OStringStream = std::basic_ostringstream<String::value_type,
 using IStream = std::istream;
 using OStream = std::ostream;
 } // namespace Json
-} // namespace svt
+} // namespace scenepic
 
 // Legacy names (formerly macros).
 using JSONCPP_STRING = svt::Json::String;
@@ -410,7 +410,7 @@ using JSONCPP_OSTREAM = svt::Json::OStream;
 #include "config.h"
 #endif // if !defined(JSON_IS_AMALGAMATION)
 
-namespace svt { namespace Json {
+namespace scenepic { namespace Json {
 
 // writer.h
 class StreamWriter;
@@ -439,7 +439,7 @@ class ValueIterator;
 class ValueConstIterator;
 
 } // namespace Json
-} // namespace svt
+} // namespace scenepic
 
 #endif // JSON_FORWARDS_H_INCLUDED
 
@@ -470,7 +470,7 @@ class ValueConstIterator;
 
 #pragma pack(push, 8)
 
-namespace svt { namespace Json {
+namespace scenepic { namespace Json {
 
 /** \brief Configuration passed to reader and writer.
  * This configuration object can be used to force the Reader or Writer
@@ -513,7 +513,7 @@ public:
 };
 
 } // namespace Json
-} // namespace svt
+} // namespace scenepic
 
 #pragma pack(pop)
 
@@ -569,7 +569,7 @@ public:
 
 /** \brief JSON (JavaScript Object Notation).
  */
-namespace svt { namespace Json {
+namespace scenepic { namespace Json {
 
 #if JSON_USE_EXCEPTION
 /** Base class for all exceptions we throw.
@@ -1423,7 +1423,7 @@ public:
 inline void swap(Value& a, Value& b) { a.swap(b); }
 
 } // namespace Json
-} // namespace svt
+} // namespace scenepic
 
 #pragma pack(pop)
 
@@ -1477,7 +1477,7 @@ inline void swap(Value& a, Value& b) { a.swap(b); }
 #pragma warning(disable : 4996)
 #endif
 
-namespace svt { namespace Json {
+namespace scenepic { namespace Json {
 
 /** \brief Unserialize a <a HREF="http://www.json.org">JSON</a> document into a
  * Value.
@@ -1850,7 +1850,7 @@ bool JSON_API parseFromStream(CharReader::Factory const&,
 JSON_API IStream& operator>>(IStream&, Value&);
 
 } // namespace Json
-} // namespace svt
+} // namespace scenepic
 
 #pragma pack(pop)
 
@@ -1897,7 +1897,7 @@ JSON_API IStream& operator>>(IStream&, Value&);
 
 #pragma pack(push, 8)
 
-namespace svt { namespace Json {
+namespace scenepic { namespace Json {
 
 class Value;
 
@@ -2233,7 +2233,7 @@ String JSON_API valueToQuotedString(const char* value);
 JSON_API OStream& operator<<(OStream&, const Value& root);
 
 } // namespace Json
-} // namespace svt
+} // namespace scenepic
 
 #pragma pack(pop)
 

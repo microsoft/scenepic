@@ -10,7 +10,7 @@ namespace
 const float PI = static_cast<float>(M_PI);
 }
 
-namespace svt
+namespace scenepic
 {
 Vector interpolate(const Vector &p0, const Vector &p1, float alpha)
 {
@@ -689,4 +689,4 @@ void Mesh::add_uv_sphere(const Color &color,
     this->append_mesh(m);
 }
 
-} // namespace svt
+} // namespace scenepic

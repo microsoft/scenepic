@@ -5,11 +5,11 @@
 
 #include <sstream>
 
-#include "svt.h"
+#include "scenepic.h"
 #include "js_lib.h"
 
 using namespace pybind11::literals;
-using namespace svt;
+using namespace scenepic;
 
 namespace py = pybind11;
 

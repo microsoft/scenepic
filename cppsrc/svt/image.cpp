@@ -25,7 +25,7 @@ bool end_with(const std::string &value, const std::string &ending)
 }
 } // namespace
 
-namespace svt
+namespace scenepic
 {
 Image::Image(const std::string &image_id) : m_image_id(image_id),
                                             m_data(),
@@ -110,4 +110,4 @@ std::string Image::to_string() const
     return this->to_json().to_string();
 }
 
-} // namespace svt
+} // namespace scenepic

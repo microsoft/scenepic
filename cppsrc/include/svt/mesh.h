@@ -8,8 +8,8 @@
 //
 // ----------------------------------------------------------------------------
 
-#ifndef _SP_MESH_H_
-#define _SP_MESH_H_
+#ifndef _SCENEPIC_MESH_H_
+#define _SCENEPIC_MESH_H_
 
 #include <cstdint>
 #include <array>
@@ -22,7 +22,7 @@
 #include "matrix.h"
 #include "mesh_info.h"
 
-namespace svt
+namespace scenepic
 {
 
 /**
@@ -607,6 +607,6 @@ private:
     bool m_instance_buffer_has_rotations;
     bool m_instance_buffer_has_colors;
 };
-} // namespace svt
+} // namespace scenepic
 
 #endif

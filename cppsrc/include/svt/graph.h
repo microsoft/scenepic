@@ -8,8 +8,8 @@
 //
 // ----------------------------------------------------------------------------
 
-#ifndef _SP_GRAPH_H_
-#define _SP_GRAPH_H_
+#ifndef _SCENEPIC_GRAPH_H_
+#define _SCENEPIC_GRAPH_H_
 
 #include <string>
 #include <vector>
@@ -20,7 +20,7 @@
 #include "color.h"
 #include "matrix.h"
 
-namespace svt
+namespace scenepic
 {
 
 /** A 2D viewport that animates one or more sparklines. */
@@ -77,7 +77,7 @@ public:
      *  \param line_width the width of the line
      */
     void add_sparkline(const std::string &name, const std::vector<float>& values,
-                       const svt::Color& line_color=svt::Colors::Black, float line_width=1.0f);
+                       const scenepic::Color& line_color=scenepic::Colors::Black, float line_width=1.0f);
 
     /** Return a JSON string representing the object */
     std::string to_string() const;
@@ -153,6 +153,6 @@ private:
     std::string m_font_family;
     float m_text_size;
 };
-} // namespace svt
+} // namespace scenepic
 
 #endif

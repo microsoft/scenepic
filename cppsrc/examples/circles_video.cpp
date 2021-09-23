@@ -13,8 +13,10 @@
 #include <vector>
 #include <utility>
 
-#include "svt.h"
+#include "scenepic.h"
 
+
+namespace sp = scenepic;
 
 const int SIZE = 400;
 
@@ -28,16 +30,16 @@ std::pair<float, float> angle_to_pos(float angle, float radius)
 
 int main(int argc, char *argv[])
 {
-    svt::Scene scene;
+    sp::Scene scene;
 
     auto video = scene.create_video();
     video->load("circles.mp4");
 
     auto tracking = scene.create_canvas_2d("tracking", SIZE, SIZE);
-    tracking->background_color(svt::Colors::White);
+    tracking->background_color(sp::Colors::White);
     tracking->media_id(video->video_id());
     auto multi = scene.create_canvas_2d("multi", SIZE, SIZE);
-    multi->background_color(svt::Colors::White);
+    multi->background_color(sp::Colors::White);
     multi->media_id(video->video_id());
 
     for(int i=0; i<360; ++i){
@@ -46,16 +48,16 @@ int main(int argc, char *argv[])
 
         float angle = static_cast<float>(i * M_PI / 180.0f);
         auto red_pos = angle_to_pos(angle, 160);
-        frame->add_rectangle(red_pos.first - 11, red_pos.second - 11, 22, 22, svt::Color::from_bytes(255, 0, 0), 2, svt::Color::None(), "rect");
-        frame->add_circle(red_pos.first, red_pos.second, 10, svt::Color::from_bytes(255, 0, 0), 1.0f, svt::Color::from_bytes(255, 0, 0), "dot");
+        frame->add_rectangle(red_pos.first - 11, red_pos.second - 11, 22, 22, sp::Color::from_bytes(255, 0, 0), 2, sp::Color::None(), "rect");
+        frame->add_circle(red_pos.first, red_pos.second, 10, sp::Color::from_bytes(255, 0, 0), 1.0f, sp::Color::from_bytes(255, 0, 0), "dot");
 
         auto green_pos = angle_to_pos(-2*angle, 80);
-        frame->add_rectangle(green_pos.first - 11, green_pos.second - 11, 22, 22, svt::Color::from_bytes(0, 255, 0), 2, svt::Color::None(), "rect");
-        frame->add_circle(green_pos.first, green_pos.second, 10, svt::Color::from_bytes(0, 255, 0), 1.0f, svt::Color::from_bytes(0, 255, 0), "dot");
+        frame->add_rectangle(green_pos.first - 11, green_pos.second - 11, 22, 22, sp::Color::from_bytes(0, 255, 0), 2, sp::Color::None(), "rect");
+        frame->add_circle(green_pos.first, green_pos.second, 10, sp::Color::from_bytes(0, 255, 0), 1.0f, sp::Color::from_bytes(0, 255, 0), "dot");
 
         auto blue_pos = angle_to_pos(4*angle, 40);
-        frame->add_rectangle(blue_pos.first - 11, blue_pos.second - 11, 22, 22, svt::Color::from_bytes(0, 0, 255), 2, svt::Color::None(), "rect");
-        frame->add_circle(blue_pos.first, blue_pos.second, 10, svt::Color::from_bytes(0, 0, 255), 1.0f, svt::Color::from_bytes(0, 0, 255), "dot");
+        frame->add_rectangle(blue_pos.first - 11, blue_pos.second - 11, 22, 22, sp::Color::from_bytes(0, 0, 255), 2, sp::Color::None(), "rect");
+        frame->add_circle(blue_pos.first, blue_pos.second, 10, sp::Color::from_bytes(0, 0, 255), 1.0f, sp::Color::from_bytes(0, 0, 255), "dot");
 
         frame = multi->create_frame();
         frame->add_video("manual", red_pos.first - 40, red_pos.second - 40, 0.2f, false, "red");
@@ -64,8 +66,8 @@ int main(int argc, char *argv[])
     }
 
     tracking->set_layer_settings({
-        {"rect", svt::LayerSettings().render_order(0)},
-        {"dot", svt::LayerSettings().render_order(1)}
+        {"rect", sp::LayerSettings().render_order(0)},
+        {"dot", sp::LayerSettings().render_order(1)}
     });
 
     scene.link_canvas_events({"tracking", "multi"});

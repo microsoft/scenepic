@@ -9,13 +9,13 @@
 //
 // ----------------------------------------------------------------------------
 
-#ifndef _SP_ZIP_H_
-#define _SP_ZIP_H_
+#ifndef _SCENEPIC_ZIP_H_
+#define _SCENEPIC_ZIP_H_
 
 #include <cstdint>
 #include <vector>
 
-namespace svt
+namespace scenepic
 {
     /** Deflate a byte array.
      *  \param data a pointer to the bytes to deflate
@@ -31,6 +31,6 @@ namespace svt
      *  \return the original bytes
      */
     std::vector<std::uint8_t> inflate(const std::uint8_t *data, std::size_t source_length, std::size_t dest_length);
-} // namespace svt
+} // namespace scenepic
 
 #endif

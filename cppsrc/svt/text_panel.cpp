@@ -1,7 +1,7 @@
 #include "text_panel.h"
 #include "util.h"
 
-namespace svt
+namespace scenepic
 {
 TextPanel::TextPanel(const std::string &text_panel_id) : m_text_panel_id(text_panel_id), m_text(""), m_title(""), m_input_text("")
 {
@@ -84,4 +84,4 @@ std::string TextPanel::to_string() const
 {
     return this->to_json().to_string();
 }
-} // namespace svt
+} // namespace scenepic

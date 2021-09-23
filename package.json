@@ -1,6 +1,6 @@
 {
   "_comment0": "This file is used by npm to specify the project and npm dependencies",
-  "name": "svt",
+  "name": "scenepic",
   "version": "1.10.6",
   "description": "Science Visualization Toolkit 3D",
   "author": "Jamie Shotton and Matthew Johnson",

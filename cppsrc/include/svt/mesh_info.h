@@ -8,14 +8,14 @@
 //
 // ----------------------------------------------------------------------------
 
-#ifndef _SP_MESH_INFO_H_
-#define _SP_MESH_INFO_H_
+#ifndef _SCENEPIC_MESH_INFO_H_
+#define _SCENEPIC_MESH_INFO_H_
 
 #include <memory>
 
 #include "matrix.h"
 
-namespace svt
+namespace scenepic
 {
 /** Container for Mesh creation information */
 class MeshInfo
@@ -71,6 +71,6 @@ private:
     UVBuffer m_uv_buffer;
     ColorBuffer m_color_buffer;
 };
-} // namespace svt
+} // namespace scenepic
 
 #endif

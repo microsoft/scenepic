@@ -3,7 +3,7 @@
 #include "loop_subdivision_stencil.h"
 #include "mesh_info.h"
 
-namespace svt
+namespace scenepic
 {
 MeshInfo::MeshInfo(std::size_t num_vertices, std::size_t num_triangles, bool has_uvs, bool has_colors)
 {
@@ -95,4 +95,4 @@ std::shared_ptr<MeshInfo> MeshInfo::subdivide(int steps, bool project_to_limit)
     return subdiv_mesh;
 }
 
-} // namespace svt
+} // namespace scenepic

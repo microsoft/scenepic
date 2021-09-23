@@ -9,8 +9,8 @@
 //
 // ----------------------------------------------------------------------------
 
-#ifndef _SP_JSON_VALUE_H_
-#define _SP_JSON_VALUE_H_
+#ifndef _SCENEPIC_JSON_VALUE_H_
+#define _SCENEPIC_JSON_VALUE_H_
 
 #include <cstdint>
 #include <string>
@@ -18,7 +18,7 @@
 #include <vector>
 #include <iostream>
 
-namespace svt
+namespace scenepic
 {
     enum class JsonType
     {
@@ -77,6 +77,6 @@ namespace svt
         std::map<std::string, JsonValue> m_lookup;
         std::vector<JsonValue> m_values;
     };
-} // namespace svt
+} // namespace scenepic
 
 #endif

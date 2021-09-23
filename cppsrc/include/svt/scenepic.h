@@ -1,6 +1,6 @@
 // ----------------------------------------------------------------------------
 //
-// svt.h -- Header file for the SP library
+// scenepic.h -- Header file for the ScenePic library
 //
 // Copyright (C) 2019 Microsoft
 //
@@ -8,8 +8,8 @@
 //
 // ----------------------------------------------------------------------------
 
-#ifndef _SP_H_
-#define _SP_H_
+#ifndef _SCENEPIC_H_
+#define _SCENEPIC_H_
 
 #include "io.h"
 #include "loop_subdivision_stencil.h"

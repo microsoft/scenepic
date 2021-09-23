@@ -8,13 +8,13 @@
 //
 // ----------------------------------------------------------------------------
 
-#ifndef _SP_LOOP_SUBDIV_STENCIL_H_
-#define _SP_LOOP_SUBDIV_STENCIL_H_
+#ifndef _SCENEPIC_LOOP_SUBDIV_STENCIL_H_
+#define _SCENEPIC_LOOP_SUBDIV_STENCIL_H_
 
 #include "matrix.h"
 #include "mesh_info.h"
 
-namespace svt
+namespace scenepic
 {
 /** This class enables efficient Loop subdivision of triangle meshes.
  *
@@ -64,6 +64,6 @@ private:
     TriangleBuffer m_triangles;
     SparseMatrix m_subdiv;
 };
-} // namespace svt
+} // namespace scenepic
 
 #endif

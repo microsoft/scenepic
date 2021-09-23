@@ -8,8 +8,8 @@
 //
 // ----------------------------------------------------------------------------
 
-#ifndef _SP_CANVAS3D_H_
-#define _SP_CANVAS3D_H_
+#ifndef _SCENEPIC_CANVAS3D_H_
+#define _SCENEPIC_CANVAS3D_H_
 
 #include <string>
 #include <map>
@@ -25,7 +25,7 @@
 #include "mesh.h"
 #include "frame3d.h"
 
-namespace svt
+namespace scenepic
 {
 /** Represents an ScenePic Canvas3D - a 3D viewport that can contain a number of Frame3Ds. */
 class Canvas3D
@@ -168,6 +168,6 @@ private:
     // DO NOT REMOVE - it is important
     std::size_t m_num_frames;
 };
-} // namespace svt
+} // namespace scenepic
 
 #endif

@@ -1,6 +1,6 @@
 #include "matrix.h"
 
-namespace svt
+namespace scenepic
 {
     const VectorBuffer& VectorBufferNone()
     {

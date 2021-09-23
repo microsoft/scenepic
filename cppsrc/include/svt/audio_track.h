@@ -8,8 +8,8 @@
 //
 // ----------------------------------------------------------------------------
 
-#ifndef _SP_AUDIO_TRACK_H_
-#define _SP_AUDIO_TRACK_H_
+#ifndef _SCENEPIC_AUDIO_TRACK_H_
+#define _SCENEPIC_AUDIO_TRACK_H_
 
 #include <cstdint>
 #include <string>
@@ -17,7 +17,7 @@
 
 #include "json_value.h"
 
-namespace svt
+namespace scenepic
 {
 /** Audio track that can be connected to a canvas. */
 class AudioTrack
@@ -66,6 +66,6 @@ private:
     std::string m_audio_id;
     std::string m_ext;
 };
-} // namespace svt
+} // namespace scenepic
 
 #endif

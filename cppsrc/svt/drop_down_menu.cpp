@@ -1,7 +1,7 @@
 #include "drop_down_menu.h"
 #include "util.h"
 
-namespace svt
+namespace scenepic
 {
 DropDownMenu::DropDownMenu(const std::string &drop_down_menu_id) : m_drop_down_menu_id(drop_down_menu_id),
                                                                    m_selection(0)
@@ -118,4 +118,4 @@ std::string DropDownMenu::to_string() const
     return this->to_json().to_string();
 }
 
-} // namespace svt
+} // namespace scenepic

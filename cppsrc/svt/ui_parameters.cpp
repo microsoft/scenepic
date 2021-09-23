@@ -3,7 +3,7 @@
 #include "ui_parameters.h"
 #include "util.h"
 
-namespace svt
+namespace scenepic
 {
 UIParameters::UIParameters(double pointer_alt_key_multiplier,
                            double pointer_rotation_speed,
@@ -57,4 +57,4 @@ const UIParameters UIParameters::None()
                         -std::numeric_limits<double>::infinity());
 }
 
-} // namespace svt
+} // namespace scenepic

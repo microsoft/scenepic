@@ -8,8 +8,8 @@
 //
 // ----------------------------------------------------------------------------
 
-#ifndef _SP_CANVAS2D_H_
-#define _SP_CANVAS2D_H_
+#ifndef _SCENEPIC_CANVAS2D_H_
+#define _SCENEPIC_CANVAS2D_H_
 
 #include <string>
 #include <vector>
@@ -22,7 +22,7 @@
 #include "frame2d.h"
 #include "layer_settings.h"
 
-namespace svt
+namespace scenepic
 {
 /** A 2D canvas that can contain a number of Frame2Ds. */
 class Canvas2D
@@ -106,6 +106,6 @@ private:
     // DO NOT REMOVE - it is important
     std::size_t m_num_frames;
 };
-} // namespace svt
+} // namespace scenepic
 
 #endif

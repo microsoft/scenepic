@@ -8,8 +8,8 @@
 //
 // ----------------------------------------------------------------------------
 
-#ifndef _SP_COMPRESSION_H_
-#define _SP_COMPRESSION_H_
+#ifndef _SCENEPIC_COMPRESSION_H_
+#define _SCENEPIC_COMPRESSION_H_
 
 #include <cstdint>
 #include <vector>
@@ -17,7 +17,7 @@
 #include "zip.h"
 #include "matrix.h"
 
-namespace svt
+namespace scenepic
 {
     /** Compress a matrix.
      *  \param matrix the matrix to be compressed
@@ -53,6 +53,6 @@ namespace svt
 
         return matrix;        
     }
-} // namespace svt
+} // namespace scenepic
 
 #endif

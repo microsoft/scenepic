@@ -2,7 +2,7 @@
 #include "transforms.h"
 #include "util.h"
 
-namespace svt
+namespace scenepic
 {
 Frame3D::Frame3D(const std::string &frame_id,
                  const FocusPoint &focus_point,
@@ -96,4 +96,4 @@ Frame3D &Frame3D::focus_point(const FocusPoint &value)
     return *this;
 }
 
-} // namespace svt
+} // namespace scenepic

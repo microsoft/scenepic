@@ -1,4 +1,4 @@
-"""Setup script for svt."""
+"""Setup script for scenepic."""
 
 from distutils.version import LooseVersion
 import os
@@ -89,7 +89,7 @@ class CMakeBuild(build_ext):
                       "-DPYTHON_EXECUTABLE=" + sys.executable,
                       "-DSCENEPIC_BUILD_PYTHON=1"]
 
-        build_args = ["--config", cfg, "--target", "_svt"]
+        build_args = ["--config", cfg, "--target", "_scenepic"]
 
         if platform.system() == "Windows":
             cmake_args += ["-DCMAKE_LIBRARY_OUTPUT_DIRECTORY_{}={}".format(cfg.upper(), extdir)]

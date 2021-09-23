@@ -18,9 +18,13 @@
 
 #include <Eigen/Core>
 
-#include "svt.h"
+#include "scenepic.h"
 
-svt::Color to_color(double hue)
+
+namespace sp = scenepic;
+
+
+sp::Color to_color(double hue)
 {
     float hh = static_cast<float>(hue * 3 / M_PI);
     int i = static_cast<int>(hh);
@@ -29,7 +33,7 @@ svt::Color to_color(double hue)
     float q = 1.0f - ff;
     float t = 1.0f - (1.0f - ff);
 
-    svt::Color color;
+    sp::Color color;
 
     switch (i)
     {
@@ -72,11 +76,11 @@ svt::Color to_color(double hue)
 
 int main(int argc, char *argv[])
 {
-    svt::Scene scene;
+    sp::Scene scene;
 
     float width = 600;
     float height = 300;
-    auto canvas = scene.create_canvas_2d("waves", width, height, "waves", svt::Colors::White);
+    auto canvas = scene.create_canvas_2d("waves", width, height, "waves", sp::Colors::White);
 
     std::size_t num_frames = 120;
     std::size_t num_points = 20;
@@ -84,9 +88,9 @@ int main(int argc, char *argv[])
     {
         auto frame = canvas->create_frame();
         float offset = static_cast<float>(M_PI * 2 * i / num_frames);
-        svt::Color color = to_color(offset);
+        sp::Color color = to_color(offset);
         float diff = static_cast<float>(M_PI * 2 / num_points);
-        svt::CoordinateBuffer coords(num_points, 2);
+        sp::CoordinateBuffer coords(num_points, 2);
         for (auto j = 0; j < num_points; ++j)
         {
             float angle = offset + diff * j;

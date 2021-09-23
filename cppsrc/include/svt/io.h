@@ -8,8 +8,8 @@
 //
 // ----------------------------------------------------------------------------
 
-#ifndef _SP_IO_H_
-#define _SP_IO_H_
+#ifndef _SCENEPIC_IO_H_
+#define _SCENEPIC_IO_H_
 
 #include <string>
 #include <iostream>
@@ -17,7 +17,7 @@
 
 #include "mesh_info.h"
 
-namespace svt
+namespace scenepic
 {
 /** Load the geometry of a WaveFront OBJ file from a location on disk.
  * 

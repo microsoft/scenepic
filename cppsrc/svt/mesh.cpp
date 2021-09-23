@@ -12,7 +12,7 @@
 #include "transforms.h"
 #include "util.h"
 
-namespace svt
+namespace scenepic
 {
 
     Vector compute_triangle_normal(const Vector &pos0, const Vector &pos1, const Vector &pos2)
@@ -926,4 +926,4 @@ namespace svt
         return this->to_json().to_string();
     }
 
-} // namespace svt
+} // namespace scenepic

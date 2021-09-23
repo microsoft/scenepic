@@ -8,14 +8,14 @@
 //
 // ----------------------------------------------------------------------------
 
-#ifndef _SP_TRANSFORMS_H_
-#define _SP_TRANSFORMS_H_
+#ifndef _SCENEPIC_TRANSFORMS_H_
+#define _SCENEPIC_TRANSFORMS_H_
 
 #include <utility>
 
 #include "matrix.h"
 
-namespace svt
+namespace scenepic
 {
 namespace Transforms
 {
@@ -147,6 +147,6 @@ Transform gl_projection(const Intrinsic& camera_matrix, int width, int height, d
 Transform gl_world_to_camera(const Extrinsic& extrinsic);
 
 } // namespace Transforms
-} // namespace svt
+} // namespace scenepic
 
 #endif

@@ -8,14 +8,14 @@
 //
 // ----------------------------------------------------------------------------
 
-#ifndef _SP_CAMERA_H_
-#define _SP_CAMERA_H_
+#ifndef _SCENEPIC_CAMERA_H_
+#define _SCENEPIC_CAMERA_H_
 
 #include "json_value.h"
 #include "matrix.h"
 #include "transforms.h"
 
-namespace svt
+namespace scenepic
 {
 /** A camera type */
 class Camera
@@ -121,6 +121,6 @@ protected:
 };
 
 
-} // namespace svt
+} // namespace scenepic
 
 #endif

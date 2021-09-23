@@ -8,14 +8,14 @@
 //
 // ----------------------------------------------------------------------------
 
-#ifndef _SP_PARAMETERS_H_
-#define _SP_PARAMETERS_H_
+#ifndef _SCENEPIC_PARAMETERS_H_
+#define _SCENEPIC_PARAMETERS_H_
 
 #include "json_value.h"
 #include "color.h"
 #include "matrix.h"
 
-namespace svt
+namespace scenepic
 {
 /** Parameters of the shaders */
 class Shading
@@ -60,6 +60,6 @@ private:
     Color m_directional_light_color;
     Vector m_directional_light_dir;
 };
-} // namespace svt
+} // namespace scenepic
 
 #endif

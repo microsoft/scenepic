@@ -3,7 +3,7 @@
 #include "focus_point.h"
 #include "util.h"
 
-namespace svt
+namespace scenepic
 {
 FocusPoint::FocusPoint(const Vector &position,
                        const Vector &orientation_axis_angle) : m_position(position),
@@ -57,4 +57,4 @@ std::string FocusPoint::to_string() const
     return this->to_json().to_string();
 }
 
-} // namespace svt
+} // namespace scenepic

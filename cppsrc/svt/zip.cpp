@@ -2,7 +2,7 @@
 #include "miniz/miniz.h"
 
 
-namespace svt
+namespace scenepic
 {
     std::vector<std::uint8_t> deflate(const std::uint8_t *data, std::size_t data_length)
     {

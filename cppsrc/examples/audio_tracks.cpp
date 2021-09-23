@@ -12,12 +12,14 @@
 #include <cmath>
 #include <vector>
 
-#include "svt.h"
+#include "scenepic.h"
 
-typedef std::shared_ptr<svt::Canvas3D> CanvasPtr;
+namespace sp = scenepic;
+
+typedef std::shared_ptr<sp::Canvas3D> CanvasPtr;
 
 
-void set_audio(svt::Scene &scene, CanvasPtr &canvas, const std::string &path)
+void set_audio(sp::Scene &scene, CanvasPtr &canvas, const std::string &path)
 {
     auto audio = scene.create_audio();
     audio->load(path);
@@ -27,10 +29,10 @@ void set_audio(svt::Scene &scene, CanvasPtr &canvas, const std::string &path)
 
 int main(int argc, char *argv[])
 {
-    svt::Scene scene;
+    sp::Scene scene;
 
     std::vector<std::string> names = {"red", "green", "blue"};
-    std::vector<svt::Color> colors = {svt::Colors::Red, svt::Colors::Green, svt::Colors::Blue};
+    std::vector<sp::Color> colors = {sp::Colors::Red, sp::Colors::Green, sp::Colors::Blue};
     std::vector<float> frequencies = {0, 1, 0.5};
 
     auto graph = scene.create_graph("graph", 600, 150, "graph");
@@ -47,7 +49,7 @@ int main(int argc, char *argv[])
             auto frame = canvas->create_frame();
             double scale = std::sin(j * 2 * M_PI * frequencies[i] / 30);
             values.push_back(static_cast<float>(scale));
-            frame->add_mesh(mesh, svt::Transforms::scale(static_cast<float>((scale + 1) / 2 + 0.5)));
+            frame->add_mesh(mesh, sp::Transforms::scale(static_cast<float>((scale + 1) / 2 + 0.5)));
         }
 
         graph->add_sparkline(names[i], values, colors[i]);

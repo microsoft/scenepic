@@ -17,7 +17,7 @@ std::map<std::string, int> VERTICAL_ALIGNMENTS = {
     {"bottom", +1}};
 } // namespace
 
-namespace svt
+namespace scenepic
 {
 Label::Label(const std::string &label_id,
              const std::string &mesh_id) : m_label_id(label_id),
@@ -151,4 +151,4 @@ std::string Label::to_string() const
     return this->to_json().to_string();
 }
 
-} // namespace svt
+} // namespace scenepic

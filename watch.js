@@ -4,8 +4,8 @@ let fs = require("fs")
 let exorcist = require("exorcist")
 let watchify = require("watchify")
 
-let stream = fs.createWriteStream("build/svt.js")
-let mapFile = "build/svt.js.map"
+let stream = fs.createWriteStream("build/scenepic.js")
+let mapFile = "build/scenepic.js.map"
 
 let b = browserify({
     debug: true,

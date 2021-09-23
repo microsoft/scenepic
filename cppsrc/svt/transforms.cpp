@@ -6,7 +6,7 @@
 
 #include "transforms.h"
 
-namespace svt
+namespace scenepic
 {
 namespace Transforms
 {
@@ -249,4 +249,4 @@ Transform gl_world_to_camera(const Extrinsic& extrinsic)
 }
 
 } // namespace Transforms
-} // namespace svt
+} // namespace scenepic

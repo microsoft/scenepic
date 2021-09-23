@@ -8,7 +8,7 @@
 #include "util.h"
 
 
-namespace svt
+namespace scenepic
 {
 Video::Video(const std::string &video_id) : m_video_id(video_id),
                                                       m_data()
@@ -71,4 +71,4 @@ std::string Video::to_string() const
     return this->to_json().to_string();
 }
 
-} // namespace svt
+} // namespace scenepic

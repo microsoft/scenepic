@@ -1,5 +1,5 @@
 #include "svt_tests.h"
-#include "svt.h"
+#include "scenepic.h"
 
 int test_stencil()
 {

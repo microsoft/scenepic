@@ -1,7 +1,7 @@
 #include "canvas3d.h"
 #include "util.h"
 
-namespace svt
+namespace scenepic
 {
 Canvas3D::Canvas3D(const std::string &canvas_id,
                    double width,
@@ -201,4 +201,4 @@ double Canvas3D::height() const
 {
     return this->m_height;
 }
-} // namespace svt
+} // namespace scenepic

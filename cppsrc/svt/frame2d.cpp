@@ -1,7 +1,7 @@
 #include "frame2d.h"
 #include "util.h"
 
-namespace svt
+namespace scenepic
 {
 Frame2D::Frame2D(const std::string &frame_id) : m_frame_id(frame_id)
 {
@@ -303,4 +303,4 @@ std::string Frame2D::to_string() const
     return this->to_json().to_string();
 }
 
-} // namespace svt
+} // namespace scenepic

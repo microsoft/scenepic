@@ -8,8 +8,8 @@
 //
 // ----------------------------------------------------------------------------
 
-#ifndef _SP_FRAME3D_H_
-#define _SP_FRAME3D_H_
+#ifndef _SCENEPIC_FRAME3D_H_
+#define _SCENEPIC_FRAME3D_H_
 
 #include <string>
 #include <vector>
@@ -23,7 +23,7 @@
 #include "label.h"
 #include "focus_point.h"
 
-namespace svt
+namespace scenepic
 {
 /** Represents a frame of an animation which contains a number of
  *  transformed Mesh objects.
@@ -124,6 +124,6 @@ private:
     Camera m_camera;
     std::vector<JsonValue> m_frame_commands;
 };
-} // namespace svt
+} // namespace scenepic
 
 #endif

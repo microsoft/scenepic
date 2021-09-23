@@ -8,7 +8,7 @@
 #include "util.h"
 
 
-namespace svt
+namespace scenepic
 {
 AudioTrack::AudioTrack(const std::string &audio_id) : m_audio_id(audio_id),
                                                       m_data()
@@ -71,4 +71,4 @@ std::string AudioTrack::to_string() const
     return this->to_json().to_string();
 }
 
-} // namespace svt
+} // namespace scenepic

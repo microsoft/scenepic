@@ -8,14 +8,14 @@
 //
 // ----------------------------------------------------------------------------
 
-#ifndef _SP_TEXT_PANEL_H_
-#define _SP_TEXT_PANEL_H_
+#ifndef _SCENEPIC_TEXT_PANEL_H_
+#define _SCENEPIC_TEXT_PANEL_H_
 
 #include <string>
 
 #include "json_value.h"
 
-namespace svt
+namespace scenepic
 {
 /** Represents a ScenePic TextPanel UI component. */
 class TextPanel
@@ -64,6 +64,6 @@ private:
     std::string m_title;
     std::string m_input_text;
 };
-} // namespace svt
+} // namespace scenepic
 
 #endif

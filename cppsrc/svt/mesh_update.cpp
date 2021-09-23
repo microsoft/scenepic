@@ -7,7 +7,7 @@ namespace {
     std::uint16_t MAX_FIXED = 0xFFFF;
 }
 
-namespace svt
+namespace scenepic
 {
 
 MeshUpdate::MeshUpdate(const std::string &base_mesh_id,

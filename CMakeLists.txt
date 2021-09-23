@@ -18,7 +18,7 @@ set( SCENEPIC_VERSION ${SCENEPIC_VERSION_MAJOR}.${SCENEPIC_VERSION_MINOR}.${SCEN
 
 message("Configure SCENEPIC_VERSION at ${SCENEPIC_VERSION}")
 
-project( svt VERSION ${SCENEPIC_VERSION} LANGUAGES CXX)
+project( scenepic VERSION ${SCENEPIC_VERSION} LANGUAGES CXX)
 
 # -------------------- Options --------------------------------
 
@@ -39,7 +39,7 @@ if( APPLE )
   add_definitions( -DAPPLE )
   set( CMAKE_MACOSX_RPATH ON )
   set( SYSTEM_NAME "Mac" )
-  set( SCENEPIC_NUGET_LIB "libsvt.a")
+  set( SCENEPIC_NUGET_LIB "libscenepic.a")
   execute_process(COMMAND sysctl kern.ostype -is OUTPUT_VARIABLE OSX_ID)
   execute_process(COMMAND sysctl kern.osrelease -rs OUTPUT_VARIABLE OSX_RELEASE)
   if( LSB_ID AND LSB_RELEASE )
@@ -49,7 +49,7 @@ if( APPLE )
   endif()
 elseif( UNIX )
   set( SYSTEM_NAME "Linux" )
-  set( SCENEPIC_NUGET_LIB "libsvt.a")
+  set( SCENEPIC_NUGET_LIB "libscenepic.a")
   execute_process(COMMAND lsb_release -is OUTPUT_VARIABLE LSB_ID)
   execute_process(COMMAND lsb_release -rs OUTPUT_VARIABLE LSB_RELEASE)
   if( LSB_ID AND LSB_RELEASE )
@@ -67,7 +67,7 @@ elseif( UNIX )
     set( SYSTEM_NAME "${SYSTEM_NAME}-Redhat")
   endif()
 elseif( WIN32 )
-  set( SCENEPIC_NUGET_LIB "svt.lib")
+  set( SCENEPIC_NUGET_LIB "scenepic.lib")
   set( SYSTEM_NAME "Windows" )
 endif()
 if( CMAKE_SIZEOF_VOID_P EQUAL 8 )
@@ -126,7 +126,7 @@ endif()
 # -------------------- Build settings -----------------------------
 
 if( NOT DEFINED SCENEPIC_JS_LIB_PATH )
-   set( SCENEPIC_JS_LIB_PATH ${CMAKE_CURRENT_SOURCE_DIR}/dist/svt.min.js CACHE PATH "Javascript library path" )
+   set( SCENEPIC_JS_LIB_PATH ${CMAKE_CURRENT_SOURCE_DIR}/dist/scenepic.min.js CACHE PATH "Javascript library path" )
 endif()
 
 file( READ ${SCENEPIC_JS_LIB_PATH} SCENEPIC_JS_LIB_RAW )
@@ -147,21 +147,21 @@ endif()
 # -------------------- Walk the subdirectories --------------------
 
 set( CPP_TARGETS
-  svt
+  scenepic
 )
 
-add_subdirectory( cppsrc/svt )
+add_subdirectory( cppsrc/scenepic )
 if( SCENEPIC_BUILD_EXAMPLES OR SCENEPIC_BUILD_TESTS )
   add_subdirectory( cppsrc/examples )
-  list( APPEND CPP_TARGETS svt_examples )
+  list( APPEND CPP_TARGETS scenepic_examples )
 endif()
 if( SCENEPIC_BUILD_TESTS )
   add_subdirectory( test )
-  list( APPEND CPP_TARGETS svt_tests )
+  list( APPEND CPP_TARGETS scenepic_tests )
 endif()
 if( SCENEPIC_BUILD_DOCUMENTATION )
   add_subdirectory( cppsrc/doc )
-  list( APPEND CPP_TARGETS svt_doc )
+  list( APPEND CPP_TARGETS scenepic_doc )
 endif()
 
 add_custom_target( cpp )
@@ -173,8 +173,8 @@ set(INSTALL_CONFIGDIR cmake)
 set(INSTALL_LIBDIR build/native/lib)
 set(INSTALL_INCLUDEDIR build/native/include)
 
-install(TARGETS svt 
-  EXPORT svt-targets
+install(TARGETS scenepic 
+  EXPORT scenepic-targets
   ARCHIVE DESTINATION ${INSTALL_LIBDIR}
   LIBRARY DESTINATION ${INSTALL_LIBDIR}
 )
@@ -182,7 +182,7 @@ install(TARGETS svt
 if( WIN32 )
   if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
     install(FILES
-      $<TARGET_FILE_DIR:svt>/svt.pdb
+      $<TARGET_FILE_DIR:scenepic>/scenepic.pdb
       DESTINATION ${INSTALL_LIBDIR}
     )
   endif()
@@ -190,46 +190,46 @@ endif()
 
 install(DIRECTORY cppsrc/include/ DESTINATION ${INSTALL_INCLUDEDIR})
 install(FILES 
-  ${CMAKE_CURRENT_BINARY_DIR}/cppsrc/svt/version.h
-  ${CMAKE_CURRENT_BINARY_DIR}/cppsrc/svt/js_lib.h
-  DESTINATION ${INSTALL_INCLUDEDIR}/svt
+  ${CMAKE_CURRENT_BINARY_DIR}/cppsrc/scenepic/version.h
+  ${CMAKE_CURRENT_BINARY_DIR}/cppsrc/scenepic/js_lib.h
+  DESTINATION ${INSTALL_INCLUDEDIR}/scenepic
 )
 
-install(EXPORT svt-targets
+install(EXPORT scenepic-targets
   FILE
-    svtTargets.cmake
+    scenepicTargets.cmake
   NAMESPACE
-    svt::
+    scenepic::
   DESTINATION
     ${INSTALL_CONFIGDIR}
 )
 
 include(CMakePackageConfigHelpers)
 write_basic_package_version_file(
-  ${CMAKE_CURRENT_BINARY_DIR}/svtConfigVersion.cmake
+  ${CMAKE_CURRENT_BINARY_DIR}/scenepicConfigVersion.cmake
   VERSION ${PROJECT_VERSION}
   COMPATIBILITY AnyNewerVersion
 )
 
-configure_package_config_file(${CMAKE_CURRENT_LIST_DIR}/cmake/svtConfig.cmake.in
-  ${CMAKE_CURRENT_BINARY_DIR}/svtConfig.cmake
+configure_package_config_file(${CMAKE_CURRENT_LIST_DIR}/cmake/scenepicConfig.cmake.in
+  ${CMAKE_CURRENT_BINARY_DIR}/scenepicConfig.cmake
   INSTALL_DESTINATION ${INSTALL_CONFIGDIR}
 )
 
 INSTALL(FILES
-  ${CMAKE_CURRENT_BINARY_DIR}/svtConfig.cmake
-  ${CMAKE_CURRENT_BINARY_DIR}/svtConfigVersion.cmake
+  ${CMAKE_CURRENT_BINARY_DIR}/scenepicConfig.cmake
+  ${CMAKE_CURRENT_BINARY_DIR}/scenepicConfigVersion.cmake
   DESTINATION ${INSTALL_CONFIGDIR}
 )
 
 # -------------------- Export -------------------------------------
 
-export(EXPORT svt-targets
-  FILE ${CMAKE_CURRENT_BINARY_DIR}/svtTargets.cmake
-  NAMESPACE svt::
+export(EXPORT scenepic-targets
+  FILE ${CMAKE_CURRENT_BINARY_DIR}/scenepicTargets.cmake
+  NAMESPACE scenepic::
 )
 
-export(PACKAGE svt)
+export(PACKAGE scenepic)
 
 # -------------------- Package ------------------------------------
 
@@ -242,7 +242,7 @@ set( PROJECT_FILES
 install( FILES ${PROJECT_FILES} DESTINATION "." )
 
 # NuGet files
-set( SCENEPIC_NUGET_NAME "svt-v${MSVC_TOOLSET_VERSION}-${SYSTEM_BITS}-${CMAKE_BUILD_TYPE}" CACHE STRING "SCENEPIC NuGet Name" FORCE )
+set( SCENEPIC_NUGET_NAME "scenepic-v${MSVC_TOOLSET_VERSION}-${SYSTEM_BITS}-${CMAKE_BUILD_TYPE}" CACHE STRING "SCENEPIC NuGet Name" FORCE )
 file( READ RELEASE_NOTES SCENEPIC_RELEASE_NOTES )
 
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/ci/nuget/template.nuspec.in" "${CMAKE_CURRENT_BINARY_DIR}/nuget/${SCENEPIC_NUGET_NAME}.nuspec" @ONLY )

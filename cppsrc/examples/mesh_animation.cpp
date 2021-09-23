@@ -18,15 +18,18 @@
 
 #include <Eigen/Core>
 
-#include "svt.h"
+#include "scenepic.h"
+
+
+namespace sp = scenepic;
 
 
 int main(int argc, char *argv[])
 {
-    svt::Scene scene;
+    sp::Scene scene;
     auto canvas = scene.create_canvas_3d("jelly", 700, 700);
 
-    auto jelly_mesh = svt::load_obj("jelly.obj");
+    auto jelly_mesh = sp::load_obj("jelly.obj");
     auto texture = scene.create_image("texture");
     texture->load("jelly.png");
 
@@ -35,13 +38,13 @@ int main(int argc, char *argv[])
     base_mesh->add_mesh(jelly_mesh);
 
     auto marble = scene.create_mesh("marble");
-    marble->shared_color(svt::Colors::White);
-    marble->add_sphere(svt::Color::None(), svt::Transforms::scale(0.4f));
+    marble->shared_color(sp::Colors::White);
+    marble->add_sphere(sp::Color::None(), sp::Transforms::scale(0.4f));
 
     for(auto i=0; i<60; ++i)
     {
         auto frame = canvas->create_frame();
-        svt::VectorBuffer positions = jelly_mesh->position_buffer();
+        sp::VectorBuffer positions = jelly_mesh->position_buffer();
         auto delta_x = (positions.col(0).array() + 0.0838f * i) * 10.0f;
         auto delta_z = (positions.col(2).array() + 0.0419f * i) * 10.0f;
         positions.col(1) = positions.col(1).array() + 0.1 * (delta_x.cos() + delta_z.sin());
@@ -50,7 +53,7 @@ int main(int argc, char *argv[])
         frame->add_mesh(mesh_update);
 
         float marble_y = std::sin(0.105f * i);
-        frame->add_mesh(marble, svt::Transforms::translate(svt::Vector(0, marble_y, 0)));
+        frame->add_mesh(marble, sp::Transforms::translate(sp::Vector(0, marble_y, 0)));
     }
 
     std::cout << std::endl << "Before compression:" << std::endl;

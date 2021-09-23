@@ -11,7 +11,7 @@
 #include "util.h"
 #include "json/json.h"
 
-namespace svt
+namespace scenepic
 {
     Scene::Scene(const std::string &scene_id) : m_scene_id(scene_id),
                                                 m_num_canvases(0),
@@ -679,4 +679,4 @@ namespace svt
         display_obj["GridColumn"] = grid_column;
         this->m_display_order.push_back(display_obj);
     }
-} // namespace svt
+} // namespace scenepic

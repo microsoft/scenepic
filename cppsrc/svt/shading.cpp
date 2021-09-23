@@ -1,7 +1,7 @@
 #include "shading.h"
 #include "util.h"
 
-namespace svt
+namespace scenepic
 {
 Shading::Shading(const Color &bg_color,
                  const Color &ambient_light_color,
@@ -61,4 +61,4 @@ std::string Shading::to_string() const
 {
     return this->to_json().to_string();
 }
-} // namespace svt
+} // namespace scenepic

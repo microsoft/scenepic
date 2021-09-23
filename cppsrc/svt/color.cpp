@@ -6,7 +6,7 @@
 #include "color.h"
 #include "matrix.h"
 
-namespace svt
+namespace scenepic
 {
 const Color Color::None()
 {
@@ -111,4 +111,4 @@ bool Color::is_none() const
 {
     return *this == Color::None();
 }
-} // namespace svt
+} // namespace scenepic

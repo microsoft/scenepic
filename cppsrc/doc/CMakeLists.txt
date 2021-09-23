@@ -4,7 +4,7 @@ configure_file(
   ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY 
 )
 
-add_custom_target( svt_doc
+add_custom_target( scenepic_doc
   ALL
   ${DOXYGEN_EXECUTABLE} 
   ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile

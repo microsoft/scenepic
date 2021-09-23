@@ -1,7 +1,7 @@
 #include "graph.h"
 #include "util.h"
 
-namespace svt
+namespace scenepic
 {
 Graph::Margin::Margin() : Margin(10) {}
 
@@ -155,4 +155,4 @@ Graph &Graph::media_id(const std::string &media_id)
     this->m_media_id = media_id;
     return *this;
 }
-} // namespace svt
+} // namespace scenepic

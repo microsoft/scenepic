@@ -8,8 +8,8 @@
 //
 // ----------------------------------------------------------------------------
 
-#ifndef _SP_COLOR_H_
-#define _SP_COLOR_H_
+#ifndef _SCENEPIC_COLOR_H_
+#define _SCENEPIC_COLOR_H_
 
 #include <cstdint>
 #include <cmath>
@@ -19,7 +19,7 @@
 
 #include "matrix.h"
 
-namespace svt
+namespace scenepic
 {
 /** Class for representing color values */
 class Color : public Eigen::Vector3f
@@ -121,6 +121,6 @@ const Color Lavender = Color::from_bytes(230, 190, 255);
 const Color Magenta = Color::from_bytes(255, 0, 255);
 const Color Gray = Color::from_bytes(128, 128, 128);
 } // namespace Colors
-} // namespace svt
+} // namespace scenepic
 
 #endif

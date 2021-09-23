@@ -200,7 +200,7 @@ msvc_pre1900_c99_snprintf(char* outBuf, size_t size, const char* format, ...);
 
 #endif // if !defined(JSON_IS_AMALGAMATION)
 
-namespace svt { namespace Json {
+namespace scenepic { namespace Json {
 typedef int Int;
 typedef unsigned int UInt;
 #if defined(JSON_NO_INT64)
@@ -235,7 +235,7 @@ using OStringStream = std::basic_ostringstream<String::value_type,
 using IStream = std::istream;
 using OStream = std::ostream;
 } // namespace Json
-} // namespace svt
+} // namespace scenepic
 
 // Legacy names (formerly macros).
 using JSONCPP_STRING = svt::Json::String;
@@ -271,7 +271,7 @@ using JSONCPP_OSTREAM = svt::Json::OStream;
 #include "config.h"
 #endif // if !defined(JSON_IS_AMALGAMATION)
 
-namespace svt { namespace Json {
+namespace scenepic { namespace Json {
 
 // writer.h
 class StreamWriter;
@@ -300,7 +300,7 @@ class ValueIterator;
 class ValueConstIterator;
 
 } // namespace Json
-} // namespace svt
+} // namespace scenepic
 
 #endif // JSON_FORWARDS_H_INCLUDED
 

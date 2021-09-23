@@ -8,12 +8,12 @@
 //
 // ----------------------------------------------------------------------------
 
-#ifndef _SP_UI_PARAMETERS_H_
-#define _SP_UI_PARAMETERS_H_
+#ifndef _SCENEPIC_UI_PARAMETERS_H_
+#define _SCENEPIC_UI_PARAMETERS_H_
 
 #include "json_value.h"
 
-namespace svt
+namespace scenepic
 {
 /** Per-Canvas3D parameters of the ScenePic user interface */
 class UIParameters
@@ -56,6 +56,6 @@ private:
     double m_pointer_rotation_speed;
     double m_mouse_wheel_translation_speed;
 };
-} // namespace svt
+} // namespace scenepic
 
 #endif

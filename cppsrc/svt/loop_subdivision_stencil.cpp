@@ -9,7 +9,7 @@
 
 #include "loop_subdivision_stencil.h"
 
-namespace svt
+namespace scenepic
 {
 typedef std::map<Triangle::Scalar, Triangle::Scalar> VertexMap;
 typedef std::vector<Triangle::Scalar> VertexList;
@@ -315,4 +315,4 @@ LoopSubdivisionStencil LoopSubdivisionStencil::create(const ConstTriangleBufferR
 
     return stencil;
 }
-} // namespace svt
+} // namespace scenepic

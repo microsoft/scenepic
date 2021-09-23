@@ -8,8 +8,8 @@
 //
 // ----------------------------------------------------------------------------
 
-#ifndef _SP_MESH_UPDATE_H_
-#define _SP_MESH_UPDATE_H_
+#ifndef _SCENEPIC_MESH_UPDATE_H_
+#define _SCENEPIC_MESH_UPDATE_H_
 
 #include <string>
 #include <vector>
@@ -19,7 +19,7 @@
 #include "json_value.h"
 #include "matrix.h"
 
-namespace svt
+namespace scenepic
 {
 /** Class which represents an update to an existing mesh in which only the vertex buffer is changed.
  *  By only updating a mesh the ScenePic file can become smaller, due to only needing to store the
@@ -91,6 +91,6 @@ private:
     std::uint32_t m_frame_index;
     std::uint32_t m_keyframe_index;
 };
-} // namespace svt
+} // namespace scenepic
 
 #endif

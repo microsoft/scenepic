@@ -61,7 +61,7 @@ Corner resolve_corner(const Corner &vertex,
 
 } // namespace
 
-namespace svt
+namespace scenepic
 {
 std::shared_ptr<MeshInfo> load_obj(const std::string &path)
 {
@@ -157,4 +157,4 @@ std::shared_ptr<MeshInfo> load_obj(std::istream &stream)
 
     return mesh_info;
 }
-} // namespace svt
+} // namespace scenepic

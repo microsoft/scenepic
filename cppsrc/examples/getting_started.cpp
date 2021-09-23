@@ -17,7 +17,10 @@
 
 #include <Eigen/Core>
 
-#include "svt.h"
+#include "scenepic.h"
+
+
+namespace sp = scenepic;
 
 
 int main(int argc, char *argv[])
@@ -27,7 +30,7 @@ int main(int argc, char *argv[])
     // that webpage. If you do not provide a template, it will
     // set up a series of floating divs, but for this example
     // let's provide a simple structure.
-    std::string body_html = R"svthtml(
+    std::string body_html = R"scenepichtml(
 <table>
 <tr>
     <td id="main" rowspan=3></td>
@@ -38,10 +41,10 @@ int main(int argc, char *argv[])
 <tr><td><h2>Z</h2><td id="projz"></td></tr>
 </tr>
 </table>
-)svthtml";
+)scenepichtml";
 
     // the scene object acts as the root of the entire ScenePic environment
-    svt::Scene scene;
+    sp::Scene scene;
 
     // you can use it to create one or more canvases to display 3D or 2D
     // objects. Canvas objects display Frames. For a static ScenePic, there
@@ -54,7 +57,7 @@ int main(int argc, char *argv[])
     auto projy = scene.create_canvas_2d("projy", 200, 200, "projy");
     auto projz = scene.create_canvas_2d("projz", 200, 200, "projz");
 
-    std::vector<std::shared_ptr<svt::Canvas2D>> projections = {projx, projy, projz};
+    std::vector<std::shared_ptr<sp::Canvas2D>> projections = {projx, projy, projz};
 
     // the scene object is also used to create Mesh objects that will be added
     // to frames. We are going to create an animation of some spheres orbiting
@@ -63,14 +66,14 @@ int main(int argc, char *argv[])
 
     // the Mesh object has a variety of methods for adding primitive objects
     // or loading arbitrary mesh geometry.
-    cube->add_cube(svt::Colors::White);
+    cube->add_cube(sp::Colors::White);
 
     // let's create our spheres as well, using some different colors
-    std::vector<svt::Color> sphere_colors = {svt::Colors::Red, svt::Colors::Green, svt::Colors::Blue};
-    std::vector<std::shared_ptr<svt::Mesh>> spheres;
-    std::transform(sphere_colors.begin(), sphere_colors.end(), std::back_inserter(spheres), [&](const svt::Color &color){
+    std::vector<sp::Color> sphere_colors = {sp::Colors::Red, sp::Colors::Green, sp::Colors::Blue};
+    std::vector<std::shared_ptr<sp::Mesh>> spheres;
+    std::transform(sphere_colors.begin(), sphere_colors.end(), std::back_inserter(spheres), [&](const sp::Color &color){
         auto mesh = scene.create_mesh();
-        mesh->add_sphere(color, svt::Transforms::scale(0.5));
+        mesh->add_sphere(color, sp::Transforms::scale(0.5));
         return mesh;
     });
 
@@ -94,13 +97,13 @@ int main(int argc, char *argv[])
                      0, 1, 0, 1,
                      0, 0, 1, 1;
         auto inc = static_cast<float>(2.0 * M_PI / 180.0);
-        positions.row(0) = svt::Transforms::rotation_about_y(inc * i) * positions.row(0).transpose();
-        positions.row(1) = svt::Transforms::rotation_about_z(2 * inc * i) * positions.row(1).transpose();
-        positions.row(2) = svt::Transforms::rotation_about_x(3 * inc * i) * positions.row(2).transpose();
+        positions.row(0) = sp::Transforms::rotation_about_y(inc * i) * positions.row(0).transpose();
+        positions.row(1) = sp::Transforms::rotation_about_z(2 * inc * i) * positions.row(1).transpose();
+        positions.row(2) = sp::Transforms::rotation_about_x(3 * inc * i) * positions.row(2).transpose();
         positions.conservativeResize(3, 3);
         for(auto j=0; j<spheres.size(); ++j)
         {
-            auto transform = svt::Transforms::translate(positions.row(j));
+            auto transform = sp::Transforms::translate(positions.row(j));
             main_frame->add_mesh(spheres[j], transform);
         }
 
@@ -112,12 +115,12 @@ int main(int argc, char *argv[])
 
             // 2D frames work in pixels (as oppose to world units) so we need
             // to convert positions to pixels.
-            proj_frame->add_rectangle(75, 75, 50, 50, svt::Colors::Black, 1.0f, svt::Colors::White);
+            proj_frame->add_rectangle(75, 75, 50, 50, sp::Colors::Black, 1.0f, sp::Colors::White);
             for(auto k=0; k<sphere_colors.size(); ++k)
             {
                 float x = positions(k, j) * 50 + 100;
                 float y = positions(k, (j + 1) % positions.cols()) * 50 + 100;
-                proj_frame->add_circle(x, y, 12.5, svt::Colors::Black, 1.0f, sphere_colors[k]);
+                proj_frame->add_circle(x, y, 12.5, sp::Colors::Black, 1.0f, sphere_colors[k]);
             }
         }
     }

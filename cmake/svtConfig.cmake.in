@@ -3,8 +3,8 @@ include(CMakeFindDependencyMacro)
 
 find_dependency(Eigen3)
 
-if(NOT TARGET svt::svt)
-    include("${SCENEPIC_CMAKE_DIR}/svtTargets.cmake")
+if(NOT TARGET scenepic::scenepic)
+    include("${SCENEPIC_CMAKE_DIR}/scenepicTargets.cmake")
 endif()
 
-set(SCENEPIC_lIBRARIES svt::svt)
+set(SCENEPIC_lIBRARIES scenepic::scenepic)

@@ -4,7 +4,7 @@
 # - SCENEPIC_LIBS: Libraries to link against.
 
 get_filename_component (_BIN_DIR "${CMAKE_CURRENT_LIST_DIR}/../build/native" ABSOLUTE)
-set(SCENEPIC_INCLUDE_DIRS "${_BIN_DIR}/include/svt")
+set(SCENEPIC_INCLUDE_DIRS "${_BIN_DIR}/include/scenepic")
 set(SCENEPIC_LIBS "${_BIN_DIR}/lib/@SCENEPIC_NUGET_LIB@")
 
 # Unset private variables.

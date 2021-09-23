@@ -8,8 +8,8 @@
 //
 // ----------------------------------------------------------------------------
 
-#ifndef _SP_LABEL_H_
-#define _SP_LABEL_H_
+#ifndef _SCENEPIC_LABEL_H_
+#define _SCENEPIC_LABEL_H_
 
 #include <cstdint>
 #include <string>
@@ -18,7 +18,7 @@
 #include "mesh.h"
 #include "json_value.h"
 
-namespace svt
+namespace scenepic
 {
 /** A ScenePic label type */
 class Label
@@ -101,6 +101,6 @@ private:
     double m_offset_distance;
     std::string m_mesh_id;
 };
-} // namespace svt
+} // namespace scenepic
 
 #endif

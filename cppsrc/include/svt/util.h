@@ -8,15 +8,15 @@
 //
 // ----------------------------------------------------------------------------
 
-#ifndef _SP_UTIL_H_
-#define _SP_UTIL_H_
+#ifndef _SCENEPIC_UTIL_H_
+#define _SCENEPIC_UTIL_H_
 
 #include <sstream>
 #include <string>
 #include <map>
 #include <vector>
 
-namespace svt
+namespace scenepic
 {
 template <typename T>
 void split(const std::string &s, char delim, T result) {
@@ -53,6 +53,6 @@ void unique_index(const std::vector<T> &items, std::vector<T> &unique_items, std
         }
     }
 }
-} // namespace svt
+} // namespace scenepic
 
 #endif

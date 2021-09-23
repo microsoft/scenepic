@@ -11,7 +11,7 @@
 #include "json/json.h"
 #include "json_value.h"
 
-namespace svt
+namespace scenepic
 {
     Json::Value svt_to_json(const JsonValue &value);
 }

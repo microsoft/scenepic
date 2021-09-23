@@ -8,8 +8,8 @@
 //
 // ----------------------------------------------------------------------------
 
-#ifndef _SP_DROP_DOWN_MENU_H_
-#define _SP_DROP_DOWN_MENU_H_
+#ifndef _SCENEPIC_DROP_DOWN_MENU_H_
+#define _SCENEPIC_DROP_DOWN_MENU_H_
 
 #include <string>
 #include <vector>
@@ -17,7 +17,7 @@
 
 #include "json_value.h"
 
-namespace svt
+namespace scenepic
 {
 /** Represents an ScenePic DropDownMenu UI component. */
 class DropDownMenu
@@ -75,6 +75,6 @@ private:
     std::set<int> m_disabled_indices;
     int m_selection;
 };
-} // namespace svt
+} // namespace scenepic
 
 #endif

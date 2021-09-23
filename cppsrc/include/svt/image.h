@@ -8,8 +8,8 @@
 //
 // ----------------------------------------------------------------------------
 
-#ifndef _SP_IMAGE_H_
-#define _SP_IMAGE_H_
+#ifndef _SCENEPIC_IMAGE_H_
+#define _SCENEPIC_IMAGE_H_
 
 #include <cstdint>
 #include <string>
@@ -17,7 +17,7 @@
 
 #include "json_value.h"
 
-namespace svt
+namespace scenepic
 {
 /** An ScenePic Image type */
 class Image
@@ -66,6 +66,6 @@ private:
     std::string m_image_id;
     std::string m_ext;
 };
-} // namespace svt
+} // namespace scenepic
 
 #endif

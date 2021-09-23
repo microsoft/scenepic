@@ -8,8 +8,8 @@
 //
 // ----------------------------------------------------------------------------
 
-#ifndef _SP_FRAME2D_H_
-#define _SP_FRAME2D_H_
+#ifndef _SCENEPIC_FRAME2D_H_
+#define _SCENEPIC_FRAME2D_H_
 
 #include <map>
 #include <string>
@@ -18,7 +18,7 @@
 #include "color.h"
 #include "matrix.h"
 
-namespace svt
+namespace scenepic
 {
 /** Represents a frame of a 2D animation */
 
@@ -209,6 +209,6 @@ private:
         std::string m_layer_id;
     };    
 };
-} // namespace svt
+} // namespace scenepic
 
 #endif

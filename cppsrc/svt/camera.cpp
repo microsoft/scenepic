@@ -9,7 +9,7 @@
 #include "util.h"
 
 
-namespace svt
+namespace scenepic
 {
 void check_valid_rotation(const Transform& rotation, float tolerance=1e-6f)
 {
@@ -150,4 +150,4 @@ Camera& Camera::aspect_ratio(float aspect_ratio)
     return *this;
 }
 
-} // namespace svt
+} // namespace scenepic

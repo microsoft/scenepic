@@ -8,8 +8,8 @@
 //
 // ----------------------------------------------------------------------------
 
-#ifndef _SP_SCENE_H_
-#define _SP_SCENE_H_
+#ifndef _SCENEPIC_SCENE_H_
+#define _SCENEPIC_SCENE_H_
 
 #include <string>
 #include <vector>
@@ -31,7 +31,7 @@
 #include "ui_parameters.h"
 #include "video.h"
 
-namespace svt
+namespace scenepic
 {
 /** Information about the results of quantization. */
 struct QuantizationInfo
@@ -78,7 +78,7 @@ public:
     void grid(const std::string &width, const std::string &grid_template_rows = "", const std::string &grid_template_cols = "");
 
     /** Places a canvas at a specific place in the ScenePic grid.
-     *  @see svt::Scene::grid.
+     *  @see scenepic::Scene::grid.
      *  \param canvas_id the unique ID of the Canvas to place.
      *  \param grid_row the CSS row specification for the Canvas
      *  \param grid_column the CSS column specification for the Canvas
@@ -310,14 +310,14 @@ public:
     void framerate(float fps);
 
     /** Save the scene as a JSON file.
-     *  To view the JSON, you will need to separately code up the wrapper html and provide the svt.min.js library file.
+     *  To view the JSON, you will need to separately code up the wrapper html and provide the scenepic.min.js library file.
      *  Alternatively, use save_as_html() to make a self-contained HTML file.
      *  \param path the path to the file on disk
      */
     void save_as_json(const std::string &path) const;
 
     /** Save the scene as an ScenePic script file (JavaScript JSONP format).
-     *  To view the script, you will need to separately code up the wrapper html and provide the svt.min.js library file.
+     *  To view the script, you will need to separately code up the wrapper html and provide the scenepic.min.js library file.
      *  Alternatively, use save_as_html() to make a self-contained HTML file.
      *  \param path the path to the file on disk
      */
@@ -411,6 +411,6 @@ private:
     float m_fps;
     bool m_script_cleared;
 };
-} // namespace svt
+} // namespace scenepic
 
 #endif

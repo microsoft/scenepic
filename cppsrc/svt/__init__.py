@@ -36,8 +36,8 @@ from typing import Tuple, Union
 
 import numpy as np
 
-from . import _svt
-from ._svt import (
+from . import _scenepic
+from ._scenepic import (
     Camera,
     ColorFromBytes,
     DropDownMenu,
@@ -68,12 +68,12 @@ from .video import Video
 try:
     from .video_writer import VideoWriter
 except ImportError:
-    print("svt[info]> Disabling VideoWriter due to ImportError")
+    print("scenepic[info]> Disabling VideoWriter due to ImportError")
 
 try:
     from .web_socket_handler import WebSocketHandler
 except ImportError:
-    print("svt[info]> Disabling WebSocketHandler due to ImportError")
+    print("scenepic[info]> Disabling WebSocketHandler due to ImportError")
 
 __all__ = [
     "__version__",
@@ -156,35 +156,35 @@ class Colors:
         Gray (np.ndarray): (128, 128, 128)
     """
 
-    Black = _svt.Black
-    White = _svt.White
-    Red = _svt.Red
-    Maroon = _svt.Maroon
-    Pink = _svt.Pink
-    Brown = _svt.Brown
-    Orange = _svt.Orange
-    Coral = _svt.Coral
-    Olive = _svt.Olive
-    Yellow = _svt.Yellow
-    Beige = _svt.Beige
-    Lime = _svt.Lime
-    Green = _svt.Green
-    Mint = _svt.Mint
-    Teal = _svt.Teal
-    Cyan = _svt.Cyan
-    Navy = _svt.Navy
-    Blue = _svt.Blue
-    Purple = _svt.Purple
-    Lavender = _svt.Lavender
-    Magenta = _svt.Magenta
-    Gray = _svt.Gray
-    Grey = _svt.Gray
+    Black = _scenepic.Black
+    White = _scenepic.White
+    Red = _scenepic.Red
+    Maroon = _scenepic.Maroon
+    Pink = _scenepic.Pink
+    Brown = _scenepic.Brown
+    Orange = _scenepic.Orange
+    Coral = _scenepic.Coral
+    Olive = _scenepic.Olive
+    Yellow = _scenepic.Yellow
+    Beige = _scenepic.Beige
+    Lime = _scenepic.Lime
+    Green = _scenepic.Green
+    Mint = _scenepic.Mint
+    Teal = _scenepic.Teal
+    Cyan = _scenepic.Cyan
+    Navy = _scenepic.Navy
+    Blue = _scenepic.Blue
+    Purple = _scenepic.Purple
+    Lavender = _scenepic.Lavender
+    Magenta = _scenepic.Magenta
+    Gray = _scenepic.Gray
+    Grey = _scenepic.Gray
 
 
 class Transforms:
     """Static class with convenience methods for creating various 3D homogeneous transforms."""
 
-    scale = _svt.scale
+    scale = _scenepic.scale
 
     @staticmethod
     def Scale(scale: Union[np.ndarray, float]):  # noqa: N802
@@ -196,9 +196,9 @@ class Transforms:
         Returns:
             np.ndarray: a 3D homogeneous transform matrix
         """
-        return _svt.scale(scale)
+        return _scenepic.scale(scale)
 
-    translate = _svt.translate
+    translate = _scenepic.translate
 
     @staticmethod
     def Translate(vec: np.ndarray):  # noqa: N802
@@ -210,9 +210,9 @@ class Transforms:
         Returns:
             np.ndarray: a 3D homogeneous transform matrix
         """
-        return _svt.translate(vec)
+        return _scenepic.translate(vec)
 
-    rotation_matrix_from_axis_angle = _svt.rotation_matrix_from_axis_angle
+    rotation_matrix_from_axis_angle = _scenepic.rotation_matrix_from_axis_angle
 
     @staticmethod
     def RotationMatrixFromAxisAngle(axis: np.ndarray, angle: float):  # noqa: N802
@@ -225,9 +225,9 @@ class Transforms:
         Returns:
             np.ndarray: a 3D homogeneous transform matrix
         """
-        return _svt.rotation_matrix_from_axis_angle(axis, angle)
+        return _scenepic.rotation_matrix_from_axis_angle(axis, angle)
 
-    quaternion_from_axis_angle = _svt.quaternion_from_axis_angle
+    quaternion_from_axis_angle = _scenepic.quaternion_from_axis_angle
 
     @staticmethod
     def QuaternionFromAxisAngle(axis: np.ndarray, angle: float):  # noqa: N802
@@ -240,9 +240,9 @@ class Transforms:
         Returns:
             np.ndarray: a 3D homgenous transform matrix
         """
-        return _svt.quaternion_from_axis_angle(axis, angle)
+        return _scenepic.quaternion_from_axis_angle(axis, angle)
 
-    axis_angle_to_align_x_to_axis = _svt.axis_angle_to_align_x_to_axis
+    axis_angle_to_align_x_to_axis = _scenepic.axis_angle_to_align_x_to_axis
 
     @staticmethod
     def AxisAngleRotationToRotateXAxisToAlignWithAxis(axis: np.ndarray):  # noqa: N802
@@ -257,9 +257,9 @@ class Transforms:
         Returns:
             np.ndarray: a 3D homogeneous transform matrix
         """
-        return _svt.axis_angle_to_align_x_to_axis(axis)
+        return _scenepic.axis_angle_to_align_x_to_axis(axis)
 
-    quaternion_to_align_x_to_axis = _svt.quaternion_to_align_x_to_axis
+    quaternion_to_align_x_to_axis = _scenepic.quaternion_to_align_x_to_axis
 
     @staticmethod
     def QuaternionToRotateXAxisToAlignWithAxis(axis: np.ndarray):  # noqa: N802
@@ -274,9 +274,9 @@ class Transforms:
         Returns:
             np.ndarray: a quaternion
         """
-        return _svt.quaternion_to_align_x_to_axis(axis)
+        return _scenepic.quaternion_to_align_x_to_axis(axis)
 
-    rotation_to_align_x_to_axis = _svt.rotation_to_align_x_to_axis
+    rotation_to_align_x_to_axis = _scenepic.rotation_to_align_x_to_axis
 
     @staticmethod
     def RotationToRotateXAxisToAlignWithAxis(axis: np.ndarray):  # noqa: N802
@@ -291,9 +291,9 @@ class Transforms:
         Returns:
             np.ndarray: a 3D homogeneous transform matrix
         """
-        return _svt.rotation_to_align_x_to_axis(axis)
+        return _scenepic.rotation_to_align_x_to_axis(axis)
 
-    rotation_about_x = _svt.rotation_about_x
+    rotation_about_x = _scenepic.rotation_about_x
 
     @staticmethod
     def RotationAboutXAxis(angle: float):  # noqa: N802
@@ -305,9 +305,9 @@ class Transforms:
         Returns:
             np.ndarray: a 3D homogeous transform matrix
         """
-        return _svt.rotation_about_x(angle)
+        return _scenepic.rotation_about_x(angle)
 
-    rotation_about_y = _svt.rotation_about_y
+    rotation_about_y = _scenepic.rotation_about_y
 
     @staticmethod
     def RotationAboutYAxis(angle: float):  # noqa: N802
@@ -319,9 +319,9 @@ class Transforms:
         Returns:
             np.ndarray: a 3D homogeous transform matrix
         """
-        return _svt.rotation_about_y(angle)
+        return _scenepic.rotation_about_y(angle)
 
-    rotation_about_z = _svt.rotation_about_z
+    rotation_about_z = _scenepic.rotation_about_z
 
     @staticmethod
     def RotationAboutZAxis(angle: float):  # noqa: N802
@@ -333,13 +333,13 @@ class Transforms:
         Returns:
             np.ndarray: a 3D homogeous transform matrix
         """
-        return _svt.rotation_about_z(angle)
+        return _scenepic.rotation_about_z(angle)
 
-    look_at_rotation = _svt.look_at_rotation
-    euler_angles_to_matrix = _svt.euler_angles_to_matrix
-    quaternion_to_matrix = _svt.quaternion_to_matrix
-    gl_projection = _svt.gl_projection
-    gl_world_to_camera = _svt.gl_world_to_camera
+    look_at_rotation = _scenepic.look_at_rotation
+    euler_angles_to_matrix = _scenepic.euler_angles_to_matrix
+    quaternion_to_matrix = _scenepic.quaternion_to_matrix
+    gl_projection = _scenepic.gl_projection
+    gl_world_to_camera = _scenepic.gl_world_to_camera
 
 
 class LoopSubdivStencil:

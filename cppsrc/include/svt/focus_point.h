@@ -8,13 +8,13 @@
 //
 // ----------------------------------------------------------------------------
 
-#ifndef _SP_FOCUS_POINT_H_
-#define _SP_FOCUS_POINT_H_
+#ifndef _SCENEPIC_FOCUS_POINT_H_
+#define _SCENEPIC_FOCUS_POINT_H_
 
 #include "json_value.h"
 #include "matrix.h"
 
-namespace svt
+namespace scenepic
 {
 /** 3D focus point for this frame (with optional 3D
  *  rotation for orientation lock), used in the ScenePic user interface.
@@ -56,6 +56,6 @@ private:
     Vector m_position;
     Vector m_orientation_axis_angle;
 };
-} // namespace svt
+} // namespace scenepic
 
 #endif

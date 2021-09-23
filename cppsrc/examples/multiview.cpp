@@ -21,17 +21,20 @@
 #include <Eigen/Core>
 #include <Eigen/Dense>
 
-#include "svt.h"
+#include "scenepic.h"
 
 
-svt::Camera load_camera(const svt::JsonValue& camera_info)
+namespace sp = scenepic;
+
+
+sp::Camera load_camera(const sp::JsonValue& camera_info)
 {
-    svt::Vector location;
+    sp::Vector location;
     location.x() = camera_info["location"].values()[0].as_float();
     location.y() = camera_info["location"].values()[1].as_float();
     location.z() = camera_info["location"].values()[2].as_float();
 
-    svt::Vector euler_angles;
+    sp::Vector euler_angles;
     euler_angles.x() = camera_info["rotation"].values()[0].as_float();
     euler_angles.y() = camera_info["rotation"].values()[1].as_float();
     euler_angles.z() = camera_info["rotation"].values()[2].as_float();
@@ -39,20 +42,20 @@ svt::Camera load_camera(const svt::JsonValue& camera_info)
     float fov = camera_info["fov"].as_float();
     float aspect_ratio = camera_info["width"].as_float() / camera_info["height"].as_float();
 
-    auto rotation = svt::Transforms::euler_angles_to_matrix(euler_angles, "XYZ");
-    auto translation = svt::Transforms::translate(location);
+    auto rotation = sp::Transforms::euler_angles_to_matrix(euler_angles, "XYZ");
+    auto translation = sp::Transforms::translate(location);
     auto extrinsics = (translation * rotation).eval();
-    auto world_to_camera = svt::Transforms::gl_world_to_camera(extrinsics);
+    auto world_to_camera = sp::Transforms::gl_world_to_camera(extrinsics);
 
-    auto projection = svt::Transforms::gl_projection(fov, aspect_ratio, 0.01, 100);
-    return svt::Camera(world_to_camera, projection);
+    auto projection = sp::Transforms::gl_projection(fov, aspect_ratio, 0.01, 100);
+    return sp::Camera(world_to_camera, projection);
 }
 
 
-std::vector<svt::Camera> load_cameras()
+std::vector<sp::Camera> load_cameras()
 {
     std::ifstream input("cameras.json");
-    auto cameras = svt::JsonValue::parse(input);
+    auto cameras = sp::JsonValue::parse(input);
     return {
         load_camera(cameras["cam0"]),
         load_camera(cameras["cam1"]),
@@ -63,7 +66,7 @@ std::vector<svt::Camera> load_cameras()
 
 int main(int argc, char *argv[])
 {
-    svt::Scene scene;
+    sp::Scene scene;
 
     auto cameras = load_cameras();
 
@@ -72,10 +75,10 @@ int main(int argc, char *argv[])
 
     auto cube = scene.create_mesh("cube");
     cube->texture_id(texture->image_id());
-    cube->add_cube(svt::Color::None(), svt::Transforms::scale(2));
+    cube->add_cube(sp::Color::None(), sp::Transforms::scale(2));
 
     auto frustums = scene.create_mesh("frustums", "frustums");
-    std::vector<svt::Color> colors = {svt::Colors::Red, svt::Colors::Green, svt::Colors::Blue};
+    std::vector<sp::Color> colors = {sp::Colors::Red, sp::Colors::Green, sp::Colors::Blue};
     std::vector<std::string> paths = {"render0.png", "render1.png", "render2.png"};
     std::vector<std::string> camera_images;
     std::vector<std::string> images;
@@ -86,7 +89,7 @@ int main(int argc, char *argv[])
         image->load(paths[i]);
         frustums->add_camera_frustum(cameras[i], colors[i]);
         auto image_mesh = scene.create_mesh("image" + std::to_string(i), "images");
-        image_mesh->texture_id(image->image_id()).shared_color(svt::Colors::Gray).double_sided(true);
+        image_mesh->texture_id(image->image_id()).shared_color(sp::Colors::Gray).double_sided(true);
         image_mesh->add_camera_image(cameras[i]);
 
         images.push_back(image->image_id());
