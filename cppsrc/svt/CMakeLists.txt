@@ -40,7 +40,7 @@ set( SOURCES
 add_library( scenepic STATIC ${SOURCES} )
 add_library( scenepic::scenepic ALIAS scenepic )
 
-target_compile_features(svt PRIVATE cxx_std_14)
+target_compile_features(scenepic PRIVATE cxx_std_14)
 
 target_include_directories( scenepic
   PUBLIC
@@ -60,8 +60,8 @@ if( SCENEPIC_BUILD_PYTHON )
   set(PYBIND11_CPP_STANDARD -std=c++14)
   pybind11_add_module(_scenepic python.cpp ${SOURCES})
 
-  target_include_directories( _svt PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/../include/svt
+  target_include_directories( _scenepic PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/../include/scenepic
     ${CMAKE_CURRENT_BINARY_DIR}
   )
   target_link_libraries(_scenepic 

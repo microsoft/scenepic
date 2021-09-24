@@ -13,5 +13,5 @@
 
 namespace scenepic
 {
-    Json::Value svt_to_json(const JsonValue &value);
+    Json::Value scenepic_to_json(const JsonValue &value);
 }

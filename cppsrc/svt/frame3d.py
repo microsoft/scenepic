@@ -1,10 +1,10 @@
-"""Module which extends the svt Frame3D type."""
+"""Module which extends the scenepic Frame3D type."""
 
 from typing import List, Union
 
 import numpy as np
 
-from ._svt import Frame3D, Mesh, MeshUpdate
+from ._scenepic import Frame3D, Mesh, MeshUpdate
 
 
 def add_meshes(self, meshes: List[Union[Mesh, MeshUpdate, str]], transform: np.ndarray = None):

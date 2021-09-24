@@ -1,6 +1,6 @@
 // ----------------------------------------------------------------------------
 //
-// svt_tests.h -- Defines the test functions for the C++ ScenePic interface
+// scenepic_tests.h -- Defines the test functions for the C++ ScenePic interface
 //
 // Copyright (C) 2019 Microsoft
 //
@@ -45,9 +45,9 @@ int test_video();
 namespace test
 {
 const float EPSILON = 1e-5f;
-const svt::Color COLOR(0.83863144f, 0.39671423f, 0.77389568f);
+const scenepic::Color COLOR(0.83863144f, 0.39671423f, 0.77389568f);
 std::string asset_path(const std::string &asset_name);
-void assert_equal(const svt::JsonValue& actual, const std::string &expected_name, int &result, float epsilon=EPSILON);
+void assert_equal(const scenepic::JsonValue& actual, const std::string &expected_name, int &result, float epsilon=EPSILON);
 void assert_close(float actual, float expected, int &result, const std::string &tag, float epsilon=EPSILON);
 void assert_near(float actual, float expected, int &result, const std::string &tag, float epsilon=EPSILON);
 

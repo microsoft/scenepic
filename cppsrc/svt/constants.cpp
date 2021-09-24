@@ -28,7 +28,7 @@ namespace scenepic
 
     const Vector& VectorNone()
     {
-        const Vector::Scalar val = -std::numeric_limits<typename svt::Vector::Scalar>::infinity();
+        const Vector::Scalar val = -std::numeric_limits<typename scenepic::Vector::Scalar>::infinity();
         static Vector NONE = Vector(val, val, val);
         return NONE;
     }

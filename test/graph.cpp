@@ -5,7 +5,7 @@
 
 #include "scene.h"
 #include "graph.h"
-#include "svt_tests.h"
+#include "scenepic_tests.h"
 
 int test_graph()
 {
@@ -21,10 +21,10 @@ int test_graph()
     std::transform(t.begin(), t.end(), std::back_inserter(sin_t),
                    [](int t){return static_cast<float>(std::sin(static_cast<double>(t) / 29.0));});
 
-    svt::Scene scene;
+    scenepic::Scene scene;
     auto graph = scene.create_graph();
-    graph->add_sparkline("cos", cos_t, svt::Colors::Red);
-    graph->add_sparkline("sin", sin_t, svt::Colors::Black, 2.0f);
+    graph->add_sparkline("cos", cos_t, scenepic::Colors::Red);
+    graph->add_sparkline("sin", sin_t, scenepic::Colors::Black, 2.0f);
 
     test::assert_equal(graph->to_json(), "graph", result);
     return result;

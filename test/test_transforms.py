@@ -1,7 +1,7 @@
 """Tests for transform calculations."""
 
 import numpy as np
-import svt
+import scenepic as sp
 
 
 PI = np.array(np.pi, np.float32)
@@ -19,7 +19,7 @@ def test_scale_1():
         [0, 0, 0, 1]
     ], np.float32)
 
-    np.testing.assert_allclose(svt.Transforms.scale(0.1), expected)
+    np.testing.assert_allclose(sp.Transforms.scale(0.1), expected)
 
 
 def test_scale_3():
@@ -30,7 +30,7 @@ def test_scale_3():
         [0, 0, 0, 1]
     ], np.float32)
 
-    np.testing.assert_allclose(svt.Transforms.scale(VEC), expected)
+    np.testing.assert_allclose(sp.Transforms.scale(VEC), expected)
 
 
 def test_translate():
@@ -41,7 +41,7 @@ def test_translate():
         [0, 0, 0, 1]
     ], np.float32)
 
-    np.testing.assert_allclose(svt.Transforms.translate(VEC), expected)
+    np.testing.assert_allclose(sp.Transforms.translate(VEC), expected)
 
 
 def test_rotation_about_x():
@@ -52,7 +52,7 @@ def test_rotation_about_x():
         [0, 0, 0, 1]
     ], np.float32)
 
-    np.testing.assert_allclose(svt.Transforms.rotation_about_x(ANGLE), expected)
+    np.testing.assert_allclose(sp.Transforms.rotation_about_x(ANGLE), expected)
 
 
 def test_rotation_about_y():
@@ -63,7 +63,7 @@ def test_rotation_about_y():
         [0, 0, 0, 1]
     ], np.float32)
 
-    np.testing.assert_allclose(svt.Transforms.rotation_about_y(ANGLE), expected)
+    np.testing.assert_allclose(sp.Transforms.rotation_about_y(ANGLE), expected)
 
 
 def test_rotation_about_z():
@@ -74,7 +74,7 @@ def test_rotation_about_z():
         [0, 0, 0, 1]
     ], np.float32)
 
-    np.testing.assert_allclose(svt.Transforms.rotation_about_z(ANGLE), expected)
+    np.testing.assert_allclose(sp.Transforms.rotation_about_z(ANGLE), expected)
 
 
 def test_euler_angles_to_matrix():
@@ -85,7 +85,7 @@ def test_euler_angles_to_matrix():
         [0, 0, 0, 1]
     ], np.float32)
 
-    np.testing.assert_allclose(svt.Transforms.euler_angles_to_matrix(VEC), expected, rtol=0, atol=1e-6)
+    np.testing.assert_allclose(sp.Transforms.euler_angles_to_matrix(VEC), expected, rtol=0, atol=1e-6)
 
 
 def test_rotation_to_align_x_to_axis():
@@ -96,13 +96,13 @@ def test_rotation_to_align_x_to_axis():
         [0, 0, 0, 1]
     ], np.float32)
 
-    np.testing.assert_allclose(svt.Transforms.rotation_to_align_x_to_axis(VEC), expected, rtol=0, atol=1e-6)
+    np.testing.assert_allclose(sp.Transforms.rotation_to_align_x_to_axis(VEC), expected, rtol=0, atol=1e-6)
 
 
 def test_quaternion_to_align_x_to_axis():
     expected = np.array([0, -0.503627,  0.335751,  0.796009], np.float32)
 
-    np.testing.assert_allclose(svt.Transforms.quaternion_to_align_x_to_axis(VEC), expected, rtol=0, atol=1e-6)
+    np.testing.assert_allclose(sp.Transforms.quaternion_to_align_x_to_axis(VEC), expected, rtol=0, atol=1e-6)
 
 
 def test_quaternion_to_matrix():
@@ -114,7 +114,7 @@ def test_quaternion_to_matrix():
         [0, 0, 0, 1]
     ], np.float32)
 
-    np.testing.assert_allclose(svt.Transforms.quaternion_to_matrix(quaternion), expected, rtol=0, atol=1e-5)
+    np.testing.assert_allclose(sp.Transforms.quaternion_to_matrix(quaternion), expected, rtol=0, atol=1e-5)
 
 
 def test_gl_projection():
@@ -129,7 +129,7 @@ def test_gl_projection():
         [0, 0, -1, 0],
     ], np.float32)
 
-    actual = svt.Transforms.gl_projection(fov_y_degrees, aspect_ratio, znear, zfar)
+    actual = sp.Transforms.gl_projection(fov_y_degrees, aspect_ratio, znear, zfar)
     np.testing.assert_allclose(actual, expected, rtol=0, atol=1e-6)
 
     intrinsic = np.array([
@@ -146,7 +146,7 @@ def test_gl_projection():
         [0, 0, -1, 0]
     ], np.float32)
 
-    actual = svt.Transforms.gl_projection(intrinsic, width, height, znear, zfar)
+    actual = sp.Transforms.gl_projection(intrinsic, width, height, znear, zfar)
     np.testing.assert_allclose(actual, expected, rtol=0, atol=1e-6)
 
 
@@ -164,4 +164,4 @@ def test_gl_world_to_camera():
         [0, 0, 0, 1]
     ], np.float32)
 
-    np.testing.assert_allclose(svt.Transforms.gl_world_to_camera(extrinsic), expected, rtol=0, atol=1e-6)
+    np.testing.assert_allclose(sp.Transforms.gl_world_to_camera(extrinsic), expected, rtol=0, atol=1e-6)

@@ -473,7 +473,7 @@ namespace scenepic
 
     void measure_commands(std::map<std::string, std::size_t> &command_sizes, JsonValue commands)
     {
-        _measure_commands(command_sizes, svt_to_json(commands));
+        _measure_commands(command_sizes, scenepic_to_json(commands));
     }
 
     std::map<std::string, std::size_t> Scene::measure_command_size() const

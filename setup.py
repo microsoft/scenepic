@@ -24,16 +24,13 @@ REQUIRES_VIDEO = [
 REQUIRES_DEV = [
     "azure-storage-blob>=12.0.0",
     "azure-common",
+    "nbstripout",
     "pytest-azurepipelines",
     "pytest-cov",
     "pytest",
     "requests",
     "twine",
     "wheel"
-]
-
-REQUIRES_INTERACTIVE = [
-    "tornado"
 ]
 
 with open("README.md", "r") as file:
@@ -133,8 +130,7 @@ setup(
     install_requires=REQUIRES,
     extras_require={
         "dev": REQUIRES_DEV,
-        "video": REQUIRES_VIDEO,
-        "interactive": REQUIRES_INTERACTIVE
+        "video": REQUIRES_VIDEO
     },
     tests_require=["pytest"],
     cmdclass=dict(build_ext=CMakeBuild),

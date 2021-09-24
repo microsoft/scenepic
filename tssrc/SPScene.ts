@@ -101,45 +101,45 @@ export default class SPScene
 
         // Create html placeholder
         this.div = document.createElement("div"); // Main div for canvases and user-provided text panels
-        this.div.className = "svt";
+        this.div.className = "scenepic";
         if (element != null) element.append(this.div); else document.body.appendChild(this.div);
 
         this.statusDiv = document.createElement("div");
-        this.statusDiv.classList.add("svt");
+        this.statusDiv.classList.add("scenepic");
         if (element == null)
-            this.statusDiv.classList.add("svt-status-bar");
+            this.statusDiv.classList.add("scenepic-status-bar");
         this.statusDivNeedsPadding = element == null;
         if (element != null) element.append(this.statusDiv); else document.body.appendChild(this.statusDiv);
 
         let controls = document.createElement("div");
-        controls.className = "svt-controls";
+        controls.className = "scenepic-controls";
 
         // Recording
         this.recordButton = document.createElement("button");
-        this.recordButton.classList.add("svt-icon-record", "svt-medium");
+        this.recordButton.classList.add("scenepic-icon-record", "scenepic-medium");
         this.recordButton.addEventListener("click", () => this.Record());
         this.recordButton.title = "Record";
         this.progressDiv = document.createElement("div");
         this.progressBar = document.createElement("span");
         this.progressBar.style.width = "0%";
         this.progressDiv.style.visibility = "hidden";
-        this.progressDiv.classList.add("svt-progress");
+        this.progressDiv.classList.add("scenepic-progress");
         this.progressDiv.append(this.progressBar);
         this.statusDiv.append(this.progressDiv);
         controls.appendChild(this.recordButton);
 
         // Play/pause and faster/slower
         let playPauseToggle = this.createToggleButton("Play/Pause", "playpause");
-        playPauseToggle[0].classList.add("svt-large");
+        playPauseToggle[0].classList.add("scenepic-large");
         this.playPauseToggle = playPauseToggle[1];
         this.playPauseToggle.checked = false;
         this.playPauseToggle.addEventListener("change", () => this.PlayVideo());
         let fasterButton = document.createElement("button");
-        fasterButton.className = "svt-icon-faster";
+        fasterButton.className = "scenepic-icon-faster";
         fasterButton.addEventListener("click", () => this.faster());
         fasterButton.title = "Faster";
         let slowerButton = document.createElement("button");
-        slowerButton.className = "svt-icon-slower";
+        slowerButton.className = "scenepic-icon-slower";
         slowerButton.addEventListener("click", () => this.slower());
         slowerButton.title = "Slower";
         controls.appendChild(slowerButton);
@@ -152,7 +152,7 @@ export default class SPScene
         this.volumeToggle = volumeToggle[1];
         this.volumeToggle.addEventListener("change", () => this.UpdateVolume());
         this.volumeSlider = document.createElement("input");
-        this.volumeSlider.className = "svt-volume-slider";
+        this.volumeSlider.className = "scenepic-volume-slider";
         this.volumeSlider.title = "Global Volume";
         this.volumeSlider.type = "range";
         this.volumeSlider.min = "0";
@@ -166,14 +166,14 @@ export default class SPScene
 
         // Help and status information
         this.AddTextPanel(HelpPanelName, "Click for Help", "font-size:10pt;", this.statusDiv, true);
-        var helpHtml = '<span class="svt-textbox-content">'
+        var helpHtml = '<span class="scenepic-textbox-content">'
         helpHtml += 'space: play/pause<br>';
         helpHtml += '+/-: adjust play speed<br>';
         helpHtml += 'shift: translate<br>';
         helpHtml += 'ctrl: twist<br>';
         helpHtml += 'alt: slow translation/rotation<br>';
         helpHtml += 'r: reset view';
-        helpHtml += '</span><span class="svt-textbox-content">';
+        helpHtml += '</span><span class="scenepic-textbox-content">';
         helpHtml += '\\: toggle orbit camera<br>';
         helpHtml += 'caps: move focus point (modal)<br>';
         helpHtml += 'l: lock camera translation to focus point<br>';
@@ -199,14 +199,14 @@ export default class SPScene
     private createToggleButton(title: string, icon: string) : [HTMLLabelElement, HTMLInputElement]
     {
         let label = document.createElement("label");
-        label.className = "svt-toggle-button";
+        label.className = "scenepic-toggle-button";
         label.title = title;
         let checkbox = document.createElement("input");
         checkbox.type = "checkbox";
         checkbox.checked = true;
 
         let span = document.createElement("span");
-        span.className = "svt-icon-" + icon;
+        span.className = "scenepic-icon-" + icon;
         label.appendChild(checkbox);
         label.appendChild(span);
 
@@ -359,7 +359,7 @@ export default class SPScene
     SetStatus(status : string)
     {
         var html = "";
-        html += "<span class='svt-textbox-content'>";
+        html += "<span class='scenepic-textbox-content'>";
         html += status;
         html += "</span>";
         this.SetTextPanelValue(StatusPanelName, html);
@@ -373,7 +373,7 @@ export default class SPScene
 
         // Construct inner html
         var html = "";
-        html += "<span class='svt-textbox-content'>";
+        html += "<span class='scenepic-textbox-content'>";
         var d = new Date();
         html += `<span style='font-size:50%; color:grey; vertical-align:middle; display: inline-block; font-family:monospace;'>${d.getFullYear()}-${d.getMonth()}-${d.getDay()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}&nbsp;&nbsp;</span>`;
         html += `<span style='color:${color};vertical-align:middle; display: inline-block;'>${message}</span>`;
@@ -573,7 +573,7 @@ export default class SPScene
             if (this.canvasDiv == null)
             {
                 this.canvasDiv = document.createElement("div");
-                this.canvasDiv.className = "svt"; // CSS style class name
+                this.canvasDiv.className = "scenepic"; // CSS style class name
                 this.div.appendChild(this.canvasDiv);
             }
             parent = this.canvasDiv;

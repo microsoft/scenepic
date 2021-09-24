@@ -22,7 +22,7 @@ class VideoWriter:
 
             import cv2
             import numpy as np
-            from svt import VideoWriter
+            from scenepic import VideoWriter
 
             with VideoWriter("example_video.mp4", (256, 256)) as video:
                 angles = np.linspace(0, 2 * np.pi, 60, endpoint=False)

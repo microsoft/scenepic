@@ -300,7 +300,7 @@ export default class Canvas2D extends CanvasBase
         for(var headerName of ["Visible", "Opacity", "Layer Id"])
         {
             var headerItem = document.createElement("th");
-            headerItem.className = "svt-dropdown-header";
+            headerItem.className = "scenepic-dropdown-header";
             headerItem.innerHTML = headerName;
             headerRow.appendChild(headerItem);
         }
@@ -345,9 +345,9 @@ export default class Canvas2D extends CanvasBase
                 td.className = className;
                 tr.appendChild(td);
             };
-            addControl(rowItems[0], "svt-table-control");
-            addControl(rowItems[1], "svt-table-control");
-            addControl(rowItems[2], "svt-table-layerid");
+            addControl(rowItems[0], "scenepic-table-control");
+            addControl(rowItems[1], "scenepic-table-control");
+            addControl(rowItems[2], "scenepic-table-layerid");
             this.dropdownTable.appendChild(tr);
         };
 

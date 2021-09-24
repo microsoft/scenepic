@@ -73,7 +73,7 @@ You can slow any of the mouse controls by holding down the Alt key. If you
 accidentally transform the camera too wildly, you can reset by pressing 'r'.
 
 In the top right of each canvas a *Layer* control will appear (when
-programmatically enabled via `svt.py/Canvas/set_layer_visibilities()`).
+programmatically enabled via `scenepic.py/Canvas/set_layer_visibilities()`).
 This allows the user to toggle certain layers of meshes on and off
 interactively. 
 

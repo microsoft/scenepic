@@ -439,7 +439,7 @@ export abstract class CanvasBase
 
         // Create span
         this.container = document.createElement("div");
-        this.container.className = "svt-canvas-container";
+        this.container.className = "scenepic-canvas-container";
         
         // Create html canvas
         this.htmlCanvas = document.createElement("canvas");
@@ -447,15 +447,15 @@ export abstract class CanvasBase
         this.htmlCanvas.style.height = height.toString() + "px";
         this.htmlCanvas.id = canvasId;
         this.htmlCanvas.tabIndex = 1;
-        this.htmlCanvas.className = "svt-canvas";
+        this.htmlCanvas.className = "scenepic-canvas";
         this.container.appendChild(this.htmlCanvas);
 
         // Create dropdown menu
         this.dropdown = document.createElement("div");
-        this.dropdown.className = "svt-dropdown";
+        this.dropdown.className = "scenepic-dropdown";
         this.dropdown.addEventListener("click", event => { if (event.target == this.dropdown) { $(this.dropdown).toggleClass("is-active"); this.htmlCanvas.focus(); } });
         this.dropdownTable = document.createElement("table");
-        this.dropdownTable.className = "svt-dropdown-table";
+        this.dropdownTable.className = "scenepic-dropdown-table";
         this.dropdown.appendChild(this.dropdownTable);
         this.container.appendChild(this.dropdown);
         this.htmlCanvas.addEventListener("click", event => { $(this.dropdown).removeClass("is-active"); this.htmlCanvas.focus(); });
@@ -466,13 +466,13 @@ export abstract class CanvasBase
         this.slider.min = "0";
         this.slider.max = "0";
         this.slider.valueAsNumber = this.currentFrameIndex;
-        this.slider.className = "svt-slider";
+        this.slider.className = "scenepic-slider";
         this.slider.addEventListener("change", event => this.ReportFrameIdChange(this.htmlCanvas.id, this.GetCurrentFrameId()));
         this.sliderTextBox = document.createElement("span");
-        this.sliderTextBox.className = "svt-slider-text";
+        this.sliderTextBox.className = "scenepic-slider-text";
         this.sliderTextBox.style.padding = this.sliderTextBoxPadding.toString() + "px";
         this.sliderContainer = document.createElement("div");
-        this.sliderContainer.className = "svt-slider-container";
+        this.sliderContainer.className = "scenepic-slider-container";
         this.sliderContainer.style.visibility = "hidden";
         this.sliderContainer.appendChild(this.sliderTextBox);
         this.sliderContainer.appendChild(this.slider);
@@ -504,7 +504,7 @@ export abstract class CanvasBase
         this.dropdownTable.appendChild(container);
 
         this.fpsDisplay = document.createElement("div");
-        this.fpsDisplay.className = "svt-fps";
+        this.fpsDisplay.className = "scenepic-fps";
         this.fpsDisplay.style.visibility = "hidden";
         this.container.appendChild(this.fpsDisplay);
 

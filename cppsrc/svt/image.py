@@ -1,11 +1,11 @@
-"""Module which extends the svt Image type."""
+"""Module which extends the scenepic Image type."""
 
 from io import BytesIO
 
 import numpy as np
 import PIL.Image
 
-from ._svt import Image
+from ._scenepic import Image
 
 
 def load_from_buffer(self, data: bytes, ext: str):

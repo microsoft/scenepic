@@ -1,10 +1,10 @@
-"""Module which extends the svt Canvas3D type."""
+"""Module which extends the scenepic Canvas3D type."""
 
 from typing import List, Union, Mapping
 
 import numpy as np
 
-from ._svt import (
+from ._scenepic import (
     Camera,
     Canvas3D,
     FocusPoint,

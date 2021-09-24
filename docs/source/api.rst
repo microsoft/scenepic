@@ -3,7 +3,7 @@
 API
 ===
 
-.. module:: svt
+.. module:: scenepic
 
 This part of the documentation covers all the interfaces of ScenePic.
 

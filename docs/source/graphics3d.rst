@@ -1,6 +1,6 @@
 .. _graphics3d:
 
-.. currentmodule:: svt
+.. currentmodule:: scenepic
 
 Canvas3D
 --------

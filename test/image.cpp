@@ -1,11 +1,11 @@
 #include "scene.h"
-#include "svt_tests.h"
+#include "scenepic_tests.h"
 
 int test_image()
 {
     int result = EXIT_SUCCESS;
 
-    svt::Scene scene;
+    scenepic::Scene scene;
     auto image = scene.create_image("rand");
     image->load(test::asset_path("rand.png"));
     test::assert_equal(image->to_json(), "image", result);

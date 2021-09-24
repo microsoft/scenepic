@@ -1,6 +1,6 @@
 .. _ui:
 
-.. currentmodule:: svt
+.. currentmodule:: scenepic
 
 LayerSettings
 -------------

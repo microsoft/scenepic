@@ -377,11 +377,11 @@ using OStream = std::ostream;
 } // namespace scenepic
 
 // Legacy names (formerly macros).
-using JSONCPP_STRING = svt::Json::String;
-using JSONCPP_ISTRINGSTREAM = svt::Json::IStringStream;
-using JSONCPP_OSTRINGSTREAM = svt::Json::OStringStream;
-using JSONCPP_ISTREAM = svt::Json::IStream;
-using JSONCPP_OSTREAM = svt::Json::OStream;
+using JSONCPP_STRING = scenepic::Json::String;
+using JSONCPP_ISTRINGSTREAM = scenepic::Json::IStringStream;
+using JSONCPP_OSTRINGSTREAM = scenepic::Json::OStringStream;
+using JSONCPP_ISTREAM = scenepic::Json::IStream;
+using JSONCPP_OSTREAM = scenepic::Json::OStream;
 
 #endif // JSON_CONFIG_H_INCLUDED
 

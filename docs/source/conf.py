@@ -17,7 +17,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'svt'
+project = 'scenepic'
 copyright = '2020, Matthew Johnson'
 author = 'Matthew Johnson'
 

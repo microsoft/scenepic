@@ -1,12 +1,12 @@
-#include "svt_tests.h"
+#include "scenepic_tests.h"
 #include "scenepic.h"
 
-using svt::Scene;
+namespace sp = scenepic;
 
 int test_primitives()
 {
     int result = EXIT_SUCCESS;
-    svt::Scene scene;
+    sp::Scene scene;
     auto texture = scene.create_image("uv");
     texture->load(test::asset_path("uv.png"));
 
@@ -36,7 +36,7 @@ int test_primitives()
     test::assert_equal(mesh->to_json(), "cone", result);
 
     mesh = scene.create_mesh("trunc_cone");
-    mesh->add_cone(test::COLOR, svt::Transform::Identity(), 0.7f);
+    mesh->add_cone(test::COLOR, sp::Transform::Identity(), 0.7f);
     test::assert_equal(mesh->to_json(), "trunc_cone", result);
 
     mesh = scene.create_mesh("coordinate_axes");
@@ -61,7 +61,7 @@ int test_primitives()
 
     mesh = scene.create_mesh("icosphere_texture");
     mesh->texture_id(texture->image_id());
-    mesh->add_icosphere(svt::Color::None(), svt::Transform::Identity(), 1);
+    mesh->add_icosphere(sp::Color::None(), sp::Transform::Identity(), 1);
     test::assert_equal(mesh->to_json(), "icosphere_texture", result);
 
     mesh = scene.create_mesh("uv_sphere");
@@ -69,7 +69,7 @@ int test_primitives()
     test::assert_equal(mesh->to_json(), "uv_sphere", result);
 
     mesh = scene.create_mesh("point_cloud");
-    svt::VectorBuffer positions(125, 3);
+    sp::VectorBuffer positions(125, 3);
     for(int i=0, x=0; x<5; ++x){
         for(int y=0; y<5; ++y){
             for(int z=0; z<5; ++z, ++i){
@@ -81,12 +81,12 @@ int test_primitives()
     }
     positions = (positions.array() / 2) - 1;
     mesh->add_cube(test::COLOR);
-    mesh->apply_transform(svt::Transforms::scale(0.01f));
+    mesh->apply_transform(sp::Transforms::scale(0.01f));
     mesh->enable_instancing(positions);
     test::assert_equal(mesh->to_json(), "point_cloud", result);
 
     mesh = scene.create_mesh("line_cloud");
-    svt::VectorBuffer end_points;
+    sp::VectorBuffer end_points;
     end_points = positions*10;
     mesh->add_lines(positions, end_points, test::COLOR);
     test::assert_equal(mesh->to_json(), "line_cloud", result);

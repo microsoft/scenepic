@@ -1,6 +1,6 @@
-"""Module which extends the svt AudioTrack type."""
+"""Module which extends the scenepic AudioTrack type."""
 
-from ._svt import AudioTrack
+from ._scenepic import AudioTrack
 
 
 def load_from_buffer(self, data: bytes, ext: str):

@@ -2,7 +2,7 @@
 
 from typing import Union
 
-from ._svt import (
+from ._scenepic import (
     Canvas2D,
     Canvas3D,
     Graph,

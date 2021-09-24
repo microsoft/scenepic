@@ -44,7 +44,7 @@ const std::string &Graph::canvas_id() const
     return this->m_canvas_id;
 }
 
-void Graph::add_sparkline(const std::string &name, const std::vector<float> &values, const svt::Color &color, float line_width)
+void Graph::add_sparkline(const std::string &name, const std::vector<float> &values, const scenepic::Color &color, float line_width)
 {
     ValueBuffer value_buffer(values.size(), 1);
     std::copy(values.begin(), values.end(), value_buffer.data());

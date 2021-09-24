@@ -337,7 +337,7 @@ export default class Canvas3D extends CanvasBase
         for(var headerName of ["Wire", "Fill", "Opacity", "Layer Id"])
         {
             var headerItem = document.createElement("th");
-            headerItem.className = "svt-dropdown-header";
+            headerItem.className = "scenepic-dropdown-header";
             headerItem.innerHTML = headerName;
             headerRow.appendChild(headerItem);
         }
@@ -350,7 +350,7 @@ export default class Canvas3D extends CanvasBase
             var checkboxWireframe = document.createElement("input");
             checkboxWireframe.type = "checkbox";
             checkboxWireframe.checked = this.ShowLayerWireframe(id);
-            checkboxWireframe.className = "svt-table-control";
+            checkboxWireframe.className = "scenepic-table-control";
             checkboxWireframe.addEventListener("change", event => { this.SetLayerWireframe(id, checkboxWireframe.checked); this.PrepareBuffers(); event.stopPropagation(); });
 
             // Create fill checkbox
@@ -389,10 +389,10 @@ export default class Canvas3D extends CanvasBase
                 td.className = className;
                 tr.appendChild(td);
             };
-            addControl(rowItems[0], "svt-table-control");
-            addControl(rowItems[1], "svt-table-control");
-            addControl(rowItems[2], "svt-table-control");
-            addControl(rowItems[3], "svt-table-layerid");
+            addControl(rowItems[0], "scenepic-table-control");
+            addControl(rowItems[1], "scenepic-table-control");
+            addControl(rowItems[2], "scenepic-table-control");
+            addControl(rowItems[3], "scenepic-table-layerid");
             this.dropdownTable.appendChild(tr);
         }
 

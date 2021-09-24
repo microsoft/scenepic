@@ -1,8 +1,8 @@
-"""Module which extends the svt Mesh type."""
+"""Module which extends the scenepic Mesh type."""
 
 import numpy as np
 
-from ._svt import Mesh, MeshUpdate
+from ._scenepic import Mesh, MeshUpdate
 
 
 class VertexBuffer:

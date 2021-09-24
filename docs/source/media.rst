@@ -1,6 +1,6 @@
 .. _media:
 
-.. currentmodule:: svt
+.. currentmodule:: scenepic
 
 Image
 -----

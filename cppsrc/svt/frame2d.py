@@ -1,10 +1,10 @@
-"""Module which extends the svt Frame2D type."""
+"""Module which extends the scenepic Frame2D type."""
 
 from typing import Union
 
 import numpy as np
 
-from ._svt import Frame2D, Image
+from ._scenepic import Frame2D, Image
 
 
 def add_image(self, image_id: Union[Image, str], position_type="fit", **kwargs):

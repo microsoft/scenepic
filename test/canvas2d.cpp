@@ -1,12 +1,12 @@
 #include "scene.h"
 #include "canvas2d.h"
-#include "svt_tests.h"
+#include "scenepic_tests.h"
 
 int test_canvas2d()
 {
     int result = EXIT_SUCCESS;
 
-    svt::Scene scene;
+    scenepic::Scene scene;
     auto canvas2d = scene.create_canvas_2d("canvas2d");
     auto frame2d = canvas2d->create_frame();
     frame2d->add_circle(0, 0, 5);
@@ -25,7 +25,7 @@ int test_canvas2d()
 
     canvas2d->clear_script();
     frame2d = canvas2d->create_frame();
-    svt::CoordinateBuffer positions(3, 2);
+    scenepic::CoordinateBuffer positions(3, 2);
     positions << 0, 0,
                  1, 1,
                  2, 2;

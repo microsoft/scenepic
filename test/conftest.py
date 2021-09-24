@@ -7,7 +7,7 @@ import zlib
 
 import numpy as np
 import pytest
-from svt import Color
+from scenepic import Color
 
 
 def _asset(name):

@@ -1,9 +1,13 @@
 #include <functional>
 
-#include "svt_tests.h"
+#include "scenepic_tests.h"
 #include "base64.h"
 #include "compression.h"
 #include "internal.h"
+
+
+namespace sp = scenepic;
+
 
 namespace test
 {
@@ -35,12 +39,12 @@ void assert_near(float actual, float expected, int &result, const std::string& t
 Eigen::MatrixXf to_matrix(const std::string& buffer)
 {
     std::vector<std::uint8_t> bytes(buffer.begin(), buffer.end());
-    Eigen::MatrixXf values = svt::decompress_matrix<Eigen::MatrixXf>(bytes);
+    Eigen::MatrixXf values = sp::decompress_matrix<Eigen::MatrixXf>(bytes);
     values.transposeInPlace();
     return values;
 }
 
-void assert_buffer_equal(const svt::Json::Value &actual, const svt::Json::Value &expected, int &result, const std::string &tag, float epsilon)
+void assert_buffer_equal(const sp::Json::Value &actual, const sp::Json::Value &expected, int &result, const std::string &tag, float epsilon)
 {
     std::string actual_buffer = base64_decode(actual.asString());
     std::string expected_buffer = base64_decode(expected.asString());
@@ -80,14 +84,14 @@ void assert_buffer_equal(const svt::Json::Value &actual, const svt::Json::Value 
 std::vector<float> decompress_buffer(const std::string &raw_buffer, float min_value, float max_value)
 {
     std::vector<std::uint8_t> buffer(raw_buffer.begin(), raw_buffer.end());
-    svt::FixedPointVertexBuffer fp_buffer = svt::decompress_matrix<svt::FixedPointVertexBuffer>(buffer);
-    svt::VertexBuffer vertex_buffer = fp_buffer.cast<float>();
+    sp::FixedPointVertexBuffer fp_buffer = sp::decompress_matrix<sp::FixedPointVertexBuffer>(buffer);
+    sp::VertexBuffer vertex_buffer = fp_buffer.cast<float>();
     float scale = (max_value - min_value)/65535;
     vertex_buffer = (vertex_buffer.array() * scale + min_value); 
     return std::vector<float>(vertex_buffer.data(), vertex_buffer.data() + vertex_buffer.size());
 }
 
-void assert_quantized_buffer_equal(const svt::Json::Value &actual, const svt::Json::Value &expected, int &result, const std::string &tag, float epsilon)
+void assert_quantized_buffer_equal(const sp::Json::Value &actual, const sp::Json::Value &expected, int &result, const std::string &tag, float epsilon)
 {
     std::string actual_buffer = base64_decode(actual["QuantizedBuffer"].asString());
     std::string expected_buffer = base64_decode(expected["QuantizedBuffer"].asString());
@@ -115,7 +119,7 @@ void assert_quantized_buffer_equal(const svt::Json::Value &actual, const svt::Js
     }
 }
 
-void assert_json_equal(const svt::Json::Value &actual, const svt::Json::Value &expected, int &result, const std::string &tag, float epsilon)
+void assert_json_equal(const sp::Json::Value &actual, const sp::Json::Value &expected, int &result, const std::string &tag, float epsilon)
 {
     assert_equal(actual.type(), expected.type(), result, tag + " type");
     if (expected.type() != actual.type())
@@ -125,7 +129,7 @@ void assert_json_equal(const svt::Json::Value &actual, const svt::Json::Value &e
         return;
     }
 
-    if (actual.type() == svt::Json::ValueType::objectValue)
+    if (actual.type() == sp::Json::ValueType::objectValue)
     {
         assert_equal(actual.size(), expected.size(), result, tag + " size");
         if(result == EXIT_FAILURE)
@@ -155,7 +159,7 @@ void assert_json_equal(const svt::Json::Value &actual, const svt::Json::Value &e
             }
         }
     }
-    else if(actual.type() == svt::Json::ValueType::arrayValue)
+    else if(actual.type() == sp::Json::ValueType::arrayValue)
     {
         assert_equal(actual.size(), expected.size(), result, tag + " size");
         if(result == EXIT_FAILURE)
@@ -163,7 +167,7 @@ void assert_json_equal(const svt::Json::Value &actual, const svt::Json::Value &e
             return;
         }    
 
-        for(svt::Json::ArrayIndex i=0; i<actual.size(); ++i)
+        for(sp::Json::ArrayIndex i=0; i<actual.size(); ++i)
         {
             assert_json_equal(actual[i], expected[i], result, tag + "[" + std::to_string(i) + "]", epsilon);
             if(result == EXIT_FAILURE)
@@ -174,7 +178,7 @@ void assert_json_equal(const svt::Json::Value &actual, const svt::Json::Value &e
     }
     else
     {
-        if(actual.type() == svt::Json::ValueType::realValue)
+        if(actual.type() == sp::Json::ValueType::realValue)
         {
             assert_near(actual.asFloat(), expected.asFloat(), result, tag, epsilon);
         }
@@ -185,10 +189,10 @@ void assert_json_equal(const svt::Json::Value &actual, const svt::Json::Value &e
     }
 }
 
-void assert_equal(const svt::JsonValue &value, const std::string &expected_name, int &result, float epsilon)
+void assert_equal(const sp::JsonValue &value, const std::string &expected_name, int &result, float epsilon)
 {
-    svt::Json::Value actual = svt_to_json(value);
-    svt::Json::Value expected;
+    sp::Json::Value actual = scenepic_to_json(value);
+    sp::Json::Value expected;
     std::ifstream expected_stream(asset_path(expected_name) + ".json");
     expected_stream >> expected;
     assert_json_equal(actual, expected, result, expected_name, epsilon);

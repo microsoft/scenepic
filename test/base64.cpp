@@ -1,7 +1,7 @@
 #include <fstream>
 
 #include "base64.h"
-#include "svt_tests.h"
+#include "scenepic_tests.h"
 
 int test_base64()
 {

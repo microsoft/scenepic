@@ -7,7 +7,7 @@
 
 namespace scenepic
 {
-    Json::Value svt_to_json(const JsonValue &value)
+    Json::Value scenepic_to_json(const JsonValue &value)
     {
         Json::Value obj;
         switch(value.type())
@@ -32,7 +32,7 @@ namespace scenepic
                 obj.resize(0);
                 for(const auto& value : value.values())
                 {
-                    obj.append(svt_to_json(value));
+                    obj.append(scenepic_to_json(value));
                 }
 
                 break;
@@ -40,7 +40,7 @@ namespace scenepic
             case JsonType::Object:
                 for(const auto& pair : value.lookup())
                 {
-                    obj[pair.first] = svt_to_json(pair.second);
+                    obj[pair.first] = scenepic_to_json(pair.second);
                 }
 
                 break;
@@ -55,7 +55,7 @@ namespace scenepic
         return obj;
     }
 
-    JsonValue json_to_svt(const Json::Value &value)
+    JsonValue json_to_scenepic(const Json::Value &value)
     {
         JsonValue obj;
         switch(value.type())
@@ -80,7 +80,7 @@ namespace scenepic
                 obj.resize(0);
                 for(int i=0; i<value.size(); ++i)
                 {
-                    obj.append(json_to_svt(value[i]));
+                    obj.append(json_to_scenepic(value[i]));
                 }
 
                 break;
@@ -88,7 +88,7 @@ namespace scenepic
             case Json::ValueType::objectValue:
                 for(const auto& key : value.getMemberNames())
                 {
-                    obj[key] = json_to_svt(value[key]);
+                    obj[key] = json_to_scenepic(value[key]);
                 }
 
                 break;
@@ -111,7 +111,7 @@ namespace scenepic
         builder["enableYAMLCompatibility"] = true;
         std::unique_ptr<Json::StreamWriter> writer(builder.newStreamWriter());
         std::stringstream buffer;
-        writer->write(svt_to_json(*this), &buffer);
+        writer->write(scenepic_to_json(*this), &buffer);
         buffer << std::endl;
         return buffer.str();        
     }
@@ -124,7 +124,7 @@ namespace scenepic
         std::string errs;
         if(Json::parseFromStream(rbuilder, stream, &root, &errs))
         {
-            return json_to_svt(root);
+            return json_to_scenepic(root);
         }
 
         throw std::logic_error(errs);

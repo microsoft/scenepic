@@ -11,7 +11,7 @@ export default class DropDownMenu
     {
         // Create div
         var div = document.createElement("div");
-        div.className = "svt"; // CSS style class name
+        div.className = "scenepic"; // CSS style class name
         if (style != null)
             div.setAttribute("style", style);
 
@@ -20,7 +20,7 @@ export default class DropDownMenu
 
         // Create title header
         this.header = document.createElement("span");
-        this.header.className = "svt-textbox-header";
+        this.header.className = "scenepic-textbox-header";
         this.title = title;
         div.appendChild(this.header);
 

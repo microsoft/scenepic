@@ -3,12 +3,12 @@
 import numpy as np
 from PIL import Image
 import pytest
-import svt
+import scenepic as sp
 
 
 def test_color():
-    expected = svt.Color(0.5, 0, 0.2)
-    actual = svt.ColorFromBytes(255, 0, 102) * 0.5
+    expected = sp.Color(0.5, 0, 0.2)
+    actual = sp.ColorFromBytes(255, 0, 102) * 0.5
     np.testing.assert_array_almost_equal(actual, expected)
 
 
@@ -43,9 +43,9 @@ def test_camera(assert_json_equal):
         [0, 0, 0, 1]
     ], np.float32)
 
-    projection = svt.Transforms.gl_projection(fov_y_degrees, initial_aspect_ratio, znear, zfar)
+    projection = sp.Transforms.gl_projection(fov_y_degrees, initial_aspect_ratio, znear, zfar)
 
-    look_at_cam = svt.Camera(center, look_at, up_dir, fov_y_degrees, znear, zfar, initial_aspect_ratio)
+    look_at_cam = sp.Camera(center, look_at, up_dir, fov_y_degrees, znear, zfar, initial_aspect_ratio)
     np.testing.assert_array_almost_equal(look_at_cam.center, center)
     np.testing.assert_array_almost_equal(look_at_cam.look_at, look_at)
     np.testing.assert_array_almost_equal(look_at_cam.up_dir, up_dir)
@@ -57,7 +57,7 @@ def test_camera(assert_json_equal):
     look_at_cam.aspect_ratio = new_aspect_ratio
     assert look_at_cam.aspect_ratio == pytest.approx(new_aspect_ratio)
 
-    rt_cam = svt.Camera(center, rotation, fov_y_degrees, znear, zfar, new_aspect_ratio)
+    rt_cam = sp.Camera(center, rotation, fov_y_degrees, znear, zfar, new_aspect_ratio)
     np.testing.assert_array_almost_equal(rt_cam.center, center)
     np.testing.assert_array_almost_equal(rt_cam.look_at, look_at)
     np.testing.assert_array_almost_equal(rt_cam.up_dir, up_dir)
@@ -68,7 +68,7 @@ def test_camera(assert_json_equal):
     np.testing.assert_array_almost_equal(rt_cam.projection, projection)
     assert_json_equal(str(rt_cam), "camera")
 
-    cam = svt.Camera(world_to_camera, fov_y_degrees, znear, zfar, new_aspect_ratio)
+    cam = sp.Camera(world_to_camera, fov_y_degrees, znear, zfar, new_aspect_ratio)
     np.testing.assert_array_almost_equal(cam.center, center)
     np.testing.assert_array_almost_equal(cam.look_at, look_at)
     np.testing.assert_array_almost_equal(cam.up_dir, up_dir)
@@ -81,7 +81,7 @@ def test_camera(assert_json_equal):
 
 
 def test_canvas2d(assert_json_equal):
-    scene = svt.Scene()
+    scene = sp.Scene()
     canvas2d = scene.create_canvas_2d("canvas2d")
     frame2d = canvas2d.create_frame()
     frame2d.add_circle(0, 0, 5)
@@ -109,7 +109,7 @@ def test_canvas2d(assert_json_equal):
 
 
 def test_canvas3d(assert_json_equal, color):
-    scene = svt.Scene()
+    scene = sp.Scene()
 
     cube_mesh = scene.create_mesh("cube")
     cube_mesh.add_cube(color)
@@ -131,7 +131,7 @@ def test_canvas3d(assert_json_equal, color):
     frame3d.add_mesh(cube_mesh)
 
     frame3d = canvas3d.create_frame()
-    frame3d.add_mesh(disc_mesh, svt.Transforms.Scale(5))
+    frame3d.add_mesh(disc_mesh, sp.Transforms.Scale(5))
 
     frame3d = canvas3d.create_frame()
     frame3d.add_mesh(icosphere_mesh)
@@ -149,14 +149,14 @@ def test_canvas3d(assert_json_equal, color):
 
 
 def test_drop_down_menu(assert_json_equal):
-    scene = svt.Scene()
+    scene = sp.Scene()
     drop_down_menu = scene.create_drop_down_menu("", "DropDown")
     drop_down_menu.items = ["one", "two", "three"]
     assert_json_equal(str(drop_down_menu), "drop_down_menu")
 
 
 def test_frame2d(assert_json_equal):
-    scene = svt.Scene()
+    scene = sp.Scene()
     canvas2d = scene.create_canvas_2d()
     frame2d = canvas2d.create_frame()
     frame2d.add_circle(0, 0, 5.0)
@@ -164,7 +164,7 @@ def test_frame2d(assert_json_equal):
 
 
 def test_frame3d(assert_json_equal, color):
-    scene = svt.Scene()
+    scene = sp.Scene()
     cube_mesh = scene.create_mesh("cube")
     cube_mesh.add_cube(color)
 
@@ -176,7 +176,7 @@ def test_frame3d(assert_json_equal, color):
 
 
 def test_image(assert_json_equal, color, asset):
-    scene = svt.Scene()
+    scene = sp.Scene()
     image = scene.create_image("rand")
     image.load(asset("rand.png"))
     assert_json_equal(str(image), "image")
@@ -198,27 +198,27 @@ def test_image(assert_json_equal, color, asset):
 
 
 def test_audio(assert_json_equal, asset):
-    scene = svt.Scene()
+    scene = sp.Scene()
     audio = scene.create_audio("hello")
     audio.load(asset("hello.mp3"))
     assert_json_equal(str(audio), "audio")
 
 
 def test_video(assert_json_equal, asset):
-    scene = svt.Scene()
+    scene = sp.Scene()
     video = scene.create_video("test")
     video.load(asset("test.mp4"))
     assert_json_equal(str(video), "video")
 
 
 def test_label(assert_json_equal):
-    scene = svt.Scene()
+    scene = sp.Scene()
     scene.create_label()
     assert_json_equal(scene.get_json(), "label")
 
 
 def test_primitives(assert_json_equal, asset, color):
-    scene = svt.Scene()
+    scene = sp.Scene()
     texture = scene.create_image("uv")
     texture.load(asset("uv.png"))
 
@@ -291,7 +291,7 @@ def test_primitives(assert_json_equal, asset, color):
     positions = np.array(positions, np.float32)
     positions = (positions / 2) - 1
     mesh.add_cube(color)
-    mesh.apply_transform(svt.Transforms.scale(0.01))
+    mesh.apply_transform(sp.Transforms.scale(0.01))
     mesh.enable_instancing(positions)
     assert_json_equal(str(mesh), "point_cloud")
 
@@ -301,7 +301,7 @@ def test_primitives(assert_json_equal, asset, color):
 
 
 def test_io(assert_json_equal, asset):
-    scene = svt.Scene()
+    scene = sp.Scene()
 
     image = scene.create_image("texture")
     image.load(asset("PolarBear.png"))
@@ -309,14 +309,14 @@ def test_io(assert_json_equal, asset):
     mesh = scene.create_mesh("cube")
     mesh.texture_id = image.image_id
 
-    mesh_info = svt.load_obj(asset("cube.obj"))
+    mesh_info = sp.load_obj(asset("cube.obj"))
     mesh.add_mesh(mesh_info)
 
     assert_json_equal(str(mesh), "io")
 
 
 def test_mesh_update(assert_json_equal, color):
-    scene = svt.Scene()
+    scene = sp.Scene()
 
     mesh = scene.create_mesh("base")
     mesh.add_triangle(color)
@@ -348,7 +348,7 @@ def test_mesh_update(assert_json_equal, color):
 
 
 def test_compression(assert_json_equal, color):
-    scene = svt.Scene()
+    scene = sp.Scene()
 
     mesh = scene.create_mesh("base")
     mesh.add_triangle(color)
@@ -389,7 +389,7 @@ SIZE = 500
 
 
 def test_scene(assert_json_equal, asset):
-    scene = svt.Scene("test")
+    scene = sp.Scene("test")
     image = scene.create_image("rand")
     image.load(asset("rand.png"))
     mesh_rand = scene.create_mesh()
@@ -400,39 +400,39 @@ def test_scene(assert_json_equal, asset):
     tet_verts, tet_tris = _create_tetrahedron()
 
     model_mesh = scene.create_mesh()
-    model_mesh.shared_color = svt.Color(1, 0, 0)
+    model_mesh.shared_color = sp.Color(1, 0, 0)
     model_mesh.add_mesh_without_normals(tet_verts, tet_tris)
     model_mesh.reverse_triangle_order()
 
     canvas_rand = scene.create_canvas_3d("", SIZE, SIZE)
     tet_center = tet_verts.mean(axis=0)
     canvas_tet = scene.create_canvas_3d("", SIZE, SIZE)
-    canvas_tet.camera = svt.Camera(tet_center + np.array([0, 0, 0.5], np.float32),
+    canvas_tet.camera = sp.Camera(tet_center + np.array([0, 0, 0.5], np.float32),
                                    tet_center, [0, 1, 0], 45.0)
-    canvas_tet.shading = svt.Shading(svt.Colors.White)
-    canvas_tet.ui_parameters = svt.UIParameters()
+    canvas_tet.shading = sp.Shading(sp.Colors.White)
+    canvas_tet.ui_parameters = sp.UIParameters()
 
     n_frames = 5
     for i in range(n_frames):
         angle = 2 * np.pi * i / n_frames
 
         frame_rand = canvas_rand.create_frame()
-        frame_rand.add_mesh(mesh_rand, svt.Transforms.Translate([np.cos(angle), np.sin(angle), 0]))
+        frame_rand.add_mesh(mesh_rand, sp.Transforms.Translate([np.cos(angle), np.sin(angle), 0]))
 
         mesh_primitives = scene.create_mesh()
         mesh_primitives.layer_id = "Primitives"
-        mesh_primitives.add_disc(svt.Color(0, 1, 0),
-                                 svt.Transforms.Scale(0.2 + 0.2 * (1 + np.cos(angle))),
+        mesh_primitives.add_disc(sp.Color(0, 1, 0),
+                                 sp.Transforms.Scale(0.2 + 0.2 * (1 + np.cos(angle))),
                                  10, False, True)
-        mesh_primitives.add_cube(svt.Color(0, 0, 1), svt.Transforms.Translate([-1, -1, -3]))
+        mesh_primitives.add_cube(sp.Color(0, 0, 1), sp.Transforms.Translate([-1, -1, -3]))
         frame_rand.add_mesh(mesh_primitives)
 
         mesh_noise = scene.create_mesh()
-        mesh_noise.shared_color = svt.Color(1, 0, 0)
+        mesh_noise.shared_color = sp.Color(1, 0, 0)
         mesh_noise.layer_id = "Noise"
         mesh_noise.add_cylinder()
-        mesh_noise.apply_transform(svt.Transforms.Scale([0.02, 0.1, 0.1]))
-        mesh_noise.apply_transform(svt.Transforms.RotationToRotateXAxisToAlignWithAxis([0.5, 0.5, 0.5]))
+        mesh_noise.apply_transform(sp.Transforms.Scale([0.02, 0.1, 0.1]))
+        mesh_noise.apply_transform(sp.Transforms.RotationToRotateXAxisToAlignWithAxis([0.5, 0.5, 0.5]))
         positions = np.zeros((16, 3), np.float32)
         for j in range(16 * 3):
             value = (j % 4) / 4.0
@@ -442,7 +442,7 @@ def test_scene(assert_json_equal, asset):
         frame_rand.add_mesh(mesh_noise)
 
         frame_tet = canvas_tet.create_frame("", tet_center)
-        frame_tet.add_mesh(model_mesh, svt.Transforms.RotationAboutZAxis(np.cos(angle)))
+        frame_tet.add_mesh(model_mesh, sp.Transforms.RotationAboutZAxis(np.cos(angle)))
 
     canvas_rand.set_layer_settings({
         "Test": {"filled": True},
@@ -455,13 +455,13 @@ def test_scene(assert_json_equal, asset):
     scene.clear_script()
 
     frame_tet = canvas_tet.create_frame("", tet_center)
-    frame_tet.add_mesh(model_mesh, svt.Transforms.RotationAboutZAxis(np.cos(2 * np.pi)))
+    frame_tet.add_mesh(model_mesh, sp.Transforms.RotationAboutZAxis(np.cos(2 * np.pi)))
 
     assert_json_equal(scene.get_json(), "scene_cleared")
 
 
 def test_layer_settings(assert_json_equal):
-    scene = svt.Scene()
+    scene = sp.Scene()
     canvas3d = scene.create_canvas_3d()
     canvas2d = scene.create_canvas_2d()
 
@@ -520,12 +520,12 @@ def test_layer_settings(assert_json_equal):
 
 
 def test_shading(assert_json_equal):
-    shading = svt.Shading()
+    shading = sp.Shading()
     assert_json_equal(str(shading), "shading")
 
 
 def test_text_panel(assert_json_equal):
-    scene = svt.Scene()
+    scene = sp.Scene()
     text_panel = scene.create_text_panel()
     text_panel.text = "Text"
     text_panel.title = "Title"
@@ -533,14 +533,14 @@ def test_text_panel(assert_json_equal):
 
 
 def test_ui_parameters(assert_json_equal):
-    ui_parameters = svt.UIParameters()
+    ui_parameters = sp.UIParameters()
     assert_json_equal(str(ui_parameters), "ui_parameters")
 
 
 def test_graph(assert_json_equal):
-    scene = svt.Scene()
+    scene = sp.Scene()
     graph = scene.create_graph()
     t = np.linspace(0, 1, 30)
-    graph.add_sparkline("cos", np.cos(t), svt.Colors.Red)
+    graph.add_sparkline("cos", np.cos(t), sp.Colors.Red)
     graph.add_sparkline("sin", np.sin(t), line_width=2)
     assert_json_equal(str(graph), "graph")

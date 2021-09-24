@@ -1,8 +1,8 @@
-"""Module which extends the svt Canvas3D type."""
+"""Module which extends the scenepic Canvas3D type."""
 
 from typing import Union, Mapping
 
-from ._svt import (
+from ._scenepic import (
     Canvas2D,
     LayerSettings,
 )

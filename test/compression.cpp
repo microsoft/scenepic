@@ -1,19 +1,23 @@
 #include "scene.h"
-#include "svt_tests.h"
+#include "scenepic_tests.h"
+
+
+namespace sp = scenepic;
+
 
 namespace
 {
     void integration(int &result)
     {
         // integration test
-        svt::Scene scene;
+        sp::Scene scene;
 
         auto mesh = scene.create_mesh("base");
         mesh->add_triangle(test::COLOR);
 
         for (auto i = 0; i < 20; ++i)
         {
-            svt::VectorBuffer positions(3, 3);
+            sp::VectorBuffer positions(3, 3);
             positions << 0, 0, 0,
                 1, i * 0.05f, 0,
                 0, 1, 0;
@@ -28,12 +32,12 @@ namespace
 
     void error_bound(int &result)
     {
-        svt::Scene scene;
+        sp::Scene scene;
         auto mesh = scene.create_mesh("sphere");
         mesh->add_sphere(test::COLOR);
 
-        svt::VectorBuffer positions = mesh->vertex_positions();
-        positions = positions + svt::VectorBuffer::Random(positions.rows(), positions.cols()) * 0.01f;
+        sp::VectorBuffer positions = mesh->vertex_positions();
+        positions = positions + sp::VectorBuffer::Random(positions.rows(), positions.cols()) * 0.01f;
 
         auto update = scene.update_mesh("sphere", positions);
 
@@ -41,7 +45,7 @@ namespace
         float range = expected_error * 65535;
         update->quantize(0, range, mesh->vertex_buffer().leftCols(6));
 
-        svt::VertexBuffer actual = update->unquantize() + mesh->vertex_buffer().leftCols(6);
+        sp::VertexBuffer actual = update->unquantize() + mesh->vertex_buffer().leftCols(6);
         auto diff = (actual - update->vertex_buffer());
         
         test::assert_lessthan(diff.maxCoeff() - diff.minCoeff(), expected_error, result, "Compression @ " + std::to_string(expected_error));

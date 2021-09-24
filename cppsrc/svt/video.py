@@ -1,6 +1,6 @@
-"""Module which extends the svt Video type."""
+"""Module which extends the scenepic Video type."""
 
-from ._svt import Video
+from ._scenepic import Video
 
 
 def load_from_buffer(self, data: bytes, ext: str):

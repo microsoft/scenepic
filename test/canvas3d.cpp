@@ -1,13 +1,13 @@
 #include "scene.h"
 #include "transforms.h"
 #include "canvas3d.h"
-#include "svt_tests.h"
+#include "scenepic_tests.h"
 
 int test_canvas3d()
 {
     int result = EXIT_SUCCESS;
 
-    svt::Scene scene;
+    scenepic::Scene scene;
     auto cube_mesh = scene.create_mesh("cube");
     cube_mesh->add_cube(test::COLOR);
 
@@ -24,11 +24,11 @@ int test_canvas3d()
     cylinder_mesh->add_cylinder(test::COLOR);
     
     auto canvas3d = scene.create_canvas_3d("canvas3d");
-    auto frame3d = canvas3d->create_frame("", svt::Vector(1, 0, 0));
+    auto frame3d = canvas3d->create_frame("", scenepic::Vector(1, 0, 0));
     frame3d->add_mesh(cube_mesh);
 
     frame3d = canvas3d->create_frame();
-    frame3d->add_mesh(disc_mesh, svt::Transforms::scale(5));
+    frame3d->add_mesh(disc_mesh, scenepic::Transforms::scale(5));
 
     frame3d = canvas3d->create_frame();
     frame3d->add_mesh(icosphere_mesh);

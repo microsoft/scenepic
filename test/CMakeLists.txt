@@ -3,8 +3,8 @@
 # --------------------------------------------------------------------------------------------------------------------
 
 set( CPP_TEST_SOURCES
-  svt_tests.cpp
-  svt_tests.h
+  scenepic_tests.cpp
+  scenepic_tests.h
 )
 
 set( TESTS
@@ -37,16 +37,16 @@ foreach( test ${TESTS} )
   list( APPEND CPP_TEST_SOURCES "${test}.cpp" )
 endforeach()
 
-set( TEST_DRIVER svt_tests )
+set( TEST_DRIVER scenepic_tests )
 add_executable(${TEST_DRIVER} ${CPP_TEST_SOURCES})
 
-if (TARGET svt_examples )
-  add_dependencies(${TEST_DRIVER} svt_examples)
+if (TARGET scenepic_examples )
+  add_dependencies(${TEST_DRIVER} scenepic_examples)
 endif()
 
-target_link_libraries( ${TEST_DRIVER} svt::svt )
+target_link_libraries( ${TEST_DRIVER} scenepic::scenepic )
 target_compile_features(${TEST_DRIVER} PRIVATE cxx_std_14)
-target_include_directories(${TEST_DRIVER} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../cppsrc/svt/)
+target_include_directories(${TEST_DRIVER} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../cppsrc/scenepic/)
 
 foreach( test ${TESTS} )
   add_test( NAME ${test}
