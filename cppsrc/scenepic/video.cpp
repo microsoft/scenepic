@@ -20,14 +20,14 @@ void Video::load(const std::string &path)
     std::ifstream ifs(path, std::ios::binary | std::ios::ate);
     std::ifstream::pos_type pos = ifs.tellg();
 
-    this->m_data = std::vector<unsigned char>(static_cast<std::size_t>(pos));
+    m_data = std::vector<unsigned char>(static_cast<std::size_t>(pos));
 
     ifs.seekg(0, std::ios::beg);
-    ifs.read(reinterpret_cast<char *>(this->m_data.data()), pos);
+    ifs.read(reinterpret_cast<char *>(m_data.data()), pos);
 
     auto idx = path.rfind('.');
     if(idx != std::string::npos){
-        this->m_ext = path.substr(idx + 1);
+        m_ext = path.substr(idx + 1);
     }else{
         throw std::invalid_argument("Unable to determine extension from path.");
     }
@@ -37,32 +37,32 @@ JsonValue Video::to_json() const
 {
     JsonValue obj;
     obj["CommandType"] = "DefineVideo";
-    obj["VideoId"] = this->m_video_id;
-    obj["Type"] = this->m_ext;
-    obj["Data"] = base64_encode(this->m_data.data(),
-                                static_cast<unsigned int>(this->m_data.size()));
+    obj["VideoId"] = m_video_id;
+    obj["Type"] = m_ext;
+    obj["Data"] = base64_encode(m_data.data(),
+                                static_cast<unsigned int>(m_data.size()));
 
     return obj;
 }
 
 const std::string &Video::video_id() const
 {
-    return this->m_video_id;
+    return m_video_id;
 }
 
 const std::vector<std::uint8_t> &Video::data() const
 {
-    return this->m_data;
+    return m_data;
 }
 
 std::vector<std::uint8_t> &Video::data()
 {
-    return this->m_data;
+    return m_data;
 }
 
 Video &Video::data(const std::vector<std::uint8_t> &value)
 {
-    this->m_data = value;
+    m_data = value;
     return *this;
 }
 

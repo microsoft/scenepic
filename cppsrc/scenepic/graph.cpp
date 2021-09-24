@@ -32,23 +32,23 @@ JsonValue Graph::Sparkline::to_json() const
 {
     JsonValue command;
     command["CommandType"] = "AddSparkline";
-    command["ValueBuffer"] = matrix_to_json(this->m_values);
-    command["Name"] = this->m_name;
-    command["StrokeStyle"] = this->m_color.to_html_hex();
-    command["LineWidth"] = this->m_line_width;
+    command["ValueBuffer"] = matrix_to_json(m_values);
+    command["Name"] = m_name;
+    command["StrokeStyle"] = m_color.to_html_hex();
+    command["LineWidth"] = m_line_width;
     return command;
 }
 
 const std::string &Graph::canvas_id() const
 {
-    return this->m_canvas_id;
+    return m_canvas_id;
 }
 
 void Graph::add_sparkline(const std::string &name, const std::vector<float> &values, const scenepic::Color &color, float line_width)
 {
     ValueBuffer value_buffer(values.size(), 1);
     std::copy(values.begin(), values.end(), value_buffer.data());
-    this->m_sparklines.emplace_back(name, value_buffer, color, line_width);
+    m_sparklines.emplace_back(name, value_buffer, color, line_width);
 }
 
 Graph::Graph(const std::string &canvas_id) : m_canvas_id(canvas_id)
@@ -68,80 +68,80 @@ JsonValue Graph::to_json() const
 
     JsonValue margin;
     margin["CommandType"] = "SetMargin";
-    margin["Value"] = this->m_margin.to_json();
+    margin["Value"] = m_margin.to_json();
     canvas_commands.append(margin);
 
     JsonValue background;
     background["CommandType"] = "SetBackgroundStyle";
-    background["Value"] = this->m_background_color.to_html_hex();
+    background["Value"] = m_background_color.to_html_hex();
     canvas_commands.append(background);
 
     JsonValue text;
     text["CommandType"] = "SetTextStyle";
-    text["FontFamily"] = this->m_font_family;
-    text["SizeInPixels"] = this->m_text_size;
+    text["FontFamily"] = m_font_family;
+    text["SizeInPixels"] = m_text_size;
     canvas_commands.append(text);
 
-    for (const auto &sparkline : this->m_sparklines)
+    for (const auto &sparkline : m_sparklines)
     {
         canvas_commands.append(sparkline.to_json());
     }
 
-    if (!this->m_media_id.empty())
+    if (!m_media_id.empty())
     {
         JsonValue media;
         media["CommandType"] = "SetMedia";
-        media["MediaId"] = this->m_media_id;
+        media["MediaId"] = m_media_id;
         canvas_commands.append(media);
     }
 
     obj["CommandType"] = "CanvasCommands";
-    obj["CanvasId"] = this->m_canvas_id;
+    obj["CanvasId"] = m_canvas_id;
     obj["Commands"] = canvas_commands;
     return obj;
 }
 
 const Color &Graph::background_color() const
 {
-    return this->m_background_color;
+    return m_background_color;
 }
 
 Graph &Graph::background_color(const Color &color)
 {
-    this->m_background_color = color;
+    m_background_color = color;
     return *this;
 }
 
 const Graph::Margin &Graph::margin() const
 {
-    return this->m_margin;
+    return m_margin;
 }
 
 Graph &Graph::margin(const Graph::Margin &margin)
 {
-    this->m_margin = margin;
+    m_margin = margin;
     return *this;
 }
 
 const std::string &Graph::font_family() const
 {
-    return this->m_font_family;
+    return m_font_family;
 }
 
 Graph &Graph::font_family(const std::string &font_family)
 {
-    this->m_font_family = font_family;
+    m_font_family = font_family;
     return *this;
 }
 
 float Graph::text_size() const
 {
-    return this->m_text_size;
+    return m_text_size;
 }
 
 Graph &Graph::text_size(float text_size)
 {
-    this->m_text_size = text_size;
+    m_text_size = text_size;
     return *this;
 }
 
@@ -152,7 +152,7 @@ const std::string &Graph::media_id() const
 
 Graph &Graph::media_id(const std::string &media_id)
 {
-    this->m_media_id = media_id;
+    m_media_id = media_id;
     return *this;
 }
 } // namespace scenepic

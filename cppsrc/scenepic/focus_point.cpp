@@ -13,22 +13,22 @@ FocusPoint::FocusPoint(const Vector &position,
 
 const Vector &FocusPoint::position() const
 {
-    return this->m_position;
+    return m_position;
 }
 
 const Vector &FocusPoint::orientation_axis_angle() const
 {
-    return this->m_orientation_axis_angle;
+    return m_orientation_axis_angle;
 }
 
 JsonValue FocusPoint::to_json() const
 {
     JsonValue obj;
     obj["CommandType"] = "SetFocusPoint";
-    obj["Position"] = matrix_to_json(this->m_position);
-    if (this->m_orientation_axis_angle != VectorNone())
+    obj["Position"] = matrix_to_json(m_position);
+    if (m_orientation_axis_angle != VectorNone())
     {
-        obj["OrientationAxisAngle"] = matrix_to_json(this->m_orientation_axis_angle);
+        obj["OrientationAxisAngle"] = matrix_to_json(m_orientation_axis_angle);
     }
 
     return obj;
@@ -36,14 +36,14 @@ JsonValue FocusPoint::to_json() const
 
 bool FocusPoint::is_none() const
 {
-    return !(this->m_position != VectorNone() ||
-             this->m_orientation_axis_angle != VectorNone());
+    return !(m_position != VectorNone() ||
+             m_orientation_axis_angle != VectorNone());
 }
 
 FocusPoint &FocusPoint::operator=(const Vector &position)
 {
-    this->m_position = position;
-    this->m_orientation_axis_angle = VectorNone();
+    m_position = position;
+    m_orientation_axis_angle = VectorNone();
     return *this;
 }
 

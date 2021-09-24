@@ -15,41 +15,41 @@ Shading::Shading(const Color &bg_color,
 
 const Color& Shading::bg_color() const
 {
-    return this->m_bg_color;
+    return m_bg_color;
 }
 
 const Color& Shading::ambient_light_color() const
 {
-    return this->m_ambient_light_color;
+    return m_ambient_light_color;
 }
 
 const Color& Shading::directional_light_color() const
 {
-    return this->m_directional_light_color;
+    return m_directional_light_color;
 }
 
 const Vector& Shading::directional_light_dir() const
 {
-    return this->m_directional_light_dir;
+    return m_directional_light_dir;
 }
 
 JsonValue Shading::to_json() const
 {
     JsonValue obj;
     obj["CommandType"] = "SetShading";
-    obj["Value"]["BackgroundColor"] = matrix_to_json(this->m_bg_color);
-    obj["Value"]["AmbientLightColor"] = matrix_to_json(this->m_ambient_light_color);
-    obj["Value"]["DirectionalLightColor"] = matrix_to_json(this->m_directional_light_color);
-    obj["Value"]["DirectionalLightDir"] = matrix_to_json(this->m_directional_light_dir);
+    obj["Value"]["BackgroundColor"] = matrix_to_json(m_bg_color);
+    obj["Value"]["AmbientLightColor"] = matrix_to_json(m_ambient_light_color);
+    obj["Value"]["DirectionalLightColor"] = matrix_to_json(m_directional_light_color);
+    obj["Value"]["DirectionalLightDir"] = matrix_to_json(m_directional_light_dir);
     return obj;
 }
 
 bool Shading::is_none() const
 {
-    return !(this->m_bg_color != Color::None() ||
-             this->m_ambient_light_color != Color::None() ||
-             this->m_directional_light_color != Color::None() ||
-             this->m_directional_light_dir != VectorNone());
+    return !(m_bg_color != Color::None() ||
+             m_ambient_light_color != Color::None() ||
+             m_directional_light_color != Color::None() ||
+             m_directional_light_dir != VectorNone());
 }
 
 const Shading Shading::None()

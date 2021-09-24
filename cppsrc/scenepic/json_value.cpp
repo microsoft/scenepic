@@ -148,120 +148,120 @@ namespace scenepic
 
     void JsonValue::resize(std::size_t size)
     {
-        this->m_type = JsonType::Array;
-        this->m_values.resize(size);
+        m_type = JsonType::Array;
+        m_values.resize(size);
     }
 
     void JsonValue::append(const JsonValue &value)
     {
-        this->m_type = JsonType::Array;
-        this->m_values.push_back(value);
+        m_type = JsonType::Array;
+        m_values.push_back(value);
     }
 
     void JsonValue::append(JsonValue &&value)
     {
-        this->m_type = JsonType::Array;
-        this->m_values.push_back(std::move(value));
+        m_type = JsonType::Array;
+        m_values.push_back(std::move(value));
     }
 
     JsonValue& JsonValue::operator[](const std::string& key)
     {
-        if(this->m_lookup.count(key) == 0)
+        if(m_lookup.count(key) == 0)
         {
-            this->m_lookup[key] = JsonValue();
+            m_lookup[key] = JsonValue();
         }
 
-        this->m_type = JsonType::Object;
-        return this->m_lookup[key];
+        m_type = JsonType::Object;
+        return m_lookup[key];
     }
 
     const JsonValue& JsonValue::operator[](const std::string& key) const
     {
-        return this->m_lookup.at(key);
+        return m_lookup.at(key);
     }
 
     JsonValue& JsonValue::operator=(const std::string& value)
     {
-        this->m_type = JsonType::String;
-        this->m_string = value;
+        m_type = JsonType::String;
+        m_string = value;
         return *this;
     }
 
     JsonValue& JsonValue::operator=(const char* value)
     {
-        this->m_type = JsonType::String;
-        this->m_string = value;
+        m_type = JsonType::String;
+        m_string = value;
         return *this;
     }
 
     JsonValue& JsonValue::operator=(std::string&& value)
     {
-        this->m_type = JsonType::String;
-        this->m_string = std::move(value);
+        m_type = JsonType::String;
+        m_string = std::move(value);
         return *this;
     }
 
     JsonValue& JsonValue::operator=(double value)
     {
-        this->m_type = JsonType::Double;
-        this->m_double = value;
-        this->m_int = static_cast<std::int64_t>(value);
+        m_type = JsonType::Double;
+        m_double = value;
+        m_int = static_cast<std::int64_t>(value);
         return *this;
     }
 
     JsonValue& JsonValue::operator=(std::int64_t value)
     {
-        this->m_type = JsonType::Integer;
-        this->m_int = value;
-        this->m_double = value;
+        m_type = JsonType::Integer;
+        m_int = value;
+        m_double = value;
         return *this;
     }
 
     JsonValue& JsonValue::operator=(bool value)
     {
-        this->m_type = JsonType::Boolean;
-        this->m_bool = value;
+        m_type = JsonType::Boolean;
+        m_bool = value;
         return *this;
     }
 
     JsonType JsonValue::type() const
     {
-        return this->m_type;
+        return m_type;
     }
 
     const std::string& JsonValue::as_string() const
     {
-        return this->m_string;
+        return m_string;
     }
     
     double JsonValue::as_double() const
     {
-        return this->m_double;
+        return m_double;
     }
 
     float JsonValue::as_float() const
     {
-        return static_cast<float>(this->m_double);
+        return static_cast<float>(m_double);
     }
     
     std::int64_t JsonValue::as_int() const
     {
-        return this->m_int;
+        return m_int;
     }
 
     bool JsonValue::as_boolean() const
     {
-        return this->m_bool;
+        return m_bool;
     }
 
     const std::vector<JsonValue>& JsonValue::values() const
     {
-        return this->m_values;
+        return m_values;
     }
 
     const std::map<std::string, JsonValue>& JsonValue::lookup() const
     {
-        return this->m_lookup;
+        return m_lookup;
     }
 
     JsonValue JsonValue::nullSingleton()

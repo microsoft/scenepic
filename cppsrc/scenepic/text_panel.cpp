@@ -9,64 +9,64 @@ TextPanel::TextPanel(const std::string &text_panel_id) : m_text_panel_id(text_pa
 
 TextPanel &TextPanel::title(const std::string &title)
 {
-    this->m_title = title;
+    m_title = title;
     return *this;
 }
 
 const std::string &TextPanel::title() const
 {
-    return this->m_title;
+    return m_title;
 }
 
 TextPanel &TextPanel::text(const std::string &text)
 {
-    this->m_text = text;
+    m_text = text;
     return *this;
 }
 
 const std::string &TextPanel::text() const
 {
-    return this->m_text;
+    return m_text;
 }
 
 TextPanel &TextPanel::input_text(const std::string &text)
 {
-    this->m_input_text = text;
+    m_input_text = text;
     return *this;
 }
 
 const std::string &TextPanel::input_text() const
 {
-    return this->m_input_text;
+    return m_input_text;
 }
 
 JsonValue TextPanel::to_json() const
 {
     JsonValue commands;
-    if (!this->m_text.empty())
+    if (!m_text.empty())
     {
         JsonValue command;
         command["CommandType"] = "SetTextPanelValue";
-        command["TextPanelId"] = this->m_text_panel_id;
-        command["Value"] = this->m_text;
+        command["TextPanelId"] = m_text_panel_id;
+        command["Value"] = m_text;
         commands.append(command);
     }
 
-    if (!this->m_title.empty())
+    if (!m_title.empty())
     {
         JsonValue command;
         command["CommandType"] = "SetTextPanelTitle";
-        command["TextPanelId"] = this->m_text_panel_id;
-        command["Value"] = this->m_title;
+        command["TextPanelId"] = m_text_panel_id;
+        command["Value"] = m_title;
         commands.append(command);
     }
 
-    if (!this->m_input_text.empty())
+    if (!m_input_text.empty())
     {
         JsonValue command;
         command["CommandType"] = "SetTextPanelInputText";
-        command["TextPanelId"] = this->m_text_panel_id;
-        command["Value"] = this->m_input_text;
+        command["TextPanelId"] = m_text_panel_id;
+        command["Value"] = m_input_text;
         commands.append(command);
     }
 
@@ -75,9 +75,9 @@ JsonValue TextPanel::to_json() const
 
 void TextPanel::clear_script()
 {
-    this->m_text.clear();
-    this->m_title.clear();
-    this->m_input_text.clear();
+    m_text.clear();
+    m_title.clear();
+    m_input_text.clear();
 }
 
 std::string TextPanel::to_string() const

@@ -44,45 +44,45 @@ namespace scenepic
                                              m_triangles(TriangleBuffer::Zero(0, 3)),
                                              m_lines(LineBuffer::Zero(0, 2))
     {
-        bool vertex_colors = this->m_shared_color.is_none();
-        bool vertex_uvs = !this->m_texture_id.empty();
+        bool vertex_colors = m_shared_color.is_none();
+        bool vertex_uvs = !m_texture_id.empty();
         if (vertex_colors && vertex_uvs)
         {
             throw std::invalid_argument("Cannot have both vertex colors and vertex UVs");
         }
         else if (vertex_colors)
         {
-            this->m_vertices = VertexBuffer::Zero(0, 9);
+            m_vertices = VertexBuffer::Zero(0, 9);
         }
         else if (vertex_uvs)
         {
-            this->m_vertices = VertexBuffer::Zero(0, 8);
+            m_vertices = VertexBuffer::Zero(0, 8);
         }
     }
 
     std::uint32_t Mesh::count_vertices() const
     {
-        return static_cast<std::uint32_t>(this->m_vertices.rows());
+        return static_cast<std::uint32_t>(m_vertices.rows());
     }
 
     Vector Mesh::center_of_mass() const
     {
-        return this->m_vertices.leftCols(3).rowwise().mean();
+        return m_vertices.leftCols(3).rowwise().mean();
     }
 
     void Mesh::reverse_triangle_order()
     {
-        this->m_triangles.col(1).swap(this->m_triangles.col(2));
-        this->m_vertices.block(0, 3, this->count_vertices(), 3) *= -1;
+        m_triangles.col(1).swap(m_triangles.col(2));
+        m_vertices.block(0, 3, this->count_vertices(), 3) *= -1;
     }
 
     void Mesh::apply_transform(const Transform &transform)
     {
         WorldVectorMatrix positions(this->count_vertices(), 4);
-        positions.leftCols(3) = this->m_vertices.leftCols(3);
+        positions.leftCols(3) = m_vertices.leftCols(3);
         positions.col(3).setConstant(1.0);
         positions *= transform.transpose();
-        this->m_vertices.leftCols(3) = positions.leftCols(3);
+        m_vertices.leftCols(3) = positions.leftCols(3);
 
         auto norm_transform = transform.topLeftCorner(3, 3).inverse();
         this->vertex_normals() *= norm_transform;
@@ -113,11 +113,11 @@ namespace scenepic
     void Mesh::append_mesh(const Mesh &mesh)
     {
         auto vert_offset = this->count_vertices();
-        append_matrix(this->m_vertices, mesh.m_vertices);
+        append_matrix(m_vertices, mesh.m_vertices);
         TriangleBuffer triangles = mesh.m_triangles.array() + vert_offset;
         LineBuffer lines = mesh.m_lines.array() + vert_offset;
-        append_matrix(this->m_triangles, triangles);
-        append_matrix(this->m_lines, lines);
+        append_matrix(m_triangles, triangles);
+        append_matrix(m_lines, lines);
     }
 
     void Mesh::add_triangle(const Color &color,
@@ -140,7 +140,7 @@ namespace scenepic
         }
 
         std::uint32_t i0, i1, i2;
-        if (this->m_texture_id.empty())
+        if (m_texture_id.empty())
         {
             i0 = this->append_vertex(p0, normal, color);
             i1 = this->append_vertex(p1, normal, color);
@@ -188,10 +188,10 @@ namespace scenepic
             normal = compute_triangle_normal(p0, p1, p2);
         }
 
-        Mesh m = Mesh("").shared_color(this->m_shared_color).texture_id(this->m_texture_id);
+        Mesh m = Mesh("").shared_color(m_shared_color).texture_id(m_texture_id);
 
         std::uint32_t i0, i1, i2, i3;
-        if (this->m_texture_id.empty())
+        if (m_texture_id.empty())
         {
             i0 = m.append_vertex(p0, normal, color);
             i1 = m.append_vertex(p1, normal, color);
@@ -240,7 +240,7 @@ namespace scenepic
                          const Transform &transform)
     {
         this->check_instances();
-        if (this->m_texture_id.length() == 0)
+        if (m_texture_id.length() == 0)
         {
             throw std::logic_error("Must set mesh's texture_id property first");
         }
@@ -255,7 +255,7 @@ namespace scenepic
             normal = compute_triangle_normal(p0, p1, p2);
         }
 
-        Mesh m = Mesh("").texture_id(this->m_texture_id);
+        Mesh m = Mesh("").texture_id(m_texture_id);
 
         // Front face
         auto i0 = m.append_vertex(p0, normal, uv0);
@@ -375,8 +375,8 @@ namespace scenepic
         assert(vertices.rows() == normals.rows());
         this->check_instances();
 
-        bool has_texture = this->m_texture_id.length() > 0;
-        bool has_vertex_colors = this->m_shared_color.is_none();
+        bool has_texture = m_texture_id.length() > 0;
+        bool has_vertex_colors = m_shared_color.is_none();
         bool has_uvs = uvs.rows() > 0;
 
         if (!has_texture && has_uvs)
@@ -404,7 +404,7 @@ namespace scenepic
             throw std::invalid_argument("Expecting per-vertex uvs stored in uvs");
         }
 
-        Mesh m = Mesh("").shared_color(this->m_shared_color).texture_id(this->m_texture_id);
+        Mesh m = Mesh("").shared_color(m_shared_color).texture_id(m_texture_id);
         if (has_uvs)
         {
             m.m_vertices = VertexBuffer(vertices.rows(), 8);
@@ -460,13 +460,13 @@ namespace scenepic
         assert(start_points.rows() == end_points.rows());
         assert(start_points.cols() == end_points.cols());
 
-        bool per_point_color = this->m_shared_color.is_none() && color.is_none();
+        bool per_point_color = m_shared_color.is_none() && color.is_none();
         if (per_point_color && start_points.cols() != 6)
         {
             throw std::invalid_argument("Expecting either single-color mesh, or shared color for whole set of lines, or per-point color stored in start_points and end_points");
         }
 
-        Mesh m = Mesh("").shared_color(this->m_shared_color).texture_id(this->m_texture_id);
+        Mesh m = Mesh("").shared_color(m_shared_color).texture_id(m_texture_id);
         const std::uint32_t num_lines = static_cast<const std::uint32_t>(start_points.rows());
 
         if (per_point_color)
@@ -513,43 +513,43 @@ namespace scenepic
                                  const ConstQuaternionBufferRef &rotations,
                                  const ConstColorBufferRef &colors)
     {
-        if (this->m_instance_buffer.rows())
+        if (m_instance_buffer.rows())
         {
             std::cerr << "WARNING: multiple calls to enable_instancing will replace existing instance_buffers." << std::endl;
         }
 
-        this->m_instance_buffer_has_rotations = false;
-        this->m_instance_buffer_has_colors = false;
+        m_instance_buffer_has_rotations = false;
+        m_instance_buffer_has_colors = false;
         if (rotations.size() && colors.size())
         {
             assert(rotations.rows() == positions.rows());
             assert(colors.rows() == positions.rows());
-            this->m_instance_buffer_has_rotations = true;
-            this->m_instance_buffer_has_colors = true;
-            this->m_instance_buffer = InstanceBuffer(positions.rows(), 10);
-            this->m_instance_buffer.leftCols(3) = positions;
-            this->m_instance_buffer.block(0, 3, positions.rows(), 4) = rotations;
-            this->m_instance_buffer.rightCols(3) = colors;
+            m_instance_buffer_has_rotations = true;
+            m_instance_buffer_has_colors = true;
+            m_instance_buffer = InstanceBuffer(positions.rows(), 10);
+            m_instance_buffer.leftCols(3) = positions;
+            m_instance_buffer.block(0, 3, positions.rows(), 4) = rotations;
+            m_instance_buffer.rightCols(3) = colors;
         }
         else if (rotations.size())
         {
             assert(rotations.rows() == positions.rows());
-            this->m_instance_buffer_has_rotations = true;
-            this->m_instance_buffer = InstanceBuffer(positions.rows(), 7);
-            this->m_instance_buffer.leftCols(3) = positions;
-            this->m_instance_buffer.rightCols(4) = rotations;
+            m_instance_buffer_has_rotations = true;
+            m_instance_buffer = InstanceBuffer(positions.rows(), 7);
+            m_instance_buffer.leftCols(3) = positions;
+            m_instance_buffer.rightCols(4) = rotations;
         }
         else if (colors.size())
         {
             assert(colors.rows() == positions.rows());
-            this->m_instance_buffer_has_colors = true;
-            this->m_instance_buffer = InstanceBuffer(positions.rows(), 6);
-            this->m_instance_buffer.leftCols(3) = positions;
-            this->m_instance_buffer.rightCols(3) = colors;
+            m_instance_buffer_has_colors = true;
+            m_instance_buffer = InstanceBuffer(positions.rows(), 6);
+            m_instance_buffer.leftCols(3) = positions;
+            m_instance_buffer.rightCols(3) = colors;
         }
         else
         {
-            this->m_instance_buffer = positions;
+            m_instance_buffer = positions;
         }
     }
 
@@ -558,12 +558,12 @@ namespace scenepic
         std::string data_type;
         JsonValue obj;
 
-        obj["VertexBuffer"] = matrix_to_json(this->m_vertices);
+        obj["VertexBuffer"] = matrix_to_json(m_vertices);
 
-        if (this->m_vertices.rows() < 0xFFFF)
+        if (m_vertices.rows() < 0xFFFF)
         {
-            TriangleShortBuffer triangles = this->m_triangles.cast<std::uint16_t>();
-            LineShortBuffer lines = this->m_lines.cast<std::uint16_t>();
+            TriangleShortBuffer triangles = m_triangles.cast<std::uint16_t>();
+            LineShortBuffer lines = m_lines.cast<std::uint16_t>();
             obj["IndexBufferType"] = "UInt16";
             obj["TriangleBuffer"] = matrix_to_json(triangles);
             obj["LineBuffer"] = matrix_to_json(lines);
@@ -571,32 +571,32 @@ namespace scenepic
         else
         {
             obj["IndexBufferType"] = "UInt32";
-            obj["TriangleBuffer"] = matrix_to_json(this->m_triangles);
-            obj["LineBuffer"] = matrix_to_json(this->m_lines);
+            obj["TriangleBuffer"] = matrix_to_json(m_triangles);
+            obj["LineBuffer"] = matrix_to_json(m_lines);
         }
 
-        if (!this->m_shared_color.is_none())
+        if (!m_shared_color.is_none())
         {
             obj["PrimitiveType"] = "SingleColorMesh";
-            obj["Color"] = matrix_to_json(this->m_shared_color);
+            obj["Color"] = matrix_to_json(m_shared_color);
         }
         else
         {
             obj["PrimitiveType"] = "MultiColorMesh";
         }
 
-        if (this->m_texture_id.length() > 0)
+        if (m_texture_id.length() > 0)
         {
-            obj["TextureId"] = this->m_texture_id;
-            obj["NearestNeighborTexture"] = this->m_nn_texture;
-            obj["UseTextureAlpha"] = this->m_use_texture_alpha;
+            obj["TextureId"] = m_texture_id;
+            obj["NearestNeighborTexture"] = m_nn_texture;
+            obj["UseTextureAlpha"] = m_use_texture_alpha;
         }
 
-        if (this->m_instance_buffer.rows() > 0)
+        if (m_instance_buffer.rows() > 0)
         {
-            obj["InstanceBuffer"] = matrix_to_json(this->m_instance_buffer);
-            obj["InstanceBufferHasRotations"] = this->m_instance_buffer_has_rotations;
-            obj["InstanceBufferHasColors"] = this->m_instance_buffer_has_colors;
+            obj["InstanceBuffer"] = matrix_to_json(m_instance_buffer);
+            obj["InstanceBufferHasRotations"] = m_instance_buffer_has_rotations;
+            obj["InstanceBufferHasColors"] = m_instance_buffer_has_colors;
         }
 
         return obj;
@@ -606,21 +606,21 @@ namespace scenepic
     {
         JsonValue root;
         root["CommandType"] = "DefineMesh";
-        root["MeshId"] = this->m_mesh_id;
-        if (this->m_layer_id.empty())
+        root["MeshId"] = m_mesh_id;
+        if (m_layer_id.empty())
         {
             root["LayerId"] = JsonValue::nullSingleton();
         }
         else
         {
-            root["LayerId"] = this->m_layer_id;
+            root["LayerId"] = m_layer_id;
         }
-        root["DoubleSided"] = this->m_double_sided;
+        root["DoubleSided"] = m_double_sided;
         root["Definition"] = this->definition_to_json();
-        root["CameraSpace"] = this->m_camera_space;
-        root["IsBillboard"] = this->m_is_billboard;
-        root["IsLabel"] = this->m_is_label;
-        root["VRWorldLocked"] = this->m_vr_world_locked;
+        root["CameraSpace"] = m_camera_space;
+        root["IsBillboard"] = m_is_billboard;
+        root["IsLabel"] = m_is_label;
+        root["VRWorldLocked"] = m_vr_world_locked;
         return root;
     }
 
@@ -636,7 +636,7 @@ namespace scenepic
         vertex.segment(0, 3) = pos;
         vertex.segment(3, 3) = normal.normalized();
         vertex.segment(6, 3) = color;
-        append_row(this->m_vertices, vertex);
+        append_row(m_vertices, vertex);
 
         return index;
     }
@@ -648,7 +648,7 @@ namespace scenepic
         vertex.segment(0, 3) = pos;
         vertex.segment(3, 3) = normal.normalized();
         vertex.segment(6, 2) = texture_uv;
-        append_row(this->m_vertices, vertex);
+        append_row(m_vertices, vertex);
         return index;
     }
 
@@ -658,23 +658,23 @@ namespace scenepic
         Vertex vertex(1, 6);
         vertex.segment(0, 3) = pos;
         vertex.segment(3, 3) = normal.normalized();
-        append_row(this->m_vertices, vertex);
+        append_row(m_vertices, vertex);
         return index;
     }
 
     void Mesh::append_triangle(std::uint32_t index0, std::uint32_t index1, std::uint32_t index2)
     {
-        append_row(this->m_triangles, Triangle(index0, index1, index2));
+        append_row(m_triangles, Triangle(index0, index1, index2));
     }
 
     void Mesh::append_line(std::uint32_t index0, std::uint32_t index1)
     {
-        append_row(this->m_lines, Line(index0, index1));
+        append_row(m_lines, Line(index0, index1));
     }
 
     void Mesh::check_instances()
     {
-        if (this->m_instance_buffer.rows() > 0)
+        if (m_instance_buffer.rows() > 0)
         {
             std::cerr << "WARNING: Editing Mesh after calling enable_instancing"
                       << "(used for point/line clouds) can lead to unexpected results."
@@ -684,7 +684,7 @@ namespace scenepic
 
     void Mesh::check_color(const Color &color)
     {
-        if (color.is_none() && this->m_shared_color.is_none())
+        if (color.is_none() && m_shared_color.is_none())
         {
             throw std::invalid_argument("Expected a vertex color");
         }
@@ -692,22 +692,22 @@ namespace scenepic
 
     Color Mesh::shared_color() const
     {
-        return this->m_shared_color;
+        return m_shared_color;
     }
 
     Mesh &Mesh::shared_color(const Color &shared_color)
     {
-        if (this->m_shared_color.is_none() && !shared_color.is_none())
+        if (m_shared_color.is_none() && !shared_color.is_none())
         {
             // remove per-vertex color
-            this->m_vertices = this->m_vertices.leftCols(6);
+            m_vertices = m_vertices.leftCols(6);
         }
-        else if (!this->m_shared_color.is_none() && shared_color.is_none())
+        else if (!m_shared_color.is_none() && shared_color.is_none())
         {
             // attempt to add per-vertex color.
             if (this->count_vertices() == 0)
             {
-                this->m_vertices = VertexBuffer::Zero(0, 9);
+                m_vertices = VertexBuffer::Zero(0, 9);
             }
             else
             {
@@ -716,25 +716,25 @@ namespace scenepic
             }
         }
 
-        this->m_shared_color = shared_color;
+        m_shared_color = shared_color;
         return *this;
     }
 
     const std::string &Mesh::texture_id() const
     {
-        return this->m_texture_id;
+        return m_texture_id;
     }
 
     Mesh &Mesh::texture_id(const std::string &texture_id)
     {
-        this->m_texture_id = texture_id;
+        m_texture_id = texture_id;
         if (!texture_id.empty())
         {
             // convert this to a UV mesh
             if (this->count_vertices() == 0)
             {
-                this->m_shared_color = Color(1, 1, 1);
-                this->m_vertices = VertexBuffer::Zero(0, 8);
+                m_shared_color = Color(1, 1, 1);
+                m_vertices = VertexBuffer::Zero(0, 8);
             }
             else
             {
@@ -744,10 +744,10 @@ namespace scenepic
         }
         else
         {
-            if (!this->m_shared_color.is_none())
+            if (!m_shared_color.is_none())
             {
                 // Remove the texture coordinates
-                this->m_vertices = this->m_vertices.leftCols(6);
+                m_vertices = m_vertices.leftCols(6);
             }
         }
 
@@ -756,105 +756,105 @@ namespace scenepic
 
     const std::string &Mesh::mesh_id() const
     {
-        return this->m_mesh_id;
+        return m_mesh_id;
     }
 
     const std::string &Mesh::layer_id() const
     {
-        return this->m_layer_id;
+        return m_layer_id;
     }
 
     Mesh &Mesh::layer_id(const std::string &layer_id)
     {
-        this->m_layer_id = layer_id;
+        m_layer_id = layer_id;
         return *this;
     }
 
     bool Mesh::double_sided() const
     {
-        return this->m_double_sided;
+        return m_double_sided;
     }
 
     Mesh &Mesh::double_sided(bool double_sided)
     {
-        this->m_double_sided = double_sided;
+        m_double_sided = double_sided;
         return *this;
     }
 
     bool Mesh::camera_space() const
     {
-        return this->m_camera_space;
+        return m_camera_space;
     }
 
     Mesh &Mesh::camera_space(bool camera_space)
     {
-        this->m_camera_space = camera_space;
+        m_camera_space = camera_space;
         return *this;
     }
 
     bool Mesh::vr_world_locked() const
     {
-        return this->m_vr_world_locked;
+        return m_vr_world_locked;
     }
 
     Mesh &Mesh::vr_world_locked(bool vr_world_locked)
     {
-        this->m_vr_world_locked = vr_world_locked;
+        m_vr_world_locked = vr_world_locked;
         return *this;
     }
 
     bool Mesh::nn_texture() const
     {
-        return this->m_nn_texture;
+        return m_nn_texture;
     }
 
     Mesh &Mesh::nn_texture(bool nn_texture)
     {
-        this->m_nn_texture = nn_texture;
+        m_nn_texture = nn_texture;
         return *this;
     }
 
     bool Mesh::use_texture_alpha() const
     {
-        return this->m_use_texture_alpha;
+        return m_use_texture_alpha;
     }
 
     Mesh &Mesh::use_texture_alpha(bool use_texture_alpha)
     {
-        this->m_use_texture_alpha = use_texture_alpha;
+        m_use_texture_alpha = use_texture_alpha;
         return *this;
     }
 
     bool Mesh::is_billboard() const
     {
-        return this->m_is_billboard;
+        return m_is_billboard;
     }
 
     Mesh &Mesh::is_billboard(bool is_billboard)
     {
-        this->m_is_billboard = is_billboard;
+        m_is_billboard = is_billboard;
         return *this;
     }
 
     bool Mesh::is_label() const
     {
-        return this->m_is_label;
+        return m_is_label;
     }
 
     Mesh &Mesh::is_label(bool is_label)
     {
-        this->m_is_label = is_label;
+        m_is_label = is_label;
         return *this;
     }
 
     const ConstTriangleBufferRef Mesh::triangles() const
     {
-        return ConstTriangleBufferRef(this->m_triangles);
+        return ConstTriangleBufferRef(m_triangles);
     }
 
     VertexBlock Mesh::vertex_positions()
     {
-        return this->m_vertices.leftCols(3);
+        return m_vertices.leftCols(3);
     }
 
     Mesh &Mesh::vertex_positions(const VertexBlock &vertices)
@@ -865,12 +865,12 @@ namespace scenepic
 
     const ConstVertexBlock Mesh::vertex_positions() const
     {
-        return this->m_vertices.leftCols(3);
+        return m_vertices.leftCols(3);
     }
 
     VertexBlock Mesh::vertex_normals()
     {
-        return this->m_vertices.block(0, 3, this->count_vertices(), 3);
+        return m_vertices.block(0, 3, this->count_vertices(), 3);
     }
 
     Mesh &Mesh::vertex_normals(const VertexBlock &normals)
@@ -881,12 +881,12 @@ namespace scenepic
 
     const ConstVertexBlock Mesh::vertex_normals() const
     {
-        return this->m_vertices.block(0, 3, this->count_vertices(), 3);
+        return m_vertices.block(0, 3, this->count_vertices(), 3);
     }
 
     VertexBlock Mesh::vertex_colors()
     {
-        return this->m_vertices.rightCols(3);
+        return m_vertices.rightCols(3);
     }
 
     Mesh &Mesh::vertex_colors(const VertexBlock &colors)
@@ -897,12 +897,12 @@ namespace scenepic
 
     const ConstVertexBlock Mesh::vertex_colors() const
     {
-        return this->m_vertices.rightCols(3);
+        return m_vertices.rightCols(3);
     }
 
     VertexBlock Mesh::vertex_uvs()
     {
-        return this->m_vertices.rightCols(2);
+        return m_vertices.rightCols(2);
     }
 
     Mesh &Mesh::vertex_uvs(const VertexBlock &uvs)
@@ -913,12 +913,12 @@ namespace scenepic
 
     const ConstVertexBlock Mesh::vertex_uvs() const
     {
-        return this->m_vertices.rightCols(2);
+        return m_vertices.rightCols(2);
     }
 
     VertexBufferRef Mesh::vertex_buffer()
     {
-        return VertexBufferRef(this->m_vertices);
+        return VertexBufferRef(m_vertices);
     }
 
     std::string Mesh::to_string() const

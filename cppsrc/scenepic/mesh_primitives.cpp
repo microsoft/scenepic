@@ -33,7 +33,7 @@ void Mesh::add_cube(const Color &color,
     Vector p6(-0.5, +0.5, +0.5);
     Vector p7(+0.5, +0.5, +0.5);
 
-    Mesh m = Mesh("").shared_color(this->m_shared_color).texture_id(this->m_texture_id);
+    Mesh m = Mesh("").shared_color(m_shared_color).texture_id(m_texture_id);
     m.add_quad(color, p0, p2, p3, p1, VectorNone(), fill_triangles, add_wireframe);
     m.add_quad(color, p1, p3, p7, p5, VectorNone(), fill_triangles, add_wireframe);
     m.add_quad(color, p5, p7, p6, p4, VectorNone(), fill_triangles, add_wireframe);
@@ -77,7 +77,7 @@ void Mesh::add_thickline(const Color &color,
     Vector p7(+length, +end_thickness, +end_thickness);
 
     // Add quads to new mesh
-    Mesh m = Mesh("").shared_color(this->m_shared_color).texture_id(this->m_texture_id);
+    Mesh m = Mesh("").shared_color(m_shared_color).texture_id(m_texture_id);
     m.add_quad(color, p0, p2, p3, p1, VectorNone(), fill_triangles, add_wireframe);
     m.add_quad(color, p1, p3, p7, p5, VectorNone(), fill_triangles, add_wireframe);
     m.add_quad(color, p4, p5, p7, p6, VectorNone(), fill_triangles, add_wireframe);
@@ -129,7 +129,7 @@ void Mesh::add_cone(const Color &color,
     Vector apex(-0.5f, 0., 0.);
     bool add_apex = std::abs(truncation_height - 1.) < 1e-6;
     const float base_center_x = 0.5f;
-    Mesh m = Mesh("").shared_color(this->m_shared_color);
+    Mesh m = Mesh("").shared_color(m_shared_color);
     for (std::uint32_t lat_index = 0; lat_index < lat_count; ++lat_index)
     {
         float alpha = static_cast<float>(lat_index) / lat_count;
@@ -216,7 +216,7 @@ void Mesh::add_coordinate_axes(float length,
                                const Transform &transform)
 {
     this->check_instances();
-    Mesh m = Mesh("").shared_color(this->m_shared_color);
+    Mesh m = Mesh("").shared_color(m_shared_color);
     m.add_thickline({1, 0, 0}, {0, 0, 0}, {length, 0, 0}, thickness, 0.5f * thickness);
     m.add_thickline({0, 1, 0}, {0, 0, 0}, {0, length, 0}, thickness, 0.5f * thickness);
     m.add_thickline({0, 0, 1}, {0, 0, 0}, {0, 0, length}, thickness, 0.5f * thickness);
@@ -238,7 +238,7 @@ void Mesh::add_camera_frustum(const Color &color,
 {
     this->check_instances();
     this->check_color(color);
-    Mesh m = Mesh("").shared_color(this->m_shared_color);
+    Mesh m = Mesh("").shared_color(m_shared_color);
     const float fov_y_half_radians = fov_y_degrees / 2.0f * PI / 180.0f;
     const float height = depth * std::sin(fov_y_half_radians);
     const float width = height * aspect_ratio;
@@ -267,7 +267,7 @@ void Mesh::add_camera_frustum(const Camera &camera,
 {
     this->check_instances();
     this->check_color(color);
-    Mesh m = Mesh("").shared_color(this->m_shared_color);
+    Mesh m = Mesh("").shared_color(m_shared_color);
     Vector eye(0, 0, 0);
     Eigen::Vector3f top_left(-1, -1, 1);
     Eigen::Vector3f top_right(1, -1, 1);
@@ -547,7 +547,7 @@ void Mesh::add_icosphere(const Color &color,
 
     // Set up per-vertex uvs if required
     UVBuffer uvs;
-    if (!this->m_texture_id.empty())
+    if (!m_texture_id.empty())
     {
         // Compute azimuth and inclination values into the uv buffer
         uvs.resize(vertex_positions.rows(), Eigen::NoChange);
@@ -633,7 +633,7 @@ void Mesh::add_uv_sphere(const Color &color,
 
     // Leads to unit diameter for consistency with other primitives
     const double radius = 0.5;
-    Mesh m = Mesh("").shared_color(this->m_shared_color);
+    Mesh m = Mesh("").shared_color(m_shared_color);
     for (std::uint32_t lat_index = 0; lat_index < lat_count + 1; ++lat_index)
     {
         double theta = lat_index * M_PI / lat_count;

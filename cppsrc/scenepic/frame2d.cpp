@@ -14,16 +14,16 @@ void Frame2D::add_line(const CoordinateBuffer &coordinates,
                        bool close_path,
                        const std::string &layer_id)
 {
-    this->m_line_layer_ids.push_back(layer_id);
+    m_line_layer_ids.push_back(layer_id);
     std::uint16_t start = this->num_coordinates();
-    append_matrix(this->m_coord_buffer, coordinates);
+    append_matrix(m_coord_buffer, coordinates);
     std::uint16_t end = this->num_coordinates();
     Style style;
     style << line_color.is_none(), line_color.R(), line_color.G(), line_color.B(),
              fill_color.is_none(), fill_color.R(), fill_color.G(), fill_color.B();
-    append_row(this->m_line_style_buffer, style);
-    this->m_line_width.push_back(line_width);
-    append_row(this->m_line_buffer, PolyLine(start, end, close_path));
+    append_row(m_line_style_buffer, style);
+    m_line_width.push_back(line_width);
+    append_row(m_line_buffer, PolyLine(start, end, close_path));
 }
 
 void Frame2D::add_rectangle(float x, float y, float w, float h,
@@ -46,13 +46,13 @@ void Frame2D::add_circle(float x, float y, float radius,
                          const Color &fill_color,
                          const std::string &layer_id)
 {
-    this->m_circle_layer_ids.push_back(layer_id);
-    std::uint32_t index = static_cast<std::uint32_t>(this->m_circle_buffer.rows());
-    append_row(this->m_circle_buffer, Circle(x, y, radius, line_width));
+    m_circle_layer_ids.push_back(layer_id);
+    std::uint32_t index = static_cast<std::uint32_t>(m_circle_buffer.rows());
+    append_row(m_circle_buffer, Circle(x, y, radius, line_width));
     Style style;
     style << line_color.is_none(), line_color.R(), line_color.G(), line_color.B(),
              fill_color.is_none(), fill_color.R(), fill_color.G(), fill_color.B();
-    append_row(this->m_circle_style_buffer, style);
+    append_row(m_circle_style_buffer, style);
 }
 
 void Frame2D::add_image(const std::string &image_id,
@@ -61,9 +61,9 @@ void Frame2D::add_image(const std::string &image_id,
                         bool smoothed, const std::string &layer_id)
 {
     std::uint16_t index = this->num_coordinates();
-    append_row(this->m_coord_buffer, Coordinate(x, y));
+    append_row(m_coord_buffer, Coordinate(x, y));
     Frame2D::Image image(image_id, position_type, index, scale, smoothed, layer_id);
-    this->m_frame_commands.push_back(image.to_json());
+    m_frame_commands.push_back(image.to_json());
 }
 
 void Frame2D::add_video(const std::string &position_type,
@@ -71,9 +71,9 @@ void Frame2D::add_video(const std::string &position_type,
                         bool smoothed, const std::string &layer_id)
 {
     std::uint16_t index = this->num_coordinates();
-    append_row(this->m_coord_buffer, Coordinate(x, y));
+    append_row(m_coord_buffer, Coordinate(x, y));
     Frame2D::Video video(position_type, index, scale, smoothed, layer_id);
-    this->m_frame_commands.push_back(video.to_json());
+    m_frame_commands.push_back(video.to_json());
 }
 
 void Frame2D::add_text(const std::string& text,
@@ -84,14 +84,14 @@ void Frame2D::add_text(const std::string& text,
                   const std::string &layer_id)
 {
     std::uint16_t index = this->num_coordinates();
-    append_row(this->m_coord_buffer, Coordinate(left, bottom));
+    append_row(m_coord_buffer, Coordinate(left, bottom));
     Frame2D::Text element(text, index, color, size_in_pixels, font_family, layer_id);
-    this->m_frame_commands.push_back(element.to_json());
+    m_frame_commands.push_back(element.to_json());
 }
 
 std::uint16_t Frame2D::num_coordinates() const
 {
-    return static_cast<std::uint16_t>(this->m_coord_buffer.rows());
+    return static_cast<std::uint16_t>(m_coord_buffer.rows());
 }
 
 typedef Eigen::Matrix<std::uint8_t, 1, Eigen::Dynamic, Eigen::RowMajor> LineCloseBuffer;
@@ -136,34 +136,34 @@ JsonValue Frame2D::to_json() const
 
     JsonValue command;
     command["CommandType"] = "AddFrame";
-    command["FrameId"] = this->m_frame_id;
+    command["FrameId"] = m_frame_id;
 
     JsonValue frame_commands;
     frame_commands["CommandType"] = "FrameCommands";
-    frame_commands["FrameId"] = this->m_frame_id;
+    frame_commands["FrameId"] = m_frame_id;
 
     frame_commands["Commands"].resize(0);
 
     JsonValue set_coords;
     set_coords["CommandType"] = "SetCoordinates";
-    set_coords["CoordinateBuffer"] = matrix_to_json(this->m_coord_buffer);
+    set_coords["CoordinateBuffer"] = matrix_to_json(m_coord_buffer);
     frame_commands["Commands"].append(set_coords);
 
-    for (auto &frame_command : this->m_frame_commands)
+    for (auto &frame_command : m_frame_commands)
     {
         frame_commands["Commands"].append(frame_command);
     }
 
-    if(this->m_line_buffer.size())
+    if(m_line_buffer.size())
     {
         JsonValue add_lines;
         add_lines["CommandType"] = "AddLines";
-        add_lines["InfoBuffer"] = matrix_to_json(this->m_line_buffer);
-        add_lines["StyleBuffer"] = matrix_to_json(this->m_line_style_buffer);
-        Eigen::Index cols = static_cast<Eigen::Index>(this->m_line_width.size());
-        Eigen::Map<const Eigen::VectorXf> line_width_buffer(this->m_line_width.data(), cols);
+        add_lines["InfoBuffer"] = matrix_to_json(m_line_buffer);
+        add_lines["StyleBuffer"] = matrix_to_json(m_line_style_buffer);
+        Eigen::Index cols = static_cast<Eigen::Index>(m_line_width.size());
+        Eigen::Map<const Eigen::VectorXf> line_width_buffer(m_line_width.data(), cols);
         add_lines["WidthBuffer"] = matrix_to_json(line_width_buffer);
-        JsonValue layer_ids = run_length_encode(this->m_line_layer_ids);
+        JsonValue layer_ids = run_length_encode(m_line_layer_ids);
         if(layer_ids.type() != JsonType::Null)
         {
             add_lines["LayerIds"] = layer_ids;
@@ -172,13 +172,13 @@ JsonValue Frame2D::to_json() const
         frame_commands["Commands"].append(add_lines);
     }
 
-    if(this->m_circle_buffer.size())
+    if(m_circle_buffer.size())
     {
         JsonValue add_circles;
         add_circles["CommandType"] = "AddCircles";
-        add_circles["InfoBuffer"] = matrix_to_json(this->m_circle_buffer);
-        add_circles["StyleBuffer"] = matrix_to_json(this->m_circle_style_buffer);
-        JsonValue layer_ids = run_length_encode(this->m_circle_layer_ids);
+        add_circles["InfoBuffer"] = matrix_to_json(m_circle_buffer);
+        add_circles["StyleBuffer"] = matrix_to_json(m_circle_style_buffer);
+        JsonValue layer_ids = run_length_encode(m_circle_layer_ids);
         if(layer_ids.type() != JsonType::Null)
         {
             add_circles["LayerIds"] = layer_ids;
@@ -211,14 +211,14 @@ JsonValue Frame2D::Text::to_json() const
 {
     JsonValue obj;
     obj["CommandType"] = "AddText";
-    obj["Text"] = this->m_text;
-    obj["Index"] = static_cast<std::int64_t>(this->m_index);
-    obj["FillStyle"] = this->m_fill_style;
-    obj["Font"] = this->m_font_family;
-    obj["SizeInPixels"] = this->m_size_in_pixels;
-    if(!this->m_layer_id.empty())
+    obj["Text"] = m_text;
+    obj["Index"] = static_cast<std::int64_t>(m_index);
+    obj["FillStyle"] = m_fill_style;
+    obj["Font"] = m_font_family;
+    obj["SizeInPixels"] = m_size_in_pixels;
+    if(!m_layer_id.empty())
     {
-        obj["LayerId"] = this->m_layer_id;
+        obj["LayerId"] = m_layer_id;
     }
 
     return obj;
@@ -242,9 +242,9 @@ JsonValue Frame2D::Image::to_json() const
 {
     JsonValue obj;
     obj["CommandType"] = "AddImage";
-    obj["ImageId"] = this->m_image_id;
-    obj["PositionType"] = this->m_position_type;
-    if (this->m_position_type == "manual")
+    obj["ImageId"] = m_image_id;
+    obj["PositionType"] = m_position_type;
+    if (m_position_type == "manual")
     {
         obj["Index"] = static_cast<std::int64_t>(m_index);
     }
@@ -252,11 +252,11 @@ JsonValue Frame2D::Image::to_json() const
     {
         obj["Index"] = JsonValue::nullSingleton();
     }
-    obj["Scale"] = this->m_scale;
-    obj["Smoothed"] = this->m_smoothed;
-    if(!this->m_layer_id.empty())
+    obj["Scale"] = m_scale;
+    obj["Smoothed"] = m_smoothed;
+    if(!m_layer_id.empty())
     {
-        obj["LayerId"] = this->m_layer_id;
+        obj["LayerId"] = m_layer_id;
     }
 
     return obj;
@@ -278,8 +278,8 @@ JsonValue Frame2D::Video::to_json() const
 {
     JsonValue obj;
     obj["CommandType"] = "AddVideo";
-    obj["PositionType"] = this->m_position_type;
-    if (this->m_position_type == "manual")
+    obj["PositionType"] = m_position_type;
+    if (m_position_type == "manual")
     {
         obj["Index"] = static_cast<std::int64_t>(m_index);
     }
@@ -287,11 +287,11 @@ JsonValue Frame2D::Video::to_json() const
     {
         obj["Index"] = JsonValue::nullSingleton();
     }
-    obj["Scale"] = this->m_scale;
-    obj["Smoothed"] = this->m_smoothed;
-    if(!this->m_layer_id.empty())
+    obj["Scale"] = m_scale;
+    obj["Smoothed"] = m_smoothed;
+    if(!m_layer_id.empty())
     {
-        obj["LayerId"] = this->m_layer_id;
+        obj["LayerId"] = m_layer_id;
     }
 
     return obj;

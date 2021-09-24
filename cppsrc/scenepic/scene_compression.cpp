@@ -171,7 +171,7 @@ namespace scenepic
 
     float Scene::compute_mesh_range(const std::string &mesh_id)
     {
-        auto it = std::find_if(this->m_meshes.begin(), this->m_meshes.end(),
+        auto it = std::find_if(m_meshes.begin(), m_meshes.end(),
                                [&](const std::shared_ptr<Mesh> &mesh) { return mesh->mesh_id() == mesh_id; });
         auto mesh = *it;
         return mesh->vertex_buffer().maxCoeff() - mesh->vertex_buffer().minCoeff();
@@ -180,7 +180,7 @@ namespace scenepic
     std::map<std::string, QuantizationInfo> Scene::quantize_updates(float relative_error_threshold, float absolute_error_threshold, const std::string &base_mesh_id, bool per_frame_range)
     {
         std::map<std::string, std::vector<std::shared_ptr<MeshUpdate>>> updates;
-        for (auto &update : this->m_mesh_updates)
+        for (auto &update : m_mesh_updates)
         {
             updates[update->base_mesh_id()].push_back(update);
         }

@@ -38,10 +38,10 @@ void Image::load(const std::string &path)
     std::ifstream ifs(path, std::ios::binary | std::ios::ate);
     std::ifstream::pos_type pos = ifs.tellg();
 
-    this->m_data = std::vector<unsigned char>(static_cast<std::size_t>(pos));
+    m_data = std::vector<unsigned char>(static_cast<std::size_t>(pos));
 
     ifs.seekg(0, std::ios::beg);
-    ifs.read(reinterpret_cast<char *>(this->m_data.data()), pos);
+    ifs.read(reinterpret_cast<char *>(m_data.data()), pos);
 
     std::string name = path;
     std::transform(name.begin(), name.end(), name.begin(),
@@ -49,11 +49,11 @@ void Image::load(const std::string &path)
 
     if (end_with(name, "png"))
     {
-        this->m_ext = "png";
+        m_ext = "png";
     }
     else if (end_with(name, "jpeg") || end_with(name, "jpg"))
     {
-        this->m_ext = "jpg";
+        m_ext = "jpg";
     }
     else
     {
@@ -65,43 +65,43 @@ JsonValue Image::to_json() const
 {
     JsonValue obj;
     obj["CommandType"] = "DefineImage";
-    obj["ImageId"] = this->m_image_id;
-    obj["Type"] = this->m_ext;
-    obj["Data"] = base64_encode(this->m_data.data(),
-                                static_cast<unsigned int>(this->m_data.size()));
+    obj["ImageId"] = m_image_id;
+    obj["Type"] = m_ext;
+    obj["Data"] = base64_encode(m_data.data(),
+                                static_cast<unsigned int>(m_data.size()));
 
     return obj;
 }
 
 const std::string &Image::image_id() const
 {
-    return this->m_image_id;
+    return m_image_id;
 }
 
 const std::vector<std::uint8_t> &Image::data() const
 {
-    return this->m_data;
+    return m_data;
 }
 
 std::vector<std::uint8_t> &Image::data()
 {
-    return this->m_data;
+    return m_data;
 }
 
 Image &Image::data(const std::vector<std::uint8_t> &value)
 {
-    this->m_data = value;
+    m_data = value;
     return *this;
 }
 
 const std::string &Image::ext() const
 {
-    return this->m_ext;
+    return m_ext;
 }
 
 Image &Image::ext(const std::string &value)
 {
-    this->m_ext = value;
+    m_ext = value;
     return *this;
 }
 

@@ -185,22 +185,22 @@ EdgeList edges(Triangle::Scalar a, Triangle::Scalar b, Triangle::Scalar c)
 
 const ConstTriangleBufferRef LoopSubdivisionStencil::triangles() const
 {
-    return this->m_triangles;
+    return m_triangles;
 }
 
 std::size_t LoopSubdivisionStencil::vertex_count() const
 {
-    return static_cast<std::size_t>(this->m_subdiv.rows());
+    return static_cast<std::size_t>(m_subdiv.rows());
 }
 
 std::size_t LoopSubdivisionStencil::triangle_count() const
 {
-    return static_cast<std::size_t>(this->m_triangles.rows());
+    return static_cast<std::size_t>(m_triangles.rows());
 }
 
 VertexBuffer LoopSubdivisionStencil::apply(const ConstVertexBufferRef vertices) const
 {
-    return this->m_subdiv * vertices;
+    return m_subdiv * vertices;
 }
 
 LoopSubdivisionStencil::LoopSubdivisionStencil(TriangleBuffer triangles, SparseMatrix subdiv) : m_triangles(triangles), m_subdiv(subdiv)

@@ -39,7 +39,7 @@ namespace scenepic
         std::string canvas_id = canvas_id_init;
         if (canvas_id.empty())
         {
-            canvas_id = "Canvas-" + std::to_string(this->m_num_canvases);
+            canvas_id = "Canvas-" + std::to_string(m_num_canvases);
         }
 
         auto canvas = std::make_shared<Canvas3D>(Canvas3D(canvas_id, width, height));
@@ -47,8 +47,8 @@ namespace scenepic
         canvas->shading(shading);
         canvas->ui_parameters(ui_parameters);
         canvas->media_id(media_id);
-        this->m_canvas3Ds.push_back(canvas);
-        this->m_num_canvases += 1;
+        m_canvas3Ds.push_back(canvas);
+        m_num_canvases += 1;
 
         JsonValue display_obj;
         display_obj["CommandType"] = "AddCanvas3D";
@@ -77,7 +77,7 @@ namespace scenepic
             display_obj["HtmlId"] = html_id;
         }
 
-        this->m_display_order.push_back(display_obj);
+        m_display_order.push_back(display_obj);
 
         return canvas;
     }
@@ -92,14 +92,14 @@ namespace scenepic
         std::string canvas_id = canvas_id_init;
         if (canvas_id.empty())
         {
-            canvas_id = "Canvas-" + std::to_string(this->m_num_canvases);
+            canvas_id = "Canvas-" + std::to_string(m_num_canvases);
         }
 
         auto canvas = std::make_shared<Canvas2D>(Canvas2D(canvas_id, width, height));
         canvas->background_color(background_color);
         canvas->media_id(media_id);
-        this->m_canvas2Ds.push_back(canvas);
-        this->m_num_canvases += 1;
+        m_canvas2Ds.push_back(canvas);
+        m_num_canvases += 1;
 
         JsonValue display_obj;
         display_obj["CommandType"] = "AddCanvas2D";
@@ -128,7 +128,7 @@ namespace scenepic
             display_obj["HtmlId"] = html_id;
         }
 
-        this->m_display_order.push_back(display_obj);
+        m_display_order.push_back(display_obj);
 
         return canvas;
     }
@@ -146,7 +146,7 @@ namespace scenepic
         std::string canvas_id = canvas_id_init;
         if (canvas_id.empty())
         {
-            canvas_id = "Canvas-" + std::to_string(this->m_num_canvases);
+            canvas_id = "Canvas-" + std::to_string(m_num_canvases);
         }
 
         auto canvas = std::make_shared<Graph>(Graph(canvas_id));
@@ -155,8 +155,8 @@ namespace scenepic
         canvas->margin(margin);
         canvas->font_family(font_family);
         canvas->text_size(text_size);
-        this->m_graphs.push_back(canvas);
-        this->m_num_canvases += 1;
+        m_graphs.push_back(canvas);
+        m_num_canvases += 1;
 
         JsonValue display_obj;
         display_obj["CommandType"] = "AddGraph";
@@ -185,7 +185,7 @@ namespace scenepic
             display_obj["HtmlId"] = html_id;
         }
 
-        this->m_display_order.push_back(display_obj);
+        m_display_order.push_back(display_obj);
 
         return canvas;
     }
@@ -195,12 +195,12 @@ namespace scenepic
         std::string audio_id = audio_id_init;
         if (audio_id.empty())
         {
-            audio_id = "AudioTrack-" + std::to_string(this->m_num_audios);
+            audio_id = "AudioTrack-" + std::to_string(m_num_audios);
         }
 
         auto audio = std::make_shared<AudioTrack>(AudioTrack(audio_id));
-        this->m_audios.push_back(audio);
-        this->m_num_audios += 1;
+        m_audios.push_back(audio);
+        m_num_audios += 1;
 
         return audio;
     }
@@ -210,12 +210,12 @@ namespace scenepic
         std::string video_id = video_id_init;
         if (video_id.empty())
         {
-            video_id = "Video-" + std::to_string(this->m_num_videos);
+            video_id = "Video-" + std::to_string(m_num_videos);
         }
 
         auto video = std::make_shared<Video>(Video(video_id));
-        this->m_videos.push_back(video);
-        this->m_num_videos += 1;
+        m_videos.push_back(video);
+        m_num_videos += 1;
 
         return video;
     }
@@ -235,7 +235,7 @@ namespace scenepic
         std::string mesh_id = mesh_id_init;
         if (mesh_id.empty())
         {
-            mesh_id = "Mesh-" + std::to_string(this->m_num_meshes);
+            mesh_id = "Mesh-" + std::to_string(m_num_meshes);
         }
 
         auto mesh = std::make_shared<Mesh>(Mesh(mesh_id));
@@ -249,8 +249,8 @@ namespace scenepic
         mesh->use_texture_alpha(use_texture_alpha);
         mesh->is_billboard(is_billboard);
         mesh->is_label(is_label);
-        this->m_meshes.push_back(mesh);
-        this->m_num_meshes += 1;
+        m_meshes.push_back(mesh);
+        m_num_meshes += 1;
         return mesh;
     }
 
@@ -262,32 +262,32 @@ namespace scenepic
         std::string mesh_id = mesh_id_init;
         if (mesh_id.empty())
         {
-            mesh_id = "Mesh-" + std::to_string(this->m_num_meshes);
+            mesh_id = "Mesh-" + std::to_string(m_num_meshes);
         }
 
-        auto it = std::find_if(this->m_meshes.begin(), this->m_meshes.end(),
+        auto it = std::find_if(m_meshes.begin(), m_meshes.end(),
                                [&](const std::shared_ptr<Mesh> &mesh) { return mesh->mesh_id() == base_mesh_id; });
-        if (it == this->m_meshes.end())
+        if (it == m_meshes.end())
         {
             throw std::invalid_argument("Invalid base mesh ID");
         }
         auto base_mesh = *it;
 
-        if (this->m_update_counts.count(base_mesh_id) == 0)
+        if (m_update_counts.count(base_mesh_id) == 0)
         {
-            this->m_update_counts[base_mesh_id] = 0;
+            m_update_counts[base_mesh_id] = 0;
         }
 
-        auto frame_index = this->m_update_counts[base_mesh_id];
-        this->m_update_counts[base_mesh_id] = frame_index + 1;
+        auto frame_index = m_update_counts[base_mesh_id];
+        m_update_counts[base_mesh_id] = frame_index + 1;
 
         VertexBuffer new_vertices(base_mesh->vertex_buffer().leftCols(6));
         new_vertices.leftCols(3) = positions;
         new_vertices.rightCols(3) = normals;
  
         auto mesh_update = std::make_shared<MeshUpdate>(MeshUpdate(base_mesh_id, mesh_id, new_vertices, frame_index));
-        this->m_mesh_updates.push_back(mesh_update);
-        this->m_num_meshes += 1;
+        m_mesh_updates.push_back(mesh_update);
+        m_num_meshes += 1;
         return mesh_update;
     }
 
@@ -295,9 +295,9 @@ namespace scenepic
                                                    const ConstVectorBufferRef &positions,
                                                    const std::string &mesh_id_init)
     {
-        auto it = std::find_if(this->m_meshes.begin(), this->m_meshes.end(),
+        auto it = std::find_if(m_meshes.begin(), m_meshes.end(),
                                [&](const std::shared_ptr<Mesh> &mesh) { return mesh->mesh_id() == base_mesh_id; });
-        if (it == this->m_meshes.end())
+        if (it == m_meshes.end())
         {
             throw std::invalid_argument("Invalid base mesh ID");
         }
@@ -312,12 +312,12 @@ namespace scenepic
         std::string image_id = image_id_init;
         if (image_id.empty())
         {
-            image_id = "Image-" + std::to_string(this->m_num_images);
+            image_id = "Image-" + std::to_string(m_num_images);
         }
 
         auto image = std::make_shared<Image>(Image(image_id));
-        this->m_images.push_back(image);
-        this->m_num_images += 1;
+        m_images.push_back(image);
+        m_num_images += 1;
         return image;
     }
 
@@ -336,7 +336,7 @@ namespace scenepic
         std::string label_id = label_id_init;
         if (label_id.empty())
         {
-            label_id = "Label-" + std::to_string(this->m_num_labels);
+            label_id = "Label-" + std::to_string(m_num_labels);
         }
 
         auto &mesh = *this->create_mesh();
@@ -362,8 +362,8 @@ namespace scenepic
         label->horizontal_align(horizontal_align);
         label->vertical_align(vertical_align);
         label->offset_distance(offset_distance);
-        this->m_labels.push_back(label);
-        this->m_num_labels += 1;
+        m_labels.push_back(label);
+        m_num_labels += 1;
 
         return label;
     }
@@ -375,12 +375,12 @@ namespace scenepic
         std::string text_panel_id = text_panel_id_init;
         if (text_panel_id.empty())
         {
-            text_panel_id = "TextPanel-" + std::to_string(this->m_num_text_panels);
+            text_panel_id = "TextPanel-" + std::to_string(m_num_text_panels);
         }
 
         auto text_panel = std::make_shared<TextPanel>(TextPanel(text_panel_id));
-        this->m_text_panels.push_back(text_panel);
-        this->m_num_text_panels += 1;
+        m_text_panels.push_back(text_panel);
+        m_num_text_panels += 1;
 
         JsonValue display_obj;
         display_obj["CommandType"] = "AddTextPanel";
@@ -391,7 +391,7 @@ namespace scenepic
             display_obj["HtmlId"] = html_id;
         }
 
-        this->m_display_order.push_back(display_obj);
+        m_display_order.push_back(display_obj);
         return text_panel;
     }
 
@@ -402,12 +402,12 @@ namespace scenepic
         std::string drop_down_menu_id = drop_down_menu_id_init;
         if (drop_down_menu_id.empty())
         {
-            drop_down_menu_id = "DropDownMenu-" + std::to_string(this->m_num_drop_down_menus);
+            drop_down_menu_id = "DropDownMenu-" + std::to_string(m_num_drop_down_menus);
         }
 
         auto drop_down_menu = std::make_shared<DropDownMenu>(DropDownMenu(drop_down_menu_id));
-        this->m_drop_down_menus.push_back(drop_down_menu);
-        this->m_num_drop_down_menus += 1;
+        m_drop_down_menus.push_back(drop_down_menu);
+        m_num_drop_down_menus += 1;
 
         JsonValue display_obj;
         display_obj["CommandType"] = "AddDropDownMenu";
@@ -418,13 +418,13 @@ namespace scenepic
             display_obj["HtmlId"] = html_id;
         }
 
-        this->m_display_order.push_back(display_obj);
+        m_display_order.push_back(display_obj);
         return drop_down_menu;
     }
 
     void Scene::configure_user_interface(const UIParameters &ui_parameters)
     {
-        this->m_misc.push_back(ui_parameters.to_json());
+        m_misc.push_back(ui_parameters.to_json());
     }
 
     void Scene::link_canvas_events(const std::vector<std::string> &canvas_ids)
@@ -435,7 +435,7 @@ namespace scenepic
         {
             command["CanvasIds"].append(id);
         }
-        this->m_misc.push_back(command);
+        m_misc.push_back(command);
     }
 
     void Scene::simulate_key_presses(const std::string &canvas_id, const std::vector<std::string> &keypresses)
@@ -446,7 +446,7 @@ namespace scenepic
             command["CommandType"] = "SimulateKeyPress";
             command["CanvasId"] = canvas_id;
             command["Key"] = keypress;
-            this->m_misc.push_back(command);
+            m_misc.push_back(command);
         }
     }
 
@@ -488,23 +488,23 @@ namespace scenepic
     {
         JsonValue commands;
         commands.resize(0);
-        if (!this->m_scene_id.empty())
+        if (!m_scene_id.empty())
         {
             JsonValue command;
             command["CommandType"] = "SetSceneId";
-            command["SceneId"] = this->m_scene_id;
+            command["SceneId"] = m_scene_id;
             commands.append(command);
         }
 
         JsonValue fps;
         fps["CommandType"] = "SetFPS";
-        fps["Value"] = this->m_fps;
+        fps["Value"] = m_fps;
         commands.append(fps);
 
-        Scene::add_commands(commands, this->m_meshes);
+        Scene::add_commands(commands, m_meshes);
 
         // add key frames first
-        for (auto &update : this->m_mesh_updates)
+        for (auto &update : m_mesh_updates)
         {
             if (!update->is_quantized())
             {
@@ -513,7 +513,7 @@ namespace scenepic
         }
 
         // then add quantized frames
-        for (auto &update : this->m_mesh_updates)
+        for (auto &update : m_mesh_updates)
         {
             if (update->is_quantized())
             {
@@ -521,23 +521,23 @@ namespace scenepic
             }
         }
 
-        Scene::add_commands(commands, this->m_images);
-        Scene::add_commands(commands, this->m_videos);
-        Scene::add_commands(commands, this->m_audios);
-        Scene::add_commands(commands, this->m_labels);
+        Scene::add_commands(commands, m_images);
+        Scene::add_commands(commands, m_videos);
+        Scene::add_commands(commands, m_audios);
+        Scene::add_commands(commands, m_labels);
 
-        for (const auto &display_obj : this->m_display_order)
+        for (const auto &display_obj : m_display_order)
         {
             commands.append(display_obj);
         }
 
-        Scene::add_commands(commands, this->m_canvas2Ds);
-        Scene::add_commands(commands, this->m_canvas3Ds);
-        Scene::add_commands(commands, this->m_graphs);
-        Scene::add_commands(commands, this->m_text_panels);
-        Scene::add_commands(commands, this->m_drop_down_menus);
+        Scene::add_commands(commands, m_canvas2Ds);
+        Scene::add_commands(commands, m_canvas3Ds);
+        Scene::add_commands(commands, m_graphs);
+        Scene::add_commands(commands, m_text_panels);
+        Scene::add_commands(commands, m_drop_down_menus);
 
-        for (const auto &misc : this->m_misc)
+        for (const auto &misc : m_misc)
         {
             commands.append(misc);
         }
@@ -547,45 +547,45 @@ namespace scenepic
 
     void Scene::clear_script()
     {
-        this->m_scene_id = "";
-        this->m_meshes.clear();
-        this->m_mesh_updates.clear();
-        this->m_images.clear();
-        this->m_audios.clear();
-        this->m_labels.clear();
-        this->m_display_order.clear();
-        for (auto &canvas : this->m_canvas2Ds)
+        m_scene_id = "";
+        m_meshes.clear();
+        m_mesh_updates.clear();
+        m_images.clear();
+        m_audios.clear();
+        m_labels.clear();
+        m_display_order.clear();
+        for (auto &canvas : m_canvas2Ds)
         {
             canvas->clear_script();
         }
 
-        for (auto &canvas : this->m_canvas3Ds)
+        for (auto &canvas : m_canvas3Ds)
         {
             canvas->clear_script();
         }
 
-        for (auto &text_panel : this->m_text_panels)
+        for (auto &text_panel : m_text_panels)
         {
             text_panel->clear_script();
         }
 
-        for (auto &drop_down_menu : this->m_drop_down_menus)
+        for (auto &drop_down_menu : m_drop_down_menus)
         {
             drop_down_menu->clear_script();
         }
 
-        this->m_misc.clear();
-        this->m_script_cleared = true;
+        m_misc.clear();
+        m_script_cleared = true;
     }
 
     float Scene::framerate() const
     {
-        return this->m_fps;
+        return m_fps;
     }
 
     void Scene::framerate(float fps)
     {
-        this->m_fps = fps;
+        m_fps = fps;
     }
 
     std::string Scene::json() const
@@ -616,7 +616,7 @@ namespace scenepic
                              const std::string &head_html,
                              const std::string &body_html)
     {
-        if (this->m_script_cleared)
+        if (m_script_cleared)
         {
             throw std::logic_error("You should not call clear_script() on Scenes that you wish to save_as_html().");
         }
@@ -657,7 +657,7 @@ namespace scenepic
 
     bool Scene::script_cleared() const
     {
-        return this->m_script_cleared;
+        return m_script_cleared;
     }
 
     void Scene::grid(const std::string &width, const std::string &grid_template_rows, const std::string &grid_template_columns)
@@ -667,7 +667,7 @@ namespace scenepic
         display_obj["Width"] = width;
         display_obj["GridTemplateRows"] = grid_template_rows;
         display_obj["GridTemplateColumns"] = grid_template_columns;
-        this->m_display_order.push_back(display_obj);
+        m_display_order.push_back(display_obj);
     }
 
     void Scene::place(const std::string &canvas_id, const std::string &grid_row, const std::string &grid_column)
@@ -677,6 +677,6 @@ namespace scenepic
         display_obj["CanvasId"] = canvas_id;
         display_obj["GridRow"] = grid_row;
         display_obj["GridColumn"] = grid_column;
-        this->m_display_order.push_back(display_obj);
+        m_display_order.push_back(display_obj);
     }
 } // namespace scenepic
