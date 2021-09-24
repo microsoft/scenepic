@@ -1,0 +1,23 @@
+{
+    "comment": "This file is not used except by Code editor.  gulpfile.js needs to be updated in tandem with this.",
+    "include": [
+        "tssrc/**/*.ts"
+    ],
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "noImplicitAny": false,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "allowJs": false,
+        "declaration": true,
+        "rootDir": ".",
+        "outDir": "build",
+        "types": [
+            "node",
+            "jquery",
+            "gl-matrix"
+        ]
+    }
+}

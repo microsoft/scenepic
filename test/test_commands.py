@@ -333,10 +333,10 @@ def test_mesh_update(assert_json_equal, color):
         [0, -1, 0]
     ], np.float32)
 
-    update = scene.update_mesh("base", positions, "update0")
+    update = scene.update_mesh_without_normals("base", positions, "update0")
     assert_json_equal(str(update), "update0")
 
-    update = scene.update_mesh("base", positions, "update1", normals)
+    update = scene.update_mesh("base", positions, normals,  "update1")
     assert_json_equal(str(update), "update1")
 
     keyframe_buffer = update.vertex_buffer.copy()
@@ -359,7 +359,7 @@ def test_compression(assert_json_equal, color):
             [1, i * 0.05, 0],
             [0, 1, 0]
         ], np.float32)
-        scene.update_mesh("base", positions)
+        scene.update_mesh_without_normals("base", positions)
 
     info = scene.quantize_updates(1e-5)
 

@@ -333,7 +333,7 @@ def test_animation(asset):
         delta_z = (positions[:, 2] + 0.0419 * i) * 10
         positions[:, 1] = positions[:, 1] + 0.1 * (np.cos(delta_x) + np.sin(delta_z))
 
-        mesh_update = scene.update_mesh("jelly_base", positions)
+        mesh_update = scene.update_mesh_without_normals("jelly_base", positions)
         frame.add_mesh(mesh_update)
 
         marble_y = np.sin(0.105 * i)

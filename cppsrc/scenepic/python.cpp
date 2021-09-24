@@ -1451,7 +1451,7 @@ PYBIND11_MODULE(_scenepic, m)
              "mesh_id"_a = "", "layer_id"_a = "", "double_sided"_a = false, "camera_space"_a = false,
              "vr_world_locked"_a = false, "shared_color"_a = Color::None(), "texture_id"_a = "",
              "nn_texture"_a = true, "use_texture_alpha"_a = false, "is_billboard"_a = false, "is_label"_a = false)
-        .def("update_mesh", py::overload_cast<const std::string&, const ConstVertexBufferRef&, const ConstVertexBufferRef&, const std::string &>(&Scene::update_mesh), R"scenepicdoc(
+        .def("update_mesh", &Scene::update_mesh, R"scenepicdoc(
             Create a new mesh from an existing one by replacing its vector positions and normals.
 
             Args:
@@ -1465,7 +1465,22 @@ PYBIND11_MODULE(_scenepic, m)
             Returns:
                 MeshUpdate: a reference to the MeshUpdate object
         )scenepicdoc",
-             "base_mesh_id"_a, "vertex_buffer"_a, "normals"_a = VectorBufferNone(), "mesh_id"_a = "")
+             "base_mesh_id"_a, "vertex_buffer"_a, "normals"_a, "mesh_id"_a = "")
+        .def("update_mesh_without_normals", &Scene::update_mesh_without_normals, R"scenepicdoc(
+            Create a new mesh from an existing one by replacing its vector positions and compute normal values.
+
+            Args:
+                base_mesh_id (str): the unique identifier of the original base mesh. Must already have been created.
+                positions (np.ndarray): float32 matrix of [N, 3] new positions
+                normals (np.ndarray, optional): float32 matrix of [N, 3] new normals. Defaults to None, indicating
+                                                they will be computed automatically.
+                mesh_id (str, optional): a unique identifier for the new updated Mesh (will be
+                                         automatically populated if not provided). Defaults to None.
+            
+            Returns:
+                MeshUpdate: a reference to the MeshUpdate object
+        )scenepicdoc",
+            "base_mesh_id"_a, "vertex_buffer"_a, "mesh_id"_a = "")
         .def("create_audio", &Scene::create_audio, R"scenepicdoc(
             Create a new AudioTrack object and append it to the Scene.
             Audio tracks are Scene-wide resources that can be attached to multiple canvases.

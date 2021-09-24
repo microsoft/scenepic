@@ -49,7 +49,7 @@ from ._scenepic import (
     load_obj,
     LoopSubdivisionStencil,
     MeshInfo,
-    PathToSVTLib,
+    PathToScenePicLib,
     Shading,
     TextPanel,
     UIParameters,
@@ -70,11 +70,6 @@ try:
 except ImportError:
     print("scenepic[info]> Disabling VideoWriter due to ImportError")
 
-try:
-    from .web_socket_handler import WebSocketHandler
-except ImportError:
-    print("scenepic[info]> Disabling WebSocketHandler due to ImportError")
-
 __all__ = [
     "__version__",
     "AudioTrack",
@@ -90,7 +85,7 @@ __all__ = [
     "Label",
     "LayerSettings",
     "load_obj",
-    "PathToSVTLib",
+    "PathToScenePicLib",
     "Shading",
     "UIParameters",
     "Canvas3D",

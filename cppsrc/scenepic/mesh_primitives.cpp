@@ -267,7 +267,7 @@ void Mesh::add_camera_frustum(const Camera &camera,
 {
     this->check_instances();
     this->check_color(color);
-    Mesh m("");
+    Mesh m = Mesh("").shared_color(this->m_shared_color);
     Vector eye(0, 0, 0);
     Eigen::Vector3f top_left(-1, -1, 1);
     Eigen::Vector3f top_right(1, -1, 1);

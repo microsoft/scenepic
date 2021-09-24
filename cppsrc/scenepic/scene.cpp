@@ -291,7 +291,7 @@ namespace scenepic
         return mesh_update;
     }
 
-    std::shared_ptr<MeshUpdate> Scene::update_mesh(const std::string &base_mesh_id,
+    std::shared_ptr<MeshUpdate> Scene::update_mesh_without_normals(const std::string &base_mesh_id,
                                                    const ConstVectorBufferRef &positions,
                                                    const std::string &mesh_id_init)
     {

@@ -7,7 +7,7 @@
 
 namespace
 {
-    const float NUM_BINS = static_cast<float>(MeshUpdate::QuantizationBinCount);
+    const float NUM_BINS = static_cast<float>(scenepic::MeshUpdate::QuantizationBinCount);
 
     float compute_representable_range(float relative_error_threshold, float absolute_error_threshold, float range)
     {

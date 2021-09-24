@@ -209,9 +209,9 @@ public:
      *  \param mesh_id a unique identifier for the Mesh (will be automatically populated if not provided).
      *  \return a references to the new Mesh object
      */
-    std::shared_ptr<MeshUpdate> update_mesh(const std::string &base_mesh_id,
-                                            const ConstVectorBufferRef &positions,
-                                            const std::string &mesh_id = "");
+    std::shared_ptr<MeshUpdate> update_mesh_without_normals(const std::string &base_mesh_id,
+                                                            const ConstVectorBufferRef &positions,
+                                                            const std::string &mesh_id = "");
 
     /** Create a new Image and append to the Scene.
      *  Images are Scene-wide resources that can be reused as textures across multiple Meshes and Frame2Ds.
