@@ -21,7 +21,7 @@ namespace
             positions << 0, 0, 0,
                 1, i * 0.05f, 0,
                 0, 1, 0;
-            scene.update_mesh("base", positions);
+            scene.update_mesh_without_normals("base", positions);
         }
 
         auto quantization_info = scene.quantize_updates(1e-5f);
@@ -39,7 +39,7 @@ namespace
         sp::VectorBuffer positions = mesh->vertex_positions();
         positions = positions + sp::VectorBuffer::Random(positions.rows(), positions.cols()) * 0.01f;
 
-        auto update = scene.update_mesh("sphere", positions);
+        auto update = scene.update_mesh_without_normals("sphere", positions);
 
         float expected_error = 1e-4f;
         float range = expected_error * 65535;

@@ -1400,7 +1400,7 @@ PYBIND11_MODULE(_scenepic, m)
                 Canvas3D: a reference to the new Canvas object
         )scenepicdoc",
              "canvas_id"_a = "", "width"_a = 400, "height"_a = 400, "html_id"_a = "",
-             "camera"_a = Camera(), "shading"_a = Shading(), "ui_parameters"_a = UIParameters(),
+             "camera"_a = Camera::None(), "shading"_a = Shading(), "ui_parameters"_a = UIParameters(),
              "media_id"_a = "")
         .def("create_canvas_2d", &Scene::create_canvas_2d, R"scenepicdoc(
             Create a new 2D Canvas and append to the Scene.

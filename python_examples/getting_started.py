@@ -91,10 +91,7 @@ def _main():
     scene.place(projy.canvas_id, "2", "2")
     scene.place(projz.canvas_id, "3", "2")
 
-    # The scene is complete, so we write it to an HTML file. We have the
-    # choice to either embed the ScenePic javascript library (which we do here)
-    # or to use a web-hosted one instead. This can reduce overall file size,
-    # but embedding will allow the file to be viewed entirely offline.
+    # The scene is complete, so we write it to a standalone HTML file.
     scene.save_as_html("getting_started.html", embed_library=True, title="Getting Started")
 
 

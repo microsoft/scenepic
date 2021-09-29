@@ -72,6 +72,32 @@ public:
     /** Distance in world space to offset the label by when using left/right/top/bottom alignment. */
     Label &offset_distance(double value);
 
+    /** Whether this Mesh is defined in camera space
+     *  (cannot be moved in the ScenePic user interface) or
+     *  world space (standard).
+     */
+    bool camera_space() const;
+
+    /** Whether this Mesh is defined in camera space
+     *  (cannot be moved in the ScenePic user interface) or
+     *  world space (standard).
+     */
+    Label &camera_space(bool camera_space);
+
+    /** An identifier to allow several Meshes to be grouped
+     *  together into a "layer".  Layers should be used in
+     *  conjunction with Canvas3D.set_layer_settings().
+     *  \see Canvas3D::set_layer_settings.
+     */
+    const std::string &layer_id() const;
+
+    /** An identifier to allow several Meshes to be grouped
+     *  together into a "layer".  Layers should be used in
+     *  conjunction with Canvas3D.set_layer_settings().
+     *  \see Canvas3D::set_layer_settings.
+     */
+    Label &layer_id(const std::string &layer_id);
+
     /** Return a JSON string representing the object */
     std::string to_string() const;
 
@@ -86,20 +112,19 @@ private:
     /**
      * Constructor.
      * \param label_id a unique identifier for the Label (will be automatically populated if not provided).
-     * \param mesh_id ID of the Mesh object used to render the label
+     * \param mesh pointer to the Mesh object used to render the label
      */
     Label(const std::string &label_id,
-          const std::string &mesh_id);
+          const std::shared_ptr<Mesh> &mesh);
 
     std::string m_label_id;
     std::string m_text;
-    Color m_fill_color;
     double m_size_in_pixels;
     std::string m_font_family;
     std::string m_horizontal_align;
     std::string m_vertical_align;
     double m_offset_distance;
-    std::string m_mesh_id;
+    std::shared_ptr<Mesh> m_mesh;
 };
 } // namespace scenepic
 

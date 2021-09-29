@@ -31,7 +31,7 @@ namespace scenepic
                                                       double width,
                                                       double height,
                                                       const std::string &html_id,
-                                                      const Camera &camera,
+                                                      const Camera &camera_init,
                                                       const Shading &shading,
                                                       const UIParameters &ui_parameters,
                                                       const std::string &media_id)
@@ -40,6 +40,16 @@ namespace scenepic
         if (canvas_id.empty())
         {
             canvas_id = "Canvas-" + std::to_string(m_num_canvases);
+        }
+
+        Camera camera;
+        if(camera_init.is_none())
+        {
+            camera.aspect_ratio(width / height);
+        }
+        else
+        {
+            camera = camera_init;
         }
 
         auto canvas = std::make_shared<Canvas3D>(Canvas3D(canvas_id, width, height));
@@ -266,7 +276,8 @@ namespace scenepic
         }
 
         auto it = std::find_if(m_meshes.begin(), m_meshes.end(),
-                               [&](const std::shared_ptr<Mesh> &mesh) { return mesh->mesh_id() == base_mesh_id; });
+                               [&](const std::shared_ptr<Mesh> &mesh)
+                               { return mesh->mesh_id() == base_mesh_id; });
         if (it == m_meshes.end())
         {
             throw std::invalid_argument("Invalid base mesh ID");
@@ -284,7 +295,7 @@ namespace scenepic
         VertexBuffer new_vertices(base_mesh->vertex_buffer().leftCols(6));
         new_vertices.leftCols(3) = positions;
         new_vertices.rightCols(3) = normals;
- 
+
         auto mesh_update = std::make_shared<MeshUpdate>(MeshUpdate(base_mesh_id, mesh_id, new_vertices, frame_index));
         m_mesh_updates.push_back(mesh_update);
         m_num_meshes += 1;
@@ -292,11 +303,12 @@ namespace scenepic
     }
 
     std::shared_ptr<MeshUpdate> Scene::update_mesh_without_normals(const std::string &base_mesh_id,
-                                                   const ConstVectorBufferRef &positions,
-                                                   const std::string &mesh_id_init)
+                                                                   const ConstVectorBufferRef &positions,
+                                                                   const std::string &mesh_id_init)
     {
         auto it = std::find_if(m_meshes.begin(), m_meshes.end(),
-                               [&](const std::shared_ptr<Mesh> &mesh) { return mesh->mesh_id() == base_mesh_id; });
+                               [&](const std::shared_ptr<Mesh> &mesh)
+                               { return mesh->mesh_id() == base_mesh_id; });
         if (it == m_meshes.end())
         {
             throw std::invalid_argument("Invalid base mesh ID");
@@ -339,22 +351,22 @@ namespace scenepic
             label_id = "Label-" + std::to_string(m_num_labels);
         }
 
-        auto &mesh = *this->create_mesh();
-        mesh.double_sided(false)
+        auto mesh = this->create_mesh();
+        mesh->double_sided(false)
             .shared_color(color)
             .texture_id(label_id)
             .nn_texture(false)
             .is_label(true)
             .layer_id(layer_id)
             .camera_space(camera_space);
-        mesh.add_image(Vector(-0.5f, -0.5f, 0),
-                       Vector(1, 0, 0),
-                       Vector(0, 1, 0),
-                       VectorNone(),
-                       UV(0, 0), UV(1, 0), UV(1, 1), UV(0, 1),
-                       false);
+        mesh->add_image(Vector(-0.5f, -0.5f, 0),
+                        Vector(1, 0, 0),
+                        Vector(0, 1, 0),
+                        VectorNone(),
+                        UV(0, 0), UV(1, 0), UV(1, 1), UV(0, 1),
+                        false);
 
-        auto label = std::make_shared<Label>(Label(label_id, mesh.mesh_id()));
+        auto label = std::make_shared<Label>(Label(label_id, mesh));
         label->text(text);
         label->fill_color(color);
         label->size_in_pixels(size_in_pixels);

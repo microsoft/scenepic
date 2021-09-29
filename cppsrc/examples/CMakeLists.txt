@@ -3,10 +3,7 @@
 # --------------------------------------------------------------------------------------------------------------------
 
 set( ASSETS
-  Analog.png
   hand.obj
-  Hello.png
-  Science.png
   hello.mp3
   jelly.obj
   jelly.png
@@ -28,13 +25,8 @@ else()
 endif()
 
 set( EXAMPLES
-  hello_world
   getting_started
-  mesh_animation
-  waves
-  audio_tracks
-  circles_video
-  multiview
+  tutorial
 )
 
 foreach( example ${EXAMPLES})

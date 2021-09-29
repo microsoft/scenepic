@@ -23,7 +23,7 @@ int test_mesh_update()
                0, -1, 0,
                0, -1, 0;
 
-    auto update = scene.update_mesh("base", positions, "update0");
+    auto update = scene.update_mesh_without_normals("base", positions, "update0");
     
     test::assert_equal(update->to_json(), "update0", result);
 

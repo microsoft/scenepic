@@ -31,9 +31,9 @@ void Frame3D::add_mesh_by_id(const std::string &mesh_id, const Transform &transf
     m_frame_commands.push_back(instance);
 }
 
-void Frame3D::add_label(const Label &label, const Vector &position)
+void Frame3D::add_label(const std::shared_ptr<Label> &label, const Vector &position)
 {
-    this->add_mesh_by_id(label.mesh_id(), Transforms::translate(position));
+    this->add_mesh_by_id(label->mesh_id(), Transforms::translate(position));
 }
 
 JsonValue Frame3D::to_json() const

@@ -83,7 +83,7 @@ public:
      *  \param label the label to add
      *  \param position the position at which to put the label
      */
-    void add_label(const Label &label, const Vector &position);
+    void add_label(const std::shared_ptr<Label> &label, const Vector &position);
 
     /** The default camera parameters for this frame. */
     const Camera &camera() const;

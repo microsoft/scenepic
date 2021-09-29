@@ -100,7 +100,7 @@ public:
                                                double width = 400,
                                                double height = 400,
                                                const std::string &html_id = "",
-                                               const Camera &camera = Camera(),
+                                               const Camera &camera = Camera::None(),
                                                const Shading &shading = Shading(),
                                                const UIParameters &ui_parameters = UIParameters(),
                                                const std::string &media_id = "");

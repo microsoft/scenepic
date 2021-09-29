@@ -27,21 +27,7 @@ int main(int argc, char *argv[])
 {
     // when we build a ScenePic we are essentially building a web
     // page, and the ScenePic will automatically populate parts of
-    // that webpage. If you do not provide a template, it will
-    // set up a series of floating divs, but for this example
-    // let's provide a simple structure.
-    std::string body_html = R"scenepichtml(
-<table>
-<tr>
-    <td id="main" rowspan=3></td>
-    <td><h2>X</h2></td>
-    <td id="projx"></td>
-</tr>
-<tr><td><h2>Y</h2></td><td id="projy"></tr>
-<tr><td><h2>Z</h2><td id="projz"></td></tr>
-</tr>
-</table>
-)scenepichtml";
+    // that webpage.
 
     // the scene object acts as the root of the entire ScenePic environment
     sp::Scene scene;
@@ -52,10 +38,10 @@ int main(int argc, char *argv[])
     // an animation or to display a range of visualizations in the same visual
     // space. We will create one 3D canvas to display the full scene, and then
     // some 2D canvases which will show projections of the scene.
-    auto main = scene.create_canvas_3d("main", 600, 600, "main");
-    auto projx = scene.create_canvas_2d("projx", 200, 200, "projx");
-    auto projy = scene.create_canvas_2d("projy", 200, 200, "projy");
-    auto projz = scene.create_canvas_2d("projz", 200, 200, "projz");
+    auto main = scene.create_canvas_3d("main", 600, 600);
+    auto projx = scene.create_canvas_2d("projx", 200, 200);
+    auto projy = scene.create_canvas_2d("projy", 200, 200);
+    auto projz = scene.create_canvas_2d("projz", 200, 200);
 
     std::vector<std::shared_ptr<sp::Canvas2D>> projections = {projx, projy, projz};
 
@@ -128,9 +114,13 @@ int main(int argc, char *argv[])
     // this will make user interactions happen to all canvas simultaneously
     scene.link_canvas_events({"main", "projx", "projy", "projz"});
 
-    // The scene is complete, so we write it to an HTML file. We have the
-    // choice to either embed the ScenePic javascript library (which we do here)
-    // or to use a web-hosted one instead. This can reduce overall file size,
-    // but embedding will allow the file to be viewed entirely offline.
-    scene.save_as_html("getting_started.html", "Getting Started", true, "", body_html);
+    // ScenePic provides some useful layout controls by exposing CSS grid commands
+    scene.grid("800px", "200px 200px 200px", "600px 200px");
+    scene.place(main->canvas_id(), "1 / span 3", "1");
+    scene.place(projx->canvas_id(), "1", "2");
+    scene.place(projy->canvas_id(), "2", "2");
+    scene.place(projz->canvas_id(), "3", "2");
+
+    // The scene is complete, so we write it to a standalone HTML file.
+    scene.save_as_html("getting_started.html", "Getting Started", true, "");
 }
