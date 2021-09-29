@@ -408,7 +408,7 @@ def test_scene(assert_json_equal, asset):
     tet_center = tet_verts.mean(axis=0)
     canvas_tet = scene.create_canvas_3d("", SIZE, SIZE)
     canvas_tet.camera = sp.Camera(tet_center + np.array([0, 0, 0.5], np.float32),
-                                   tet_center, [0, 1, 0], 45.0)
+                                  tet_center, [0, 1, 0], 45.0)
     canvas_tet.shading = sp.Shading(sp.Colors.White)
     canvas_tet.ui_parameters = sp.UIParameters()
 
