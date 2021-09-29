@@ -130,6 +130,34 @@ Eigen::Array<typename Derived::Scalar, Eigen::Dynamic, 1> roll(const Eigen::Arra
     result.tail(remainder) = values.head(remainder);
     return result;
 }
+
+template <typename Derived>
+Eigen::Matrix<typename Derived::Scalar, Derived::RowsAtCompileTime, Derived::ColsAtCompileTime> rowwise_cumsum(const Eigen::MatrixBase<Derived>& values)
+{
+    typedef Eigen::Matrix<typename Derived::Scalar, Derived::RowsAtCompileTime, Derived::ColsAtCompileTime> MatrixType;
+    MatrixType result = MatrixType::Zero(values.rows(), values.cols());
+
+    result.row(0) = values.row(0);
+    for(Eigen::Index row=1; row < result.rows(); ++row)
+    {
+        result.row(row) = result.row(row - 1) + values.row(row);
+    }
+
+    return result;
+}
+
+template <typename Derived>
+Eigen::Matrix<typename Derived::Scalar, Derived::RowsAtCompileTime, Derived::ColsAtCompileTime> random(Eigen::Index rows, Eigen::Index cols, float min=0.0f, float max=1.0f)
+{
+    typedef Eigen::Matrix<typename Derived::Scalar, Derived::RowsAtCompileTime, Derived::ColsAtCompileTime> MatrixType;
+    MatrixType result = MatrixType::Random(rows, cols);
+    float offset = 1 + min;
+    float scale = (max - min) / 2;
+    result = result.array() + offset;
+    result = result * scale;
+    return result;
+}
+
 } // namespace scenepic
 
 #endif

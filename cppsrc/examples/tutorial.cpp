@@ -63,7 +63,7 @@ void point_clouds_1()
     mesh->shared_color(sp::Color(0, 1, 0));
     mesh->add_cube();
     mesh->apply_transform(sp::Transforms::scale(0.01f));
-    sp::VectorBuffer positions = sp::VectorBuffer::Random(10000, 3);
+    sp::VectorBuffer positions = sp::random<sp::VectorBuffer>(10000, 3);
     positions = (2 * positions).array() - 1;
     mesh->enable_instancing(positions);
 
@@ -72,7 +72,7 @@ void point_clouds_1()
     auto frame = canvas->create_frame();
     frame->add_mesh(mesh);
 
-    scene.save_as_html("points_clouds_1.html");
+    scene.save_as_html("point_clouds_1.html");
 }
 
 void point_clouds_2()
@@ -95,7 +95,7 @@ void point_clouds_2()
         rotations.row(i) = sp::Transforms::quaternion_to_align_x_to_axis(normals.row(i));
     }
 
-    sp::ColorBuffer colors = sp::ColorBuffer::Random(num_vertices, 3);
+    sp::ColorBuffer colors = sp::random<sp::ColorBuffer>(num_vertices, 3);
 
     sp::Scene scene;
 
@@ -121,12 +121,12 @@ void misc_meshes()
     std::cout << "== Miscellaneous Meshes ==" << std::endl;
     sp::Scene scene;
 
-    auto mesh1 = scene.create_mesh("", "Sphere+");
+    auto mesh1 = scene.create_mesh("sphere+", "Sphere+");
     mesh1->add_cube(sp::Color(1, 0, 0), sp::Transforms::translate({-2, 0, -2}));
     mesh1->add_uv_sphere(sp::Color(0, 0, 1), sp::Transforms::translate({-1, 1, 0}) * sp::Transforms::scale(1.8f), 10, 10, false, true);
     mesh1->add_icosphere(sp::Color(0, 1, 1), sp::Transforms::translate({2, 1, 0}) * sp::Transforms::scale(1.8f), 2, false, true);
 
-    auto mesh2 = scene.create_mesh("", "Coords");
+    auto mesh2 = scene.create_mesh("coords", "Coords");
     mesh2->add_coordinate_axes();
 
     sp::VectorBuffer cube_verts(8, 3);
@@ -166,31 +166,33 @@ void misc_meshes()
                                     sp::Transforms::translate({-1, 0, 0}));
     mesh3->add_mesh_without_normals(cube_verts_a, cube_tris_a);
     mesh3->add_mesh_without_normals(cube_verts_b, cube_tris_b, sp::ColorBufferNone(), sp::UVBufferNone(),
-                                    sp::Transforms::Translate({1, 0, 0}));
+                                    sp::Transforms::translate({1, 0, 0}));
 
     auto mesh4 = scene.create_mesh();
     int num_segs = 7000;
     
-    positions = np.cumsum(np.random.rand(num_segs, 3) * 0.2, axis=0)
-    colored_points = np.concatenate(
-        (positions, np.random.rand(num_segs, 3)), axis=1)
-    mesh4.add_lines(colored_points[0:-1, :], colored_points[1:, :])
-    mesh4.add_camera_frustum(color=sp.Color(1.0, 1.0, 0.0))
+    sp::VertexBuffer colored_points(num_segs, 6);
+    colored_points.leftCols(3) = sp::rowwise_cumsum(sp::random<sp::VectorBuffer>(num_segs, 3) * 0.2);
+    colored_points.rightCols(3) = sp::random<sp::ColorBuffer>(num_segs, 3);
 
-    canvas1 = scene.create_canvas_3d(width=300, height=300)
-    canvas2 = scene.create_canvas_3d(width=300, height=300)
+    mesh4->add_lines(colored_points.topRows(num_segs - 1), colored_points.bottomRows(num_segs - 1));
+    mesh4->add_camera_frustum(sp::Color(1, 1, 0));
 
-    scene.link_canvas_events(canvas1, canvas2)
+    auto canvas1 = scene.create_canvas_3d("canvas1", 300, 300);
+    auto canvas2 = scene.create_canvas_3d("canvas2", 300, 300);
 
-    canvas1.set_layer_settings({
-        "Coords": {"visible": False},
-        "Sphere+": {"visible": True}
-    })
+    scene.link_canvas_events({"canvas1", "canvas2"});
 
-    canvas1.create_frame(meshes=[mesh1, mesh2])
-    canvas2.create_frame(meshes=[mesh2, mesh3])
-    canvas2.create_frame(meshes=[mesh4, mesh1])
+    canvas1->set_layer_settings({
+        {"Coords", sp::LayerSettings().filled(false)},
+        {"Sphere+", sp::LayerSettings().filled(true)}
+    });
 
+    canvas1->create_frame("", sp::FocusPoint::None(), {mesh1->mesh_id(), mesh2->mesh_id()});
+    canvas2->create_frame("", sp::FocusPoint::None(), {mesh2->mesh_id(), mesh3->mesh_id()});
+    canvas2->create_frame("", sp::FocusPoint::None(), {mesh4->mesh_id(), mesh1->mesh_id()});
+
+    scene.save_as_html("misc_meshes.html");
 }
 
 int main(int argc, char *argv[])
@@ -199,4 +201,5 @@ int main(int argc, char *argv[])
     meshes_and_frames();
     point_clouds_1();
     point_clouds_2();
+    misc_meshes();
 }

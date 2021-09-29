@@ -690,7 +690,7 @@ namespace scenepic
         }
     }
 
-    Color Mesh::shared_color() const
+    const Color &Mesh::shared_color() const
     {
         return m_shared_color;
     }

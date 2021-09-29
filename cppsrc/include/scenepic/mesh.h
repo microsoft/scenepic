@@ -420,7 +420,7 @@ public:
     JsonValue to_json() const;
 
     /** Whole-mesh color (reduces memory requirements but makes Mesh monochrome). */
-    Color shared_color() const;
+    const Color &shared_color() const;
 
     /** Whole-mesh color (reduces memory requirements but makes Mesh monochrome). */
     Mesh &shared_color(const Color &shared_color);
