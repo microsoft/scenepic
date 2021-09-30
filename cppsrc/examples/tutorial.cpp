@@ -35,25 +35,43 @@ float randf(float min = 0.0f, float max = 1.0f)
 void scene_and_canvas_basics()
 {
     std::cout << "== Scene and Canvas Basics ==" << std::endl;
+
+    // Create a Scene, the top level container in ScenePic
     sp::Scene scene;
+
+    // A Scene can contain many Canvases
+    // For correct operation, you should create these using scene1.create_canvas() (rather than constructing directly using sp.Canvas(...))
     scene.create_canvas_3d("300", 300, 300);
     scene.create_canvas_3d("100", 100, 300);
+
+    // Once we're done, we can save the ScenePic to a standalone HTML file
     scene.save_as_html("scene_and_canvas_basics.html", "Scene and Canvas Basics");
 }
 
 void meshes_and_frames()
 {
     std::cout << "== Meshes and Frames ==" << std::endl;
+
+    //Create a scene
     sp::Scene scene;
 
+    // A Mesh is a vertex/triangle/line buffer with convenience methods
+    // Meshes "belong to" the Scene, so should be created using create_mesh()
+    // Meshes can be re-used across multiple frames/canvases
     auto mesh = scene.create_mesh();
     mesh->shared_color(sp::Color(1, 0, 1));
-    mesh->add_cube(sp::Color::None(), sp::Transforms::scale(0.1f));
-    mesh->add_cube(sp::Color::None(), sp::Transforms::translate({-1, 1, -1}) * sp::Transforms::scale(0.5f));
+#If shared_color is not provided, you can use per - vertex coloring
+                                                            mesh->add_cube(sp::Color::None(), sp::Transforms::scale(0.1f));
+#Adds a unit cube centered at the origin
+        mesh->add_cube(sp::Color::None(), sp::Transforms::translate({-1, 1, -1}) * sp::Transforms::scale(0.5f));
     mesh->add_sphere(sp::Color::None(), sp::Transforms::translate({1, 1, 1}));
 
+    // A Canvas is a 3D rendering panel
     auto canvas = scene.create_canvas_3d("", 300, 300);
 
+    // Create an animation with multiple Frames
+    // A Frame references a set of Meshes
+    // Frames are created from the Canvas not the Scene
     for (int i = 0; i < 10; ++i)
     {
         auto frame = canvas->create_frame();
@@ -75,8 +93,11 @@ void meshes_and_frames()
 void point_clouds_1()
 {
     std::cout << "== Point Clouds 1 ==" << std::endl;
+
+    // Create a scene
     sp::Scene scene;
 
+    // Create a mesh that we'll turn in to a point-cloud using enable_instancing()
     auto mesh = scene.create_mesh();
     mesh->shared_color(sp::Color(0, 1, 0));
     mesh->add_cube();
@@ -85,6 +106,7 @@ void point_clouds_1()
     positions = (2 * positions).array() - 1;
     mesh->enable_instancing(positions);
 
+    // Create Canvas and Frame, and add Mesh to Frame
     auto canvas = scene.create_canvas_3d("", 300, 300);
     canvas->shading(sp::Shading(sp::Colors::White));
     auto frame = canvas->create_frame();
@@ -97,36 +119,49 @@ void point_clouds_2()
 {
     std::cout << "== Point Clouds 2 ==" << std::endl;
 
+    // Note that the point cloud primitive can be arbitrarily complex.
+    // The primitive geometry will only be stored once for efficiency.
+
+    // Some parameters
     float disc_thickness = 0.2f;
     float normal_length = 1.5f;
     float point_size = 0.1f;
 
+    // A helper Mesh which we won't actually use for rendering - just to find the points and normals on a sphere to be used in mesh2 below
+    // NB this is created using the sp.Mesh() constructor directly so it doesn't get added automatically to the Scene
     sp::Mesh sphere_mesh;
     sphere_mesh.add_sphere(sp::Color(1, 0, 0), sp::Transforms::scale(2));
     auto num_vertices = sphere_mesh.count_vertices();
     auto points = sphere_mesh.vertex_positions();
     auto normals = sphere_mesh.vertex_normals();
 
+    // Convert the normals into quaternion rotations
     sp::QuaternionBuffer rotations = sp::QuaternionBuffer::Zero(num_vertices, 4);
     for (int i = 0; i < num_vertices; ++i)
     {
         rotations.row(i) = sp::Transforms::quaternion_to_align_x_to_axis(normals.row(i));
     }
 
+    // Generate some random colors
     sp::ColorBuffer colors = sp::random<sp::ColorBuffer>(num_vertices, 3, 0, 1);
 
+    // Create a scene
     sp::Scene scene;
 
+    // Create a mesh that we'll turn in to a point-cloud using enable_instancing()
     auto mesh = scene.create_mesh();
     mesh->shared_color(sp::Color(0, 1, 0))
         .double_sided(true);
 
+    // Add the primitive to the Mesh - a disc and a thickline showing the normal
     mesh->add_disc(sp::Color::None(), sp::Transforms::scale({disc_thickness, 1, 1}), 20);
     mesh->add_thickline(sp::Color::None(), {disc_thickness * 0.5f, 0, 0}, {normal_length, 0, 0}, 0.2f, 0.1f);
     mesh->apply_transform(sp::Transforms::scale(point_size));
 
+    // Now turn the mesh into a point-cloud
     mesh->enable_instancing(points, rotations, colors);
 
+    // Create Canvas and Frame, and add Mesh to Frame
     auto canvas = scene.create_canvas_3d("", 300, 300);
     auto frame = canvas->create_frame();
     frame->add_mesh(mesh);
@@ -137,16 +172,25 @@ void point_clouds_2()
 void misc_meshes()
 {
     std::cout << "== Miscellaneous Meshes ==" << std::endl;
+
+    // Scene is the top level container in ScenePic
     sp::Scene scene;
 
+    // Ok - let's start by creating some Mesh objects
+
+    // Mesh 1 - contains a cube and a sphere
+    // Mesh objects can contain arbitrary triangle mesh and line geometry
+    // Meshes can belong to "layers" which can be controlled by the user interactively
     auto mesh1 = scene.create_mesh("sphere+", "Sphere+");
     mesh1->add_cube(sp::Color(1, 0, 0), sp::Transforms::translate({-2, 0, -2}));
     mesh1->add_uv_sphere(sp::Color(0, 0, 1), sp::Transforms::translate({-1, 1, 0}) * sp::Transforms::scale(1.8f), 10, 10, false, true);
     mesh1->add_icosphere(sp::Color(0, 1, 1), sp::Transforms::translate({2, 1, 0}) * sp::Transforms::scale(1.8f), 2, false, true);
 
+    // Mesh 2 - coordinate axes
     auto mesh2 = scene.create_mesh("coords", "Coords");
     mesh2->add_coordinate_axes();
 
+    // Mesh 3 - example of Loop Subdivision on a cube
     sp::VectorBuffer cube_verts(8, 3);
     cube_verts << -0.5, -0.5, -0.5,
         +0.5, -0.5, -0.5,
@@ -186,6 +230,7 @@ void misc_meshes()
     mesh3->add_mesh_without_normals(cube_verts_b, cube_tris_b, sp::ColorBufferNone(), sp::UVBufferNone(),
                                     sp::Transforms::translate({1, 0, 0}));
 
+    // Mesh 4 - line example
     auto mesh4 = scene.create_mesh();
     int num_segs = 7000;
 
@@ -196,14 +241,19 @@ void misc_meshes()
     mesh4->add_lines(colored_points.topRows(num_segs - 1), colored_points.bottomRows(num_segs - 1));
     mesh4->add_camera_frustum(sp::Color(1, 1, 0));
 
+    // Let's create two Canvases this time
     auto canvas1 = scene.create_canvas_3d("canvas1", 300, 300);
     auto canvas2 = scene.create_canvas_3d("canvas2", 300, 300);
 
+    // We can link their keyboard/mouse/etc. input events to keep the views in sync
     scene.link_canvas_events({"canvas1", "canvas2"});
 
+    // And we can specify that certain named "mesh collections" should have user-controlled visibility and opacity
+    // Meshs without mesh_collection set, or without specified visibilities will always be visible and opaque
     canvas1->set_layer_settings({{"Coords", sp::LayerSettings().filled(false)},
                                  {"Sphere+", sp::LayerSettings().filled(true)}});
 
+    // A Frame contains an array of meshes
     canvas1->create_frame("", sp::FocusPoint::None(), {mesh1->mesh_id(), mesh2->mesh_id()});
     canvas2->create_frame("", sp::FocusPoint::None(), {mesh2->mesh_id(), mesh3->mesh_id()});
     canvas2->create_frame("", sp::FocusPoint::None(), {mesh4->mesh_id(), mesh1->mesh_id()});
@@ -214,19 +264,26 @@ void misc_meshes()
 void images_and_textures()
 {
     std::cout << "== Images and Textures ==" << std::endl;
+
+    // Scene is the top level container in ScenePic
     sp::Scene scene;
 
+    // Create and populate an Image object
     auto image1 = scene.create_image("PolarBear");
-    image1->load("PolarBear.png");
+    image1->load("PolarBear.png"); // This will preserve the image data in compressed PNG format
 
+    // Create a texture map
     auto texture = scene.create_image("texture");
-    texture->load("uv.png");
+    texture->load("uv.png"); // we can use this image to skin meshes
 
+    // Example of a mesh that is defined in camera space not world space
+    // This will not move as the virtual camera is moved with the mouse
     auto cam_space_mesh = scene.create_mesh();
     cam_space_mesh->shared_color(sp::Color(1, 0, 0));
     cam_space_mesh->camera_space(true);
     cam_space_mesh->add_sphere(sp::Color::None(), sp::Transforms::translate({10, -10, -20}));
 
+    // Some textured primitives
     auto sphere = scene.create_mesh();
     sphere->texture_id(texture->image_id());
     sphere->nn_texture(false);
@@ -237,12 +294,14 @@ void images_and_textures()
     auto transform = sp::Transforms::translate({-1, 0, 0}) * sp::Transforms::scale(0.5f);
     cube->add_cube(sp::Color::None(), transform);
 
+    // Show images in 3D canvas
     auto canvas = scene.create_canvas_3d();
     canvas->shading(sp::Shading(sp::Colors::White));
     auto mesh1 = scene.create_mesh();
     mesh1->texture_id("PolarBear");
-    mesh1->add_image();
+    mesh1->add_image(); // Adds image in canonical position
 
+    // Add an animation that rigidly transforms each image
     int n_frames = 20;
     for (int i = 0; i < n_frames; ++i)
     {
@@ -250,6 +309,7 @@ void images_and_textures()
         float cos = std::cosf(angle);
         float sin = std::sinf(angle);
 
+        // Create a focus point that allows you to "lock" the camera's translation and optionally orientation by pressing the "l" key
         sp::Vector axis(1, 0, 1);
         axis.normalize();
         sp::FocusPoint focus_point({cos, sin, 0}, axis * angle);
@@ -282,14 +342,18 @@ void images_and_textures()
 void canvas_2d()
 {
     std::cout << "== 2D Canvases ==" << std::endl;
+
+    // Scene is the top level container in ScenePic
     sp::Scene scene;
 
+    // Load some images
     auto image1 = scene.create_image("PolarBear");
     image1->load("PolarBear.png");
 
     auto image2 = scene.create_image("Random");
     image2->load("rand30x20.png");
 
+    // Create a 2D canvas demonstrating different image positioning options
     auto canvas1 = scene.create_canvas_2d("", 400, 300);
     canvas1->background_color(sp::Colors::White);
     canvas1->create_frame()->add_image(image1->image_id(), "fit");
@@ -297,6 +361,7 @@ void canvas_2d()
     canvas1->create_frame()->add_image(image1->image_id(), "stretch");
     canvas1->create_frame()->add_image(image1->image_id(), "manual", 50, 50, 0.3f);
 
+    // You can composite images and primitives too
     auto canvas2 = scene.create_canvas_2d("", 300, 300);
     auto frame = canvas2->create_frame();
     frame->add_image(image2->image_id(), "fit");
@@ -326,12 +391,14 @@ void opacity_and_labels()
     int num_objects = 20;
     for (int i = 0; i < num_objects; ++i)
     {
+        // Sample object
         int geotype = randint(2);
         sp::Color color = sp::random<sp::Color>(0, 1);
         float size = randf(0.2f, 0.5f);
         sp::Vector position = sp::random<sp::Vector>(-1.5f, 1.5f);
         float opacity = randint(2) == 0 ? 1.0f : randf(0.45, 0.55);
 
+        // Generate geometry
         std::string layer_id = "Layer" + std::to_string(i);
         auto mesh = scene.create_mesh("", layer_id);
         mesh->shared_color(color);
@@ -345,10 +412,11 @@ void opacity_and_labels()
             mesh->add_cube();
         }
 
-        mesh->apply_transform(sp::Transforms::scale(size));
+        mesh->apply_transform(sp::Transforms::scale(size)); // Scale the primitive
         mesh->apply_transform(sp::Transforms::translate(position));
         frame->add_mesh(mesh);
 
+        // Add label
         std::stringstream text;
         text.precision(2);
         text << color[0] << " " << color[1] << " " << color[2] << " " << opacity;
@@ -392,32 +460,43 @@ void animation()
 {
     std::cout << "== Animation ==" << std::endl;
 
+    // let's create our scene to get started
     sp::Scene scene;
     auto canvas = scene.create_canvas_3d("jelly", 700, 700);
 
+    // Load a mesh to animate
     auto jelly_mesh = sp::load_obj("jelly.obj");
     auto texture = scene.create_image("texture");
     texture->load("jelly.png");
 
+    // create a base mesh for the animation. The animation
+    // will only change the vertex positions, so this mesh
+    // is used to set everything else, e.g. textures.
     auto base_mesh = scene.create_mesh("jelly_base");
     base_mesh->texture_id(texture->image_id()).use_texture_alpha(true);
     base_mesh->add_mesh(jelly_mesh);
 
+    // this mesh will only change in a rigid fashion (i.e. one instance)
     auto marble = scene.create_mesh("marble");
     marble->shared_color(sp::Colors::White);
     marble->add_sphere(sp::Color::None(), sp::Transforms::scale(0.4f));
 
     for (auto i = 0; i < 60; ++i)
     {
+        // animate the wave mesh by updating the vertex positions
         auto frame = canvas->create_frame();
         sp::VectorBuffer positions = jelly_mesh->position_buffer();
         auto delta_x = (positions.col(0).array() + 0.0838f * i) * 10.0f;
         auto delta_z = (positions.col(2).array() + 0.0419f * i) * 10.0f;
         positions.col(1) = positions.col(1).array() + 0.1 * (delta_x.cos() + delta_z.sin());
 
+        // we create a mesh update with the new posiitons. We can use this mesh update
+        // just like a new mesh, because it essentially is one, as ScenePic will create
+        // a new mesh from the old one using these new positions.
         auto mesh_update = scene.update_mesh_without_normals("jelly_base", positions);
         frame->add_mesh(mesh_update);
 
+        // this is a more simple form of animation using rigid transforms
         float marble_y = std::sin(0.105f * i);
         frame->add_mesh(marble, sp::Transforms::translate(sp::Vector(0, marble_y, 0)));
     }
@@ -450,10 +529,16 @@ void camera_movement()
 {
     std::cout << "== Camera Movement ==" << std::endl;
 
+    // in this tutorial we will show how to create per-frame camera movement.
+    // while the user can always choose to override this behavior, having a
+    // camera track specified can be helpful for demonstrating particular
+    // items in 3D. We will also show off the flexible GLCamera class.
+
     sp::Scene scene;
     auto spin_canvas = scene.create_canvas_3d("spin");
     auto spiral_canvas = scene.create_canvas_3d("spiral");
 
+    // let's create some items in the scene so we have a frame of reference
     auto polar_bear = scene.create_image("polar_bear");
     polar_bear->load("PolarBear.png");
     auto uv_texture = scene.create_image("texture");
@@ -467,15 +552,21 @@ void camera_movement()
     sphere->add_icosphere(sp::Color::None(), sp::Transforms::translate({0, 1, 0}), 4);
 
     int num_frames = 60;
-    for(int i=0; i<num_frames; ++i)
+    for (int i = 0; i < num_frames; ++i)
     {
-        float angle = static_cast<float>(i*M_PI*2/num_frames);
+        float angle = static_cast<float>(i * M_PI * 2 / num_frames);
+
+        // for the first camera we will spin in place on the Z axis
         auto rotation = sp::Transforms::rotation_about_z(angle);
         sp::Camera spin_camera(sp::Vector(0, 0, 4), rotation, 30);
 
-        sp::Vector camera_center(4*std::cosf(angle), i*4.0f/num_frames - 2, 4*std::sinf(angle));
+        // for the second camera, we will spin the camera in a spiral around the scene
+        // we can do this using the look-at initialization, which provides a straightforward
+        // "look at" interface for camera placement.
+        sp::Vector camera_center(4 * std::cosf(angle), i * 4.0f / num_frames - 2, 4 * std::sinf(angle));
         sp::Camera spiral_camera(camera_center, sp::Vector(0, 0.5f, 0));
 
+        // we can add frustums directly using the SVT camera objects
         auto frustums = scene.create_mesh();
         frustums->add_camera_frustum(spin_camera, sp::Colors::Red);
         frustums->add_camera_frustum(spiral_camera, sp::Colors::Green);
@@ -483,7 +574,7 @@ void camera_movement()
         std::vector<std::string> mesh_ids = {cube->mesh_id(), sphere->mesh_id(), frustums->mesh_id()};
 
         auto spin_frame = spin_canvas->create_frame();
-        spin_frame->camera(spin_camera);
+        spin_frame->camera(spin_camera); // each frame can have its own camera object
         spin_frame->add_meshes_by_id(mesh_ids);
 
         auto spiral_frame = spiral_canvas->create_frame();
@@ -495,7 +586,6 @@ void camera_movement()
     scene.save_as_html("camera_movement.html", "Camera Movement");
 }
 
-
 void set_audio(sp::Scene &scene, std::shared_ptr<sp::Canvas3D> &canvas, const std::string &path)
 {
     auto audio = scene.create_audio();
@@ -503,10 +593,13 @@ void set_audio(sp::Scene &scene, std::shared_ptr<sp::Canvas3D> &canvas, const st
     canvas->media_id(audio->audio_id());
 }
 
-
 void audio_tracks()
 {
     std::cout << "== Audio Tracks ==" << std::endl;
+
+    // in this tutorial we'll show how to attach audio tracks to canvases. ScenePic
+    // supports any audio file format supported by the browser.
+
     sp::Scene scene;
 
     std::vector<std::string> names = {"red", "green", "blue"};
@@ -514,15 +607,18 @@ void audio_tracks()
     std::vector<float> frequencies = {0, 1, 0.5f};
 
     auto graph = scene.create_graph("graph", 600, 150, "graph");
-    for(int i=0; i<3; ++i)
+    for (int i = 0; i < 3; ++i)
     {
         auto mesh = scene.create_mesh();
         mesh->add_cube(colors[i]);
+
+        // each canvas can have a different audio file linked to it
+        // and ScenePic will blend them into a single audio output
         auto canvas = scene.create_canvas_3d(names[i], 200, 200, names[i]);
         set_audio(scene, canvas, names[i] + ".ogg");
         std::vector<float> values;
 
-        for(int j=0; j<60; ++j)
+        for (int j = 0; j < 60; ++j)
         {
             auto frame = canvas->create_frame();
             double scale = std::sin(j * 2 * M_PI * frequencies[i] / 30);
@@ -533,14 +629,13 @@ void audio_tracks()
         graph->add_sparkline(names[i], values, colors[i]);
         graph->media_id(canvas->media_id());
     }
-    
+
     names.push_back("graph");
     scene.link_canvas_events(names);
     scene.grid("600px", "1fr auto", "1fr 1fr 1fr");
     scene.place("graph", "2", "1 / span 3");
     scene.save_as_html("audio_tracks.html", "Audio Tracks");
 }
-
 
 const int SIZE = 400;
 
@@ -554,11 +649,21 @@ std::pair<float, float> angle_to_pos(float angle, float radius)
 void circles_video()
 {
     std::cout << "== Circles Video ==" << std::endl;
+
+    // It is also possible to attach videos to ScenePic scenes. Once attached, you can draw the
+    // frames of those videos to canvases in the same way as images, and can draw the same
+    // video to multiple frames. Once a media file (video or audio) has been attached to a
+    // canvas, that file will be used to drive playback. In practical terms, this means that
+    // ScenePic will display frames such that they line up with the timestamps of the video
+    // working on the assumption that ScenePic frames are displayed at the framerate of the video.
+
     sp::Scene scene;
 
+    // A scene can have one or more videos attached to it
     auto video = scene.create_video();
     video->load("circles.mp4");
 
+    // Attached videos works much the same way as adding audio
     auto tracking = scene.create_canvas_2d("tracking", SIZE, SIZE);
     tracking->background_color(sp::Colors::White);
     tracking->media_id(video->video_id());
@@ -566,7 +671,11 @@ void circles_video()
     multi->background_color(sp::Colors::White);
     multi->media_id(video->video_id());
 
-    for(int i=0; i<360; ++i){
+    for (int i = 0; i < 360; ++i)
+    {
+        // if a 2D canvas has an associated video
+        // then a frame of that video can be added
+        // via the add_video method.
         auto frame = tracking->create_frame();
         frame->add_video("fit", 0.0f, 0.0f, 1.0f, false);
 
@@ -575,11 +684,11 @@ void circles_video()
         frame->add_rectangle(red_pos.first - 11, red_pos.second - 11, 22, 22, sp::Color::from_bytes(255, 0, 0), 2, sp::Color::None(), "rect");
         frame->add_circle(red_pos.first, red_pos.second, 10, sp::Color::from_bytes(255, 0, 0), 1.0f, sp::Color::from_bytes(255, 0, 0), "dot");
 
-        auto green_pos = angle_to_pos(-2*angle, 80);
+        auto green_pos = angle_to_pos(-2 * angle, 80);
         frame->add_rectangle(green_pos.first - 11, green_pos.second - 11, 22, 22, sp::Color::from_bytes(0, 255, 0), 2, sp::Color::None(), "rect");
         frame->add_circle(green_pos.first, green_pos.second, 10, sp::Color::from_bytes(0, 255, 0), 1.0f, sp::Color::from_bytes(0, 255, 0), "dot");
 
-        auto blue_pos = angle_to_pos(4*angle, 40);
+        auto blue_pos = angle_to_pos(4 * angle, 40);
         frame->add_rectangle(blue_pos.first - 11, blue_pos.second - 11, 22, 22, sp::Color::from_bytes(0, 0, 255), 2, sp::Color::None(), "rect");
         frame->add_circle(blue_pos.first, blue_pos.second, 10, sp::Color::from_bytes(0, 0, 255), 1.0f, sp::Color::from_bytes(0, 0, 255), "dot");
 
@@ -589,17 +698,18 @@ void circles_video()
         frame->add_video("manual", 160, 160, 0.2f, false, "blue");
     }
 
-    tracking->set_layer_settings({
-        {"rect", sp::LayerSettings().render_order(0)},
-        {"dot", sp::LayerSettings().render_order(1)}
-    });
+    tracking->set_layer_settings({{"rect", sp::LayerSettings().render_order(0)},
+                                  {"dot", sp::LayerSettings().render_order(1)}});
 
     scene.link_canvas_events({"tracking", "multi"});
     scene.save_as_html("circles_video.html", "Circles Video");
 }
 
-sp::Camera load_camera(const sp::JsonValue& camera_info)
+sp::Camera load_camera(const sp::JsonValue &camera_info)
 {
+    // this function loads an "OpenCV"-style camera representation
+    // and converts it to a GL style for use in ScenePic
+
     sp::Vector location;
     location.x() = camera_info["location"].values()[0].as_float();
     location.y() = camera_info["location"].values()[1].as_float();
@@ -622,7 +732,6 @@ sp::Camera load_camera(const sp::JsonValue& camera_info)
     return sp::Camera(world_to_camera, projection);
 }
 
-
 std::vector<sp::Camera> load_cameras()
 {
     std::ifstream input("cameras.json");
@@ -630,18 +739,23 @@ std::vector<sp::Camera> load_cameras()
     return {
         load_camera(cameras["cam0"]),
         load_camera(cameras["cam1"]),
-        load_camera(cameras["cam2"])
-    };
+        load_camera(cameras["cam2"])};
 }
-
 
 void multiview()
 {
     std::cout << "== Multiview ==" << std::endl;
+
+    // One common and useful scenario for ScenePic is to visualize the result of multiview 3D reconstruction.
+    // In this tutorial we'll show how to load some geometry, assocaited camera calibration
+    // information, and images to create a visualization depicting the results.
+
     sp::Scene scene;
 
+    // load the fitted cameras
     auto cameras = load_cameras();
 
+    // this textured cube will stand in for a reconstructed mesh
     auto texture = scene.create_image("texture");
     texture->load("PolarBear.png");
 
@@ -649,13 +763,15 @@ void multiview()
     cube->texture_id(texture->image_id());
     cube->add_cube(sp::Color::None(), sp::Transforms::scale(2));
 
+    // construct all of the frustums
+    // and camera images
     auto frustums = scene.create_mesh("frustums", "frustums");
     std::vector<sp::Color> colors = {sp::Colors::Red, sp::Colors::Green, sp::Colors::Blue};
     std::vector<std::string> paths = {"render0.png", "render1.png", "render2.png"};
     std::vector<std::string> camera_images;
     std::vector<std::string> images;
 
-    for(int i=0; i<3; ++i)
+    for (int i = 0; i < 3; ++i)
     {
         auto image = scene.create_image(paths[i]);
         image->load(paths[i]);
@@ -668,8 +784,10 @@ void multiview()
         camera_images.push_back(image_mesh->mesh_id());
     }
 
+    // create one canvas for each camera to show the scene from
+    // that camera's viewpoint
     float width = 640;
-    for(int i=0; i<3; ++i)
+    for (int i = 0; i < 3; ++i)
     {
         float height = width / cameras[i].aspect_ratio();
         auto canvas = scene.create_canvas_3d("hand" + std::to_string(i), width, height, "", cameras[i]);
@@ -678,7 +796,7 @@ void multiview()
         frame->add_mesh(cube);
         frame->add_mesh(frustums);
         frame->camera(cameras[i]);
-        for(int j=0; j<3; ++j)
+        for (int j = 0; j < 3; ++j)
         {
             frame->add_mesh_by_id(camera_images[j]);
         }
@@ -686,7 +804,6 @@ void multiview()
 
     scene.save_as_html("multiview.html", "Multiview");
 }
-
 
 int main(int argc, char *argv[])
 {
