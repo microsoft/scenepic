@@ -12,6 +12,7 @@
 #include <cmath>
 #include <cstdlib>
 #include <iostream>
+#include <fstream>
 #include <map>
 #include <string>
 #include <sstream>
@@ -80,7 +81,7 @@ void point_clouds_1()
     mesh->shared_color(sp::Color(0, 1, 0));
     mesh->add_cube();
     mesh->apply_transform(sp::Transforms::scale(0.01f));
-    sp::VectorBuffer positions = sp::random<sp::VectorBuffer>(10000, 3);
+    sp::VectorBuffer positions = sp::random<sp::VectorBuffer>(10000, 3, 0, 1);
     positions = (2 * positions).array() - 1;
     mesh->enable_instancing(positions);
 
@@ -112,7 +113,7 @@ void point_clouds_2()
         rotations.row(i) = sp::Transforms::quaternion_to_align_x_to_axis(normals.row(i));
     }
 
-    sp::ColorBuffer colors = sp::random<sp::ColorBuffer>(num_vertices, 3);
+    sp::ColorBuffer colors = sp::random<sp::ColorBuffer>(num_vertices, 3, 0, 1);
 
     sp::Scene scene;
 
@@ -189,8 +190,8 @@ void misc_meshes()
     int num_segs = 7000;
 
     sp::VertexBuffer colored_points(num_segs, 6);
-    colored_points.leftCols(3) = sp::rowwise_cumsum(sp::random<sp::VectorBuffer>(num_segs, 3) * 0.2);
-    colored_points.rightCols(3) = sp::random<sp::ColorBuffer>(num_segs, 3);
+    colored_points.leftCols(3) = sp::rowwise_cumsum(sp::random<sp::VectorBuffer>(num_segs, 3, 0, 1) * 0.2);
+    colored_points.rightCols(3) = sp::random<sp::ColorBuffer>(num_segs, 3, 0, 1);
 
     mesh4->add_lines(colored_points.topRows(num_segs - 1), colored_points.bottomRows(num_segs - 1));
     mesh4->add_camera_frustum(sp::Color(1, 1, 0));
@@ -326,7 +327,7 @@ void opacity_and_labels()
     for (int i = 0; i < num_objects; ++i)
     {
         int geotype = randint(2);
-        sp::Color color = sp::random<sp::Color>();
+        sp::Color color = sp::random<sp::Color>(0, 1);
         float size = randf(0.2f, 0.5f);
         sp::Vector position = sp::random<sp::Vector>(-1.5f, 1.5f);
         float opacity = randint(2) == 0 ? 1.0f : randf(0.45, 0.55);
@@ -445,6 +446,248 @@ void animation()
     scene.save_as_html("animation.html", "Animation");
 }
 
+void camera_movement()
+{
+    std::cout << "== Camera Movement ==" << std::endl;
+
+    sp::Scene scene;
+    auto spin_canvas = scene.create_canvas_3d("spin");
+    auto spiral_canvas = scene.create_canvas_3d("spiral");
+
+    auto polar_bear = scene.create_image("polar_bear");
+    polar_bear->load("PolarBear.png");
+    auto uv_texture = scene.create_image("texture");
+    uv_texture->load("uv.png");
+
+    auto cube = scene.create_mesh("cube");
+    cube->texture_id(polar_bear->image_id());
+    cube->add_cube();
+    auto sphere = scene.create_mesh("sphere");
+    sphere->texture_id(uv_texture->image_id());
+    sphere->add_icosphere(sp::Color::None(), sp::Transforms::translate({0, 1, 0}), 4);
+
+    int num_frames = 60;
+    for(int i=0; i<num_frames; ++i)
+    {
+        float angle = static_cast<float>(i*M_PI*2/num_frames);
+        auto rotation = sp::Transforms::rotation_about_z(angle);
+        sp::Camera spin_camera(sp::Vector(0, 0, 4), rotation, 30);
+
+        sp::Vector camera_center(4*std::cosf(angle), i*4.0f/num_frames - 2, 4*std::sinf(angle));
+        sp::Camera spiral_camera(camera_center, sp::Vector(0, 0.5f, 0));
+
+        auto frustums = scene.create_mesh();
+        frustums->add_camera_frustum(spin_camera, sp::Colors::Red);
+        frustums->add_camera_frustum(spiral_camera, sp::Colors::Green);
+
+        std::vector<std::string> mesh_ids = {cube->mesh_id(), sphere->mesh_id(), frustums->mesh_id()};
+
+        auto spin_frame = spin_canvas->create_frame();
+        spin_frame->camera(spin_camera);
+        spin_frame->add_meshes_by_id(mesh_ids);
+
+        auto spiral_frame = spiral_canvas->create_frame();
+        spiral_frame->camera(spiral_camera);
+        spiral_frame->add_meshes_by_id(mesh_ids);
+    }
+
+    scene.link_canvas_events({spin_canvas->canvas_id(), spiral_canvas->canvas_id()});
+    scene.save_as_html("camera_movement.html", "Camera Movement");
+}
+
+
+void set_audio(sp::Scene &scene, std::shared_ptr<sp::Canvas3D> &canvas, const std::string &path)
+{
+    auto audio = scene.create_audio();
+    audio->load(path);
+    canvas->media_id(audio->audio_id());
+}
+
+
+void audio_tracks()
+{
+    std::cout << "== Audio Tracks ==" << std::endl;
+    sp::Scene scene;
+
+    std::vector<std::string> names = {"red", "green", "blue"};
+    std::vector<sp::Color> colors = {sp::Colors::Red, sp::Colors::Green, sp::Colors::Blue};
+    std::vector<float> frequencies = {0, 1, 0.5f};
+
+    auto graph = scene.create_graph("graph", 600, 150, "graph");
+    for(int i=0; i<3; ++i)
+    {
+        auto mesh = scene.create_mesh();
+        mesh->add_cube(colors[i]);
+        auto canvas = scene.create_canvas_3d(names[i], 200, 200, names[i]);
+        set_audio(scene, canvas, names[i] + ".ogg");
+        std::vector<float> values;
+
+        for(int j=0; j<60; ++j)
+        {
+            auto frame = canvas->create_frame();
+            double scale = std::sin(j * 2 * M_PI * frequencies[i] / 30);
+            values.push_back(static_cast<float>(scale));
+            frame->add_mesh(mesh, sp::Transforms::scale(static_cast<float>((scale + 1) / 2 + 0.5f)));
+        }
+
+        graph->add_sparkline(names[i], values, colors[i]);
+        graph->media_id(canvas->media_id());
+    }
+    
+    names.push_back("graph");
+    scene.link_canvas_events(names);
+    scene.grid("600px", "1fr auto", "1fr 1fr 1fr");
+    scene.place("graph", "2", "1 / span 3");
+    scene.save_as_html("audio_tracks.html", "Audio Tracks");
+}
+
+
+const int SIZE = 400;
+
+std::pair<float, float> angle_to_pos(float angle, float radius)
+{
+    int x = static_cast<int>(std::cos(angle) * radius) + SIZE / 2;
+    int y = static_cast<int>(std::sin(angle) * radius) + SIZE / 2;
+    return std::make_pair(static_cast<float>(x), static_cast<float>(y));
+}
+
+void circles_video()
+{
+    std::cout << "== Circles Video ==" << std::endl;
+    sp::Scene scene;
+
+    auto video = scene.create_video();
+    video->load("circles.mp4");
+
+    auto tracking = scene.create_canvas_2d("tracking", SIZE, SIZE);
+    tracking->background_color(sp::Colors::White);
+    tracking->media_id(video->video_id());
+    auto multi = scene.create_canvas_2d("multi", SIZE, SIZE);
+    multi->background_color(sp::Colors::White);
+    multi->media_id(video->video_id());
+
+    for(int i=0; i<360; ++i){
+        auto frame = tracking->create_frame();
+        frame->add_video("fit", 0.0f, 0.0f, 1.0f, false);
+
+        float angle = static_cast<float>(i * M_PI / 180.0f);
+        auto red_pos = angle_to_pos(angle, 160);
+        frame->add_rectangle(red_pos.first - 11, red_pos.second - 11, 22, 22, sp::Color::from_bytes(255, 0, 0), 2, sp::Color::None(), "rect");
+        frame->add_circle(red_pos.first, red_pos.second, 10, sp::Color::from_bytes(255, 0, 0), 1.0f, sp::Color::from_bytes(255, 0, 0), "dot");
+
+        auto green_pos = angle_to_pos(-2*angle, 80);
+        frame->add_rectangle(green_pos.first - 11, green_pos.second - 11, 22, 22, sp::Color::from_bytes(0, 255, 0), 2, sp::Color::None(), "rect");
+        frame->add_circle(green_pos.first, green_pos.second, 10, sp::Color::from_bytes(0, 255, 0), 1.0f, sp::Color::from_bytes(0, 255, 0), "dot");
+
+        auto blue_pos = angle_to_pos(4*angle, 40);
+        frame->add_rectangle(blue_pos.first - 11, blue_pos.second - 11, 22, 22, sp::Color::from_bytes(0, 0, 255), 2, sp::Color::None(), "rect");
+        frame->add_circle(blue_pos.first, blue_pos.second, 10, sp::Color::from_bytes(0, 0, 255), 1.0f, sp::Color::from_bytes(0, 0, 255), "dot");
+
+        frame = multi->create_frame();
+        frame->add_video("manual", red_pos.first - 40, red_pos.second - 40, 0.2f, false, "red");
+        frame->add_video("manual", green_pos.first - 25, green_pos.second - 25, 0.125f, false, "green");
+        frame->add_video("manual", 160, 160, 0.2f, false, "blue");
+    }
+
+    tracking->set_layer_settings({
+        {"rect", sp::LayerSettings().render_order(0)},
+        {"dot", sp::LayerSettings().render_order(1)}
+    });
+
+    scene.link_canvas_events({"tracking", "multi"});
+    scene.save_as_html("circles_video.html", "Circles Video");
+}
+
+sp::Camera load_camera(const sp::JsonValue& camera_info)
+{
+    sp::Vector location;
+    location.x() = camera_info["location"].values()[0].as_float();
+    location.y() = camera_info["location"].values()[1].as_float();
+    location.z() = camera_info["location"].values()[2].as_float();
+
+    sp::Vector euler_angles;
+    euler_angles.x() = camera_info["rotation"].values()[0].as_float();
+    euler_angles.y() = camera_info["rotation"].values()[1].as_float();
+    euler_angles.z() = camera_info["rotation"].values()[2].as_float();
+
+    float fov = camera_info["fov"].as_float();
+    float aspect_ratio = camera_info["width"].as_float() / camera_info["height"].as_float();
+
+    auto rotation = sp::Transforms::euler_angles_to_matrix(euler_angles, "XYZ");
+    auto translation = sp::Transforms::translate(location);
+    auto extrinsics = (translation * rotation).eval();
+    auto world_to_camera = sp::Transforms::gl_world_to_camera(extrinsics);
+
+    auto projection = sp::Transforms::gl_projection(fov, aspect_ratio, 0.01, 100);
+    return sp::Camera(world_to_camera, projection);
+}
+
+
+std::vector<sp::Camera> load_cameras()
+{
+    std::ifstream input("cameras.json");
+    auto cameras = sp::JsonValue::parse(input);
+    return {
+        load_camera(cameras["cam0"]),
+        load_camera(cameras["cam1"]),
+        load_camera(cameras["cam2"])
+    };
+}
+
+
+void multiview()
+{
+    std::cout << "== Multiview ==" << std::endl;
+    sp::Scene scene;
+
+    auto cameras = load_cameras();
+
+    auto texture = scene.create_image("texture");
+    texture->load("PolarBear.png");
+
+    auto cube = scene.create_mesh("cube");
+    cube->texture_id(texture->image_id());
+    cube->add_cube(sp::Color::None(), sp::Transforms::scale(2));
+
+    auto frustums = scene.create_mesh("frustums", "frustums");
+    std::vector<sp::Color> colors = {sp::Colors::Red, sp::Colors::Green, sp::Colors::Blue};
+    std::vector<std::string> paths = {"render0.png", "render1.png", "render2.png"};
+    std::vector<std::string> camera_images;
+    std::vector<std::string> images;
+
+    for(int i=0; i<3; ++i)
+    {
+        auto image = scene.create_image(paths[i]);
+        image->load(paths[i]);
+        frustums->add_camera_frustum(cameras[i], colors[i], 0.02, i + 1);
+        auto image_mesh = scene.create_mesh("image" + std::to_string(i), "images");
+        image_mesh->texture_id(image->image_id()).shared_color(sp::Colors::Gray).double_sided(true);
+        image_mesh->add_camera_image(cameras[i], i + 1);
+
+        images.push_back(image->image_id());
+        camera_images.push_back(image_mesh->mesh_id());
+    }
+
+    float width = 640;
+    for(int i=0; i<3; ++i)
+    {
+        float height = width / cameras[i].aspect_ratio();
+        auto canvas = scene.create_canvas_3d("hand" + std::to_string(i), width, height, "", cameras[i]);
+
+        auto frame = canvas->create_frame();
+        frame->add_mesh(cube);
+        frame->add_mesh(frustums);
+        frame->camera(cameras[i]);
+        for(int j=0; j<3; ++j)
+        {
+            frame->add_mesh_by_id(camera_images[j]);
+        }
+    }
+
+    scene.save_as_html("multiview.html", "Multiview");
+}
+
+
 int main(int argc, char *argv[])
 {
     scene_and_canvas_basics();
@@ -456,4 +699,8 @@ int main(int argc, char *argv[])
     canvas_2d();
     opacity_and_labels();
     animation();
+    camera_movement();
+    audio_tracks();
+    circles_video();
+    multiview();
 }
