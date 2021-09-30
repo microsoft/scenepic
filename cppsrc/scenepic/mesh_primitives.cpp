@@ -263,7 +263,8 @@ void Mesh::add_camera_frustum(const Color &color,
 
 void Mesh::add_camera_frustum(const Camera &camera,
                               const Color &color,
-                              float thickness)
+                              float thickness,
+                              float depth)
 {
     this->check_instances();
     this->check_color(color);
@@ -275,10 +276,10 @@ void Mesh::add_camera_frustum(const Camera &camera,
     Eigen::Vector3f bottom_right(1, 1, 1);
 
     Transform unprojection = camera.projection().inverse();
-    top_left = (unprojection * top_left.homogeneous()).hnormalized().normalized();
-    top_right = (unprojection * top_right.homogeneous()).hnormalized().normalized();
-    bottom_left = (unprojection * bottom_left.homogeneous()).hnormalized().normalized();
-    bottom_right = (unprojection * bottom_right.homogeneous()).hnormalized().normalized();
+    top_left = (unprojection * top_left.homogeneous()).hnormalized().normalized() * depth;
+    top_right = (unprojection * top_right.homogeneous()).hnormalized().normalized() * depth;
+    bottom_left = (unprojection * bottom_left.homogeneous()).hnormalized().normalized() * depth;
+    bottom_right = (unprojection * bottom_right.homogeneous()).hnormalized().normalized() * depth;
 
     m.add_thickline(color, eye, bottom_right, 0.4f * thickness, thickness);
     m.add_thickline(color, eye, top_right, 0.4f * thickness, thickness);
@@ -298,7 +299,7 @@ void Mesh::add_camera_frustum(const Camera &camera,
     this->append_mesh(m);
 }
 
-void Mesh::add_camera_image(const Camera &camera)
+void Mesh::add_camera_image(const Camera &camera, float depth)
 {
     this->check_instances();
     Mesh m = Mesh("").shared_color(m_shared_color).texture_id(m_texture_id);
@@ -309,10 +310,10 @@ void Mesh::add_camera_image(const Camera &camera)
     Eigen::Vector3f bottom_right(1, 1, 1);
 
     Transform unprojection = camera.projection().inverse();
-    top_left = (unprojection * top_left.homogeneous()).hnormalized().normalized();
-    top_right = (unprojection * top_right.homogeneous()).hnormalized().normalized();
-    bottom_left = (unprojection * bottom_left.homogeneous()).hnormalized().normalized();
-    bottom_right = (unprojection * bottom_right.homogeneous()).hnormalized().normalized();
+    top_left = (unprojection * top_left.homogeneous()).hnormalized().normalized() * depth;
+    top_right = (unprojection * top_right.homogeneous()).hnormalized().normalized() * depth;
+    bottom_left = (unprojection * bottom_left.homogeneous()).hnormalized().normalized() * depth;
+    bottom_right = (unprojection * bottom_right.homogeneous()).hnormalized().normalized() * depth;
 
     m.add_quad(Color::None(), top_left, top_right, bottom_right, bottom_left);
     if (!camera.camera_to_world().isIdentity())

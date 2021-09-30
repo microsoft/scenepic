@@ -247,15 +247,18 @@ public:
      *  \param camera the ScenePic Camera to visualize
      *  \param color required unless Mesh was constructed with shared_color argument.
      *  \param thickness thickness of the edges
+     *  \param depth depth of the frustum
      */
     void add_camera_frustum(const Camera &camera,
                             const Color &color = Color::None(),
-                            float thickness = 0.02f);
+                            float thickness = 0.02f,
+                            float depth = 1.0f);
 
     /** Add the image plane for a camera into the scene.
      *  \param camera the ScenePic Camera corresponding to the image
+     *  \param depth depth of the frustum
      */
-    void add_camera_image(const Camera &camera);
+    void add_camera_image(const Camera &camera, float depth = 1.0f);
 
     /** Add a x-axis aligned unit diameter disc to this Mesh.
      * \param color required unless Mesh was constructed with shared_color argument.
@@ -289,7 +292,7 @@ public:
      * \param fill_triangles whether to fill the primitive
      * \param add_wireframe whether to add a wireframe outline
      */
-    void add_sphere(const Color &color,
+    void add_sphere(const Color &color = Color::None(),
                     const Transform &transform = Transform::Identity(),
                     bool fill_triangles = true,
                     bool add_wireframe = false);
@@ -301,7 +304,7 @@ public:
      * \param fill_triangles whether to fill the primitive
      * \param add_wireframe whether to add a wireframe outline
      */
-    void add_icosphere(const Color &color,
+    void add_icosphere(const Color &color = Color::None(),
                        const Transform &transform = Transform::Identity(),
                        std::uint32_t steps = 0,
                        bool fill_triangles = true,
@@ -317,7 +320,7 @@ public:
      * \param fill_triangles whether to fill the primitive
      * \param add_wireframe whether to add a wireframe outline
      */
-    void add_uv_sphere(const Color &color,
+    void add_uv_sphere(const Color &color = Color::None(),
                        const Transform &transform = Transform::Identity(),
                        std::uint32_t lat_count = 10,
                        std::uint32_t long_count = 10,

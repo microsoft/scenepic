@@ -12,10 +12,13 @@ set( ASSETS
   blue.ogg
   circles.mp4
   cameras.json
+  rand15x15.png
+  rand30x20.png
   render0.png
   render1.png
   render2.png
   PolarBear.png
+  uv.png
 )
 
 if( WIN32 )

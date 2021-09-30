@@ -87,10 +87,10 @@ int main(int argc, char *argv[])
     {
         auto image = scene.create_image(paths[i]);
         image->load(paths[i]);
-        frustums->add_camera_frustum(cameras[i], colors[i]);
+        frustums->add_camera_frustum(cameras[i], colors[i], 0.02, i + 1);
         auto image_mesh = scene.create_mesh("image" + std::to_string(i), "images");
         image_mesh->texture_id(image->image_id()).shared_color(sp::Colors::Gray).double_sided(true);
-        image_mesh->add_camera_image(cameras[i]);
+        image_mesh->add_camera_image(cameras[i], i + 1);
 
         images.push_back(image->image_id());
         camera_images.push_back(image_mesh->mesh_id());

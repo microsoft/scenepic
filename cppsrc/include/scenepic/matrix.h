@@ -147,7 +147,7 @@ Eigen::Matrix<typename Derived::Scalar, Derived::RowsAtCompileTime, Derived::Col
 }
 
 template <typename Derived>
-Eigen::Matrix<typename Derived::Scalar, Derived::RowsAtCompileTime, Derived::ColsAtCompileTime> random(Eigen::Index rows, Eigen::Index cols, float min=0.0f, float max=1.0f)
+Eigen::Matrix<typename Derived::Scalar, Derived::RowsAtCompileTime, Derived::ColsAtCompileTime> random(Eigen::Index rows, Eigen::Index cols, float min, float max)
 {
     typedef Eigen::Matrix<typename Derived::Scalar, Derived::RowsAtCompileTime, Derived::ColsAtCompileTime> MatrixType;
     MatrixType result = MatrixType::Random(rows, cols);
@@ -156,6 +156,12 @@ Eigen::Matrix<typename Derived::Scalar, Derived::RowsAtCompileTime, Derived::Col
     result = result.array() + offset;
     result = result * scale;
     return result;
+}
+
+template <typename Derived>
+Eigen::Matrix<typename Derived::Scalar, Derived::RowsAtCompileTime, Derived::ColsAtCompileTime> random(float min, float max)
+{
+    return random(Derived::RowsAtCompileTime, Derived::ColsAtCompileTime, min, max);
 }
 
 } // namespace scenepic
