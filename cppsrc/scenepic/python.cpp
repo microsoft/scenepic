@@ -622,22 +622,24 @@ PYBIND11_MODULE(_scenepic, m)
         )scenepicdoc",
              "color"_a = Color::None(), "fov_y_degrees"_a = 45.0f, "aspect_ratio"_a = 16.0f / 9.0f,
              "depth"_a = 1.0f, "thickness"_a = 0.02f, "transform"_a = Transform::Identity())
-        .def("add_camera_frustum", py::overload_cast<const Camera &, const Color&, float>(&Mesh::add_camera_frustum), R"scenepicdoc(
+        .def("add_camera_frustum", py::overload_cast<const Camera &, const Color&, float, float>(&Mesh::add_camera_frustum), R"scenepicdoc(
             Add a camera frustum visualization to this Mesh.
 
             Args:
                 camera (Camera, optional): the camera to use for the frustum
                 color (np.ndarray, optional): required unless Mesh was constructed with shared_color argument. Defaults to None.
                 thickness (float, optional): thickness of the edges. Defaults to 0.02.
+                depth (float, optional): depth of the frustum. Defaults to 1.0.
         )scenepicdoc",
-            "camera"_a, "color"_a = Color::None(), "thickness"_a = 0.02f)
+            "camera"_a, "color"_a = Color::None(), "thickness"_a = 0.02f, "depth"_a = 1.0f)
         .def("add_camera_image", &Mesh::add_camera_image, R"scenepicdoc(
              Add the image plane for a camera into the scene.
 
              Args:
-                camera the ScenePic Camera corresponding to the image. 
+                camera (Camera, optional): the ScenePic Camera corresponding to the image. 
+                depth (float, optional): depth of the frustum. Defaults to 1.0.
         )scenepicdoc",
-            "camera"_a)
+            "camera"_a, "depth"_a=1.0f)
         .def("add_disc", &Mesh::add_disc, R"scenepicdoc(
             Add a x-axis aligned unit diameter disc to this Mesh.
 
