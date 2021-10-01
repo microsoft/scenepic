@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ScenePic: 3D Visualization Made Easy &mdash; scenepic 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API" href="api.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="#" class="icon icon-home"> scenepic
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">scenepic</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+      <li>ScenePic: 3D Visualization Made Easy</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="scenepic-3d-visualization-made-easy">
+<h1>ScenePic: 3D Visualization Made Easy<a class="headerlink" href="#scenepic-3d-visualization-made-easy" title="Permalink to this headline"></a></h1>
+<p>© Microsoft 2021</p>
+<p>Primary Contact: &lt;<a class="reference external" href="mailto:matjoh&#37;&#52;&#48;microsoft&#46;com">matjoh<span>&#64;</span>microsoft<span>&#46;</span>com</a>&gt;</p>
+<p>All platforms have good support for 2D images, with well-recognized formats
+such as PNG and JPEG that can be viewed out of the box (no installation)
+and shared trivially.</p>
+<p>However, while many formats exist for 3D data, none are well-supported
+without installation of tools such as MeshLab, Blender, etc.</p>
+<p>ScenePic was created for 3D computer vision researchers such as those
+working on [HoloLens](<a class="reference external" href="https://www.microsoft.com/en-gb/hololens">https://www.microsoft.com/en-gb/hololens</a>)
+and [Mesh](<a class="reference external" href="https://www.microsoft.com/en-us/mesh">https://www.microsoft.com/en-us/mesh</a>) at Microsoft.
+It was designed to be a lightweight, reuseable 3D visualization
+library, with the following desiderata in mind:</p>
+<ul class="simple">
+<li><p>Make experimentation with 3D data near effortless</p></li>
+<li><p>Incredibly easy to create and share 3D results</p>
+<ul>
+<li><p>zero-install sharing of detailed 3D results using HTML</p></li>
+<li><p>based on modern web standards so usable with any modern browser</p></li>
+<li><p>embeddable in other HTML documents</p></li>
+</ul>
+</li>
+<li><p>Performant</p>
+<ul>
+<li><p>based on WebGL</p></li>
+</ul>
+</li>
+<li><p>High quality visuals</p></li>
+<li><p>Works both offline or interactively in client-server setup</p></li>
+<li><p>Simple, clean API</p>
+<ul>
+<li><p>friendly Python front-end</p></li>
+<li><p>basic mesh json file format</p></li>
+<li><p>other language front ends easy to add</p></li>
+</ul>
+</li>
+</ul>
+<img alt="_images/example_render.png" src="_images/example_render.png" />
+<section id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="sd">&quot;&quot;&quot;Example script demonstrating the basic ScenePic functionality.&quot;&quot;&quot;</span>
+<span class="linenos">  2</span>
+<span class="linenos">  3</span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="linenos">  4</span><span class="kn">import</span> <span class="nn">scenepic</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="linenos">  5</span>
+<span class="linenos">  6</span>
+<span class="linenos">  7</span><span class="k">def</span> <span class="nf">_main</span><span class="p">():</span>
+<span class="linenos">  8</span>    <span class="c1"># when we build a ScenePic we are essentially building a web</span>
+<span class="linenos">  9</span>    <span class="c1"># page, and the ScenePic will automatically populate parts of</span>
+<span class="linenos"> 10</span>    <span class="c1"># that webpage.</span>
+<span class="linenos"> 11</span>
+<span class="linenos"> 12</span>    <span class="c1"># the scene object acts as the root of the entire ScenePic environment</span>
+<span class="linenos"> 13</span>    <span class="n">scene</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Scene</span><span class="p">()</span>
+<span class="linenos"> 14</span>
+<span class="linenos"> 15</span>    <span class="c1"># you can use it to create one or more canvases to display 3D or 2D</span>
+<span class="linenos"> 16</span>    <span class="c1"># objects. Canvas objects display Frames. For a static ScenePic, there</span>
+<span class="linenos"> 17</span>    <span class="c1"># will only be a single Frame, but you can use multiple frames to create</span>
+<span class="linenos"> 18</span>    <span class="c1"># an animation or to display a range of visualizations in the same visual</span>
+<span class="linenos"> 19</span>    <span class="c1"># space. We will create one 3D canvas to display the full scene, and then</span>
+<span class="linenos"> 20</span>    <span class="c1"># some 2D canvases which will show projections of the scene.</span>
+<span class="linenos"> 21</span>    <span class="n">main</span> <span class="o">=</span> <span class="n">scene</span><span class="o">.</span><span class="n">create_canvas_3d</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+<span class="linenos"> 22</span>    <span class="n">projx</span> <span class="o">=</span> <span class="n">scene</span><span class="o">.</span><span class="n">create_canvas_2d</span><span class="p">(</span><span class="s2">&quot;projx&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="linenos"> 23</span>    <span class="n">projy</span> <span class="o">=</span> <span class="n">scene</span><span class="o">.</span><span class="n">create_canvas_2d</span><span class="p">(</span><span class="s2">&quot;projy&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="linenos"> 24</span>    <span class="n">projz</span> <span class="o">=</span> <span class="n">scene</span><span class="o">.</span><span class="n">create_canvas_2d</span><span class="p">(</span><span class="s2">&quot;projz&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="linenos"> 25</span>
+<span class="linenos"> 26</span>    <span class="c1"># the scene object is also used to create Mesh objects that will be added</span>
+<span class="linenos"> 27</span>    <span class="c1"># to frames. We are going to create an animation of some spheres orbiting</span>
+<span class="linenos"> 28</span>    <span class="c1"># a fixed cube, so let&#39;s create a default unit cube to start.</span>
+<span class="linenos"> 29</span>    <span class="n">cube</span> <span class="o">=</span> <span class="n">scene</span><span class="o">.</span><span class="n">create_mesh</span><span class="p">(</span><span class="s2">&quot;cube&quot;</span><span class="p">)</span>
+<span class="linenos"> 30</span>
+<span class="linenos"> 31</span>    <span class="c1"># the Mesh object has a variety of methods for adding primitive objects</span>
+<span class="linenos"> 32</span>    <span class="c1"># or loading arbitrary mesh geometry. In this example, we will just</span>
+<span class="linenos"> 33</span>    <span class="c1"># be using primitives, but the python tutorial shows all the various</span>
+<span class="linenos"> 34</span>    <span class="c1"># methods for adding geometry to a mesh.</span>
+<span class="linenos"> 35</span>    <span class="n">cube</span><span class="o">.</span><span class="n">add_cube</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">sp</span><span class="o">.</span><span class="n">Colors</span><span class="o">.</span><span class="n">White</span><span class="p">)</span>
+<span class="linenos"> 36</span>
+<span class="linenos"> 37</span>    <span class="c1"># let&#39;s create our spheres as well, using some different colors</span>
+<span class="linenos"> 38</span>    <span class="n">sphere_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">]</span>
+<span class="linenos"> 39</span>    <span class="n">sphere_colors</span> <span class="o">=</span> <span class="p">[</span><span class="n">sp</span><span class="o">.</span><span class="n">Colors</span><span class="o">.</span><span class="n">Red</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">Colors</span><span class="o">.</span><span class="n">Green</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">Colors</span><span class="o">.</span><span class="n">Blue</span><span class="p">]</span>
+<span class="linenos"> 40</span>    <span class="n">spheres</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos"> 41</span>    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">sphere_names</span><span class="p">,</span> <span class="n">sphere_colors</span><span class="p">):</span>
+<span class="linenos"> 42</span>        <span class="c1"># by placing each sphere on a different layer, we can toggle them on and off</span>
+<span class="linenos"> 43</span>        <span class="n">sphere</span> <span class="o">=</span> <span class="n">scene</span><span class="o">.</span><span class="n">create_mesh</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">_sphere&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">),</span> <span class="n">layer_id</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+<span class="linenos"> 44</span>        <span class="n">sphere</span><span class="o">.</span><span class="n">add_sphere</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">sp</span><span class="o">.</span><span class="n">Transforms</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
+<span class="linenos"> 45</span>        <span class="n">spheres</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sphere</span><span class="p">)</span>
+<span class="linenos"> 46</span>
+<span class="linenos"> 47</span>    <span class="c1"># now we will iteratively create each frame of the animation.</span>
+<span class="linenos"> 48</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">180</span><span class="p">):</span>
+<span class="linenos"> 49</span>        <span class="c1"># first we create a frame object. This will be used to populate</span>
+<span class="linenos"> 50</span>        <span class="c1"># the 3D canvas.</span>
+<span class="linenos"> 51</span>        <span class="n">main_frame</span> <span class="o">=</span> <span class="n">main</span><span class="o">.</span><span class="n">create_frame</span><span class="p">()</span>
+<span class="linenos"> 52</span>
+<span class="linenos"> 53</span>        <span class="c1"># Now that we have a frame, we can add the cube mesh to the frame</span>
+<span class="linenos"> 54</span>        <span class="n">main_frame</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">cube</span><span class="p">)</span>
+<span class="linenos"> 55</span>
+<span class="linenos"> 56</span>        <span class="c1"># Next, we add the spheres. ScenePic has a variety of useful tools</span>
+<span class="linenos"> 57</span>        <span class="c1"># for operating on 3D data. Some of the most useful enable us to</span>
+<span class="linenos"> 58</span>        <span class="c1"># create transforms to move meshes around. Let&#39;s create the</span>
+<span class="linenos"> 59</span>        <span class="c1"># transforms for our three rotating spheres and add them to the frame.</span>
+<span class="linenos"> 60</span>        <span class="c1"># NB The Python interface uses numpy for matrices and vectors.</span>
+<span class="linenos"> 61</span>        <span class="n">positions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.3</span><span class="p">,</span>
+<span class="linenos"> 62</span>                                    <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)],</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos"> 63</span>        <span class="n">inc</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">180</span>
+<span class="linenos"> 64</span>        <span class="n">positions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Transforms</span><span class="o">.</span><span class="n">RotationAboutYAxis</span><span class="p">(</span><span class="n">inc</span> <span class="o">*</span> <span class="n">i</span><span class="p">)</span> <span class="o">@</span> <span class="n">positions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">T</span>
+<span class="linenos"> 65</span>        <span class="n">positions</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Transforms</span><span class="o">.</span><span class="n">RotationAboutZAxis</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">inc</span> <span class="o">*</span> <span class="n">i</span><span class="p">)</span> <span class="o">@</span> <span class="n">positions</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">T</span>
+<span class="linenos"> 66</span>        <span class="n">positions</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Transforms</span><span class="o">.</span><span class="n">RotationAboutXAxis</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">inc</span> <span class="o">*</span> <span class="n">i</span><span class="p">)</span> <span class="o">@</span> <span class="n">positions</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">T</span>
+<span class="linenos"> 67</span>        <span class="n">positions</span> <span class="o">=</span> <span class="n">positions</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<span class="linenos"> 68</span>        <span class="k">for</span> <span class="n">sphere</span><span class="p">,</span> <span class="n">position</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">spheres</span><span class="p">,</span> <span class="n">positions</span><span class="p">):</span>
+<span class="linenos"> 69</span>            <span class="n">transform</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Transforms</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
+<span class="linenos"> 70</span>            <span class="n">main_frame</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">sphere</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">transform</span><span class="p">)</span>
+<span class="linenos"> 71</span>
+<span class="linenos"> 72</span>        <span class="c1"># now we&#39;ll populate our projections</span>
+<span class="linenos"> 73</span>        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">proj</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">projx</span><span class="p">,</span> <span class="n">projy</span><span class="p">,</span> <span class="n">projz</span><span class="p">]):</span>
+<span class="linenos"> 74</span>            <span class="n">proj_frame</span> <span class="o">=</span> <span class="n">proj</span><span class="o">.</span><span class="n">create_frame</span><span class="p">()</span>
+<span class="linenos"> 75</span>
+<span class="linenos"> 76</span>            <span class="c1"># 2D frames work in pixels (as oppose to world units) so we need</span>
+<span class="linenos"> 77</span>            <span class="c1"># to convert positions to pixels.</span>
+<span class="linenos"> 78</span>            <span class="n">proj_frame</span><span class="o">.</span><span class="n">add_rectangle</span><span class="p">(</span><span class="mi">75</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">fill_color</span><span class="o">=</span><span class="n">sp</span><span class="o">.</span><span class="n">Colors</span><span class="o">.</span><span class="n">White</span><span class="p">)</span>
+<span class="linenos"> 79</span>            <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">:]</span>
+<span class="linenos"> 80</span>            <span class="n">points</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="linenos"> 81</span>            <span class="n">points</span> <span class="o">=</span> <span class="n">points</span> <span class="o">*</span> <span class="mi">50</span> <span class="o">+</span> <span class="mi">100</span>
+<span class="linenos"> 82</span>
+<span class="linenos"> 83</span>            <span class="k">for</span> <span class="n">point</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">sphere_colors</span><span class="p">):</span>
+<span class="linenos"> 84</span>                <span class="n">proj_frame</span><span class="o">.</span><span class="n">add_circle</span><span class="p">(</span><span class="n">point</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">point</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mf">12.5</span><span class="p">,</span> <span class="n">fill_color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+<span class="linenos"> 85</span>
+<span class="linenos"> 86</span>            <span class="c1"># let&#39;s add some label text</span>
+<span class="linenos"> 87</span>            <span class="n">proj_frame</span><span class="o">.</span><span class="n">add_text</span><span class="p">(</span><span class="n">proj</span><span class="o">.</span><span class="n">canvas_id</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">190</span><span class="p">,</span> <span class="n">size_in_pixels</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="linenos"> 88</span>
+<span class="linenos"> 89</span>    <span class="c1"># this will make user interactions happen to all canvases simultaneously</span>
+<span class="linenos"> 90</span>    <span class="n">scene</span><span class="o">.</span><span class="n">link_canvas_events</span><span class="p">(</span><span class="n">main</span><span class="p">,</span> <span class="n">projx</span><span class="p">,</span> <span class="n">projy</span><span class="p">,</span> <span class="n">projz</span><span class="p">)</span>
+<span class="linenos"> 91</span>
+<span class="linenos"> 92</span>    <span class="c1"># ScenePic provides some useful layout controls by exposing CSS grid commands</span>
+<span class="linenos"> 93</span>    <span class="n">scene</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s2">&quot;800px&quot;</span><span class="p">,</span> <span class="n">grid_template_rows</span><span class="o">=</span><span class="s2">&quot;200px 200px 200px&quot;</span><span class="p">,</span> <span class="n">grid_template_columns</span><span class="o">=</span><span class="s2">&quot;600px 200px&quot;</span><span class="p">)</span>
+<span class="linenos"> 94</span>    <span class="n">scene</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">main</span><span class="o">.</span><span class="n">canvas_id</span><span class="p">,</span> <span class="s2">&quot;1 / span 3&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">)</span>
+<span class="linenos"> 95</span>    <span class="n">scene</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">projx</span><span class="o">.</span><span class="n">canvas_id</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">)</span>
+<span class="linenos"> 96</span>    <span class="n">scene</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">projy</span><span class="o">.</span><span class="n">canvas_id</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">)</span>
+<span class="linenos"> 97</span>    <span class="n">scene</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">projz</span><span class="o">.</span><span class="n">canvas_id</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">)</span>
+<span class="linenos"> 98</span>
+<span class="linenos"> 99</span>    <span class="c1"># The scene is complete, so we write it to a standalone HTML file.</span>
+<span class="linenos">100</span>    <span class="n">scene</span><span class="o">.</span><span class="n">save_as_html</span><span class="p">(</span><span class="s2">&quot;getting_started.html&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Getting Started&quot;</span><span class="p">)</span>
+<span class="linenos">101</span>
+<span class="linenos">102</span>
+<span class="linenos">103</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="linenos">104</span>    <span class="n">_main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The resulting ScenePic looks like this:</p>
+<img alt="_images/getting_started.gif" src="_images/getting_started.gif" />
+</section>
+<section id="using-the-html-client">
+<h2>Using the HTML Client<a class="headerlink" href="#using-the-html-client" title="Permalink to this headline"></a></h2>
+<img alt="_images/scenepic_ui.png" src="_images/scenepic_ui.png" />
+<p>A ScenePic HTML page will look something like the image above. This example shows
+four <em>Canvas</em> objects, each of which contains several <em>Frame</em> objects (refering under the
+hood to a set of <em>Mesh</em> objects).</p>
+<p>The UI supports standard 3D mouse controls (drag to rotate, shift-drag to
+translate in xy, mousewheel to translate in z) to move the viewport camera.
+On touch screens: single finger to rotate, two fingers to translate in xyz.
+You can slow any of the mouse controls by holding down the Alt key. If you
+accidentally transform the camera too wildly, you can reset by pressing ‘r’.</p>
+<p>In the top right of each canvas a <em>Layer</em> control will appear.
+This allows the user to toggle certain layers of meshes on and off
+interactively.</p>
+<p>Each <em>Frame</em> for a 3D canvas has an associated <em>Focus Point</em> - a 3D
+location about which the camera rotates.  You can view the <em>Focus Point</em> by
+holding down the ‘``’ (backtick) key, and while holding this down it can be
+translated using the mouse.  If you press ‘l’ then the camera is ‘locked’ to the focus
+point in xy, though you can still rotate and translate in z.  Locking to
+the focus point is particularly useful to center useful content in
+animations where the focus point can be different in each frame. You
+can also toggle the camera automatically orbiting the focus point by
+pressing ‘\’.</p>
+<p>For <em>Scene</em> objects that contain many frames, you can control animation by
+pressing the spacebar to play/pause or by using the playback control
+widget.  You can also use the scrollbar to select different frames.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#scene">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#d-graphics">3D Graphics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html">Canvas3D</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#frame3d">Frame3D</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#mesh">Mesh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#meshupdate">MeshUpdate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#meshinfo">MeshInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#vertexbuffer">VertexBuffer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#camera">Camera</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#focuspoint">FocusPoint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#shading">Shading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#transforms">Transforms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#label">Label</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#loopsubdivisionstencil">LoopSubdivisionStencil</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#id2">2D Graphics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="graphics2d.html">Canvas2D</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics2d.html#frame2d">Frame2D</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics2d.html#graph">Graph</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#user-interface">User Interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ui.html">LayerSettings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ui.html#dropdownmenu">DropDownMenu</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ui.html#textpanel">TextPanel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ui.html#uiparameters">UIParameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#media">Media</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="media.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="media.html#audiotrack">AudioTrack</a></li>
+<li class="toctree-l3"><a class="reference internal" href="media.html#video">Video</a></li>
+<li class="toctree-l3"><a class="reference internal" href="media.html#videowriter">VideoWriter</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#color">Color</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="api.html" class="btn btn-neutral float-right" title="API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Microsoft.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

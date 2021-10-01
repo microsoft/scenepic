@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API &mdash; scenepic 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Canvas3D" href="graphics3d.html" />
+    <link rel="prev" title="ScenePic: 3D Visualization Made Easy" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> scenepic
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#scene">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#d-graphics">3D Graphics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html">Canvas3D</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#frame3d">Frame3D</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#mesh">Mesh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#meshupdate">MeshUpdate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#meshinfo">MeshInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#vertexbuffer">VertexBuffer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#camera">Camera</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#focuspoint">FocusPoint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#shading">Shading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#transforms">Transforms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#label">Label</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#loopsubdivisionstencil">LoopSubdivisionStencil</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">2D Graphics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="graphics2d.html">Canvas2D</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics2d.html#frame2d">Frame2D</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics2d.html#graph">Graph</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#user-interface">User Interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ui.html">LayerSettings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ui.html#dropdownmenu">DropDownMenu</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ui.html#textpanel">TextPanel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ui.html#uiparameters">UIParameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#media">Media</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="media.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="media.html#audiotrack">AudioTrack</a></li>
+<li class="toctree-l3"><a class="reference internal" href="media.html#video">Video</a></li>
+<li class="toctree-l3"><a class="reference internal" href="media.html#videowriter">VideoWriter</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#color">Color</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">scenepic</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>API</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="api">
+<span id="id1"></span><h1>API<a class="headerlink" href="#api" title="Permalink to this headline"></a></h1>
+<span class="target" id="module-scenepic"></span><p>This part of the documentation covers all the interfaces of ScenePic.</p>
+<section id="scene">
+<h2>Scene<a class="headerlink" href="#scene" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="scenepic.Scene">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">Scene</span></span><a class="headerlink" href="#scenepic.Scene" title="Permalink to this definition"></a></dt>
+<dd><p>Top level container representing an entire ScenePic Scene.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>scene_id</strong> (<em>str</em><em>, </em><em>optional</em>) – a unique identifier for the Scene (will be
+automatically populated if not provided). Defaults to None.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="scenepic.Scene.clear_script">
+<span class="sig-name descname"><span class="pre">clear_script</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.clear_script" title="Permalink to this definition"></a></dt>
+<dd><p>Call this if you are dumping a ScenePic script in multiple parts,
+e.g. for client-server interactions, or when chunking a large
+visualization into multiple files. Immediately after this, a
+call to get_script() will returnempty.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scenepic.Scene.configure_user_interface">
+<span class="sig-name descname"><span class="pre">configure_user_interface</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.configure_user_interface" title="Permalink to this definition"></a></dt>
+<dd><p>Set user interface parameters across all Canvases with given
+UIParameters instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ui_parameters</strong> (<a class="reference internal" href="ui.html#scenepic.UIParameters" title="scenepic.UIParameters"><em>UIParameters</em></a>) – global UI parameters to set</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scenepic.Scene.create_audio">
+<span class="sig-name descname"><span class="pre">create_audio</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.create_audio" title="Permalink to this definition"></a></dt>
+<dd><p>Create a new AudioTrack object and append it to the Scene.
+Audio tracks are Scene-wide resources that can be attached to multiple canvases.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>audio_id</strong> (<em>str</em><em>, </em><em>optional</em>) – a unique identifier for the Audio track (will be
+automatically populated if not provided). Defaults to None.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a reference to an Audio track object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="media.html#scenepic.AudioTrack" title="scenepic.AudioTrack">AudioTrack</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scenepic.Scene.create_canvas_2d">
+<span class="sig-name descname"><span class="pre">create_canvas_2d</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.create_canvas_2d" title="Permalink to this definition"></a></dt>
+<dd><p>Create a new 2D Canvas and append to the Scene.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>canvas_id</strong> (<em>str</em><em>, </em><em>optional</em>) – a unique identifier for the Canvas (will be
+automatically populated if not provided). Defaults to None.</p></li>
+<li><p><strong>width</strong> (<em>int</em><em>, </em><em>optional</em>) – the width in pixels of the Canvas on the HTML page. Defaults to 400.</p></li>
+<li><p><strong>height</strong> (<em>int</em><em>, </em><em>optional</em>) – the height in pixels of the Canvas on the HTML page. Defaults to 400.</p></li>
+<li><p><strong>html_id</strong> (<em>str</em><em>, </em><em>optional</em>) – id of an HTML element to use as this
+Canvas’s parent in the HTML DOM (otherwise simply
+appended to document). Defaults to None.</p></li>
+<li><p><strong>background_color</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – the background color of the canvas. Defaults to Black.</p></li>
+<li><p><strong>media_id</strong> (<em>str</em><em>, </em><em>optional</em>) – optional ID of a media file to attach to the canvas. This file will be
+used to drive playback, i.e. frames will be displayed in time with
+the playback of the media file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a reference to the new Canvas object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="graphics2d.html#scenepic.Canvas2D" title="scenepic.Canvas2D">Canvas2D</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scenepic.Scene.create_canvas_3d">
+<span class="sig-name descname"><span class="pre">create_canvas_3d</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.create_canvas_3d" title="Permalink to this definition"></a></dt>
+<dd><p>Create a new 3D Canvas and append to the Scene.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>canvas_id</strong> (<em>str</em><em>, </em><em>optional</em>) – a unique identifier for the Canvas (will be
+automatically populated if not provided). Defaults to None.</p></li>
+<li><p><strong>width</strong> (<em>int</em><em>, </em><em>optional</em>) – the width in pixels of the Canvas on the HTML page. Defaults to 400.</p></li>
+<li><p><strong>height</strong> (<em>int</em><em>, </em><em>optional</em>) – the height in pixels of the Canvas on the HTML page. Defaults to 400.</p></li>
+<li><p><strong>html_id</strong> (<em>str</em><em>, </em><em>optional</em>) – id of an HTML element to use as this
+Canvas’s parent in the HTML DOM (otherwise simply
+appended to document). Defaults to None.</p></li>
+<li><p><strong>camera</strong> (<a class="reference internal" href="graphics3d.html#scenepic.Camera" title="scenepic.Camera"><em>Camera</em></a><em>, </em><em>optional</em>) – Camera parameters for the Canvas. See <cite>Camera</cite> for defaults.</p></li>
+<li><p><strong>shading</strong> (<a class="reference internal" href="graphics3d.html#scenepic.Shading" title="scenepic.Shading"><em>Shading</em></a><em>, </em><em>optional</em>) – Set of Shading parameters for the Canvas. See <cite>Shading</cite> for defaults.</p></li>
+<li><p><strong>ui_parameters</strong> (<a class="reference internal" href="ui.html#scenepic.UIParameters" title="scenepic.UIParameters"><em>UIParameters</em></a><em>, </em><em>optional</em>) – Set of user interface parameters. See <cite>UIParameters</cite> for
+defaults.</p></li>
+<li><p><strong>media_id</strong> (<em>str</em><em>, </em><em>optional</em>) – optional ID of a media file to attach to the canvas. This file will be
+used to drive playback, i.e. frames will be displayed in time with
+the playback of the media file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a reference to the new Canvas object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="graphics3d.html#scenepic.Canvas3D" title="scenepic.Canvas3D">Canvas3D</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scenepic.Scene.create_drop_down_menu">
+<span class="sig-name descname"><span class="pre">create_drop_down_menu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.create_drop_down_menu" title="Permalink to this definition"></a></dt>
+<dd><p>Create a new DropDownMenu and add directly to the HTML page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>drop_down_menu_id</strong> (<em>str</em><em>, </em><em>optional</em>) – a unique identifier for the DropDownMenu
+(will be automatically populated if not
+provided). Defaults to None.</p></li>
+<li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – a title for the drop down box. Defaults to None.</p></li>
+<li><p><strong>html_id</strong> (<em>str</em><em>, </em><em>optional</em>) – optional id of an HTML element to use as this
+TextPanel’s parent in the HTML DOM (otherwise
+will simply be appended to document). Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a reference to the new DropDownMenu object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="ui.html#scenepic.DropDownMenu" title="scenepic.DropDownMenu">DropDownMenu</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scenepic.Scene.create_graph">
+<span class="sig-name descname"><span class="pre">create_graph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.create_graph" title="Permalink to this definition"></a></dt>
+<dd><p>Create a new Graph canvas and append to the Scene.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>canvas_id</strong> (<em>str</em><em>, </em><em>optional</em>) – a unique identifier for the Canvas (will be
+automatically populated if not provided). Defaults to None.</p></li>
+<li><p><strong>width</strong> (<em>int</em><em>, </em><em>optional</em>) – the width in pixels of the Canvas on the HTML page. Defaults to 400.</p></li>
+<li><p><strong>height</strong> (<em>int</em><em>, </em><em>optional</em>) – the height in pixels of the Canvas on the HTML page. Defaults to 400.</p></li>
+<li><p><strong>html_id</strong> (<em>str</em><em>, </em><em>optional</em>) – id of an HTML element to use as this
+Canvas’s parent in the HTML DOM (otherwise simply
+appended to document). Defaults to None.</p></li>
+<li><p><strong>background_color</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – the background color of the canvas. Defaults to White.</p></li>
+<li><p><strong>margin</strong> (<em>Margin</em><em>, </em><em>optional</em>) – the outer margin of the graph. Defaults to Margin(10).</p></li>
+<li><p><strong>font_family</strong> (<em>str</em><em>, </em><em>optional</em>) – the font family used for the graph labels. Defaults to “sans-serif”.</p></li>
+<li><p><strong>text_size</strong> (<em>float</em><em>, </em><em>optional</em>) – the text size in pixels used for the graph labels. Defaults to 12.0.</p></li>
+<li><p><strong>media_id</strong> (<em>str</em><em>, </em><em>optional</em>) – optional ID of a media file to attach to the canvas. This file will be
+used to drive playback, i.e. frames will be displayed in time with
+the playback of the media file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a reference to the new Graph object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="graphics2d.html#scenepic.Graph" title="scenepic.Graph">Graph</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scenepic.Scene.create_image">
+<span class="sig-name descname"><span class="pre">create_image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.create_image" title="Permalink to this definition"></a></dt>
+<dd><p>Create a new Image and append to the Scene.
+Images are Scene-wide resources that can be reused as textures
+across multiple Meshes and Frame2Ds.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image_id</strong> (<em>str</em><em>, </em><em>optional</em>) – a unique identifier for the Image (will be
+automatically populated if not provided). Defaults to None.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a reference to the Image object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="media.html#scenepic.Image" title="scenepic.Image">Image</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scenepic.Scene.create_label">
+<span class="sig-name descname"><span class="pre">create_label</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.create_label" title="Permalink to this definition"></a></dt>
+<dd><p>Create a new Label and append to the Scene.
+Labels are Scene-wide resources that can be reused across
+multiple Meshes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>label_id</strong> (<em>str</em><em>, </em><em>optional</em>) – a unique identifier for the Label (will be
+automatically populated if not provided). Defaults to None.</p></li>
+<li><p><strong>text</strong> (<em>str</em><em>, </em><em>optional</em>) – the text to use in the label. Defaults to “Text”.</p></li>
+<li><p><strong>color</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – the color to use. Defaults to White.</p></li>
+<li><p><strong>size_in_pixels</strong> (<em>float</em><em>, </em><em>optional</em>) – the size in pixels to display the label at. Defaults to 12.0.</p></li>
+<li><p><strong>font_family</strong> (<em>str</em><em>, </em><em>optional</em>) – HTML font family name. Defaults to “sans-serif”.</p></li>
+<li><p><strong>layer_id</strong> (<em>str</em><em>, </em><em>optional</em>) – an identifier to allow several labels to be grouped together
+into a “layer”.  Layers should be used in conjunction with
+Canvas3D.set_layer_settings(). Defaults to None.</p></li>
+<li><p><strong>horizontal_align</strong> (<em>str</em><em>, </em><em>optional</em>) – one of ‘left’, ‘center’, ‘right’. how to align the
+label horizontally. Defaults to “left”.</p></li>
+<li><p><strong>vertical_align</strong> (<em>str</em><em>, </em><em>optional</em>) – one of ‘top’, ‘middle’, ‘bottom’. how to align the
+label vertically. Defaults to “middle”.</p></li>
+<li><p><strong>offset_distance</strong> (<em>float</em><em>, </em><em>optional</em>) – distance in world space to offset the label by when
+using left/right/top/bottom alignment. Defaults to 0.1.</p></li>
+<li><p><strong>camera_space</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether the label should be created in
+camera space. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a reference to the new Label object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="graphics3d.html#scenepic.Label" title="scenepic.Label">Label</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scenepic.Scene.create_mesh">
+<span class="sig-name descname"><span class="pre">create_mesh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mesh_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.create_mesh" title="Permalink to this definition"></a></dt>
+<dd><p>Create a new Mesh and append to the Scene.</p>
+<dl class="simple">
+<dt>Description:</dt><dd><p>Meshes are Scene-wide resources that can be reused across multiple
+Frames in multiple Canvas3Ds.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mesh_id</strong> (<em>str</em><em>, </em><em>optional</em>) – a unique identifier for the Mesh (will be
+automatically populated if not provided). Defaults to None.</p></li>
+<li><p><strong>layer_id</strong> (<em>str</em><em>, </em><em>optional</em>) – an identifier to allow several Meshes to be grouped together
+into a “layer”.  Layers should be used in conjunction with
+Canvas3D.set_layer_settings(). Defaults to None.</p></li>
+<li><p><strong>double_sided</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether to turn off back face culling and draw the Mesh’s
+triangles as double sided. Defaults to False.</p></li>
+<li><p><strong>camera_space</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether this Mesh is defined in camera space (cannot
+be moved in the ScenePic user interface) or world space (standard).
+Defaults to False.</p></li>
+<li><p><strong>shared_color</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – see <cite>Mesh</cite> constructor.</p></li>
+<li><p><strong>texture_id</strong> (<em>str</em><em>, </em><em>optional</em>) – see <cite>Mesh</cite> constructor.</p></li>
+<li><p><strong>nn_texture</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether the shader should use nearest-neighbor
+texture interpolation. Defaults to True.</p></li>
+<li><p><strong>use_texture_alpha</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether to use the alpha channel in the texture
+for transparency (only relevant for textured Meshes).
+Defaults to True.</p></li>
+<li><p><strong>is_billboard</strong> (<em>bool</em><em>, </em><em>optional</em>) – draw this Mesh as a billboard (i.e. always facing the user)
+rather than rotating with the rest of the world. Defaults to False.</p></li>
+<li><p><strong>is_label</strong> (<em>bool</em><em>, </em><em>optional</em>) – this mesh will be treated specially as a label. Not for public use.
+Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a reference to the new Mesh object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="graphics3d.html#scenepic.Mesh" title="scenepic.Mesh">Mesh</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scenepic.Scene.create_text_panel">
+<span class="sig-name descname"><span class="pre">create_text_panel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.create_text_panel" title="Permalink to this definition"></a></dt>
+<dd><p>Create a new TextPanel and add directly to the HTML page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text_panel_id</strong> (<em>str</em><em>, </em><em>optional</em>) – a unique identifier for the TextPanel (will be
+automatically populated if not provided). Defaults to None.</p></li>
+<li><p><strong>html_id</strong> (<em>str</em><em>, </em><em>optional</em>) – optional id of an HTML element to use as this
+TextPanel’s parent in the HTML DOM (otherwise will
+simply be appended to document). Defaults to None.</p></li>
+<li><p><strong>add_input_box</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether to add an input box to the TextPanel. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a reference to the new TextPanel object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scenepic.Scene.create_video">
+<span class="sig-name descname"><span class="pre">create_video</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.create_video" title="Permalink to this definition"></a></dt>
+<dd><p>Create a new Video object and append it to the Scene.
+Videos are Scene-wide resources that can be attached to multiple canvases.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>video_id</strong> (<em>str</em><em>, </em><em>optional</em>) – a unique identifier for the Video (will be
+automatically populated if not provided). Defaults to None.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a reference to an Video object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="media.html#scenepic.Video" title="scenepic.Video">Video</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="scenepic.Scene.framerate">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">framerate</span></span><a class="headerlink" href="#scenepic.Scene.framerate" title="Permalink to this definition"></a></dt>
+<dd><p>Number of frames to display per second</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scenepic.Scene.get_json">
+<span class="sig-name descname"><span class="pre">get_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.get_json" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a JSON-serialized representation of the Scene as a string.</p>
+<p>If you use clear_script() then this will return updates to
+the Scene since thelast call to clear_script().</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a JSON string representing the Scene</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scenepic.Scene.get_script">
+<span class="sig-name descname"><span class="pre">get_script</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.get_script" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a JSONP (<a class="reference external" href="https://en.wikipedia.org/wiki/JSONP">https://en.wikipedia.org/wiki/JSONP</a>) script
+representing the Scene.
+If you use clear_script() then this will return updates to
+the Scene since the last call to clear_script().</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a JSONP script representing the Scene</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scenepic.Scene.grid">
+<span class="sig-name descname"><span class="pre">grid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.grid" title="Permalink to this definition"></a></dt>
+<dd><p>Defines a CSS layout grid for the canvases of the ScenePic.</p>
+<dl class="simple">
+<dt>Description:</dt><dd><p>Should not be used in conjunction with <cite>html_id</cite> for individual canvases. See
+<a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout">https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout</a> for more information.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>width</strong> (<em>str</em>) – CSS declaration for the width of the ScenePic.</p></li>
+<li><p><strong>grid_template_rows</strong> (<em>str</em>) – CSS declaration defining the rows of the ScenePic</p></li>
+<li><p><strong>grid_template_columns</strong> (<em>str</em>) – CSS declaration defining the columns of the ScenePic</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scenepic.Scene.link_canvas_events">
+<span class="sig-name descname"><span class="pre">link_canvas_events</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">canvases</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.link_canvas_events" title="Permalink to this definition"></a></dt>
+<dd><p>Specify that all input events should be linked across the provided set of Canvases.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>self</strong> (<a class="reference internal" href="#scenepic.Scene" title="scenepic.Scene"><em>Scene</em></a>) – self reference</p></li>
+<li><p><strong>canvases</strong> – the canvases which should have linked events</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scenepic.Scene.measure_command_size">
+<span class="sig-name descname"><span class="pre">measure_command_size</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.measure_command_size" title="Permalink to this definition"></a></dt>
+<dd><p>Measures the number of bytes used by command type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the number of bytes per command type</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Mapping[str, int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scenepic.Scene.place">
+<span class="sig-name descname"><span class="pre">place</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.place" title="Permalink to this definition"></a></dt>
+<dd><p>Places a canvas at a specific place in the ScenePic grid.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For use with Scene.grid</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>canvas_id</strong> (<em>str</em>) – The unique ID of the canvas to place</p></li>
+<li><p><strong>grid_row</strong> (<em>str</em>) – the CSS row specification for the Canvas</p></li>
+<li><p><strong>grid_column</strong> (<em>str</em>) – the CSS column specification for the Canvas</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scenepic.Scene.quantize_updates">
+<span class="sig-name descname"><span class="pre">quantize_updates</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.quantize_updates" title="Permalink to this definition"></a></dt>
+<dd><p>Quantize the mesh updates.</p>
+<dl>
+<dt>Description:</dt><dd><p>Each update will be reduced in size in such a way as to minimize the expected per-value error from quantization.
+The number of keyframes (and thus the level of compression) can be controlled via two
+thresholds: the relative error threshold, and the absolute error threshold. The relative
+threshold is evaluated as a fraction of max(positions) - min(positions). The absolute
+threshold is measured in raw units.</p>
+<p>If the relative error threshold has a positive value but the absolute error threshold is negative,
+only the relative threshold will be used. Conversely, if the relative threshold is negative and the
+absolute threshold is positive then only the absolute threshold will be used. If both are positive,
+then they will both be applied. If both are negative, an exception will be raised.</p>
+<p>The quantization process will complete in such a way that (quantized - actual).abs().max() &lt; threshold.
+In essence, each x, y, and z coordinate will individually be different by no more than this threshold
+after quantization. Thus, a possible result of quantization will that every frame is a keyframe, i.e. no
+quantization occurs. More typically, however, the algorithm finds a few “keyframe” meshes which
+minimize the expected error across the remaining (quantized) meshes.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>relative_error_threshold</strong> (<em>float</em><em>, </em><em>optional</em>) – the maximum expected error as a multiple of the range of
+values in the base mesh. Defaults to 1e-5.</p></li>
+<li><p><strong>absolute_error_threshold</strong> (<em>float</em><em>, </em><em>optional</em>) – the maximum expected error in absolute units. Defaults to -1.0.</p></li>
+<li><p><strong>base_mesh_id</strong> (<em>str</em><em>, </em><em>optional</em>) – ID of the base mesh to use as a filter on quantization. Defaults to None.</p></li>
+<li><p><strong>per_frame_range</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to use the most accurate range per frame, increasing accuracy
+but reducing compression. Defaults to True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>information on the per-mesh quantization process</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Mapping[str, QuantizationInfo]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scenepic.Scene.save_as_html">
+<span class="sig-name descname"><span class="pre">save_as_html</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.save_as_html" title="Permalink to this definition"></a></dt>
+<dd><p>Save the scene as a self-contained html file with no
+dependencies.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – the path to the file on disk</p></li>
+<li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – the HTML title. Defaults to “ScenePic”.</p></li>
+<li><p><strong>head_html</strong> (<em>str</em><em>, </em><em>optional</em>) – the raw HTML to place in the HEAD tag. Defaults to None.</p></li>
+<li><p><strong>body_html</strong> (<em>str</em><em>, </em><em>optional</em>) – the raw HTML to place in the BODY tag. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scenepic.Scene.save_as_json">
+<span class="sig-name descname"><span class="pre">save_as_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.save_as_json" title="Permalink to this definition"></a></dt>
+<dd><p>To view the JSON, you will need to separately code up the
+wrapper html and provide the scenepic.min.js library file.
+Alternatively, use save_as_html() to make a self-contained
+HTML file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – the path to the file on disk</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scenepic.Scene.save_as_script">
+<span class="sig-name descname"><span class="pre">save_as_script</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.save_as_script" title="Permalink to this definition"></a></dt>
+<dd><p>Save the scene as a ScenePic script file (JavaScript JSONP
+format).
+To view the script, you will need to separately code up
+the wrapper html and provide the scenepic.min.js library file.
+Alternatively, use save_as_html() to make a self-contained
+HTML file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – the path to the file on disk</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="scenepic.Scene.script_cleared">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">script_cleared</span></span><a class="headerlink" href="#scenepic.Scene.script_cleared" title="Permalink to this definition"></a></dt>
+<dd><p>Whether the script has been cleared</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scenepic.Scene.simulate_key_presses">
+<span class="sig-name descname"><span class="pre">simulate_key_presses</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">canvas_id</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">keypresses</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.simulate_key_presses" title="Permalink to this definition"></a></dt>
+<dd><p>Simulates one or more keypresses to fire off events in the ScenePic UI at startup, e.g. video playback.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>self</strong> (<a class="reference internal" href="#scenepic.Scene" title="scenepic.Scene"><em>Scene</em></a>) – self reference</p></li>
+<li><p><strong>canvas_id</strong> (<em>Union</em><em>[</em><a class="reference internal" href="graphics3d.html#scenepic.Canvas3D" title="scenepic.Canvas3D"><em>Canvas3D</em></a><em>, </em><a class="reference internal" href="graphics2d.html#scenepic.Canvas2D" title="scenepic.Canvas2D"><em>Canvas2D</em></a><em>, </em><em>str</em><em>]</em>) – ID of the canvas on which to fire off this
+event.</p></li>
+<li><p><strong>keypresses</strong> – the key values</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scenepic.Scene.update_mesh">
+<span class="sig-name descname"><span class="pre">update_mesh</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.update_mesh" title="Permalink to this definition"></a></dt>
+<dd><p>Create a new mesh from an existing one by replacing its vector positions and normals.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_mesh_id</strong> (<em>str</em>) – the unique identifier of the original base mesh. Must already have been created.</p></li>
+<li><p><strong>positions</strong> (<em>np.ndarray</em>) – float32 matrix of [N, 3] new positions</p></li>
+<li><p><strong>normals</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – float32 matrix of [N, 3] new normals. Defaults to None, indicating
+they will be computed automatically.</p></li>
+<li><p><strong>mesh_id</strong> (<em>str</em><em>, </em><em>optional</em>) – a unique identifier for the new updated Mesh (will be
+automatically populated if not provided). Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a reference to the MeshUpdate object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="graphics3d.html#scenepic.MeshUpdate" title="scenepic.MeshUpdate">MeshUpdate</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scenepic.Scene.update_mesh_without_normals">
+<span class="sig-name descname"><span class="pre">update_mesh_without_normals</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.update_mesh_without_normals" title="Permalink to this definition"></a></dt>
+<dd><p>Create a new mesh from an existing one by replacing its vector positions and compute normal values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_mesh_id</strong> (<em>str</em>) – the unique identifier of the original base mesh. Must already have been created.</p></li>
+<li><p><strong>positions</strong> (<em>np.ndarray</em>) – float32 matrix of [N, 3] new positions</p></li>
+<li><p><strong>normals</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – float32 matrix of [N, 3] new normals. Defaults to None, indicating
+they will be computed automatically.</p></li>
+<li><p><strong>mesh_id</strong> (<em>str</em><em>, </em><em>optional</em>) – a unique identifier for the new updated Mesh (will be
+automatically populated if not provided). Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a reference to the MeshUpdate object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="graphics3d.html#scenepic.MeshUpdate" title="scenepic.MeshUpdate">MeshUpdate</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="d-graphics">
+<h2>3D Graphics<a class="headerlink" href="#d-graphics" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="graphics3d.html">Canvas3D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphics3d.html#frame3d">Frame3D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphics3d.html#mesh">Mesh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphics3d.html#meshupdate">MeshUpdate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphics3d.html#meshinfo">MeshInfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphics3d.html#vertexbuffer">VertexBuffer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphics3d.html#camera">Camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphics3d.html#focuspoint">FocusPoint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphics3d.html#shading">Shading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphics3d.html#transforms">Transforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphics3d.html#label">Label</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphics3d.html#loopsubdivisionstencil">LoopSubdivisionStencil</a></li>
+</ul>
+</div>
+</section>
+<section id="id2">
+<h2>2D Graphics<a class="headerlink" href="#id2" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="graphics2d.html">Canvas2D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphics2d.html#frame2d">Frame2D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphics2d.html#graph">Graph</a></li>
+</ul>
+</div>
+</section>
+<section id="user-interface">
+<h2>User Interface<a class="headerlink" href="#user-interface" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ui.html">LayerSettings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ui.html#dropdownmenu">DropDownMenu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ui.html#textpanel">TextPanel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ui.html#uiparameters">UIParameters</a></li>
+</ul>
+</div>
+</section>
+<section id="media">
+<h2>Media<a class="headerlink" href="#media" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="media.html">Image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="media.html#audiotrack">AudioTrack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="media.html#video">Video</a></li>
+<li class="toctree-l1"><a class="reference internal" href="media.html#videowriter">VideoWriter</a></li>
+</ul>
+</div>
+</section>
+<section id="color">
+<h2>Color<a class="headerlink" href="#color" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="scenepic.Colors">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">Colors</span></span><a class="headerlink" href="#scenepic.Colors" title="Permalink to this definition"></a></dt>
+<dd><p>Class containing standard colors.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scenepic.Colors.Black">
+<span class="sig-name descname"><span class="pre">Black</span></span><a class="headerlink" href="#scenepic.Colors.Black" title="Permalink to this definition"></a></dt>
+<dd><p>(0, 0, 0)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scenepic.Colors.White">
+<span class="sig-name descname"><span class="pre">White</span></span><a class="headerlink" href="#scenepic.Colors.White" title="Permalink to this definition"></a></dt>
+<dd><p>(255, 255, 255)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scenepic.Colors.Red">
+<span class="sig-name descname"><span class="pre">Red</span></span><a class="headerlink" href="#scenepic.Colors.Red" title="Permalink to this definition"></a></dt>
+<dd><p>(255, 0, 0)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scenepic.Colors.Maroon">
+<span class="sig-name descname"><span class="pre">Maroon</span></span><a class="headerlink" href="#scenepic.Colors.Maroon" title="Permalink to this definition"></a></dt>
+<dd><p>(128, 0, 0)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scenepic.Colors.Pink">
+<span class="sig-name descname"><span class="pre">Pink</span></span><a class="headerlink" href="#scenepic.Colors.Pink" title="Permalink to this definition"></a></dt>
+<dd><p>(255, 200, 220)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scenepic.Colors.Brown">
+<span class="sig-name descname"><span class="pre">Brown</span></span><a class="headerlink" href="#scenepic.Colors.Brown" title="Permalink to this definition"></a></dt>
+<dd><p>(170, 110, 40)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scenepic.Colors.Orange">
+<span class="sig-name descname"><span class="pre">Orange</span></span><a class="headerlink" href="#scenepic.Colors.Orange" title="Permalink to this definition"></a></dt>
+<dd><p>(255, 150, 0)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scenepic.Colors.Coral">
+<span class="sig-name descname"><span class="pre">Coral</span></span><a class="headerlink" href="#scenepic.Colors.Coral" title="Permalink to this definition"></a></dt>
+<dd><p>(255, 215, 180)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scenepic.Colors.Olive">
+<span class="sig-name descname"><span class="pre">Olive</span></span><a class="headerlink" href="#scenepic.Colors.Olive" title="Permalink to this definition"></a></dt>
+<dd><p>(128, 128, 0)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scenepic.Colors.Yellow">
+<span class="sig-name descname"><span class="pre">Yellow</span></span><a class="headerlink" href="#scenepic.Colors.Yellow" title="Permalink to this definition"></a></dt>
+<dd><p>(255, 235, 0)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scenepic.Colors.Beige">
+<span class="sig-name descname"><span class="pre">Beige</span></span><a class="headerlink" href="#scenepic.Colors.Beige" title="Permalink to this definition"></a></dt>
+<dd><p>(255, 250, 200)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scenepic.Colors.Lime">
+<span class="sig-name descname"><span class="pre">Lime</span></span><a class="headerlink" href="#scenepic.Colors.Lime" title="Permalink to this definition"></a></dt>
+<dd><p>(190, 255, 0)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scenepic.Colors.Green">
+<span class="sig-name descname"><span class="pre">Green</span></span><a class="headerlink" href="#scenepic.Colors.Green" title="Permalink to this definition"></a></dt>
+<dd><p>(0, 190, 0)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scenepic.Colors.Mint">
+<span class="sig-name descname"><span class="pre">Mint</span></span><a class="headerlink" href="#scenepic.Colors.Mint" title="Permalink to this definition"></a></dt>
+<dd><p>(170, 255, 195)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scenepic.Colors.Teal">
+<span class="sig-name descname"><span class="pre">Teal</span></span><a class="headerlink" href="#scenepic.Colors.Teal" title="Permalink to this definition"></a></dt>
+<dd><p>(0, 128, 128)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scenepic.Colors.Cyan">
+<span class="sig-name descname"><span class="pre">Cyan</span></span><a class="headerlink" href="#scenepic.Colors.Cyan" title="Permalink to this definition"></a></dt>
+<dd><p>(100, 255, 255)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scenepic.Colors.Navy">
+<span class="sig-name descname"><span class="pre">Navy</span></span><a class="headerlink" href="#scenepic.Colors.Navy" title="Permalink to this definition"></a></dt>
+<dd><p>(0, 0, 128)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scenepic.Colors.Blue">
+<span class="sig-name descname"><span class="pre">Blue</span></span><a class="headerlink" href="#scenepic.Colors.Blue" title="Permalink to this definition"></a></dt>
+<dd><p>(67, 133, 255)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scenepic.Colors.Purple">
+<span class="sig-name descname"><span class="pre">Purple</span></span><a class="headerlink" href="#scenepic.Colors.Purple" title="Permalink to this definition"></a></dt>
+<dd><p>(130, 0, 150)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scenepic.Colors.Lavender">
+<span class="sig-name descname"><span class="pre">Lavender</span></span><a class="headerlink" href="#scenepic.Colors.Lavender" title="Permalink to this definition"></a></dt>
+<dd><p>(230, 190, 255)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scenepic.Colors.Magenta">
+<span class="sig-name descname"><span class="pre">Magenta</span></span><a class="headerlink" href="#scenepic.Colors.Magenta" title="Permalink to this definition"></a></dt>
+<dd><p>(255, 0, 255)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scenepic.Colors.Gray">
+<span class="sig-name descname"><span class="pre">Gray</span></span><a class="headerlink" href="#scenepic.Colors.Gray" title="Permalink to this definition"></a></dt>
+<dd><p>(128, 128, 128)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="scenepic.Color">
+<span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">Color</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Color" title="Permalink to this definition"></a></dt>
+<dd><p>Convenience method for creating a numpy 3-vector from R,G,B float values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>r</strong> (<em>float</em>) – red value [0,1].</p></li>
+<li><p><strong>g</strong> (<em>float</em>) – green value [0,1].</p></li>
+<li><p><strong>b</strong> (<em>float</em>) – blue value [0,1].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Will raise this if the values are out of range</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a color array</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="scenepic.ColorFromBytes">
+<span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">ColorFromBytes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.ColorFromBytes" title="Permalink to this definition"></a></dt>
+<dd><p>Construct a color object from byte values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>red</strong> – Red channel</p></li>
+<li><p><strong>green</strong> – Green channel</p></li>
+<li><p><strong>blue</strong> – Blue channel</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a valid color object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="ScenePic: 3D Visualization Made Easy" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="graphics3d.html" class="btn btn-neutral float-right" title="Canvas3D" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Microsoft.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
