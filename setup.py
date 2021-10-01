@@ -29,6 +29,9 @@ REQUIRES_DEV = [
     "pytest-cov",
     "pytest",
     "requests",
+    "sphinx",
+    "sphinx-autodoc-typehints",
+    "sphinx-markdown-builder",
     "twine",
     "wheel"
 ]
