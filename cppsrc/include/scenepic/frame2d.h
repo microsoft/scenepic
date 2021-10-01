@@ -2,7 +2,7 @@
 //
 // frame3d.h -- Represents a frame of a 2D animation
 //
-// Copyright (C) 2019 Microsoft
+// Copyright (C) 2021 Microsoft
 //
 // For conditions of distribution and use, see copyright notice in LICENSE
 //

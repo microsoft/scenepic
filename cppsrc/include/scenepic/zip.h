@@ -3,7 +3,7 @@
 // zip.h -- Internal interface for basic zip functionality. Acts a shim in
 //          front of miniz.
 //
-// Copyright (C) 2020 Microsoft
+// Copyright (C) 2021 Microsoft
 //
 // For conditions of distribution and use, see copyright notice in LICENSE
 //

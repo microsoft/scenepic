@@ -2,7 +2,7 @@
 //
 // canvas2d.h -- A 2D viewport that can contain a number of Frame2Ds
 //
-// Copyright (C) 2019 Microsoft
+// Copyright (C) 2021 Microsoft
 //
 // For conditions of distribution and use, see copyright notice in LICENSE
 //

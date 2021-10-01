@@ -2,7 +2,7 @@
 //
 // graph.h -- A 2D viewport that animates one or more line graphs
 //
-// Copyright (C) 2020 Microsoft
+// Copyright (C) 2021 Microsoft
 //
 // For conditions of distribution and use, see copyright notice in LICENSE
 //

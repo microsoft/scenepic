@@ -3,7 +3,7 @@
 // json_value.h -- Internal class providing JSON functionality. Acts a shim
 //                 for jsoncpp, which provides Json IO internally.
 //
-// Copyright (C) 2020 Microsoft
+// Copyright (C) 2021 Microsoft
 //
 // For conditions of distribution and use, see copyright notice in LICENSE
 //

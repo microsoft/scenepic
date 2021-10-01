@@ -2,7 +2,7 @@
 //
 // audio_track.h -- An audio track type.
 //
-// Copyright (C) 2020 Microsoft
+// Copyright (C) 2021 Microsoft
 //
 // For conditions of distribution and use, see copyright notice in LICENSE
 //

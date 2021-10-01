@@ -85,9 +85,6 @@ For *Scene* objects that contain many frames, you can control animation by
 pressing the spacebar to play/pause or by using the playback control
 widget.  You can also use the scrollbar to select different frames.
 
-You can programmatically link all input events across multiple
-*Canvas*es by using `scenepic.py/Scene/link_canvas_events()`.
-
 
 .. toctree::
     :maxdepth: 3

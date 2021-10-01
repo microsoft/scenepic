@@ -2,7 +2,7 @@
 //
 // shading.h -- Parameters of the shaders
 //
-// Copyright (C) 2019 Microsoft
+// Copyright (C) 2021 Microsoft
 //
 // For conditions of distribution and use, see copyright notice in LICENSE
 //

@@ -2,7 +2,7 @@
 //
 // canvas3d.h -- A 3D viewport that can contain a number of Frame3Ds
 //
-// Copyright (C) 2019 Microsoft
+// Copyright (C) 2021 Microsoft
 //
 // For conditions of distribution and use, see copyright notice in LICENSE
 //
