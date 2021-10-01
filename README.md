@@ -65,7 +65,7 @@ basically triangle meshes, comprising flat vertex and triangle
 buffers.  Each *Mesh* has an optional *Image* associated for texturing
 purposes.  *Image*s can also be displayed as flat 2D *Displayed Image*s.
 
-![ScenePic Anatomy](docs/scenepic_anatomy.jpg)
+![ScenePic Anatomy](docs/scenepic_anatomy.png)
 
 However, most users will not need interact with ScenePic's core API and
 scripting language directly.  Instead they will use one of the
