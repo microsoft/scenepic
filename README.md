@@ -168,19 +168,10 @@ compiling to JavaScript.
 - Node.js (JavaScript outside the browser)
    > <https://nodejs.org/>
 
-- TypeScript compiler
-    > `npm install -g typescript`
-
-- Install node_module dependencies locally (these don't get checked in to git)
+- Install node_module dependencies locally
     
     From repository root folder:
     > `npm install`
-
-    As specified in package.json, this downloads and installs packages 
-    locally under `node_modules` folder.
-    
-    (This folder should not be checked in and is .gitignored).
-
 
 ### Build
 
