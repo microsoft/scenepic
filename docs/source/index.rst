@@ -43,24 +43,24 @@ desiderata in mind:
   - use HoloLens in our science workflow
 
 
-.. image:: ../../images/ExampleRender.png
+.. image:: ../example_render.png
 
 
 Getting Started
 ---------------
 
-.. literalinclude:: ../../examples/getting_started.py
+.. literalinclude:: ../../python_examples/getting_started.py
    :language: python
    :linenos:
 
 The resulting SVT looks like this:
 
-.. image:: ../../images/getting_started.gif
+.. image:: ../getting_started.gif
 
 Using the HTML Client
 ---------------------
 
-.. image:: ../../images/SVT_UI.jpg
+.. image:: ../screenpic_ui.png
 
 An SVT HTML page will look something like the image above. This example shows
 two *Canvas* objects, each of which contains several *Frame* objects (refering under the
