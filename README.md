@@ -127,8 +127,6 @@ To see an example of how to use the library from C++ look at
 
 ![ScenePic UI](docs/scenepic_ui.png)
 
-.. image:: ../scenepic.png
-
 A ScenePic HTML page will look something like the image above. This example shows
 four *Canvas* objects, each of which contains several *Frame* objects (refering under the
 hood to a set of *Mesh* objects).
