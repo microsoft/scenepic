@@ -102,7 +102,7 @@ $(function() {
 <h2>Overview</h2>
 <p>The core ScenePic library is written in TypeScript and based on WebGL. This is compiled down to <code>dist/scenepic.min.js</code> which is a 'minified' JavaScript library that can be loaded in HTML pages to enable ScenePic to display data.</p>
 <p>The core API for ScenePic is a JSON-based scripting file format. The simplified architecture diagram below illustrates how these scripts are used to define a <em>Scene</em> which is the top-level object in ScenePic. A <em>Scene</em> can contain multiple <em>Canvas*es (3D drawing canvases), *Image*s, and *TextPanel*s. Each *Canvas</em> can contain multiple <em>Frame*s. *Frame*s comprise multiple *Mesh*es, and *Mesh*es can be reused across different *Frame*s and *Canvas*es. *Mesh*es are basically triangle meshes, comprising flat vertex and triangle buffers. Each *Mesh</em> has an optional <em>Image</em> associated for texturing purposes. *Image*s can also be displayed as flat 2D *Displayed Image*s.</p>
-<img src="docs/scenepic_anatomy.jpg" alt="ScenePic Anatomy" class="inline"/>
+<img src="docs/scenepic_anatomy.png" alt="ScenePic Anatomy" class="inline"/>
 <p>However, most users will not need interact with ScenePic's core API and scripting language directly. Instead they will use one of the client-language front end libraries to easily generate ScenePic JSON scripts. Currently supported are:</p>
 <h3>C++</h3>
 <p>Users can either clone this repository and <a href="#c-client-build-how-to">build the client library</a> directly, download a NuGet package [here](), or use one of the GitHub releases.</p>
@@ -121,7 +121,6 @@ $(function() {
 <p>To see an example of how to use the library from C++ look at [the example code](). You can find the API documentation [here]()</p>
 <h2>Using the HTML Client</h2>
 <img src="docs/scenepic_ui.png" alt="ScenePic UI" class="inline"/>
-<p>.. image:: ../scenepic.png</p>
 <p>A ScenePic HTML page will look something like the image above. This example shows four <em>Canvas</em> objects, each of which contains several <em>Frame</em> objects (refering under the hood to a set of <em>Mesh</em> objects).</p>
 <p>The UI supports standard 3D mouse controls (drag to rotate, shift-drag to translate in xy, mousewheel to translate in z) to move the viewport camera. On touch screens: single finger to rotate, two fingers to translate in xyz. You can slow any of the mouse controls by holding down the Alt key. If you accidentally transform the camera too wildly, you can reset by pressing 'r'.</p>
 <p>In the top right of each canvas a <em>Layer</em> control will appear. This allows the user to toggle certain layers of meshes on and off interactively.</p>
@@ -167,7 +166,7 @@ $(function() {
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Oct 1 2021 16:29:01 for scenepic by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Oct 1 2021 16:52:36 for scenepic by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.15
 </small></address>
