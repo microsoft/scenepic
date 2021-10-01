@@ -1,6 +1,6 @@
 // ----------------------------------------------------------------------------
 //
-// text_panel.h -- An ScenePic TextPanel UI component.
+// text_panel.h -- A ScenePic TextPanel UI component.
 //
 // Copyright (C) 2019 Microsoft
 //
@@ -47,7 +47,7 @@ public:
      */
     JsonValue to_json() const;
 
-    /** Call this if you are dumping an ScenePic script in multiple parts,
+    /** Call this if you are dumping a ScenePic script in multiple parts,
      *  e.g. for client-server interactions, or when chunking a large
      * visualization into multiple files.
      */

@@ -5,7 +5,7 @@ import scenepic as sp
 
 
 def _main():
-    # when we build an ScenePic we are essentially building a web
+    # when we build a ScenePic we are essentially building a web
     # page, and the ScenePic will automatically populate parts of
     # that webpage.
 

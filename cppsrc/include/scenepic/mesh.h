@@ -428,10 +428,10 @@ public:
     /** Whole-mesh color (reduces memory requirements but makes Mesh monochrome). */
     Mesh &shared_color(const Color &shared_color);
 
-    /** Specifies the id of an ScenePic Image to be used as a texture in this Mesh. */
+    /** Specifies the id of a ScenePic Image to be used as a texture in this Mesh. */
     const std::string &texture_id() const;
 
-    /** Specifies the id of an ScenePic Image to be used as a texture in this Mesh. */
+    /** Specifies the id of a ScenePic Image to be used as a texture in this Mesh. */
     Mesh &texture_id(const std::string &texture_id);
 
     /** A unique identifier for the Mesh */

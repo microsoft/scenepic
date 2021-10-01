@@ -780,7 +780,7 @@ PYBIND11_MODULE(_scenepic, m)
         .def_property("texture_id",
                       py::overload_cast<>(&Mesh::texture_id, py::const_),
                       py::overload_cast<const std::string &>(&Mesh::texture_id),
-                      "str: Specifies the id of an ScenePic Image to be used as a texture in this Mesh.")
+                      "str: Specifies the id of a ScenePic Image to be used as a texture in this Mesh.")
         .def_property_readonly("mesh_id", &Mesh::mesh_id, "str: A unique identifier for the Mesh")
         .def_property("layer_id",
                       py::overload_cast<>(&Mesh::layer_id, py::const_),
@@ -842,7 +842,7 @@ PYBIND11_MODULE(_scenepic, m)
                           [x, y, z, nx, ny, nz, u, v] (+ uv)
                       )scenepicdoc");
 
-    py::class_<AudioTrack, std::shared_ptr<AudioTrack>>(m, "AudioTrack", "An ScenePic AudioTrack type")
+    py::class_<AudioTrack, std::shared_ptr<AudioTrack>>(m, "AudioTrack", "A ScenePic AudioTrack type")
         .def("__repr__", &AudioTrack::to_string)
         .def("load", &AudioTrack::load, R"scenepicdoc(
             Load an audio file from the disk
@@ -860,7 +860,7 @@ PYBIND11_MODULE(_scenepic, m)
              py::overload_cast<const std::vector<std::uint8_t> &>(&AudioTrack::data),
              "Sets the encoded binary audio data");
 
-    py::class_<Video, std::shared_ptr<Video>>(m, "Video", "An ScenePic Video type")
+    py::class_<Video, std::shared_ptr<Video>>(m, "Video", "A ScenePic Video type")
         .def("__repr__", &Video::to_string)
         .def("load", &Video::load, R"scenepicdoc(
             Load a video file from the disk
@@ -878,7 +878,7 @@ PYBIND11_MODULE(_scenepic, m)
              py::overload_cast<const std::vector<std::uint8_t> &>(&Video::data),
              "Sets the encoded binary video data");
 
-    py::class_<Image, std::shared_ptr<Image>>(m, "Image", "An ScenePic Image type")
+    py::class_<Image, std::shared_ptr<Image>>(m, "Image", "A ScenePic Image type")
         .def("__repr__", &Image::to_string)
         .def("load", &Image::load, R"scenepicdoc(
             Load an image file from the disk
@@ -899,7 +899,7 @@ PYBIND11_MODULE(_scenepic, m)
                       py::overload_cast<const std::string &>(&Image::ext),
                       "str: The extension of the image (e.g. JPG, PNG)");
 
-    py::class_<Label, std::shared_ptr<Label>>(m, "Label", "An ScenePic label type")
+    py::class_<Label, std::shared_ptr<Label>>(m, "Label", "A ScenePic label type")
         .def("__repr__", &Label::to_string)
         .def_property_readonly("label_id", &Label::label_id,
                                "str: A unique identifier for the Label")
@@ -1038,7 +1038,7 @@ PYBIND11_MODULE(_scenepic, m)
                       py::overload_cast<const Camera &>(&Frame3D::camera),
                       R"scenepicdoc(
             Camera: The camera for the frame. This property can be used to create cinematic
-            camera movement within an ScenePic, but the user can choose to override the camera
+            camera movement within a ScenePic, but the user can choose to override the camera
             track at any time. If they reset to the original camera, however, it will make
             subsequent frames use the specified camera parameters.)scenepicdoc");
 
@@ -1112,7 +1112,7 @@ PYBIND11_MODULE(_scenepic, m)
         )scenepicdoc",
              "layer_settings"_a)
         .def("clear_script", &Canvas2D::clear_script, R"scenepicdoc(
-            Call this if you are dumping an ScenePic script in multiple parts,
+            Call this if you are dumping a ScenePic script in multiple parts,
             e.g. for client-server interactions, or when chunking a large
             visualization into multiple files.
         )scenepicdoc")
@@ -1169,7 +1169,7 @@ PYBIND11_MODULE(_scenepic, m)
                       "int: Specifies a fixed order to draw transparency.");
 
     py::class_<Canvas3D, std::shared_ptr<Canvas3D>>(m, "Canvas3D", R"scenepicdoc(
-        Represents an ScenePic Canvas3D - a 3D viewport that can contain a number of Frame3Ds.
+        Represents a ScenePic Canvas3D - a 3D viewport that can contain a number of Frame3Ds.
     )scenepicdoc")
         .def("create_frame_", &Canvas3D::create_frame, R"scenepicdoc(
             Creates a new Frame3D object and appends to the list of Frame3Ds in the Canvas3D.
@@ -1200,7 +1200,7 @@ PYBIND11_MODULE(_scenepic, m)
         )scenepicdoc",
              "layer_settings"_a)
         .def("clear_script", &Canvas3D::clear_script, R"scenepicdoc(
-            Call this if you are dumping an ScenePic script in multiple parts,
+            Call this if you are dumping a ScenePic script in multiple parts,
             e.g. for client-server interactions, or when chunking a large
             visualization into multiple files.
         )scenepicdoc")
@@ -1290,7 +1290,7 @@ PYBIND11_MODULE(_scenepic, m)
         )scenepicdoc",
              "name"_a, "values"_a, "line_color"_a = Colors::Black, "line_width"_a = 1.0f);
 
-    py::class_<DropDownMenu, std::shared_ptr<DropDownMenu>>(m, "DropDownMenu", "Represents an ScenePic DropDownMenu UI component.")
+    py::class_<DropDownMenu, std::shared_ptr<DropDownMenu>>(m, "DropDownMenu", "Represents a ScenePic DropDownMenu UI component.")
         .def("__repr__", &DropDownMenu::to_string)
         .def_property("title",
                       py::overload_cast<>(&DropDownMenu::title, py::const_),
@@ -1307,7 +1307,7 @@ PYBIND11_MODULE(_scenepic, m)
         .def("set_disabled", &DropDownMenu::set_disabled, "index"_a, "disabled"_a,
              "Sets the disabled flag on an option.")
         .def("clear_script", &DropDownMenu::clear_script, R"scenepicdoc(
-            Call this if you are dumping an ScenePic script in multiple parts,
+            Call this if you are dumping a ScenePic script in multiple parts,
             e.g. for client-server interactions, or when chunking a large
             visualization into multiple files.
         )scenepicdoc");
@@ -1319,7 +1319,7 @@ PYBIND11_MODULE(_scenepic, m)
         .def_readonly("mean_error", &QuantizationInfo::mean_error, "float: The mean per-frame error.")
         .def_readonly("max_error", &QuantizationInfo::max_error, "float: The maximum per-frame error.");
 
-    py::class_<TextPanel, std::shared_ptr<TextPanel>>(m, "TextPanel", "Represents an ScenePic TextPanel UI component.")
+    py::class_<TextPanel, std::shared_ptr<TextPanel>>(m, "TextPanel", "Represents a ScenePic TextPanel UI component.")
         .def("__repr__", &TextPanel::to_string)
         .def_property("title",
                       py::overload_cast<>(&TextPanel::title, py::const_),
@@ -1334,7 +1334,7 @@ PYBIND11_MODULE(_scenepic, m)
                       py::overload_cast<const std::string &>(&TextPanel::input_text),
                       "str: Text for the optional input textbox.")
         .def("clear_script", &TextPanel::clear_script, R"scenepicdoc(
-            Call this if you are dumping an ScenePic script in multiple parts,
+            Call this if you are dumping a ScenePic script in multiple parts,
             e.g. for client-server interactions, or when chunking a large
             visualization into multiple files.
         )scenepicdoc");
@@ -1631,7 +1631,7 @@ PYBIND11_MODULE(_scenepic, m)
         .def("link_canvas_events_", &Scene::link_canvas_events, "canvas_ids"_a)
         .def("simulate_key_presses_", &Scene::simulate_key_presses, "canvas_id"_a, "keypresses"_a)
         .def("clear_script", &Scene::clear_script, R"scenepicdoc(
-            Call this if you are dumping an ScenePic script in multiple parts,
+            Call this if you are dumping a ScenePic script in multiple parts,
             e.g. for client-server interactions, or when chunking a large
             visualization into multiple files. Immediately after this, a
             call to get_script() will returnempty.
@@ -1665,7 +1665,7 @@ PYBIND11_MODULE(_scenepic, m)
         )scenepicdoc",
              "path"_a)
         .def("save_as_script", &Scene::save_as_script, R"scenepicdoc(
-            Save the scene as an ScenePic script file (JavaScript JSONP
+            Save the scene as a ScenePic script file (JavaScript JSONP
             format).
             To view the script, you will need to separately code up
             the wrapper html and provide the scenepic.min.js library file.

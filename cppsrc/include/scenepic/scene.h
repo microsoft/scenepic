@@ -284,7 +284,7 @@ public:
      */
     JsonValue to_json() const;
 
-    /** Call this if you are dumping an ScenePic script in multiple parts,
+    /** Call this if you are dumping a ScenePic script in multiple parts,
      *  e.g. for client-server interactions, or when chunking a large visualization into multiple files.
      *  Immediately after this, a call to get_script() will return empty.
      */
@@ -314,7 +314,7 @@ public:
      */
     void save_as_json(const std::string &path) const;
 
-    /** Save the scene as an ScenePic script file (JavaScript JSONP format).
+    /** Save the scene as a ScenePic script file (JavaScript JSONP format).
      *  To view the script, you will need to separately code up the wrapper html and provide the scenepic.min.js library file.
      *  Alternatively, use save_as_html() to make a self-contained HTML file.
      *  \param path the path to the file on disk

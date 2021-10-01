@@ -19,7 +19,7 @@
 
 namespace scenepic
 {
-/** Represents an ScenePic DropDownMenu UI component. */
+/** Represents a ScenePic DropDownMenu UI component. */
 class DropDownMenu
 {
 public:
@@ -55,7 +55,7 @@ public:
      */
     JsonValue to_json() const;
 
-    /** Call this if you are dumping an ScenePic script in multiple parts,
+    /** Call this if you are dumping a ScenePic script in multiple parts,
      *  e.g. for client-server interactions, or when chunking a large
      *  visualization into multiple files.
      */

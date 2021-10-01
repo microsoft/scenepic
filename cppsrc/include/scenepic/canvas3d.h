@@ -27,7 +27,7 @@
 
 namespace scenepic
 {
-/** Represents an ScenePic Canvas3D - a 3D viewport that can contain a number of Frame3Ds. */
+/** Represents a ScenePic Canvas3D - a 3D viewport that can contain a number of Frame3Ds. */
 class Canvas3D
 {
 public:
@@ -82,7 +82,7 @@ public:
     /** A unique identifier for the canvas */
     const std::string &canvas_id() const;
 
-    /** Call this if you are dumping an ScenePic script in multiple parts,
+    /** Call this if you are dumping a ScenePic script in multiple parts,
      *  e.g. for client-server interactions, or when chunking a large
      *  visualization into multiple files.
      */

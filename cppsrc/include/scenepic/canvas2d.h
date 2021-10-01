@@ -37,7 +37,7 @@ public:
      */
     std::shared_ptr<Frame2D> create_frame(const std::string &frame_id = "");
 
-    /** Call this if you are dumping an ScenePic script in multiple parts,
+    /** Call this if you are dumping a ScenePic script in multiple parts,
      * e.g. for client-server interactions, or when chunking a large
      * visualization into multiple files.
      */

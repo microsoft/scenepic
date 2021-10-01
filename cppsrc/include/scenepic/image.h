@@ -19,7 +19,7 @@
 
 namespace scenepic
 {
-/** An ScenePic Image type */
+/** A ScenePic Image type */
 class Image
 {
 public:
