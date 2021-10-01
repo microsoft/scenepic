@@ -16,6 +16,5 @@
 	"IsBillboard": false,
 	"IsLabel": false,
 	"LayerId": null,
-	"MeshId": "icosphere_texture",
-	"VRWorldLocked": false
+	"MeshId": "icosphere_texture"
 }

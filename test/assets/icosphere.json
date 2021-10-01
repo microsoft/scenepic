@@ -12,6 +12,5 @@
 	"IsBillboard": false,
 	"IsLabel": false,
 	"LayerId": null,
-	"MeshId": "icosphere",
-	"VRWorldLocked": false
+	"MeshId": "icosphere"
 }

@@ -43,8 +43,6 @@ def create_mesh(self, mesh_id="", **kwargs) -> Mesh:
         camera_space (bool, optional): whether this Mesh is defined in camera space (cannot
                                        be moved in the ScenePic user interface) or world space (standard).
                                        Defaults to False.
-        vr_world_locked (bool, optional): if True, this Mesh will only appear in VR, and will
-                                          be locked to the user's world. Defaults to False.
         shared_color (np.ndarray, optional): see `Mesh` constructor.
         texture_id (str, optional): see `Mesh` constructor.
         nn_texture (bool, optional): whether the shader should use nearest-neighbor

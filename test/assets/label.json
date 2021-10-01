@@ -21,8 +21,7 @@
 		"IsBillboard": false,
 		"IsLabel": true,
 		"LayerId": null,
-		"MeshId": "Mesh-0",
-		"VRWorldLocked": false
+		"MeshId": "Mesh-0"
 	},
 	{
 		"CommandType": "DefineLabel",

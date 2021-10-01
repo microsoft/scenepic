@@ -59,11 +59,9 @@ void meshes_and_frames()
     // Meshes "belong to" the Scene, so should be created using create_mesh()
     // Meshes can be re-used across multiple frames/canvases
     auto mesh = scene.create_mesh();
-    mesh->shared_color(sp::Color(1, 0, 1));
-#If shared_color is not provided, you can use per - vertex coloring
-                                                            mesh->add_cube(sp::Color::None(), sp::Transforms::scale(0.1f));
-#Adds a unit cube centered at the origin
-        mesh->add_cube(sp::Color::None(), sp::Transforms::translate({-1, 1, -1}) * sp::Transforms::scale(0.5f));
+    mesh->shared_color(sp::Color(1, 0, 1));                         // If shared_color is not provided, you can use per - vertex coloring
+    mesh->add_cube(sp::Color::None(), sp::Transforms::scale(0.1f)); // Adds a unit cube centered at the origin
+    mesh->add_cube(sp::Color::None(), sp::Transforms::translate({-1, 1, -1}) * sp::Transforms::scale(0.5f));
     mesh->add_sphere(sp::Color::None(), sp::Transforms::translate({1, 1, 1}));
 
     // A Canvas is a 3D rendering panel

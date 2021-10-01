@@ -25,7 +25,6 @@ let b = browserify({
     "tssrc/SPScene.ts",
     "tssrc/TextPanel.ts",
     "tssrc/WebGLMeshBuffers.ts",
-    "tssrc/WebVRBackground.ts",
     "tssrc/ScenePic.ts"
 ])
 .plugin(tsify)

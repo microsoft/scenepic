@@ -19,8 +19,7 @@
 		"IsBillboard": false,
 		"IsLabel": false,
 		"LayerId": null,
-		"MeshId": "hand1",
-		"VRWorldLocked": false
+		"MeshId": "hand1"
 	},
 	{
 		"CameraSpace": false,
@@ -38,7 +37,6 @@
 		"IsBillboard": false,
 		"IsLabel": false,
 		"LayerId": null,
-		"MeshId": "hand2",
-		"VRWorldLocked": false
+		"MeshId": "hand2"
 	}
 ]

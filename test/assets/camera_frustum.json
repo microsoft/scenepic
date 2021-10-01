@@ -12,6 +12,5 @@
 	"IsBillboard": false,
 	"IsLabel": false,
 	"LayerId": null,
-	"MeshId": "camera_frustum",
-	"VRWorldLocked": false
+	"MeshId": "camera_frustum"
 }

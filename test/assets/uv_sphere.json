@@ -12,6 +12,5 @@
 	"IsBillboard": false,
 	"IsLabel": false,
 	"LayerId": null,
-	"MeshId": "uv_sphere",
-	"VRWorldLocked": false
+	"MeshId": "uv_sphere"
 }

@@ -802,10 +802,6 @@ PYBIND11_MODULE(_scenepic, m)
                           bool: Whether this Mesh is defined in camera space (cannot be moved in the ScenePic user
                           interface) or world space (standard).
                       )scenepicdoc")
-        .def_property("vr_world_locked",
-                      py::overload_cast<>(&Mesh::vr_world_locked, py::const_),
-                      py::overload_cast<bool>(&Mesh::vr_world_locked),
-                      "bool: if True, this Mesh will only appear in VR, and will be locked to the user's world")
         .def_property("nn_texture",
                       py::overload_cast<>(&Mesh::nn_texture, py::const_),
                       py::overload_cast<bool>(&Mesh::nn_texture),
@@ -1449,7 +1445,7 @@ PYBIND11_MODULE(_scenepic, m)
              "margin"_a = Graph::Margin(10), "font_family"_a = "sans-serif", "text_size"_a = 12.0, "media_id"_a = "")
         .def("create_mesh_", &Scene::create_mesh,
              "mesh_id"_a = "", "layer_id"_a = "", "double_sided"_a = false, "camera_space"_a = false,
-             "vr_world_locked"_a = false, "shared_color"_a = Color::None(), "texture_id"_a = "",
+             "shared_color"_a = Color::None(), "texture_id"_a = "",
              "nn_texture"_a = true, "use_texture_alpha"_a = false, "is_billboard"_a = false, "is_label"_a = false)
         .def("update_mesh", &Scene::update_mesh, R"scenepicdoc(
             Create a new mesh from an existing one by replacing its vector positions and normals.

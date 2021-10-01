@@ -12,6 +12,5 @@
 	"IsBillboard": false,
 	"IsLabel": false,
 	"LayerId": null,
-	"MeshId": "coordinate_axes",
-	"VRWorldLocked": false
+	"MeshId": "coordinate_axes"
 }

@@ -161,7 +161,6 @@ public:
      *  \param layer_id an identifier to allow several Meshes to be grouped together into a "layer".  Layers should be used in conjunction with Canvas3D.set_layer_settings().
      *  \param double_sided whether to turn off back face culling and draw the Mesh's triangles as double sided.
      *  \param camera_space whether this Mesh is defined in camera space (cannot be moved in the ScenePic user interface) or world space (standard).
-     *  \param vr_world_locked if True, this Mesh will only appear in VR, and will be locked to the user's world
      *  \param shared_color see Mesh constructor.
      *  \param texture_id see Mesh constructor.
      *  \param nn_texture whether the shader should use nearest-neighbor texture interpolation.
@@ -174,7 +173,6 @@ public:
                                       const std::string &layer_id = "",
                                       bool double_sided = false,
                                       bool camera_space = false,
-                                      bool vr_world_locked = false,
                                       const Color &shared_color = Color::None(),
                                       const std::string &texture_id = "",
                                       bool nn_texture = true,

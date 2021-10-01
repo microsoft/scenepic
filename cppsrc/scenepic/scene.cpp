@@ -234,7 +234,6 @@ namespace scenepic
                                              const std::string &layer_id,
                                              bool double_sided,
                                              bool camera_space,
-                                             bool vr_world_locked,
                                              const Color &shared_color,
                                              const std::string &texture_id,
                                              bool nn_texture,
@@ -252,7 +251,6 @@ namespace scenepic
         mesh->layer_id(layer_id);
         mesh->double_sided(double_sided);
         mesh->camera_space(camera_space);
-        mesh->vr_world_locked(vr_world_locked);
         mesh->shared_color(shared_color);
         mesh->texture_id(texture_id);
         mesh->nn_texture(nn_texture);

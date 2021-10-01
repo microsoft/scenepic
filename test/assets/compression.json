@@ -17,8 +17,7 @@
 		"IsBillboard": false,
 		"IsLabel": false,
 		"LayerId": null,
-		"MeshId": "base",
-		"VRWorldLocked": false
+		"MeshId": "base"
 	},
 	{
 		"BaseMeshId": "base",

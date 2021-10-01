@@ -36,7 +36,6 @@ export default class Mesh
     cameraSpace : boolean; // If true, the mesh is defined in camera-space rather than world space and will thus not move with mouse commands
     layerId : string; // Unique identifier for a layer of Meshes with shared properties
     doubleSided : boolean; // If true, then back-face culling is turned off
-    vrWorldLocked : boolean; // If true, then this mesh is only shown in VR mode, and then will be treated as background that cannot be moved/rotated with the mouse
 
     // Properties
     CountVertices() : number { return this.vertexBuffer.length / this.ElementsPerVertex; }
@@ -60,7 +59,6 @@ export default class Mesh
         this.nnTexture = nnTexture;
         this.useTextureAlpha = useTextureAlpha;
         this.cameraSpace = false;
-        this.vrWorldLocked = false;
         this.layerId = null;
 
         // Deal with instance buffer
@@ -151,7 +149,6 @@ export default class Mesh
         mesh.doubleSided = this.doubleSided;
         mesh.isBillboard = this.isBillboard;
         mesh.isLabel = this.isLabel;
-        mesh.vrWorldLocked = this.vrWorldLocked;
         return mesh;
     }
 

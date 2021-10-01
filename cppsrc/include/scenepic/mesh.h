@@ -473,16 +473,6 @@ public:
      */
     Mesh &camera_space(bool camera_space);
 
-    /** if True, this Mesh will only appear in VR,
-     *  and will be locked to the user's world
-     */
-    bool vr_world_locked() const;
-
-    /** if True, this Mesh will only appear in VR,
-     *  and will be locked to the user's world
-     */
-    Mesh &vr_world_locked(bool vr_world_locked);
-
     /** Whether the shader should use nearest-neighbor
      *  texture interpolation.
      */
@@ -600,7 +590,6 @@ private:
     std::string m_layer_id;
     bool m_double_sided;
     bool m_camera_space;
-    bool m_vr_world_locked;
     bool m_nn_texture;
     bool m_use_texture_alpha;
     bool m_is_billboard;

@@ -16,6 +16,5 @@
 	"IsBillboard": false,
 	"IsLabel": false,
 	"LayerId": null,
-	"MeshId": "cube_texture",
-	"VRWorldLocked": false
+	"MeshId": "cube_texture"
 }

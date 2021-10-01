@@ -1,10 +1,10 @@
 {
   "_comment0": "This file is used by npm to specify the project and npm dependencies",
   "name": "scenepic",
-  "version": "1.10.6",
+  "version": "1.0.0",
   "description": "Science Visualization Toolkit 3D",
-  "author": "Jamie Shotton and Matthew Johnson",
-  "license": "UNLICENSED",
+  "author": "Matthew Johnson",
+  "license": "MIT",
   "private": true,
   "repository": {
     "type": "git",

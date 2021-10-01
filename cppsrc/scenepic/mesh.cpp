@@ -34,7 +34,6 @@ namespace scenepic
                                              m_texture_id(""),
                                              m_layer_id(""),
                                              m_camera_space(false),
-                                             m_vr_world_locked(false),
                                              m_double_sided(false),
                                              m_is_billboard(false),
                                              m_is_label(false),
@@ -620,7 +619,6 @@ namespace scenepic
         root["CameraSpace"] = m_camera_space;
         root["IsBillboard"] = m_is_billboard;
         root["IsLabel"] = m_is_label;
-        root["VRWorldLocked"] = m_vr_world_locked;
         return root;
     }
 
@@ -789,17 +787,6 @@ namespace scenepic
     Mesh &Mesh::camera_space(bool camera_space)
     {
         m_camera_space = camera_space;
-        return *this;
-    }
-
-    bool Mesh::vr_world_locked() const
-    {
-        return m_vr_world_locked;
-    }
-
-    Mesh &Mesh::vr_world_locked(bool vr_world_locked)
-    {
-        m_vr_world_locked = vr_world_locked;
         return *this;
     }
 

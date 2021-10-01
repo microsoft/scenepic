@@ -10,7 +10,6 @@ import Misc from "./Misc"
 import Mesh from "./Mesh";
 import {vec3} from "gl-matrix";
 import {saveAs} from "file-saver";
-import {WebVRBackgroundCommands} from "./WebVRBackground";
 import * as JSZip from "jszip";
 
 const StatusPanelName = "___STATUS___";
@@ -47,9 +46,6 @@ export default class SPScene
     // Mesh keyframes
     meshKeyframes = {};
 
-    // Currently active VR canvas
-    activeVRCanvas = null;
-
     // Canvas groups (used to link events across canvases)
     canvasGroups = {};
 
@@ -78,9 +74,6 @@ export default class SPScene
     numFramesPerCanvas : {[id: string]: number};
     currentRecordingFrame : number;
     maxFrames : number;
-
-    // WebVR device
-    vrDisplay = null;
 
     constructor(element = null) // element is passed in if being used from Jupyter
     {
@@ -183,17 +176,6 @@ export default class SPScene
         this.SetTextPanelValue(HelpPanelName, helpHtml);
         this.AddTextPanel(StatusPanelName, "Status", "", this.statusDiv);
         this.UpdateStatusPadding();
-
-        // Init VR
-        //this.InitVRForScene();  Appears not necessary as vrdisplayconnect fires on startup
-        window.addEventListener('vrdisplayconnect', event => this.InitVRForScene(), false);
-        window.addEventListener('vrdisplaydisconnect', event => this.InitVRForScene(), false);
-        window.addEventListener('vrdisplayactivate', event => this.InitVRForScene(), false);
-        window.addEventListener('vrdisplaydeactivate', event => this.InitVRForScene(), false);
-        window.addEventListener("vrdisplaypointerrestricted", event => { if (this.activeVRCanvas != null) this.activeVRCanvas.htmlCanvas.requestPointerLock(); }, true);
-
-        // Initialize WebVR background content (only once)
-        this.ExecuteSceneCommands(WebVRBackgroundCommands);
     }
 
     private createToggleButton(title: string, icon: string) : [HTMLLabelElement, HTMLInputElement]
@@ -312,41 +294,6 @@ export default class SPScene
         else
         {
             setTimeout(() => this.recordFrame(), 0);
-        }
-    }
-
-    InitVRForScene()
-    {
-        var getVRDisplays = (<any>navigator).getVRDisplays;
-        if (getVRDisplays !== undefined)
-        {
-            (<any>navigator).getVRDisplays().then(devices => {
-                if (devices.length > 0 && devices[0].isConnected)
-                    this.InitVRInCanvases(devices[0]);
-                else
-                    this.InitVRInCanvases(null);
-            });
-        }
-        else
-        {
-            this.InitVRInCanvases(null);
-        }
-    }
-
-    InitVRInCanvases(device : any)
-    {
-        this.vrDisplay = device;
-        this.activeVRCanvas = null;
-
-        // Initialize WebVR for all extant Canvas3D objects
-        for(var canvasId in this.canvases)
-        {
-            var canvas = this.canvases[canvasId];
-            if (canvas instanceof Canvas3D)
-            {
-                canvas.InitializeWebVR(this.vrDisplay);
-                canvas.vrToggleBtn.disabled = false;
-            }
         }
     }
 
@@ -585,43 +532,6 @@ export default class SPScene
     {
     }
 
-    EnterVR(canvas : Canvas3D)
-    {
-        this.activeVRCanvas = canvas;
-
-        // Disable all 2D rendering loops and other buttons
-        for(var canvasId in this.canvases)
-        {
-            var otherCanvas = <CanvasBase>this.canvases[canvasId];
-            otherCanvas.StopRenderLoop();
-            if (otherCanvas != canvas && otherCanvas instanceof Canvas3D)
-                otherCanvas.vrToggleBtn.disabled = true;
-        }
-
-        // Enter VR
-        canvas.EnterVR();
-    }
-
-    ExitVR(canvas : Canvas3D)
-    {
-        this.activeVRCanvas = null;
-
-        // Leave VR
-        canvas.ExitVR();
-
-        // Enable all 2D rendering loops and other buttons
-        for(var canvasId in this.canvases)
-        {
-            var otherCanvas = <CanvasBase>this.canvases[canvasId];
-            if (otherCanvas instanceof Canvas3D)
-            {
-                otherCanvas.ResetView(); // Ensure consistent views when exiting VR
-                otherCanvas.vrToggleBtn.disabled = false;
-            }
-            otherCanvas.StartRenderLoop();
-        }
-    }
-
     private AddCanvas3D(canvasId : string, width : number, height : number, parent : HTMLElement)
     {
         // Check unique
@@ -632,31 +542,10 @@ export default class SPScene
         }
 
         // Create canvas
-        var canvas = new Canvas3D(canvasId, this.frameRate, width, height, this.allMeshes, this.objectCache, status => this.SetStatus(status), msg => this.AddWarning(msg), () => this.RequestRedraw(), (cid, fid) => this.ReportFrameIdChange(cid, fid), (cid, key) => this.HandleKeyDown(cid, key, false, false, false, false, true), canvas => this.ExitVR(canvas));
+        var canvas = new Canvas3D(canvasId, this.frameRate, width, height, this.allMeshes, this.objectCache, status => this.SetStatus(status), msg => this.AddWarning(msg), () => this.RequestRedraw(), (cid, fid) => this.ReportFrameIdChange(cid, fid), (cid, key) => this.HandleKeyDown(cid, key, false, false, false, false, true));
 
         // Store canvas
         this.InitializeCanvas(canvas, canvasId, parent, true);
-
-        // Initialize WebVR
-        if (this.vrDisplay != null)
-            canvas.InitializeWebVR(this.vrDisplay);
-
-        // Add event listener (even if WebVR not currently present - as may get added later, and button will be hidden until then)
-        canvas.vrToggleBtn.addEventListener("click", event =>
-        {
-            // Ensure keypresses not captured by button
-            canvas.htmlCanvas.focus();
-
-            // Deal with enter or exit click
-            if (this.activeVRCanvas == null) // Entering VR on one canvas
-            {
-                this.EnterVR(canvas);
-            }
-            else // Exiting VR
-            {
-                this.ExitVR(canvas);
-            }
-        });
     }
 
     private AddCanvas2D(canvasId : string, width : number, height : number, parent : HTMLElement)
@@ -727,7 +616,7 @@ export default class SPScene
     }
 
     // Add new or replace existing mesh
-    DefineMesh(meshId : string, layerId : string, definition : any, cameraSpace : boolean, doubleSided : boolean, isBillboard : boolean, isLabel : boolean, vrWorldLocked : boolean)
+    DefineMesh(meshId : string, layerId : string, definition : any, cameraSpace : boolean, doubleSided : boolean, isBillboard : boolean, isLabel : boolean)
     {
         try
         {
@@ -737,7 +626,6 @@ export default class SPScene
             mesh.doubleSided = doubleSided;
             mesh.isBillboard = isBillboard;
             mesh.isLabel = isLabel;
-            mesh.vrWorldLocked = vrWorldLocked;
             this.allMeshes[meshId] = mesh;
         }
         catch (e)
@@ -831,8 +719,7 @@ export default class SPScene
                 var doubleSided = Misc.GetDefault(command, "DoubleSided", false);
                 var isBillboard = Misc.GetDefault(command, "IsBillboard", false);
                 var isLabel = Misc.GetDefault(command, "IsLabel", false);
-                var vrWorldLocked = Misc.GetDefault(command, "VRWorldLocked", false);
-                this.DefineMesh(meshId, layerId, definition, cameraSpace, doubleSided, isBillboard, isLabel, vrWorldLocked);
+                this.DefineMesh(meshId, layerId, definition, cameraSpace, doubleSided, isBillboard, isLabel);
                 break;             
 
             case "UpdateMesh":

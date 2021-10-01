@@ -16,6 +16,5 @@
 	"IsBillboard": false,
 	"IsLabel": false,
 	"LayerId": null,
-	"MeshId": "image",
-	"VRWorldLocked": false
+	"MeshId": "image"
 }

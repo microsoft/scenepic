@@ -25,8 +25,7 @@
 		"IsBillboard": false,
 		"IsLabel": false,
 		"LayerId": "Test",
-		"MeshId": "Mesh-0",
-		"VRWorldLocked": false
+		"MeshId": "Mesh-0"
 	},
 	{
 		"CameraSpace": false,
@@ -43,8 +42,7 @@
 		"IsBillboard": false,
 		"IsLabel": false,
 		"LayerId": null,
-		"MeshId": "Mesh-1",
-		"VRWorldLocked": false
+		"MeshId": "Mesh-1"
 	},
 	{
 		"CameraSpace": false,
@@ -60,8 +58,7 @@
 		"IsBillboard": false,
 		"IsLabel": false,
 		"LayerId": "Primitives",
-		"MeshId": "Mesh-2",
-		"VRWorldLocked": false
+		"MeshId": "Mesh-2"
 	},
 	{
 		"CameraSpace": false,
@@ -81,8 +78,7 @@
 		"IsBillboard": false,
 		"IsLabel": false,
 		"LayerId": "Noise",
-		"MeshId": "Mesh-3",
-		"VRWorldLocked": false
+		"MeshId": "Mesh-3"
 	},
 	{
 		"CameraSpace": false,
@@ -98,8 +94,7 @@
 		"IsBillboard": false,
 		"IsLabel": false,
 		"LayerId": "Primitives",
-		"MeshId": "Mesh-4",
-		"VRWorldLocked": false
+		"MeshId": "Mesh-4"
 	},
 	{
 		"CameraSpace": false,
@@ -119,8 +114,7 @@
 		"IsBillboard": false,
 		"IsLabel": false,
 		"LayerId": "Noise",
-		"MeshId": "Mesh-5",
-		"VRWorldLocked": false
+		"MeshId": "Mesh-5"
 	},
 	{
 		"CameraSpace": false,
@@ -136,8 +130,7 @@
 		"IsBillboard": false,
 		"IsLabel": false,
 		"LayerId": "Primitives",
-		"MeshId": "Mesh-6",
-		"VRWorldLocked": false
+		"MeshId": "Mesh-6"
 	},
 	{
 		"CameraSpace": false,
@@ -157,8 +150,7 @@
 		"IsBillboard": false,
 		"IsLabel": false,
 		"LayerId": "Noise",
-		"MeshId": "Mesh-7",
-		"VRWorldLocked": false
+		"MeshId": "Mesh-7"
 	},
 	{
 		"CameraSpace": false,
@@ -174,8 +166,7 @@
 		"IsBillboard": false,
 		"IsLabel": false,
 		"LayerId": "Primitives",
-		"MeshId": "Mesh-8",
-		"VRWorldLocked": false
+		"MeshId": "Mesh-8"
 	},
 	{
 		"CameraSpace": false,
@@ -195,8 +186,7 @@
 		"IsBillboard": false,
 		"IsLabel": false,
 		"LayerId": "Noise",
-		"MeshId": "Mesh-9",
-		"VRWorldLocked": false
+		"MeshId": "Mesh-9"
 	},
 	{
 		"CameraSpace": false,
@@ -212,8 +202,7 @@
 		"IsBillboard": false,
 		"IsLabel": false,
 		"LayerId": "Primitives",
-		"MeshId": "Mesh-10",
-		"VRWorldLocked": false
+		"MeshId": "Mesh-10"
 	},
 	{
 		"CameraSpace": false,
@@ -233,8 +222,7 @@
 		"IsBillboard": false,
 		"IsLabel": false,
 		"LayerId": "Noise",
-		"MeshId": "Mesh-11",
-		"VRWorldLocked": false
+		"MeshId": "Mesh-11"
 	},
 	{
 		"CommandType": "DefineImage",

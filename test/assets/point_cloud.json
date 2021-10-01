@@ -15,6 +15,5 @@
 	"IsBillboard": false,
 	"IsLabel": false,
 	"LayerId": null,
-	"MeshId": "point_cloud",
-	"VRWorldLocked": false
+	"MeshId": "point_cloud"
 }
