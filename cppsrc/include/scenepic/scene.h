@@ -355,13 +355,11 @@ public:
     /** Save the scene as a self-contained html file with no dependencies.
      *  \param path the path to the file on disk
      *  \param title the HTML title
-     *  \param embed_library whether to embed the javascript library in the page
      *  \param head_html the raw HTML to place in the HEAD tag
      *  \param body_html the raw HTML to place in the BODY tag
      */
     void save_as_html(const std::string &path,
                       const std::string &title = "ScenePic",
-                      bool embed_library = true,
                       const std::string &head_html = "",
                       const std::string &body_html = "");
 

@@ -622,7 +622,6 @@ namespace scenepic
 
     void Scene::save_as_html(const std::string &path,
                              const std::string &title,
-                             bool embed_library,
                              const std::string &head_html,
                              const std::string &body_html)
     {
@@ -633,21 +632,12 @@ namespace scenepic
 
         std::string lib = "";
         std::string path_to_lib = "";
-        if (embed_library)
+        std::stringstream buff;
+        for (auto &line : JS_LIB_SRC)
         {
-            std::stringstream buff;
-            for (auto &line : JS_LIB_SRC)
-            {
-                buff << line;
-            }
-            lib = buff.str();
+            buff << line;
         }
-        else
-        {
-            std::stringstream buff;
-            buff << " src=\"" << JS_LIB_URL << "\"";
-            path_to_lib = buff.str();
-        }
+        lib = buff.str();
 
         std::ofstream html(path);
         html << "<!DOCTYPE html>" << std::endl

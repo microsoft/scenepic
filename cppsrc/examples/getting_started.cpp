@@ -122,5 +122,5 @@ int main(int argc, char *argv[])
     scene.place(projz->canvas_id(), "3", "2");
 
     // The scene is complete, so we write it to a standalone HTML file.
-    scene.save_as_html("getting_started.html", "Getting Started", true, "");
+    scene.save_as_html("getting_started.html", "Getting Started");
 }

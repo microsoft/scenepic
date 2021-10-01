@@ -66,7 +66,6 @@ PYBIND11_MODULE(_scenepic, m)
     m.attr("Lavender") = Colors::Lavender;
     m.attr("Magenta") = Colors::Magenta;
     m.attr("Gray") = Colors::Gray;
-    m.attr("PathToScenePicLib") = JS_LIB_URL;
 
     m.def("scale", py::overload_cast<float>(&Transforms::scale), "scale"_a, R"scenepicdoc(
         Creates a 3D homogeneous scale matrix.
@@ -1684,13 +1683,11 @@ PYBIND11_MODULE(_scenepic, m)
             Args:
                 path (str): the path to the file on disk
                 title (str, optional): the HTML title. Defaults to "ScenePic".
-                embed_library (bool, optional): whether to embed the javascript library in
-                                                the page. Defaults to True.
                 head_html (str, optional): the raw HTML to place in the HEAD tag. Defaults to None.
                 body_html (str, optional): the raw HTML to place in the BODY tag. Defaults to None.
         )scenepicdoc",
              "path"_a, "title"_a = "ScenePic ",
-             "embed_library"_a = true, "head_html"_a = "", "body_html"_a = "")
+             "head_html"_a = "", "body_html"_a = "")
         .def_property_readonly("script_cleared", &Scene::script_cleared,
                                "bool: Whether the script has been cleared");
 }
