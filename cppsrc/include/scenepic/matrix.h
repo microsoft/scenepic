@@ -164,7 +164,7 @@ Eigen::Matrix<typename Derived::Scalar, Derived::RowsAtCompileTime, Derived::Col
 template <typename Derived>
 Eigen::Matrix<typename Derived::Scalar, Derived::RowsAtCompileTime, Derived::ColsAtCompileTime> random(float min, float max)
 {
-    return random<typename Derived>(Derived::RowsAtCompileTime, Derived::ColsAtCompileTime, min, max);
+    return random<Derived>(Derived::RowsAtCompileTime, Derived::ColsAtCompileTime, min, max);
 }
 
 } // namespace scenepic

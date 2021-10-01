@@ -304,8 +304,8 @@ void images_and_textures()
     for (int i = 0; i < n_frames; ++i)
     {
         float angle = static_cast<float>(2 * M_PI * i / n_frames);
-        float cos = std::cosf(angle);
-        float sin = std::sinf(angle);
+        float cos = std::cos(angle);
+        float sin = std::sin(angle);
 
         // Create a focus point that allows you to "lock" the camera's translation and optionally orientation by pressing the "l" key
         sp::Vector axis(1, 0, 1);
@@ -561,7 +561,7 @@ void camera_movement()
         // for the second camera, we will spin the camera in a spiral around the scene
         // we can do this using the look-at initialization, which provides a straightforward
         // "look at" interface for camera placement.
-        sp::Vector camera_center(4 * std::cosf(angle), i * 4.0f / num_frames - 2, 4 * std::sinf(angle));
+        sp::Vector camera_center(4 * std::cos(angle), i * 4.0f / num_frames - 2, 4 * std::sin(angle));
         sp::Camera spiral_camera(camera_center, sp::Vector(0, 0.5f, 0));
 
         // we can add frustums directly using the ScenePic camera objects
