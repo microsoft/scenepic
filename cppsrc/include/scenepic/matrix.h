@@ -151,10 +151,13 @@ Eigen::Matrix<typename Derived::Scalar, Derived::RowsAtCompileTime, Derived::Col
 {
     typedef Eigen::Matrix<typename Derived::Scalar, Derived::RowsAtCompileTime, Derived::ColsAtCompileTime> MatrixType;
     MatrixType result = MatrixType::Random(rows, cols);
-    float offset = 1 + min;
+    // Eigen produces matrices with values ranging from -1 to 1
+    // so we offset it by 1, and scale it by 1/2 in addition to
+    // the requested range/offset.
+    result = result.array() + 1;
     float scale = (max - min) / 2;
-    result = result.array() + offset;
     result = result * scale;
+    result = result.array() + min;
     return result;
 }
 

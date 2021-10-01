@@ -55,10 +55,12 @@ int main(int argc, char *argv[])
     cube->add_cube(sp::Colors::White);
 
     // let's create our spheres as well, using some different colors
+    std::vector<std::string> sphere_names = {"red", "green", "blue"};
     std::vector<sp::Color> sphere_colors = {sp::Colors::Red, sp::Colors::Green, sp::Colors::Blue};
     std::vector<std::shared_ptr<sp::Mesh>> spheres;
-    std::transform(sphere_colors.begin(), sphere_colors.end(), std::back_inserter(spheres), [&](const sp::Color &color){
-        auto mesh = scene.create_mesh();
+    std::transform(sphere_names.begin(), sphere_names.end(), sphere_colors.begin(), std::back_inserter(spheres), [&](const std::string& name, const sp::Color &color){
+        // by placing each sphere on a different layer, we can toggle them on and off
+        auto mesh = scene.create_mesh(name + "_sphere", name);
         mesh->add_sphere(color, sp::Transforms::scale(0.5));
         return mesh;
     });
@@ -108,6 +110,9 @@ int main(int argc, char *argv[])
                 float y = positions(k, (j + 1) % positions.cols()) * 50 + 100;
                 proj_frame->add_circle(x, y, 12.5, sp::Colors::Black, 1.0f, sphere_colors[k]);
             }
+
+            // let's add some label text
+            proj_frame->add_text(proj->canvas_id(), 10, 190, sp::Colors::White, 16);
         }
     }
 

@@ -19,9 +19,9 @@ def _main():
     # space. We will create one 3D canvas to display the full scene, and then
     # some 2D canvases which will show projections of the scene.
     main = scene.create_canvas_3d(width=600, height=600)
-    projx = scene.create_canvas_2d(width=200, height=200)
-    projy = scene.create_canvas_2d(width=200, height=200)
-    projz = scene.create_canvas_2d(width=200, height=200)
+    projx = scene.create_canvas_2d("projx", width=200, height=200)
+    projy = scene.create_canvas_2d("projy", width=200, height=200)
+    projz = scene.create_canvas_2d("projz", width=200, height=200)
 
     # the scene object is also used to create Mesh objects that will be added
     # to frames. We are going to create an animation of some spheres orbiting
@@ -35,10 +35,12 @@ def _main():
     cube.add_cube(color=sp.Colors.White)
 
     # let's create our spheres as well, using some different colors
+    sphere_names = ["red", "green", "blue"]
     sphere_colors = [sp.Colors.Red, sp.Colors.Green, sp.Colors.Blue]
     spheres = []
-    for i, color in enumerate(sphere_colors):
-        sphere = scene.create_mesh("sphere_{}".format(i))
+    for name, color in zip(sphere_names, sphere_colors):
+        # by placing each sphere on a different layer, we can toggle them on and off
+        sphere = scene.create_mesh("{}_sphere".format(name), layer_id=name)
         sphere.add_sphere(color=color, transform=sp.Transforms.scale(0.5))
         spheres.append(sphere)
 
@@ -80,6 +82,9 @@ def _main():
 
             for point, color in zip(points, sphere_colors):
                 proj_frame.add_circle(point[0], point[1], 12.5, fill_color=color)
+
+            # let's add some label text
+            proj_frame.add_text(proj.canvas_id, 10, 190, size_in_pixels=16)
 
     # this will make user interactions happen to all canvases simultaneously
     scene.link_canvas_events(main, projx, projy, projz)

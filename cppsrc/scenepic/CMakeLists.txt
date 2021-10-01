@@ -4,7 +4,7 @@ configure_file("${CMAKE_CURRENT_SOURCE_DIR}/js_lib.h.in" "${CMAKE_CURRENT_BINARY
 
 set( SOURCES
   audio_track.cpp
-  base64.cpp
+  cpp-base64/base64.cpp
   camera.cpp
   canvas2d.cpp
   canvas3d.cpp

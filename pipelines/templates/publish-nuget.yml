@@ -9,7 +9,5 @@ steps:
   inputs:
     command: 'push'
     packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
-    nuGetFeedType: 'internal'
-    publishVstsFeed: 'Analog/$(svt.feed)'
   continueOnError: true
   displayName: Publish NuGet

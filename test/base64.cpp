@@ -16,8 +16,8 @@ int test_base64()
     std::vector<std::uint8_t> expected(static_cast<std::size_t>(file_size));
     file.read((char*) &expected[0], file_size);
 
-    std::string encoded = base64_encode(expected.data(), static_cast<unsigned int>(expected.size()));
-    std::string decoded = base64_decode(encoded);
+    std::string encoded = scenepic::base64_encode(expected.data(), static_cast<unsigned int>(expected.size()));
+    std::string decoded = scenepic::base64_decode(encoded);
 
     std::vector<std::uint8_t> actual(decoded.begin(), decoded.end());
 

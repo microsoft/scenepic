@@ -5,7 +5,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(MSBuildThisFileDirectory)lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies Condition="'$(Configuration)'=='@CMAKE_BUILD_TYPE@'">@SVT_NUGET_LIB@;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(Configuration)'=='@CMAKE_BUILD_TYPE@'">@SCENEPIC_NUGET_LIB@;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Target Name="EnsureDynamicRuntimeLibrary" BeforeTargets="PrepareForBuild">

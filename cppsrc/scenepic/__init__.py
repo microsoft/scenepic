@@ -1,35 +1,32 @@
-"""The Science Visualizaton Toolkit (SVT) python interface module.
+"""ScenePic python interface module.
 
-All platforms have good support for 2D images, with well-recognized
-formats such as PNG and JPEG that can be viewed out of the box (no
-installation) and shared trivially.
+All platforms have good support for 2D images, with well-recognized formats
+such as PNG and JPEG that can be viewed out of the box (no installation)
+and shared trivially.
 
 However, while many formats exist for 3D data, none are well-supported
-without installation of tools such as MeshLab, Blender, etc.  Windows
-is at the beginning of a journey to fixing that with Windows Mixed
-Reality and Paint 3D, but it is still early days.
+without installation of tools such as MeshLab, Blender, etc.
 
-SVT (Science Visualization Toolkit) was created for 3D computer
-vision researchers such as those in Analog (Science).  SVT was
-designed as a lightweight, reuseable 3D visualization library,
-with the following desiderata in mind:
+ScenePic was created for 3D computer vision researchers such as those
+working on [HoloLens](https://www.microsoft.com/en-gb/hololens)
+and [Mesh](https://www.microsoft.com/en-us/mesh) at Microsoft.
+It was designed to be a lightweight, reuseable 3D visualization
+library, with the following desiderata in mind:
 
 - Make experimentation with 3D data near effortless
 - Incredibly easy to create and share 3D results
-- zero-install sharing of detailed 3D results using HTML
-- based on modern web standards so usable with any modern
-    browser (tested in Edge and Chrome)
-- embeddable in other HTML documents
+  * zero-install sharing of detailed 3D results using HTML
+  * based on modern web standards so usable with any modern browser
+    (tested in Edge, FireFox and Chrome)
+  * embeddable in other HTML documents
 - Performant
-- based on WebGL
+  * based on WebGL
 - High quality visuals
 - Works both offline or interactively in client-server setup
 - Simple, clean API
-- friendly Python front-end
-- basic mesh json file format
-- other language front ends easy to add
-- Extensible to WebVR in future
-- use HoloLens in our science workflow
+  * friendly Python front-end
+  * basic mesh json file format
+  * other language front ends easy to add
 """
 
 from typing import Tuple, Union

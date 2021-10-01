@@ -564,7 +564,7 @@ void camera_movement()
         sp::Vector camera_center(4 * std::cosf(angle), i * 4.0f / num_frames - 2, 4 * std::sinf(angle));
         sp::Camera spiral_camera(camera_center, sp::Vector(0, 0.5f, 0));
 
-        // we can add frustums directly using the SVT camera objects
+        // we can add frustums directly using the ScenePic camera objects
         auto frustums = scene.create_mesh();
         frustums->add_camera_frustum(spin_camera, sp::Colors::Red);
         frustums->add_camera_frustum(spiral_camera, sp::Colors::Green);

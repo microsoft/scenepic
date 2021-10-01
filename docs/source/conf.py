@@ -33,8 +33,7 @@ release = '1.0.0'
 extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.napoleon",
-    "sphinx_autodoc_typehints",
-    "sphinx_markdown_builder"
+    "sphinx_autodoc_typehints"
 ]
 
 napoleon_use_param = True

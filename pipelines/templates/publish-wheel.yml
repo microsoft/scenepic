@@ -1,13 +1,11 @@
 steps:
 - task: TwineAuthenticate@1
   displayName: 'Twine Authenticate '
-  inputs:
-    artifactFeed: Analog/$(svt.feed)
 
 - script: |
     pip install twine
     python -m twine --version
-    twine upload -r $(svt.feed) --config-file $(PYPIRC_PATH) dist/*.whl
+    twine upload --config-file $(PYPIRC_PATH) dist/*.whl
   
   displayName: 'Upload wheel'
   continueOnError: true

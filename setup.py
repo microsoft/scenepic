@@ -31,7 +31,7 @@ REQUIRES_DEV = [
     "requests",
     "sphinx",
     "sphinx-autodoc-typehints",
-    "sphinx-markdown-builder",
+    "sphinx-rtd-theme",
     "twine",
     "wheel"
 ]

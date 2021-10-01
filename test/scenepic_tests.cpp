@@ -46,8 +46,8 @@ Eigen::MatrixXf to_matrix(const std::string& buffer)
 
 void assert_buffer_equal(const sp::Json::Value &actual, const sp::Json::Value &expected, int &result, const std::string &tag, float epsilon)
 {
-    std::string actual_buffer = base64_decode(actual.asString());
-    std::string expected_buffer = base64_decode(expected.asString());
+    std::string actual_buffer = scenepic::base64_decode(actual.asString());
+    std::string expected_buffer = scenepic::base64_decode(expected.asString());
     Eigen::MatrixXf actual_matrix = to_matrix(actual_buffer);
     Eigen::MatrixXf expected_matrix = to_matrix(expected_buffer);
 
@@ -93,8 +93,8 @@ std::vector<float> decompress_buffer(const std::string &raw_buffer, float min_va
 
 void assert_quantized_buffer_equal(const sp::Json::Value &actual, const sp::Json::Value &expected, int &result, const std::string &tag, float epsilon)
 {
-    std::string actual_buffer = base64_decode(actual["QuantizedBuffer"].asString());
-    std::string expected_buffer = base64_decode(expected["QuantizedBuffer"].asString());
+    std::string actual_buffer = scenepic::base64_decode(actual["QuantizedBuffer"].asString());
+    std::string expected_buffer = scenepic::base64_decode(expected["QuantizedBuffer"].asString());
 
     std::vector<float> actual_values = decompress_buffer(actual_buffer, actual["MinValue"].asFloat(), actual["MaxValue"].asFloat());
     std::vector<float> expected_values = decompress_buffer(expected_buffer, expected["MinValue"].asFloat(), expected["MaxValue"].asFloat());
