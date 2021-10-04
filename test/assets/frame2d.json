@@ -1,0 +1,21 @@
+[
+	{
+		"CommandType": "AddFrame",
+		"FrameId": "0"
+	},
+	{
+		"CommandType": "FrameCommands",
+		"Commands": [
+			{
+				"CommandType": "SetCoordinates",
+				"CoordinateBuffer": "eAEDAAAAAAEAAAAAAg=="
+			},
+			{
+				"CommandType": "AddCircles",
+				"InfoBuffer": "eAFjYICBBQ4MDA32AAZPAaABAAAABA==",
+				"StyleBuffer": "eAEBCAD3/wAAAAABAAAAAAwAAgEAAAAI"
+			}
+		],
+		"FrameId": "0"
+	}
+]

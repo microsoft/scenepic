@@ -1,0 +1,101 @@
+parameters:
+- name: vmImage
+  default: ''
+
+
+jobs:
+- job: WindowsPython
+  strategy: 
+    matrix:
+      Python36_Win32:
+        python.version: '3.6'
+        python.arch: 'x86'
+      Python37_Win32:
+        python.version: '3.7'
+        python.arch: 'x86'
+      Python38_Win32:
+        python.version: '3.8'
+        python.arch: 'x86'
+      Python39_Win32:
+        python.version: '3.9'
+        python.arch: 'x86'
+      Python36_x64:
+        python.version: '3.6'
+        python.arch: 'x64'
+      Python37_x64:
+        python.version: '3.7'
+        python.arch: 'x64'
+      Python38_x64:
+        python.version: '3.8'
+        python.arch: 'x64'
+      Python39_x64:
+        python.version: '3.9'
+        python.arch: 'x64'
+
+  pool:
+    name: Azure Pipelines
+    vmImage: ${{ parameters.vmImage }}
+
+  steps:
+  - task: UsePythonVersion@0
+    displayName: 'Use Python $(python.version)'
+    inputs:
+      versionSpec: '$(python.version)'
+      architecture: '$(python.arch)'
+
+  - task: CmdLine@2
+    inputs:
+      script: |
+        python -m pip install --upgrade pip
+        pip install requests
+            
+        cd ci
+        python download_deps.py
+      
+    displayName: 'Get dependencies'
+
+  - template: npm-steps.yml
+
+  - template: build-and-test-python.yml
+
+- job: WindowsCPP
+  pool:
+    name: Azure Pipelines
+    vmImage: ${{ parameters.vmImage }}
+
+  strategy: 
+    matrix:
+      Release:
+        cmake.build: 'Release'
+      Debug:
+        cmake.build: 'Debug'
+
+  steps:
+  - task: UsePythonVersion@0
+    displayName: 'Use Python 3.8'
+    inputs:
+      versionSpec: '3.8'
+      architecture: 'x64'
+
+  - task: CmdLine@2
+    inputs:
+      script: |
+        python -m pip install --upgrade pip
+        pip install requests
+
+        cd ci
+        python download_deps.py
+      
+    displayName: 'Get dependencies'
+
+  - template: npm-steps.yml
+
+  - template: build-and-test-cpp.yml
+    parameters:
+      cmake_args: '-G"Visual Studio 16 2019" -Ax64'
+      cmake_build: $(cmake.build)
+
+  - task: CMake@1
+    displayName: 'CMake install'
+    inputs:
+      cmakeArgs: '--build . --config $(cmake.build) --target INSTALL'

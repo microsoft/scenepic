@@ -1,0 +1,16 @@
+{
+	"CameraSpace": false,
+	"CommandType": "DefineMesh",
+	"Definition": {
+		"IndexBufferType": "UInt16",
+		"LineBuffer": "eAEDAAAAAAEAAAAAAg==",
+		"PrimitiveType": "MultiColorMesh",
+		"TriangleBuffer": "eAEBBgD5/wAAAQACAAAOAAQBAAAAAw==",
+		"VertexBuffer": "eAGFijENADAIBNnqgqRG+lslVE8N4AUfmCKElcBtdzmiig/Rh812Fl+Ez0+27nGm+w8IAwAAAAk="
+	},
+	"DoubleSided": false,
+	"IsBillboard": false,
+	"IsLabel": false,
+	"LayerId": null,
+	"MeshId": "triangle"
+}

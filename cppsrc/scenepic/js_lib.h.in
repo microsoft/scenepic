@@ -1,0 +1,17 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
+#ifndef _SCENEPIC_JS_LIB_H_
+#define _SCENEPIC_JS_LIB_H_
+
+#include <string>
+#include <vector>
+
+namespace scenepic
+{
+const std::vector<std::string> JS_LIB_SRC = {
+    R"js(@SCENEPIC_JS_LIB_SRC@)js"
+};
+} // namespace scenepic
+
+#endif

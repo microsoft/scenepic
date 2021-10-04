@@ -1,0 +1,16 @@
+{
+	"CameraSpace": false,
+	"CommandType": "DefineMesh",
+	"Definition": {
+		"IndexBufferType": "UInt16",
+		"LineBuffer": "eAEFwDNwGAAAAMCvbdu2bdu2bdu2bdu2bds2oi3HCGGMFNYo4YwW3hgRjBXROJGMF9kEUUwU1STRTBbdFDFMFdM0sUwX2wxxzBTXLPHMFt8cCcyV0DyJzJfYAkkslNQiySyW3BIpLJXSMqksl9oKaayU1irprJbeGhmsldE6mayX2QZZbJTVJtlslt0WOWyV0za5bJfbDnnslNcu+eyW3x4F7FXQPoXsV9gBRRxU1CHFHFbcESUcVdIxpRxX2gllnFTWKeWcVt4ZFZxV0TmVnFfZBVVcVNUl1VxW3RU1XFXTNbVcV9sNddxU1y313FbfHQ3c1dA9jdzX2ANNPNTUI8081twTLTzV0jOtPNfaC2281NYr7bzW3hsdvNXRO52819kHXXzU1SfdfNbdFz181dM3vXzX2w99/NTXL/381t8fA/w10D+D/DdYgCECDRVkmGDDhQgFId95ln0AAAAC",
+		"PrimitiveType": "MultiColorMesh",
+		"TriangleBuffer": "eAEDAAAAAAEAAAAAAw==",
+		"VertexBuffer": "eAGN18GNFEEMRuG+kcUKEmGbCyEQDwmQAyGQAXAmKcqlsre1B3+2NNJq6+nvN257eua6vv++3l6v16kfv769fnr59/nDy9f1vzy/JswqMvE3mDjvmO0Cn2DkvBk4b2biIyauI5+oCSPnqImPmLwnYOh8zshMfDQ/A+d9NmHgvM8mPg1Ts9z4JNM5F9M4FzPxAaMdTEbO2sFiJj5i4jryiZowco6a+IjBPCdD53NGZuKj+Rk4awefZ2QmPh0T19A8H6Z1TqZzTmbiA4Y7eBg5cweTmfiIeby3jqFzZomZ+IjRPB+GzprnZCY+mp+BM3fw4Upm4tMx6dv5HKZ1TqZzTmbiA4Y7eBg5cweTmfiIievIJ2rCyDlq4iNG8/zu/beMnDXPj/N2fgbO3MHHNchMfBqmfBufZNrvz8k0zsVMfMBoB5ORs3awmImPmLiOfKImjJyjJj5iMM/J0PlxvZaZ+Gh+Bs7awec1yEx8Gubj37eXmJ9/zHTOlXMPfL70TLjIORg5x7mcdw6ctw+co+QcJecs5twDH/V5ZbDPi2GfF8M+R476HD5wjnPO82I4z4uR886B8/ZpnHOWO+dkOudkOufKaZzLB87awWTkrB2snHvgA+coOUfJOYs598BHfV4Z7PNi2OfFsM+Roz6Hj+YZO5gM5xk7WDlw1g7u+4AdTKZzTqZzrpx74ANn7WAyctYOVs498IFzvjcxcs5izj3wUZ9XBvu8GPZ5MXLWDpaP5hk7mAznGTtYOffAp/vciPek5+Bh2s+Nw3TOldM4lw+c+Rw8jJz5HMwcOPM5uJh9P+AcJecs5sB5+6jP536IYZ/P9ZijPoeP5lnPwcNwnvUczBw4awfTt/3+fJj2+/NhOufKaZzLB878PXgYOfP3YObAmb8Hz/2Uc5Scs5hzD3zU55XBPi+GfV4M+xw56nP4aJ6xg8lwnvV7MHPg3O/gf7+QTzP6AAAACQ=="
+	},
+	"DoubleSided": false,
+	"IsBillboard": false,
+	"IsLabel": false,
+	"LayerId": null,
+	"MeshId": "line_cloud"
+}

@@ -1,0 +1,551 @@
+[
+	{
+		"CommandType": "SetSceneId",
+		"SceneId": "test"
+	},
+	{
+		"CommandType": "SetFPS",
+		"Value": 30.0
+	},
+	{
+		"CameraSpace": false,
+		"CommandType": "DefineMesh",
+		"Definition": {
+			"Color": "eAFjYGiwZ4BiAAy9Aj4DAAAAAQ==",
+			"IndexBufferType": "UInt16",
+			"LineBuffer": "eAEDAAAAAAEAAAAAAg==",
+			"NearestNeighborTexture": true,
+			"PrimitiveType": "SingleColorMesh",
+			"TextureId": "rand",
+			"TriangleBuffer": "eAFjYGBkYGJgAGJmBhYGNgZWIMkOpAEBdAApBAAAAAM=",
+			"UseTextureAlpha": false,
+			"VertexBuffer": "eAFtjYEJACAIBH8zV/vNarRQqT5TEIV7PQAD2VK0u0/fG74zwSWvPDJ+2/Az1c9siu/xC2/9hX/+8p+2ANIkHOEIAAAACA=="
+		},
+		"DoubleSided": false,
+		"IsBillboard": false,
+		"IsLabel": false,
+		"LayerId": "Test",
+		"MeshId": "Mesh-0"
+	},
+	{
+		"CameraSpace": false,
+		"CommandType": "DefineMesh",
+		"Definition": {
+			"Color": "eAFjYGiwZ4ACAAdDAMADAAAAAQ==",
+			"IndexBufferType": "UInt16",
+			"LineBuffer": "eAEDAAAAAAEAAAAAAg==",
+			"PrimitiveType": "SingleColorMesh",
+			"TriangleBuffer": "eAFjYGBmYARCZgYmIGRmAAFGIAsAAQoAEwQAAAAD",
+			"VertexBuffer": "eAFNyCESQEAYBtAvSLpiXEO021TjAJqyyREIDsDMuoKkbba/4AZGVM0ohnEBVtr25gGgO+716qQ6LDJ+qYX5smUAuPVkPUTjcvMfq6PLSdb7/5PaIjEH3HxyDuPjlfQCecInbwQAAAAG"
+		},
+		"DoubleSided": false,
+		"IsBillboard": false,
+		"IsLabel": false,
+		"LayerId": null,
+		"MeshId": "Mesh-1"
+	},
+	{
+		"CameraSpace": false,
+		"CommandType": "DefineMesh",
+		"Definition": {
+			"IndexBufferType": "UInt16",
+			"LineBuffer": "eAGNzMkNwCAAA0FzQ/ovOCMqQKv5WU6+JIVKozOYLDbHqqiqqWtoamnr3NXLV+x+MLYA3R4AAAAC",
+			"PrimitiveType": "MultiColorMesh",
+			"TriangleBuffer": "eAENxEkCQDAQALDc7buiqP8/0hySSq1RhVanN8SD0WS2xIvVZpfi5HC65Di7PV4lLj4/YGwDJQwAAAAD",
+			"VertexBuffer": "eAGN0rEOgjAQBmAWHoLNpJObiSboUFxgcBdnmNmZ1YTdDavPYuUZmF18DDdbDeZovLuSMLT3hf96NAjgs1+PlmB9USrhzGxbJc86Mw43ryKXy7QlzVVF+hA2pFntTjoSvaRMbMxU9DfKnE3WMWw0ZUSZyzhtSbMwZ3/UGWnsDKtNOcdNd/++RQdqZg2drQeMsXUfw2VB4/b8L4szE8bYLF8z2keyMDPMkDNcFjRwdlgWZz4zJMzvX3h8Z9ij+sGMO0PKcFlwhm7f7rkw495VyuBZb/bdqBojAAAACQ=="
+		},
+		"DoubleSided": false,
+		"IsBillboard": false,
+		"IsLabel": false,
+		"LayerId": "Primitives",
+		"MeshId": "Mesh-2"
+	},
+	{
+		"CameraSpace": false,
+		"CommandType": "DefineMesh",
+		"Definition": {
+			"Color": "eAFjYGiwZ4ACAAdDAMADAAAAAQ==",
+			"IndexBufferType": "UInt16",
+			"InstanceBuffer": "eAHVx0ENAAAIw8BzhjWcYY1Mxpr0cewhp1HmB1jiGt0QAAAAAw==",
+			"InstanceBufferHasColors": false,
+			"InstanceBufferHasRotations": false,
+			"LineBuffer": "eAEDAAAAAAEAAAAAAg==",
+			"PrimitiveType": "SingleColorMesh",
+			"TriangleBuffer": "eAENy1sCQgAABdHpTXmTJCFJ2v8Gm4977tfAmQ24rW7Z6Y697jnogaMeOemJQANCDe0uXIk0ItaYRBNSTck0I9ecQgtKLam0shuoGd2Nl2uY3J23a5ndg4/rWNyTr+tZ3cDPjVpbjraT31hOtrPfWs62i99ZLrar39us/AEFdQmJKAAAAAM=",
+			"VertexBuffer": "eAFdks8rg3Ecxy8uykia3DYXZGkHF7bnx9nBkpqWchEplpy4SCk/TitKTqaRhihLbp5n0y4cWJJSUspK0vLIH2B7f+r7rPd2+B72au9Xn/fn86SD9nVaPe2hLRfCC+PZRY8dfW/Uf17XLeZHxQ5rrlDWelN+m3lsc0t78mraf8io4WNw/MJhwcd8Fo4AHAfwMS8oxzh8zB3lkJmY98GxA8cMfMxdxz18zF3HX10v9A+7D9wEN8FN/LbMwKAeb0rKfqq83Wm2u32Olj20xF/lqycfVinYGvb1B2XOKp9C/hguAy7meeS9cHXBxbwT+WW4nuFiLvlJ5ar5P/K3ysX8EXk/XCtwMT9VvSbqevHdZS/7n0NmYjqWLWOfUezzBfscDo3kWu4cI3GeMeQ7OMP+49h/fiCQS9nb9tKCbpaQd10byIsrCdcb8uIahUvy4vLANY98D1yXcEn+Bq4LuCTvuvaQF5fcLYL8l3I1IL8LVwSuK+RdVwb5Rbhkrqya5RsuXc2yBhffl/vyfbkv35f78n25L9+X+/J9uS/fl/vyfbkv35f78n25bwViwM/ZKgAAAAY="
+		},
+		"DoubleSided": false,
+		"IsBillboard": false,
+		"IsLabel": false,
+		"LayerId": "Noise",
+		"MeshId": "Mesh-3"
+	},
+	{
+		"CameraSpace": false,
+		"CommandType": "DefineMesh",
+		"Definition": {
+			"IndexBufferType": "UInt16",
+			"LineBuffer": "eAGNzMkNwCAAA0FzQ/ovOCMqQKv5WU6+JIVKozOYLDbHqqiqqWtoamnr3NXLV+x+MLYA3R4AAAAC",
+			"PrimitiveType": "MultiColorMesh",
+			"TriangleBuffer": "eAENxEkCQDAQALDc7buiqP8/0hySSq1RhVanN8SD0WS2xIvVZpfi5HC65Di7PV4lLj4/YGwDJQwAAAAD",
+			"VertexBuffer": "eAGN0jEOgkAQBVAuYejMFrbGwlgZsDZaWhsbEwobCjsT9RgUFph4C0AKL8ERjN6Axl0JZtg4f5aEYnde+LPDeh59TrPOkqyP8S6UzFxNwkvta8eb1XQQvKoImnP8znuPJTRqtC6SLA2Q6Wtzy9IcmUOTVSCz1z0/qwiahT57UvvQmBlet8Mxb8p7825KUtNr6kzdE4ypuxgpixq7539ZklGCMVmuprPPZHGmnaFkpCxq6Oy4LMl8ZwjM7184fKfdQ/1wxp4hMlIWnaHdt30uzth3FRk+6wN3A6pGIwAAAAk="
+		},
+		"DoubleSided": false,
+		"IsBillboard": false,
+		"IsLabel": false,
+		"LayerId": "Primitives",
+		"MeshId": "Mesh-4"
+	},
+	{
+		"CameraSpace": false,
+		"CommandType": "DefineMesh",
+		"Definition": {
+			"Color": "eAFjYGiwZ4ACAAdDAMADAAAAAQ==",
+			"IndexBufferType": "UInt16",
+			"InstanceBuffer": "eAHVx0ENAAAIw8BzhjWcYY1Mxpr0cewhp1HmB1jiGt0QAAAAAw==",
+			"InstanceBufferHasColors": false,
+			"InstanceBufferHasRotations": false,
+			"LineBuffer": "eAEDAAAAAAEAAAAAAg==",
+			"PrimitiveType": "SingleColorMesh",
+			"TriangleBuffer": "eAENy1sCQgAABdHpTXmTJCFJ2v8Gm4977tfAmQ24rW7Z6Y697jnogaMeOemJQANCDe0uXIk0ItaYRBNSTck0I9ecQgtKLam0shuoGd2Nl2uY3J23a5ndg4/rWNyTr+tZ3cDPjVpbjraT31hOtrPfWs62i99ZLrar39us/AEFdQmJKAAAAAM=",
+			"VertexBuffer": "eAFdks8rg3Ecxy8uykia3DYXZGkHF7bnx9nBkpqWchEplpy4SCk/TitKTqaRhihLbp5n0y4cWJJSUspK0vLIH2B7f+r7rPd2+B72au9Xn/fn86SD9nVaPe2hLRfCC+PZRY8dfW/Uf17XLeZHxQ5rrlDWelN+m3lsc0t78mraf8io4WNw/MJhwcd8Fo4AHAfwMS8oxzh8zB3lkJmY98GxA8cMfMxdxz18zF3HX10v9A+7D9wEN8FN/LbMwKAeb0rKfqq83Wm2u32Olj20xF/lqycfVinYGvb1B2XOKp9C/hguAy7meeS9cHXBxbwT+WW4nuFiLvlJ5ar5P/K3ysX8EXk/XCtwMT9VvSbqevHdZS/7n0NmYjqWLWOfUezzBfscDo3kWu4cI3GeMeQ7OMP+49h/fiCQS9nb9tKCbpaQd10byIsrCdcb8uIahUvy4vLANY98D1yXcEn+Bq4LuCTvuvaQF5fcLYL8l3I1IL8LVwSuK+RdVwb5Rbhkrqya5RsuXc2yBhffl/vyfbkv35f78n25L9+X+/J9uS/fl/vyfbkv35f78n25bwViwM/ZKgAAAAY="
+		},
+		"DoubleSided": false,
+		"IsBillboard": false,
+		"IsLabel": false,
+		"LayerId": "Noise",
+		"MeshId": "Mesh-5"
+	},
+	{
+		"CameraSpace": false,
+		"CommandType": "DefineMesh",
+		"Definition": {
+			"IndexBufferType": "UInt16",
+			"LineBuffer": "eAGNzMkNwCAAA0FzQ/ovOCMqQKv5WU6+JIVKozOYLDbHqqiqqWtoamnr3NXLV+x+MLYA3R4AAAAC",
+			"PrimitiveType": "MultiColorMesh",
+			"TriangleBuffer": "eAENxEkCQDAQALDc7buiqP8/0hySSq1RhVanN8SD0WS2xIvVZpfi5HC65Di7PV4lLj4/YGwDJQwAAAAD",
+			"VertexBuffer": "eAGN0rEOgjAQBuDOPoJxcGIyJqI4lfgq7o6+gO8hL+DKaFJlZDAhpgtuLg5sJL6AVw3maLi7kjC094X/elQp/Bw2vSVaV807lczycU5tmYGjzXF30vOkZc292ZuFtqyZrF4mryPWjMFc6shw5gZZsbasMdDzLGlZs4azV2XGGjfD0TOPaVNcf++2QDVYY+fqSjCuHmKkLGz8noeyJDMVjMsKNb19Iosy3QwlI2Vhg2dHZUnmO0PG/P9FwHe6Pa4fyvgz5IyUhWfo9+2fizL+XeUMnfUBGpCyPiMAAAAJ"
+		},
+		"DoubleSided": false,
+		"IsBillboard": false,
+		"IsLabel": false,
+		"LayerId": "Primitives",
+		"MeshId": "Mesh-6"
+	},
+	{
+		"CameraSpace": false,
+		"CommandType": "DefineMesh",
+		"Definition": {
+			"Color": "eAFjYGiwZ4ACAAdDAMADAAAAAQ==",
+			"IndexBufferType": "UInt16",
+			"InstanceBuffer": "eAHVx0ENAAAIw8BzhjWcYY1Mxpr0cewhp1HmB1jiGt0QAAAAAw==",
+			"InstanceBufferHasColors": false,
+			"InstanceBufferHasRotations": false,
+			"LineBuffer": "eAEDAAAAAAEAAAAAAg==",
+			"PrimitiveType": "SingleColorMesh",
+			"TriangleBuffer": "eAENy1sCQgAABdHpTXmTJCFJ2v8Gm4977tfAmQ24rW7Z6Y697jnogaMeOemJQANCDe0uXIk0ItaYRBNSTck0I9ecQgtKLam0shuoGd2Nl2uY3J23a5ndg4/rWNyTr+tZ3cDPjVpbjraT31hOtrPfWs62i99ZLrar39us/AEFdQmJKAAAAAM=",
+			"VertexBuffer": "eAFdks8rg3Ecxy8uykia3DYXZGkHF7bnx9nBkpqWchEplpy4SCk/TitKTqaRhihLbp5n0y4cWJJSUspK0vLIH2B7f+r7rPd2+B72au9Xn/fn86SD9nVaPe2hLRfCC+PZRY8dfW/Uf17XLeZHxQ5rrlDWelN+m3lsc0t78mraf8io4WNw/MJhwcd8Fo4AHAfwMS8oxzh8zB3lkJmY98GxA8cMfMxdxz18zF3HX10v9A+7D9wEN8FN/LbMwKAeb0rKfqq83Wm2u32Olj20xF/lqycfVinYGvb1B2XOKp9C/hguAy7meeS9cHXBxbwT+WW4nuFiLvlJ5ar5P/K3ysX8EXk/XCtwMT9VvSbqevHdZS/7n0NmYjqWLWOfUezzBfscDo3kWu4cI3GeMeQ7OMP+49h/fiCQS9nb9tKCbpaQd10byIsrCdcb8uIahUvy4vLANY98D1yXcEn+Bq4LuCTvuvaQF5fcLYL8l3I1IL8LVwSuK+RdVwb5Rbhkrqya5RsuXc2yBhffl/vyfbkv35f78n25L9+X+/J9uS/fl/vyfbkv35f78n25bwViwM/ZKgAAAAY="
+		},
+		"DoubleSided": false,
+		"IsBillboard": false,
+		"IsLabel": false,
+		"LayerId": "Noise",
+		"MeshId": "Mesh-7"
+	},
+	{
+		"CameraSpace": false,
+		"CommandType": "DefineMesh",
+		"Definition": {
+			"IndexBufferType": "UInt16",
+			"LineBuffer": "eAGNzMkNwCAAA0FzQ/ovOCMqQKv5WU6+JIVKozOYLDbHqqiqqWtoamnr3NXLV+x+MLYA3R4AAAAC",
+			"PrimitiveType": "MultiColorMesh",
+			"TriangleBuffer": "eAENxEkCQDAQALDc7buiqP8/0hySSq1RhVanN8SD0WS2xIvVZpfi5HC65Di7PV4lLj4/YGwDJQwAAAAD",
+			"VertexBuffer": "eAGN0rEOgjAQBuDOPoJxcGIyJqI4lfgq7o6+gO8hL+DKaFJlZDAhpgtuLg5sJL6AVw3maLi7kjC094X/elQp/Bw2vSVaV807lczycU5tmYGjzXF30vOkZc292ZuFtqyZrF4mryPWjMFc6shw5gZZsbasMdDzLGlZs4azV2XGGjfD0TOPaVNcf++2QDVYY+fqSjCuHmKkLGz8noeyJDMVjMsKNb19Iosy3QwlI2Vhg2dHZUnmO0PG/P9FwHe6Pa4fyvgz5IyUhWfo9+2fizL+XeUMnfUBGpCyPiMAAAAJ"
+		},
+		"DoubleSided": false,
+		"IsBillboard": false,
+		"IsLabel": false,
+		"LayerId": "Primitives",
+		"MeshId": "Mesh-8"
+	},
+	{
+		"CameraSpace": false,
+		"CommandType": "DefineMesh",
+		"Definition": {
+			"Color": "eAFjYGiwZ4ACAAdDAMADAAAAAQ==",
+			"IndexBufferType": "UInt16",
+			"InstanceBuffer": "eAHVx0ENAAAIw8BzhjWcYY1Mxpr0cewhp1HmB1jiGt0QAAAAAw==",
+			"InstanceBufferHasColors": false,
+			"InstanceBufferHasRotations": false,
+			"LineBuffer": "eAEDAAAAAAEAAAAAAg==",
+			"PrimitiveType": "SingleColorMesh",
+			"TriangleBuffer": "eAENy1sCQgAABdHpTXmTJCFJ2v8Gm4977tfAmQ24rW7Z6Y697jnogaMeOemJQANCDe0uXIk0ItaYRBNSTck0I9ecQgtKLam0shuoGd2Nl2uY3J23a5ndg4/rWNyTr+tZ3cDPjVpbjraT31hOtrPfWs62i99ZLrar39us/AEFdQmJKAAAAAM=",
+			"VertexBuffer": "eAFdks8rg3Ecxy8uykia3DYXZGkHF7bnx9nBkpqWchEplpy4SCk/TitKTqaRhihLbp5n0y4cWJJSUspK0vLIH2B7f+r7rPd2+B72au9Xn/fn86SD9nVaPe2hLRfCC+PZRY8dfW/Uf17XLeZHxQ5rrlDWelN+m3lsc0t78mraf8io4WNw/MJhwcd8Fo4AHAfwMS8oxzh8zB3lkJmY98GxA8cMfMxdxz18zF3HX10v9A+7D9wEN8FN/LbMwKAeb0rKfqq83Wm2u32Olj20xF/lqycfVinYGvb1B2XOKp9C/hguAy7meeS9cHXBxbwT+WW4nuFiLvlJ5ar5P/K3ysX8EXk/XCtwMT9VvSbqevHdZS/7n0NmYjqWLWOfUezzBfscDo3kWu4cI3GeMeQ7OMP+49h/fiCQS9nb9tKCbpaQd10byIsrCdcb8uIahUvy4vLANY98D1yXcEn+Bq4LuCTvuvaQF5fcLYL8l3I1IL8LVwSuK+RdVwb5Rbhkrqya5RsuXc2yBhffl/vyfbkv35f78n25L9+X+/J9uS/fl/vyfbkv35f78n25bwViwM/ZKgAAAAY="
+		},
+		"DoubleSided": false,
+		"IsBillboard": false,
+		"IsLabel": false,
+		"LayerId": "Noise",
+		"MeshId": "Mesh-9"
+	},
+	{
+		"CameraSpace": false,
+		"CommandType": "DefineMesh",
+		"Definition": {
+			"IndexBufferType": "UInt16",
+			"LineBuffer": "eAGNzMkNwCAAA0FzQ/ovOCMqQKv5WU6+JIVKozOYLDbHqqiqqWtoamnr3NXLV+x+MLYA3R4AAAAC",
+			"PrimitiveType": "MultiColorMesh",
+			"TriangleBuffer": "eAENxEkCQDAQALDc7buiqP8/0hySSq1RhVanN8SD0WS2xIvVZpfi5HC65Di7PV4lLj4/YGwDJQwAAAAD",
+			"VertexBuffer": "eAGN0jEOgkAQBVAuYejMFrbGwlgZsDZaWhsbEwobCjsT9RgUFph4C0AKL8ERjN6Axl0JZtg4f5aEYnde+LPDeh59TrPOkqyP8S6UzFxNwkvta8eb1XQQvKoImnP8znuPJTRqtC6SLA2Q6Wtzy9IcmUOTVSCz1z0/qwiahT57UvvQmBlet8Mxb8p7825KUtNr6kzdE4ypuxgpixq7539ZklGCMVmuprPPZHGmnaFkpCxq6Oy4LMl8ZwjM7184fKfdQ/1wxp4hMlIWnaHdt30uzth3FRk+6wN3A6pGIwAAAAk="
+		},
+		"DoubleSided": false,
+		"IsBillboard": false,
+		"IsLabel": false,
+		"LayerId": "Primitives",
+		"MeshId": "Mesh-10"
+	},
+	{
+		"CameraSpace": false,
+		"CommandType": "DefineMesh",
+		"Definition": {
+			"Color": "eAFjYGiwZ4ACAAdDAMADAAAAAQ==",
+			"IndexBufferType": "UInt16",
+			"InstanceBuffer": "eAHVx0ENAAAIw8BzhjWcYY1Mxpr0cewhp1HmB1jiGt0QAAAAAw==",
+			"InstanceBufferHasColors": false,
+			"InstanceBufferHasRotations": false,
+			"LineBuffer": "eAEDAAAAAAEAAAAAAg==",
+			"PrimitiveType": "SingleColorMesh",
+			"TriangleBuffer": "eAENy1sCQgAABdHpTXmTJCFJ2v8Gm4977tfAmQ24rW7Z6Y697jnogaMeOemJQANCDe0uXIk0ItaYRBNSTck0I9ecQgtKLam0shuoGd2Nl2uY3J23a5ndg4/rWNyTr+tZ3cDPjVpbjraT31hOtrPfWs62i99ZLrar39us/AEFdQmJKAAAAAM=",
+			"VertexBuffer": "eAFdks8rg3Ecxy8uykia3DYXZGkHF7bnx9nBkpqWchEplpy4SCk/TitKTqaRhihLbp5n0y4cWJJSUspK0vLIH2B7f+r7rPd2+B72au9Xn/fn86SD9nVaPe2hLRfCC+PZRY8dfW/Uf17XLeZHxQ5rrlDWelN+m3lsc0t78mraf8io4WNw/MJhwcd8Fo4AHAfwMS8oxzh8zB3lkJmY98GxA8cMfMxdxz18zF3HX10v9A+7D9wEN8FN/LbMwKAeb0rKfqq83Wm2u32Olj20xF/lqycfVinYGvb1B2XOKp9C/hguAy7meeS9cHXBxbwT+WW4nuFiLvlJ5ar5P/K3ysX8EXk/XCtwMT9VvSbqevHdZS/7n0NmYjqWLWOfUezzBfscDo3kWu4cI3GeMeQ7OMP+49h/fiCQS9nb9tKCbpaQd10byIsrCdcb8uIahUvy4vLANY98D1yXcEn+Bq4LuCTvuvaQF5fcLYL8l3I1IL8LVwSuK+RdVwb5Rbhkrqya5RsuXc2yBhffl/vyfbkv35f78n25L9+X+/J9uS/fl/vyfbkv35f78n25bwViwM/ZKgAAAAY="
+		},
+		"DoubleSided": false,
+		"IsBillboard": false,
+		"IsLabel": false,
+		"LayerId": "Noise",
+		"MeshId": "Mesh-11"
+	},
+	{
+		"CommandType": "DefineImage",
+		"Data": "iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAIAAAACDbGyAAAAW0lEQVR4nAFQAK//ALkuqVW5aSCZx8UUbYyo5AIXLm4xCly9vxE4uPy7A5gBJqgq+M2XBla7rHMAtz0NAsb/Ukda2pvz5OwruNFZMwBZJLfGG+zpzkfABFNEF9eqwiUHRJMCPgAAAABJRU5ErkJggg==",
+		"ImageId": "rand",
+		"Type": "png"
+	},
+	{
+		"CanvasId": "Canvas-0",
+		"CommandType": "AddCanvas3D",
+		"Height": 500,
+		"Width": 500
+	},
+	{
+		"CanvasId": "Canvas-1",
+		"CommandType": "AddCanvas3D",
+		"Height": 500,
+		"Width": 500
+	},
+	{
+		"CanvasId": "Canvas-0",
+		"CommandType": "CanvasCommands",
+		"Commands": [
+			{
+				"CommandType": "SetCamera",
+				"Value": {
+					"Projection": "eAFtiLEJADAIBL/KEKkySuayClnFNQRrd3EIETvx4Dg4+vuiQcOz8xRIi+Us2QDh0AhlBAAAAAQ=",
+					"WorldToCamera": "eAGNyDERAAAMArF3VmtIqzSOmYWMAR1lOX3OZYQEPQQAAAAE"
+				}
+			},
+			{
+				"CommandType": "SetShading",
+				"Value": {
+					"AmbientLightColor": "eAEzNja2N4ZiABBKAokDAAAAAQ==",
+					"BackgroundColor": "eAFjYEAAAAAMAAEDAAAAAQ==",
+					"DirectionalLightColor": "eAGbNXOm3SwoBgApbQYfAwAAAAE=",
+					"DirectionalLightDir": "eAEBDADz/wAAAEAAAIA/AAAAQAbHAUABAAAAAw=="
+				}
+			},
+			{
+				"CommandType": "ConfigureUserInterface",
+				"MouseWheelTranslationSpeed": 0.0050000000000000001,
+				"PointerAltKeyMultiplier": 0.20000000000000001,
+				"PointerRotationSpeed": 0.01
+			},
+			{
+				"CommandType": "SetLayerSettings",
+				"Value": {
+					"Noise": {
+						"filled": false,
+						"opacity": 0.5,
+						"wireframe": false
+					},
+					"Primitives": {
+						"filled": false,
+						"opacity": 1.0,
+						"wireframe": false
+					},
+					"Test": {
+						"filled": true,
+						"opacity": 1.0,
+						"wireframe": false
+					}
+				}
+			},
+			[
+				{
+					"CommandType": "AddFrame",
+					"FrameId": "0"
+				},
+				{
+					"CommandType": "FrameCommands",
+					"Commands": [
+						{
+							"CommandType": "AddMesh",
+							"MeshId": "Mesh-0",
+							"Transform": "eAF9ybEJAAAAwrB+5mue7ioIdmzAYnqvzQpo9wO8BAAAAAQ="
+						},
+						{
+							"CommandType": "AddMesh",
+							"MeshId": "Mesh-2"
+						},
+						{
+							"CommandType": "AddMesh",
+							"MeshId": "Mesh-3"
+						}
+					],
+					"FrameId": "0"
+				}
+			],
+			[
+				{
+					"CommandType": "AddFrame",
+					"FrameId": "1"
+				},
+				{
+					"CommandType": "FrameCommands",
+					"Commands": [
+						{
+							"CommandType": "AddMesh",
+							"MeshId": "Mesh-0",
+							"Transform": "eAF1ybERAAAEBMHvSkZNRmJEX4laJTLjwluAhtP/Slo9Y502hpAGJQQAAAAE"
+						},
+						{
+							"CommandType": "AddMesh",
+							"MeshId": "Mesh-4"
+						},
+						{
+							"CommandType": "AddMesh",
+							"MeshId": "Mesh-5"
+						}
+					],
+					"FrameId": "1"
+				}
+			],
+			[
+				{
+					"CommandType": "AddFrame",
+					"FrameId": "2"
+				},
+				{
+					"CommandType": "FrameCommands",
+					"Commands": [
+						{
+							"CommandType": "AddMesh",
+							"MeshId": "Mesh-0",
+							"Transform": "eAF1ybENAAAERNGbQiSGMYJ5dLeYWE2jE7/8D6Dj9L+yaE1Zpw+DlAXJBAAAAAQ="
+						},
+						{
+							"CommandType": "AddMesh",
+							"MeshId": "Mesh-6"
+						},
+						{
+							"CommandType": "AddMesh",
+							"MeshId": "Mesh-7"
+						}
+					],
+					"FrameId": "2"
+				}
+			],
+			[
+				{
+					"CommandType": "AddFrame",
+					"FrameId": "3"
+				},
+				{
+					"CommandType": "FrameCommands",
+					"Commands": [
+						{
+							"CommandType": "AddMesh",
+							"MeshId": "Mesh-0",
+							"Transform": "eAF1yLENAAAEBMCfQiSGMYJ5dBaTX02lElceUI7jv7agpnBvAIgUBkkEAAAABA=="
+						},
+						{
+							"CommandType": "AddMesh",
+							"MeshId": "Mesh-8"
+						},
+						{
+							"CommandType": "AddMesh",
+							"MeshId": "Mesh-9"
+						}
+					],
+					"FrameId": "3"
+				}
+			],
+			[
+				{
+					"CommandType": "AddFrame",
+					"FrameId": "4"
+				},
+				{
+					"CommandType": "FrameCommands",
+					"Commands": [
+						{
+							"CommandType": "AddMesh",
+							"MeshId": "Mesh-0",
+							"Transform": "eAF1yLENAAAEBMDfSsdMohGVSaxiNZVKXHlACo7/gorVrfcGixAGpQQAAAAE"
+						},
+						{
+							"CommandType": "AddMesh",
+							"MeshId": "Mesh-10"
+						},
+						{
+							"CommandType": "AddMesh",
+							"MeshId": "Mesh-11"
+						}
+					],
+					"FrameId": "4"
+				}
+			]
+		]
+	},
+	{
+		"CanvasId": "Canvas-1",
+		"CommandType": "CanvasCommands",
+		"Commands": [
+			{
+				"CommandType": "SetCamera",
+				"Value": {
+					"Projection": "eAFtiLEJADAIBL/KEKkySuayClnFNQRrd3EIETvx4Dg4+vuiQcOz8xRIi+Us2QDh0AhlBAAAAAQ=",
+					"WorldToCamera": "eAGFyDERAAAIA7HXxLFjrc6wxjF3aMaABpNOXbB/B2rjBKIEAAAABA=="
+				}
+			},
+			{
+				"CommandType": "SetShading",
+				"Value": {
+					"AmbientLightColor": "eAEzNja2N4ZiABBKAokDAAAAAQ==",
+					"BackgroundColor": "eAFjYGiwZ4BiAAy9Aj4DAAAAAQ==",
+					"DirectionalLightColor": "eAGbNXOm3SwoBgApbQYfAwAAAAE=",
+					"DirectionalLightDir": "eAEBDADz/wAAAEAAAIA/AAAAQAbHAUABAAAAAw=="
+				}
+			},
+			{
+				"CommandType": "ConfigureUserInterface",
+				"MouseWheelTranslationSpeed": 0.0050000000000000001,
+				"PointerAltKeyMultiplier": 0.20000000000000001,
+				"PointerRotationSpeed": 0.01
+			},
+			[
+				{
+					"CommandType": "AddFrame",
+					"FrameId": "0"
+				},
+				{
+					"CommandType": "FrameCommands",
+					"Commands": [
+						{
+							"CommandType": "AddMesh",
+							"MeshId": "Mesh-1",
+							"Transform": "eAFtiDERAAAEAM1KUcGkgxTC6KEaA2fx0/+zIIUpwdCe3G/78PcVL3MG+wQAAAAE"
+						},
+						{
+							"CommandType": "SetFocusPoint",
+							"Position": "eAFjYACBhi0MDJ5mAAdYAbQBAAAAAw=="
+						}
+					],
+					"FrameId": "0"
+				}
+			],
+			[
+				{
+					"CommandType": "AddFrame",
+					"FrameId": "1"
+				},
+				{
+					"CommandType": "FrameCommands",
+					"Commands": [
+						{
+							"CommandType": "AddMesh",
+							"MeshId": "Mesh-1",
+							"Transform": "eAFtiLERAEAEwH6yN5QF7GEOrTuTmMAOFJxGqiTmCCH8X1OuVm96ofMlJHYLmQQAAAAE"
+						},
+						{
+							"CommandType": "SetFocusPoint",
+							"Position": "eAFjYACBhi0MDJ5mAAdYAbQBAAAAAw=="
+						}
+					],
+					"FrameId": "1"
+				}
+			],
+			[
+				{
+					"CommandType": "AddFrame",
+					"FrameId": "2"
+				},
+				{
+					"CommandType": "FrameCommands",
+					"Commands": [
+						{
+							"CommandType": "AddMesh",
+							"MeshId": "Mesh-1",
+							"Transform": "eAFtiDERAAAEAEWyWsikgR5SSKAaA2fx0/97oChTwtAu3m/7sPcVXxsHwwQAAAAE"
+						},
+						{
+							"CommandType": "SetFocusPoint",
+							"Position": "eAFjYACBhi0MDJ5mAAdYAbQBAAAAAw=="
+						}
+					],
+					"FrameId": "2"
+				}
+			],
+			[
+				{
+					"CommandType": "AddFrame",
+					"FrameId": "3"
+				},
+				{
+					"CommandType": "FrameCommands",
+					"Commands": [
+						{
+							"CommandType": "AddMesh",
+							"MeshId": "Mesh-1",
+							"Transform": "eAFtiDERAAAEAEWyWsikgR5SSKAaA2fx0/97oChTwtAu3m/7sPcVXxsHwwQAAAAE"
+						},
+						{
+							"CommandType": "SetFocusPoint",
+							"Position": "eAFjYACBhi0MDJ5mAAdYAbQBAAAAAw=="
+						}
+					],
+					"FrameId": "3"
+				}
+			],
+			[
+				{
+					"CommandType": "AddFrame",
+					"FrameId": "4"
+				},
+				{
+					"CommandType": "FrameCommands",
+					"Commands": [
+						{
+							"CommandType": "AddMesh",
+							"MeshId": "Mesh-1",
+							"Transform": "eAFtiLERAEAEwH6yN5QF7GEOrTuTmMAOFJxGqiTmCCH8X1OuVm96ofMlJHYLmQQAAAAE"
+						},
+						{
+							"CommandType": "SetFocusPoint",
+							"Position": "eAFjYACBhi0MDJ5mAAdYAbQBAAAAAw=="
+						}
+					],
+					"FrameId": "4"
+				}
+			]
+		]
+	}
+]

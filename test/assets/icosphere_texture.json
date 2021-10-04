@@ -1,0 +1,20 @@
+{
+	"CameraSpace": false,
+	"CommandType": "DefineMesh",
+	"Definition": {
+		"Color": "eAFjYGiwZ4BiAAy9Aj4DAAAAAQ==",
+		"IndexBufferType": "UInt16",
+		"LineBuffer": "eAEDAAAAAAEAAAAAAg==",
+		"NearestNeighborTexture": true,
+		"PrimitiveType": "SingleColorMesh",
+		"TextureId": "uv",
+		"TriangleBuffer": "eAEdkId2gkAURMeIEMoiloAgTURKes///1kue/a8O7PF9xyMpEixDNzAmBUp1JZzA40SmGhFGV7s9Mh+R+3hXh615fagJ/YH6giPCnCe9S96hm96pWukB3ygd9svZSXKYCafSui/Yf6JFSuHuRxciIb8stBZn/qA3/qCP3QKmFFSFSyhi/fQ5X/VVANreI9foWu1ulAd7Oi+eB+3xl1ZF/Ww1x3OQW/cXDWgC110wP2iIzc3TehE95G7yZ62nI+a0ZnOLXcz+440DszQjJQnm7hjQsGsnoSFTVnwKmc/kMYlY4k7k7KEg/6YUdOxgpNNWfOqws98RZ98Ka4hacqrBv8Ppb4V7lAAAAAD",
+		"UseTextureAlpha": false,
+		"VertexBuffer": "eAGllT9LA0EQxUNEq2ApSMBCsFCwE6yye4VliiDod7DQYDq7rbRKK2hvcyJY2Ho2FilOBQtBwUZSWliLAfdtdu4mt3MX0Kt+7Mv8ebPDpnN6nET3r6pmvw5jfLPDbW3PFNMztp/2OmISFu8Y31d3Q/kY0jNGPPRi3ZyNagwugro5G/XdXNfFujlHuhBf6CHSiJe8g0f9BeTm+kQPc8NnMPTAO7je26P4wDv4s3vTgn7bfLJnRh1tLinO12/7rThe05YTe+78cm4MVtRD2rY1TOJjcZ4x9POzRTcf1KE7YYxY5KdY6sHP9srlZzWRO+NRf1d7PagNnumtOp15QmzGO8uHGv5YHLSMkd/3f8d65+w8SL2D460P5fMHGvjH+mPzEWZk3P0WfRNjvo9pGvRNPL6/mJ+Rf8dj/zHPOfE7+Ef+Eu+WI7df0u6A63b+8CftDvjyfd7NX7q7fH6xmJv2I03bYm6aL+tfukM37+JeEGO+yC/tBu2X14PZ0X5Cl3Y39+/mH+wmzc/3X7EjNXr/hPfT8Pfxz3rZ+/BycEL3V6mXzN7l9x7+pZft/7j+xP6Levn/h6H/h8r60+Kn6b/D6DhmOAAAAAg="
+	},
+	"DoubleSided": false,
+	"IsBillboard": false,
+	"IsLabel": false,
+	"LayerId": null,
+	"MeshId": "icosphere_texture"
+}

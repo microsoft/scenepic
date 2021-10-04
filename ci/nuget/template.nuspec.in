@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>@SCENEPIC_NUGET_NAME@</id>
+    <version>@SCENEPIC_VERSION@</version>
+    <title>@SCENEPIC_NUGET_NAME@</title>
+    <authors>Microsoft Corp.</authors>
+    <owners>Microsoft Corp.</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">	MS-PL</license>
+    <projectUrl>https://github.com/microsoft/scenepic</projectUrl>
+    <description>C++ visualization library for 3D scenes.</description>
+    <releaseNotes>@SCENEPIC_RELEASE_NOTES@</releaseNotes>
+    <tags>native</tags>
+  </metadata>
+</package>

@@ -1,0 +1,11 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
+#ifndef _SCENEPIC_VERSION_H_
+#define _SCENEPIC_VERSION_H_
+
+#define SCENEPIC_VERSION_MAJOR @SCENEPIC_VERSION_MAJOR@
+#define SCENEPIC_VERSION_MINOR @SCENEPIC_VERSION_MINOR@
+#define SCENEPIC_VERSION_REVISION @SCENEPIC_VERSION_REVISION@
+
+#endif

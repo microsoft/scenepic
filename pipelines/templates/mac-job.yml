@@ -1,0 +1,58 @@
+parameters:
+- name: vmImage
+  default: ''
+
+
+jobs:
+- job: MacPython
+  strategy: 
+    matrix:
+      Python36:
+        python.version: '3.6'
+      Python37:
+        python.version: '3.7'
+      Python38:
+        python.version: '3.8'
+      Python39:
+        python.version: '3.9'
+
+  pool:
+    name: Azure Pipelines
+    vmImage: ${{ parameters.vmImage }}
+
+  steps:
+  - task: UsePythonVersion@0
+    displayName: 'Use Python $(python.version)'
+    inputs:
+      versionSpec: '$(python.version)'
+
+  - bash: |
+      python -m pip install --upgrade pip
+      brew install doxygen
+    
+    displayName: 'Get dependencies'
+
+  - template: npm-steps.yml
+
+  - template: build-and-test-python.yml
+
+- job: MacCPP
+  pool:
+    name: Azure Pipelines
+    vmImage: ${{ parameters.vmImage }}
+
+  steps:
+  - task: UsePythonVersion@0
+    displayName: 'Use Python 3.8'
+    inputs:
+      versionSpec: '3.8'
+
+  - bash: |
+      python -m pip install --upgrade pip
+      brew install doxygen
+    
+    displayName: 'Get dependencies'
+
+  - template: npm-steps.yml
+
+  - template: build-and-test-cpp.yml

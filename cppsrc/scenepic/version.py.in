@@ -1,0 +1,6 @@
+"""ScenePic version."""
+
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
+__version__ = "@SCENEPIC_VERSION@"

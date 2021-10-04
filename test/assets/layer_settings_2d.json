@@ -1,0 +1,314 @@
+{
+	"CanvasId": "Canvas-1",
+	"CommandType": "CanvasCommands",
+	"Commands": [
+		{
+			"CommandType": "SetBackgroundStyle",
+			"Value": "#000000"
+		},
+		{
+			"CommandType": "SetMedia",
+			"MediaId": "Video-0"
+		},
+		{
+			"CommandType": "SetLayerSettings",
+			"Value": {
+				"one": {
+					"filled": true,
+					"opacity": 0.5,
+					"renderOrder": 1,
+					"wireframe": false
+				},
+				"two": {
+					"filled": true,
+					"opacity": 0.90000000000000002,
+					"wireframe": false
+				}
+			}
+		},
+		[
+			{
+				"CommandType": "AddFrame",
+				"FrameId": "0"
+			},
+			{
+				"CommandType": "FrameCommands",
+				"Commands": [
+					{
+						"CommandType": "SetCoordinates",
+						"CoordinateBuffer": "eAGNjskNACAIBLcUO/H6WJalWI5lGYNE4AOTTHaeCzC7kaOTlpm1KMYgqf6VzazXd2V76F8Hd5YOLRsAAAAC"
+					},
+					{
+						"CommandType": "AddText",
+						"FillStyle": "#ffffff",
+						"Font": "sans-serif",
+						"Index": 0,
+						"SizeInPixels": 12.0,
+						"Text": "null"
+					},
+					{
+						"CommandType": "AddText",
+						"FillStyle": "#ffffff",
+						"Font": "sans-serif",
+						"Index": 1,
+						"LayerId": "one",
+						"SizeInPixels": 12.0,
+						"Text": "one"
+					},
+					{
+						"CommandType": "AddText",
+						"FillStyle": "#ffffff",
+						"Font": "sans-serif",
+						"Index": 2,
+						"LayerId": "two",
+						"SizeInPixels": 12.0,
+						"Text": "two"
+					},
+					{
+						"CommandType": "AddImage",
+						"ImageId": "null",
+						"Index": null,
+						"PositionType": "fit",
+						"Scale": 1.0,
+						"Smoothed": false
+					},
+					{
+						"CommandType": "AddImage",
+						"ImageId": "one",
+						"Index": null,
+						"LayerId": "one",
+						"PositionType": "fit",
+						"Scale": 1.0,
+						"Smoothed": false
+					},
+					{
+						"CommandType": "AddImage",
+						"ImageId": "two",
+						"Index": null,
+						"LayerId": "two",
+						"PositionType": "fit",
+						"Scale": 1.0,
+						"Smoothed": false
+					},
+					{
+						"CommandType": "AddVideo",
+						"Index": 24,
+						"PositionType": "manual",
+						"Scale": 1.0,
+						"Smoothed": false
+					},
+					{
+						"CommandType": "AddVideo",
+						"Index": 25,
+						"LayerId": "one",
+						"PositionType": "manual",
+						"Scale": 1.0,
+						"Smoothed": false
+					},
+					{
+						"CommandType": "AddVideo",
+						"Index": 26,
+						"LayerId": "two",
+						"PositionType": "manual",
+						"Scale": 1.0,
+						"Smoothed": false
+					},
+					{
+						"CommandType": "AddLines",
+						"InfoBuffer": "eAFjZmBlYABidiDJzsAJJDkZeBkYgVgQSAoyiAJJAAeMAIIGAAAAAw==",
+						"LayerIds": [
+							[
+								"",
+								1
+							],
+							[
+								"one",
+								1
+							],
+							[
+								"two",
+								1
+							],
+							[
+								"",
+								1
+							],
+							[
+								"one",
+								1
+							],
+							[
+								"two",
+								1
+							]
+						],
+						"StyleBuffer": "eAGNxQENAAAMwrDev+mDA5Yshctt8QEAwAAHBgAAAAg=",
+						"WidthBuffer": "eAFjYGiwZ8CCATRWBHsGAAAAAQ=="
+					},
+					{
+						"CommandType": "AddCircles",
+						"InfoBuffer": "eAFVx8EJAAAMwkA3q6N19EJFwUAeB7gdndjm+wBL2AO9AwAAAAQ=",
+						"LayerIds": [
+							[
+								"",
+								1
+							],
+							[
+								"one",
+								1
+							],
+							[
+								"two",
+								1
+							]
+						],
+						"StyleBuffer": "eAFjYGBgYARiEECmAQA8AAQDAAAACA=="
+					}
+				],
+				"FrameId": "0"
+			}
+		],
+		[
+			{
+				"CommandType": "AddFrame",
+				"FrameId": "1"
+			},
+			{
+				"CommandType": "FrameCommands",
+				"Commands": [
+					{
+						"CommandType": "SetCoordinates",
+						"CoordinateBuffer": "eAGNjskNACAIBLcUO/H6WJalWI5lGYNE4AOTTHaeCzC7kaOTlpm1KMYgqf6VzazXd2V76F8Hd5YOLRsAAAAC"
+					},
+					{
+						"CommandType": "AddText",
+						"FillStyle": "#ffffff",
+						"Font": "sans-serif",
+						"Index": 0,
+						"SizeInPixels": 12.0,
+						"Text": "null"
+					},
+					{
+						"CommandType": "AddText",
+						"FillStyle": "#ffffff",
+						"Font": "sans-serif",
+						"Index": 1,
+						"LayerId": "one",
+						"SizeInPixels": 12.0,
+						"Text": "one"
+					},
+					{
+						"CommandType": "AddText",
+						"FillStyle": "#ffffff",
+						"Font": "sans-serif",
+						"Index": 2,
+						"LayerId": "two",
+						"SizeInPixels": 12.0,
+						"Text": "two"
+					},
+					{
+						"CommandType": "AddImage",
+						"ImageId": "null",
+						"Index": null,
+						"PositionType": "fit",
+						"Scale": 1.0,
+						"Smoothed": false
+					},
+					{
+						"CommandType": "AddImage",
+						"ImageId": "one",
+						"Index": null,
+						"LayerId": "one",
+						"PositionType": "fit",
+						"Scale": 1.0,
+						"Smoothed": false
+					},
+					{
+						"CommandType": "AddImage",
+						"ImageId": "two",
+						"Index": null,
+						"LayerId": "two",
+						"PositionType": "fit",
+						"Scale": 1.0,
+						"Smoothed": false
+					},
+					{
+						"CommandType": "AddVideo",
+						"Index": 24,
+						"PositionType": "manual",
+						"Scale": 1.0,
+						"Smoothed": false
+					},
+					{
+						"CommandType": "AddVideo",
+						"Index": 25,
+						"LayerId": "one",
+						"PositionType": "manual",
+						"Scale": 1.0,
+						"Smoothed": false
+					},
+					{
+						"CommandType": "AddVideo",
+						"Index": 26,
+						"LayerId": "two",
+						"PositionType": "manual",
+						"Scale": 1.0,
+						"Smoothed": false
+					},
+					{
+						"CommandType": "AddLines",
+						"InfoBuffer": "eAFjZmBlYABidiDJzsAJJDkZeBkYgVgQSAoyiAJJAAeMAIIGAAAAAw==",
+						"LayerIds": [
+							[
+								"",
+								1
+							],
+							[
+								"one",
+								1
+							],
+							[
+								"two",
+								1
+							],
+							[
+								"",
+								1
+							],
+							[
+								"one",
+								1
+							],
+							[
+								"two",
+								1
+							]
+						],
+						"StyleBuffer": "eAGNxQENAAAMwrDev+mDA5Yshctt8QEAwAAHBgAAAAg=",
+						"WidthBuffer": "eAFjYGiwZ8CCATRWBHsGAAAAAQ=="
+					},
+					{
+						"CommandType": "AddCircles",
+						"InfoBuffer": "eAFVx8EJAAAMwkA3q6N19EJFwUAeB7gdndjm+wBL2AO9AwAAAAQ=",
+						"LayerIds": [
+							[
+								"",
+								1
+							],
+							[
+								"one",
+								1
+							],
+							[
+								"two",
+								1
+							]
+						],
+						"StyleBuffer": "eAFjYGBgYARiEECmAQA8AAQDAAAACA=="
+					}
+				],
+				"FrameId": "1"
+			}
+		]
+	]
+}

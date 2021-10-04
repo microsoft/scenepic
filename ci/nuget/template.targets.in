@@ -1,0 +1,15 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(MSBuildThisFileDirectory)lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies Condition="'$(Configuration)'=='@CMAKE_BUILD_TYPE@'">@SCENEPIC_NUGET_LIB@;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <Target Name="EnsureDynamicRuntimeLibrary" BeforeTargets="PrepareForBuild">
+    <Error Condition="'$(Configuration)' == 'Debug' And '%(ClCompile.RuntimeLibrary)' != 'MultiThreadedDebugDLL'" Text="NuGet package requires Multi-threaded Debug DLL version of the runtime library." />
+    <Error Condition="'$(Configuration)' == 'Release' And '%(ClCompile.RuntimeLibrary)' != 'MultiThreadedDLL'" Text="NuGet package requires Multi-threaded DLL version of the runtime library." />
+  </Target>
+</Project>

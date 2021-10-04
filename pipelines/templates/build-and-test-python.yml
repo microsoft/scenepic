@@ -1,0 +1,18 @@
+steps:
+- bash: |
+    pip install --use-deprecated=legacy-resolver -e .[dev]
+    python setup.py bdist_wheel
+  displayName: 'Build wheel'
+
+- bash: |
+    python setup.py develop
+    python -m pytest test
+
+  displayName: PyTest
+  continueOnError: true
+
+- task: PublishTestResults@2
+  displayName: 'Publish Test Results **/test-output.xml'
+  inputs:
+    testResultsFiles: '**/test-output.xml'
+    failTaskOnFailedTests: true

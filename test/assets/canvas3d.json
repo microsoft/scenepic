@@ -1,0 +1,97 @@
+{
+	"CanvasId": "canvas3d",
+	"CommandType": "CanvasCommands",
+	"Commands": [
+		{
+			"CommandType": "SetCamera",
+			"Value": {
+				"Projection" : "eAFtiLEJADAIBL/KEKkySuayClnFNQRrd3EIETvx4Dg4+vuiQcOz8xRIi+Us2QDh0AhlBAAAAAQ=",
+				"WorldToCamera": "eAGNyDERAAAMArF3VmtIqzSOmYWMAR1lOX3OZYQEPQQAAAAE"
+			}
+		},
+		{
+			"CommandType": "SetShading",
+			"Value": {
+				"AmbientLightColor": "eAEzNja2N4ZiABBKAokDAAAAAQ==",
+				"BackgroundColor": "eAFjYEAAAAAMAAEDAAAAAQ==",
+				"DirectionalLightColor": "eAGbNXOm3SwoBgApbQYfAwAAAAE=",
+				"DirectionalLightDir": "eAEBDADz/wAAAEAAAIA/AAAAQAbHAUABAAAAAw=="
+			}
+		},
+		{
+			"CommandType": "ConfigureUserInterface",
+			"MouseWheelTranslationSpeed": 0.0050000000000000001,
+			"PointerAltKeyMultiplier": 0.20000000000000001,
+			"PointerRotationSpeed": 0.01
+		},
+		[
+			{
+				"CommandType": "AddFrame",
+				"FrameId": "0"
+			},
+			{
+				"CommandType": "FrameCommands",
+				"Commands": [
+					{
+						"CommandType": "AddMesh",
+						"MeshId": "cube"
+					},
+					{
+						"CommandType": "SetFocusPoint",
+						"Position": "eAFjYGiwZ4ACAAdDAMABAAAAAw=="
+					}
+				],
+				"FrameId": "0"
+			}
+		],
+		[
+			{
+				"CommandType": "AddFrame",
+				"FrameId": "1"
+			},
+			{
+				"CommandType": "FrameCommands",
+				"Commands": [
+					{
+						"CommandType": "AddMesh",
+						"MeshId": "disc",
+						"Transform": "eAGNyDEBAAAMwrA626QhBakI4CFnwE9ZTxdu/wNgBAAAAAQ="
+					}
+				],
+				"FrameId": "1"
+			}
+		],
+		[
+			{
+				"CommandType": "AddFrame",
+				"FrameId": "2"
+			},
+			{
+				"CommandType": "FrameCommands",
+				"Commands": [
+					{
+						"CommandType": "AddMesh",
+						"MeshId": "icosphere"
+					}
+				],
+				"FrameId": "2"
+			}
+		],
+		[
+			{
+				"CommandType": "AddFrame",
+				"FrameId": "3"
+			},
+			{
+				"CommandType": "FrameCommands",
+				"Commands": [
+					{
+						"CommandType": "AddMesh",
+						"MeshId": "cylinder"
+					}
+				],
+				"FrameId": "3"
+			}
+		]
+	]
+}

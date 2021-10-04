@@ -1,0 +1,10 @@
+get_filename_component(SCENEPIC_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+include(CMakeFindDependencyMacro)
+
+find_dependency(Eigen3)
+
+if(NOT TARGET scenepic::scenepic)
+    include("${SCENEPIC_CMAKE_DIR}/scenepicTargets.cmake")
+endif()
+
+set(SCENEPIC_lIBRARIES scenepic::scenepic)

@@ -1,0 +1,16 @@
+[
+	{
+		"CommandType": "SetDropDownMenuItems",
+		"DropDownMenuId": "DropDownMenu-0",
+		"Items": [
+			"one",
+			"two",
+			"three"
+		]
+	},
+	{
+		"CommandType": "SetDropDownMenuSelection",
+		"DropDownMenuId": "DropDownMenu-0",
+		"Index": 0
+	}
+]
