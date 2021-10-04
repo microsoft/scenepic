@@ -3,7 +3,7 @@ ScenePic: 3D Visualization Made Easy
 
 © Microsoft 2021
 
-Primary Contact: <matjoh@microsoft.com>
+Primary Contact: <scenepic@microsoft.com>
 
 All platforms have good support for 2D images, with well-recognized formats
 such as PNG and JPEG that can be viewed out of the box (no installation)
