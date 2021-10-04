@@ -5322,7 +5322,7 @@ for i in range(num_frames):
     camera_center = [4*np.cos(angle), i*4/num_frames - 2, 4*np.sin(angle)]
     spiral_camera = sp.Camera(camera_center, look_at=[0, 0.5, 0])
 
-    # we can add frustums directly using the SVT camera objects
+    # we can add frustums directly using the ScenePic camera objects
     frustums = scene.create_mesh()
     frustums.add_camera_frustum(spin_camera, sp.Colors.Red)
     frustums.add_camera_frustum(spiral_camera, sp.Colors.Green)
