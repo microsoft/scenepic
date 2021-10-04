@@ -24,7 +24,7 @@
    <div id="projectname">scenepic
    &#160;<span id="projectnumber">1.0.0</span>
    </div>
-   <div id="projectbrief">C++ library for reading and writing SCENEPIC files</div>
+   <div id="projectbrief">3D Visualization Made Easy</div>
   </td>
  </tr>
  </tbody>
@@ -69,7 +69,9 @@ $(function() {
 <div class="contents">
 <div class="textblock"><p>&copy; Microsoft 2021</p>
 <p>Primary Contact: <a href="#" onclick="location.href='mai'+'lto:'+'mat'+'jo'+'h@m'+'ic'+'ros'+'of'+'t.c'+'om'; return false;">matjo<span style="display: none;">.nosp@m.</span>h@mi<span style="display: none;">.nosp@m.</span>croso<span style="display: none;">.nosp@m.</span>ft.c<span style="display: none;">.nosp@m.</span>om</a></p>
-<p><a href="http://aka.ms/scenepicdocs">API Documentation</a></p>
+<p><a href="https://microsoft.visualstudio.com/Analog/_build/latest?definitionId=74916&amp;branchName=main"><img src="https://microsoft.visualstudio.com/Analog/_apis/build/status/analog/science/svt/microsoft.scenepic?branchName=main" alt="Build Status" class="inline"/>
+</a></p>
+<p><a href="https://microsoft.github.io/scenepic/">API Documentation</a></p>
 <h2>Introduction</h2>
 <p>All platforms have good support for 2D images, with well-recognized formats such as PNG and JPEG that can be viewed out of the box (no installation) and shared trivially.</p>
 <p>However, while many formats exist for 3D data, none are well-supported without installation of tools such as MeshLab, Blender, etc.</p>
@@ -97,7 +99,7 @@ $(function() {
 </ul>
 <p>An example render:</p>
 <img src="docs/example_render.png" alt="Example Render" class="inline"/>
-<p>Here is an animation of the Getting Started tutorial ( [Python]() [C++]() ):</p>
+<p>Here is an animation of the Getting Started tutorial ( <a href="https://github.com/microsoft/scenepic/blob/main/python_examples/getting_started.py">Python</a> <a href="https://github.com/microsoft/scenepic/blob/main/cppsrc/examples/getting_started.cpp">C++</a> ):</p>
 <img src="docs/getting_started.gif" alt="Getting Started" class="inline"/>
 <h2>Overview</h2>
 <p>The core ScenePic library is written in TypeScript and based on WebGL. This is compiled down to <code>dist/scenepic.min.js</code> which is a 'minified' JavaScript library that can be loaded in HTML pages to enable ScenePic to display data.</p>
@@ -105,20 +107,20 @@ $(function() {
 <img src="docs/scenepic_anatomy.png" alt="ScenePic Anatomy" class="inline"/>
 <p>However, most users will not need interact with ScenePic's core API and scripting language directly. Instead they will use one of the client-language front end libraries to easily generate ScenePic JSON scripts. Currently supported are:</p>
 <h3>C++</h3>
-<p>Users can either clone this repository and <a href="#c-client-build-how-to">build the client library</a> directly, download a NuGet package [here](), or use one of the GitHub releases.</p>
+<p>ScenePic is fully compatible with Cmake FetchContent, and we encourage users to include the library in their projects via that mechanism. Alternatively, you can follow the instructions below to <a href="#c-client-build-how-to">build the client library</a> directly.</p>
 <h3>Python</h3>
 <p>As the Python interface is provided via a wrapper around the C++ interface, users can clone the repository and follow most of the instructions to <a href="#c-client-build-how-to">build the c++ client library</a>, but then run </p><div class="fragment"><div class="line">python setup.py develop</div></div><!-- fragment --><p> which will then build and install the <code>scenepic</code> Python wheel. Alternatively, pre-built wheels are available on [PyPi]()</p>
 <h2>Expected Usage</h2>
 <p>The main branch of the ScenePic git repository will be kept up-to-date with the latest version. We highly recommend, where possible, using the binary builds we provide. That said, the library is FetchContent compatible, and can be easily included into C++ projects where desired.</p>
 <h3>Getting Started with Python</h3>
 <p>Please follow the instructions above to either create a custom build of the library or, preferably, to install one of our pre-built binary wheels.</p>
-<p>For a quick tutorial, take a look at <a href="python_examples/getting_started.py"><code>getting_started.py</code></a>.</p>
+<p>For a quick tutorial, take a look at <a href="https://github.com/microsoft/scenepic/blob/main/python_examples/getting_started.py"><code>getting_started.py</code></a>.</p>
 <p>For a more extensive tutorial, install Python and Jupyter, and open the <code>python_examples/tutorial.ipynb</code> notebook. This tutorial also demonstrates the use of ScenePic within the interactive Jupyter notebook environment.</p>
 <p>A similar example is given in <code>python_examples/getting_started.ipynb</code>.</p>
 <p>Note: you may need to set the <code>NotebookApp.iopub_data_rate_limit</code> setting in jupyter to prevent an IOPub error. To do this, call <code>jupyter notebook --generate-config</code> to generate a config file, and then edit the appropriate line to increase the value until it works.</p>
-<p>We provide a website with full Python API documentation [here]()</p>
+<p>We provide a website with full Python API documentation <a href="https://microsoft.github.io/scenepic/python/">here</a></p>
 <h3>Getting started with C++</h3>
-<p>To see an example of how to use the library from C++ look at [the example code](). You can find the API documentation [here]()</p>
+<p>To see examples of how to use the library from C++ look at <a href="https://github.com/microsoft/scenepic/blob/main/cppsrc/examples/tutorial.cpp">the tutorial</a>. You can find the API documentation <a href="https://microsoft.github.io/scenepic/cpp">here</a></p>
 <h2>Using the HTML Client</h2>
 <img src="docs/scenepic_ui.png" alt="ScenePic UI" class="inline"/>
 <p>A ScenePic HTML page will look something like the image above. This example shows four <em>Canvas</em> objects, each of which contains several <em>Frame</em> objects (refering under the hood to a set of <em>Mesh</em> objects).</p>
@@ -135,11 +137,8 @@ $(function() {
 <p><a href="https://nodejs.org/">https://nodejs.org/</a> </p>
 </blockquote>
 </li>
-<li>TypeScript compiler &gt; <code>npm install -g typescript</code></li>
-<li><p class="startli">Install node_module dependencies locally (these don't get checked in to git)</p>
+<li><p class="startli">Install node_module dependencies locally</p>
 <p class="startli">From repository root folder: &gt; <code>npm install</code></p>
-<p class="startli">As specified in package.json, this downloads and installs packages locally under <code>node_modules</code> folder.</p>
-<p class="startli">(This folder should not be checked in and is .gitignored).</p>
 </li>
 </ul>
 <h3>Build</h3>
@@ -166,7 +165,7 @@ $(function() {
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Oct 1 2021 16:52:36 for scenepic by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Oct 4 2021 14:58:30 for scenepic by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.15
 </small></address>
