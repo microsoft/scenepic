@@ -1,4 +1,6 @@
-trigger: main
+trigger:
+- main
+
 pr: none
 
 jobs:
