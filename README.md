@@ -5,7 +5,7 @@ Primary Contact: <scenepic@microsoft.com>
 
 [![Build Status](https://microsoft.visualstudio.com/Analog/_apis/build/status/analog/science/svt/microsoft.scenepic?branchName=main)](https://microsoft.visualstudio.com/Analog/_build/latest?definitionId=74916&branchName=main)
 
-[API Documentation](https://microsoft.github.io/scenepic/)
+[API Documentation + Demos](https://microsoft.github.io/scenepic/)
 
 ## Introduction
 
