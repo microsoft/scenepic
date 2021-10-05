@@ -6,9 +6,9 @@
 
 int test_label()
 {
-    int result = EXIT_SUCCESS;
-    scenepic::Scene scene;
-    auto label = scene.create_label();
-    test::assert_equal(scene.to_json(), "label", result);
-    return result;
+  int result = EXIT_SUCCESS;
+  scenepic::Scene scene;
+  auto label = scene.create_label();
+  test::assert_equal(scene.to_json(), "label", result);
+  return result;
 }

@@ -4,28 +4,29 @@
 #ifndef _SCENEPIC_MESH_UPDATE_H_
 #define _SCENEPIC_MESH_UPDATE_H_
 
-#include <string>
-#include <vector>
-#include <cstdint>
-#include <limits>
-
 #include "json_value.h"
 #include "matrix.h"
 
+#include <cstdint>
+#include <limits>
+#include <string>
+#include <vector>
+
 namespace scenepic
 {
-/** Class which represents an update to an existing mesh in which only the vertex buffer is changed.
- *  By only updating a mesh the ScenePic file can become smaller, due to only needing to store the
- *  vertex buffer instead of the full mesh topology. 
-*/
-class MeshUpdate
-{
-public:
+  /** Class which represents an update to an existing mesh in which only the
+   *  vertex buffer is changed. By only updating a mesh the ScenePic file can
+   *  become smaller, due to only needing to store the vertex buffer instead of
+   *  the full mesh topology.
+   */
+  class MeshUpdate
+  {
+  public:
     /** The unique identifier of the original base mesh */
-    const std::string &base_mesh_id() const;
+    const std::string& base_mesh_id() const;
 
     /** The unique identifier of the newly updated mesh */
-    const std::string &mesh_id() const;
+    const std::string& mesh_id() const;
 
     /** The updated vertex buffer */
     VertexBufferRef vertex_buffer();
@@ -38,7 +39,8 @@ public:
      */
     JsonValue to_json() const;
 
-    /** The unique index of the frame or the index of its keyframe (if quantized).*/
+    /** The unique index of the frame or the index of its keyframe (if
+     * quantized).*/
     std::uint32_t frame_index() const;
 
     /** Whether this update is quantized. */
@@ -46,10 +48,14 @@ public:
 
     /** Quantize the mesh update in reference to a keyframe.
      *  \param keyframe_index the index of the keyframe
-     *  \param fixed_point_range the range to use for the fixed point representation
+     *  \param fixed_point_range the range to use for the fixed point
+     *                           representation
      *  \param keyframe_vertex_buffer the keyframe vertex buffer
      */
-    void quantize(std::uint32_t keyframe_index, float fixed_point_range, const ConstVertexBufferRef &keyframe_vertex_buffer);
+    void quantize(
+      std::uint32_t keyframe_index,
+      float fixed_point_range,
+      const ConstVertexBufferRef& keyframe_vertex_buffer);
 
     /** Unquantize the buffer (for testing purposes) */
     VertexBuffer unquantize() const;
@@ -58,22 +64,27 @@ public:
      *  \param vertex_buffer the keyframe vertex buffer
      *  \return the range in difference values
      */
-    float difference_range(const ConstVertexBufferRef &vertex_buffer) const;
+    float difference_range(const ConstVertexBufferRef& vertex_buffer) const;
 
     /** The number of quantization bins. */
-    static const std::size_t QuantizationBinCount = std::numeric_limits<FixedPointVertexBuffer::Scalar>::max();
+    static const std::size_t QuantizationBinCount =
+      std::numeric_limits<FixedPointVertexBuffer::Scalar>::max();
 
-private:
+  private:
     friend class Scene;
 
     /** Constructor.
-     * 
+     *
      * \param base_mesh_id the unique identifier of the original base mesh
      * \param mesh_id the unique identifier of the new mesh.
      * \param vertex_buffer the updated vertex buffer
      * \param frame_index the unique index of the frame
      */
-    MeshUpdate(const std::string &base_mesh_id, const std::string &mesh_id, const ConstVertexBufferRef &vertex_buffer, std::uint32_t frame_index);
+    MeshUpdate(
+      const std::string& base_mesh_id,
+      const std::string& mesh_id,
+      const ConstVertexBufferRef& vertex_buffer,
+      std::uint32_t frame_index);
 
     std::string m_base_mesh_id;
     std::string m_mesh_id;
@@ -83,7 +94,7 @@ private:
     float m_max;
     std::uint32_t m_frame_index;
     std::uint32_t m_keyframe_index;
-};
+  };
 } // namespace scenepic
 
 #endif

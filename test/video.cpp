@@ -6,12 +6,12 @@
 
 int test_video()
 {
-    int result = EXIT_SUCCESS;
+  int result = EXIT_SUCCESS;
 
-    scenepic::Scene scene;
-    auto video = scene.create_video("test");
-    video->load(test::asset_path("test.mp4"));
-    test::assert_equal(video->to_json(), "video", result);
+  scenepic::Scene scene;
+  auto video = scene.create_video("test");
+  video->load(test::asset_path("test.mp4"));
+  test::assert_equal(video->to_json(), "video", result);
 
-    return result;
+  return result;
 }

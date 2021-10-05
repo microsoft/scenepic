@@ -10,10 +10,10 @@
 
 namespace scenepic
 {
-/** A camera type */
-class Camera
-{
-public:
+  /** A camera type */
+  class Camera
+  {
+  public:
     /** Constructor.
      *  \param center the camera center in world coordinates
      *  \param rotation the camera rotation matrix
@@ -22,12 +22,13 @@ public:
      *  \param far_crop_distance the far clipping plane of the view frustum
      *  \param aspect_ratio the aspect ratio of the image
      */
-    Camera(const Vector &center,
-           const Transform &rotation,
-           double fov_y_degrees = 45.0,
-           double near_crop_distance = 0.01,
-           double far_crop_distance = 20.0,
-           double aspect_ratio = 1.0);
+    Camera(
+      const Vector& center,
+      const Transform& rotation,
+      double fov_y_degrees = 45.0,
+      double near_crop_distance = 0.01,
+      double far_crop_distance = 20.0,
+      double aspect_ratio = 1.0);
 
     /** Constructor.
      *  \param world_to_camera the world-to-camera transform.
@@ -36,18 +37,18 @@ public:
      *  \param far_crop_distance the far clipping plane of the view frustum
      *  \param aspect_ratio the aspect ratio of the image
      */
-    Camera(const Transform &world_to_camera,
-           double fov_y_degrees = 45.0,
-           double near_crop_distance = 0.01,
-           double far_crop_distance = 20.0,
-           double aspect_ratio = 1.0);
+    Camera(
+      const Transform& world_to_camera,
+      double fov_y_degrees = 45.0,
+      double near_crop_distance = 0.01,
+      double far_crop_distance = 20.0,
+      double aspect_ratio = 1.0);
 
     /** Constructor.
      *  \param world_to_camera the world-to-camera transform.
      *  \param projection matrix translating view coordinates to NDC
      */
-    Camera(const Transform &world_to_camera,
-           const Transform &projection);
+    Camera(const Transform& world_to_camera, const Transform& projection);
 
     /** Constructor.
      *  \param center the camera center
@@ -58,13 +59,14 @@ public:
      *  \param far_crop_distance the far clipping plane of the view frustum
      *  \param aspect_ratio the aspect ratio of the image
      */
-    Camera(const Vector &center = Vector(0, 0, 4),
-           const Vector &look_at = Vector(0, 0, 0),
-           const Vector &up_dir = Vector(0, 1, 0),
-           double fov_y_degrees = 45.0,
-           double near_crop_distance = 0.01,
-           double far_crop_distance = 20.0,
-           double aspect_ratio = 1.0);
+    Camera(
+      const Vector& center = Vector(0, 0, 4),
+      const Vector& look_at = Vector(0, 0, 0),
+      const Vector& up_dir = Vector(0, 1, 0),
+      double fov_y_degrees = 45.0,
+      double near_crop_distance = 0.01,
+      double far_crop_distance = 20.0,
+      double aspect_ratio = 1.0);
 
     /** The camera rotation matrix */
     Transform rotation() const;
@@ -85,13 +87,14 @@ public:
     Camera& aspect_ratio(float aspect_ratio);
 
     /** The transform placing the camera in the scene */
-    const Transform &camera_to_world() const;
+    const Transform& camera_to_world() const;
 
     /** The transform placing the world in camera coordinates */
-    const Transform &world_to_camera() const;
+    const Transform& world_to_camera() const;
 
-    /** The GL project matrix, transforming from camera view coordinates to NDC */
-    const Transform &projection() const;
+    /** The GL project matrix, transforming from camera view coordinates to NDC
+     */
+    const Transform& projection() const;
 
     /** Convert this object into ScenePic json.
      *  \return a json value
@@ -107,12 +110,11 @@ public:
     /** A value indicating "no camera" */
     static Camera None();
 
-protected:
+  protected:
     Transform m_camera_to_world;
     Transform m_world_to_camera;
     Transform m_projection;
-};
-
+  };
 
 } // namespace scenepic
 
