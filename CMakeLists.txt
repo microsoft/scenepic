@@ -182,7 +182,7 @@ if( SCENEPIC_FORMAT )
        test/*.h
   )
 
-  add_custom_target(screenpic_format
+  add_custom_target(scenepic_format
                     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                     COMMAND ${CLANG_FORMAT}
                     -i
