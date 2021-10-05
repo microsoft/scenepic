@@ -29,6 +29,7 @@ option( SCENEPIC_BUILD_DOCUMENTATION "Specifies whether to build the documentati
 option( SCENEPIC_BUILD_PYTHON "Specifies whether to build the python module" OFF )
 option( SCENEPIC_BUILD_TESTS "Specifies whether to build the tests" OFF )
 option( SCENEPIC_BUILD_EXAMPLES "Specifies whether to build the examples" OFF )
+option( SCENEPIC_FORMAT "Specifies whether to enable the ability to format code via clang-format" OFF )
 
 if( NOT DEFINED CMAKE_BUILD_TYPE )
   SET(CMAKE_BUILD_TYPE Debug)
@@ -168,6 +169,26 @@ endif()
 
 add_custom_target( cpp )
 add_dependencies( cpp ${CPP_TARGETS} )
+
+# -------------------- Format -------------------------------------
+
+if( SCENEPIC_FORMAT )
+  find_program(CLANG_FORMAT NAMES clang-format-10 REQUIRED )
+  file(GLOB_RECURSE ALL_SOURCE_FILES CONFIGURE_DEPENDS
+       cppsrc/scenepic/*.cpp
+       cppsrc/scenepic/*.h
+       cppsrc/include/scenepic/*
+       test/*.cpp
+       test/*.h
+  )
+
+  add_custom_target(screenpic_format
+                    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+                    COMMAND ${CLANG_FORMAT}
+                    -i
+                    ${ALL_SOURCE_FILES})
+
+endif()
 
 # -------------------- Install ------------------------------------
 
