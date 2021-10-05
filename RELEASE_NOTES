@@ -1,1 +1,2 @@
-Initial Release
+Point release pointing the repo back at the main Eigen repository. There will
+not be a binary release as part of this change.
