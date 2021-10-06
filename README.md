@@ -1,4 +1,5 @@
-# ScenePic
+ [![ScenePic](docs/hello_scenepic.gif)](https://microsoft.github.io/scenepic/zoo/hello_scenepic.html)
+
 &copy; Microsoft 2021
 
 Primary Contact: <scenepic@microsoft.com>
