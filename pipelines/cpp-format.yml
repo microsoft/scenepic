@@ -8,6 +8,7 @@ pool:
 
 steps:
 - checkout: self
+- template: templates/npm-steps.yml
 - script: |
     set -eo pipefail
     sudo apt-get update
