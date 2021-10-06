@@ -45,7 +45,7 @@ endif()
 
 target_link_libraries( ${TEST_DRIVER} scenepic::scenepic )
 target_compile_features(${TEST_DRIVER} PRIVATE cxx_std_14)
-target_include_directories(${TEST_DRIVER} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../cppsrc/scenepic/)
+target_include_directories(${TEST_DRIVER} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../src/scenepic/)
 
 foreach( test ${TESTS} )
   add_test( NAME ${test}

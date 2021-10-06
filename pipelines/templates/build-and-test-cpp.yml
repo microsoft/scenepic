@@ -11,7 +11,7 @@ steps:
 - task: CMake@1
   displayName: 'CMake config'
   inputs:
-    cmakeArgs: '.. ${{ parameters.cmake_args }} -DCMAKE_BUILD_TYPE=${{ parameters.cmake_build }} -DSCENEPIC_BUILD_TESTS=1 -DSCENEPIC_BUILD_DOCUMENTATION=1 -DCMAKE_INSTALL_PREFIX=nuget'
+    cmakeArgs: '.. ${{ parameters.cmake_args }} -DCMAKE_BUILD_TYPE=${{ parameters.cmake_build }} -DSCENEPIC_BUILD_TESTS=1 -DSCENEPIC_BUILD_DOCUMENTATION=1'
 
 - task: CMake@1
   displayName: 'CMake build'

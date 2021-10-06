@@ -153,9 +153,9 @@ set( CPP_TARGETS
   scenepic
 )
 
-add_subdirectory( cppsrc/scenepic )
+add_subdirectory( src/scenepic )
 if( SCENEPIC_BUILD_EXAMPLES OR SCENEPIC_BUILD_TESTS )
-  add_subdirectory( cppsrc/examples )
+  add_subdirectory( src/examples )
   list( APPEND CPP_TARGETS scenepic_examples )
 endif()
 if( SCENEPIC_BUILD_TESTS )
@@ -163,7 +163,7 @@ if( SCENEPIC_BUILD_TESTS )
   list( APPEND CPP_TARGETS scenepic_tests )
 endif()
 if( SCENEPIC_BUILD_DOCUMENTATION )
-  add_subdirectory( cppsrc/doc )
+  add_subdirectory( src/doc )
   list( APPEND CPP_TARGETS scenepic_doc )
 endif()
 
@@ -175,9 +175,9 @@ add_dependencies( cpp ${CPP_TARGETS} )
 if( SCENEPIC_FORMAT )
   find_program(CLANG_FORMAT NAMES clang-format-10 REQUIRED )
   file(GLOB_RECURSE ALL_SOURCE_FILES CONFIGURE_DEPENDS
-       cppsrc/scenepic/*.cpp
-       cppsrc/scenepic/*.h
-       cppsrc/include/scenepic/*
+       src/scenepic/*.cpp
+       src/scenepic/*.h
+       src/include/scenepic/*
        test/*.cpp
        test/*.h
   )
@@ -211,10 +211,10 @@ if( WIN32 )
   endif()
 endif()
 
-install(DIRECTORY cppsrc/include/ DESTINATION ${INSTALL_INCLUDEDIR})
+install(DIRECTORY src/include/ DESTINATION ${INSTALL_INCLUDEDIR})
 install(FILES 
-  ${CMAKE_CURRENT_BINARY_DIR}/cppsrc/scenepic/version.h
-  ${CMAKE_CURRENT_BINARY_DIR}/cppsrc/scenepic/js_lib.h
+  ${CMAKE_CURRENT_BINARY_DIR}/src/scenepic/version.h
+  ${CMAKE_CURRENT_BINARY_DIR}/src/scenepic/js_lib.h
   DESTINATION ${INSTALL_INCLUDEDIR}/scenepic
 )
 

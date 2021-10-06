@@ -43,7 +43,7 @@ An example render:
 
 Here is an animation of the Getting Started tutorial (
   [Python](https://github.com/microsoft/scenepic/blob/main/python_examples/getting_started.py)
-  [C++](https://github.com/microsoft/scenepic/blob/main/cppsrc/examples/getting_started.cpp)
+  [C++](https://github.com/microsoft/scenepic/blob/main/src/examples/getting_started.cpp)
 ):
 
 ![Getting Started](docs/getting_started.gif)
@@ -123,7 +123,7 @@ We provide a website with full Python API documentation [here](https://microsoft
 ### Getting started with C++
 
 To see examples of how to use the library from C++ look at 
-[the tutorial](https://github.com/microsoft/scenepic/blob/main/cppsrc/examples/tutorial.cpp).
+[the tutorial](https://github.com/microsoft/scenepic/blob/main/src/examples/tutorial.cpp).
 You can find the API documentation [here](https://microsoft.github.io/scenepic/cpp)
 
 ## Using the HTML Client

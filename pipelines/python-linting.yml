@@ -17,5 +17,5 @@ steps:
   displayName: Install flake8
 
 - script: |
-    flake8 cppsrc/scenepic test --format "##vso[task.logissue type=error;sourcepath=%(path)s;linenumber=%(row)s;columnnumber=%(col)s;code=%(code)s;]%(text)s"
+    flake8 src/scenepic test --format "##vso[task.logissue type=error;sourcepath=%(path)s;linenumber=%(row)s;columnnumber=%(col)s;code=%(code)s;]%(text)s"
   displayName: Run flake8
