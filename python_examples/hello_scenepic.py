@@ -16,6 +16,25 @@ def _get_bounds(verts: np.ndarray) -> np.ndarray:
 
 
 class Animation:
+    """This class will create the animation during its initialization.
+
+    This is one of many potential patterns to use when constructing more complex
+    visualizations. The main advantage is that you can pass all configuration
+    information into the constructor, and then share variables between
+    different stages of the visualization or animation. This animation
+    has three stages:
+
+    1. Point cloud converging to four cubes
+    2. Four cubes morphing into the ScenePic logo
+    3. Still shot on the logo
+
+    Each is constructed in a separate method, but using shared elements.
+    One element used in this particular animation is a pre-computed camera
+    track. While the user can still move the camera around freely,
+    this can be helpful for create videos from the SVT (e.g. the animated
+    GIF in the README.)
+    """
+
     def __init__(self,
                  scene: sp.Scene,
                  num_cloud_frames=30,
@@ -28,6 +47,21 @@ class Animation:
                  width=1280,
                  height=640,
                  num_points=1000):
+        """Constructor.
+
+        Args:
+            scene (sp.Scene): The ScenePic scene.
+            num_cloud_frames (int, optional): Length of cloud stage. Defaults to 30.
+            num_morph_frames (int, optional): Length of morph stage. Defaults to 60.
+            num_still_frames (int, optional): Length of still stage. Defaults to 30.
+            start_distance (float, optional): Starting camera distance. Defaults to 0.1.
+            end_distance (int, optional): Ending camera distance. Defaults to 2.
+            start_angles (tuple, optional): Starting camera angles. Defaults to (1.5, 1, -0.1).
+            end_angles (tuple, optional): Ending camera angles. Defaults to (-0.8, -0.2, 0).
+            width (int, optional): Width of the viewport. Defaults to 1280.
+            height (int, optional): Height of the viewport. Defaults to 640.
+            num_points (int, optional): Size of the point cloud. Defaults to 1000.
+        """
         self.num_cloud_frames = num_cloud_frames
         self.num_morph_frames = num_morph_frames
         self.num_still_frames = num_still_frames
@@ -42,6 +76,7 @@ class Animation:
         self.scene = scene
         self.canvas = scene.create_canvas_3d(width=width, height=height)
 
+        # load the text meshes
         scene_obj = sp.load_obj(_asset("scene.obj"))
         self.scene_mesh = scene.create_mesh(shared_color=self.colors[0], layer_id="text")
         self.scene_mesh.add_mesh(scene_obj)
@@ -53,12 +88,18 @@ class Animation:
         self.pic_mesh.add_mesh(pic_obj)
         self.pic_pos = [1.25, -0.05, 0.5]
 
+        # create the cubes for morphing
         self.cubes = [self._create_cube(scene, color) for color in self.colors]
         self.cube1_pos = [2, 0.15, 0.25]
         self.cube2_pos = [0.4, -0.05, 0.3]
         self.cube2_scale = [1.5, 0.2, 0.8]
         self.focus_point = [1, 0.25, 0.5]
 
+        # compute the angles and distances for the cameras
+        # the camera is parametrized as a "look-at" camera,
+        # with a Z-distance from the focus point that is rotated
+        # using the provided angles to get a center, and
+        # then focused on a set point.
         self.angles, self.distances = self._compute_camera_info(start_distance,
                                                                 end_distance,
                                                                 start_angles,
@@ -90,19 +131,33 @@ class Animation:
         return angles, distances
 
     def _create_camera(self, focus_point: np.ndarray) -> sp.Camera:
+        # compute the rotation matrix
         angles = self.angles[self.index]
         rotation = sp.Transforms.euler_angles_to_matrix(angles)
+
+        # create a vector at the current distance
         pos = np.array([0, 0, self.distances[self.index]], np.float32)
+
+        # rotate and offset from the focus point
         pos = rotation[:3, :3] @ pos
         pos += focus_point
+
+        # NB each call to this function will move the camera long its track
         self.index += 1
+
         return sp.Camera(pos, look_at=focus_point, aspect_ratio=self.aspect_ratio)
 
     def animate_cloud(self, num_points: int):
         num_frames = self.num_cloud_frames
+
+        # start with random positions
         start_positions = np.random.uniform(-1, 1, (num_points, 3)).astype(np.float32)
         end_positions = np.zeros_like(start_positions)
+
+        # group the points by which will go to each cube
         groups = [num_points // 4, num_points // 2, 3 * num_points // 4]
+ 
+        # distribute the final points randomly within each target cube
         end_positions[:groups[0]] = np.random.uniform([-0.51, 0.03, -0.22],
                                                       [-0.03, 0.51, 0.22],
                                                       (groups[0], 3))
@@ -116,6 +171,7 @@ class Animation:
                                                       [0.51, -0.03, 0.22],
                                                       (num_points - groups[2], 3))
 
+        # set the cloud colors to correspond to the target cubes
         colors = np.zeros_like(start_positions)
         colors[:groups[0]] = self.colors[0]
         colors[groups[0]:groups[1]] = self.colors[1]
@@ -136,8 +192,11 @@ class Animation:
     def animate_morph(self):
         num_frames = self.num_morph_frames
 
-        scene_pos, scene_scale = _get_bounds(self.scene_mesh.vertex_buffer["pos"])
+        # because the text will be hiding within the cubes
+        # and then eventually revealed, we need to compute
+        # some bounds information to position it correctly
 
+        scene_pos, scene_scale = _get_bounds(self.scene_mesh.vertex_buffer["pos"])
         scene_positions = np.linspace([-0.47, 0.07, 0], self.scene_pos, num_frames)
         scene_scales = np.linspace(0.4 / scene_scale, [1, 1, 1], num_frames)
         scene_scales[:, 2] = 1
@@ -149,6 +208,7 @@ class Animation:
         pic_pos = self.pic_pos.copy()
         pic_pos[2] -= 0.5 * pic_scale[2]
 
+        # create the animated positions and scales for the cubes
         positions = np.stack([np.linspace([-0.27, 0.27, 0], scene_pos, num_frames),
                               np.linspace([0.27, 0.27, 0], self.cube1_pos, num_frames),
                               np.linspace([-0.27, -0.27, 0], self.cube2_pos, num_frames),
@@ -184,6 +244,7 @@ class Animation:
         return cube
 
     def animate_still(self):
+        # this creates the ScenePic logo
         meshes = [self.scene_mesh, self.cubes[1], self.cubes[2], self.pic_mesh]
         transforms = [
             sp.Transforms.translate(self.scene_pos),
