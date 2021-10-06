@@ -18,6 +18,8 @@ set( ASSETS
   render1.png
   render2.png
   PolarBear.png
+  pic.obj
+  scene.obj
   uv.png
 )
 
@@ -29,6 +31,7 @@ endif()
 
 set( EXAMPLES
   getting_started
+  hello_scenepic
   tutorial
 )
 

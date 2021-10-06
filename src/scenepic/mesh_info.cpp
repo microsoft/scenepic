@@ -13,6 +13,7 @@ namespace scenepic
     std::size_t num_vertices,
     std::size_t num_triangles,
     bool has_uvs,
+    bool has_normals,
     bool has_colors)
   {
     if (has_uvs && has_colors)
@@ -31,6 +32,15 @@ namespace scenepic
     else
     {
       m_uv_buffer = UVBufferNone();
+    }
+
+    if (has_normals)
+    {
+      m_normal_buffer = VectorBuffer(num_vertices, 3);
+    }
+    else
+    {
+      m_normal_buffer = VectorBufferNone();
     }
 
     if (has_colors)
@@ -73,6 +83,21 @@ namespace scenepic
     return ConstUVBufferRef(m_uv_buffer);
   }
 
+  VectorBufferRef MeshInfo::normal_buffer()
+  {
+    return VectorBufferRef(m_normal_buffer);
+  }
+
+  const ConstVectorBufferRef MeshInfo::normal_buffer() const
+  {
+    return ConstVectorBufferRef(m_normal_buffer);
+  }
+
+  bool MeshInfo::has_normals() const
+  {
+    return m_normal_buffer.size();
+  }
+
   ColorBufferRef MeshInfo::color_buffer()
   {
     return ColorBufferRef(m_color_buffer);
@@ -90,13 +115,23 @@ namespace scenepic
       m_triangle_buffer, steps, project_to_limit);
     bool has_uvs = m_uv_buffer.size();
     bool has_color = m_color_buffer.size();
+    bool has_normals = m_normal_buffer.size();
     auto subdiv_mesh = std::make_shared<MeshInfo>(
-      stencil.vertex_count(), stencil.triangle_count(), has_uvs, has_color);
+      stencil.vertex_count(),
+      stencil.triangle_count(),
+      has_uvs,
+      has_normals,
+      has_color);
     subdiv_mesh->m_position_buffer = stencil.apply(m_position_buffer);
     subdiv_mesh->m_triangle_buffer = stencil.triangles();
     if (has_color)
     {
       subdiv_mesh->m_color_buffer = stencil.apply(m_color_buffer);
+    }
+
+    if (has_normals)
+    {
+      subdiv_mesh->m_normal_buffer = stencil.apply(m_normal_buffer);
     }
 
     if (has_uvs)

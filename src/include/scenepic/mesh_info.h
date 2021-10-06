@@ -19,14 +19,15 @@ namespace scenepic
      *
      *  \param num_vertices the number of vertices in the mesh
      *  \param num_triangles the number of triangles in the mesh
-     *  \param has_uvs whether the mesh will have UV information
-     *  \param has_colors whether the mesh will have per-vertex color
-     * information
+     *  \param has_uvs whether the mesh will have vertex UVs
+     *  \param has_normals whether the mesh will have vertex normals
+     *  \param has_colors whether the mesh will have vertex colors
      */
     MeshInfo(
       std::size_t num_vertices,
       std::size_t num_triangles,
       bool has_uvs,
+      bool has_normals,
       bool has_colors);
 
     /** A reference to the vector buffer containing the vertex positions. */
@@ -35,6 +36,12 @@ namespace scenepic
     /** A const reference to the vector buffer containing the vertex positions.
      */
     const ConstVectorBufferRef position_buffer() const;
+
+    /** A reference to the vector buffer containing the vertex normals. */
+    VectorBufferRef normal_buffer();
+
+    /** A const reference to the vector buffer containing the vertex normals. */
+    const ConstVectorBufferRef normal_buffer() const;
 
     /** A reference to the triangle buffer containing the triangle vertex
      * indices. */
@@ -59,6 +66,9 @@ namespace scenepic
      * values. */
     const ConstColorBufferRef color_buffer() const;
 
+    /** Whether the mesh info contains vertex normals. */
+    bool has_normals() const;
+
     /** Subdivide this mesh using loop subdivision.
      *
      *  \param steps specifies how many steps of subdivision to apply.
@@ -73,6 +83,7 @@ namespace scenepic
 
   private:
     VectorBuffer m_position_buffer;
+    VectorBuffer m_normal_buffer;
     TriangleBuffer m_triangle_buffer;
     UVBuffer m_uv_buffer;
     ColorBuffer m_color_buffer;

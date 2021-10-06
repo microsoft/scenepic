@@ -175,6 +175,7 @@ add_dependencies( cpp ${CPP_TARGETS} )
 if( SCENEPIC_FORMAT )
   find_program(CLANG_FORMAT NAMES clang-format-10 REQUIRED )
   file(GLOB_RECURSE ALL_SOURCE_FILES CONFIGURE_DEPENDS
+       src/examples/*.cpp
        src/scenepic/*.cpp
        src/scenepic/*.h
        src/include/scenepic/*

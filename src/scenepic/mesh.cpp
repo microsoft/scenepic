@@ -300,15 +300,31 @@ namespace scenepic
     bool fill_triangles,
     bool add_wireframe)
   {
-    this->add_mesh_without_normals(
-      mesh_info->position_buffer(),
-      mesh_info->triangle_buffer(),
-      mesh_info->color_buffer(),
-      mesh_info->uv_buffer(),
-      transform,
-      reverse_triangle_order,
-      fill_triangles,
-      add_wireframe);
+    if (mesh_info->has_normals())
+    {
+      this->add_mesh_with_normals(
+        mesh_info->position_buffer(),
+        mesh_info->normal_buffer(),
+        mesh_info->triangle_buffer(),
+        mesh_info->color_buffer(),
+        mesh_info->uv_buffer(),
+        transform,
+        reverse_triangle_order,
+        fill_triangles,
+        add_wireframe);
+    }
+    else
+    {
+      this->add_mesh_without_normals(
+        mesh_info->position_buffer(),
+        mesh_info->triangle_buffer(),
+        mesh_info->color_buffer(),
+        mesh_info->uv_buffer(),
+        transform,
+        reverse_triangle_order,
+        fill_triangles,
+        add_wireframe);
+    }
   }
 
   VectorBuffer Mesh::compute_normals(
@@ -410,7 +426,8 @@ namespace scenepic
     if (has_vertex_colors && colors.rows() == 0)
     {
       throw std::invalid_argument(
-        "Per-vertex colors must be provided unless the mesh has a single color "
+        "Per-vertex colors must be provided unless the mesh has a single "
+        "color "
         "or texture map");
     }
 
@@ -488,7 +505,8 @@ namespace scenepic
     if (per_point_color && start_points.cols() != 6)
     {
       throw std::invalid_argument(
-        "Expecting either single-color mesh, or shared color for whole set of "
+        "Expecting either single-color mesh, or shared color for whole set "
+        "of "
         "lines, or per-point color stored in start_points and end_points");
     }
 

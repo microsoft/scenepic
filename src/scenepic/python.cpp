@@ -514,18 +514,14 @@ PYBIND11_MODULE(_scenepic, m)
         the vertex positions, the triangulation, and either per-vertex UV coordinates
         or Color (if present).
     )scenepicdoc")
-    .def(
-      py::init<std::size_t, std::size_t, bool, bool>(),
-      "Initializer which allocates space for the buffers. Note: a mesh cannot "
-      "have both per-vertex colors and uvs.",
-      "num_vertices"_a,
-      "num_triangles"_a,
-      "has_uvs"_a,
-      "has_colors"_a)
     .def_property_readonly(
       "positions",
       py::overload_cast<>(&MeshInfo::position_buffer),
       "np.ndarray: A reference to the position buffer.")
+    .def_property_readonly(
+      "normals",
+      py::overload_cast<>(&MeshInfo::normal_buffer),
+      "np.ndarray: A reference to the normal buffer")
     .def_property_readonly(
       "triangles",
       py::overload_cast<>(&MeshInfo::triangle_buffer),
@@ -538,6 +534,10 @@ PYBIND11_MODULE(_scenepic, m)
       "colors",
       py::overload_cast<>(&MeshInfo::color_buffer),
       "np.ndarray: A reference to the color buffer.")
+    .def_property_readonly(
+      "has_normals",
+      &MeshInfo::has_normals,
+      "Whether the mesh info contains vertex normals.")
     .def(
       "subdivide",
       &MeshInfo::subdivide,
