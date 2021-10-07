@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.15"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>scenepic: ScenePic</title>
+<title>scenepic: Main Page</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">scenepic
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">1.0.1</span>
    </div>
    <div id="projectbrief">3D Visualization Made Easy</div>
   </td>
@@ -64,14 +64,30 @@ $(function() {
 
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">ScenePic </div>  </div>
+<div class="title">scenepic Documentation</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>&copy; Microsoft 2021</p>
+<div class="textblock"><p><a href="https://microsoft.github.io/scenepic/zoo/hello_scenepic.html"><img src="docs/hello_scenepic.gif" alt="ScenePic" class="inline"/>
+</a></p>
+<p>&copy; Microsoft 2021</p>
 <p>Primary Contact: <a href="#" onclick="location.href='mai'+'lto:'+'sce'+'ne'+'pic'+'@m'+'icr'+'os'+'oft'+'.c'+'om'; return false;">scene<span style="display: none;">.nosp@m.</span>pic@<span style="display: none;">.nosp@m.</span>micro<span style="display: none;">.nosp@m.</span>soft<span style="display: none;">.nosp@m.</span>.com</a></p>
 <p><a href="https://microsoft.visualstudio.com/Analog/_build/latest?definitionId=74916&amp;branchName=main"><img src="https://microsoft.visualstudio.com/Analog/_apis/build/status/analog/science/svt/microsoft.scenepic?branchName=main" alt="Build Status" class="inline"/>
 </a></p>
-<p><a href="https://microsoft.github.io/scenepic/">API Documentation</a></p>
+<h2>Getting Started</h2>
+<p>To look at some examples and browse the documentation, visit our website:</p>
+<p><a href="https://microsoft.github.io/scenepic/">API Documentation + Demos</a></p>
+<p>We currently support Python and C++:</p>
+<h3>Python</h3>
+<p>We provide up-to-date Python wheels via <a href="https://pypi.org/project/scenepic/">PyPi</a>:</p>
+<div class="fragment"><div class="line">pip install scenepic</div></div><!-- fragment --><p>If you want to build the library yourself (e.g. for development reasons) can clone the repository and follow most of the instructions to <a href="#c-client-build-how-to">build the c++ client library</a>, but then run </p><div class="fragment"><div class="line">python setup.py develop</div></div><!-- fragment --><p> which will then build and install the library locally.</p>
+<p>For a quick tutorial, take a look at <a href="https://github.com/microsoft/scenepic/blob/main/python_examples/getting_started.py"><code>getting_started.py</code></a>.</p>
+<p>For a more extensive tutorial, install Python and Jupyter, and open the <code>python_examples/tutorial.ipynb</code> notebook. This tutorial also demonstrates the use of ScenePic within the interactive Jupyter notebook environment.</p>
+<p>A similar example is given in <code>python_examples/getting_started.ipynb</code>.</p>
+<p>Note: you may need to set the <code>NotebookApp.iopub_data_rate_limit</code> setting in jupyter to prevent an IOPub error. To do this, call <code>jupyter notebook --generate-config</code> to generate a config file, and then edit the appropriate line to increase the value until it works.</p>
+<p>We provide a website with full Python API documentation <a href="https://microsoft.github.io/scenepic/python/">here</a></p>
+<h3>C++</h3>
+<p>ScenePic is fully compatible with <a href="https://cmake.org/cmake/help/latest/module/FetchContent.html">CMake FetchContent</a>, and we encourage users to include the library in their projects via that mechanism. Alternatively, you can follow the instructions below to <a href="#c-client-build-how-to">build the client library</a> directly.</p>
+<p>To see examples of how to use the library from C++ look at <a href="https://github.com/microsoft/scenepic/blob/main/src/examples/tutorial.cpp">the tutorial</a>. You can find the API documentation <a href="https://microsoft.github.io/scenepic/cpp">here</a></p>
 <h2>Introduction</h2>
 <p>All platforms have good support for 2D images, with well-recognized formats such as PNG and JPEG that can be viewed out of the box (no installation) and shared trivially.</p>
 <p>However, while many formats exist for 3D data, none are well-supported without installation of tools such as MeshLab, Blender, etc.</p>
@@ -99,28 +115,15 @@ $(function() {
 </ul>
 <p>An example render:</p>
 <img src="docs/example_render.png" alt="Example Render" class="inline"/>
-<p>Here is an animation of the Getting Started tutorial ( <a href="https://github.com/microsoft/scenepic/blob/main/python_examples/getting_started.py">Python</a> <a href="https://github.com/microsoft/scenepic/blob/main/cppsrc/examples/getting_started.cpp">C++</a> ):</p>
+<p>Here is an animation of the Getting Started tutorial ( <a href="https://github.com/microsoft/scenepic/blob/main/python_examples/getting_started.py">Python</a> <a href="https://github.com/microsoft/scenepic/blob/main/src/examples/getting_started.cpp">C++</a> ):</p>
 <img src="docs/getting_started.gif" alt="Getting Started" class="inline"/>
-<h2>Overview</h2>
+<h2>Architecture</h2>
 <p>The core ScenePic library is written in TypeScript and based on WebGL. This is compiled down to <code>dist/scenepic.min.js</code> which is a 'minified' JavaScript library that can be loaded in HTML pages to enable ScenePic to display data.</p>
 <p>The core API for ScenePic is a JSON-based scripting file format. The simplified architecture diagram below illustrates how these scripts are used to define a <em>Scene</em> which is the top-level object in ScenePic. A <em>Scene</em> can contain multiple <em>Canvas*es (3D drawing canvases), *Image*s, and *TextPanel*s. Each *Canvas</em> can contain multiple <em>Frame*s. *Frame*s comprise multiple *Mesh*es, and *Mesh*es can be reused across different *Frame*s and *Canvas*es. *Mesh*es are basically triangle meshes, comprising flat vertex and triangle buffers. Each *Mesh</em> has an optional <em>Image</em> associated for texturing purposes. *Image*s can also be displayed as flat 2D *Displayed Image*s.</p>
 <img src="docs/scenepic_anatomy.png" alt="ScenePic Anatomy" class="inline"/>
-<p>However, most users will not need interact with ScenePic's core API and scripting language directly. Instead they will use one of the client-language front end libraries to easily generate ScenePic JSON scripts. Currently supported are:</p>
-<h3>C++</h3>
-<p>ScenePic is fully compatible with Cmake FetchContent, and we encourage users to include the library in their projects via that mechanism. Alternatively, you can follow the instructions below to <a href="#c-client-build-how-to">build the client library</a> directly.</p>
-<h3>Python</h3>
-<p>As the Python interface is provided via a wrapper around the C++ interface, users can clone the repository and follow most of the instructions to <a href="#c-client-build-how-to">build the c++ client library</a>, but then run </p><div class="fragment"><div class="line">python setup.py develop</div></div><!-- fragment --><p> which will then build and install the <code>scenepic</code> Python wheel. Alternatively, pre-built wheels are available on [PyPi]()</p>
+<p>However, most users will not need interact with ScenePic's core API and scripting language directly. Instead they will use one of the client-language front end libraries to easily generate ScenePic JSON scripts. Currently supported are C++ and Python.</p>
 <h2>Expected Usage</h2>
 <p>The main branch of the ScenePic git repository will be kept up-to-date with the latest version. We highly recommend, where possible, using the binary builds we provide. That said, the library is FetchContent compatible, and can be easily included into C++ projects where desired.</p>
-<h3>Getting Started with Python</h3>
-<p>Please follow the instructions above to either create a custom build of the library or, preferably, to install one of our pre-built binary wheels.</p>
-<p>For a quick tutorial, take a look at <a href="https://github.com/microsoft/scenepic/blob/main/python_examples/getting_started.py"><code>getting_started.py</code></a>.</p>
-<p>For a more extensive tutorial, install Python and Jupyter, and open the <code>python_examples/tutorial.ipynb</code> notebook. This tutorial also demonstrates the use of ScenePic within the interactive Jupyter notebook environment.</p>
-<p>A similar example is given in <code>python_examples/getting_started.ipynb</code>.</p>
-<p>Note: you may need to set the <code>NotebookApp.iopub_data_rate_limit</code> setting in jupyter to prevent an IOPub error. To do this, call <code>jupyter notebook --generate-config</code> to generate a config file, and then edit the appropriate line to increase the value until it works.</p>
-<p>We provide a website with full Python API documentation <a href="https://microsoft.github.io/scenepic/python/">here</a></p>
-<h3>Getting started with C++</h3>
-<p>To see examples of how to use the library from C++ look at <a href="https://github.com/microsoft/scenepic/blob/main/cppsrc/examples/tutorial.cpp">the tutorial</a>. You can find the API documentation <a href="https://microsoft.github.io/scenepic/cpp">here</a></p>
 <h2>Using the HTML Client</h2>
 <img src="docs/scenepic_ui.png" alt="ScenePic UI" class="inline"/>
 <p>A ScenePic HTML page will look something like the image above. This example shows four <em>Canvas</em> objects, each of which contains several <em>Frame</em> objects (refering under the hood to a set of <em>Mesh</em> objects).</p>
@@ -165,7 +168,7 @@ $(function() {
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 4 2021 15:09:23 for scenepic by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 7 2021 15:55:03 for scenepic by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.15
 </small></address>
