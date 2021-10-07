@@ -244,6 +244,7 @@ class Animation:
             transform = sp.Transforms.translate(pic_positions[i]) @ sp.Transforms.scale(pic_scales[i])
             frame.add_mesh(self.pic_mesh, transform=transform)
             frame.camera = self._create_camera(focus_points[i])
+            frame.focus_point = sp.FocusPoint(focus_points[i])
 
     def _create_cube(self, color: np.ndarray) -> sp.Mesh:
         cube = self.scene.create_mesh(shared_color=color, layer_id="cubes")
@@ -267,6 +268,7 @@ class Animation:
                 frame.add_mesh(mesh, transform=transform)
 
             frame.camera = self._create_camera(self.focus_point)
+            frame.focus_point = sp.FocusPoint(self.focus_point)
 
 
 def _main():

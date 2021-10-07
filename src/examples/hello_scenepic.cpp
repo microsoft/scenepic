@@ -212,13 +212,14 @@ private:
 
     // set the cloud colors to correspond to the target cubes
     sp::ColorBuffer colors(num_points, 3);
-    colors.topRows(group_size) = m_colors[0].colwise().replicate(group_size);
+    colors.topRows(group_size) =
+      m_colors[0].rowwise().replicate(group_size).transpose();
     colors.middleRows(group_size, group_size) =
-      m_colors[1].colwise().replicate(group_size);
+      m_colors[1].rowwise().replicate(group_size).transpose();
     colors.middleRows(2 * group_size, group_size) =
-      m_colors[2].colwise().replicate(group_size);
+      m_colors[2].rowwise().replicate(group_size).transpose();
     colors.bottomRows(final_group_size) =
-      m_colors[3].colwise().replicate(final_group_size);
+      m_colors[3].rowwise().replicate(final_group_size).transpose();
 
     sp::VectorBuffer pos_diff = (end_positions - start_positions) / num_frames;
     sp::VectorBuffer positions = start_positions;
@@ -312,6 +313,7 @@ private:
         sp::Transforms::scale(pic_scales.row(f));
       frame->add_mesh(m_pic_mesh, transform);
       frame->camera(create_camera(focus_points.row(f)));
+      frame->focus_point(sp::FocusPoint(focus_points.row(f)));
     }
   }
 
@@ -345,6 +347,7 @@ private:
       }
 
       frame->camera(create_camera(m_focus_point));
+      frame->focus_point(sp::FocusPoint(m_focus_point));
     }
   }
 

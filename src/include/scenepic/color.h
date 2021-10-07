@@ -15,21 +15,21 @@
 namespace scenepic
 {
   /** Class for representing color values */
-  class Color : public Eigen::RowVector3f
+  class Color : public Eigen::Vector3f
   {
   public:
     /** Empty constructor. */
-    Color(void) : Eigen::RowVector3f() {}
+    Color(void) : Eigen::Vector3f() {}
 
     /** Needed for pybind */
-    Color(Eigen::Index rows, Eigen::Index cols) : Eigen::RowVector3f(rows, cols) {}
+    Color(Eigen::Index rows, Eigen::Index cols) : Eigen::Vector3f(rows, cols) {}
 
-    typedef Eigen::RowVector3f Base;
+    typedef Eigen::Vector3f Base;
 
     /** Constructor which allows construction of Colors from Eigen expressions.
      */
     template<typename OtherDerived>
-    Color(const Eigen::MatrixBase<OtherDerived>& other) : Eigen::RowVector3f(other)
+    Color(const Eigen::MatrixBase<OtherDerived>& other) : Eigen::Vector3f(other)
     {}
 
     /** Constructor which allows Eigen assignments to Color */
