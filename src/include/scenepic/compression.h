@@ -49,11 +49,12 @@ namespace scenepic
       buffer.data(),
       buffer.size() - 8,
       rows * cols * sizeof(typename Derived::Scalar));
-    Eigen::Map<Derived> matrix(
+    Eigen::Map<Derived> matrix_map(
       reinterpret_cast<typename Derived::Scalar*>(inflate_bytes.data()),
       rows,
       cols);
 
+    Derived matrix = matrix_map;
     return matrix;
   }
 } // namespace scenepic
