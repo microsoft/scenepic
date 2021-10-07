@@ -12,7 +12,6 @@ set( TESTS
   camera
   canvas2d
   canvas3d
-  compression
   drop_down_menu
   frame2d
   frame3d
@@ -23,6 +22,7 @@ set( TESTS
   layer_settings
   mesh_update
   primitives
+  quantization
   scene
   shading
   stencil

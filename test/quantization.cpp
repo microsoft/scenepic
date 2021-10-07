@@ -27,7 +27,7 @@ namespace
 
     test::assert_equal(
       quantization_info["base"].keyframe_count, 2U, result, "keyframe_count");
-    test::assert_equal(scene.to_json(), "compression", result);
+    test::assert_equal(scene.to_json(), "quantization", result);
   }
 
   void error_bound(int& result)
@@ -54,13 +54,13 @@ namespace
       diff.maxCoeff() - diff.minCoeff(),
       expected_error,
       result,
-      "Compression @ " + std::to_string(expected_error));
+      "Quantization @ " + std::to_string(expected_error));
 
     // test error bounds
   }
 } // namespace
 
-int test_compression()
+int test_quantization()
 {
   int result = EXIT_SUCCESS;
 

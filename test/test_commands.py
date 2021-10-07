@@ -350,7 +350,7 @@ def test_mesh_update(assert_json_equal, color):
     assert_json_equal(str(update), "update_quantized")
 
 
-def test_compression(assert_json_equal, color):
+def test_quantization(assert_json_equal, color):
     scene = sp.Scene()
 
     mesh = scene.create_mesh("base")
@@ -367,7 +367,7 @@ def test_compression(assert_json_equal, color):
     info = scene.quantize_updates(1e-5)
 
     assert info["base"].keyframe_count == 2
-    assert_json_equal(scene.get_json(), "compression")
+    assert_json_equal(scene.get_json(), "quantization")
 
 
 def _create_tetrahedron():

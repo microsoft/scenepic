@@ -23,7 +23,7 @@ namespace scenepic
     const std::uint8_t* source_buf =
       reinterpret_cast<const std::uint8_t*>(matrix.data());
     auto dest_len = sizeof(typename Derived::Scalar) * matrix.size();
-    auto deflate_bytes = deflate(source_buf, dest_len);
+    std::vector<std::uint8_t> deflate_bytes = deflate(source_buf, dest_len);
     dest_len = deflate_bytes.size();
     deflate_bytes.resize(deflate_bytes.size() + 5);
     std::uint32_t* rows_ptr =
@@ -45,9 +45,9 @@ namespace scenepic
       reinterpret_cast<const std::uint32_t*>(buffer.data() + buffer.size() - 5);
     Eigen::Index rows = *rows_ptr;
     Eigen::Index cols = *buffer.rbegin();
-    auto inflate_bytes = inflate(
+    std::vector<std::uint8_t> inflate_bytes = inflate(
       buffer.data(),
-      buffer.size() - 8,
+      buffer.size() - 5,
       rows * cols * sizeof(typename Derived::Scalar));
     Eigen::Map<Derived> matrix_map(
       reinterpret_cast<typename Derived::Scalar*>(inflate_bytes.data()),

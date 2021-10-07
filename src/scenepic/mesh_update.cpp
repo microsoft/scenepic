@@ -59,7 +59,7 @@ namespace scenepic
     m_min = center - 0.5f * fixed_point_range;
     m_max = center + 0.5f * fixed_point_range;
 
-    diff = (diff.array() - m_min).matrix();
+    diff = diff.array() - m_min;
     float scale = MAX_FIXED / fixed_point_range;
     diff = diff * scale;
     m_fp_vertex_buffer = diff.cast<std::uint16_t>();
@@ -69,7 +69,7 @@ namespace scenepic
   {
     float scale = (m_max - m_min) / MAX_FIXED;
     VertexBuffer buffer = m_fp_vertex_buffer.cast<float>() * scale;
-    buffer = (buffer.array() + m_min).matrix();
+    buffer = buffer.array() + m_min;
     return buffer;
   }
 

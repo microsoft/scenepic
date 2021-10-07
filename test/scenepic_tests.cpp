@@ -281,7 +281,6 @@ int main(int argc, char** argv)
   tests["camera"] = test_camera;
   tests["canvas2d"] = test_canvas2d;
   tests["canvas3d"] = test_canvas3d;
-  tests["compression"] = test_compression;
   tests["drop_down_menu"] = test_drop_down_menu;
   tests["frame2d"] = test_frame2d;
   tests["frame3d"] = test_frame3d;
@@ -292,6 +291,7 @@ int main(int argc, char** argv)
   tests["layer_settings"] = test_layer_settings;
   tests["mesh_update"] = test_mesh_update;
   tests["primitives"] = test_primitives;
+  tests["quantization"] = test_quantization;
   tests["scene"] = test_scene;
   tests["shading"] = test_shading;
   tests["stencil"] = test_stencil;
