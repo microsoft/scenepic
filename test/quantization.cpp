@@ -18,11 +18,13 @@ namespace
 
     for (auto i = 0; i < 20; ++i)
     {
+      std::cout << "Adding update " << i << std::endl;
       sp::VectorBuffer positions(3, 3);
       positions << 0, 0, 0, 1, i * 0.05f, 0, 0, 1, 0;
       scene.update_mesh_without_normals("base", positions);
     }
 
+    std::cout << "Quantizing..." << std::endl;
     auto quantization_info = scene.quantize_updates(1e-5f);
 
     test::assert_equal(
@@ -40,16 +42,21 @@ namespace
     positions = positions +
       sp::VectorBuffer::Random(positions.rows(), positions.cols()) * 0.01f;
 
+    std::cout << "Adding update..." << std::endl;
     auto update = scene.update_mesh_without_normals("sphere", positions);
 
+    std::cout << "Quantizing..." << std::endl;
     float expected_error = 1e-4f;
     float range = expected_error * 65535;
     update->quantize(0, range, mesh->vertex_buffer().leftCols(6));
 
+    std::cout << "Unquantizing..." << std::endl;
     sp::VertexBuffer actual =
       update->unquantize() + mesh->vertex_buffer().leftCols(6);
-    auto diff = (actual - update->vertex_buffer());
+    std::cout << "Diff..." << std::endl;
+    sp::VertexBuffer diff = actual - update->vertex_buffer();
 
+    std::cout << "Less than test" << std::endl;
     test::assert_lessthan(
       diff.maxCoeff() - diff.minCoeff(),
       expected_error,
@@ -64,7 +71,10 @@ int test_quantization()
 {
   int result = EXIT_SUCCESS;
 
+  std::cout << "integration test..." << std::endl;
   integration(result);
+
+  std::cout << "error bounds check..." << std::endl;
   error_bound(result);
 
   return result;
