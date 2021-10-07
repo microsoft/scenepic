@@ -123,6 +123,14 @@ namespace scenepic
     return base64_encode(bytes.data(), static_cast<unsigned int>(length));
   }
 
+  /** Equivalent of numpy's arange, creating a range
+   *  of integers as an Eigen array.
+   *
+   *  \param start the start of the range
+   *  \param end the end of the range
+   *  \param step the step size
+   *  \return a range of unsigned integers
+   */
   inline Eigen::Array<std::uint32_t, Eigen::Dynamic, 1>
   arange(std::uint32_t start, std::uint32_t end, std::uint32_t step = 1)
   {
@@ -131,6 +139,59 @@ namespace scenepic
       length, start, end);
   }
 
+  /** Equivalent of numpy's linspace, setting the values of a matrix
+   *  following a linearly spaced pattern from a starting point to
+   *  an end point.
+   *
+   *  \param matrix the matrix to set
+   *  \param start the starting point of the linear space
+   *  \param end the ending point of the linear space
+   */
+  template<typename Derived, typename OtherDerived>
+  void linspace(
+    Eigen::MatrixBase<Derived>& matrix,
+    const Eigen::MatrixBase<OtherDerived>& start,
+    const Eigen::MatrixBase<OtherDerived>& end)
+  {
+    for(Eigen::Index col=0; col < matrix.cols(); ++col)
+    {
+      matrix.col(col).setLinSpaced(start(col), end(col));
+    }
+  }
+
+  /** Equivalent of numpy's linspace, generating a matrix
+   *  following a linearly spaced pattern from a starting point to
+   *  an end point.
+   *
+   *  \param rows the number of rows in the resulting matrix
+   *  \param start the starting point of the linear space
+   *  \param end the ending point of the linear space
+   */
+  template<typename Derived, typename OtherDerived>
+  Eigen::Matrix<
+    typename Derived::Scalar,
+    Eigen::Dynamic,
+    OtherDerived::ColsAtCompileTime>
+  linspace(
+    Eigen::Index rows,
+    const Eigen::MatrixBase<OtherDerived>& start,
+    const Eigen::MatrixBase<OtherDerived>& end)
+  {
+    Eigen::Matrix<
+      typename Derived::Scalar,
+      Eigen::Dynamic,
+      OtherDerived::ColsAtCompileTime>
+      result(rows, OtherDerived::ColsAtCompileTime);
+    linspace(result, start, end);
+    return result;
+  }
+
+  /** Rolls the rows of an array down the number of steps.
+   *
+   *  \param values the values to roll
+   *  \param steps the number of steps to roll
+   *  \return the rolled array
+   */
   template<typename Derived>
   Eigen::Array<typename Derived::Scalar, Eigen::Dynamic, 1>
   roll(const Eigen::ArrayBase<Derived>& values, Eigen::Index steps)
@@ -143,6 +204,11 @@ namespace scenepic
     return result;
   }
 
+  /** Perform a rowwise cumulative sum.
+   *
+   *  \param values the input matrix
+   *  \return a matrix consisting of the rowwise cumulative sum on the input
+   */
   template<typename Derived>
   Eigen::Matrix<
     typename Derived::Scalar,
@@ -166,6 +232,15 @@ namespace scenepic
     return result;
   }
 
+  /** Produce a random matrix with values sample uniformly from the
+   *  specified range.
+   *
+   *  \param rows the number of rows in the output matrix
+   *  \param cols the number of columns in the output matrix
+   *  \param min the minimum random value
+   *  \param max the maximum random value
+   *  \return a random matrix
+   */
   template<typename Derived>
   Eigen::Matrix<
     typename Derived::Scalar,
@@ -189,6 +264,54 @@ namespace scenepic
     return result;
   }
 
+  /** Produce a random matrix with values sample uniformly from the
+   *  specified range.
+   *
+   *  \param rows the number of rows in the output matrix
+   *  \param cols the number of columns in the output matrix
+   *  \param min the minimum random value
+   *  \param max the maximum random value
+   *  \return a random matrix
+   */
+  template<typename Derived, typename OtherDerived>
+  Eigen::Matrix<
+    typename Derived::Scalar,
+    Derived::RowsAtCompileTime,
+    Derived::ColsAtCompileTime>
+  random(
+    Eigen::Index rows,
+    Eigen::Index cols,
+    const Eigen::MatrixBase<OtherDerived>& min,
+    const Eigen::MatrixBase<OtherDerived>& max)
+  {
+    typedef Eigen::Matrix<
+      typename Derived::Scalar,
+      Derived::RowsAtCompileTime,
+      Derived::ColsAtCompileTime>
+      MatrixType;
+    MatrixType result = MatrixType::Random(rows, cols);
+    // Eigen produces matrices with values ranging from -1 to 1
+    // so we offset it by 1, and scale it by 1/2 in addition to
+    // the requested range/offset.
+    result = result.array() + 1;
+    result = 0.5 * result;
+    for (Eigen::Index col = 0; col < cols; ++col)
+    {
+      float scale = max(col) - min(col);
+      result.col(col) *= scale;
+      result.col(col) = result.col(col).array() + min(col);
+    }
+
+    return result;
+  }
+
+  /** Produce a random matrix with values sample uniformly from the
+   *  specified range.
+   *
+   *  \param min the minimum random value
+   *  \param max the maximum random value
+   *  \return a random matrix
+   */
   template<typename Derived>
   Eigen::Matrix<
     typename Derived::Scalar,

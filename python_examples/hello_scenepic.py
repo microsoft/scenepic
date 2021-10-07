@@ -36,7 +36,6 @@ class Animation:
     """
 
     def __init__(self,
-                 scene: sp.Scene,
                  num_cloud_frames=30,
                  num_morph_frames=60,
                  num_still_frames=30,
@@ -73,23 +72,23 @@ class Animation:
                        sp.ColorFromBytes(0, 164, 239),
                        sp.ColorFromBytes(255, 185, 0)]
 
-        self.scene = scene
-        self.canvas = scene.create_canvas_3d(width=width, height=height)
+        self.scene = sp.Scene()
+        self.canvas = self.scene.create_canvas_3d(width=width, height=height)
 
         # load the text meshes
         scene_obj = sp.load_obj(_asset("scene.obj"))
-        self.scene_mesh = scene.create_mesh(shared_color=self.colors[0], layer_id="text")
+        self.scene_mesh = self.scene.create_mesh(shared_color=self.colors[0], layer_id="text")
         self.scene_mesh.add_mesh(scene_obj)
         self.scene_mesh.apply_transform(sp.Transforms.rotation_about_x(np.pi / 2))
         self.scene_pos = [0, 0, 0]
 
         pic_obj = sp.load_obj(_asset("pic.obj"))
-        self.pic_mesh = scene.create_mesh(shared_color=self.colors[3], layer_id="text")
+        self.pic_mesh = self.scene.create_mesh(shared_color=self.colors[3], layer_id="text")
         self.pic_mesh.add_mesh(pic_obj)
         self.pic_pos = [1.25, -0.05, 0.5]
 
         # create the cubes for morphing
-        self.cubes = [self._create_cube(scene, color) for color in self.colors]
+        self.cubes = [self._create_cube(color) for color in self.colors]
         self.cube1_pos = [2, 0.15, 0.25]
         self.cube2_pos = [0.4, -0.05, 0.3]
         self.cube2_scale = [1.5, 0.2, 0.8]
@@ -106,9 +105,17 @@ class Animation:
                                                                 end_angles)
 
         self.index = 0
-        self.animate_cloud(num_points)
-        self.animate_morph()
-        self.animate_still()
+        self._animate_cloud(num_points)
+        self._animate_morph()
+        self._animate_still()
+
+    def save(self, path: str):
+        """Save the animation to the specified path.
+
+        Args:
+            path (str): path to the HTML output file
+        """
+        self.scene.save_as_html(path, "Hello Scenepic!")
 
     def _compute_camera_info(self,
                              start_distance: np.ndarray,
@@ -147,7 +154,7 @@ class Animation:
 
         return sp.Camera(pos, look_at=focus_point, aspect_ratio=self.aspect_ratio)
 
-    def animate_cloud(self, num_points: int):
+    def _animate_cloud(self, num_points: int):
         num_frames = self.num_cloud_frames
 
         # start with random positions
@@ -156,7 +163,7 @@ class Animation:
 
         # group the points by which will go to each cube
         groups = [num_points // 4, num_points // 2, 3 * num_points // 4]
- 
+
         # distribute the final points randomly within each target cube
         end_positions[:groups[0]] = np.random.uniform([-0.51, 0.03, -0.22],
                                                       [-0.03, 0.51, 0.22],
@@ -189,7 +196,7 @@ class Animation:
             frame.add_mesh(mesh)
             frame.camera = self._create_camera([0, 0, 0])
 
-    def animate_morph(self):
+    def _animate_morph(self):
         num_frames = self.num_morph_frames
 
         # because the text will be hiding within the cubes
@@ -238,12 +245,12 @@ class Animation:
             frame.add_mesh(self.pic_mesh, transform=transform)
             frame.camera = self._create_camera(focus_points[i])
 
-    def _create_cube(self, scene: sp.Scene, color: np.ndarray) -> sp.Mesh:
-        cube = scene.create_mesh(shared_color=color, layer_id="cubes")
+    def _create_cube(self, color: np.ndarray) -> sp.Mesh:
+        cube = self.scene.create_mesh(shared_color=color, layer_id="cubes")
         cube.add_cube(transform=sp.Transforms.scale(0.5))
         return cube
 
-    def animate_still(self):
+    def _animate_still(self):
         # this creates the ScenePic logo
         meshes = [self.scene_mesh, self.cubes[1], self.cubes[2], self.pic_mesh]
         transforms = [
@@ -263,9 +270,8 @@ class Animation:
 
 
 def _main():
-    scene = sp.Scene()
-    Animation(scene)
-    scene.save_as_html("hello_scenepic.html", "Hello Scenepic!")
+    anim = Animation()
+    anim.save("hello_scenepic.html")
 
 
 if __name__ == "__main__":
