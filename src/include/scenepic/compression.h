@@ -7,6 +7,7 @@
 #include "matrix.h"
 #include "zip.h"
 
+#include <Eigen/Core>
 #include <cstdint>
 #include <vector>
 

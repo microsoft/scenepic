@@ -147,13 +147,13 @@ namespace scenepic
    *  \param start the starting point of the linear space
    *  \param end the ending point of the linear space
    */
-  template<typename Derived, typename OtherDerived>
+  template<typename Derived0, typename Derived1, typename Derived2>
   void linspace(
-    Eigen::MatrixBase<Derived>& matrix,
-    const Eigen::MatrixBase<OtherDerived>& start,
-    const Eigen::MatrixBase<OtherDerived>& end)
+    Eigen::MatrixBase<Derived0>& matrix,
+    const Eigen::MatrixBase<Derived1>& start,
+    const Eigen::MatrixBase<Derived2>& end)
   {
-    for(Eigen::Index col=0; col < matrix.cols(); ++col)
+    for (Eigen::Index col = 0; col < matrix.cols(); ++col)
     {
       matrix.col(col).setLinSpaced(start(col), end(col));
     }
@@ -167,21 +167,21 @@ namespace scenepic
    *  \param start the starting point of the linear space
    *  \param end the ending point of the linear space
    */
-  template<typename Derived, typename OtherDerived>
+  template<typename Derived0, typename Derived1, typename Derived2>
   Eigen::Matrix<
-    typename Derived::Scalar,
+    typename Derived0::Scalar,
     Eigen::Dynamic,
-    OtherDerived::ColsAtCompileTime>
+    Derived1::ColsAtCompileTime>
   linspace(
     Eigen::Index rows,
-    const Eigen::MatrixBase<OtherDerived>& start,
-    const Eigen::MatrixBase<OtherDerived>& end)
+    const Eigen::MatrixBase<Derived1>& start,
+    const Eigen::MatrixBase<Derived2>& end)
   {
     Eigen::Matrix<
-      typename Derived::Scalar,
+      typename Derived0::Scalar,
       Eigen::Dynamic,
-      OtherDerived::ColsAtCompileTime>
-      result(rows, OtherDerived::ColsAtCompileTime);
+      Derived1::ColsAtCompileTime>
+      result(rows, Derived1::ColsAtCompileTime);
     linspace(result, start, end);
     return result;
   }
@@ -273,21 +273,21 @@ namespace scenepic
    *  \param max the maximum random value
    *  \return a random matrix
    */
-  template<typename Derived, typename OtherDerived>
+  template<typename Derived0, typename Derived1, typename Derived2>
   Eigen::Matrix<
-    typename Derived::Scalar,
-    Derived::RowsAtCompileTime,
-    Derived::ColsAtCompileTime>
+    typename Derived0::Scalar,
+    Derived0::RowsAtCompileTime,
+    Derived0::ColsAtCompileTime>
   random(
     Eigen::Index rows,
     Eigen::Index cols,
-    const Eigen::MatrixBase<OtherDerived>& min,
-    const Eigen::MatrixBase<OtherDerived>& max)
+    const Eigen::MatrixBase<Derived1>& min,
+    const Eigen::MatrixBase<Derived2>& max)
   {
     typedef Eigen::Matrix<
-      typename Derived::Scalar,
-      Derived::RowsAtCompileTime,
-      Derived::ColsAtCompileTime>
+      typename Derived0::Scalar,
+      Derived0::RowsAtCompileTime,
+      Derived0::ColsAtCompileTime>
       MatrixType;
     MatrixType result = MatrixType::Random(rows, cols);
     // Eigen produces matrices with values ranging from -1 to 1

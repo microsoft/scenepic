@@ -135,12 +135,11 @@ private:
     const sp::Vector& end_angles)
   {
     sp::VectorBuffer angles(m_num_frames, 3);
-    sp::linspace(
-      angles.topRows(m_num_cloud_frames), start_angles, sp::Vector(0, 0, 0));
-    sp::linspace(
-      angles.middleRows(m_num_cloud_frames, m_num_morph_frames),
-      sp::Vector(0, 0, 0),
-      end_angles);
+    angles.topRows(m_num_cloud_frames) = sp::linspace<sp::VectorBuffer>(
+      m_num_cloud_frames, start_angles, sp::Vector(0, 0, 0));
+    angles.middleRows(m_num_cloud_frames, m_num_morph_frames) =
+      sp::linspace<sp::VectorBuffer>(
+        m_num_morph_frames, sp::Vector(0, 0, 0), end_angles);
     angles.bottomRows(m_num_still_frames) =
       end_angles.colwise().replicate(m_num_still_frames);
 

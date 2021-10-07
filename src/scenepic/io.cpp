@@ -64,11 +64,12 @@ namespace
       uv_idx = -1;
     }
 
-    if(norm_idx < 0)
+    if (norm_idx < 0)
     {
-      norm_idx = static_cast<std::int32_t>(normal_index[normal_index.size() + norm_idx]);
+      norm_idx =
+        static_cast<std::int32_t>(normal_index[normal_index.size() + norm_idx]);
     }
-    else if(norm_idx > 0)
+    else if (norm_idx > 0)
     {
       norm_idx = static_cast<std::int32_t>(normal_index[norm_idx - 1]);
     }
@@ -109,7 +110,7 @@ namespace scenepic
       auto mesh_data = reinterpret_cast<MeshData*>(user_data);
       mesh_data->uvs.emplace_back(x, y);
     };
-    cb.normal_cb = [](void *user_data, float x, float y, float z) {
+    cb.normal_cb = [](void* user_data, float x, float y, float z) {
       auto mesh_data = reinterpret_cast<MeshData*>(user_data);
       mesh_data->normals.emplace_back(x, y, z);
     };
@@ -139,7 +140,9 @@ namespace scenepic
           }
 
           mesh_data->corners.emplace_back(
-            indices->vertex_index, indices->texcoord_index, indices->normal_index);
+            indices->vertex_index,
+            indices->texcoord_index,
+            indices->normal_index);
         }
         else
         {
@@ -179,8 +182,8 @@ namespace scenepic
     bool has_uvs = mesh_data.uvs.size() != 0;
     bool has_normals = mesh_data.normals.size() != 0;
 
-    auto mesh_info =
-      std::make_shared<MeshInfo>(num_vertices, num_triangles, has_uvs, has_normals, false);
+    auto mesh_info = std::make_shared<MeshInfo>(
+      num_vertices, num_triangles, has_uvs, has_normals, false);
 
     for (auto i = 0; i < num_vertices; ++i)
     {
@@ -196,7 +199,7 @@ namespace scenepic
         mesh_info->uv_buffer().row(i) << u, v;
       }
 
-      if(norm_idx >= 0)
+      if (norm_idx >= 0)
       {
         float x, y, z;
         std::tie(x, y, z) = unique_normals[norm_idx];
