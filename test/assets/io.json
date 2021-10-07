@@ -1,16 +1,17 @@
 {
 	"CameraSpace": false,
 	"CommandType": "DefineMesh",
-	"Definition": {
+	"Definition": 
+	{
 		"Color": "eAFjYGiwZ4BiAAy9Aj4DAAAAAQ==",
 		"IndexBufferType": "UInt16",
 		"LineBuffer": "eAEDAAAAAAEAAAAAAg==",
 		"NearestNeighborTexture": true,
 		"PrimitiveType": "SingleColorMesh",
 		"TextureId": "texture",
-		"TriangleBuffer": "eAENxskRwCAAgEByGo23/fcqsw+Ag1MXcPPwKnjBfopeJPEre4VKU/cGk6XkbSFmAU4MAAAAAw==",
+		"TriangleBuffer": "eAENxrURADEAwDA/M4T33zQ+NYKBURMws7BqczsHpy538/Dqcz+BqOQyharmOidsAZkMAAAAAw==",
 		"UseTextureAlpha": false,
-		"VertexBuffer": "eAF1kLsRw0AIRAlciCtQ5tRSKQ5ciCrzuRh34EiZWcQygCVmbu7z2AVOZJ1lX0MscEa8737X9yN+9T0474mv6hH+jcM/uHswcC486cnDP+pP2+cFOm1P50Jvy9F3m0HzVGfzpdrMY0C/ZP2APz12vfGi/V5uAyvp23ysYf2X/iq3+U9yLNj/QQ3qC29/+Nd/4/Cv86f/9/n6/2X+IE81Ol/mHwFQcVAUAAAACA=="
+		"VertexBuffer": "eAF1kYERgCAMAzuKkwijOAqb6WhSJL0QS+88wJeHRrNW7HtuG+Vzr+ec6/4+48ccg2NNvHVH+IW7P/h0oHy+cNoPHn45n7nBvfErR4/RP91N+eInD/PKfuHuV448Fy5ujOGX/JjzXuUj3803o9B/csaSjzy//iRD9mf9445Zvswv8OTfgGf5sb+WF4WPeWMYAAAACA=="
 	},
 	"DoubleSided": false,
 	"IsBillboard": false,

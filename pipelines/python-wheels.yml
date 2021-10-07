@@ -1,6 +1,8 @@
 trigger:
 - main
 
+pr: none
+
 jobs:
 - job: linux
   pool: {vmImage: 'ubuntu-latest'}

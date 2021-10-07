@@ -148,8 +148,8 @@ setup(
     description="3D Visualization Made Easy",
     long_description=LONG_DESCRIPTION,
     long_description_content_type="text/markdown",
-    packages=find_packages("cppsrc"),
-    package_dir={"": "cppsrc"},
+    packages=find_packages("src"),
+    package_dir={"": "src"},
     python_requires=">=3.6, <4",
     ext_modules=[CMakeExtension("scenepic._scenepic")],
     classifiers=[

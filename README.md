@@ -1,11 +1,64 @@
-# ScenePic
+ [![ScenePic](docs/hello_scenepic.gif)](https://microsoft.github.io/scenepic/zoo/hello_scenepic.html)
+
 &copy; Microsoft 2021
 
 Primary Contact: <scenepic@microsoft.com>
 
 [![Build Status](https://microsoft.visualstudio.com/Analog/_apis/build/status/analog/science/svt/microsoft.scenepic?branchName=main)](https://microsoft.visualstudio.com/Analog/_build/latest?definitionId=74916&branchName=main)
 
-[API Documentation](https://microsoft.github.io/scenepic/)
+## Getting Started
+
+To look at some examples and browse the documentation, visit our
+website:
+
+[API Documentation + Demos](https://microsoft.github.io/scenepic/)
+
+We currently support Python and C++:
+
+### Python
+We provide up-to-date Python wheels via
+[PyPi](https://pypi.org/project/scenepic/):
+
+```
+pip install scenepic
+```
+
+If you want to build the library yourself (e.g. for development reasons)
+can clone the repository and follow most of the instructions
+to [build the c++ client library](#c-client-build-how-to),
+but then run
+```
+python setup.py develop
+```
+which will then build and install the library locally.
+
+For a quick tutorial, take a look at
+[`getting_started.py`](https://github.com/microsoft/scenepic/blob/main/python_examples/getting_started.py).
+
+For a more extensive tutorial, install Python and Jupyter, and open the
+`python_examples/tutorial.ipynb` notebook.
+This tutorial also demonstrates the use of ScenePic within the interactive
+Jupyter notebook environment.
+
+A similar example is given in `python_examples/getting_started.ipynb`.
+
+Note: you may need to set the `NotebookApp.iopub_data_rate_limit` setting in
+jupyter to prevent an IOPub error.  To do this, call
+`jupyter notebook --generate-config` to generate a config file, and then edit
+the appropriate line to increase the value until it works.
+
+We provide a website with full Python API documentation [here](https://microsoft.github.io/scenepic/python/)
+
+### C++
+ScenePic is fully compatible with 
+[CMake FetchContent](https://cmake.org/cmake/help/latest/module/FetchContent.html),
+and we encourage users to include the library in their projects via that
+mechanism. Alternatively, you can follow the instructions below to
+[build the client library](#c-client-build-how-to) directly.
+
+To see examples of how to use the library from C++ look at 
+[the tutorial](https://github.com/microsoft/scenepic/blob/main/src/examples/tutorial.cpp).
+You can find the API documentation [here](https://microsoft.github.io/scenepic/cpp)
 
 ## Introduction
 
@@ -43,13 +96,13 @@ An example render:
 
 Here is an animation of the Getting Started tutorial (
   [Python](https://github.com/microsoft/scenepic/blob/main/python_examples/getting_started.py)
-  [C++](https://github.com/microsoft/scenepic/blob/main/cppsrc/examples/getting_started.cpp)
+  [C++](https://github.com/microsoft/scenepic/blob/main/src/examples/getting_started.cpp)
 ):
 
 ![Getting Started](docs/getting_started.gif)
 
 
-## Overview
+## Architecture
 
 The core ScenePic library is written in TypeScript and based on WebGL.  This 
 is compiled down to `dist/scenepic.min.js` which is a 'minified' JavaScript
@@ -71,24 +124,7 @@ purposes.  *Image*s can also be displayed as flat 2D *Displayed Image*s.
 However, most users will not need interact with ScenePic's core API and
 scripting language directly.  Instead they will use one of the
 client-language front end libraries to easily generate ScenePic JSON
-scripts.  Currently supported are:
-
-### C++
-ScenePic is fully compatible with Cmake FetchContent, and we encourage
-users to include the library in their projects via that mechanism.
-Alternatively, you can follow the instructions below to
-[build the client library](#c-client-build-how-to) directly.
-
-### Python
-As the Python interface is provided via a wrapper around the C++
-interface, users can clone the repository and follow most of the
-instructions to [build the c++ client library](#c-client-build-how-to),
-but then run
-```
-python setup.py develop
-```
-which will then build and install the `scenepic` Python wheel.
-Alternatively, pre-built wheels are available on [PyPi](https://pypi.org/project/scenepic/)
+scripts.  Currently supported are C++ and Python.
 
 ## Expected Usage
 
@@ -96,35 +132,6 @@ The main branch of the ScenePic git repository will be kept up-to-date
 with the latest version. We highly recommend, where possible, using the
 binary builds we provide. That said, the library is FetchContent compatible,
 and can be easily included into C++ projects where desired.
-
-### Getting Started with Python
-
-Please follow the instructions above to either create a custom build
-of the library or, preferably, to install one of our pre-built
-binary wheels.
-
-For a quick tutorial, take a look at
-[`getting_started.py`](https://github.com/microsoft/scenepic/blob/main/python_examples/getting_started.py).
-
-For a more extensive tutorial, install Python and Jupyter, and open the
-`python_examples/tutorial.ipynb` notebook.
-This tutorial also demonstrates the use of ScenePic within the interactive
-Jupyter notebook environment.
-
-A similar example is given in `python_examples/getting_started.ipynb`.
-
-Note: you may need to set the `NotebookApp.iopub_data_rate_limit` setting in
-jupyter to prevent an IOPub error.  To do this, call
-`jupyter notebook --generate-config` to generate a config file, and then edit
-the appropriate line to increase the value until it works.
-
-We provide a website with full Python API documentation [here](https://microsoft.github.io/scenepic/python/)
-
-### Getting started with C++
-
-To see examples of how to use the library from C++ look at 
-[the tutorial](https://github.com/microsoft/scenepic/blob/main/cppsrc/examples/tutorial.cpp).
-You can find the API documentation [here](https://microsoft.github.io/scenepic/cpp)
 
 ## Using the HTML Client
 

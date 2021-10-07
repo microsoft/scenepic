@@ -29,6 +29,7 @@ option( SCENEPIC_BUILD_DOCUMENTATION "Specifies whether to build the documentati
 option( SCENEPIC_BUILD_PYTHON "Specifies whether to build the python module" OFF )
 option( SCENEPIC_BUILD_TESTS "Specifies whether to build the tests" OFF )
 option( SCENEPIC_BUILD_EXAMPLES "Specifies whether to build the examples" OFF )
+option( SCENEPIC_FORMAT "Specifies whether to enable the ability to format code via clang-format" OFF )
 
 if( NOT DEFINED CMAKE_BUILD_TYPE )
   SET(CMAKE_BUILD_TYPE Debug)
@@ -87,7 +88,7 @@ set( CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake )
 
 FetchContent_Declare(
   eigen
-  GIT_REPOSITORY https://gitlab.com/cantonios/eigen # see https://gitlab.com/libeigen/eigen/-/issues/2336
+  GIT_REPOSITORY https://gitlab.com/libeigen/eigen
   GIT_TAG        3.4.0
 )
 
@@ -152,9 +153,9 @@ set( CPP_TARGETS
   scenepic
 )
 
-add_subdirectory( cppsrc/scenepic )
+add_subdirectory( src/scenepic )
 if( SCENEPIC_BUILD_EXAMPLES OR SCENEPIC_BUILD_TESTS )
-  add_subdirectory( cppsrc/examples )
+  add_subdirectory( src/examples )
   list( APPEND CPP_TARGETS scenepic_examples )
 endif()
 if( SCENEPIC_BUILD_TESTS )
@@ -162,12 +163,33 @@ if( SCENEPIC_BUILD_TESTS )
   list( APPEND CPP_TARGETS scenepic_tests )
 endif()
 if( SCENEPIC_BUILD_DOCUMENTATION )
-  add_subdirectory( cppsrc/doc )
+  add_subdirectory( src/doc )
   list( APPEND CPP_TARGETS scenepic_doc )
 endif()
 
 add_custom_target( cpp )
 add_dependencies( cpp ${CPP_TARGETS} )
+
+# -------------------- Format -------------------------------------
+
+if( SCENEPIC_FORMAT )
+  find_program(CLANG_FORMAT NAMES clang-format-10 REQUIRED )
+  file(GLOB_RECURSE ALL_SOURCE_FILES CONFIGURE_DEPENDS
+       src/examples/*.cpp
+       src/scenepic/*.cpp
+       src/scenepic/*.h
+       src/include/scenepic/*
+       test/*.cpp
+       test/*.h
+  )
+
+  add_custom_target(scenepic_format
+                    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+                    COMMAND ${CLANG_FORMAT}
+                    -i
+                    ${ALL_SOURCE_FILES})
+
+endif()
 
 # -------------------- Install ------------------------------------
 
@@ -190,10 +212,10 @@ if( WIN32 )
   endif()
 endif()
 
-install(DIRECTORY cppsrc/include/ DESTINATION ${INSTALL_INCLUDEDIR})
+install(DIRECTORY src/include/ DESTINATION ${INSTALL_INCLUDEDIR})
 install(FILES 
-  ${CMAKE_CURRENT_BINARY_DIR}/cppsrc/scenepic/version.h
-  ${CMAKE_CURRENT_BINARY_DIR}/cppsrc/scenepic/js_lib.h
+  ${CMAKE_CURRENT_BINARY_DIR}/src/scenepic/version.h
+  ${CMAKE_CURRENT_BINARY_DIR}/src/scenepic/js_lib.h
   DESTINATION ${INSTALL_INCLUDEDIR}/scenepic
 )
 

@@ -1,6 +1,8 @@
 pr:
 - main
 
+trigger: none
+
 jobs:
 - template: templates/windows-job.yml
   parameters:
