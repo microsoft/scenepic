@@ -1,6 +1,8 @@
 ScenePic: 3D Visualization Made Easy
 ====================================
 
+.. image:: ../hello_scenepic.gif
+
 © Microsoft 2021
 
 Primary Contact: <scenepic@microsoft.com>
