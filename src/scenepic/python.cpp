@@ -2339,7 +2339,8 @@ PYBIND11_MODULE(_scenepic, m)
                 standalone (bool): whether to make the script standalone
                                    by including the library
         )scenepicdoc",
-      "path"_a, "standalone"_a=false)
+      "path"_a,
+      "standalone"_a = false)
     .def(
       "save_as_html",
       &Scene::save_as_html,

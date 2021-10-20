@@ -663,7 +663,7 @@ namespace scenepic
       buff << line;
     }
 
-    if(standalone)
+    if (standalone)
     {
       output << buff.str();
     }

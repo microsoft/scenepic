@@ -13,7 +13,7 @@ namespace scenepic
     double pointer_alt_key_multiplier,
     double pointer_rotation_speed,
     double mouse_wheel_translation_speed,
-    const std::string &layer_dropdown_visibility)
+    const std::string& layer_dropdown_visibility)
   : m_pointer_alt_key_multiplier(pointer_alt_key_multiplier),
     m_pointer_rotation_speed(pointer_rotation_speed),
     m_mouse_wheel_translation_speed(mouse_wheel_translation_speed),

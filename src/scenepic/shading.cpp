@@ -4,6 +4,7 @@
 #include "shading.h"
 
 #include "util.h"
+
 #include <limits>
 
 namespace scenepic
@@ -13,10 +14,11 @@ namespace scenepic
     const Color& ambient_light_color,
     const Color& directional_light_color,
     const Vector& directional_light_dir)
-  : Shading(Color4(bg_color.r(), bg_color.g(), bg_color.b(), 1.0),
-            ambient_light_color,
-            directional_light_color,
-            directional_light_dir)
+  : Shading(
+      Color4(bg_color.r(), bg_color.g(), bg_color.b(), 1.0),
+      ambient_light_color,
+      directional_light_color,
+      directional_light_dir)
   {}
 
   Shading::Shading(
