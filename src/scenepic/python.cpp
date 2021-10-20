@@ -2262,6 +2262,13 @@ PYBIND11_MODULE(_scenepic, m)
       R"scenepicdoc(
                           float: Number of frames to display per second
                       )scenepicdoc")
+    .def_property(
+      "status_bar_visibility",
+      py::overload_cast<>(&Scene::status_bar_visibility, py::const_),
+      py::overload_cast<const std::string&>(&Scene::status_bar_visibility),
+      R"scenepicdoc(
+                          str: CSS visibility for the status bar
+                      )scenepicdoc")
     .def(
       "configure_user_interface",
       &Scene::configure_user_interface,

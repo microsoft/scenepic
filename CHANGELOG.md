@@ -8,6 +8,8 @@ Improvements:
 - The dropdown menu visibility can be directly controlled via `UIParameters`
 - A `standalone` parameter has been added to `save_as_script` to enable the
   creation of standalone scripts.
+- The `status_bar_visibility` of a `Scene` can now be set (i.e. it is not
+  possible to hide the status bar if desired.)
 
 Bug Fixes:
 - While transparent backgrounds were supported by the library, it was

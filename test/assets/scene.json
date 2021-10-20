@@ -4,8 +4,9 @@
 		"SceneId": "test"
 	},
 	{
-		"CommandType": "SetFPS",
-		"Value": 30.0
+		"CommandType": "SetSceneProperties",
+		"FrameRate": 30.0,
+		"StatusBarVisibility": "visible"
 	},
 	{
 		"CameraSpace": false,

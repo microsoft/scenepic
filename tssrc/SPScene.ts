@@ -706,9 +706,10 @@ export default class SPScene
                 this.SetSceneId(command["SceneId"]);
                 break;
 
-            case "SetFPS":
-                this.frameRate = Number(command["Value"]);
+            case "SetSceneProperties":
+                this.frameRate = Number(command["FrameRate"]);
                 this.timePerFrame = 1.0 / this.frameRate;
+                this.statusDiv.style.visibility = command["StatusBarVisibility"]
                 break;
 
             case "DefineMesh":
