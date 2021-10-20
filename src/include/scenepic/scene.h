@@ -391,11 +391,13 @@ namespace scenepic
 
     /** Save the scene as a ScenePic script file (JavaScript JSONP format).
      *  To view the script, you will need to separately code up the wrapper
-     *  html and provide the scenepic.min.js library file. Alternatively,
-     *  use save_as_html() to make a self-contained HTML file.
+     *  html. Alternatively, use save_as_html() to make a self-contained
+     *  HTML file.
      *  \param path the path to the file on disk
+     *  \param standalone whether to include the library in the script
      */
-    void save_as_script(const std::string& path) const;
+    void save_as_script(const std::string& path,
+                        bool standalone=false) const;
 
     /** Quantize the mesh updates.
      *  Each update will be reduced in size in such a way as to minimize

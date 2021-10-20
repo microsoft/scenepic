@@ -1529,13 +1529,16 @@ PYBIND11_MODULE(_scenepic, m)
                                                       into camera rotation. Defaults to 0.01.
             mouse_wheel_translation_speed (float, optional): linear scale factor of mouse wheel input
                                                              into camera translation. Defaults to 0.005.
+            layer_dropdown_visibility (str, optional): CSS visibility setting for the layer dropdown menu.
+                                                       Defaults to "visible".
     )scenepicdoc")
     .def("__repr__", &UIParameters::to_string)
     .def(
-      py::init<double, double, double>(),
+      py::init<double, double, double, const std::string&>(),
       "pointer_alt_key_multiplier"_a = 0.2,
       "pointer_rotation_speed"_a = 0.01,
-      "mouse_wheel_translation_speed"_a = 0.005)
+      "mouse_wheel_translation_speed"_a = 0.005,
+      "layer_dropdown_visibility"_a = "visible")
     .def_property_readonly(
       "pointer_alt_key_multiplier",
       &UIParameters::pointer_alt_key_multiplier,
@@ -2320,14 +2323,16 @@ PYBIND11_MODULE(_scenepic, m)
             Save the scene as a ScenePic script file (JavaScript JSONP
             format).
             To view the script, you will need to separately code up
-            the wrapper html and provide the scenepic.min.js library file.
+            the wrapper html.
             Alternatively, use save_as_html() to make a self-contained
             HTML file.
 
             Args:
                 path (str): the path to the file on disk
+                standalone (bool): whether to make the script standalone
+                                   by including the library
         )scenepicdoc",
-      "path"_a)
+      "path"_a, "standalone"_a=false)
     .def(
       "save_as_html",
       &Scene::save_as_html,

@@ -642,9 +642,20 @@ namespace scenepic
     output << this->json();
   }
 
-  void Scene::save_as_script(const std::string& path) const
+  void Scene::save_as_script(const std::string& path, bool standalone) const
   {
     std::ofstream output(path);
+    std::stringstream buff;
+    for (auto& line : JS_LIB_SRC)
+    {
+      buff << line;
+    }
+
+    if(standalone)
+    {
+      output << buff.str();
+    }
+
     output << this->script();
   }
 

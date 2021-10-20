@@ -1,7 +1,18 @@
 # Changelog
 
 ## [2021-10-20 - Version 1.0.2](https://github.com/microsoft/scenepic/releases/tag/v1.0.2)
-Point release adding additional wheels to support Apple Silicon.
+Point release adding additional wheels to support Apple Silicon and some
+minor UI changes.
+
+Improvements:
+- The dropdown menu visibility can be directly controlled via `UIParameters`
+- A `standalone` parameter has been added to `save_as_script` to enable the
+  creation of standalone scripts.
+
+Bug Fixes:
+- While transparent backgrounds were supported by the library, it was
+  not exposed via the client APIs. This has been fixed via a 4D color parameter
+  for `Shading`.
 
 ## [2021-10-7 - Version 1.0.1](https://github.com/microsoft/scenepic/releases/tag/v1.0.1)
 Point release addressing various items that did not make the release. There will
