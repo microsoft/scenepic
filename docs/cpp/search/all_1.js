@@ -5,7 +5,7 @@ var searchData=
   ['base',['Base',['../classscenepic_1_1_color.html#aa89729bafbf7a0983e804c2bca851adf',1,'scenepic::Color']]],
   ['base_5fmesh_5fid',['base_mesh_id',['../classscenepic_1_1_mesh_update.html#a6f2ef8fc6e676fbb43f93a3f259e6e8d',1,'scenepic::MeshUpdate']]],
   ['beige',['Beige',['../namespacescenepic_1_1_colors.html#ab5821356f76ce8cb91ae3784e4d8f5df',1,'scenepic::Colors']]],
-  ['bg_5fcolor',['bg_color',['../classscenepic_1_1_shading.html#a05c9fa0fbdf90308b919f21550467617',1,'scenepic::Shading']]],
+  ['bg_5fcolor',['bg_color',['../classscenepic_1_1_shading.html#a57480b9bce98bf3bda9cb2dd1066ab4a',1,'scenepic::Shading']]],
   ['black',['Black',['../namespacescenepic_1_1_colors.html#ab1e76f7f54afed7160790c05c3521c72',1,'scenepic::Colors']]],
   ['blue',['Blue',['../namespacescenepic_1_1_colors.html#aa80f298fc2eabfaa2e6191af9e432f93',1,'scenepic::Colors']]],
   ['boolean',['Boolean',['../namespacescenepic.html#a161576ab3f7442539ff2800e70afe3b8a27226c864bac7454a8504f8edb15d95b',1,'scenepic']]],

@@ -4,6 +4,7 @@ var searchData=
   ['label_2eh',['label.h',['../label_8h.html',1,'']]],
   ['label_5fid',['label_id',['../classscenepic_1_1_label.html#a7613640a33a327e8c5169cd083bf13fc',1,'scenepic::Label']]],
   ['lavender',['Lavender',['../namespacescenepic_1_1_colors.html#ab867fb06fe043dfa9b53a46176f6f940',1,'scenepic::Colors']]],
+  ['layer_5fdropdown_5fvisibility',['layer_dropdown_visibility',['../classscenepic_1_1_u_i_parameters.html#a16922d86475293fd81f17ee775698d11',1,'scenepic::UIParameters']]],
   ['layer_5fid',['layer_id',['../classscenepic_1_1_label.html#a37b090c8f326555ac1e2880e6e65e302',1,'scenepic::Label::layer_id() const'],['../classscenepic_1_1_label.html#adc73ca314101099af1b754e1b67dafaf',1,'scenepic::Label::layer_id(const std::string &amp;layer_id)'],['../classscenepic_1_1_mesh.html#a0824844cf4dc335cfde14741af80a2fc',1,'scenepic::Mesh::layer_id() const'],['../classscenepic_1_1_mesh.html#a1e194c8c3400e6dad57bc92641149474',1,'scenepic::Mesh::layer_id(const std::string &amp;layer_id)']]],
   ['layer_5fsettings_2eh',['layer_settings.h',['../layer__settings_8h.html',1,'']]],
   ['layersettings',['LayerSettings',['../classscenepic_1_1_layer_settings.html',1,'scenepic::LayerSettings'],['../classscenepic_1_1_layer_settings.html#a90e0934b306e686eb5bdbaea76593164',1,'scenepic::LayerSettings::LayerSettings()']]],

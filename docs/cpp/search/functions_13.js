@@ -1,7 +1,7 @@
 var searchData=
 [
   ['ui_5fparameters',['ui_parameters',['../classscenepic_1_1_canvas3_d.html#adbb1f7b8d5baee67791a5f0e052dbe83',1,'scenepic::Canvas3D::ui_parameters() const'],['../classscenepic_1_1_canvas3_d.html#a2fdf91cc3012ab3cbfa62ae151b630e4',1,'scenepic::Canvas3D::ui_parameters(const UIParameters &amp;value)']]],
-  ['uiparameters',['UIParameters',['../classscenepic_1_1_u_i_parameters.html#a8e1569068cd02333663ba667a06f8c1e',1,'scenepic::UIParameters']]],
+  ['uiparameters',['UIParameters',['../classscenepic_1_1_u_i_parameters.html#a3e6e0d3f3eec4d8ebe536a369c823648',1,'scenepic::UIParameters']]],
   ['unique_5findex',['unique_index',['../namespacescenepic.html#a3ed9d254440053474d96db05c093600e',1,'scenepic']]],
   ['unquantize',['unquantize',['../classscenepic_1_1_mesh_update.html#affe78a81b3f92943389f90c1a17f2160',1,'scenepic::MeshUpdate']]],
   ['up_5fdir',['up_dir',['../classscenepic_1_1_camera.html#a7642026050ba029721d024737c49d0cc',1,'scenepic::Camera']]],

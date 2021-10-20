@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>API &mdash; scenepic 1.0.1 documentation</title>
+  <title>API &mdash; scenepic 1.0.2 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -607,12 +607,16 @@ HTML file.</p>
 <dd><p>Save the scene as a ScenePic script file (JavaScript JSONP
 format).
 To view the script, you will need to separately code up
-the wrapper html and provide the scenepic.min.js library file.
+the wrapper html.
 Alternatively, use save_as_html() to make a self-contained
 HTML file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – the path to the file on disk</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – the path to the file on disk</p></li>
+<li><p><strong>standalone</strong> (<em>bool</em>) – whether to make the script standalone
+by including the library</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -640,6 +644,17 @@ HTML file.</p>
 event.</p></li>
 <li><p><strong>keypresses</strong> – the key values</p></li>
 </ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="scenepic.Scene.status_bar_visibility">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">status_bar_visibility</span></span><a class="headerlink" href="#scenepic.Scene.status_bar_visibility" title="Permalink to this definition"></a></dt>
+<dd><p>CSS visibility for the status bar</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
