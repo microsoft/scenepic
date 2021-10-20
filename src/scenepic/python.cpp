@@ -1498,6 +1498,12 @@ PYBIND11_MODULE(_scenepic, m)
       "ambient_light_color"_a = Color(0.7f, 0.7f, 0.7f),
       "directional_light_color"_a = Color(0.3f, 0.3f, 0.3f),
       "directional_light_dir"_a = Vector(2, 1, 2))
+    .def(
+      py::init<const Color4&, const Color&, const Color&, const Vector&>(),
+      "bg_color"_a = Color4(0, 0, 0, 1.0),
+      "ambient_light_color"_a = Color(0.7f, 0.7f, 0.7f),
+      "directional_light_color"_a = Color(0.3f, 0.3f, 0.3f),
+      "directional_light_dir"_a = Vector(2, 1, 2))
     .def_property_readonly(
       "bg_color", &Shading::bg_color, "np.ndarray: the background color")
     .def_property_readonly(

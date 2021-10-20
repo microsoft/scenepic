@@ -4,11 +4,23 @@
 #include "shading.h"
 
 #include "util.h"
+#include <limits>
 
 namespace scenepic
 {
   Shading::Shading(
     const Color& bg_color,
+    const Color& ambient_light_color,
+    const Color& directional_light_color,
+    const Vector& directional_light_dir)
+  : Shading(Color4(bg_color.r(), bg_color.g(), bg_color.b(), 1.0),
+            ambient_light_color,
+            directional_light_color,
+            directional_light_dir)
+  {}
+
+  Shading::Shading(
+    const Color4& bg_color,
     const Color& ambient_light_color,
     const Color& directional_light_color,
     const Vector& directional_light_dir)
@@ -18,7 +30,7 @@ namespace scenepic
     m_directional_light_dir(directional_light_dir)
   {}
 
-  const Color& Shading::bg_color() const
+  const Color4& Shading::bg_color() const
   {
     return m_bg_color;
   }
@@ -51,17 +63,26 @@ namespace scenepic
     return obj;
   }
 
+  Color4 Color4None()
+  {
+    return Color4(
+      -std::numeric_limits<Color::Scalar>::infinity(),
+      -std::numeric_limits<Color::Scalar>::infinity(),
+      -std::numeric_limits<Color::Scalar>::infinity(),
+      -std::numeric_limits<Color::Scalar>::infinity());
+  }
+
   bool Shading::is_none() const
   {
     return !(
-      m_bg_color != Color::None() || m_ambient_light_color != Color::None() ||
+      m_bg_color != Color4None() || m_ambient_light_color != Color::None() ||
       m_directional_light_color != Color::None() ||
       m_directional_light_dir != VectorNone());
   }
 
   const Shading Shading::None()
   {
-    return Shading(Color::None(), Color::None(), Color::None(), VectorNone());
+    return Shading(Color4None(), Color::None(), Color::None(), VectorNone());
   }
 
   std::string Shading::to_string() const
