@@ -1,5 +1,8 @@
 # Changelog
 
+## [2021-10-20 - Version 1.0.2](https://github.com/microsoft/scenepic/releases/tag/v1.0.2)
+Point release adding additional wheels to support Apple Silicon.
+
 ## [2021-10-7 - Version 1.0.1](https://github.com/microsoft/scenepic/releases/tag/v1.0.1)
 Point release addressing various items that did not make the release. There will
 not be a binary release as part of this change.
