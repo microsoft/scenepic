@@ -6,6 +6,8 @@
 
 #include "json_value.h"
 
+#include <string>
+
 namespace scenepic
 {
   /** Per-Canvas3D parameters of the ScenePic user interface */
@@ -20,11 +22,14 @@ namespace scenepic
      *                                translation into camera rotation.
      *  \param mouse_wheel_translation_speed linear scale factor of mouse wheel
      *                                       input into camera translation.
+     *  \param layer_dropdown_visibility CSS visibility setting for the layer
+     *                                   dropdown menu.
      */
     UIParameters(
       double pointer_alt_key_multiplier = 0.2,
       double pointer_rotation_speed = 0.01,
-      double mouse_wheel_translation_speed = 0.005);
+      double mouse_wheel_translation_speed = 0.005,
+      const std::string& layer_dropdown_visibility = "visible");
 
     /** When the Alt key is pressed, mouse movement is scaled by this factor. */
     double pointer_alt_key_multiplier() const;
@@ -34,6 +39,9 @@ namespace scenepic
 
     /** Linear scale factor of mouse wheel input into camera translation. */
     double mouse_wheel_translation_speed() const;
+
+    /** Whether the layer dropdown is visible. */
+    const std::string& layer_dropdown_visibility() const;
 
     /** Return a JSON string representing the object */
     std::string to_string() const;
@@ -53,6 +61,7 @@ namespace scenepic
     double m_pointer_alt_key_multiplier;
     double m_pointer_rotation_speed;
     double m_mouse_wheel_translation_speed;
+    std::string m_layer_dropdown_visibility;
   };
 } // namespace scenepic
 

@@ -381,6 +381,11 @@ namespace scenepic
 
     void framerate(float fps);
 
+    /** The CSS visibility of the status bar. */
+    const std::string& status_bar_visibility() const;
+
+    void status_bar_visibility(const std::string& visibility);
+
     /** Save the scene as a JSON file.
      *  To view the JSON, you will need to separately code up the wrapper html
      *  and provide the scenepic.min.js library file. Alternatively, use
@@ -391,11 +396,12 @@ namespace scenepic
 
     /** Save the scene as a ScenePic script file (JavaScript JSONP format).
      *  To view the script, you will need to separately code up the wrapper
-     *  html and provide the scenepic.min.js library file. Alternatively,
-     *  use save_as_html() to make a self-contained HTML file.
+     *  html. Alternatively, use save_as_html() to make a self-contained
+     *  HTML file.
      *  \param path the path to the file on disk
+     *  \param standalone whether to include the library in the script
      */
-    void save_as_script(const std::string& path) const;
+    void save_as_script(const std::string& path, bool standalone = false) const;
 
     /** Quantize the mesh updates.
      *  Each update will be reduced in size in such a way as to minimize
@@ -484,6 +490,8 @@ namespace scenepic
     std::vector<std::shared_ptr<TextPanel>> m_text_panels;
     std::vector<std::shared_ptr<DropDownMenu>> m_drop_down_menus;
     std::vector<JsonValue> m_misc;
+    float m_fps;
+    std::string m_status_bar_visibility;
 
     // These will get out of sync with the above after a call to clear_script()
     // DO NOT REMOVE THESE - they are important
@@ -495,7 +503,6 @@ namespace scenepic
     std::size_t m_num_labels;
     std::size_t m_num_text_panels;
     std::size_t m_num_drop_down_menus;
-    float m_fps;
     bool m_script_cleared;
   };
 } // namespace scenepic

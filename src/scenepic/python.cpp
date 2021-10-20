@@ -1498,6 +1498,12 @@ PYBIND11_MODULE(_scenepic, m)
       "ambient_light_color"_a = Color(0.7f, 0.7f, 0.7f),
       "directional_light_color"_a = Color(0.3f, 0.3f, 0.3f),
       "directional_light_dir"_a = Vector(2, 1, 2))
+    .def(
+      py::init<const Color4&, const Color&, const Color&, const Vector&>(),
+      "bg_color"_a = Color4(0, 0, 0, 1.0),
+      "ambient_light_color"_a = Color(0.7f, 0.7f, 0.7f),
+      "directional_light_color"_a = Color(0.3f, 0.3f, 0.3f),
+      "directional_light_dir"_a = Vector(2, 1, 2))
     .def_property_readonly(
       "bg_color", &Shading::bg_color, "np.ndarray: the background color")
     .def_property_readonly(
@@ -1523,13 +1529,16 @@ PYBIND11_MODULE(_scenepic, m)
                                                       into camera rotation. Defaults to 0.01.
             mouse_wheel_translation_speed (float, optional): linear scale factor of mouse wheel input
                                                              into camera translation. Defaults to 0.005.
+            layer_dropdown_visibility (str, optional): CSS visibility setting for the layer dropdown menu.
+                                                       Defaults to "visible".
     )scenepicdoc")
     .def("__repr__", &UIParameters::to_string)
     .def(
-      py::init<double, double, double>(),
+      py::init<double, double, double, const std::string&>(),
       "pointer_alt_key_multiplier"_a = 0.2,
       "pointer_rotation_speed"_a = 0.01,
-      "mouse_wheel_translation_speed"_a = 0.005)
+      "mouse_wheel_translation_speed"_a = 0.005,
+      "layer_dropdown_visibility"_a = "visible")
     .def_property_readonly(
       "pointer_alt_key_multiplier",
       &UIParameters::pointer_alt_key_multiplier,
@@ -2253,6 +2262,13 @@ PYBIND11_MODULE(_scenepic, m)
       R"scenepicdoc(
                           float: Number of frames to display per second
                       )scenepicdoc")
+    .def_property(
+      "status_bar_visibility",
+      py::overload_cast<>(&Scene::status_bar_visibility, py::const_),
+      py::overload_cast<const std::string&>(&Scene::status_bar_visibility),
+      R"scenepicdoc(
+                          str: CSS visibility for the status bar
+                      )scenepicdoc")
     .def(
       "configure_user_interface",
       &Scene::configure_user_interface,
@@ -2314,14 +2330,17 @@ PYBIND11_MODULE(_scenepic, m)
             Save the scene as a ScenePic script file (JavaScript JSONP
             format).
             To view the script, you will need to separately code up
-            the wrapper html and provide the scenepic.min.js library file.
+            the wrapper html.
             Alternatively, use save_as_html() to make a self-contained
             HTML file.
 
             Args:
                 path (str): the path to the file on disk
+                standalone (bool): whether to make the script standalone
+                                   by including the library
         )scenepicdoc",
-      "path"_a)
+      "path"_a,
+      "standalone"_a = false)
     .def(
       "save_as_html",
       &Scene::save_as_html,

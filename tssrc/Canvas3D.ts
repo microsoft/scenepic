@@ -63,7 +63,7 @@ export default class Canvas3D extends CanvasBase
     layerSettings = {};
 
     // Shading parameters
-    bgColor : vec3;
+    bgColor : vec4;
     ambientLightColor : vec3;
     directionalLightColor : vec3;
     directionalLightDir : vec3;
@@ -296,6 +296,7 @@ export default class Canvas3D extends CanvasBase
         if ("PointerAltKeyMultiplier" in command) this.pointerAltKeyMultiplier = command["PointerAltKeyMultiplier"];
         if ("PointerRotationSpeed" in command) this.pointerRotationSpeed = command["PointerRotationSpeed"];
         if ("MouseWheelTranslationSpeed" in command) this.mouseWheelTranslationSpeed = command["MouseWheelTranslationSpeed"];
+        if ("LayerDropdownVisibility" in command) this.dropdown.style.visibility = command["LayerDropdownVisibility"]
     }
 
     ParseFocusPoint(command : any)
@@ -460,7 +461,7 @@ export default class Canvas3D extends CanvasBase
     SetShading(params : Object)
     {
         // Background color
-        this.bgColor = <vec3>Misc.Base64ToFloat32Array(params["BackgroundColor"]);
+        this.bgColor = <vec4>Misc.Base64ToFloat32Array(params["BackgroundColor"]);
 
         // Lighting
         this.ambientLightColor = <vec3>Misc.Base64ToFloat32Array(params["AmbientLightColor"]);
@@ -960,7 +961,7 @@ export default class Canvas3D extends CanvasBase
         if (!this.AllMeshBuffersReady())
             return;
 
-        this.gl.clearColor(this.bgColor[0], this.bgColor[1], this.bgColor[2], 1.0);
+        this.gl.clearColor(this.bgColor[0], this.bgColor[1], this.bgColor[2], this.bgColor[3]);
         this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT); // Applies to whole canvas
         this.gl.viewport(0, 0, this.htmlCanvas.width, this.htmlCanvas.height);
         this.RenderViewport();

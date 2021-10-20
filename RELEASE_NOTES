@@ -1,14 +1,14 @@
-Point release addressing various items that did not make the release. There will
-not be a binary release as part of this change.
+Point release adding additional wheels to support Apple Silicon and some
+minor UI changes.
 
 Improvements:
-- Added new `hello_scenepic.py` and `hello_scenepic.cpp` example code
-- Renamed `cppsrc` to `src`
-- Added a clang-format pipeline and build targets
-- Normalized C++ file format
+- The dropdown menu visibility can be directly controlled via `UIParameters`
+- A `standalone` parameter has been added to `save_as_script` to enable the
+  creation of standalone scripts.
+- The `status_bar_visibility` of a `Scene` can now be set (i.e. it is not
+  possible to hide the status bar if desired.)
 
 Bug Fixes:
-- `load_obj` now correctly loads normals when present in the OBJ file
-- `MeshInfo` now exposes normals
-- C++ build typos now fixed
-- Fixed erroneous pipeline triggers
+- While transparent backgrounds were supported by the library, it was
+  not exposed via the client APIs. This has been fixed via a 4D color parameter
+  for `Shading`.

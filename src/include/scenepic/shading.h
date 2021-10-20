@@ -26,7 +26,19 @@ namespace scenepic
       const Color& directional_light_color = Color(0.3f, 0.3f, 0.3f),
       const Vector& directional_light_dir = Vector(2, 1, 2));
 
-    const Color& bg_color() const;
+    /** Constructor.
+     *  \param bg_color background color (RGBA)
+     *  \param ambient_light_color color of ambient light
+     *  \param directional_light_color color of directional light
+     *  \param directional_light_dir direction of directional light
+     */
+    Shading(
+      const Color4& bg_color,
+      const Color& ambient_light_color,
+      const Color& directional_light_color,
+      const Vector& directional_light_dir);
+
+    const Color4& bg_color() const;
 
     const Color& ambient_light_color() const;
 
@@ -49,7 +61,7 @@ namespace scenepic
     static const Shading None();
 
   private:
-    Color m_bg_color;
+    Color4 m_bg_color;
     Color m_ambient_light_color;
     Color m_directional_light_color;
     Vector m_directional_light_dir;

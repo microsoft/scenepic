@@ -4,8 +4,9 @@
 		"SceneId": "test"
 	},
 	{
-		"CommandType": "SetFPS",
-		"Value": 30.0
+		"CommandType": "SetSceneProperties",
+		"FrameRate": 30.0,
+		"StatusBarVisibility": "visible"
 	},
 	{
 		"CameraSpace": false,
@@ -257,7 +258,7 @@
 				"CommandType": "SetShading",
 				"Value": {
 					"AmbientLightColor": "eAEzNja2N4ZiABBKAokDAAAAAQ==",
-					"BackgroundColor": "eAFjYEAAAAAMAAEDAAAAAQ==",
+					"BackgroundColor": "eAFjYEAGDfYAAU8AwAEAAAAE",
 					"DirectionalLightColor": "eAGbNXOm3SwoBgApbQYfAwAAAAE=",
 					"DirectionalLightDir": "eAEBDADz/wAAAEAAAIA/AAAAQAbHAUABAAAAAw=="
 				}
@@ -266,7 +267,8 @@
 				"CommandType": "ConfigureUserInterface",
 				"MouseWheelTranslationSpeed": 0.0050000000000000001,
 				"PointerAltKeyMultiplier": 0.20000000000000001,
-				"PointerRotationSpeed": 0.01
+				"PointerRotationSpeed": 0.01,
+				"LayerDropdownVisibility": "visible"
 			},
 			{
 				"CommandType": "SetLayerSettings",
@@ -430,7 +432,7 @@
 				"CommandType": "SetShading",
 				"Value": {
 					"AmbientLightColor": "eAEzNja2N4ZiABBKAokDAAAAAQ==",
-					"BackgroundColor": "eAFjYGiwZ4BiAAy9Aj4DAAAAAQ==",
+					"BackgroundColor": "eAFjYGiwZ0DCABb0Av0BAAAABA==",
 					"DirectionalLightColor": "eAGbNXOm3SwoBgApbQYfAwAAAAE=",
 					"DirectionalLightDir": "eAEBDADz/wAAAEAAAIA/AAAAQAbHAUABAAAAAw=="
 				}
@@ -439,7 +441,8 @@
 				"CommandType": "ConfigureUserInterface",
 				"MouseWheelTranslationSpeed": 0.0050000000000000001,
 				"PointerAltKeyMultiplier": 0.20000000000000001,
-				"PointerRotationSpeed": 0.01
+				"PointerRotationSpeed": 0.01,
+				"LayerDropdownVisibility": "visible"
 			},
 			[
 				{

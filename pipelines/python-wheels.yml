@@ -20,6 +20,8 @@ jobs:
       inputs: {pathtoPublish: 'wheelhouse'}
 
 - job: macos
+  variables:
+    CIBW_ARCHS_MACOS: x86_64 universal2
   pool: {vmImage: 'macOS-latest'}
   steps:
     - task: UsePythonVersion@0

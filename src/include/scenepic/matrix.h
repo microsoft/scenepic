@@ -20,6 +20,7 @@ namespace scenepic
   typedef Eigen::Matrix<float, 4, 4, Eigen::RowMajor> Extrinsic;
   typedef Eigen::SparseMatrix<float> SparseMatrix;
   typedef Eigen::RowVector3f Vector;
+  typedef Eigen::RowVector4f Color4;
   typedef Eigen::Matrix<float, Eigen::Dynamic, 3, Eigen::RowMajor> VectorBuffer;
   typedef Eigen::MatrixX4f WorldVectorMatrix;
   typedef Eigen::Matrix<std::uint32_t, 1, 3> Triangle;

@@ -28,7 +28,8 @@ namespace scenepic
     m_num_text_panels(0),
     m_num_drop_down_menus(0),
     m_script_cleared(false),
-    m_fps(30.0f)
+    m_fps(30.0f),
+    m_status_bar_visibility("visible")
   {}
 
   std::shared_ptr<Canvas3D> Scene::create_canvas_3d(
@@ -534,10 +535,11 @@ namespace scenepic
       commands.append(command);
     }
 
-    JsonValue fps;
-    fps["CommandType"] = "SetFPS";
-    fps["Value"] = m_fps;
-    commands.append(fps);
+    JsonValue properties;
+    properties["CommandType"] = "SetSceneProperties";
+    properties["FrameRate"] = m_fps;
+    properties["StatusBarVisibility"] = m_status_bar_visibility;
+    commands.append(properties);
 
     Scene::add_commands(commands, m_meshes);
 
@@ -626,6 +628,16 @@ namespace scenepic
     m_fps = fps;
   }
 
+  const std::string& Scene::status_bar_visibility() const
+  {
+    return m_status_bar_visibility;
+  }
+
+  void Scene::status_bar_visibility(const std::string& visibility)
+  {
+    m_status_bar_visibility = visibility;
+  }
+
   std::string Scene::json() const
   {
     return this->to_json().to_string();
@@ -642,9 +654,20 @@ namespace scenepic
     output << this->json();
   }
 
-  void Scene::save_as_script(const std::string& path) const
+  void Scene::save_as_script(const std::string& path, bool standalone) const
   {
     std::ofstream output(path);
+    std::stringstream buff;
+    for (auto& line : JS_LIB_SRC)
+    {
+      buff << line;
+    }
+
+    if (standalone)
+    {
+      output << buff.str();
+    }
+
     output << this->script();
   }
 
