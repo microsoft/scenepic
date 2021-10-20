@@ -275,9 +275,9 @@ window.ScriptCommands =
 	{
 		"CanvasId": "Canvas-0",
 		"CommandType": "AddCanvas3D",
-		"Height": 128,
+		"Height": 200,
 		"HtmlId": "logo-scenepic",
-		"Width": 256
+		"Width": 512
 	},
 	{
 		"CanvasId": "Canvas-0",
@@ -288,7 +288,7 @@ window.ScriptCommands =
 				"CommandType": "SetCamera",
 				"Value": 
 				{
-					"Projection": "eAFdiLEJADAIBL/KEKmySTKXVXCMtFlDsHYXhxCx8+A4OOK30SCepz9bV4G0GP4lGwCiCOQEAAAABA==",
+					"Projection": "eAFdiLEJACAMBL9yCCs30X2sbK3EVVxDSJ0pskCGCCFdDo6Dk7k6EvvWkR+3Q4AbFH3fawpLCQkEAAAABA==",
 					"WorldToCamera": "eAGNyDERAAAMArF3VmtIqzSOmYWMAR1lOX3OZYQEPQQAAAAE"
 				}
 			},
@@ -345,8 +345,8 @@ window.ScriptCommands =
 							"CommandType": "SetCamera",
 							"Value": 
 							{
-								"Projection": "eAFdiLEJADAIBL/KEKmySTKXVXCMtFlDsHYXhxCx8+A4OOK30SCepz9bV4G0GP4lGwCiCOQEAAAABA==",
-								"WorldToCamera": "eAEBQAC//5jOdT9zIEk++G9LvgAAAAAAAAAA3Qw2P4f7Mz8AAAAAkAmPPvfQLL85zS4/AAAAAH7IjL+gLRa9YGIUwAAAgD+mJxUIBAAAAAQ="
+								"Projection": "eAFdiLEJACAMBL9yCCs30X2sbK3EVVxDSJ0lMkGGCCFdDo6Dk7k6EvvWkR+3Q4AbFH3fawoLCQgEAAAABA==",
+								"WorldToCamera": "eAEBQAC//5fOdT9zIEk+929LvgAAAAAAAAAA3Aw2P4f7Mz8AAAAAkAmPPvfQLL84zS4/AAAAAH3IjL+QLRa9Wl7CvwAAgD+oXhWWBAAAAAQ="
 							}
 						}
 					],

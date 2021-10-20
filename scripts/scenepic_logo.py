@@ -23,8 +23,8 @@ def _create_camera(angles: np.ndarray, distance: float,
 
 
 def _main():
-    width = 256
-    height = 128
+    width = 512
+    height = 200
     colors = [sp.ColorFromBytes(242, 80, 34),
               sp.ColorFromBytes(127, 186, 0),
               sp.ColorFromBytes(0, 164, 239),
@@ -68,7 +68,7 @@ def _main():
     for mesh, transform in zip(meshes, transforms):
         frame.add_mesh(mesh, transform=transform)
 
-    frame.camera = _create_camera([(-0.8, -0.2, 0)], 2,
+    frame.camera = _create_camera([(-0.8, -0.2, 0)], 1.2,
                                   focus_point, width / height)
     frame.focus_point = sp.FocusPoint(focus_point)
     scene.save_as_script("logo.js", True)
