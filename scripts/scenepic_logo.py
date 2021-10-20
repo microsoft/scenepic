@@ -31,9 +31,16 @@ def _main():
               sp.ColorFromBytes(255, 185, 0)]
 
     scene = sp.Scene()
-    canvas = scene.create_canvas_3d(html_id="logo-scenepic", width=width, height=height)
-    canvas.shading = sp.Shading([0, 0, 0, 0])
-    canvas.ui_parameters = sp.UIParameters(layer_dropdown_visibility="hidden")
+    scene.status_bar_visibility = "hidden"
+    canvas_lg = scene.create_canvas_3d(html_id="logo-scenepic-lg",
+                                       width=width, height=height)
+    canvas_sm = scene.create_canvas_3d(html_id="logo-scenepic-sm",
+                                       width=width // 2, height=height // 2)
+    canvas_lg.shading = sp.Shading([0, 0, 0, 0])
+    canvas_lg.ui_parameters = sp.UIParameters(layer_dropdown_visibility="hidden")
+
+    canvas_sm.shading = sp.Shading([0, 0, 0, 0])
+    canvas_sm.ui_parameters = sp.UIParameters(layer_dropdown_visibility="hidden")
 
     # load the text meshes
     scene_obj = sp.load_obj("scene.obj")
@@ -63,14 +70,19 @@ def _main():
         sp.Transforms.translate(pic_pos)
     ]
 
-    frame = canvas.create_frame()
+    frame_lg = canvas_lg.create_frame()
+    frame_sm = canvas_sm.create_frame()
 
     for mesh, transform in zip(meshes, transforms):
-        frame.add_mesh(mesh, transform=transform)
+        frame_lg.add_mesh(mesh, transform=transform)
+        frame_sm.add_mesh(mesh, transform=transform)
 
-    frame.camera = _create_camera([(-0.8, -0.2, 0)], 1.2,
-                                  focus_point, width / height)
-    frame.focus_point = sp.FocusPoint(focus_point)
+    camera = _create_camera([(-0.8, -0.2, 0)], 1.2,
+                            focus_point, width / height)
+    frame_lg.camera = camera
+    frame_sm.camera = camera
+    frame_lg.focus_point = sp.FocusPoint(focus_point)
+    frame_sm.focus_point = sp.FocusPoint(focus_point)
     scene.save_as_script("logo.js", True)
 
 

@@ -15,12 +15,12 @@
     <meta property="og:description" content="ScenePic empowers you to quickly and easily experiment, create, share, and experience 3D data using just a web browser." />
     <meta property="og:locale" content="en_GB" />
     <style type="text/css">
-        #logo-scenepic .scenepic-canvas-container {
+        #logo-scenepic-lg .scenepic-canvas-container {
             border: none;
         }
 
-        #logo-scenepic .scenepic-dropdown {
-            visibility: hidden;
+        #logo-scenepic-sm .scenepic-canvas-container {
+            border: none;
         }
     </style>
 </head>
@@ -33,8 +33,11 @@
                     <h1 class="display-3">ScenePic</h1>
                     <p class="lead" >3D Visualization Made Easy</p>
                 </div>
-                <div class="col">
-                    <!--<div id="logo-scenepic" class="col"></div>-->
+                <div class="col-lg col-md d-none d-lg-block">
+                    <div id="logo-scenepic-lg" class="img-responsive"></div>
+                </div>
+                <div class="col-sm d-block d-lg-none">
+                    <div id="logo-scenepic-sm" class="img-responsive"></div>
                 </div>
             </div>
             <hr class="my-4">
@@ -174,7 +177,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
-    <!--<script src="scripts/logo.js"></script>-->
+    <script src="scripts/logo.js"></script>
 </body>
 
 </html>
