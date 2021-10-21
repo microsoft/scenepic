@@ -187,6 +187,27 @@ window.ScriptCommands =
 		"MeshId": "Mesh-0"
 	},
 	{
+		"CameraSpace": true,
+		"CommandType": "DefineMesh",
+		"Definition": 
+		{
+			"Color": "eAFjYEAAAAAMAAEDAAAAAQ==",
+			"IndexBufferType": "UInt16",
+			"LineBuffer": "eAEDAAAAAAEAAAAAAg==",
+			"NearestNeighborTexture": false,
+			"PrimitiveType": "SingleColorMesh",
+			"TextureId": "Label-1",
+			"TriangleBuffer": "eAEBDADz/wAAAQACAAAAAgADAAA0AAkCAAAAAw==",
+			"UseTextureAlpha": false,
+			"VertexBuffer": "eAFti8EJAAAIAt2s1dqs1cKE8GEQFncCGGhtuuzhHfg7TPeNn8Nu4MoFYNYJ8QQAAAAI"
+		},
+		"DoubleSided": false,
+		"IsBillboard": false,
+		"IsLabel": true,
+		"LayerId": null,
+		"MeshId": "Mesh-1"
+	},
+	{
 		"CameraSpace": false,
 		"CommandType": "DefineMesh",
 		"Definition": 
@@ -202,7 +223,7 @@ window.ScriptCommands =
 		"IsBillboard": false,
 		"IsLabel": false,
 		"LayerId": "text",
-		"MeshId": "Mesh-1"
+		"MeshId": "Mesh-2"
 	},
 	{
 		"CameraSpace": false,
@@ -220,7 +241,7 @@ window.ScriptCommands =
 		"IsBillboard": false,
 		"IsLabel": false,
 		"LayerId": "text",
-		"MeshId": "Mesh-2"
+		"MeshId": "Mesh-3"
 	},
 	{
 		"CameraSpace": false,
@@ -238,7 +259,7 @@ window.ScriptCommands =
 		"IsBillboard": false,
 		"IsLabel": false,
 		"LayerId": "cubes",
-		"MeshId": "Mesh-3"
+		"MeshId": "Mesh-4"
 	},
 	{
 		"CameraSpace": false,
@@ -256,7 +277,7 @@ window.ScriptCommands =
 		"IsBillboard": false,
 		"IsLabel": false,
 		"LayerId": "cubes",
-		"MeshId": "Mesh-4"
+		"MeshId": "Mesh-5"
 	},
 	{
 		"CameraSpace": false,
@@ -274,7 +295,7 @@ window.ScriptCommands =
 		"IsBillboard": false,
 		"IsLabel": false,
 		"LayerId": "cubes",
-		"MeshId": "Mesh-5"
+		"MeshId": "Mesh-6"
 	},
 	{
 		"CameraSpace": false,
@@ -292,7 +313,7 @@ window.ScriptCommands =
 		"IsBillboard": false,
 		"IsLabel": false,
 		"LayerId": "cubes",
-		"MeshId": "Mesh-6"
+		"MeshId": "Mesh-7"
 	},
 	{
 		"CommandType": "DefineLabel",
@@ -301,6 +322,17 @@ window.ScriptCommands =
 		"FontSizePx": 48.0,
 		"HorizontalAlign": -1,
 		"LabelId": "Label-0",
+		"OffsetDistance": 0.10000000000000001,
+		"Text": "Try It Out!",
+		"VerticalAlign": 0
+	},
+	{
+		"CommandType": "DefineLabel",
+		"FillStyle": "#000000",
+		"FontFamily": "sans-serif",
+		"FontSizePx": 24.0,
+		"HorizontalAlign": -1,
+		"LabelId": "Label-1",
 		"OffsetDistance": 0.10000000000000001,
 		"Text": "Try It Out!",
 		"VerticalAlign": 0
@@ -365,21 +397,21 @@ window.ScriptCommands =
 						},
 						{
 							"CommandType": "AddMesh",
-							"MeshId": "Mesh-1"
-						},
-						{
-							"CommandType": "AddMesh",
-							"MeshId": "Mesh-4",
-							"Transform": "eAF9iDENAAAIw2YDMwxp2AC1wE2yJj1aIImHfNFlvn1yAHctBYUEAAAABA=="
+							"MeshId": "Mesh-2"
 						},
 						{
 							"CommandType": "AddMesh",
 							"MeshId": "Mesh-5",
+							"Transform": "eAF9iDENAAAIw2YDMwxp2AC1wE2yJj1aIImHfNFlvn1yAHctBYUEAAAABA=="
+						},
+						{
+							"CommandType": "AddMesh",
+							"MeshId": "Mesh-6",
 							"Transform": "eAFtikENADAIxE4ZGJio2WBeliDg8AThSeiraQq4YhA8srT+gpTy/8zquZodEA1VBAAAAAQ="
 						},
 						{
 							"CommandType": "AddMesh",
-							"MeshId": "Mesh-2",
+							"MeshId": "Mesh-3",
 							"Transform": "eAF9iDENAAAIw+ZsBhA1KRjBAXhiPwm92gIiDt9LTkdZ3OICh+8GvQQAAAAE"
 						},
 						{
@@ -441,26 +473,26 @@ window.ScriptCommands =
 					[
 						{
 							"CommandType": "AddMesh",
-							"MeshId": "Mesh-0",
+							"MeshId": "Mesh-1",
 							"Transform": "eAF1yLERAAAEBMHvSU5repLTAD0hNi67BVRw+q0ymch8PtYantIItgQAAAAE"
 						},
 						{
 							"CommandType": "AddMesh",
-							"MeshId": "Mesh-1"
-						},
-						{
-							"CommandType": "AddMesh",
-							"MeshId": "Mesh-4",
-							"Transform": "eAF9iDENAAAIw2YDMwxp2AC1wE2yJj1aIImHfNFlvn1yAHctBYUEAAAABA=="
+							"MeshId": "Mesh-2"
 						},
 						{
 							"CommandType": "AddMesh",
 							"MeshId": "Mesh-5",
+							"Transform": "eAF9iDENAAAIw2YDMwxp2AC1wE2yJj1aIImHfNFlvn1yAHctBYUEAAAABA=="
+						},
+						{
+							"CommandType": "AddMesh",
+							"MeshId": "Mesh-6",
 							"Transform": "eAFtikENADAIxE4ZGJio2WBeliDg8AThSeiraQq4YhA8srT+gpTy/8zquZodEA1VBAAAAAQ="
 						},
 						{
 							"CommandType": "AddMesh",
-							"MeshId": "Mesh-2",
+							"MeshId": "Mesh-3",
 							"Transform": "eAF9iDENAAAIw+ZsBhA1KRjBAXhiPwm92gIiDt9LTkdZ3OICh+8GvQQAAAAE"
 						},
 						{
