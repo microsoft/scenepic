@@ -42,6 +42,9 @@ def _main():
     canvas_sm.shading = sp.Shading([0, 0, 0, 0])
     canvas_sm.ui_parameters = sp.UIParameters(layer_dropdown_visibility="hidden")
 
+    try_it_label = scene.create_label(text="Try It Out!", camera_space=True,
+                                      color=[0,0,0], size_in_pixels=48)
+
     # load the text meshes
     scene_obj = sp.load_obj("scene.obj")
     scene_mesh = scene.create_mesh(shared_color=colors[0], layer_id="text")
@@ -73,6 +76,9 @@ def _main():
     frame_lg = canvas_lg.create_frame()
     frame_sm = canvas_sm.create_frame()
 
+    frame_lg.add_label(try_it_label, [0.4, -0.35, -1])
+    frame_sm.add_label(try_it_label, [0.4, -0.35, -1])
+
     for mesh, transform in zip(meshes, transforms):
         frame_lg.add_mesh(mesh, transform=transform)
         frame_sm.add_mesh(mesh, transform=transform)
@@ -83,7 +89,7 @@ def _main():
     frame_sm.camera = camera
     frame_lg.focus_point = sp.FocusPoint(focus_point)
     frame_sm.focus_point = sp.FocusPoint(focus_point)
-    scene.save_as_script("logo.js", True)
+    scene.save_as_script("..\\docs\\scripts\\logo.js", True)
 
 
 if __name__ == "__main__":
