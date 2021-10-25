@@ -253,9 +253,14 @@ def test_primitives(assert_json_equal, asset, color):
     mesh.add_cone(color, truncation_height=0.7)
     assert_json_equal(str(mesh), "trunc_cone")
 
-    mesh = scene.create_mesh("coordinate_axes")
+    mesh = scene.create_mesh("coordinate_axes_0")
     mesh.add_coordinate_axes()
-    assert_json_equal(str(mesh), "coordinate_axes")
+    assert_json_equal(str(mesh), "coordinate_axes_0")
+
+    mesh = scene.create_mesh("coordinate_axes_1", shared_color=sp.Colors.White)
+    mesh.add_cube()
+    mesh.add_coordinate_axes()
+    assert_json_equal(str(mesh), "coordinate_axes_1")
 
     mesh = scene.create_mesh("camera_frustum")
     mesh.add_camera_frustum(color)

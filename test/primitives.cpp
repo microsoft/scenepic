@@ -42,9 +42,15 @@ int test_primitives()
   mesh->add_cone(test::COLOR, sp::Transform::Identity(), 0.7f);
   test::assert_equal(mesh->to_json(), "trunc_cone", result);
 
-  mesh = scene.create_mesh("coordinate_axes");
+  mesh = scene.create_mesh("coordinate_axes_0");
   mesh->add_coordinate_axes();
-  test::assert_equal(mesh->to_json(), "coordinate_axes", result);
+  test::assert_equal(mesh->to_json(), "coordinate_axes_0", result);
+
+  mesh = scene.create_mesh("coordinate_axes_1");
+  mesh->shared_color(sp::Colors::White);
+  mesh->add_cube();
+  mesh->add_coordinate_axes();
+  test::assert_equal(mesh->to_json(), "coordinate_axes_1", result);
 
   mesh = scene.create_mesh("camera_frustum");
   mesh->add_camera_frustum(test::COLOR);
