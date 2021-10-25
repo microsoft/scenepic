@@ -1,5 +1,10 @@
 # Changelog
 
+## [2021-10-26 - Version 1.0.3](https://github.com/microsoft/scenepic/releases/tag/v1.0.3)
+Bug fix release:
+- Coordinate axes bug (#4)
+- Negative angle bug
+
 ## [2021-10-20 - Version 1.0.2](https://github.com/microsoft/scenepic/releases/tag/v1.0.2)
 Point release adding additional wheels to support Apple Silicon and some
 minor UI changes.

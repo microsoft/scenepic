@@ -38,7 +38,7 @@ namespace scenepic
 
     Transform rotation_matrix_from_axis_angle(const Vector& axis, float angle)
     {
-      if (angle < 0.0001)
+      if (std::abs(angle) < 0.0001)
       {
         return Transform::Identity();
       }
