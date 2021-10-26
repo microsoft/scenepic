@@ -244,6 +244,26 @@ namespace scenepic
     /** Create a new Mesh by updating a base mesh with new vertex positions.
      *  Meshes are Scene-wide resources that can be reused across multiple
      *  Frames in multiple Canvas3Ds. This method can be used to create a new
+     *  mesh which is simply a repositioning of an existing mesh,
+     *  thus saving the cost of defining the entire topology every time
+     *  the mesh is instantiated. The base mesh is not modified by this
+     *  operation.
+     *  \param base_mesh_id the id of the base mesh to update
+     *  \param positions the new instance positions
+     *  \param rotations the new instance rotations
+     *  \param mesh_id a unique identifier for the Mesh (will be automatically
+     *                 populated if not provided).
+     *  \return a references to the new Mesh object
+     */
+    std::shared_ptr<MeshUpdate> update_instanced_mesh(
+      const std::string& base_mesh_id,
+      const ConstVectorBufferRef& positions,
+      const ConstQuaternionBufferRef& rotations,
+      const std::string& mesh_id = "");
+
+    /** Create a new Mesh by updating a base mesh with new vertex positions.
+     *  Meshes are Scene-wide resources that can be reused across multiple
+     *  Frames in multiple Canvas3Ds. This method can be used to create a new
      *  mesh which is simply a repositioning of an existing mesh, thus saving
      *  the cost of defining the entire topology every time the mesh is
      *  instantiated. The base mesh is not modified by this operation. Normals

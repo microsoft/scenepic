@@ -91,9 +91,9 @@ namespace scenepic
     obj["CommandType"] = "UpdateMesh";
     obj["BaseMeshId"] = m_base_mesh_id;
     obj["MeshId"] = m_mesh_id;
+    obj["FrameIndex"] = static_cast<std::int64_t>(m_frame_index);
     if (this->is_quantized())
     {
-      obj["FrameIndex"] = static_cast<std::int64_t>(m_frame_index);
       obj["KeyframeIndex"] = static_cast<std::int64_t>(m_keyframe_index);
       obj["MinValue"] = m_min;
       obj["MaxValue"] = m_max;
@@ -101,7 +101,6 @@ namespace scenepic
     }
     else
     {
-      obj["FrameIndex"] = static_cast<std::int64_t>(m_frame_index);
       obj["VertexBuffer"] = matrix_to_json(m_vertex_buffer);
     }
 

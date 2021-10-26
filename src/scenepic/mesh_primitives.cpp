@@ -233,7 +233,30 @@ namespace scenepic
     float length, float thickness, const Transform& transform)
   {
     this->check_instances();
-    Mesh m = Mesh("").shared_color(m_shared_color);
+    if (this->m_vertices.cols() == 6)
+    {
+      // shared color mesh
+      std::cerr << "Converting shared color mesh to use vertex color "
+                << "to accommodate coordinate axes.";
+      VertexBuffer vertices = VertexBuffer::Zero(this->count_vertices(), 9);
+      if (this->count_vertices())
+      {
+        vertices.leftCols(6) = this->m_vertices;
+        vertices.col(6).fill(this->m_shared_color.r());
+        vertices.col(7).fill(this->m_shared_color.g());
+        vertices.col(8).fill(this->m_shared_color.b());
+        this->m_shared_color = Color::None();
+      }
+
+      this->m_vertices = vertices;
+    }
+    else if (this->m_vertices.cols() == 8)
+    {
+      // image/texture mesh
+      throw std::invalid_argument("Cannot add coordinate axes to a UV mesh");
+    }
+
+    Mesh m = Mesh("");
     m.add_thickline(
       {1, 0, 0}, {0, 0, 0}, {length, 0, 0}, thickness, 0.5f * thickness);
     m.add_thickline(

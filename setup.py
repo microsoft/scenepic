@@ -170,7 +170,7 @@ setup(
         "Bug Reports": "https://github.com/microsoft/scenepic/issues",
         "Source": "https://github.com/microsoft/scenepic",
     },
-    url="https://github.com/microsoft/scenepic",
+    url="https://microsoft.github.io/scenepic/",
     install_requires=REQUIRES,
     extras_require={
         "dev": REQUIRES_DEV,

@@ -253,9 +253,14 @@ def test_primitives(assert_json_equal, asset, color):
     mesh.add_cone(color, truncation_height=0.7)
     assert_json_equal(str(mesh), "trunc_cone")
 
-    mesh = scene.create_mesh("coordinate_axes")
+    mesh = scene.create_mesh("coordinate_axes_0")
     mesh.add_coordinate_axes()
-    assert_json_equal(str(mesh), "coordinate_axes")
+    assert_json_equal(str(mesh), "coordinate_axes_0")
+
+    mesh = scene.create_mesh("coordinate_axes_1", shared_color=sp.Colors.White)
+    mesh.add_cube()
+    mesh.add_coordinate_axes()
+    assert_json_equal(str(mesh), "coordinate_axes_1")
 
     mesh = scene.create_mesh("camera_frustum")
     mesh.add_camera_frustum(color)
@@ -348,6 +353,33 @@ def test_mesh_update(assert_json_equal, color):
     update.quantize(1, 6.0, keyframe_buffer)
 
     assert_json_equal(str(update), "update_quantized")
+
+    instance_pos = np.array([
+        [0, 1, 2],
+        [2, 0, 1],
+        [1, 0, 2]
+    ], np.float32)
+
+    instance_rot = np.array([
+        [0.11, 0.22, 0.46, 0.85],
+        [0.46, -0.12, -0.22, 0.85],
+        [0.22, -0.12, 0.46, 0.85]
+    ], np.float32)
+
+    mesh.enable_instancing(instance_pos, instance_rot)
+
+    instance_pos[0] = [1, 1, 0]
+
+    update = scene.update_mesh_without_normals("base", instance_pos, "update2")
+
+    assert_json_equal(str(update), "update2")
+
+    instance_pos[1] = [1, 0, 1]
+    instance_rot[0] = [0.24, 0.24, 0.06, 0.94]
+
+    update = scene.update_instanced_mesh("base", instance_pos, instance_rot, "update3")
+
+    assert_json_equal(str(update), "update3")
 
 
 def test_quantization(assert_json_equal, color):

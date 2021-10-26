@@ -644,24 +644,24 @@ export default class SPScene
     // Update an existing mesh to create a new mesh
     UpdateMesh(baseMeshId: string, meshId: string, buffer: Float32Array|Uint16Array, frameIndex: number, keyframeIndex: number, min: number, max: number)
     {
-        let vertexBuffer: Float32Array;
+        let unquantizedBuffer: Float32Array;
         if (buffer instanceof Uint16Array) {
             let range = (max - min) / 65535.0;
-            vertexBuffer = new Float32Array(buffer.length);
+            unquantizedBuffer = new Float32Array(buffer.length);
             let keyframeVertexBuffer = this.meshKeyframes[baseMeshId + keyframeIndex];
-            for(let i=0; i < vertexBuffer.length; ++i)
+            for(let i=0; i < unquantizedBuffer.length; ++i)
             {
-                vertexBuffer[i] = buffer[i] * range + min + keyframeVertexBuffer[i];
+                unquantizedBuffer[i] = buffer[i] * range + min + keyframeVertexBuffer[i];
             }
         } else {
-            vertexBuffer = buffer;
-            this.meshKeyframes[baseMeshId + frameIndex] = vertexBuffer;
+            unquantizedBuffer = buffer;
+            this.meshKeyframes[baseMeshId + frameIndex] = unquantizedBuffer;
         }
 
         try
         {
             var mesh = this.allMeshes[baseMeshId]
-            this.allMeshes[meshId] = mesh.ToVertexBuffer(vertexBuffer)
+            this.allMeshes[meshId] = mesh.Update(unquantizedBuffer)
         }
         catch (e)
         {

@@ -44,7 +44,7 @@ namespace scenepic
     m_is_billboard(false),
     m_is_label(false),
     m_nn_texture(true),
-    m_use_texture_alpha(true),
+    m_use_texture_alpha(false),
     m_vertices(VertexBuffer::Zero(0, 6)),
     m_triangles(TriangleBuffer::Zero(0, 3)),
     m_lines(LineBuffer::Zero(0, 2))
@@ -722,9 +722,14 @@ namespace scenepic
     append_row(m_lines, Line(index0, index1));
   }
 
+  bool Mesh::is_instanced() const
+  {
+    return m_instance_buffer.rows() > 0;
+  }
+
   void Mesh::check_instances()
   {
-    if (m_instance_buffer.rows() > 0)
+    if (this->is_instanced())
     {
       std::cerr
         << "WARNING: Editing Mesh after calling enable_instancing"
@@ -961,6 +966,11 @@ namespace scenepic
   VertexBufferRef Mesh::vertex_buffer()
   {
     return VertexBufferRef(m_vertices);
+  }
+
+  InstanceBufferRef Mesh::instance_buffer()
+  {
+    return InstanceBufferRef(m_instance_buffer);
   }
 
   std::string Mesh::to_string() const

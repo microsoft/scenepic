@@ -522,6 +522,24 @@ void opacity_and_labels()
   scene.save_as_html("opacity_and_labels.html", "Opacity and Labels");
 }
 
+Eigen::VectorXf random_linspace(float min_val, float max_val, int num_samples)
+{
+  const float scale = max_val - min_val;
+  Eigen::VectorXf values(num_samples);
+  for (int i = 0; i < num_samples; ++i)
+  {
+    values(i) = ((scale * i) / (num_samples - 1) + min_val);
+  }
+
+  for (int i = 0; i < num_samples - 1; ++i)
+  {
+    int j = i + std::rand() % (num_samples - i);
+    std::swap(values(i), values(j));
+  }
+
+  return values;
+}
+
 void animation()
 {
   std::cout << "== Animation ==" << std::endl;
@@ -542,12 +560,24 @@ void animation()
   base_mesh->texture_id(texture->image_id()).use_texture_alpha(true);
   base_mesh->add_mesh(jelly_mesh);
 
-  // this mesh will only change in a rigid fashion (i.e. one instance)
-  auto marble = scene.create_mesh("marble");
-  marble->shared_color(sp::Colors::White);
-  marble->add_sphere(sp::Color::None(), sp::Transforms::scale(0.4f));
+  // this base mesh will be instanced, so we can animate each
+  // instance individual using rigid transforms, in this case
+  // just translation.  auto marbles = scene.create_mesh("marbles_base");
+  int num_marbles = 10;
+  auto marbles = scene.create_mesh("marbles_base");
+  marbles->add_sphere(sp::Colors::White, sp::Transforms::scale(0.2));
+  sp::VectorBuffer marble_positions = sp::VectorBuffer::Zero(num_marbles, 3);
+  marble_positions.col(0) = random_linspace(-0.6, 0.6, num_marbles);
+  marble_positions.col(2) = random_linspace(-1.0, 0.7, num_marbles);
+  const float max_offset = static_cast<float>(2 * M_PI);
+  Eigen::VectorXf marble_offsets =
+    sp::random<Eigen::VectorXf>(num_marbles, 1, 0, max_offset);
+  sp::ColorBuffer marble_colors =
+    sp::random<sp::ColorBuffer>(num_marbles, 3, 0, 1);
+  marbles->enable_instancing(
+    marble_positions, sp::QuaternionBufferNone(), marble_colors);
 
-  for (auto i = 0; i < 60; ++i)
+  for (int i = 0; i < 60; ++i)
   {
     // animate the wave mesh by updating the vertex positions
     auto frame = canvas->create_frame();
@@ -564,10 +594,13 @@ void animation()
       scene.update_mesh_without_normals("jelly_base", positions);
     frame->add_mesh(mesh_update);
 
-    // this is a more simple form of animation using rigid transforms
-    float marble_y = std::sin(0.105f * i);
-    frame->add_mesh(
-      marble, sp::Transforms::translate(sp::Vector(0, marble_y, 0)));
+    // this is a simpler form of animation using rigid transforms per instance
+    Eigen::VectorXf marble_y = 0.105 * i + marble_offsets.array();
+    positions = marble_positions;
+    positions.col(1) = marble_y.array().sin();
+    auto marbles_update =
+      scene.update_mesh_without_normals("marbles_base", positions);
+    frame->add_mesh(marbles_update);
   }
 
   std::cout << std::endl << "Before compression:" << std::endl;
