@@ -326,21 +326,34 @@ def test_animation(asset):
     base_mesh.use_texture_alpha = True
     base_mesh.add_mesh(jelly_mesh)
 
-    marble = scene.create_mesh("plate", shared_color=sp.Colors.White)
-    marble.add_sphere(transform=sp.Transforms.Scale(0.4))
+    def random_linspace(min_val, max_val, num_samples):
+        vals = np.linspace(min_val, max_val, num_samples)
+        np.random.shuffle(vals)
+        return vals
+
+    marbles = scene.create_mesh("marbles_base")
+    num_marbles = 10
+    marbles.add_sphere(sp.Colors.White, transform=sp.Transforms.Scale(0.2))
+    marble_positions = np.zeros((num_marbles, 3), np.float32)
+    marble_positions[:, 0] = random_linspace(-0.6, 0.6, num_marbles)
+    marble_positions[:, 2] = random_linspace(-1.0, 0.7, num_marbles)
+    marble_offsets = np.random.uniform(0, 2 * np.pi, size=num_marbles).astype(np.float32)
+    marble_colors = np.random.uniform(0, 1, size=(num_marbles, 3))
+    marbles.enable_instancing(marble_positions, colors=marble_colors)
 
     for i in range(60):
-        frame = canvas.create_frame()
         positions = jelly_mesh.positions.copy()
         delta_x = (positions[:, 0] + 0.0838 * i) * 10
         delta_z = (positions[:, 2] + 0.0419 * i) * 10
         positions[:, 1] = positions[:, 1] + 0.1 * (np.cos(delta_x) + np.sin(delta_z))
 
-        mesh_update = scene.update_mesh_without_normals("jelly_base", positions)
-        frame.add_mesh(mesh_update)
+        jelly_update = scene.update_mesh_without_normals("jelly_base", positions)
+        frame = canvas.create_frame(meshes=[jelly_update])
 
-        marble_y = np.sin(0.105 * i)
-        frame.add_mesh(marble, transform=sp.Transforms.Translate([0, marble_y, 0]))
+        marble_y = np.sin(0.105 * i + marble_offsets)
+        positions = np.stack([marble_positions[:, 0], marble_y, marble_positions[:, 2]], -1)
+        marbles_update = scene.update_mesh_without_normals("marbles_base", positions)
+        frame.add_mesh(marbles_update)
 
     scene.quantize_updates()
 

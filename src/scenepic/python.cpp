@@ -2051,8 +2051,7 @@ PYBIND11_MODULE(_scenepic, m)
             Args:
                 base_mesh_id (str): the unique identifier of the original base mesh. Must already have been created.
                 positions (np.ndarray): float32 matrix of [N, 3] new positions
-                normals (np.ndarray, optional): float32 matrix of [N, 3] new normals. Defaults to None, indicating
-                                                they will be computed automatically.
+                normals (np.ndarray, optional): float32 matrix of [N, 3] new normals.
                 mesh_id (str, optional): a unique identifier for the new updated Mesh (will be
                                          automatically populated if not provided). Defaults to None.
             
@@ -2060,8 +2059,30 @@ PYBIND11_MODULE(_scenepic, m)
                 MeshUpdate: a reference to the MeshUpdate object
         )scenepicdoc",
       "base_mesh_id"_a,
-      "vertex_buffer"_a,
+      "positions"_a,
       "normals"_a,
+      "mesh_id"_a = "")
+    .def(
+      "update_instanced_mesh",
+      &Scene::update_instanced_mesh,
+      R"scenepicdoc(
+            Create a new mesh from an existing one by replacing its vector positions and normals.
+
+            Args:
+                base_mesh_id (str): the unique identifier of the original base mesh. Must already have been created.
+                positions (np.ndarray): float32 matrix of [N, 3] new positions
+                rotations (np.ndarray, optional): float32 matrix of [N, 4] new rotations.
+                                                  Defaults to None, indicating no change to
+                                                  the rotations.
+                mesh_id (str, optional): a unique identifier for the new updated Mesh (will be
+                                         automatically populated if not provided). Defaults to None.
+            
+            Returns:
+                MeshUpdate: a reference to the MeshUpdate object
+        )scenepicdoc",
+      "base_mesh_id"_a,
+      "positions"_a,
+      "rotations"_a = QuaternionBufferNone(),
       "mesh_id"_a = "")
     .def(
       "update_mesh_without_normals",
@@ -2072,8 +2093,6 @@ PYBIND11_MODULE(_scenepic, m)
             Args:
                 base_mesh_id (str): the unique identifier of the original base mesh. Must already have been created.
                 positions (np.ndarray): float32 matrix of [N, 3] new positions
-                normals (np.ndarray, optional): float32 matrix of [N, 3] new normals. Defaults to None, indicating
-                                                they will be computed automatically.
                 mesh_id (str, optional): a unique identifier for the new updated Mesh (will be
                                          automatically populated if not provided). Defaults to None.
             
@@ -2081,7 +2100,7 @@ PYBIND11_MODULE(_scenepic, m)
                 MeshUpdate: a reference to the MeshUpdate object
         )scenepicdoc",
       "base_mesh_id"_a,
-      "vertex_buffer"_a,
+      "positions"_a,
       "mesh_id"_a = "")
     .def(
       "create_audio",

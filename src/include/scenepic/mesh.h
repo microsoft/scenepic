@@ -614,8 +614,8 @@ namespace scenepic
      *  Instances are stored in a NxD matrix in the following way per row:
      *  [x, y, z]
      *  [x, y, z, r, g, b] (+ color)
-     *  [x, y, z, qw, qx, qy, qz] (+ rotation)
-     *  [x, y, z, qw, qx, qy, qz, r, g, b] (+ rotation and color)
+     *  [x, y, z, qx, qy, qz, qw] (+ rotation)
+     *  [x, y, z, qx, qy, qz, qw, r, g, b] (+ rotation and color)
      */
     InstanceBufferRef instance_buffer();
 

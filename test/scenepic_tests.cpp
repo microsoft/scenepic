@@ -48,7 +48,6 @@ namespace test
   {
     std::vector<std::uint8_t> bytes(buffer.begin(), buffer.end());
     Eigen::MatrixXf values = sp::decompress_matrix<Eigen::MatrixXf>(bytes);
-    values.transposeInPlace();
     return values;
   }
 
@@ -83,9 +82,9 @@ namespace test
         if (result == EXIT_FAILURE)
         {
           std::cerr << tag << " is incorrect: " << std::endl
-                    << actual << std::endl
+                    << actual.asString() << std::endl
                     << "!=" << std::endl
-                    << expected << std::endl;
+                    << expected.asString() << std::endl;
           break;
         }
       }

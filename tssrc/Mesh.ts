@@ -117,19 +117,19 @@ export default class Mesh
         }
     }
 
-    Update(buffer : Float32Array)
+    Update(buffer : Float32Array) : Mesh
     {
-        if(this.CountInstances() > 0)
+        if(this.CountInstances() > 1)
         {
-            this.ToInstanceBuffer(buffer);
+            return this.ToInstanceBuffer(buffer);
         }
         else
         {
-            this.ToVertexBuffer(buffer);
+            return this.ToVertexBuffer(buffer);
         }
     }
 
-    ToInstanceBuffer(positionsAndRotations : Float32Array)
+    ToInstanceBuffer(positionsAndRotations : Float32Array) : Mesh
     {
         let instanceBuffer : Float32Array;
         let elementsPerInstance = positionsAndRotations.length / this.CountInstances();
@@ -167,11 +167,11 @@ export default class Mesh
         return mesh;
     }
 
-    ToVertexBuffer(positionAndNormals : Float32Array)
+    ToVertexBuffer(positionAndNormals : Float32Array) : Mesh
     {
         let vertexBuffer : Float32Array;
         let elementsPerVertex = positionAndNormals.length / this.CountVertices();
-        if(elementsPerVertex != this.ElementsPerVertex)
+        if(elementsPerVertex == this.ElementsPerVertex)
         {
             vertexBuffer = positionAndNormals;
         }

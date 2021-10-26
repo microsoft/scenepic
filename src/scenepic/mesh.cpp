@@ -968,6 +968,11 @@ namespace scenepic
     return VertexBufferRef(m_vertices);
   }
 
+  InstanceBufferRef Mesh::instance_buffer()
+  {
+    return InstanceBufferRef(m_instance_buffer);
+  }
+
   std::string Mesh::to_string() const
   {
     return this->to_json().to_string();
