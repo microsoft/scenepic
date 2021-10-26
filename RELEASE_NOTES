@@ -1,3 +1,4 @@
 Bug fix release:
 - Coordinate axes bug (#4)
 - Negative angle bug
+- Mesh Update for instanced meshes (#8)

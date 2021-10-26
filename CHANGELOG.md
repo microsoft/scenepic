@@ -4,6 +4,7 @@
 Bug fix release:
 - Coordinate axes bug (#4)
 - Negative angle bug
+- Mesh Update for instanced meshes (#8)
 
 ## [2021-10-20 - Version 1.0.2](https://github.com/microsoft/scenepic/releases/tag/v1.0.2)
 Point release adding additional wheels to support Apple Silicon and some
