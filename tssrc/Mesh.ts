@@ -117,19 +117,72 @@ export default class Mesh
         }
     }
 
+    Update(buffer : Float32Array)
+    {
+        if(this.CountInstances() > 0)
+        {
+            this.ToInstanceBuffer(buffer);
+        }
+        else
+        {
+            this.ToVertexBuffer(buffer);
+        }
+    }
+
+    ToInstanceBuffer(positionsAndRotations : Float32Array)
+    {
+        let instanceBuffer : Float32Array;
+        let elementsPerInstance = positionsAndRotations.length / this.CountInstances();
+        if(elementsPerInstance == this.ElementsPerInstance)
+        {
+            instanceBuffer = positionsAndRotations;
+        }
+        else
+        {
+            instanceBuffer = Float32Array.from(this.instanceBuffer);
+            for(let pos_idx=0, vert_idx=0;
+                pos_idx<positionsAndRotations.length;
+                pos_idx += elementsPerInstance, vert_idx += this.ElementsPerInstance)
+            {
+                instanceBuffer.set(positionsAndRotations.slice(pos_idx, pos_idx + elementsPerInstance), vert_idx);
+            }
+        }
+
+        let mesh = new Mesh(this.vertexBuffer,
+                            this.bytesPerIndex,
+                            this.triangleBuffer,
+                            this.lineBuffer,
+                            this.color,
+                            this.textureId,
+                            this.nnTexture,
+                            this.useTextureAlpha,
+                            instanceBuffer,
+                            this.instanceBufferHasRotations,
+                            this.instanceBufferHasColors)
+        mesh.cameraSpace = this.cameraSpace;
+        mesh.layerId = this.layerId;
+        mesh.doubleSided = this.doubleSided;
+        mesh.isBillboard = this.isBillboard;
+        mesh.isLabel = this.isLabel;
+        return mesh;
+    }
+
     ToVertexBuffer(positionAndNormals : Float32Array)
     {
         let vertexBuffer : Float32Array;
-        if(this.ElementsPerInstance == 6)
+        let elementsPerVertex = positionAndNormals.length / this.CountVertices();
+        if(elementsPerVertex != this.ElementsPerVertex)
         {
             vertexBuffer = positionAndNormals;
         }
         else
         {
             vertexBuffer = Float32Array.from(this.vertexBuffer);
-            for(let pos_idx=0, vert_idx=0; pos_idx<positionAndNormals.length; pos_idx += 6, vert_idx += this.ElementsPerVertex)
+            for(let pos_idx=0, vert_idx=0;
+                pos_idx<positionAndNormals.length;
+                pos_idx += elementsPerVertex, vert_idx += this.ElementsPerVertex)
             {
-                vertexBuffer.set(positionAndNormals.slice(pos_idx, pos_idx + 6), vert_idx);
+                vertexBuffer.set(positionAndNormals.slice(pos_idx, pos_idx + elementsPerVertex), vert_idx);
             }
         }
 

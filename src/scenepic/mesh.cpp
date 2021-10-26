@@ -722,9 +722,14 @@ namespace scenepic
     append_row(m_lines, Line(index0, index1));
   }
 
+  bool Mesh::is_instanced() const
+  {
+    return m_instance_buffer.rows() > 0;
+  }
+
   void Mesh::check_instances()
   {
-    if (m_instance_buffer.rows() > 0)
+    if (this->is_instanced())
     {
       std::cerr
         << "WARNING: Editing Mesh after calling enable_instancing"

@@ -315,6 +315,56 @@ namespace scenepic
     return mesh_update;
   }
 
+  std::shared_ptr<MeshUpdate> Scene::update_instanced_mesh(
+    const std::string& base_mesh_id,
+    const ConstVectorBufferRef& positions,
+    const ConstQuaternionBufferRef& rotations,
+    const std::string& mesh_id_init)
+  {
+    std::string mesh_id = mesh_id_init;
+    if (mesh_id.empty())
+    {
+      mesh_id = "Mesh-" + std::to_string(m_num_meshes);
+    }
+
+    auto it = std::find_if(
+      m_meshes.begin(), m_meshes.end(), [&](const std::shared_ptr<Mesh>& mesh) {
+        return mesh->mesh_id() == base_mesh_id;
+      });
+    if (it == m_meshes.end())
+    {
+      throw std::invalid_argument("Invalid base mesh ID");
+    }
+    auto base_mesh = *it;
+
+    if (m_update_counts.count(base_mesh_id) == 0)
+    {
+      m_update_counts[base_mesh_id] = 0;
+    }
+
+    auto frame_index = m_update_counts[base_mesh_id];
+    m_update_counts[base_mesh_id] = frame_index + 1;
+
+    InstanceBuffer new_instances;
+    if (rotations.rows() > 0)
+    {
+      new_instances = base_mesh->instance_buffer().leftCols(7);
+      new_instances.rightCols(4) = rotations;
+    }
+    else
+    {
+      new_instances = base_mesh->instance_buffer().leftCols(3);
+    }
+
+    new_instances.leftCols(3) = positions;
+
+    auto mesh_update = std::make_shared<MeshUpdate>(
+      MeshUpdate(base_mesh_id, mesh_id, new_instances, frame_index));
+    m_mesh_updates.push_back(mesh_update);
+    m_num_meshes += 1;
+    return mesh_update;
+  }
+
   std::shared_ptr<MeshUpdate> Scene::update_mesh_without_normals(
     const std::string& base_mesh_id,
     const ConstVectorBufferRef& positions,
@@ -330,9 +380,17 @@ namespace scenepic
     }
     auto base_mesh = *it;
 
-    VectorBuffer normals =
-      Mesh::compute_normals(positions, base_mesh->triangles());
-    return update_mesh(base_mesh_id, positions, normals, mesh_id_init);
+    if (base_mesh->is_instanced())
+    {
+      return update_instanced_mesh(
+        base_mesh_id, positions, QuaternionBufferNone(), mesh_id_init);
+    }
+    else
+    {
+      VectorBuffer normals =
+        Mesh::compute_normals(positions, base_mesh->triangles());
+      return update_mesh(base_mesh_id, positions, normals, mesh_id_init);
+    }
   }
 
   std::shared_ptr<Image> Scene::create_image(const std::string& image_id_init)

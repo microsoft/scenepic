@@ -78,6 +78,7 @@ namespace scenepic
   typedef Eigen::Ref<ColorBuffer> ColorBufferRef;
   typedef Eigen::Ref<VectorBuffer> VectorBufferRef;
   typedef Eigen::Ref<VertexBuffer> VertexBufferRef;
+  typedef Eigen::Ref<InstanceBuffer> InstanceBufferRef;
 
   const VectorBuffer& VectorBufferNone();
   const ColorBuffer& ColorBufferNone();
