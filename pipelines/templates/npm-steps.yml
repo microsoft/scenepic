@@ -1,5 +1,12 @@
 steps:
 - task: Npm@1
+  displayName: 'Update npm to latest'
+  inputs:
+    command: custom
+    verbose: false
+    customCommand: 'npm i -g npm@latest'
+
+- task: Npm@1
   displayName: 'npm install'
   inputs:
     verbose: false
