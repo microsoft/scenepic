@@ -4,7 +4,7 @@ steps:
   inputs:
     command: custom
     verbose: false
-    customCommand: 'npm i -g npm@latest'
+    customCommand: 'install -g npm@latest'
 
 - task: Npm@1
   displayName: 'npm install'
