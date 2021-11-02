@@ -1,5 +1,8 @@
 # Changelog
 
+## [2021-11-2 - Version 1.0.4](https://github.com/microsoft/scenepic/releases/tag/v1.0.4)
+Point release adding text burning into video frames (#5)
+
 ## [2021-10-26 - Version 1.0.3](https://github.com/microsoft/scenepic/releases/tag/v1.0.3)
 Bug fix release:
 - Coordinate axes bug (#4)
