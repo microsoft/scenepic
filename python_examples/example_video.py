@@ -1,4 +1,4 @@
-"""Offline test script for VideoWriter."""
+"""Example script for VideoWriter."""
 
 import argparse
 
@@ -8,7 +8,7 @@ from scenepic import VideoWriter
 
 
 def _parse_args():
-    parser = argparse.ArgumentParser("VideoWriter Test Script")
+    parser = argparse.ArgumentParser("VideoWriter Example")
     parser.add_argument("--size", type=int, default=512,
                         help="Size of video frame")
     parser.add_argument("--num-frames", type=int, default=60,
