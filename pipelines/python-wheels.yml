@@ -21,7 +21,7 @@ jobs:
 
 - job: macos
   variables:
-    CIBW_ARCHS_MACOS: x86_64 universal2
+    CIBW_ARCHS_MACOS: x86_64 arm64
   pool: {vmImage: 'macOS-latest'}
   steps:
     - task: UsePythonVersion@0
