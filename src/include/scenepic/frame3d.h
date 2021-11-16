@@ -8,6 +8,7 @@
 #include "focus_point.h"
 #include "json_value.h"
 #include "label.h"
+#include "layer_settings.h"
 #include "matrix.h"
 #include "mesh.h"
 #include "mesh_update.h"
@@ -78,6 +79,22 @@ namespace scenepic
      */
     void add_label(const std::shared_ptr<Label>& label, const Vector& position);
 
+    /** Specify the visibilities and opacities of certain mesh layers.
+     *  Each Mesh object can optionally be part of a user-identified layer
+     *  (see Mesh constructor). Calling set_layer_settings will result in an
+     *  additional drop-down selector in the ScenePic user interface.
+     *  Currently, opacity is only guaranteed to be correct for Meshes
+     *  that do not overlap. If you know one mesh should be rendered before
+     *  another for opacity purposes, use the renderOrder setting:
+     *  low numbers will be drawn before high numbers, and layers with no
+     *  renderOrder set will be drawn first. Meshes without layer ids, or with
+     *  layer ids that are not specified in this dictionary, will be drawn
+     *  filled, without wireframe, at opacity 1.0, and before any layers with
+     *  renderOrder set.
+     */
+    void set_layer_settings(
+      const std::map<std::string, LayerSettings> layer_settings);
+
     /** The default camera parameters for this frame. */
     const Camera& camera() const;
 
@@ -117,6 +134,7 @@ namespace scenepic
     FocusPoint m_focus_point;
     Camera m_camera;
     std::vector<JsonValue> m_frame_commands;
+    std::map<std::string, LayerSettings> m_layer_settings;
   };
 } // namespace scenepic
 

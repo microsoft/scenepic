@@ -977,6 +977,36 @@ void multiview()
   scene.save_as_html("multiview.html", "Multiview");
 }
 
+void fading()
+{
+  std::cout << "== Multiview ==" << std::endl;
+
+  sp::Scene scene;
+
+  auto cube = scene.create_mesh("cube", "cube");
+  cube->add_cube(sp::Colors::Red);//, sp::Transforms::translate({-1, 0, 0}));
+
+  auto sphere = scene.create_mesh("sphere", "sphere");
+  sphere->add_sphere(sp::Colors::Green);//, sp::Transforms::translate({1, 0, 0}));
+
+  auto canvas = scene.create_canvas_3d();
+  
+  for(int i=0; i<60; ++i)
+  {
+    double sphere_opacity = i / 59.0;
+    double cube_opacity = 1.0 - sphere_opacity;
+    auto frame = canvas->create_frame();
+    frame->add_mesh(cube);
+    frame->add_mesh(sphere);
+    frame->set_layer_settings({
+      {"cube", sp::LayerSettings(true, false, cube_opacity)},
+      {"sphere", sp::LayerSettings(true, false, sphere_opacity)}
+    });
+  }
+
+  scene.save_as_html("fading.html", "Fading");
+}
+
 int main(int argc, char* argv[])
 {
   scene_and_canvas_basics();
@@ -992,4 +1022,5 @@ int main(int argc, char* argv[])
   audio_tracks();
   circles_video();
   multiview();
+  fading();
 }

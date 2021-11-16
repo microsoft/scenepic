@@ -44,6 +44,12 @@ namespace scenepic
     this->add_mesh_by_id(label->mesh_id(), Transforms::translate(position));
   }
 
+  void Frame3D::set_layer_settings(
+    const std::map<std::string, LayerSettings> layer_settings)
+  {
+    m_layer_settings = layer_settings;
+  }
+
   JsonValue Frame3D::to_json() const
   {
     JsonValue obj;
@@ -69,6 +75,18 @@ namespace scenepic
     if (!m_camera.is_none())
     {
       frame_commands["Commands"].append(m_camera.to_json());
+    }
+
+    if (m_layer_settings.size())
+    {
+      JsonValue layer_settings;
+      layer_settings["CommandType"] = "SetLayerSettings";
+      for (const auto& layer : m_layer_settings)
+      {
+        layer_settings["Value"][layer.first] = layer.second.to_json();
+      }
+
+      frame_commands["Commands"].append(layer_settings);
     }
 
     obj.append(command);

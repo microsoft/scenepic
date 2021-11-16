@@ -1,5 +1,8 @@
 # Changelog
 
+## [2021-11-16 - Version 1.0.5](https://github.com/microsoft/scenepic/releases/tag/v1.0.5)
+Point release adding per-frame layer settings.
+
 ## [2021-11-2 - Version 1.0.4](https://github.com/microsoft/scenepic/releases/tag/v1.0.4)
 Point release adding text burning into video frames (#5)
 
