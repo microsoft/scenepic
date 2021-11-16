@@ -999,8 +999,8 @@ void fading()
   sphere->add_sphere(sp::Colors::Green);
 
   auto canvas = scene.create_canvas_3d();
-  
-  for(int i=0; i<60; ++i)
+
+  for (int i = 0; i < 60; ++i)
   {
     double sphere_opacity = i / 59.0;
     double cube_opacity = 1.0 - sphere_opacity;
@@ -1009,10 +1009,9 @@ void fading()
     frame->add_mesh(sphere);
     // the interface here is the same as with how layer settings
     // usually works at the canvas level.
-    frame->set_layer_settings({
-      {"cube", sp::LayerSettings(true, false, cube_opacity)},
-      {"sphere", sp::LayerSettings(true, false, sphere_opacity)}
-    });
+    frame->set_layer_settings(
+      {{"cube", sp::LayerSettings(true, false, cube_opacity)},
+       {"sphere", sp::LayerSettings(true, false, sphere_opacity)}});
   }
 
   scene.save_as_html("fading.html", "Fading");
