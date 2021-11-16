@@ -3,11 +3,11 @@
 # Copyright (c) Microsoft Corporation.
 # Licensed under the MIT License.
 
-from typing import List, Union
+from typing import List, Mapping, Union
 
 import numpy as np
 
-from ._scenepic import Frame3D, Mesh, MeshUpdate
+from ._scenepic import Frame3D, LayerSettings, Mesh, MeshUpdate
 
 
 def add_meshes(self, meshes: List[Union[Mesh, MeshUpdate, str]], transform: np.ndarray = None):
@@ -43,5 +43,31 @@ def add_mesh(self, mesh: Union[Mesh, MeshUpdate, str], transform: np.ndarray = N
         self.add_mesh_(mesh_id, transform)
 
 
+def set_layer_settings(self, layer_settings: Mapping[str, Union[dict, LayerSettings]]):
+    """Specify the visibilities and opacities of certain mesh layers.
+
+    Description:
+        Each Mesh object can optionally be part of a user-identified layer
+        (see Mesh constructor).
+        Calling set_layer_settings will result in an additional drop-down
+        selector in the ScenePic user interface.
+
+    Args:
+        self (Canvas3D): the self reference
+        layer_settings (Mapping[str, Union[dict, LayerSettings]]): a LayerSettings object
+            or a dictionary. See LayerSettings for details.
+    """
+    updated_settings = {}
+    for key, value in layer_settings.items():
+        if isinstance(value, dict):
+            if "visible" in value:
+                print("`visible` keyword has been deprecated")
+            else:
+                updated_settings[key] = LayerSettings(**value)
+
+    self.set_layer_settings_(updated_settings)
+
+
 Frame3D.add_meshes = add_meshes
 Frame3D.add_mesh = add_mesh
+Frame3D.set_layer_settings = set_layer_settings

@@ -100,6 +100,9 @@ export default class Canvas3D extends CanvasBase
     frameCameraParams : Object[] = []; // Per-frame cameras
     onCameraTrack : boolean = false;
 
+    // Frame layer settings
+    frameLayerSettings : Object[] = [];
+
     // Lock view settings
     lockViewXY = false;
     lockViewOrientation = false;
@@ -388,6 +391,13 @@ export default class Canvas3D extends CanvasBase
                 this.RemoveMesh(frameIndex, meshId);
                 break;
 
+            case "SetLayerSettings":
+                var layerSettings = Misc.GetDefault(command, "Value", null);
+                if (layerSettings != null){
+                    this.SetPerFrameLayerSettings(frameIndex, layerSettings);
+                    break;
+                }
+
             default:
                 super.ExecuteFrameCommand(command, frameIndex);
                 break;
@@ -447,6 +457,13 @@ export default class Canvas3D extends CanvasBase
         if ( value == null) return;
 
         this.frameCameraParams[frameIndex] = value; // For reset support
+    }
+
+    SetPerFrameLayerSettings(frameIndex : number, value : Object)
+    {
+        if ( value == null) return;
+    
+        this.frameLayerSettings[frameIndex] = value;
     }
 
     SetGlobalFocusPoint(focusPoint : Float32Array)
@@ -907,6 +924,23 @@ export default class Canvas3D extends CanvasBase
         // Get old and new focus points
         var oldFocusPoint = this.currentFocusPoints[this.currentFrameIndex];
         var newFocusPoint = this.currentFocusPoints[frameIndex];
+
+        if (this.frameLayerSettings[frameIndex])
+        {
+            let layerSettings = this.frameLayerSettings[frameIndex];
+            for(let layerId in layerSettings)
+            {
+                this.SetLayerFilled(layerId, layerSettings[layerId]["filled"]);
+                this.SetLayerWireframe(layerId, layerSettings[layerId]["wireframe"]);
+                this.SetLayerOpacity(layerId, layerSettings[layerId]["opacity"]);
+                if ( "renderOrder" in layerSettings )
+                {
+                    this.layerSettings[layerId]["renderOrder"] = layerSettings[layerId]["renderOrder"]
+                }
+
+                this.PrepareBuffers();
+            }
+        }
 
         var w2vMatrixOld = mat4.create();
         mat4.copy(w2vMatrixOld, this.w2vMatrix);

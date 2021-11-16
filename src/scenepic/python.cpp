@@ -1467,6 +1467,16 @@ PYBIND11_MODULE(_scenepic, m)
         )scenepicdoc",
       "label"_a,
       "position"_a)
+    .def(
+      "set_layer_settings_",
+      &Frame3D::set_layer_settings,
+      R"scenepicdoc(
+            Specify the visibilities and opacities of certain mesh layers.
+            Each Mesh object can optionally be part of a user-identified layer
+            (see Mesh constructor). Calling set_layer_settings will result in an
+            additional drop-down selector in the ScenePic user interface.
+        )scenepicdoc",
+      "layer_settings"_a)
     .def_property(
       "focus_point",
       py::overload_cast<>(&Frame3D::focus_point, py::const_),
