@@ -979,15 +979,24 @@ void multiview()
 
 void fading()
 {
-  std::cout << "== Multiview ==" << std::endl;
+  std::cout << "== Fading ==" << std::endl;
+
+  // It is possible to use the per-frame layer settings to automatically
+  // change various layer properties, for example to fade meshes in and
+  // out of view. The user can still override this manually using the
+  // controls, of course, but this feature can help guide the user through
+  // more complex animations.
 
   sp::Scene scene;
 
+  // In this tutorial we will fade out one mesh (the cube) and fade
+  // another in (the sphere).
+
   auto cube = scene.create_mesh("cube", "cube");
-  cube->add_cube(sp::Colors::Red);//, sp::Transforms::translate({-1, 0, 0}));
+  cube->add_cube(sp::Colors::Red);
 
   auto sphere = scene.create_mesh("sphere", "sphere");
-  sphere->add_sphere(sp::Colors::Green);//, sp::Transforms::translate({1, 0, 0}));
+  sphere->add_sphere(sp::Colors::Green);
 
   auto canvas = scene.create_canvas_3d();
   
@@ -998,6 +1007,8 @@ void fading()
     auto frame = canvas->create_frame();
     frame->add_mesh(cube);
     frame->add_mesh(sphere);
+    // the interface here is the same as with how layer settings
+    // usually works at the canvas level.
     frame->set_layer_settings({
       {"cube", sp::LayerSettings(true, false, cube_opacity)},
       {"sphere", sp::LayerSettings(true, false, sphere_opacity)}

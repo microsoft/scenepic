@@ -553,3 +553,25 @@ def test_multiview(asset):
         frame.camera = camera
         for cam_mesh in camera_images:
             frame.add_mesh(cam_mesh)
+
+
+def test_fading():
+    scene = sp.Scene()
+
+    cube = scene.create_mesh(layer_id="cube")
+    cube.add_cube(sp.Colors.Green)
+
+    sphere = scene.create_mesh(layer_id="sphere")
+    sphere.add_sphere(sp.Colors.Red)
+
+    canvas = scene.create_canvas_3d()
+    for i in range(60):
+        sphere_opacity = i / 59
+        cube_opacity = 1 - sphere_opacity
+        frame = canvas.create_frame()
+        frame.add_mesh(cube)
+        frame.add_mesh(sphere)
+        frame.set_layer_settings({
+            "cube": {"opacity": cube_opacity},
+            "sphere": {"opacity": sphere_opacity}
+        })
