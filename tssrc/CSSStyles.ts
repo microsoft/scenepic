@@ -311,6 +311,16 @@ input.scenepic-volume-slider {
   font-size: 14px;  
 }
 
+.scenepic-camera-mode {
+  position: absolute;
+  visibility: hidden;
+  left: 5px;
+  top: 55px;
+  font-family: monospace;
+  color: magenta;
+  font-size: 14px;
+}
+
 `;
 
 var initialized = false;

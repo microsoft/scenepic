@@ -81,12 +81,17 @@ export default class Canvas3D extends CanvasBase
     pointerAltKeyMultiplier = 0.2;
     pointerRotationSpeed = 0.01;
     mouseWheelTranslationSpeed = 0.005;
+    keyDownSpeed = 0.1;
     thumbStickDeadZoneAmount = 0.2;
     thumbStickRotationSpeed = 0.1;
     thumbStickTranslationSpeed = 0.01;
     touchpadAsButtonThreshold = 0.5;
     buttonTranslationSpeed = 0.01;
     buttonScaleSpeed = 1.01;
+
+    // first person mode
+    cameraVelocity = [0.0, 0.0, 0.0];
+    cameraRotate = [0.0, 0.0];
 
     // Focus points for user interaction: center of rotation and used for locking view
     globalFocusPoint : Float32Array = new Float32Array([0.0, 0.0, 0.0]);
@@ -136,8 +141,10 @@ export default class Canvas3D extends CanvasBase
         this.onCameraTrack = true;
         this.SetShading(DefaultShading);
 
+        this.cameraModeDisplay.style.visibility = "visible";
+
         // Create dropdown
-        this.SetLayerSettings({});
+        this.SetLayerSettings({});        
 
         // Start render loop
         this.StartRenderLoop();
@@ -182,6 +189,34 @@ export default class Canvas3D extends CanvasBase
         this.PrepareBuffers();
     }
 
+    HandleKeyUp(key: string)
+    {
+        if(this.firstPerson)
+        {
+            switch(key.toLowerCase())
+            {
+                case "w":
+                case "s":
+                    this.cameraVelocity[0] = 0.0;
+                    break
+
+                case "a":
+                case "d":
+                    this.cameraVelocity[1] = 0.0;
+                    break;
+                
+                case "q":
+                case "e":
+                    this.cameraVelocity[2] = 0.0;
+                    break;
+            }
+        }
+        else
+        {
+            this.cameraVelocity = [0.0, 0.0, 0.0];
+        }
+    }
+
     HandleKeyDown(key : string)
     {
         var result = super.HandleKeyDown(key);
@@ -209,6 +244,36 @@ export default class Canvas3D extends CanvasBase
             default:
                 handled = false;
                 break;
+        }
+
+        if(this.firstPerson)
+        {
+            switch(key.toLowerCase())
+            {
+                case "w":
+                    this.cameraVelocity[0] = this.keyDownSpeed;
+                    break
+
+                case "a":
+                    this.cameraVelocity[1] = this.keyDownSpeed;
+                    break;
+
+                case "s":
+                    this.cameraVelocity[0] = -this.keyDownSpeed;
+                    break
+
+                case "d":
+                    this.cameraVelocity[1] = -this.keyDownSpeed;
+                    break;
+                
+                case "q":
+                    this.cameraVelocity[2] = this.keyDownSpeed;
+                    break;
+
+                case "e":
+                    this.cameraVelocity[2] = -this.keyDownSpeed;
+                    break;
+            }
         }
 
         return [handled, false];
@@ -299,6 +364,7 @@ export default class Canvas3D extends CanvasBase
         if ("PointerAltKeyMultiplier" in command) this.pointerAltKeyMultiplier = command["PointerAltKeyMultiplier"];
         if ("PointerRotationSpeed" in command) this.pointerRotationSpeed = command["PointerRotationSpeed"];
         if ("MouseWheelTranslationSpeed" in command) this.mouseWheelTranslationSpeed = command["MouseWheelTranslationSpeed"];
+        if ("KeyDownSpeed" in command) this.keyDownSpeed = command["KeyDownSpeed"];
         if ("LayerDropdownVisibility" in command) this.dropdown.style.visibility = command["LayerDropdownVisibility"]
     }
 
@@ -720,7 +786,7 @@ export default class Canvas3D extends CanvasBase
         return vec3.fromValues(oldView[0] - newView[0], oldView[1] - newView[1], 0.0); // oldView[2] - newView[2] should be == 0.0
     }
 
-    RotateCamera(rotateAboutX : number, rotateAboutY : number, rotateAboutZ : number)
+    RotateCameraAboutFocusPoint(rotateAboutX : number, rotateAboutY : number, rotateAboutZ : number)
     {
         this.onCameraTrack = false;
         var delta = vec3.fromValues(rotateAboutX, rotateAboutY, rotateAboutZ);
@@ -744,6 +810,26 @@ export default class Canvas3D extends CanvasBase
         mat4.translate(transform, transform, focusPointView);
 
         // Apply change to w2v matrix
+        mat4.multiply(this.w2vMatrix, transform, this.w2vMatrix);
+    }
+
+    RotateCameraAboutSelf(rotateLeft: number, rotateDown: number)
+    {
+        this.onCameraTrack = false;
+
+        let transform = mat4.create();
+        mat4.rotateY(transform, transform, rotateLeft);
+        mat4.rotateX(transform, transform, rotateDown);
+        
+        mat4.multiply(this.w2vMatrix, transform, this.w2vMatrix);
+    }
+
+    MoveCamera(moveForward: number, moveRight: number, moveUp: number)
+    {
+        this.onCameraTrack = false;
+
+        let transform = mat4.create();
+        mat4.fromTranslation(transform, [moveRight, moveUp, moveForward])
         mat4.multiply(this.w2vMatrix, transform, this.w2vMatrix);
     }
 
@@ -995,6 +1081,11 @@ export default class Canvas3D extends CanvasBase
         if (!this.AllMeshBuffersReady())
             return;
 
+        if(this.firstPerson)
+        {
+            this.MoveCamera(this.cameraVelocity[0], this.cameraVelocity[1], this.cameraVelocity[2]);
+        }
+
         this.gl.clearColor(this.bgColor[0], this.bgColor[1], this.bgColor[2], this.bgColor[3]);
         this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT); // Applies to whole canvas
         this.gl.viewport(0, 0, this.htmlCanvas.width, this.htmlCanvas.height);
@@ -1132,7 +1223,7 @@ export default class Canvas3D extends CanvasBase
             if (this.lastOrbitTime != null)
             {
                 var deltaTime = now.getTime() - this.lastOrbitTime.getTime();
-                this.RotateCamera(0.0, 0.0025 * deltaTime, 0.0); // Rotate about y axis
+                this.RotateCameraAboutFocusPoint(0.0, 0.0025 * deltaTime, 0.0); // Rotate about y axis
             }
             this.lastOrbitTime = now;
         }
