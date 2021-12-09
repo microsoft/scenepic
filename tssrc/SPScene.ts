@@ -176,11 +176,12 @@ export default class SPScene
         helpHtml += 'tab: toggle between first person/orbit cameras<br>';
         helpHtml += 'r: reset view';
         helpHtml += '</span><span class="scenepic-textbox-content">';
-        helpHtml += '\\: toggle orbit camera<br>';
+        helpHtml += '\\: toggle auto-orbit camera<br>';
         helpHtml += 'caps: move focus point (modal)<br>';
         helpHtml += 'l: lock camera translation to focus point<br>';
         helpHtml += 'o: lock camera orientation to focus point<br>';
-        helpHtml += 'drag: rotate/translate<br>';
+        helpHtml += 'drag: rotate/translate (orbit) swivel (first person)<br>';
+        helpHtml += 'wasdqe: translate (first person)<br>';
         helpHtml += 'wheel: translate camera</span>';
         this.SetTextPanelValue(HelpPanelName, helpHtml);
         this.AddTextPanel(StatusPanelName, "Status", "", this.statusDiv);
