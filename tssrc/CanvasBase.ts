@@ -931,7 +931,7 @@ export abstract class CanvasBase
         if(this.cameraModeCounter > 0)
         {
             this.cameraModeDisplay.style.opacity = (this.cameraModeCounter / this.cameraModeCounterMax).toString();
-            this.cameraModeDisplay.innerText = this.firstPerson ? "First Person" : "Orbit";
+            this.cameraModeDisplay.innerText = this.firstPerson ? "First Person" : "Focus";
             this.cameraModeCounter -= 1;
         }
 

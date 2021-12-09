@@ -173,14 +173,14 @@ export default class SPScene
         helpHtml += 'shift: translate<br>';
         helpHtml += 'ctrl: twist<br>';
         helpHtml += 'alt: slow translation/rotation<br>';
-        helpHtml += 'tab: toggle between first person/orbit cameras<br>';
+        helpHtml += 'tab: toggle between first person/focus cameras<br>';
         helpHtml += 'r: reset view';
         helpHtml += '</span><span class="scenepic-textbox-content">';
-        helpHtml += '\\: toggle auto-orbit camera<br>';
+        helpHtml += '\\: toggle orbit camera<br>';
         helpHtml += 'caps: move focus point (modal)<br>';
         helpHtml += 'l: lock camera translation to focus point<br>';
         helpHtml += 'o: lock camera orientation to focus point<br>';
-        helpHtml += 'drag: rotate/translate (orbit) swivel (first person)<br>';
+        helpHtml += 'drag: rotate/translate (focus) swivel (first person)<br>';
         helpHtml += 'wasdqe: translate (first person)<br>';
         helpHtml += 'wheel: translate camera</span>';
         this.SetTextPanelValue(HelpPanelName, helpHtml);
@@ -1367,7 +1367,7 @@ export default class SPScene
                 // Deal with basic events
                 if (event.ctrlKey) // Treat as twist of camera
                 {
-                    canvas.RotateCameraAboutFocusPoint(0.0, 0.0, twistAngle);
+                    canvas.RotateCamera(0.0, 0.0, twistAngle);
                 }
                 else if (canvas.showFocusPoint) // Translate the 3D center of rotation
                 {
@@ -1380,7 +1380,7 @@ export default class SPScene
                 }
                 else // Treat as rotation of camera about center of rotation
                 {
-                    canvas.RotateCameraAboutFocusPoint(deltaY * canvas.pointerRotationSpeed, deltaX * canvas.pointerRotationSpeed, 0.0); // NB y and x are deliberately crossed over
+                    canvas.RotateCamera(deltaY * canvas.pointerRotationSpeed, deltaX * canvas.pointerRotationSpeed, 0.0); // NB y and x are deliberately crossed over
                 }
 
                 // Deal with pinch-zoom

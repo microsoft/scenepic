@@ -782,7 +782,7 @@ export default class Canvas3D extends CanvasBase
         return vec3.fromValues(oldView[0] - newView[0], oldView[1] - newView[1], 0.0); // oldView[2] - newView[2] should be == 0.0
     }
 
-    RotateCameraAboutFocusPoint(rotateAboutX : number, rotateAboutY : number, rotateAboutZ : number)
+    RotateCamera(rotateAboutX : number, rotateAboutY : number, rotateAboutZ : number)
     {
         this.onCameraTrack = false;
         var delta = vec3.fromValues(rotateAboutX, rotateAboutY, rotateAboutZ);
@@ -815,7 +815,7 @@ export default class Canvas3D extends CanvasBase
         this.cameraRotationalVelocity[1] = rotateDown;
     }
 
-    RotateCameraAboutSelf(rotateLeft: number, rotateDown: number)
+    SwivelCamera(rotateLeft: number, rotateDown: number)
     {
         this.onCameraTrack = false;
 
@@ -1088,7 +1088,7 @@ export default class Canvas3D extends CanvasBase
             this.MoveCamera(this.cameraVelocity[0], this.cameraVelocity[1], this.cameraVelocity[2]);
             if(this.cameraRotationalVelocity[0] != 0 || this.cameraRotationalVelocity[1] != 0)
             {
-                this.RotateCameraAboutSelf(this.cameraRotationalVelocity[0], this.cameraRotationalVelocity[1]);
+                this.SwivelCamera(this.cameraRotationalVelocity[0], this.cameraRotationalVelocity[1]);
             }
         }
 
@@ -1229,7 +1229,7 @@ export default class Canvas3D extends CanvasBase
             if (this.lastOrbitTime != null)
             {
                 var deltaTime = now.getTime() - this.lastOrbitTime.getTime();
-                this.RotateCameraAboutFocusPoint(0.0, 0.0025 * deltaTime, 0.0); // Rotate about y axis
+                this.RotateCamera(0.0, 0.0025 * deltaTime, 0.0); // Rotate about y axis
             }
             this.lastOrbitTime = now;
         }
