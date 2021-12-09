@@ -51,6 +51,7 @@ export default class SPScene
 
     // Pointer events
     pointerCoords = {};
+    initPointerCoords = {};
 
     // WebSocket for use in interactive mode
     ws : WebSocket = null;  
@@ -1255,6 +1256,7 @@ export default class SPScene
         var clientRect = targetCanvas.htmlCanvas.getBoundingClientRect();
 
         this.pointerCoords[event.pointerId] = [event.clientX - clientRect.left, event.clientY - clientRect.top];
+        this.initPointerCoords[event.pointerId] = [event.clientX - clientRect.left, event.clientY - clientRect.top];
 
         this.HandlePointerMove(event);
     }
@@ -1265,6 +1267,7 @@ export default class SPScene
         if (canvases == null) return;
 
         delete this.pointerCoords[event.pointerId];
+        delete this.initPointerCoords[event.pointerId];
 
         for(var canvas of canvases)
         {
@@ -1315,16 +1318,28 @@ export default class SPScene
 
             if(canvas.FirstPerson)
             {
-                // TODO need to record beginning press position
-                // Also need to draw a circle and line to show dead zone / direction
-                let length = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-                if(length > 0)
+                let init = this.initPointerCoords[event.pointerId];
+                let initX = init[0];
+                let initY = init[1];
+
+                let diffX = newX - initX;
+                let diffY = newY - initY;
+
+                let length = Math.sqrt(diffX * diffX + diffY * diffY);
+                let deadZone = 10;
+                if(length > deadZone)
                 {
-                    deltaX *= 2 / length;
-                    deltaY *= 2 / length;
+                    let scale = Math.min(2, (length - deadZone) / deadZone);
+                    diffX *= scale / length;
+                    diffY *= scale / length;
+                }
+                else
+                {
+                    diffX = 0;
+                    diffY = 0;
                 }
 
-                canvas.SetCameraRotationalVelocity(deltaX * canvas.pointerRotationSpeed, deltaY * canvas.pointerRotationSpeed);
+                canvas.SetCameraRotationalVelocity(diffX * canvas.pointerRotationSpeed, diffY * canvas.pointerRotationSpeed);
             }
             else
             {
