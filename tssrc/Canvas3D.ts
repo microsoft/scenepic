@@ -91,7 +91,15 @@ export default class Canvas3D extends CanvasBase
 
     // first person mode
     cameraVelocity = [0.0, 0.0, 0.0];
-    cameraRotate = [0.0, 0.0];
+    cameraRotationalVelocity = [0.0, 0.0];
+    dirKeyPresses = {
+        "w": 0,
+        "a": 0,
+        "s": 0,
+        "d": 0,
+        "q": 0,
+        "e": 0
+    }
 
     // Focus points for user interaction: center of rotation and used for locking view
     globalFocusPoint : Float32Array = new Float32Array([0.0, 0.0, 0.0]);
@@ -189,31 +197,43 @@ export default class Canvas3D extends CanvasBase
         this.PrepareBuffers();
     }
 
-    HandleKeyUp(key: string)
+    private updateCameraVelocityValue(keyPlus: string, keyMinus: string, index: number)
     {
-        if(this.firstPerson)
+        if (this.dirKeyPresses[keyPlus] > this.dirKeyPresses[keyMinus])
         {
-            switch(key.toLowerCase())
-            {
-                case "w":
-                case "s":
-                    this.cameraVelocity[0] = 0.0;
-                    break
-
-                case "a":
-                case "d":
-                    this.cameraVelocity[1] = 0.0;
-                    break;
-                
-                case "q":
-                case "e":
-                    this.cameraVelocity[2] = 0.0;
-                    break;
-            }
+            this.cameraVelocity[index] = this.keyDownSpeed
+        }
+        else if(this.dirKeyPresses[keyMinus] > 0)
+        {
+            this.cameraVelocity[index] = -this.keyDownSpeed;
         }
         else
         {
-            this.cameraVelocity = [0.0, 0.0, 0.0];
+            this.cameraVelocity[index] = 0;
+        }                   
+    }
+
+    private updateCameraVelocity()
+    {
+        this.updateCameraVelocityValue("w", "s", 0);
+        this.updateCameraVelocityValue("a", "d", 1);
+        this.updateCameraVelocityValue("q", "e", 2);
+    }
+
+    HandleKeyUp(key: string)
+    {
+        key = key.toLowerCase();
+        if(this.firstPerson && key in this.dirKeyPresses)
+        {
+            this.dirKeyPresses[key] = 0;
+            this.updateCameraVelocity();
+        }
+        else
+        {
+            for(let key in this.dirKeyPresses)
+            {
+                this.dirKeyPresses[key] = 0;
+            }
         }
     }
 
@@ -223,8 +243,8 @@ export default class Canvas3D extends CanvasBase
         if (result[0]) return result; // Already handled
 
         var handled = true;
-
-        switch(key.toLowerCase())
+        key = key.toLowerCase();
+        switch(key)
         {
             case "r":
                 this.ResetView();
@@ -246,34 +266,10 @@ export default class Canvas3D extends CanvasBase
                 break;
         }
 
-        if(this.firstPerson)
+        if(this.firstPerson && key in this.dirKeyPresses)
         {
-            switch(key.toLowerCase())
-            {
-                case "w":
-                    this.cameraVelocity[0] = this.keyDownSpeed;
-                    break
-
-                case "a":
-                    this.cameraVelocity[1] = this.keyDownSpeed;
-                    break;
-
-                case "s":
-                    this.cameraVelocity[0] = -this.keyDownSpeed;
-                    break
-
-                case "d":
-                    this.cameraVelocity[1] = -this.keyDownSpeed;
-                    break;
-                
-                case "q":
-                    this.cameraVelocity[2] = this.keyDownSpeed;
-                    break;
-
-                case "e":
-                    this.cameraVelocity[2] = -this.keyDownSpeed;
-                    break;
-            }
+            this.dirKeyPresses[key] = Date.now();
+            this.updateCameraVelocity();
         }
 
         return [handled, false];
@@ -813,6 +809,12 @@ export default class Canvas3D extends CanvasBase
         mat4.multiply(this.w2vMatrix, transform, this.w2vMatrix);
     }
 
+    SetCameraRotationalVelocity(rotateLeft: number, rotateDown: number)
+    {
+        this.cameraRotationalVelocity[0] = rotateLeft;
+        this.cameraRotationalVelocity[1] = rotateDown;
+    }
+
     RotateCameraAboutSelf(rotateLeft: number, rotateDown: number)
     {
         this.onCameraTrack = false;
@@ -1084,6 +1086,10 @@ export default class Canvas3D extends CanvasBase
         if(this.firstPerson)
         {
             this.MoveCamera(this.cameraVelocity[0], this.cameraVelocity[1], this.cameraVelocity[2]);
+            if(this.cameraRotationalVelocity[0] != 0 || this.cameraRotationalVelocity[1] != 0)
+            {
+                this.RotateCameraAboutSelf(this.cameraRotationalVelocity[0], this.cameraRotationalVelocity[1]);
+            }
         }
 
         this.gl.clearColor(this.bgColor[0], this.bgColor[1], this.bgColor[2], this.bgColor[3]);

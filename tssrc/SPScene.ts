@@ -1268,10 +1268,10 @@ export default class SPScene
 
         for(var canvas of canvases)
         {
-            if (!canvas.handlesMouse) // Future-proofing
+            if (!canvas.handlesMouse)
                 continue;
 
-            // Do nothing
+            canvas.SetCameraRotationalVelocity(0, 0);
         }
     }
 
@@ -1315,7 +1315,16 @@ export default class SPScene
 
             if(canvas.FirstPerson)
             {
-                canvas.RotateCameraAboutSelf(deltaX * canvas.pointerRotationSpeed, deltaY * canvas.pointerRotationSpeed);
+                // TODO need to record beginning press position
+                // Also need to draw a circle and line to show dead zone / direction
+                let length = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+                if(length > 0)
+                {
+                    deltaX *= 2 / length;
+                    deltaY *= 2 / length;
+                }
+
+                canvas.SetCameraRotationalVelocity(deltaX * canvas.pointerRotationSpeed, deltaY * canvas.pointerRotationSpeed);
             }
             else
             {
