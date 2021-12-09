@@ -23,6 +23,7 @@
 			"MouseWheelTranslationSpeed": 0.0050000000000000001,
 			"PointerAltKeyMultiplier": 0.20000000000000001,
 			"PointerRotationSpeed": 0.01,
+			"KeyDownSpeed": 0.1,
 			"LayerDropdownVisibility": "visible"
 		},
 		{
