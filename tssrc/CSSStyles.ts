@@ -181,7 +181,7 @@ var css = `
   padding: 5px;
   background: #ddd;
   border-radius: 10px;
-  width: 330px;  
+  width: 380px;  
 }
 
 .scenepic-toggle-button {
@@ -254,6 +254,11 @@ input:checked + .scenepic-icon-playpause {
 input:checked + .scenepic-icon-soundmute {
   background: url(data:image/gif;base64,R0lGODlhEAAQAIQUAAICAgUFBQYGBgkJCQwMDA0NDQ8PDxAQEBMTExcXFxoaGh4eHiAgICEhISQkJCcnJygoKCsrKy8vLzExMbu7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7uyH+EUNyZWF0ZWQgd2l0aCBHSU1QACH5BAEKAB8ALAAAAAAQABAAAAVb4CeOZGme03lKrBqVUWw+kPg8IlSTTi/2jp+jQSw2Rg2GiLhoOhejpqipqFoVo6qomuh6E6OuqIsomxGjskg9OrhFhvdHPioURHYR4W4alAaAKiQBAgKCJQAjIQA7)
               no-repeat 3px 3px;
+}
+
+.scenepic-icon-resetcamera {
+  background: url(data:image/gif;base64,R0lGODlhIAAgAIABAAAAAP///yH+EUNyZWF0ZWQgd2l0aCBHSU1QACH5BAEKAAEALAAAAAAgACAAAAJujI+py+0Po2QAzFeztvfsn3Wg90lbc2KhulIt9CbaNS+xUcuVy+l3cIuBcsCd70gy4pRJJOcVZBaXFqhxeN1le8XesJnkWomnFNXH7X7BCOmE2LG54+25Io36oR1mfp+qJ4f1FzFo91ZCp7gYUQAAOw==)
+              no-repeat -2px -2px;
 }
 
 input.scenepic-volume-slider {

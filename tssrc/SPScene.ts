@@ -140,6 +140,13 @@ export default class SPScene
         controls.appendChild(playPauseToggle[0]);
         controls.appendChild(fasterButton);
 
+        // Camera
+        let resetCamera = document.createElement("button");
+        resetCamera.classList.add("scenepic-icon-resetcamera", "scenepic-medium");
+        resetCamera.addEventListener("click", () => this.ResetAllViews());
+        resetCamera.title = "Reset Camera";
+        controls.appendChild(resetCamera);
+
         // Audio
         let volumeToggle = this.createToggleButton("Sound/Mute", "soundmute");
         volumeToggle[0].style.marginLeft = "32px";
@@ -166,6 +173,7 @@ export default class SPScene
         helpHtml += 'shift: translate<br>';
         helpHtml += 'ctrl: twist<br>';
         helpHtml += 'alt: slow translation/rotation<br>';
+        helpHtml += 'tab: toggle between first person/orbit cameras<br>';
         helpHtml += 'r: reset view';
         helpHtml += '</span><span class="scenepic-textbox-content">';
         helpHtml += '\\: toggle orbit camera<br>';
@@ -194,6 +202,18 @@ export default class SPScene
         label.appendChild(span);
 
         return [label, checkbox];
+    }
+
+    ResetAllViews()
+    {
+        for(let canvasId in this.canvases)
+        {
+            let canvas = this.canvases[canvasId];
+            if(canvas instanceof Canvas3D)
+            {
+                canvas.ResetView();
+            }
+        }
     }
 
     UpdateVolume()
