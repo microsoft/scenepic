@@ -1571,8 +1571,7 @@ PYBIND11_MODULE(_scenepic, m)
     .def_property_readonly(
       "layer_dropdown_visibility",
       &UIParameters::layer_dropdown_visibility,
-      "str: the CSS visibility setting for the layer dropdown menu"
-    );
+      "str: the CSS visibility setting for the layer dropdown menu");
 
   py::class_<Canvas2D, std::shared_ptr<Canvas2D>>(m, "Canvas2D", R"scenepicdoc(
         A 2D canvas that can contain a number of Frame2Ds.

@@ -40,6 +40,6 @@
     "watchify": "^4.0.0"
   },
   "dependencies": {
-    "npm": "^8.1.1"
+    "npm": "^8.2.0"
   }
 }
