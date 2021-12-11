@@ -22,6 +22,7 @@ namespace scenepic
      *                                translation into camera rotation.
      *  \param mouse_wheel_translation_speed linear scale factor of mouse wheel
      *                                       input into camera translation.
+     *  \param key_down_speed movement speed from key presses
      *  \param layer_dropdown_visibility CSS visibility setting for the layer
      *                                   dropdown menu.
      */
@@ -29,6 +30,7 @@ namespace scenepic
       double pointer_alt_key_multiplier = 0.2,
       double pointer_rotation_speed = 0.01,
       double mouse_wheel_translation_speed = 0.005,
+      double key_down_speed = 0.1,
       const std::string& layer_dropdown_visibility = "visible");
 
     /** When the Alt key is pressed, mouse movement is scaled by this factor. */
@@ -39,6 +41,9 @@ namespace scenepic
 
     /** Linear scale factor of mouse wheel input into camera translation. */
     double mouse_wheel_translation_speed() const;
+
+    /** Movement speed from key presses */
+    double key_down_speed() const;
 
     /** Whether the layer dropdown is visible. */
     const std::string& layer_dropdown_visibility() const;
@@ -61,6 +66,7 @@ namespace scenepic
     double m_pointer_alt_key_multiplier;
     double m_pointer_rotation_speed;
     double m_mouse_wheel_translation_speed;
+    double m_key_down_speed;
     std::string m_layer_dropdown_visibility;
   };
 } // namespace scenepic

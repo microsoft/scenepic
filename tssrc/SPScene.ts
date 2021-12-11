@@ -51,6 +51,7 @@ export default class SPScene
 
     // Pointer events
     pointerCoords = {};
+    initPointerCoords = {};
 
     // WebSocket for use in interactive mode
     ws : WebSocket = null;  
@@ -139,6 +140,13 @@ export default class SPScene
         controls.appendChild(playPauseToggle[0]);
         controls.appendChild(fasterButton);
 
+        // Camera
+        let resetCamera = document.createElement("button");
+        resetCamera.classList.add("scenepic-icon-resetcamera", "scenepic-medium");
+        resetCamera.addEventListener("click", () => this.ResetAllViews());
+        resetCamera.title = "Reset Camera";
+        controls.appendChild(resetCamera);
+
         // Audio
         let volumeToggle = this.createToggleButton("Sound/Mute", "soundmute");
         volumeToggle[0].style.marginLeft = "32px";
@@ -165,13 +173,15 @@ export default class SPScene
         helpHtml += 'shift: translate<br>';
         helpHtml += 'ctrl: twist<br>';
         helpHtml += 'alt: slow translation/rotation<br>';
+        helpHtml += 'tab: toggle between first person/focus cameras<br>';
         helpHtml += 'r: reset view';
         helpHtml += '</span><span class="scenepic-textbox-content">';
         helpHtml += '\\: toggle orbit camera<br>';
         helpHtml += 'caps: move focus point (modal)<br>';
         helpHtml += 'l: lock camera translation to focus point<br>';
         helpHtml += 'o: lock camera orientation to focus point<br>';
-        helpHtml += 'drag: rotate/translate<br>';
+        helpHtml += 'drag: rotate/translate (focus) swivel (first person)<br>';
+        helpHtml += 'wasdqe: translate (first person)<br>';
         helpHtml += 'wheel: translate camera</span>';
         this.SetTextPanelValue(HelpPanelName, helpHtml);
         this.AddTextPanel(StatusPanelName, "Status", "", this.statusDiv);
@@ -193,6 +203,18 @@ export default class SPScene
         label.appendChild(span);
 
         return [label, checkbox];
+    }
+
+    ResetAllViews()
+    {
+        for(let canvasId in this.canvases)
+        {
+            let canvas = this.canvases[canvasId];
+            if(canvas instanceof Canvas3D)
+            {
+                canvas.ResetView();
+            }
+        }
     }
 
     UpdateVolume()
@@ -599,11 +621,20 @@ export default class SPScene
             htmlCanvas.addEventListener("pointerout", event => this.HandlePointerUp(event), true);
             htmlCanvas.addEventListener("wheel", event => this.HandleMouseWheel(event), true);
         }
-        htmlCanvas.addEventListener("keydown", event => { event.returnValue = this.HandleKeyDown(canvasId, event.key, event.altKey, event.ctrlKey, event.shiftKey, event.metaKey); }, true);
-        htmlCanvas.addEventListener("mousemove", event => { event.returnValue = false; }, true); // Consume drag in IE
-        htmlCanvas.addEventListener("mousedown", event => { htmlCanvas.focus(); event.returnValue = false; }, true); // Consume drag in IE
+        htmlCanvas.addEventListener("keydown", event => { 
+            let propagate = this.HandleKeyDown(canvasId, event.key, event.altKey, event.ctrlKey, event.shiftKey, event.metaKey);
+            if(!propagate)
+                event.preventDefault()
+        }, true);
+        htmlCanvas.addEventListener("keyup", event => { this.HandleKeyUp(canvasId, event); })
+        htmlCanvas.addEventListener("mousemove", event => { event.preventDefault(); }, true); // Consume drag in IE
+        htmlCanvas.addEventListener("mousedown", event => { htmlCanvas.focus(); event.preventDefault(); }, true); // Consume drag in IE
         canvas.slider.oninput = event => this.SliderChanged(event);
-        canvas.slider.onkeydown = event => { event.returnValue = this.HandleKeyDown(canvasId, event.key, event.altKey, event.ctrlKey, event.shiftKey, event.metaKey); };
+        canvas.slider.onkeydown = event => { 
+            let propagate = this.HandleKeyDown(canvasId, event.key, event.altKey, event.ctrlKey, event.shiftKey, event.metaKey); 
+            if(!propagate)
+                event.preventDefault()
+        };
         htmlCanvas.focus(); // Ensure keypresses are dealt with
 
         // Add canvas id property to html canvas object for event handling
@@ -1063,6 +1094,16 @@ export default class SPScene
         }
     }
 
+    private HandleKeyUp(canvasId: string, event: KeyboardEvent)
+    {
+        var canvases = this.GetTargetCanvases(canvasId);
+        if (canvases == null) return;
+        for(var canvas of canvases)
+        {
+            canvas.HandleKeyUp(event.key);
+        }
+    }
+
     private HandleKeyDown(canvasId : string, key : string, altKey : boolean, ctrlKey : boolean, shiftKey : boolean, metaKey : boolean, reportToServer : boolean = true)
     {
         var returnValue = true;
@@ -1070,11 +1111,10 @@ export default class SPScene
         var canvases = this.GetTargetCanvases(canvasId);
         if (canvases == null) return;
 
-        //alert("key: " + key);
-
         var showTimings = false;
         var timeStarted = new Date().getTime();
 
+        let toggleFirstPerson = false;
         // Only handle unmodified keypresses
         if (!altKey && !ctrlKey && !shiftKey && !metaKey)
         {
@@ -1094,11 +1134,19 @@ export default class SPScene
                 case "+":
                     this.faster();
                     break;
+                case "Tab":
+                    toggleFirstPerson = true;
+                    break
             }
 
             // Canvas-local keypresses
             for(var canvas of canvases)
             {
+                if(toggleFirstPerson)
+                {
+                    canvas.FirstPerson = !canvas.FirstPerson;
+                }
+
                 var result = canvas.HandleKeyDown(key);
                 var handled = result[0];
                 var changedFrame = result[1];
@@ -1229,10 +1277,9 @@ export default class SPScene
         var clientRect = targetCanvas.htmlCanvas.getBoundingClientRect();
 
         this.pointerCoords[event.pointerId] = [event.clientX - clientRect.left, event.clientY - clientRect.top];
+        this.initPointerCoords[event.pointerId] = [event.clientX - clientRect.left, event.clientY - clientRect.top];
 
         this.HandlePointerMove(event);
-
-        event.returnValue = true; // Propagate to allow selection of canvases
     }
 
     private HandlePointerUp(event : PointerEvent)
@@ -1241,16 +1288,15 @@ export default class SPScene
         if (canvases == null) return;
 
         delete this.pointerCoords[event.pointerId];
+        delete this.initPointerCoords[event.pointerId];
 
         for(var canvas of canvases)
         {
-            if (!canvas.handlesMouse) // Future-proofing
+            if (!canvas.handlesMouse)
                 continue;
 
-            // Do nothing
+            canvas.SetCameraRotationalVelocity(0, 0);
         }
-
-        event.returnValue = true; // Propagate to allow selection of canvases
     }
 
     private HandlePointerMove(event : PointerEvent)
@@ -1291,56 +1337,84 @@ export default class SPScene
                 deltaY *= canvas.pointerAltKeyMultiplier;
             }
 
-            // Deal with basic events
-            if (event.ctrlKey) // Treat as twist of camera
+            if(canvas.FirstPerson)
             {
-                canvas.RotateCamera(0.0, 0.0, twistAngle);
-            }
-            else if (canvas.showFocusPoint) // Translate the 3D center of rotation
-            {
-                canvas.SetFocusPointPositionFromPixelCoordinates(newX, newY);
-            }
-            else if (event.shiftKey || countPointers > 1) // Treat as translation of camera
-            {
-                var delta = canvas.ComputeFocusPointRelativeViewSpaceTranslation(oldX, oldY, newX, newY);
-                canvas.TranslateCamera(delta);
-            }
-            else // Treat as rotation of camera about center of rotation
-            {
-                canvas.RotateCamera(deltaY * canvas.pointerRotationSpeed, deltaX * canvas.pointerRotationSpeed, 0.0); // NB y and x are deliberately crossed over
-            }
+                let init = this.initPointerCoords[event.pointerId];
+                let initX = init[0];
+                let initY = init[1];
 
-            // Deal with pinch-zoom
-            if (countPointers == 2)
-            {
-                // Get other coordinate
-                var otherX : number, otherY : number;
-                for (var pid in this.pointerCoords)
+                let diffX = newX - initX;
+                let diffY = newY - initY;
+
+                let length = Math.sqrt(diffX * diffX + diffY * diffY);
+                let deadZone = 10;
+                if(length > deadZone)
                 {
-                    if (pid == event.pointerId.toString()) continue;
-                    otherX = this.pointerCoords[pid][0];
-                    otherY = this.pointerCoords[pid][1];
+                    let scale = Math.min(2, (length - deadZone) / deadZone);
+                    diffX *= scale / length;
+                    diffY *= scale / length;
+                }
+                else
+                {
+                    diffX = 0;
+                    diffY = 0;
                 }
 
-                // Compute delta between two points
-                var oldDX = oldX - otherX;
-                var oldDY = oldY - otherY;
-                var oldDist = Math.sqrt(oldDX*oldDX + oldDY*oldDY);
-                var newDX = newX - otherX;
-                var newDY = newY - otherY;
-                var newDist = Math.sqrt(newDX*newDX + newDY*newDY);
+                canvas.SetCameraRotationalVelocity(diffX * canvas.pointerRotationSpeed, diffY * canvas.pointerRotationSpeed);
+            }
+            else
+            {
+                // Deal with basic events
+                if (event.ctrlKey) // Treat as twist of camera
+                {
+                    canvas.RotateCamera(0.0, 0.0, twistAngle);
+                }
+                else if (canvas.showFocusPoint) // Translate the 3D center of rotation
+                {
+                    canvas.SetFocusPointPositionFromPixelCoordinates(newX, newY);
+                }
+                else if (event.shiftKey || countPointers > 1) // Treat as translation of camera
+                {
+                    var delta = canvas.ComputeFocusPointRelativeViewSpaceTranslation(oldX, oldY, newX, newY);
+                    canvas.TranslateCamera(delta);
+                }
+                else // Treat as rotation of camera about center of rotation
+                {
+                    canvas.RotateCamera(deltaY * canvas.pointerRotationSpeed, deltaX * canvas.pointerRotationSpeed, 0.0); // NB y and x are deliberately crossed over
+                }
 
-                // Change in distances
-                var zOld = canvas.GetCurrentFocusPointInViewSpace()[2];
-                var zNew = zOld * oldDist / newDist;
-                canvas.TranslateCamera(vec3.fromValues(0.0, 0.0, zNew - zOld));
+                // Deal with pinch-zoom
+                if (countPointers == 2)
+                {
+                    // Get other coordinate
+                    var otherX : number, otherY : number;
+                    for (var pid in this.pointerCoords)
+                    {
+                        if (pid == event.pointerId.toString()) continue;
+                        otherX = this.pointerCoords[pid][0];
+                        otherY = this.pointerCoords[pid][1];
+                    }
+
+                    // Compute delta between two points
+                    var oldDX = oldX - otherX;
+                    var oldDY = oldY - otherY;
+                    var oldDist = Math.sqrt(oldDX*oldDX + oldDY*oldDY);
+                    var newDX = newX - otherX;
+                    var newDY = newY - otherY;
+                    var newDist = Math.sqrt(newDX*newDX + newDY*newDY);
+
+                    // Change in distances
+                    var zOld = canvas.GetCurrentFocusPointInViewSpace()[2];
+                    var zNew = zOld * oldDist / newDist;
+                    canvas.TranslateCamera(vec3.fromValues(0.0, 0.0, zNew - zOld));
+                }
             }
         }
 
         // Store updated coords
         this.pointerCoords[event.pointerId] = [newX, newY];
 
-        event.returnValue = false;
+        event.preventDefault();
     }
 
     private HandleMouseWheel(event : WheelEvent)

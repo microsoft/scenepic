@@ -23,14 +23,14 @@ namespace scenepic
     auto det_diff = std::abs(rotation.determinant() - 1.0f);
     if (ortho_diff > tolerance)
     {
-      std::cerr << "camera rotation is not orthogonal: " << ortho_diff
-                << std::endl;
+      std::cerr << "camera rotation: not orthogonal within tolerance of "
+                << tolerance << ": " << ortho_diff << std::endl;
     }
 
     if (det_diff > tolerance)
     {
-      std::cerr << "camera rotation determinant " << rotation.determinant()
-                << " != 1" << std::endl;
+      std::cerr << "camera rotation: |det " << rotation.determinant()
+                << " - 1| > " << tolerance << std::endl;
     }
   }
 

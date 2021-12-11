@@ -13,10 +13,12 @@ namespace scenepic
     double pointer_alt_key_multiplier,
     double pointer_rotation_speed,
     double mouse_wheel_translation_speed,
+    double key_down_speed,
     const std::string& layer_dropdown_visibility)
   : m_pointer_alt_key_multiplier(pointer_alt_key_multiplier),
     m_pointer_rotation_speed(pointer_rotation_speed),
     m_mouse_wheel_translation_speed(mouse_wheel_translation_speed),
+    m_key_down_speed(key_down_speed),
     m_layer_dropdown_visibility(layer_dropdown_visibility)
   {}
 
@@ -35,6 +37,11 @@ namespace scenepic
     return m_mouse_wheel_translation_speed;
   }
 
+  double UIParameters::key_down_speed() const
+  {
+    return m_key_down_speed;
+  }
+
   const std::string& UIParameters::layer_dropdown_visibility() const
   {
     return m_layer_dropdown_visibility;
@@ -47,6 +54,7 @@ namespace scenepic
     obj["PointerAltKeyMultiplier"] = m_pointer_alt_key_multiplier;
     obj["PointerRotationSpeed"] = m_pointer_rotation_speed;
     obj["MouseWheelTranslationSpeed"] = m_mouse_wheel_translation_speed;
+    obj["KeyDownSpeed"] = m_key_down_speed;
     obj["LayerDropdownVisibility"] = m_layer_dropdown_visibility;
     return obj;
   }
@@ -59,6 +67,7 @@ namespace scenepic
       m_pointer_rotation_speed != -std::numeric_limits<double>::infinity() ||
       m_mouse_wheel_translation_speed !=
         -std::numeric_limits<double>::infinity() ||
+      m_key_down_speed != -std::numeric_limits<double>::infinity() ||
       !m_layer_dropdown_visibility.empty());
   }
 
@@ -70,6 +79,7 @@ namespace scenepic
   const UIParameters UIParameters::None()
   {
     return UIParameters(
+      -std::numeric_limits<double>::infinity(),
       -std::numeric_limits<double>::infinity(),
       -std::numeric_limits<double>::infinity(),
       -std::numeric_limits<double>::infinity(),

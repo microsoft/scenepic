@@ -346,6 +346,10 @@ export abstract class CanvasBase
     dropdown : HTMLDivElement;
     dropdownTable : HTMLTableElement;
 
+    cameraModeCounterMax : number = 60;
+    cameraModeCounter : number = 0;
+    cameraModeDisplay : HTMLDivElement;
+
     // FPS
     fpsToggle : HTMLInputElement;
     fpsDisplay : HTMLDivElement;
@@ -405,6 +409,7 @@ export abstract class CanvasBase
     }
 
     handlesMouse : boolean;
+    firstPerson : boolean = false;
 
     currentFrameIndex = 0; // Current frame index
     lastRedraw = 0;
@@ -480,9 +485,18 @@ export abstract class CanvasBase
 
         this.addFPSUI();
         this.addVolumeUI();
+        this.addCameraModeUI();
 
         // Search for a goto frame command
         this.gotoFrame = parseInt(Misc.GetSearchValue("frame"));
+    }
+
+    private addCameraModeUI()
+    {
+        this.cameraModeDisplay = document.createElement("div");
+        this.cameraModeDisplay.className = "scenepic-camera-mode";
+        this.cameraModeDisplay.style.visibility = "hidden";
+        this.container.appendChild(this.cameraModeDisplay);
     }
 
     private addFPSUI()
@@ -596,6 +610,24 @@ export abstract class CanvasBase
     get FrameCount() : number
     {
         return this.frameIds.length;
+    }
+
+    get FirstPerson() : boolean
+    {
+        return this.firstPerson;
+    }
+
+    set FirstPerson(firstPerson: boolean)
+    {
+        if(firstPerson != this.firstPerson)
+        {
+            this.cameraModeCounter = this.cameraModeCounterMax;
+            this.firstPerson = firstPerson;
+        }        
+    }
+
+    HandleKeyUp(key: string)
+    {        
     }
 
     HandleKeyDown(key : string)
@@ -895,6 +927,13 @@ export abstract class CanvasBase
         }
 
         let timestamp = Date.now();
+
+        if(this.cameraModeCounter > 0)
+        {
+            this.cameraModeDisplay.style.opacity = (this.cameraModeCounter / this.cameraModeCounterMax).toString();
+            this.cameraModeDisplay.innerText = this.firstPerson ? "First Person" : "Focus";
+            this.cameraModeCounter -= 1;
+        }
 
         if(this.startPlayback)
         {

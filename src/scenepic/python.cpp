@@ -1544,10 +1544,11 @@ PYBIND11_MODULE(_scenepic, m)
     )scenepicdoc")
     .def("__repr__", &UIParameters::to_string)
     .def(
-      py::init<double, double, double, const std::string&>(),
+      py::init<double, double, double, double, const std::string&>(),
       "pointer_alt_key_multiplier"_a = 0.2,
       "pointer_rotation_speed"_a = 0.01,
       "mouse_wheel_translation_speed"_a = 0.005,
+      "key_press_speed"_a = 0.1,
       "layer_dropdown_visibility"_a = "visible")
     .def_property_readonly(
       "pointer_alt_key_multiplier",
@@ -1562,7 +1563,15 @@ PYBIND11_MODULE(_scenepic, m)
       "mouse_wheel_translation_speed",
       &UIParameters::mouse_wheel_translation_speed,
       "float: linear scale factor of mouse wheel input into camera "
-      "translation.");
+      "translation.")
+    .def_property_readonly(
+      "key_press_speed",
+      &UIParameters::key_down_speed,
+      "float: movement speed from key presses")
+    .def_property_readonly(
+      "layer_dropdown_visibility",
+      &UIParameters::layer_dropdown_visibility,
+      "str: the CSS visibility setting for the layer dropdown menu");
 
   py::class_<Canvas2D, std::shared_ptr<Canvas2D>>(m, "Canvas2D", R"scenepicdoc(
         A 2D canvas that can contain a number of Frame2Ds.

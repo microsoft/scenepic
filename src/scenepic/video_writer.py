@@ -53,7 +53,8 @@ class VideoWriter:
                  codec="libx264",
                  framerate=30,
                  text="",
-                 text_color=(1, 1, 0)):
+                 text_color=(1, 1, 0),
+                 font_scale=1):
         """Constructor.
 
         Args:
@@ -70,6 +71,8 @@ class VideoWriter:
             framerate (float, optional): Framerate for video
             text (str, optional): Text to burn into the frame
             text_color (Tuple[float, float, float], optional): Color for the text
+            font_scale (float, optional): Scaling factor for the font.
+                                          Defaults to 1.
         """
 
         self._output_path = output_path
@@ -97,6 +100,7 @@ class VideoWriter:
 
         self._background_color = self._to_color(background_color)
         self._text_color = self._to_color(text_color)
+        self._font_scale = font_scale
 
     def _to_color(self, color: Tuple[float, float, float]) -> np.array:
         r, g, b = color
@@ -174,8 +178,9 @@ class VideoWriter:
     def write_frame(self):
         """Write the frame buffer to the video."""
         if self.text:
-            height = self._frame.shape[0]
-            font_scale = height / 512
+            width, height = self._frame.shape[:2]
+            size = min(width, height)
+            font_scale = self._font_scale * size / 512
             thickness = max(1, int(2 * font_scale))
             self._frame = cv2.putText(self._frame, self._text,
                                       (50, height - 50),

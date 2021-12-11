@@ -181,7 +181,7 @@ var css = `
   padding: 5px;
   background: #ddd;
   border-radius: 10px;
-  width: 330px;  
+  width: 380px;  
 }
 
 .scenepic-toggle-button {
@@ -256,6 +256,11 @@ input:checked + .scenepic-icon-soundmute {
               no-repeat 3px 3px;
 }
 
+.scenepic-icon-resetcamera {
+  background: url(data:image/gif;base64,R0lGODlhIAAgAIABAAAAAP///yH+EUNyZWF0ZWQgd2l0aCBHSU1QACH5BAEKAAEALAAAAAAgACAAAAJujI+py+0Po2QAzFeztvfsn3Wg90lbc2KhulIt9CbaNS+xUcuVy+l3cIuBcsCd70gy4pRJJOcVZBaXFqhxeN1le8XesJnkWomnFNXH7X7BCOmE2LG54+25Io36oR1mfp+qJ4f1FzFo91ZCp7gYUQAAOw==)
+              no-repeat -2px -2px;
+}
+
 input.scenepic-volume-slider {
   display: inline;
   width: 125px;
@@ -309,6 +314,16 @@ input.scenepic-volume-slider {
   font-family: monospace;
   color: yellow;
   font-size: 14px;  
+}
+
+.scenepic-camera-mode {
+  position: absolute;
+  visibility: hidden;
+  left: 5px;
+  top: 55px;
+  font-family: monospace;
+  color: magenta;
+  font-size: 14px;
 }
 
 `;

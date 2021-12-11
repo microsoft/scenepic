@@ -1,5 +1,17 @@
 # Changelog
 
+## [2021-12-11 - Version 1.0.6](https://github.com/microsoft/scenepic/releases/tag/v1.0.6)
+Point release adding new camera mode as well as some improvements.
+
+Improvements:
+- There is now a new camera control mode, "First Person", accessible by pressing
+  <kbd>Tab</kbd>, which enables mouse-look and `wasdqe` movement controls
+  (closes #22). The old mode, now called "Focus", is still available as the default.
+- Font scale is now configurable on `VideoWriter`
+- There is now a "reset camera" button on the control bar so that users without
+  a keyboard can reset camera position
+
+
 ## [2021-11-16 - Version 1.0.5](https://github.com/microsoft/scenepic/releases/tag/v1.0.5)
 Point release adding per-frame layer settings.
 
