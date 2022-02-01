@@ -233,12 +233,14 @@ namespace scenepic
      *  \param mesh_id a unique identifier for the Mesh (will be automatically
      *                 populated if not provided).
      *  \param normals the new vertex normals
+     *  \param colors the new vertex colors
      *  \return a references to the new Mesh object
      */
     std::shared_ptr<MeshUpdate> update_mesh(
       const std::string& base_mesh_id,
       const ConstVectorBufferRef& positions,
       const ConstVectorBufferRef& normals,
+      const ConstVectorBufferRef& colors,
       const std::string& mesh_id = "");
 
     /** Create a new Mesh by updating a base mesh with new vertex positions.
@@ -251,6 +253,7 @@ namespace scenepic
      *  \param base_mesh_id the id of the base mesh to update
      *  \param positions the new instance positions
      *  \param rotations the new instance rotations
+     *  \param colors the new instance colors
      *  \param mesh_id a unique identifier for the Mesh (will be automatically
      *                 populated if not provided).
      *  \return a references to the new Mesh object
@@ -259,6 +262,16 @@ namespace scenepic
       const std::string& base_mesh_id,
       const ConstVectorBufferRef& positions,
       const ConstQuaternionBufferRef& rotations,
+      const ConstVectorBufferRef& colors,
+      const std::string& mesh_id = "");
+
+    /** \deprecated This method has been deprecated for clarity and naming
+     *  purposes.
+     *  \sa Scene::update_mesh_positions
+     */
+    std::shared_ptr<MeshUpdate> update_mesh_without_normals(
+      const std::string& base_mesh_id,
+      const ConstVectorBufferRef& positions,
       const std::string& mesh_id = "");
 
     /** Create a new Mesh by updating a base mesh with new vertex positions.
@@ -274,7 +287,7 @@ namespace scenepic
      *                 populated if not provided).
      *  \return a references to the new Mesh object
      */
-    std::shared_ptr<MeshUpdate> update_mesh_without_normals(
+    std::shared_ptr<MeshUpdate> update_mesh_positions(
       const std::string& base_mesh_id,
       const ConstVectorBufferRef& positions,
       const std::string& mesh_id = "");

@@ -14,6 +14,31 @@
 
 namespace scenepic
 {
+  /** Flags indicating what aspect of the vertex buffer is updated. */
+  enum class MeshUpdateType
+  {
+    None = 0,
+    Positions = 1,
+    Normals = 2,
+    Colors = 4,
+    Rotations = 8
+  };
+
+  inline MeshUpdateType operator|(MeshUpdateType a, MeshUpdateType b)
+  {
+    return (MeshUpdateType)((int)a | (int)b);
+  }
+
+  inline MeshUpdateType operator&(MeshUpdateType a, MeshUpdateType b)
+  {
+    return (MeshUpdateType)((int)a & (int)b);
+  }
+
+  inline MeshUpdateType& operator|=(MeshUpdateType& a, MeshUpdateType b)
+  {
+    return (MeshUpdateType&)((int&)a |= (int)b);
+  }
+
   /** Class which represents an update to an existing mesh in which only the
    *  vertex buffer is changed. By only updating a mesh the ScenePic file can
    *  become smaller, due to only needing to store the vertex buffer instead of
@@ -45,6 +70,8 @@ namespace scenepic
 
     /** Whether this update is quantized. */
     bool is_quantized() const;
+
+    void update(VertexBufferRef vertex_buffer) const;
 
     /** Quantize the mesh update in reference to a keyframe.
      *  \param keyframe_index the index of the keyframe
@@ -79,11 +106,13 @@ namespace scenepic
      * \param mesh_id the unique identifier of the new mesh.
      * \param vertex_buffer the updated vertex buffer
      * \param frame_index the unique index of the frame
+     * \param updated the parts of the mesh that have been updated
      */
     MeshUpdate(
       const std::string& base_mesh_id,
       const std::string& mesh_id,
-      const ConstVertexBufferRef& vertex_buffer,
+      const std::vector<ConstVertexBufferRef>& buffers,
+      const std::vector<MeshUpdateType>& updated,
       std::uint32_t frame_index);
 
     std::string m_base_mesh_id;
@@ -94,6 +123,7 @@ namespace scenepic
     float m_max;
     std::uint32_t m_frame_index;
     std::uint32_t m_keyframe_index;
+    MeshUpdateType m_updated;
   };
 } // namespace scenepic
 
