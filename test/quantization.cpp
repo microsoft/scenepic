@@ -21,7 +21,7 @@ namespace
       std::cout << "Adding update " << i << std::endl;
       sp::VectorBuffer positions(3, 3);
       positions << 0, 0, 0, 1, i * 0.05f, 0, 0, 1, 0;
-      scene.update_mesh_without_normals("base", positions);
+      scene.update_mesh_positions("base", positions);
     }
 
     std::cout << "Quantizing..." << std::endl;
@@ -43,7 +43,7 @@ namespace
       sp::VectorBuffer::Random(positions.rows(), positions.cols()) * 0.01f;
 
     std::cout << "Adding update..." << std::endl;
-    auto update = scene.update_mesh_without_normals("sphere", positions);
+    auto update = scene.update_mesh_positions("sphere", positions);
 
     std::cout << "Quantizing..." << std::endl;
     float expected_error = 1e-4f;

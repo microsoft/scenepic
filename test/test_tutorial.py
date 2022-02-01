@@ -347,12 +347,12 @@ def test_animation(asset):
         delta_z = (positions[:, 2] + 0.0419 * i) * 10
         positions[:, 1] = positions[:, 1] + 0.1 * (np.cos(delta_x) + np.sin(delta_z))
 
-        jelly_update = scene.update_mesh_without_normals("jelly_base", positions)
+        jelly_update = scene.update_mesh_positions("jelly_base", positions)
         frame = canvas.create_frame(meshes=[jelly_update])
 
         marble_y = np.sin(0.105 * i + marble_offsets)
         positions = np.stack([marble_positions[:, 0], marble_y, marble_positions[:, 2]], -1)
-        marbles_update = scene.update_mesh_without_normals("marbles_base", positions)
+        marbles_update = scene.update_mesh_positions("marbles_base", positions)
         frame.add_mesh(marbles_update)
 
     scene.quantize_updates()

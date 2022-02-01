@@ -2069,8 +2069,9 @@ PYBIND11_MODULE(_scenepic, m)
 
             Args:
                 base_mesh_id (str): the unique identifier of the original base mesh. Must already have been created.
-                positions (np.ndarray): float32 matrix of [N, 3] new positions
+                positions (np.ndarray, optional): float32 matrix of [N, 3] new positions
                 normals (np.ndarray, optional): float32 matrix of [N, 3] new normals.
+                colors (np.ndarray, optional): float32 matrix of [N, 3] new colors.
                 mesh_id (str, optional): a unique identifier for the new updated Mesh (will be
                                          automatically populated if not provided). Defaults to None.
             
@@ -2078,8 +2079,9 @@ PYBIND11_MODULE(_scenepic, m)
                 MeshUpdate: a reference to the MeshUpdate object
         )scenepicdoc",
       "base_mesh_id"_a,
-      "positions"_a,
-      "normals"_a,
+      "positions"_a = VectorBufferNone(),
+      "normals"_a = VectorBufferNone(),
+      "colors"_a = VectorBufferNone(),
       "mesh_id"_a = "")
     .def(
       "update_instanced_mesh",
@@ -2089,10 +2091,11 @@ PYBIND11_MODULE(_scenepic, m)
 
             Args:
                 base_mesh_id (str): the unique identifier of the original base mesh. Must already have been created.
-                positions (np.ndarray): float32 matrix of [N, 3] new positions
+                positions (np.ndarray, optional): float32 matrix of [N, 3] new positions
                 rotations (np.ndarray, optional): float32 matrix of [N, 4] new rotations.
                                                   Defaults to None, indicating no change to
                                                   the rotations.
+                colors (np.ndarray, optional): float32 matrix of [N, 3] new colors
                 mesh_id (str, optional): a unique identifier for the new updated Mesh (will be
                                          automatically populated if not provided). Defaults to None.
             
@@ -2100,12 +2103,22 @@ PYBIND11_MODULE(_scenepic, m)
                 MeshUpdate: a reference to the MeshUpdate object
         )scenepicdoc",
       "base_mesh_id"_a,
-      "positions"_a,
+      "positions"_a = VectorBufferNone(),
       "rotations"_a = QuaternionBufferNone(),
+      "colors"_a = ColorBufferNone(),
       "mesh_id"_a = "")
     .def(
       "update_mesh_without_normals",
       &Scene::update_mesh_without_normals,
+      R"scenepicdoc(
+            Deprecated.
+        )scenepicdoc",
+      "base_mesh_id"_a,
+      "positions"_a,
+      "mesh_id"_a = "")
+    .def(
+      "update_mesh_positions",
+      &Scene::update_mesh_positions,
       R"scenepicdoc(
             Create a new mesh from an existing one by replacing its vector positions and compute normal values.
 

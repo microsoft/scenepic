@@ -3,5 +3,6 @@
 	"CommandType": "UpdateMesh",
 	"FrameIndex": 0,
 	"MeshId": "update0",
-	"VertexBuffer": "eAFtiTENAAAMwnA2a3M2azsgHAQe0hbI7emne7M6/QOadwU8AwAAAAY="
+	"VertexBuffer": "eAFtiTENAAAMwnA2a3M2azsgHAQe0hbI7emne7M6/QOadwU8AwAAAAY=",
+	"UpdateFlags": 1
 }

@@ -47,7 +47,7 @@ int test_mesh_update()
 
   instance_pos.row(0) << 1, 1, 0;
 
-  update = scene.update_mesh_without_normals("base", instance_pos, "update2");
+  update = scene.update_mesh_positions("base", instance_pos, "update2");
 
   test::assert_equal(update->to_json(), "update2", result);
 

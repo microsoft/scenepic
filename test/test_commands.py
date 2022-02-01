@@ -341,7 +341,7 @@ def test_mesh_update(assert_json_equal, color):
         [0, -1, 0]
     ], np.float32)
 
-    update = scene.update_mesh_without_normals("base", positions, "update0")
+    update = scene.update_mesh_positions("base", positions, "update0")
     assert_json_equal(str(update), "update0")
 
     update = scene.update_mesh("base", positions, normals, "update1")
@@ -370,7 +370,7 @@ def test_mesh_update(assert_json_equal, color):
 
     instance_pos[0] = [1, 1, 0]
 
-    update = scene.update_mesh_without_normals("base", instance_pos, "update2")
+    update = scene.update_mesh_positions("base", instance_pos, "update2")
 
     assert_json_equal(str(update), "update2")
 
@@ -394,7 +394,7 @@ def test_quantization(assert_json_equal, color):
             [1, i * 0.05, 0],
             [0, 1, 0]
         ], np.float32)
-        scene.update_mesh_without_normals("base", positions)
+        scene.update_mesh_positions("base", positions)
 
     info = scene.quantize_updates(1e-5)
 

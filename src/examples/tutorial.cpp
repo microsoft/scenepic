@@ -590,8 +590,7 @@ void animation()
     // we create a mesh update with the new posiitons. We can use this mesh
     // update just like a new mesh, because it essentially is one, as ScenePic
     // will create a new mesh from the old one using these new positions.
-    auto mesh_update =
-      scene.update_mesh_without_normals("jelly_base", positions);
+    auto mesh_update = scene.update_mesh_positions("jelly_base", positions);
     frame->add_mesh(mesh_update);
 
     // this is a simpler form of animation using rigid transforms per instance
@@ -599,7 +598,7 @@ void animation()
     positions = marble_positions;
     positions.col(1) = marble_y.array().sin();
     auto marbles_update =
-      scene.update_mesh_without_normals("marbles_base", positions);
+      scene.update_mesh_positions("marbles_base", positions);
     frame->add_mesh(marbles_update);
   }
 
