@@ -15,7 +15,7 @@
 namespace scenepic
 {
   /** Flags indicating what aspect of the vertex buffer is updated. */
-  enum class MeshUpdateType
+  enum class VertexBufferType
   {
     None = 0,
     Positions = 1,
@@ -24,19 +24,19 @@ namespace scenepic
     Rotations = 8
   };
 
-  inline MeshUpdateType operator|(MeshUpdateType a, MeshUpdateType b)
+  inline VertexBufferType operator|(VertexBufferType a, VertexBufferType b)
   {
-    return (MeshUpdateType)((int)a | (int)b);
+    return (VertexBufferType)((int)a | (int)b);
   }
 
-  inline MeshUpdateType operator&(MeshUpdateType a, MeshUpdateType b)
+  inline VertexBufferType operator&(VertexBufferType a, VertexBufferType b)
   {
-    return (MeshUpdateType)((int)a & (int)b);
+    return (VertexBufferType)((int)a & (int)b);
   }
 
-  inline MeshUpdateType& operator|=(MeshUpdateType& a, MeshUpdateType b)
+  inline VertexBufferType& operator|=(VertexBufferType& a, VertexBufferType b)
   {
-    return (MeshUpdateType&)((int&)a |= (int)b);
+    return (VertexBufferType&)((int&)a |= (int)b);
   }
 
   /** Class which represents an update to an existing mesh in which only the
@@ -104,7 +104,8 @@ namespace scenepic
      *
      * \param base_mesh_id the unique identifier of the original base mesh
      * \param mesh_id the unique identifier of the new mesh.
-     * \param vertex_buffer the updated vertex buffer
+     * \param buffers the updated vertex buffers
+     * \param buffer_types the types of the buffers
      * \param frame_index the unique index of the frame
      * \param updated the parts of the mesh that have been updated
      */
@@ -112,7 +113,7 @@ namespace scenepic
       const std::string& base_mesh_id,
       const std::string& mesh_id,
       const std::vector<ConstVertexBufferRef>& buffers,
-      const std::vector<MeshUpdateType>& updated,
+      const std::vector<VertexBufferType>& buffer_types,
       std::uint32_t frame_index);
 
     std::string m_base_mesh_id;
@@ -123,7 +124,7 @@ namespace scenepic
     float m_max;
     std::uint32_t m_frame_index;
     std::uint32_t m_keyframe_index;
-    MeshUpdateType m_updated;
+    VertexBufferType m_update_flags;
   };
 } // namespace scenepic
 

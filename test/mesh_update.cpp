@@ -20,11 +20,12 @@ int test_mesh_update()
   sp::VectorBuffer normals(3, 3);
   normals << 0, -1, 0, 0, -1, 0, 0, -1, 0;
 
-  auto update = scene.update_mesh_without_normals("base", positions, "update0");
+  auto update = scene.update_mesh_positions("base", positions, "update0");
 
   test::assert_equal(update->to_json(), "update0", result);
 
-  update = scene.update_mesh("base", positions, normals, "update1");
+  update = scene.update_mesh(
+    "base", positions, normals, sp::ColorBufferNone(), "update1");
 
   test::assert_equal(update->to_json(), "update1", result);
 
@@ -53,8 +54,8 @@ int test_mesh_update()
   instance_pos.row(1) << 1, 0, 1;
   instance_rot.row(0) << 0.24, 0.24, 0.06, 0.94;
 
-  update =
-    scene.update_instanced_mesh("base", instance_pos, instance_rot, "update3");
+  update = scene.update_instanced_mesh(
+    "base", instance_pos, instance_rot, sp::ColorBufferNone(), "update3");
 
   test::assert_equal(update->to_json(), "update3", result);
 

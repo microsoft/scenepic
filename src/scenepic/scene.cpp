@@ -309,14 +309,14 @@ namespace scenepic
       positions, normals, colors
     };
 
-    std::vector<MeshUpdateType> updated = {
-      MeshUpdateType::Positions,
-      MeshUpdateType::Normals,
-      MeshUpdateType::Colors
+    std::vector<VertexBufferType> buffer_types = {
+      VertexBufferType::Positions,
+      VertexBufferType::Normals,
+      VertexBufferType::Colors
     };
 
     auto mesh_update = std::make_shared<MeshUpdate>(
-      MeshUpdate(base_mesh_id, mesh_id, buffers, updated, frame_index));
+      MeshUpdate(base_mesh_id, mesh_id, buffers, buffer_types, frame_index));
     m_mesh_updates.push_back(mesh_update);
     m_num_meshes += 1;
     return mesh_update;
@@ -357,14 +357,14 @@ namespace scenepic
       positions, rotations, colors
     };
 
-    std::vector<MeshUpdateType> updated = {
-      MeshUpdateType::Positions,
-      MeshUpdateType::Rotations,
-      MeshUpdateType::Colors
+    std::vector<VertexBufferType> buffer_types = {
+      VertexBufferType::Positions,
+      VertexBufferType::Rotations,
+      VertexBufferType::Colors
     };
 
     auto mesh_update = std::make_shared<MeshUpdate>(
-      MeshUpdate(base_mesh_id, mesh_id, buffers, updated, frame_index));
+      MeshUpdate(base_mesh_id, mesh_id, buffers, buffer_types, frame_index));
     m_mesh_updates.push_back(mesh_update);
     m_num_meshes += 1;
     return mesh_update;
@@ -375,7 +375,7 @@ namespace scenepic
     const ConstVectorBufferRef& positions,
     const std::string& mesh_id_init)
   {
-    update_mesh_positions(base_mesh_id, positions, mesh_id_init);
+    return update_mesh_positions(base_mesh_id, positions, mesh_id_init);
   }
 
   std::shared_ptr<MeshUpdate> Scene::update_mesh_positions(
