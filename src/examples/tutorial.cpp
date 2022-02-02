@@ -540,7 +540,7 @@ Eigen::VectorXf random_linspace(float min_val, float max_val, int num_samples)
   return values;
 }
 
-void animation()
+void animation0()
 {
   std::cout << "== Animation ==" << std::endl;
 
@@ -620,7 +620,30 @@ void animation()
     std::cout << item.first << ": " << item.second << std::endl;
   }
 
-  scene.save_as_html("animation.html", "Animation");
+  scene.save_as_html("animation0.html", "Animation");
+}
+
+void animation1()
+{
+  std::cout << "== Instanced Animation ==" << std::endl;
+
+  // In this tutorial we will explore how we can use mesh updates on
+  // instanced meshes as well. We will begin by creating a simple primitive
+  // and use instancing to create a cloud of stylized butterflies. We will
+  // then using mesh updates on the instances to make the butterflies
+  // fly.
+
+  sp::Scene scene;
+
+  auto butterflies = scene.create_mesh("butterflies");
+  butterflies->double_sided(true);
+  butterflies->add_quad(sp::Colors::Blue, {0, 0, 0}, {0.5, 0.1, 0.2}, {0.4, -0.1, -0.3}, {0.05, -0.05, -0.1});
+
+  auto canvas = scene.create_canvas_3d("main", 700, 700);
+  auto frame = canvas->create_frame();
+  frame->add_mesh(butterflies);
+
+  scene.save_as_html("animation1.html", "Instanced Animation");
 }
 
 void camera_movement()
@@ -1026,7 +1049,8 @@ int main(int argc, char* argv[])
   images_and_textures();
   canvas_2d();
   opacity_and_labels();
-  animation();
+  animation0();
+  animation1();
   camera_movement();
   audio_tracks();
   circles_video();
