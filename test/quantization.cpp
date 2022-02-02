@@ -48,11 +48,11 @@ namespace
     std::cout << "Quantizing..." << std::endl;
     float expected_error = 1e-4f;
     float range = expected_error * 65535;
-    update->quantize(0, range, mesh->vertex_buffer().leftCols(6));
+    update->quantize(0, range, mesh->vertex_buffer().leftCols(3));
 
     std::cout << "Unquantizing..." << std::endl;
     sp::VertexBuffer actual =
-      update->unquantize() + mesh->vertex_buffer().leftCols(6);
+      update->unquantize() + mesh->vertex_buffer().leftCols(3);
     std::cout << "Diff..." << std::endl;
     sp::VertexBuffer diff = actual - update->vertex_buffer();
 

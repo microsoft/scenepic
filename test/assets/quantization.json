@@ -25,16 +25,16 @@
 		"CommandType": "UpdateMesh",
 		"FrameIndex": 0,
 		"MeshId": "Mesh-1",
-		"VertexBuffer": "eAFtiLEJAAAAgvqs1zq9oaGGBBEEHmJ8f9tvaP8DvAMAAAAG",
-		"UpdateFlags": 1
+		"UpdateFlags": 1,
+		"VertexBuffer": "eAFjYEAGDfYoXCgfABSKAX8DAAAAAw=="
 	},
 	{
 		"BaseMeshId": "base",
 		"CommandType": "UpdateMesh",
 		"FrameIndex": 19,
 		"MeshId": "Mesh-20",
-		"VertexBuffer": "eAFtiLEJAAAIw/pTD/AoH/B0dVJKAyEQwFGxkjnV/3u/AZdJBNQDAAAABg==",
-		"UpdateFlags": 1
+		"UpdateFlags": 1,
+		"VertexBuffer": "eAFjYEAGDfbGxsX2yHwQCQAolAKXAwAAAAM="
 	},
 	{
 		"BaseMeshId": "base",
@@ -44,7 +44,7 @@
 		"MaxValue": 0.05000000074505806,
 		"MeshId": "Mesh-2",
 		"MinValue": 0.0,
-		"QuantizedBuffer": "eAFjYEAG//+jcKEAACr5Af8DAAAABg==",
+		"QuantizedBuffer": "eAFjYICA//+hDAYAEv8B/wMAAAAD",
 		"UpdateFlags": 1
 	},
 	{
@@ -55,7 +55,7 @@
 		"MaxValue": 0.10000000149011612,
 		"MeshId": "Mesh-3",
 		"MinValue": 0.0,
-		"QuantizedBuffer": "eAFjYEAG//+jcKEAACr5Af8DAAAABg==",
+		"QuantizedBuffer": "eAFjYICA//+hDAYAEv8B/wMAAAAD",
 		"UpdateFlags": 1
 	},
 	{
@@ -66,7 +66,7 @@
 		"MaxValue": 0.15000000596046448,
 		"MeshId": "Mesh-4",
 		"MinValue": 0.0,
-		"QuantizedBuffer": "eAFjYEAG//6jcKEAACrjAf4DAAAABg==",
+		"QuantizedBuffer": "eAFjYICAf/+hDAYAEvUB/gMAAAAD",
 		"UpdateFlags": 1
 	},
 	{
@@ -77,7 +77,7 @@
 		"MaxValue": 0.20000000298023224,
 		"MeshId": "Mesh-5",
 		"MinValue": 0.0,
-		"QuantizedBuffer": "eAFjYEAG//+jcKEAACr5Af8DAAAABg==",
+		"QuantizedBuffer": "eAFjYICA//+hDAYAEv8B/wMAAAAD",
 		"UpdateFlags": 1
 	},
 	{
@@ -88,7 +88,7 @@
 		"MaxValue": 0.25,
 		"MeshId": "Mesh-6",
 		"MinValue": 0.0,
-		"QuantizedBuffer": "eAFjYEAG//+jcKEAACr5Af8DAAAABg==",
+		"QuantizedBuffer": "eAFjYICA//+hDAYAEv8B/wMAAAAD",
 		"UpdateFlags": 1
 	},
 	{
@@ -99,7 +99,7 @@
 		"MaxValue": 0.30000001192092896,
 		"MeshId": "Mesh-7",
 		"MinValue": 0.0,
-		"QuantizedBuffer": "eAFjYEAG//6jcKEAACrjAf4DAAAABg==",
+		"QuantizedBuffer": "eAFjYICAf/+hDAYAEvUB/gMAAAAD",
 		"UpdateFlags": 1
 	},
 	{
@@ -110,7 +110,7 @@
 		"MaxValue": 0.34999999403953552,
 		"MeshId": "Mesh-8",
 		"MinValue": 0.0,
-		"QuantizedBuffer": "eAFjYEAG//+jcKEAACr5Af8DAAAABg==",
+		"QuantizedBuffer": "eAFjYICA//+hDAYAEv8B/wMAAAAD",
 		"UpdateFlags": 1
 	},
 	{
@@ -121,7 +121,7 @@
 		"MaxValue": 0.40000000596046448,
 		"MeshId": "Mesh-9",
 		"MinValue": 0.0,
-		"QuantizedBuffer": "eAFjYEAG//+jcKEAACr5Af8DAAAABg==",
+		"QuantizedBuffer": "eAFjYICA//+hDAYAEv8B/wMAAAAD",
 		"UpdateFlags": 1
 	},
 	{
@@ -132,7 +132,7 @@
 		"MaxValue": 0.44999998807907104,
 		"MeshId": "Mesh-10",
 		"MinValue": 0.0,
-		"QuantizedBuffer": "eAFjYEAG//+jcKEAACr5Af8DAAAABg==",
+		"QuantizedBuffer": "eAFjYICA//+hDAYAEv8B/wMAAAAD",
 		"UpdateFlags": 1
 	},
 	{
@@ -143,7 +143,7 @@
 		"MaxValue": 0.0,
 		"MeshId": "Mesh-11",
 		"MinValue": -0.44999998807907104,
-		"QuantizedBuffer": "eAH7/x8ZMDCgcKEAAGzTId8DAAAABg==",
+		"QuantizedBuffer": "eAH7/x8CGBigjP8Al3oP8QMAAAAD",
 		"UpdateFlags": 1
 	},
 	{
@@ -154,7 +154,7 @@
 		"MaxValue": 0.0,
 		"MeshId": "Mesh-12",
 		"MinValue": -0.39999997615814209,
-		"QuantizedBuffer": "eAH7/x8ZMDCgcKEAAGzTId8DAAAABg==",
+		"QuantizedBuffer": "eAH7/x8CGBigjP8Al3oP8QMAAAAD",
 		"UpdateFlags": 1
 	},
 	{
@@ -165,7 +165,7 @@
 		"MaxValue": 0.0,
 		"MeshId": "Mesh-13",
 		"MinValue": -0.34999996423721313,
-		"QuantizedBuffer": "eAH7/x8ZMDCgcKEAAGzTId8DAAAABg==",
+		"QuantizedBuffer": "eAH7/x8CGBigjP8Al3oP8QMAAAAD",
 		"UpdateFlags": 1
 	},
 	{
@@ -176,7 +176,7 @@
 		"MaxValue": 0.0,
 		"MeshId": "Mesh-14",
 		"MinValue": -0.30000001192092896,
-		"QuantizedBuffer": "eAH79/8fEmRgQObBIABrkyHOAwAAAAY=",
+		"QuantizedBuffer": "eAH79/8fGDIwQOh//wGXKg/pAwAAAAM=",
 		"UpdateFlags": 1
 	},
 	{
@@ -187,7 +187,7 @@
 		"MaxValue": 0.0,
 		"MeshId": "Mesh-15",
 		"MinValue": -0.25,
-		"QuantizedBuffer": "eAH7/x8ZMDCgcKEAAGzTId8DAAAABg==",
+		"QuantizedBuffer": "eAH7/x8CGBigjP8Al3oP8QMAAAAD",
 		"UpdateFlags": 1
 	},
 	{
@@ -198,7 +198,7 @@
 		"MaxValue": 0.0,
 		"MeshId": "Mesh-16",
 		"MinValue": -0.19999998807907104,
-		"QuantizedBuffer": "eAH7/x8ZMDCgcKEAAGzTId8DAAAABg==",
+		"QuantizedBuffer": "eAH7/x8CGBigjP8Al3oP8QMAAAAD",
 		"UpdateFlags": 1
 	},
 	{
@@ -209,7 +209,7 @@
 		"MaxValue": 0.0,
 		"MeshId": "Mesh-17",
 		"MinValue": -0.14999997615814209,
-		"QuantizedBuffer": "eAH7/x8ZMDCgcKEAAGzTId8DAAAABg==",
+		"QuantizedBuffer": "eAH7/x8CGBigjP8Al3oP8QMAAAAD",
 		"UpdateFlags": 1
 	},
 	{
@@ -220,7 +220,7 @@
 		"MaxValue": 0.0,
 		"MeshId": "Mesh-18",
 		"MinValue": -0.099999964237213135,
-		"QuantizedBuffer": "eAH7/x8ZMDCgcKEAAGzTId8DAAAABg==",
+		"QuantizedBuffer": "eAH7/x8CGBigjP8Al3oP8QMAAAAD",
 		"UpdateFlags": 1
 	},
 	{
@@ -231,7 +231,7 @@
 		"MaxValue": 0.0,
 		"MeshId": "Mesh-19",
 		"MinValue": -0.050000011920928955,
-		"QuantizedBuffer": "eAH7/x8ZMDCgcKEAAGzTId8DAAAABg==",
+		"QuantizedBuffer": "eAH7/x8CGBigjP8Al3oP8QMAAAAD",
 		"UpdateFlags": 1
 	}
 ]

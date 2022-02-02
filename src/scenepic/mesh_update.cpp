@@ -63,7 +63,7 @@ namespace scenepic
       }
 
       Eigen::Index num_cols = buffers[i].cols();
-      m_vertex_buffer.middleCols(col, col + num_cols) = buffers[i];
+      m_vertex_buffer.middleCols(col, num_cols) = buffers[i];
       col += num_cols;
     }
   }
