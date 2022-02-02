@@ -341,10 +341,18 @@ def test_mesh_update(assert_json_equal, color):
         [0, -1, 0]
     ], np.float32)
 
+    colors = np.array([
+        [1, 0, 0],
+        [0, 1, 0],
+        [0, 0, 1]
+    ], np.float32)
+
     update = scene.update_mesh_positions("base", positions, "update0")
+
     assert_json_equal(str(update), "update0")
 
-    update = scene.update_mesh("base", positions, normals, "update1")
+    update = scene.update_mesh("base", positions, normals, colors, "update1")
+
     assert_json_equal(str(update), "update1")
 
     keyframe_buffer = update.vertex_buffer.copy()
@@ -366,7 +374,13 @@ def test_mesh_update(assert_json_equal, color):
         [0.22, -0.12, 0.46, 0.85]
     ], np.float32)
 
-    mesh.enable_instancing(instance_pos, instance_rot)
+    instance_c = np.array([
+        [1, 0, 0],
+        [0, 1, 0],
+        [0, 0, 1]
+    ], np.float32)
+
+    mesh.enable_instancing(instance_pos, instance_rot, instance_c)
 
     instance_pos[0] = [1, 1, 0]
 
@@ -376,8 +390,12 @@ def test_mesh_update(assert_json_equal, color):
 
     instance_pos[1] = [1, 0, 1]
     instance_rot[0] = [0.24, 0.24, 0.06, 0.94]
+    instance_c[0] = [0.5, 0, 0]
 
-    update = scene.update_instanced_mesh("base", instance_pos, instance_rot, "update3")
+    update = scene.update_instanced_mesh("base", instance_pos, instance_rot, instance_c, "update3")
+
+    with open("update3.json", "w") as file:
+        file.write(str(update))
 
     assert_json_equal(str(update), "update3")
 
