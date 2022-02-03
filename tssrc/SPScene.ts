@@ -8,6 +8,7 @@ import DropDownMenu from "./DropDownMenu";
 import InitializeCSSStyles from "./CSSStyles";
 import Misc from "./Misc"
 import Mesh from "./Mesh";
+import { VertexBufferType } from "./VertexBuffers";
 import {vec3} from "gl-matrix";
 import {saveAs} from "file-saver";
 import * as JSZip from "jszip";
@@ -673,7 +674,7 @@ export default class SPScene
     }
 
     // Update an existing mesh to create a new mesh
-    UpdateMesh(baseMeshId: string, meshId: string, buffer: Float32Array|Uint16Array, frameIndex: number, keyframeIndex: number, min: number, max: number)
+    UpdateMesh(baseMeshId: string, meshId: string, buffer: Float32Array|Uint16Array, frameIndex: number, keyframeIndex: number, min: number, max: number, updateFlags: VertexBufferType)
     {
         let unquantizedBuffer: Float32Array;
         if (buffer instanceof Uint16Array) {
@@ -691,8 +692,8 @@ export default class SPScene
 
         try
         {
-            var mesh = this.allMeshes[baseMeshId]
-            this.allMeshes[meshId] = mesh.Update(unquantizedBuffer)
+            var mesh = this.allMeshes[baseMeshId];
+            this.allMeshes[meshId] = mesh.Update(unquantizedBuffer, updateFlags);
         }
         catch (e)
         {
@@ -761,13 +762,14 @@ export default class SPScene
                 var keyframeIndex = Misc.GetDefault(command, "KeyframeIndex", frameIndex);
                 var min = Misc.GetDefault(command, "MinValue", 0);
                 var max = Misc.GetDefault(command, "MaxValue", 0);
+                var updateFlags = command["UpdateFlags"] as number as VertexBufferType;
                 var buffer: Float32Array|Uint16Array;
                 if ("QuantizedBuffer" in command) 
                     buffer = Misc.Base64ToUInt16Array(command["QuantizedBuffer"])
                 else
                     buffer = Misc.Base64ToFloat32Array(command["VertexBuffer"])
 
-                this.UpdateMesh(baseMeshId, meshId, buffer, frameIndex, keyframeIndex, min, max);
+                this.UpdateMesh(baseMeshId, meshId, buffer, frameIndex, keyframeIndex, min, max, updateFlags);
                 break;
 
             case "DefineImage":

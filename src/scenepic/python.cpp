@@ -144,7 +144,23 @@ PYBIND11_MODULE(_scenepic, m)
             angle (float): the angle to rotate in radians
 
         Returns:
-            np.ndarray: a 3D homgenous transform matrix
+            np.ndarray: a 3D homogenous transform matrix
+    )scenepicdoc");
+
+  m.def(
+    "quaternion_multiply",
+    &Transforms::quaternion_multiply,
+    "a"_a,
+    "b"_a,
+    R"scenepicdoc(
+      Multiply two quaternions together.
+
+      Args:
+        a (np.ndarray): the first quaternion
+        b (np.ndarray): the second quaternion
+      
+      Returns:
+        np.ndarray: the result of a * b
     )scenepicdoc");
 
   m.def(

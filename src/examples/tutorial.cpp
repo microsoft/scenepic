@@ -637,11 +637,58 @@ void animation1()
 
   auto butterflies = scene.create_mesh("butterflies");
   butterflies->double_sided(true);
-  butterflies->add_quad(sp::Colors::Blue, {0, 0, 0}, {0.5, 0.1, 0.2}, {0.4, -0.1, -0.3}, {0.05, -0.05, -0.1});
+  butterflies->add_quad(sp::Colors::Blue, {0, 0, 0}, {0.5, 0, 0.2}, {0.4, 0, -0.3}, {0.075, 0, -0.15});
+
+  // 100 butterflies
+  // random colors
+  // random starting points (angles)
+  // 
+
+  sp::VectorBuffer positions = sp::VectorBuffer::Zero(2, 3);
+
+  sp::Quaternion right = sp::Transforms::quaternion_from_axis_angle({0, 0, 1}, 0);
+  sp::Quaternion left = sp::Transforms::quaternion_from_axis_angle({0, 0, 1}, M_PI);
+  sp::Quaternion rotate_back = sp::Transforms::quaternion_from_axis_angle({1, 0, 0}, -M_PI/6);
+
+
+  sp::QuaternionBuffer rotations(2, 4);
+  rotations.row(0) = sp::Transforms::quaternion_multiply(rotate_back, right);
+  rotations.row(1) = sp::Transforms::quaternion_multiply(rotate_back, left);
+
+  sp::ColorBuffer colors(2, 3);
+  colors.row(0) = sp::Colors::Green;
+  colors.row(1) = sp::Colors::Green;
+
+  butterflies->enable_instancing(positions, rotations, colors);
 
   auto canvas = scene.create_canvas_3d("main", 700, 700);
-  auto frame = canvas->create_frame();
-  frame->add_mesh(butterflies);
+
+  float start = -M_PI / 6;
+  float end = M_PI / 2;
+  int num_frames = 20;
+  float delta = (end - start) / (num_frames / 2 - 1);
+  for(int i=0; i<num_frames; ++i)
+  {
+    float angle;
+    if(i < num_frames / 2)
+    {
+      angle = start + delta * i;
+    }
+    else
+    {
+      angle = end + delta * (i - num_frames / 2);
+    }
+
+    right = sp::Transforms::quaternion_from_axis_angle({0, 0, 1}, angle);
+    left = sp::Transforms::quaternion_from_axis_angle({0, 0, 1}, M_PI - angle);
+    sp::QuaternionBuffer frame_rotations(2, 4);
+    frame_rotations.row(0) = sp::Transforms::quaternion_multiply(rotate_back, right);
+    frame_rotations.row(1) = sp::Transforms::quaternion_multiply(rotate_back, left);
+
+    auto update = scene.update_instanced_mesh("butterflies", sp::VectorBufferNone(), frame_rotations, sp::ColorBufferNone());
+    auto frame = canvas->create_frame();
+    frame->add_mesh(update);
+  }
 
   scene.save_as_html("animation1.html", "Instanced Animation");
 }
@@ -1041,7 +1088,7 @@ void fading()
 
 int main(int argc, char* argv[])
 {
-  scene_and_canvas_basics();
+  /*scene_and_canvas_basics();
   meshes_and_frames();
   point_clouds_1();
   point_clouds_2();
@@ -1055,5 +1102,7 @@ int main(int argc, char* argv[])
   audio_tracks();
   circles_video();
   multiview();
-  fading();
+  fading();*/
+
+  animation1();
 }

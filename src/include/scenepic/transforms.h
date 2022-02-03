@@ -59,6 +59,13 @@ namespace scenepic
      */
     Quaternion quaternion_to_align_x_to_axis(const Vector& axis);
 
+    /** Multiply two quaternions.
+     *  \param a the first quaternion
+     *  \param b the second quaternion
+     *  \return the result of a * b
+     */
+    Quaternion quaternion_multiply(const Quaternion& a, const Quaternion& b);
+
     /** Creates a 3D homogeneous rotation matrix that will ensure the x-axis
      * aligns with the provided axis.  NB one degree of freedom is
      * underconstrained. \param axis the axis to which to align the x-axis

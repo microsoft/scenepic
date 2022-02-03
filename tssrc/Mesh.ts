@@ -1,6 +1,7 @@
 // NB ONLY TO BE USED INTERNALLY, NOT IN API
 import Misc from "./Misc"
 import {vec3, vec4, mat4} from "gl-matrix";
+import { VertexBuffer, VertexBufferType } from "./VertexBuffers";
 
 export default class Mesh
 {    
@@ -117,37 +118,21 @@ export default class Mesh
         }
     }
 
-    Update(buffer : Float32Array) : Mesh
+    Update(buffer : Float32Array, update_flags: VertexBufferType) : Mesh
     {
         if(this.CountInstances() > 1)
         {
-            return this.ToInstanceBuffer(buffer);
+            return this.ToInstanceBuffer(buffer, update_flags);
         }
         else
         {
-            return this.ToVertexBuffer(buffer);
+            return this.ToVertexBuffer(buffer, update_flags);
         }
     }
 
-    ToInstanceBuffer(positionsAndRotations : Float32Array) : Mesh
+    ToInstanceBuffer(update : Float32Array, updateFlags: VertexBufferType) : Mesh
     {
-        let instanceBuffer : Float32Array;
-        let elementsPerInstance = positionsAndRotations.length / this.CountInstances();
-        if(elementsPerInstance == this.ElementsPerInstance)
-        {
-            instanceBuffer = positionsAndRotations;
-        }
-        else
-        {
-            instanceBuffer = Float32Array.from(this.instanceBuffer);
-            for(let pos_idx=0, vert_idx=0;
-                pos_idx<positionsAndRotations.length;
-                pos_idx += elementsPerInstance, vert_idx += this.ElementsPerInstance)
-            {
-                instanceBuffer.set(positionsAndRotations.slice(pos_idx, pos_idx + elementsPerInstance), vert_idx);
-            }
-        }
-
+        let instanceBuffer = VertexBuffer.Update(this.instanceBuffer, this.ElementsPerInstance, update, updateFlags);
         let mesh = new Mesh(this.vertexBuffer,
                             this.bytesPerIndex,
                             this.triangleBuffer,
@@ -167,25 +152,9 @@ export default class Mesh
         return mesh;
     }
 
-    ToVertexBuffer(positionAndNormals : Float32Array) : Mesh
+    ToVertexBuffer(update : Float32Array, updateFlags: VertexBufferType) : Mesh
     {
-        let vertexBuffer : Float32Array;
-        let elementsPerVertex = positionAndNormals.length / this.CountVertices();
-        if(elementsPerVertex == this.ElementsPerVertex)
-        {
-            vertexBuffer = positionAndNormals;
-        }
-        else
-        {
-            vertexBuffer = Float32Array.from(this.vertexBuffer);
-            for(let pos_idx=0, vert_idx=0;
-                pos_idx<positionAndNormals.length;
-                pos_idx += elementsPerVertex, vert_idx += this.ElementsPerVertex)
-            {
-                vertexBuffer.set(positionAndNormals.slice(pos_idx, pos_idx + elementsPerVertex), vert_idx);
-            }
-        }
-
+        let vertexBuffer = VertexBuffer.Update(this.vertexBuffer, this.ElementsPerVertex, update, updateFlags);
         let mesh = new Mesh(vertexBuffer,
                             this.bytesPerIndex,
                             this.triangleBuffer,
