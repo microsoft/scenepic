@@ -110,6 +110,33 @@ namespace scenepic
     /** A value indicating "no camera" */
     static Camera None();
 
+    /** Returns a sequence of cameras which move in an orbit around
+     *  the origin.
+     * 
+     *  \param num_frames the number of frames in the sequence
+     *  \param distance the distance of the camera from the origin
+     *  \param num_times the number of times to orbit
+     *  \param min_altitude the minimum altitude of the orbit
+     *  \param max_altitude the maximum altitude of the orbit
+     *  \param up_dir the direction that is up
+     *  \param forward_dir the direction that is forward
+     *  \param fov_y_degrees the field of view of the camera
+     *  \param aspect_ratio the aspect ratio of the camera
+     *  \param near_crop_distance the near clipping plane of the view frustum
+     *  \param far_crop_distance the far clipping plane of the view frustum
+     *  \return a sequence of cameras moving in an orbit
+     */
+    static std::vector<Camera> orbit(int num_frames, float distance,
+                                     int num_times,
+                                     float min_altitude=0.25,
+                                     float max_altitude=0.8,
+                                     Vector up_dir = {0, 1, 0},
+                                     Vector forward_dir = {0, 0, 1},
+                                     double fov_y_degrees = 45.0,
+                                     double aspect_ratio = 1.0,
+                                     double near_crop_distance = 0.01,
+                                     double far_crop_distance = 20.0);
+
   protected:
     Transform m_camera_to_world;
     Transform m_world_to_camera;

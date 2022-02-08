@@ -691,11 +691,12 @@ void animation1()
   auto canvas = scene.create_canvas_3d("main", 700, 700);
   canvas->shading(sp::Shading(sp::Colors::White));
 
-  int num_frames = 60;
+  int num_frames = 120;
   float start = -M_PI / 6;
   float end = M_PI / 2;
   float delta = (end - start) / (num_anim_frames / 2 - 1);
-  // move the camera?
+  std::vector<sp::Camera> cameras = sp::Camera::orbit(num_frames, 3.0, 1);
+  // REUSE THE ANIMATION FRAMES!!!
   for(int i=0; i<num_frames; ++i)
   {
     sp::VectorBuffer frame_positions = sp::VectorBuffer::Zero(num_butterflies * 2, 3);
@@ -748,6 +749,7 @@ void animation1()
     auto update = scene.update_instanced_mesh("butterflies", frame_positions, frame_rotations, frame_colors);
     auto frame = canvas->create_frame();
     frame->add_mesh(update);
+    frame->camera(cameras[i]);
   }
 
   scene.save_as_html("animation1.html", "Instanced Animation");
