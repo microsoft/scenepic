@@ -623,6 +623,19 @@ void animation0()
   scene.save_as_html("animation0.html", "Animation");
 }
 
+float modf(float value)
+{
+  if(value > 1.0f){
+    return value - 1.0f;
+  }
+
+  if(value < 0.0f){
+    return value + 1.0f;
+  }
+
+  return value;
+}
+
 void animation1()
 {
   std::cout << "== Instanced Animation ==" << std::endl;
@@ -636,56 +649,103 @@ void animation1()
   sp::Scene scene;
 
   auto butterflies = scene.create_mesh("butterflies");
+  // the primitive will be a single wing, and we'll use instancing to create
+  // all the butterflies
   butterflies->double_sided(true);
-  butterflies->add_quad(sp::Colors::Blue, {0, 0, 0}, {0.5, 0, 0.2}, {0.4, 0, -0.3}, {0.075, 0, -0.15});
+  butterflies->add_quad(sp::Colors::Blue, {0, 0, 0}, {0.1, 0, 0.04}, {0.08, 0, -0.06}, {0.015, 0, -0.03});
 
-  // 100 butterflies
-  // random colors
-  // random starting points (angles)
-  // 
-
-  sp::VectorBuffer positions = sp::VectorBuffer::Zero(2, 3);
-
-  sp::Quaternion right = sp::Transforms::quaternion_from_axis_angle({0, 0, 1}, 0);
-  sp::Quaternion left = sp::Transforms::quaternion_from_axis_angle({0, 0, 1}, M_PI);
   sp::Quaternion rotate_back = sp::Transforms::quaternion_from_axis_angle({1, 0, 0}, -M_PI/6);
 
+  Eigen::Index num_butterflies = 100;
 
-  sp::QuaternionBuffer rotations(2, 4);
-  rotations.row(0) = sp::Transforms::quaternion_multiply(rotate_back, right);
-  rotations.row(1) = sp::Transforms::quaternion_multiply(rotate_back, left);
+  int num_anim_frames = 20;
 
-  sp::ColorBuffer colors(2, 3);
-  colors.row(0) = sp::Colors::Green;
-  colors.row(1) = sp::Colors::Green;
+  // this will make them flap their wings independently
+  std::vector<int> start_frames(num_butterflies, 0);
+  std::generate(start_frames.begin(), start_frames.end(), [num_anim_frames](){
+    return std::rand() % num_anim_frames;
+  });
+
+  Eigen::VectorXf rot_angles = Eigen::VectorXf::Random(num_butterflies);
+  sp::QuaternionBuffer rotations(num_butterflies * 2, 4);
+  sp::VectorBuffer positions = sp::random<sp::VectorBuffer>(num_butterflies * 2, 3, -1, 1);
+  sp::ColorBuffer colors = sp::random<sp::ColorBuffer>(num_butterflies * 2, 3, 0, 1);
+  for(Eigen::Index b=0; b < num_butterflies; ++b)
+  {
+    auto rot = sp::Transforms::quaternion_from_axis_angle({0, 1, 0}, rot_angles(b));
+    rotations.row(2 * b) = rotations.row(2 * b + 1) = rot;
+
+    // we will use the second position as a destination
+    float dx = std::sinf(rot_angles(b)) * 0.1;
+    float dy = positions(2 * b + 1, 1) - positions(2 * b, 1);
+    float dz = std::cosf(rot_angles(b)) * 0.1;
+
+    dy = dy > 0.1 ? 0.1 : (dy < -0.1 ? -0.1 : dy);    
+    positions(2 * b + 1, 0) = positions(2 * b, 0) + dx;
+    positions(2 * b + 1, 1) = positions(2 * b, 1) + dy;
+    positions(2 * b + 1, 2) = positions(2 * b, 2) + dz;
+  }
 
   butterflies->enable_instancing(positions, rotations, colors);
 
   auto canvas = scene.create_canvas_3d("main", 700, 700);
+  canvas->shading(sp::Shading(sp::Colors::White));
 
+  int num_frames = 60;
   float start = -M_PI / 6;
   float end = M_PI / 2;
-  int num_frames = 20;
-  float delta = (end - start) / (num_frames / 2 - 1);
+  float delta = (end - start) / (num_anim_frames / 2 - 1);
+  // move the camera?
   for(int i=0; i<num_frames; ++i)
   {
-    float angle;
-    if(i < num_frames / 2)
+    sp::VectorBuffer frame_positions = sp::VectorBuffer::Zero(num_butterflies * 2, 3);
+    sp::QuaternionBuffer frame_rotations = sp::QuaternionBuffer::Zero(num_butterflies * 2, 4);
+    sp::ColorBuffer frame_colors = sp::ColorBuffer::Zero(num_butterflies * 2, 3);
+    for(int b=0; b<num_butterflies; ++b)
     {
-      angle = start + delta * i;
-    }
-    else
-    {
-      angle = end + delta * (i - num_frames / 2);
+      int frame = (i + start_frames[b]) % num_anim_frames;
+      float angle;
+      if(frame < num_anim_frames / 2)
+      {
+        angle = start + delta * frame;
+      }
+      else
+      {
+        angle = end + delta * (frame - num_anim_frames / 2);
+      }
+
+      // we create two rotations, one for each wing
+      sp::Quaternion right = sp::Transforms::quaternion_from_axis_angle({0, 0, 1}, angle);
+      right = sp::Transforms::quaternion_multiply(rotate_back, right);
+      right = sp::Transforms::quaternion_multiply(rotations.row(2 * b), right);
+      sp::Quaternion left = sp::Transforms::quaternion_from_axis_angle({0, 0, 1}, M_PI - angle);
+      left = sp::Transforms::quaternion_multiply(rotate_back, left);
+      left = sp::Transforms::quaternion_multiply(rotations.row(2 * b + 1), left);
+      frame_rotations.row(2 * b) = right;
+      frame_rotations.row(2 * b + 1) = left;
+
+      float progress = (i + start_frames[b]) % num_frames;
+      progress = std::sinf((progress * 2 * M_PI) / num_frames);
+
+      // we move the butterfly along its path
+      sp::Vector pos = positions.row(2 * b + 1) - positions.row(2 * b);
+      pos = positions.row(2 * b) + progress * pos;
+      pos.y() -= std::sinf(angle) * 0.02;
+      frame_positions.row(2 * b) = pos;
+      frame_positions.row(2 * b + 1) = pos;
+
+      // finally, we alter the color
+      progress = (progress + 1) * 0.5;
+      sp::Vector color = colors.row(2 * b + 1) - colors.row(2 * b);
+      color = colors.row(2 * b) + progress * color;    
+      frame_colors.row(2 * b) = color;
+      frame_colors.row(2 * b + 1) = color;
     }
 
-    right = sp::Transforms::quaternion_from_axis_angle({0, 0, 1}, angle);
-    left = sp::Transforms::quaternion_from_axis_angle({0, 0, 1}, M_PI - angle);
-    sp::QuaternionBuffer frame_rotations(2, 4);
-    frame_rotations.row(0) = sp::Transforms::quaternion_multiply(rotate_back, right);
-    frame_rotations.row(1) = sp::Transforms::quaternion_multiply(rotate_back, left);
-
-    auto update = scene.update_instanced_mesh("butterflies", sp::VectorBufferNone(), frame_rotations, sp::ColorBufferNone());
+    // now we create the update. Here we update position, rotation,
+    // and color, but you can update them separately as well by passing
+    // the `*None()` versions of the buffers to this function.
+    auto update = scene.update_instanced_mesh("butterflies", frame_positions, frame_rotations, frame_colors);
     auto frame = canvas->create_frame();
     frame->add_mesh(update);
   }
