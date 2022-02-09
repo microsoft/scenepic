@@ -572,10 +572,12 @@ void animation0()
   const float max_offset = static_cast<float>(2 * M_PI);
   Eigen::VectorXf marble_offsets =
     sp::random<Eigen::VectorXf>(num_marbles, 1, 0, max_offset);
-  sp::ColorBuffer marble_colors =
+  sp::ColorBuffer marble_colors_start =
+    sp::random<sp::ColorBuffer>(num_marbles, 3, 0, 1);
+  sp::ColorBuffer marble_colors_end =
     sp::random<sp::ColorBuffer>(num_marbles, 3, 0, 1);
   marbles->enable_instancing(
-    marble_positions, sp::QuaternionBufferNone(), marble_colors);
+    marble_positions, sp::QuaternionBufferNone(), marble_colors_start);
 
   for (int i = 0; i < 60; ++i)
   {
@@ -593,12 +595,19 @@ void animation0()
     auto mesh_update = scene.update_mesh_positions("jelly_base", positions);
     frame->add_mesh(mesh_update);
 
-    // this is a simpler form of animation using rigid transforms per instance
+    // this is a simpler form of animation in which we will change the position
+    // and colors of the marbles
     Eigen::VectorXf marble_y = 0.105 * i + marble_offsets.array();
     positions = marble_positions;
     positions.col(1) = marble_y.array().sin();
+    Eigen::VectorXf alpha = (marble_y.array().sin() + 1) * 0.5;
+    Eigen::VectorXf beta = 1 - alpha.array();
+    sp::ColorBuffer colors = alpha.asDiagonal() * marble_colors_start;
+    colors += beta.asDiagonal() * marble_colors_end;
+
     auto marbles_update =
-      scene.update_mesh_positions("marbles_base", positions);
+      scene.update_instanced_mesh("marbles_base", positions,
+                                  sp::QuaternionBufferNone(), colors);
     frame->add_mesh(marbles_update);
   }
 
@@ -621,19 +630,6 @@ void animation0()
   }
 
   scene.save_as_html("animation0.html", "Animation");
-}
-
-float modf(float value)
-{
-  if(value > 1.0f){
-    return value - 1.0f;
-  }
-
-  if(value < 0.0f){
-    return value + 1.0f;
-  }
-
-  return value;
 }
 
 void animation1()
@@ -1159,7 +1155,7 @@ void fading()
 
 int main(int argc, char* argv[])
 {
-  /*scene_and_canvas_basics();
+  scene_and_canvas_basics();
   meshes_and_frames();
   point_clouds_1();
   point_clouds_2();
@@ -1173,7 +1169,5 @@ int main(int argc, char* argv[])
   audio_tracks();
   circles_video();
   multiview();
-  fading();*/
-
-  animation1();
+  fading();
 }
