@@ -691,13 +691,13 @@ void animation1()
   auto canvas = scene.create_canvas_3d("main", 700, 700);
   canvas->shading(sp::Shading(sp::Colors::White));
 
-  int num_frames = 120;
   float start = -M_PI / 6;
   float end = M_PI / 2;
   float delta = (end - start) / (num_anim_frames / 2 - 1);
-  std::vector<sp::Camera> cameras = sp::Camera::orbit(num_frames, 3.0, 1);
-  // REUSE THE ANIMATION FRAMES!!!
-  for(int i=0; i<num_frames; ++i)
+
+  // let's construct the animation
+  std::vector<std::shared_ptr<sp::MeshUpdate>> animation;
+  for(int i=0; i<num_anim_frames; ++i)
   {
     sp::VectorBuffer frame_positions = sp::VectorBuffer::Zero(num_butterflies * 2, 3);
     sp::QuaternionBuffer frame_rotations = sp::QuaternionBuffer::Zero(num_butterflies * 2, 4);
@@ -725,8 +725,8 @@ void animation1()
       frame_rotations.row(2 * b) = right;
       frame_rotations.row(2 * b + 1) = left;
 
-      float progress = (i + start_frames[b]) % num_frames;
-      progress = std::sinf((progress * 2 * M_PI) / num_frames);
+      float progress = (i + start_frames[b]) % num_anim_frames;
+      progress = std::sinf((progress * 2 * M_PI) / num_anim_frames);
 
       // we move the butterfly along its path
       sp::Vector pos = positions.row(2 * b + 1) - positions.row(2 * b);
@@ -747,8 +747,17 @@ void animation1()
     // and color, but you can update them separately as well by passing
     // the `*None()` versions of the buffers to this function.
     auto update = scene.update_instanced_mesh("butterflies", frame_positions, frame_rotations, frame_colors);
+    animation.push_back(update);
+  }
+
+  // now we create the encapsulating animation which will move the camera
+  // around the butterflies. The inner animation will loop as the camera moves.
+  int num_frames = 300;
+  std::vector<sp::Camera> cameras = sp::Camera::orbit(num_frames, 3.0, 2);
+  for(int i=0; i<num_frames; ++i)
+  {
     auto frame = canvas->create_frame();
-    frame->add_mesh(update);
+    frame->add_mesh(animation[i % num_anim_frames]);
     frame->camera(cameras[i]);
   }
 
