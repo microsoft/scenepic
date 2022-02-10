@@ -680,10 +680,10 @@ void animation1()
     rotations.row(2 * b) = rotations.row(2 * b + 1) = rot;
 
     // we will use the second position as a destination
-    float dx = std::sinf(rot_angles(b)) * 0.1;
+    float dx = std::sin(rot_angles(b)) * 0.1;
     float dy = positions(2 * b + 1, 1) - positions(2 * b, 1);
     dy = dy > 0.1 ? 0.1 : (dy < -0.1 ? -0.1 : dy);
-    float dz = std::cosf(rot_angles(b)) * 0.1;
+    float dz = std::cos(rot_angles(b)) * 0.1;
     positions.row(2 * b + 1) = positions.row(2 * b) + sp::Vector(dx, dy, dz);
   }
 
@@ -732,13 +732,13 @@ void animation1()
       frame_rotations.row(2 * b) = right;
       frame_rotations.row(2 * b + 1) = left;
 
-      float progress = std::sinf((frame * 2 * M_PI) / num_anim_frames);
+      float progress = std::sin((frame * 2 * M_PI) / num_anim_frames);
       progress = (progress + 1) * 0.5;
 
       // we move the butterfly along its path
       sp::Vector pos = (1 - progress) * positions.row(2 * b) +
         progress * positions.row(2 * b + 1);
-      pos.y() -= std::sinf(angle) * 0.02;
+      pos.y() -= std::sin(angle) * 0.02;
       frame_positions.row(2 * b) = frame_positions.row(2 * b + 1) = pos;
 
       // finally, we alter the color
