@@ -27,7 +27,8 @@ let b = browserify({
     "tssrc/SPScene.ts",
     "tssrc/TextPanel.ts",
     "tssrc/WebGLMeshBuffers.ts",
-    "tssrc/ScenePic.ts"
+    "tssrc/ScenePic.ts",
+    "tssrc/VertexBuffers.ts"
 ])
 .plugin(tsify)
 .transform('uglifyify', { global: true })

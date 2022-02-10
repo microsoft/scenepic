@@ -540,7 +540,7 @@ Eigen::VectorXf random_linspace(float min_val, float max_val, int num_samples)
   return values;
 }
 
-void animation()
+void animation0()
 {
   std::cout << "== Animation ==" << std::endl;
 
@@ -572,10 +572,12 @@ void animation()
   const float max_offset = static_cast<float>(2 * M_PI);
   Eigen::VectorXf marble_offsets =
     sp::random<Eigen::VectorXf>(num_marbles, 1, 0, max_offset);
-  sp::ColorBuffer marble_colors =
+  sp::ColorBuffer marble_colors_start =
+    sp::random<sp::ColorBuffer>(num_marbles, 3, 0, 1);
+  sp::ColorBuffer marble_colors_end =
     sp::random<sp::ColorBuffer>(num_marbles, 3, 0, 1);
   marbles->enable_instancing(
-    marble_positions, sp::QuaternionBufferNone(), marble_colors);
+    marble_positions, sp::QuaternionBufferNone(), marble_colors_start);
 
   for (int i = 0; i < 60; ++i)
   {
@@ -590,16 +592,21 @@ void animation()
     // we create a mesh update with the new posiitons. We can use this mesh
     // update just like a new mesh, because it essentially is one, as ScenePic
     // will create a new mesh from the old one using these new positions.
-    auto mesh_update =
-      scene.update_mesh_without_normals("jelly_base", positions);
+    auto mesh_update = scene.update_mesh_positions("jelly_base", positions);
     frame->add_mesh(mesh_update);
 
-    // this is a simpler form of animation using rigid transforms per instance
+    // this is a simpler form of animation in which we will change the position
+    // and colors of the marbles
     Eigen::VectorXf marble_y = 0.105 * i + marble_offsets.array();
     positions = marble_positions;
     positions.col(1) = marble_y.array().sin();
-    auto marbles_update =
-      scene.update_mesh_without_normals("marbles_base", positions);
+    Eigen::VectorXf alpha = (marble_y.array().sin() + 1) * 0.5;
+    Eigen::VectorXf beta = 1 - alpha.array();
+    sp::ColorBuffer colors = alpha.asDiagonal() * marble_colors_start;
+    colors += beta.asDiagonal() * marble_colors_end;
+
+    auto marbles_update = scene.update_instanced_mesh(
+      "marbles_base", positions, sp::QuaternionBufferNone(), colors);
     frame->add_mesh(marbles_update);
   }
 
@@ -621,7 +628,146 @@ void animation()
     std::cout << item.first << ": " << item.second << std::endl;
   }
 
-  scene.save_as_html("animation.html", "Animation");
+  scene.save_as_html("animation0.html", "Animation");
+}
+
+void animation1()
+{
+  std::cout << "== Instanced Animation ==" << std::endl;
+
+  // In this tutorial we will explore how we can use mesh updates on
+  // instanced meshes as well. We will begin by creating a simple primitive
+  // and use instancing to create a cloud of stylized butterflies. We will
+  // then using mesh updates on the instances to make the butterflies
+  // fly.
+
+  sp::Scene scene;
+
+  auto butterflies = scene.create_mesh("butterflies");
+  // the primitive will be a single wing, and we'll use instancing to create
+  // all the butterflies
+  butterflies->double_sided(true);
+  butterflies->add_quad(
+    sp::Colors::Blue,
+    {0, 0, 0},
+    {0.1, 0, 0.04},
+    {0.08, 0, -0.06},
+    {0.015, 0, -0.03});
+
+  sp::Quaternion rotate_back =
+    sp::Transforms::quaternion_from_axis_angle({1, 0, 0}, -M_PI / 6);
+
+  Eigen::Index num_butterflies = 100;
+
+  int num_anim_frames = 20;
+
+  // this will make them flap their wings independently
+  std::vector<int> start_frames(num_butterflies, 0);
+  std::generate(start_frames.begin(), start_frames.end(), [num_anim_frames]() {
+    return std::rand() % num_anim_frames;
+  });
+
+  Eigen::VectorXf rot_angles = Eigen::VectorXf::Random(num_butterflies);
+  sp::QuaternionBuffer rotations(num_butterflies * 2, 4);
+  sp::VectorBuffer positions =
+    sp::random<sp::VectorBuffer>(num_butterflies * 2, 3, -1, 1);
+  sp::ColorBuffer colors =
+    sp::random<sp::ColorBuffer>(num_butterflies * 2, 3, 0, 1);
+  for (Eigen::Index b = 0; b < num_butterflies; ++b)
+  {
+    auto rot =
+      sp::Transforms::quaternion_from_axis_angle({0, 1, 0}, rot_angles(b));
+    rotations.row(2 * b) = rotations.row(2 * b + 1) = rot;
+
+    // we will use the second position as a destination
+    float dx = std::sin(rot_angles(b)) * 0.1;
+    float dy = positions(2 * b + 1, 1) - positions(2 * b, 1);
+    dy = dy > 0.1 ? 0.1 : (dy < -0.1 ? -0.1 : dy);
+    float dz = std::cos(rot_angles(b)) * 0.1;
+    positions.row(2 * b + 1) = positions.row(2 * b) + sp::Vector(dx, dy, dz);
+  }
+
+  butterflies->enable_instancing(positions, rotations, colors);
+
+  auto canvas = scene.create_canvas_3d("main", 700, 700);
+  canvas->shading(sp::Shading(sp::Colors::White));
+
+  float start = -M_PI / 6;
+  float end = M_PI / 2;
+  float delta = (end - start) / (num_anim_frames / 2 - 1);
+
+  // let's construct the animation frame by frame
+  std::vector<std::shared_ptr<sp::MeshUpdate>> animation;
+  for (int i = 0; i < num_anim_frames; ++i)
+  {
+    sp::VectorBuffer frame_positions =
+      sp::VectorBuffer::Zero(num_butterflies * 2, 3);
+    sp::QuaternionBuffer frame_rotations =
+      sp::QuaternionBuffer::Zero(num_butterflies * 2, 4);
+    sp::ColorBuffer frame_colors =
+      sp::ColorBuffer::Zero(num_butterflies * 2, 3);
+    for (int b = 0; b < num_butterflies; ++b)
+    {
+      int frame = (i + start_frames[b]) % num_anim_frames;
+      float angle;
+      if (frame < num_anim_frames / 2)
+      {
+        angle = start + delta * frame;
+      }
+      else
+      {
+        angle = end + delta * (frame - num_anim_frames / 2);
+      }
+
+      // we create two rotations, one for each wing
+      sp::Quaternion right =
+        sp::Transforms::quaternion_from_axis_angle({0, 0, 1}, angle);
+      right = sp::Transforms::quaternion_multiply(rotate_back, right);
+      right = sp::Transforms::quaternion_multiply(rotations.row(2 * b), right);
+      sp::Quaternion left =
+        sp::Transforms::quaternion_from_axis_angle({0, 0, 1}, M_PI - angle);
+      left = sp::Transforms::quaternion_multiply(rotate_back, left);
+      left =
+        sp::Transforms::quaternion_multiply(rotations.row(2 * b + 1), left);
+      frame_rotations.row(2 * b) = right;
+      frame_rotations.row(2 * b + 1) = left;
+
+      float progress = std::sin((frame * 2 * M_PI) / num_anim_frames);
+      progress = (progress + 1) * 0.5;
+
+      // we move the butterfly along its path
+      sp::Vector pos = (1 - progress) * positions.row(2 * b) +
+        progress * positions.row(2 * b + 1);
+      pos.y() -= std::sin(angle) * 0.02;
+      frame_positions.row(2 * b) = frame_positions.row(2 * b + 1) = pos;
+
+      // finally, we alter the color
+      progress = (progress + 1) * 0.5;
+      sp::Color color =
+        (1 - progress) * colors.row(2 * b) + progress * colors.row(2 * b + 1);
+      frame_colors.row(2 * b) = frame_colors.row(2 * b + 1) = color;
+    }
+
+    // now we create the update. Here we update position, rotation,
+    // and color, but you can update them separately as well by passing
+    // the `*None()` versions of the buffers to this function.
+    auto update = scene.update_instanced_mesh(
+      "butterflies", frame_positions, frame_rotations, frame_colors);
+    animation.push_back(update);
+  }
+
+  // now we create the encapsulating animation which will move the camera
+  // around the butterflies. The inner animation will loop as the camera moves.
+  int num_frames = 300;
+  std::vector<sp::Camera> cameras = sp::Camera::orbit(num_frames, 3.0, 2);
+  for (int i = 0; i < num_frames; ++i)
+  {
+    auto frame = canvas->create_frame();
+    frame->add_mesh(animation[i % num_anim_frames]);
+    frame->camera(cameras[i]);
+  }
+
+  scene.save_as_html("animation1.html", "Instanced Animation");
 }
 
 void camera_movement()
@@ -1027,7 +1173,8 @@ int main(int argc, char* argv[])
   images_and_textures();
   canvas_2d();
   opacity_and_labels();
-  animation();
+  animation0();
+  animation1();
   camera_movement();
   audio_tracks();
   circles_video();

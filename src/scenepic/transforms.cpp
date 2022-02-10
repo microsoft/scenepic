@@ -211,6 +211,15 @@ namespace scenepic
       return matrix;
     }
 
+    Quaternion quaternion_multiply(const Quaternion& a, const Quaternion& b)
+    {
+      float x = a.w() * b.x() + a.x() * b.w() + a.y() * b.z() - a.z() * b.y();
+      float y = a.w() * b.y() + a.y() * b.w() + a.z() * b.x() - a.x() * b.z();
+      float z = a.w() * b.z() + a.z() * b.w() + a.x() * b.y() - a.y() * b.x();
+      float w = a.w() * b.w() - a.x() * b.x() - a.y() * b.y() - a.z() * b.z();
+      return Quaternion(x, y, z, w);
+    }
+
     Transform gl_projection(
       double fov_y_degrees, double aspect_ratio, double znear, double zfar)
     {

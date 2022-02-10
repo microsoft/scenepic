@@ -175,4 +175,47 @@ namespace scenepic
     return *this;
   }
 
+  std::vector<Camera> Camera::orbit(
+    int num_frames,
+    float distance,
+    int num_times,
+    float min_altitude,
+    float max_altitude,
+    Vector up_dir,
+    Vector forward_dir,
+    double fov_y_degrees,
+    double aspect_ratio,
+    double near_crop_distance,
+    double far_crop_distance)
+  {
+    Vector right_dir = up_dir.cross(forward_dir);
+    Eigen::VectorXf azimuth(num_frames);
+    Eigen::VectorXf altitude(num_frames);
+    azimuth.setLinSpaced(0, num_times * 2 * EIGEN_PI);
+    int half_frames = num_frames / 2;
+    altitude.topRows(half_frames + 1).setLinSpaced(min_altitude, max_altitude);
+    altitude.bottomRows(half_frames).setLinSpaced(min_altitude, max_altitude);
+    altitude.bottomRows(half_frames).reverseInPlace();
+
+    Transform projection = Transforms::gl_projection(
+      fov_y_degrees, aspect_ratio, near_crop_distance, far_crop_distance);
+
+    Transform init_ext = Transforms::look_at_rotation(
+      -forward_dir * distance, Vector::Zero(), up_dir);
+    init_ext = Transforms::translate(-forward_dir * distance) * init_ext;
+    std::vector<Camera> cameras;
+    for (int i = 0; i < num_frames; ++i)
+    {
+      Transform elevate =
+        Transforms::rotation_matrix_from_axis_angle(right_dir, altitude[i]);
+      Transform rotate =
+        Transforms::rotation_matrix_from_axis_angle(up_dir, azimuth[i]);
+      Transform camera_to_world = rotate * elevate * init_ext;
+      Transform world_to_camera = camera_to_world.inverse();
+      cameras.push_back(Camera(world_to_camera, projection));
+    }
+
+    return cameras;
+  }
+
 } // namespace scenepic

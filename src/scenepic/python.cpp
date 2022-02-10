@@ -144,7 +144,23 @@ PYBIND11_MODULE(_scenepic, m)
             angle (float): the angle to rotate in radians
 
         Returns:
-            np.ndarray: a 3D homgenous transform matrix
+            np.ndarray: a 3D homogenous transform matrix
+    )scenepicdoc");
+
+  m.def(
+    "quaternion_multiply",
+    &Transforms::quaternion_multiply,
+    "a"_a,
+    "b"_a,
+    R"scenepicdoc(
+      Multiply two quaternions together.
+
+      Args:
+        a (np.ndarray): the first quaternion
+        b (np.ndarray): the second quaternion
+      
+      Returns:
+        np.ndarray: the result of a * b
     )scenepicdoc");
 
   m.def(
@@ -451,6 +467,40 @@ PYBIND11_MODULE(_scenepic, m)
       &Camera::projection,
       "np.ndarray: WebGL projection matrix from camera view coordinates to NDC")
     .def("__repr__", &Camera::to_string);
+
+  m.def(
+    "camera_orbit",
+    &Camera::orbit,
+    R"scenepicdoc(
+        Creates a sequence of cameras which move in an orbit around the origin.
+       
+        Args:
+            num_frames (int): the number of frames in the sequence
+            distance (float): the distance of the camera from the origin
+            num_times (int): the number of times to orbit
+            min_altitude (float): the minimum altitude of the orbit
+            max_altitude (float): the maximum altitude of the orbit
+            up_dir (np.ndarray): the direct that is up (as a normalized vector)
+            forward_dir (np.ndarray): the direction that is forward (as a normalized vector)
+            fov_y_degrees (float): the field of the view of the camera in degrees
+            aspect_ratio (float): the aspect ratio of the camera
+            near_crop_distance (float): the near clipping plane of the view frustum
+            far_crop_distance (float): the far clipping plane of the view frustum
+    
+        Returns:
+            List[Camera]: a sequence of cameras moving in an orbit
+    )scenepicdoc",
+    "num_frames"_a,
+    "distance"_a,
+    "num_times"_a,
+    "min_altitude"_a = 0.25,
+    "max_altitude"_a = 0.8,
+    "up_dir"_a = Vector(0, 1, 0),
+    "forward_dir"_a = Vector(0, 0, 1),
+    "fov_y_degrees"_a = 45.0,
+    "aspect_ratio"_a = 1.0,
+    "near_crop_distance"_a = 0.01,
+    "far_crop_distance"_a = 20.0);
 
   py::class_<LoopSubdivisionStencil, std::shared_ptr<LoopSubdivisionStencil>>(
     m, "LoopSubdivisionStencil", R"scenepicdoc(
@@ -2069,8 +2119,9 @@ PYBIND11_MODULE(_scenepic, m)
 
             Args:
                 base_mesh_id (str): the unique identifier of the original base mesh. Must already have been created.
-                positions (np.ndarray): float32 matrix of [N, 3] new positions
+                positions (np.ndarray, optional): float32 matrix of [N, 3] new positions
                 normals (np.ndarray, optional): float32 matrix of [N, 3] new normals.
+                colors (np.ndarray, optional): float32 matrix of [N, 3] new colors.
                 mesh_id (str, optional): a unique identifier for the new updated Mesh (will be
                                          automatically populated if not provided). Defaults to None.
             
@@ -2078,8 +2129,9 @@ PYBIND11_MODULE(_scenepic, m)
                 MeshUpdate: a reference to the MeshUpdate object
         )scenepicdoc",
       "base_mesh_id"_a,
-      "positions"_a,
-      "normals"_a,
+      "positions"_a = VectorBufferNone(),
+      "normals"_a = VectorBufferNone(),
+      "colors"_a = VectorBufferNone(),
       "mesh_id"_a = "")
     .def(
       "update_instanced_mesh",
@@ -2089,10 +2141,11 @@ PYBIND11_MODULE(_scenepic, m)
 
             Args:
                 base_mesh_id (str): the unique identifier of the original base mesh. Must already have been created.
-                positions (np.ndarray): float32 matrix of [N, 3] new positions
+                positions (np.ndarray, optional): float32 matrix of [N, 3] new positions
                 rotations (np.ndarray, optional): float32 matrix of [N, 4] new rotations.
                                                   Defaults to None, indicating no change to
                                                   the rotations.
+                colors (np.ndarray, optional): float32 matrix of [N, 3] new colors
                 mesh_id (str, optional): a unique identifier for the new updated Mesh (will be
                                          automatically populated if not provided). Defaults to None.
             
@@ -2100,12 +2153,22 @@ PYBIND11_MODULE(_scenepic, m)
                 MeshUpdate: a reference to the MeshUpdate object
         )scenepicdoc",
       "base_mesh_id"_a,
-      "positions"_a,
+      "positions"_a = VectorBufferNone(),
       "rotations"_a = QuaternionBufferNone(),
+      "colors"_a = ColorBufferNone(),
       "mesh_id"_a = "")
     .def(
       "update_mesh_without_normals",
       &Scene::update_mesh_without_normals,
+      R"scenepicdoc(
+            Deprecated.
+        )scenepicdoc",
+      "base_mesh_id"_a,
+      "positions"_a,
+      "mesh_id"_a = "")
+    .def(
+      "update_mesh_positions",
+      &Scene::update_mesh_positions,
       R"scenepicdoc(
             Create a new mesh from an existing one by replacing its vector positions and compute normal values.
 

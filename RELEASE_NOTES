@@ -1,9 +1,11 @@
-Point release adding new camera mode as well as some improvements.
+Point release improving `MeshUpdate` thus adding the ability to update colors
+per frame along with some minor additions.
 
-Improvements:
-- There is now a new camera control mode, "First Person", accessible by pressing
-  <kbd>Tab</kbd>, which enables mouse-look and `wasdqe` movement controls
-  (closes #22). The old mode, now called "Focus", is still available as the default.
-- Font scale is now configurable on `VideoWriter`
-- There is now a "reset camera" button on the control bar so that users without
-  a keyboard can reset camera position
+New Features:
+- Can now updated colors per frame for both meshes and instanced meshes
+- `quaternion_multiply` adds the long-missing code to combine quaternion rotations
+- `Camera.orbit` creates a sequence of orbiting cameras around a central point
+
+Deprecation:
+- `update_mesh_without_normals` has been deprecated in favor of the new method
+  `update_mesh_positions`

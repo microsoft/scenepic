@@ -17,17 +17,56 @@ namespace scenepic
   MeshUpdate::MeshUpdate(
     const std::string& base_mesh_id,
     const std::string& mesh_id,
-    const ConstVertexBufferRef& vertex_buffer,
+    const std::vector<ConstVertexBufferRef>& buffers,
+    const std::vector<VertexBufferType>& buffer_types,
     std::uint32_t frame_index)
   : m_base_mesh_id(base_mesh_id),
     m_mesh_id(mesh_id),
-    m_vertex_buffer(vertex_buffer),
-    m_fp_vertex_buffer(FixedPointVertexBuffer::Zero(0, 6)),
     m_frame_index(frame_index),
     m_min(0),
     m_max(0),
     m_keyframe_index(NO_KEYFRAME)
-  {}
+  {
+    m_update_flags = VertexBufferType::None;
+    Eigen::Index num_columns = 0;
+    Eigen::Index num_rows = 0;
+
+    assert(buffers.size() == buffer_types.size());
+    for (int i = 0; i < buffers.size(); ++i)
+    {
+      if (buffers[i].rows() == 0)
+      {
+        continue;
+      }
+
+      if (num_rows == 0)
+      {
+        num_rows = buffers[i].rows();
+      }
+      else
+      {
+        assert(num_rows == buffers[i].rows());
+      }
+      num_columns += buffers[i].cols();
+      m_update_flags |= buffer_types[i];
+    }
+
+    m_vertex_buffer = VertexBuffer(num_rows, num_columns);
+    m_fp_vertex_buffer = FixedPointVertexBuffer(0, num_columns);
+
+    Eigen::Index col = 0;
+    for (int i = 0; i < buffers.size(); ++i)
+    {
+      if (buffers[i].rows() == 0)
+      {
+        continue;
+      }
+
+      Eigen::Index num_cols = buffers[i].cols();
+      m_vertex_buffer.middleCols(col, num_cols) = buffers[i];
+      col += num_cols;
+    }
+  }
 
   const std::string& MeshUpdate::base_mesh_id() const
   {
@@ -92,6 +131,7 @@ namespace scenepic
     obj["BaseMeshId"] = m_base_mesh_id;
     obj["MeshId"] = m_mesh_id;
     obj["FrameIndex"] = static_cast<std::int64_t>(m_frame_index);
+    obj["UpdateFlags"] = static_cast<std::int64_t>(m_update_flags);
     if (this->is_quantized())
     {
       obj["KeyframeIndex"] = static_cast<std::int64_t>(m_keyframe_index);

@@ -35,7 +35,6 @@ import numpy as np
 
 from . import _scenepic
 from ._scenepic import (
-    Camera,
     ColorFromBytes,
     DropDownMenu,
     FocusPoint,
@@ -51,6 +50,7 @@ from ._scenepic import (
     UIParameters,
 )
 from .audio_track import AudioTrack
+from .camera import Camera
 from .canvas2d import Canvas2D
 from .canvas3d import Canvas3D
 from .frame2d import Frame2D
@@ -330,6 +330,7 @@ class Transforms:
     quaternion_to_matrix = _scenepic.quaternion_to_matrix
     gl_projection = _scenepic.gl_projection
     gl_world_to_camera = _scenepic.gl_world_to_camera
+    quaternion_multiply = _scenepic.quaternion_multiply
 
 
 class LoopSubdivStencil:
