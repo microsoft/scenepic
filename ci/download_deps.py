@@ -7,7 +7,7 @@ import zipfile
 import requests
 
 
-DOXYGEN = "https://doxygen.nl/files/doxygen-1.9.1.windows.x64.bin.zip"
+DOXYGEN = "https://www.doxygen.nl/files/doxygen-1.9.3.windows.x64.bin.zip"
 
 
 def _download_and_unzip(download_uri, name, output_dir="."):
