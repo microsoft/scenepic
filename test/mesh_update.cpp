@@ -27,8 +27,7 @@ int test_mesh_update()
 
   test::assert_equal(update->to_json(), "update0", result);
 
-  update = scene.update_mesh(
-    "base", positions, normals, colors, "update1");
+  update = scene.update_mesh("base", positions, normals, colors, "update1");
 
   test::assert_equal(update->to_json(), "update1", result);
 

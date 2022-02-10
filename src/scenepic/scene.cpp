@@ -305,15 +305,12 @@ namespace scenepic
     auto frame_index = m_update_counts[base_mesh_id];
     m_update_counts[base_mesh_id] = frame_index + 1;
 
-    std::vector<ConstVertexBufferRef> buffers = {
-      positions, normals, colors
-    };
+    std::vector<ConstVertexBufferRef> buffers = {positions, normals, colors};
 
     std::vector<VertexBufferType> buffer_types = {
       VertexBufferType::Positions,
       VertexBufferType::Normals,
-      VertexBufferType::Colors
-    };
+      VertexBufferType::Colors};
 
     auto mesh_update = std::make_shared<MeshUpdate>(
       MeshUpdate(base_mesh_id, mesh_id, buffers, buffer_types, frame_index));
@@ -353,15 +350,12 @@ namespace scenepic
     auto frame_index = m_update_counts[base_mesh_id];
     m_update_counts[base_mesh_id] = frame_index + 1;
 
-    std::vector<ConstVertexBufferRef> buffers = {
-      positions, rotations, colors
-    };
+    std::vector<ConstVertexBufferRef> buffers = {positions, rotations, colors};
 
     std::vector<VertexBufferType> buffer_types = {
       VertexBufferType::Positions,
       VertexBufferType::Rotations,
-      VertexBufferType::Colors
-    };
+      VertexBufferType::Colors};
 
     auto mesh_update = std::make_shared<MeshUpdate>(
       MeshUpdate(base_mesh_id, mesh_id, buffers, buffer_types, frame_index));
@@ -396,13 +390,20 @@ namespace scenepic
     if (base_mesh->is_instanced())
     {
       return update_instanced_mesh(
-        base_mesh_id, positions, QuaternionBufferNone(), ColorBufferNone(),
+        base_mesh_id,
+        positions,
+        QuaternionBufferNone(),
+        ColorBufferNone(),
         mesh_id_init);
     }
     else
     {
-      return update_mesh(base_mesh_id, positions, VectorBufferNone(),
-                         ColorBufferNone(), mesh_id_init);
+      return update_mesh(
+        base_mesh_id,
+        positions,
+        VectorBufferNone(),
+        ColorBufferNone(),
+        mesh_id_init);
     }
   }
 

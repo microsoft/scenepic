@@ -468,7 +468,6 @@ PYBIND11_MODULE(_scenepic, m)
       "np.ndarray: WebGL projection matrix from camera view coordinates to NDC")
     .def("__repr__", &Camera::to_string);
 
-
   m.def(
     "camera_orbit",
     &Camera::orbit,
@@ -502,7 +501,6 @@ PYBIND11_MODULE(_scenepic, m)
     "aspect_ratio"_a = 1.0,
     "near_crop_distance"_a = 0.01,
     "far_crop_distance"_a = 20.0);
-
 
   py::class_<LoopSubdivisionStencil, std::shared_ptr<LoopSubdivisionStencil>>(
     m, "LoopSubdivisionStencil", R"scenepicdoc(
