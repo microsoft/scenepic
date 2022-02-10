@@ -394,9 +394,6 @@ def test_mesh_update(assert_json_equal, color):
 
     update = scene.update_instanced_mesh("base", instance_pos, instance_rot, instance_c, "update3")
 
-    with open("update3.json", "w") as file:
-        file.write(str(update))
-
     assert_json_equal(str(update), "update3")
 
 

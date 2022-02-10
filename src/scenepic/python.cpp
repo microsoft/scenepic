@@ -468,6 +468,42 @@ PYBIND11_MODULE(_scenepic, m)
       "np.ndarray: WebGL projection matrix from camera view coordinates to NDC")
     .def("__repr__", &Camera::to_string);
 
+
+  m.def(
+    "camera_orbit",
+    &Camera::orbit,
+    R"scenepicdoc(
+        Creates a sequence of cameras which move in an orbit around the origin.
+       
+        Args:
+            num_frames (int): the number of frames in the sequence
+            distance (float): the distance of the camera from the origin
+            num_times (int): the number of times to orbit
+            min_altitude (float): the minimum altitude of the orbit
+            max_altitude (float): the maximum altitude of the orbit
+            up_dir (np.ndarray): the direct that is up (as a normalized vector)
+            forward_dir (np.ndarray): the direction that is forward (as a normalized vector)
+            fov_y_degrees (float): the field of the view of the camera in degrees
+            aspect_ratio (float): the aspect ratio of the camera
+            near_crop_distance (float): the near clipping plane of the view frustum
+            far_crop_distance (float): the far clipping plane of the view frustum
+    
+        Returns:
+            List[Camera]: a sequence of cameras moving in an orbit
+    )scenepicdoc",
+    "num_frames"_a,
+    "distance"_a,
+    "num_times"_a,
+    "min_altitude"_a = 0.25,
+    "max_altitude"_a = 0.8,
+    "up_dir"_a = Vector(0, 1, 0),
+    "forward_dir"_a = Vector(0, 0, 1),
+    "fov_y_degrees"_a = 45.0,
+    "aspect_ratio"_a = 1.0,
+    "near_crop_distance"_a = 0.01,
+    "far_crop_distance"_a = 20.0);
+
+
   py::class_<LoopSubdivisionStencil, std::shared_ptr<LoopSubdivisionStencil>>(
     m, "LoopSubdivisionStencil", R"scenepicdoc(
         This class enables efficient Loop subdivision of triangle meshes.

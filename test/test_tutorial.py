@@ -313,7 +313,7 @@ def test_opacity_and_labels():
     canvas.set_layer_settings(layer_settings)
 
 
-def test_animation(asset):
+def test_animation0(asset):
     scene = sp.Scene()
     canvas = scene.create_canvas_3d(width=700, height=700)
 
@@ -338,8 +338,9 @@ def test_animation(asset):
     marble_positions[:, 0] = random_linspace(-0.6, 0.6, num_marbles)
     marble_positions[:, 2] = random_linspace(-1.0, 0.7, num_marbles)
     marble_offsets = np.random.uniform(0, 2 * np.pi, size=num_marbles).astype(np.float32)
-    marble_colors = np.random.uniform(0, 1, size=(num_marbles, 3))
-    marbles.enable_instancing(marble_positions, colors=marble_colors)
+    marble_colors_start = np.random.uniform(0, 1, size=(num_marbles, 3)).astype(np.float32)
+    marble_colors_end = np.random.uniform(0, 1, size=(num_marbles, 3)).astype(np.float32)
+    marbles.enable_instancing(marble_positions, colors=marble_colors_start)
 
     for i in range(60):
         positions = jelly_mesh.positions.copy()
@@ -352,10 +353,93 @@ def test_animation(asset):
 
         marble_y = np.sin(0.105 * i + marble_offsets)
         positions = np.stack([marble_positions[:, 0], marble_y, marble_positions[:, 2]], -1)
-        marbles_update = scene.update_mesh_positions("marbles_base", positions)
+        alpha = ((np.sin(marble_y) + 1) * 0.5).reshape(-1, 1)
+        beta = 1 - alpha
+        colors = alpha * marble_colors_start + beta * marble_colors_end
+        marbles_update = scene.update_instanced_mesh("marbles_base", positions, colors=colors)
         frame.add_mesh(marbles_update)
 
     scene.quantize_updates()
+
+
+def test_animation1():
+    scene = sp.Scene()
+
+    butterflies = scene.create_mesh("butterflies", double_sided=True)
+    butterflies.add_quad(sp.Colors.Blue, [0, 0, 0], [0.1, 0, 0.04], [0.08, 0, -0.06], [0.015, 0, -0.03])
+
+    rotate_back = sp.Transforms.quaternion_from_axis_angle([1, 0, 0], -np.pi / 6)
+
+    num_butterflies = 100
+    num_anim_frames = 20
+
+    start_frames = np.random.randint(0, num_anim_frames, num_butterflies)
+    rot_angles = np.random.uniform(-1, 1, num_butterflies)
+
+    rotations = np.zeros((num_butterflies * 2, 4), np.float32)
+    positions = np.random.uniform(-1, 1, (num_butterflies * 2, 3))
+    colors = np.random.random((num_butterflies * 2, 3))
+
+    for b, angle in enumerate(rot_angles):
+        rot = sp.Transforms.quaternion_from_axis_angle([0, 1, 0], angle)
+        rotations[2 * b] = rotations[2 * b + 1] = rot
+
+        dx = np.sin(angle) * 0.1
+        dy = positions[2 * b + 1, 1] - positions[2 * b, 1]
+        dy = np.sign(angle) * min(abs(angle), 0.1)
+        dz = np.cos(angle) * 0.1
+        positions[2 * b + 1] = positions[2 * b] + [dx, dy, dz]
+
+    butterflies.enable_instancing(positions, rotations, colors)
+
+    canvas = scene.create_canvas_3d("main", 700, 700)
+    canvas.shading = sp.Shading(sp.Colors.White)
+
+    start = -np.pi / 6
+    end = np.pi / 2
+    delta = (end - start) / (num_anim_frames // 2 - 1)
+
+    animation = []
+    for i in range(num_anim_frames):
+        frame_positions = np.zeros_like(positions)
+        frame_rotations = np.zeros_like(rotations)
+        frame_colors = np.zeros_like(colors)
+
+        for b, start_frame in enumerate(start_frames):
+            frame = (i + start_frame) % num_anim_frames
+            if frame < num_anim_frames // 2:
+                angle = start + delta * frame
+            else:
+                angle = end + delta * (frame - num_anim_frames // 2)
+
+            right = sp.Transforms.quaternion_from_axis_angle([0, 0, 1], angle)
+            right = sp.Transforms.quaternion_multiply(rotate_back, right)
+            right = sp.Transforms.quaternion_multiply(rotations[2 * b], right)
+            left = sp.Transforms.quaternion_from_axis_angle([0, 0, 1], np.pi - angle)
+            left = sp.Transforms.quaternion_multiply(rotate_back, left)
+            left = sp.Transforms.quaternion_multiply(rotations[2 * b + 1], left)
+            frame_rotations[2 * b] = right
+            frame_rotations[2 * b + 1] = left
+
+            progress = np.sin((frame * 2 * np.pi) / num_anim_frames)
+            progress = (progress + 1) * 0.5
+
+            pos = (1 - progress) * positions[2 * b] + progress * positions[2 * b + 1]
+            pos[1] -= np.sin(angle) * 0.02
+            frame_positions[2 * b : 2 * b + 2, :] = pos
+
+            color = (1 - progress) * colors[2 * b] + progress * colors[2 * b + 1]
+            frame_colors[2 * b : 2 * b + 2, :] = color
+
+        update = scene.update_instanced_mesh("butterflies", frame_positions, frame_rotations, frame_colors)
+        animation.append(update)
+
+    num_frames = 300
+    cameras = sp.Camera.orbit(num_frames, 3, 2)
+    for i, camera in enumerate(cameras):
+        frame = canvas.create_frame()
+        frame.add_mesh(animation[i % num_anim_frames])
+        frame.camera = camera
 
 
 def test_camera_movement(asset):
