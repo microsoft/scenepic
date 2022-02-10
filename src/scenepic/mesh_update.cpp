@@ -32,14 +32,14 @@ namespace scenepic
     Eigen::Index num_rows = 0;
 
     assert(buffers.size() == buffer_types.size());
-    for(int i=0; i<buffers.size(); ++i)
+    for (int i = 0; i < buffers.size(); ++i)
     {
-      if(buffers[i].rows() == 0)
+      if (buffers[i].rows() == 0)
       {
         continue;
       }
 
-      if(num_rows == 0)
+      if (num_rows == 0)
       {
         num_rows = buffers[i].rows();
       }
@@ -55,9 +55,9 @@ namespace scenepic
     m_fp_vertex_buffer = FixedPointVertexBuffer(0, num_columns);
 
     Eigen::Index col = 0;
-    for(int i=0; i<buffers.size(); ++i)
+    for (int i = 0; i < buffers.size(); ++i)
     {
-      if(buffers[i].rows() == 0)
+      if (buffers[i].rows() == 0)
       {
         continue;
       }
