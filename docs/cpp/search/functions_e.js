@@ -1,10 +1,12 @@
 var searchData=
 [
-  ['parse',['parse',['../classscenepic_1_1_json_value.html#ac227fb6435f5573f1c7b679d6c60d4e8',1,'scenepic::JsonValue']]],
-  ['place',['place',['../classscenepic_1_1_scene.html#a6863eb2b52541871154628a7e0df773d',1,'scenepic::Scene']]],
-  ['pointer_5falt_5fkey_5fmultiplier',['pointer_alt_key_multiplier',['../classscenepic_1_1_u_i_parameters.html#a4eb192ada81098e0b89c3176f523067b',1,'scenepic::UIParameters']]],
-  ['pointer_5frotation_5fspeed',['pointer_rotation_speed',['../classscenepic_1_1_u_i_parameters.html#aabbc9977a42a10df1636b2e4c8ee1932',1,'scenepic::UIParameters']]],
-  ['position',['position',['../classscenepic_1_1_focus_point.html#a0a30ea5cbb38ce2a5a03855b3b9295d7',1,'scenepic::FocusPoint']]],
-  ['position_5fbuffer',['position_buffer',['../classscenepic_1_1_mesh_info.html#a3fa85bd1dbceb7dca90f916c2eec6312',1,'scenepic::MeshInfo::position_buffer()'],['../classscenepic_1_1_mesh_info.html#a35cc755e4c52c6064696da45f7aba60d',1,'scenepic::MeshInfo::position_buffer() const']]],
-  ['projection',['projection',['../classscenepic_1_1_camera.html#ad92c2a6e2813520a33a05e9c4cf8418a',1,'scenepic::Camera']]]
+  ['offset_5fdistance_0',['offset_distance',['../classscenepic_1_1_label.html#a32d50622e53d6da769b0a92633ba1125',1,'scenepic::Label::offset_distance() const'],['../classscenepic_1_1_label.html#a99a19d28c325de0bde33a759188dd3dd',1,'scenepic::Label::offset_distance(double value)']]],
+  ['opacity_1',['opacity',['../classscenepic_1_1_layer_settings.html#a5b692d55df0ad9423ce769314cc54f9e',1,'scenepic::LayerSettings::opacity() const'],['../classscenepic_1_1_layer_settings.html#a68143e6dcfef403fe9026bc44436f4dc',1,'scenepic::LayerSettings::opacity(double value)']]],
+  ['operator_26_2',['operator&amp;',['../namespacescenepic.html#a912932320a84c9fff64d745c171e5de5',1,'scenepic']]],
+  ['operator_3d_3',['operator=',['../classscenepic_1_1_color.html#a8d1f6eff126085be68378d0275f5eeb9',1,'scenepic::Color::operator=()'],['../classscenepic_1_1_focus_point.html#afdb8d2c69695687da1bcbff11199eaa3',1,'scenepic::FocusPoint::operator=()'],['../classscenepic_1_1_json_value.html#a36c1898d70f8c56113060dbb07f1c877',1,'scenepic::JsonValue::operator=(const std::string &amp;value)'],['../classscenepic_1_1_json_value.html#a9220319699be83b0a4b83fd43bbbe63e',1,'scenepic::JsonValue::operator=(std::string &amp;&amp;value)'],['../classscenepic_1_1_json_value.html#a8153739d9e26b2713b0417564e34828c',1,'scenepic::JsonValue::operator=(const char *value)'],['../classscenepic_1_1_json_value.html#a236b5e7b4e63617bab71544de07f763d',1,'scenepic::JsonValue::operator=(double value)'],['../classscenepic_1_1_json_value.html#a6afcbacd334567a08a41067791d2efcc',1,'scenepic::JsonValue::operator=(std::int64_t value)'],['../classscenepic_1_1_json_value.html#ab237af190ac1c29c5c6ebdeb57101085',1,'scenepic::JsonValue::operator=(bool value)']]],
+  ['operator_5b_5d_4',['operator[]',['../classscenepic_1_1_json_value.html#a651bc88631b49c34175417d3ba08ade0',1,'scenepic::JsonValue::operator[](const std::string &amp;key)'],['../classscenepic_1_1_json_value.html#a4da6ffbdfe15bd134bd6eaf3f84f1f9d',1,'scenepic::JsonValue::operator[](const std::string &amp;key) const']]],
+  ['operator_7c_5',['operator|',['../namespacescenepic.html#a95396abfb19716323d9cf8cb129eb18b',1,'scenepic']]],
+  ['operator_7c_3d_6',['operator|=',['../namespacescenepic.html#a5efe20d43477a34dfeb7415ea3106ee6',1,'scenepic']]],
+  ['orbit_7',['orbit',['../classscenepic_1_1_camera.html#adf96b565cb21cf7a8a8ab42f9ac185ae',1,'scenepic::Camera']]],
+  ['orientation_5faxis_5fangle_8',['orientation_axis_angle',['../classscenepic_1_1_focus_point.html#a903108b3798cc33d668d2658a71f1858',1,'scenepic::FocusPoint']]]
 ];

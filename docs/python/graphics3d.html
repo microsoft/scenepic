@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Canvas3D &mdash; scenepic 1.0.2 documentation</title>
+  <title>Canvas3D &mdash; scenepic 1.0.7 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -379,6 +379,37 @@ subsequent frames use the specified camera parameters.</p>
 <dd class="field-odd"><p><a class="reference internal" href="#scenepic.FocusPoint" title="scenepic.FocusPoint">FocusPoint</a></p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scenepic.Frame3D.set_layer_settings">
+<span class="sig-name descname"><span class="pre">set_layer_settings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layer_settings</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Frame3D.set_layer_settings" title="Permalink to this definition"></a></dt>
+<dd><p>Specify the visibilities and opacities of certain mesh layers.</p>
+<dl class="simple">
+<dt>Description:</dt><dd><p>Each Mesh object can optionally be part of a user-identified layer
+(see Mesh constructor).
+Calling set_layer_settings will result in an additional drop-down
+selector in the ScenePic user interface.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>self</strong> (<a class="reference internal" href="#scenepic.Canvas3D" title="scenepic.Canvas3D"><em>Canvas3D</em></a>) – the self reference</p></li>
+<li><p><strong>layer_settings</strong> (<em>Mapping</em><em>[</em><em>str</em><em>, </em><em>Union</em><em>[</em><em>dict</em><em>, </em><a class="reference internal" href="ui.html#scenepic.LayerSettings" title="scenepic.LayerSettings"><em>LayerSettings</em></a><em>]</em><em>]</em>) – a LayerSettings object
+or a dictionary. See LayerSettings for details.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scenepic.Frame3D.set_layer_settings_">
+<span class="sig-name descname"><span class="pre">set_layer_settings_</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Frame3D.set_layer_settings_" title="Permalink to this definition"></a></dt>
+<dd><p>Specify the visibilities and opacities of certain mesh layers.
+Each Mesh object can optionally be part of a user-identified layer
+(see Mesh constructor). Calling set_layer_settings will result in an
+additional drop-down selector in the ScenePic user interface.</p>
 </dd></dl>
 
 </dd></dl>
@@ -1312,6 +1343,35 @@ world-to-camera matrix.</p>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="scenepic.Camera.orbit">
+<span class="sig-name descname"><span class="pre">orbit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Camera.orbit" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a sequence of cameras which move in an orbit around the origin.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num_frames</strong> (<em>int</em>) – the number of frames in the sequence</p></li>
+<li><p><strong>distance</strong> (<em>float</em>) – the distance of the camera from the origin</p></li>
+<li><p><strong>num_times</strong> (<em>int</em>) – the number of times to orbit</p></li>
+<li><p><strong>min_altitude</strong> (<em>float</em>) – the minimum altitude of the orbit</p></li>
+<li><p><strong>max_altitude</strong> (<em>float</em>) – the maximum altitude of the orbit</p></li>
+<li><p><strong>up_dir</strong> (<em>np.ndarray</em>) – the direct that is up (as a normalized vector)</p></li>
+<li><p><strong>forward_dir</strong> (<em>np.ndarray</em>) – the direction that is forward (as a normalized vector)</p></li>
+<li><p><strong>fov_y_degrees</strong> (<em>float</em>) – the field of the view of the camera in degrees</p></li>
+<li><p><strong>aspect_ratio</strong> (<em>float</em>) – the aspect ratio of the camera</p></li>
+<li><p><strong>near_crop_distance</strong> (<em>float</em>) – the near clipping plane of the view frustum</p></li>
+<li><p><strong>far_crop_distance</strong> (<em>float</em>) – the far clipping plane of the view frustum</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a sequence of cameras moving in an orbit</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="#scenepic.Camera" title="scenepic.Camera">Camera</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Camera.projection">
 <em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">projection</span></span><a class="headerlink" href="#scenepic.Camera.projection" title="Permalink to this definition"></a></dt>
@@ -1812,7 +1872,27 @@ the up direction as given.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>a 3D homgenous transform matrix</p>
+<dd class="field-even"><p>a 3D homogenous transform matrix</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scenepic.Transforms.quaternion_multiply">
+<span class="sig-name descname"><span class="pre">quaternion_multiply</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.quaternion_multiply" title="Permalink to this definition"></a></dt>
+<dd><p>Multiply two quaternions together.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>np.ndarray</em>) – the first quaternion</p></li>
+<li><p><strong>b</strong> (<em>np.ndarray</em>) – the second quaternion</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the result of a * b</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>np.ndarray</p>

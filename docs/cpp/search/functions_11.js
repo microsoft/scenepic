@@ -1,20 +1,14 @@
 var searchData=
 [
-  ['save_5fas_5fhtml',['save_as_html',['../classscenepic_1_1_scene.html#a1b39816957d9de36613ed20a92d8c36f',1,'scenepic::Scene']]],
-  ['save_5fas_5fjson',['save_as_json',['../classscenepic_1_1_scene.html#a9261d77f08daba5e9463e90b0550921e',1,'scenepic::Scene']]],
-  ['save_5fas_5fscript',['save_as_script',['../classscenepic_1_1_scene.html#ab8a4c99f795f06c1cb18bcd73dcb1134',1,'scenepic::Scene']]],
-  ['scale',['scale',['../namespacescenepic_1_1_transforms.html#a50ff95fb8057abc78201f780d114b1b7',1,'scenepic::Transforms::scale(float scale)'],['../namespacescenepic_1_1_transforms.html#aabd95be7e009680eb1828c9d4f46af56',1,'scenepic::Transforms::scale(const Vector &amp;scale)']]],
-  ['scene',['Scene',['../classscenepic_1_1_scene.html#ad341cb9f6d65205d1fdbd565e1477084',1,'scenepic::Scene']]],
-  ['script',['script',['../classscenepic_1_1_scene.html#a4b872c2fdb428917f9d58f219d05e109',1,'scenepic::Scene']]],
-  ['script_5fcleared',['script_cleared',['../classscenepic_1_1_scene.html#a2f02f50f35dba6047e6560ecbf783c05',1,'scenepic::Scene']]],
-  ['selection',['selection',['../classscenepic_1_1_drop_down_menu.html#ab7ed45244e206dafc0e79e4b00c40ce2',1,'scenepic::DropDownMenu::selection(int index)'],['../classscenepic_1_1_drop_down_menu.html#a383e43e17de1d0a0892fb2e6554d5efd',1,'scenepic::DropDownMenu::selection() const']]],
-  ['set_5fdisabled',['set_disabled',['../classscenepic_1_1_drop_down_menu.html#ac55091d1433243b9911836436da6dca2',1,'scenepic::DropDownMenu']]],
-  ['set_5flayer_5fsettings',['set_layer_settings',['../classscenepic_1_1_canvas2_d.html#aaac8d98a725836c6dcde9376a74c8f28',1,'scenepic::Canvas2D::set_layer_settings()'],['../classscenepic_1_1_canvas3_d.html#af20c10a0f5ed83970d7fea706ece3289',1,'scenepic::Canvas3D::set_layer_settings()']]],
-  ['shading',['Shading',['../classscenepic_1_1_shading.html#a1ee4db4cdeb7a3e4e073cb3ccc2cee37',1,'scenepic::Shading::Shading(const Color &amp;bg_color=Color(0, 0, 0), const Color &amp;ambient_light_color=Color(0.7f, 0.7f, 0.7f), const Color &amp;directional_light_color=Color(0.3f, 0.3f, 0.3f), const Vector &amp;directional_light_dir=Vector(2, 1, 2))'],['../classscenepic_1_1_shading.html#a386c3020f50e1f5cef0e509588235ac4',1,'scenepic::Shading::Shading(const Color4 &amp;bg_color, const Color &amp;ambient_light_color, const Color &amp;directional_light_color, const Vector &amp;directional_light_dir)'],['../classscenepic_1_1_canvas3_d.html#ade6b9bb2b2f67fd9d546bc162c6d1abe',1,'scenepic::Canvas3D::shading() const'],['../classscenepic_1_1_canvas3_d.html#ad223f25275c4fe87d0f0f83a5b425162',1,'scenepic::Canvas3D::shading(const Shading &amp;value)']]],
-  ['shared_5fcolor',['shared_color',['../classscenepic_1_1_mesh.html#a04303e016f9671e9e2f597d4e8e0482e',1,'scenepic::Mesh::shared_color() const'],['../classscenepic_1_1_mesh.html#a73b10be17fc2bb0f5973e6592e16ed35',1,'scenepic::Mesh::shared_color(const Color &amp;shared_color)']]],
-  ['simulate_5fkey_5fpresses',['simulate_key_presses',['../classscenepic_1_1_scene.html#a15a47b309cb5ed80871c8ffaa541df70',1,'scenepic::Scene']]],
-  ['size_5fin_5fpixels',['size_in_pixels',['../classscenepic_1_1_label.html#a8264e1eb5a131d83853936c2bc8441f7',1,'scenepic::Label::size_in_pixels() const'],['../classscenepic_1_1_label.html#a9859dd4865ca11513dc488ccfbd57cdb',1,'scenepic::Label::size_in_pixels(double value)']]],
-  ['split',['split',['../namespacescenepic.html#a9816ba0865d5552616c6ebcab578d07a',1,'scenepic']]],
-  ['status_5fbar_5fvisibility',['status_bar_visibility',['../classscenepic_1_1_scene.html#aa185b6e15da73b3f2ac046bdfc8718c5',1,'scenepic::Scene::status_bar_visibility() const'],['../classscenepic_1_1_scene.html#ab2ac43a4c878a6793a802f6b31fdc0a4',1,'scenepic::Scene::status_bar_visibility(const std::string &amp;visibility)']]],
-  ['subdivide',['subdivide',['../classscenepic_1_1_mesh_info.html#a10c9c641f90b3d8697c22b4000d2cbb2',1,'scenepic::MeshInfo']]]
+  ['r_0',['R',['../classscenepic_1_1_color.html#aaffb5c034897f7ab0cf9055767ca9ffc',1,'scenepic::Color']]],
+  ['r_1',['r',['../classscenepic_1_1_color.html#a00b3b68d120fa58c25a3b14308b6da7b',1,'scenepic::Color::r() const'],['../classscenepic_1_1_color.html#afd20cf36af242834d1f03ca84ea3315f',1,'scenepic::Color::r()']]],
+  ['render_5forder_2',['render_order',['../classscenepic_1_1_layer_settings.html#ace76eed14e2ca3ace4b42b74c31774e3',1,'scenepic::LayerSettings::render_order() const'],['../classscenepic_1_1_layer_settings.html#a3d91231d4b12d966faf91e9ca1fd8651',1,'scenepic::LayerSettings::render_order(int value)']]],
+  ['resize_3',['resize',['../classscenepic_1_1_json_value.html#aebe6ea22ebb200665e7ee8050993de25',1,'scenepic::JsonValue']]],
+  ['reverse_5ftriangle_5forder_4',['reverse_triangle_order',['../classscenepic_1_1_mesh.html#a3b4b1205bcf78929f54ff67ed357c831',1,'scenepic::Mesh']]],
+  ['rotation_5',['rotation',['../classscenepic_1_1_camera.html#a6e2b1c679fa020f644cebc7b42078336',1,'scenepic::Camera']]],
+  ['rotation_5fabout_5fx_6',['rotation_about_x',['../namespacescenepic_1_1_transforms.html#ac1700f7b0f7318ad62aa2468c5e36c78',1,'scenepic::Transforms']]],
+  ['rotation_5fabout_5fy_7',['rotation_about_y',['../namespacescenepic_1_1_transforms.html#a1f7390e9bcfd89d40f1bfb8b6a61a7f5',1,'scenepic::Transforms']]],
+  ['rotation_5fabout_5fz_8',['rotation_about_z',['../namespacescenepic_1_1_transforms.html#aa3228dec62ec0a52dbdaa56ebf07a406',1,'scenepic::Transforms']]],
+  ['rotation_5fmatrix_5ffrom_5faxis_5fangle_9',['rotation_matrix_from_axis_angle',['../namespacescenepic_1_1_transforms.html#a5850e9095059f3026dd6829c7d3b9f45',1,'scenepic::Transforms']]],
+  ['rotation_5fto_5falign_5fx_5fto_5faxis_10',['rotation_to_align_x_to_axis',['../namespacescenepic_1_1_transforms.html#a126c90dc3476f6967a5d0dcc543c3d09',1,'scenepic::Transforms']]]
 ];

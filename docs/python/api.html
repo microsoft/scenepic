@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>API &mdash; scenepic 1.0.2 documentation</title>
+  <title>API &mdash; scenepic 1.0.7 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -660,6 +660,32 @@ event.</p></li>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="scenepic.Scene.update_instanced_mesh">
+<span class="sig-name descname"><span class="pre">update_instanced_mesh</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.update_instanced_mesh" title="Permalink to this definition"></a></dt>
+<dd><p>Create a new mesh from an existing one by replacing its vector positions and normals.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_mesh_id</strong> (<em>str</em>) – the unique identifier of the original base mesh. Must already have been created.</p></li>
+<li><p><strong>positions</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – float32 matrix of [N, 3] new positions</p></li>
+<li><p><strong>rotations</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – float32 matrix of [N, 4] new rotations.
+Defaults to None, indicating no change to
+the rotations.</p></li>
+<li><p><strong>colors</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – float32 matrix of [N, 3] new colors</p></li>
+<li><p><strong>mesh_id</strong> (<em>str</em><em>, </em><em>optional</em>) – a unique identifier for the new updated Mesh (will be
+automatically populated if not provided). Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a reference to the MeshUpdate object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="graphics3d.html#scenepic.MeshUpdate" title="scenepic.MeshUpdate">MeshUpdate</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="scenepic.Scene.update_mesh">
 <span class="sig-name descname"><span class="pre">update_mesh</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.update_mesh" title="Permalink to this definition"></a></dt>
 <dd><p>Create a new mesh from an existing one by replacing its vector positions and normals.</p>
@@ -667,9 +693,31 @@ event.</p></li>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>base_mesh_id</strong> (<em>str</em>) – the unique identifier of the original base mesh. Must already have been created.</p></li>
+<li><p><strong>positions</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – float32 matrix of [N, 3] new positions</p></li>
+<li><p><strong>normals</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – float32 matrix of [N, 3] new normals.</p></li>
+<li><p><strong>colors</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – float32 matrix of [N, 3] new colors.</p></li>
+<li><p><strong>mesh_id</strong> (<em>str</em><em>, </em><em>optional</em>) – a unique identifier for the new updated Mesh (will be
+automatically populated if not provided). Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a reference to the MeshUpdate object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="graphics3d.html#scenepic.MeshUpdate" title="scenepic.MeshUpdate">MeshUpdate</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scenepic.Scene.update_mesh_positions">
+<span class="sig-name descname"><span class="pre">update_mesh_positions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.update_mesh_positions" title="Permalink to this definition"></a></dt>
+<dd><p>Create a new mesh from an existing one by replacing its vector positions and compute normal values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_mesh_id</strong> (<em>str</em>) – the unique identifier of the original base mesh. Must already have been created.</p></li>
 <li><p><strong>positions</strong> (<em>np.ndarray</em>) – float32 matrix of [N, 3] new positions</p></li>
-<li><p><strong>normals</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – float32 matrix of [N, 3] new normals. Defaults to None, indicating
-they will be computed automatically.</p></li>
 <li><p><strong>mesh_id</strong> (<em>str</em><em>, </em><em>optional</em>) – a unique identifier for the new updated Mesh (will be
 automatically populated if not provided). Defaults to None.</p></li>
 </ul>
@@ -686,25 +734,7 @@ automatically populated if not provided). Defaults to None.</p></li>
 <dl class="py method">
 <dt class="sig sig-object py" id="scenepic.Scene.update_mesh_without_normals">
 <span class="sig-name descname"><span class="pre">update_mesh_without_normals</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.update_mesh_without_normals" title="Permalink to this definition"></a></dt>
-<dd><p>Create a new mesh from an existing one by replacing its vector positions and compute normal values.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>base_mesh_id</strong> (<em>str</em>) – the unique identifier of the original base mesh. Must already have been created.</p></li>
-<li><p><strong>positions</strong> (<em>np.ndarray</em>) – float32 matrix of [N, 3] new positions</p></li>
-<li><p><strong>normals</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – float32 matrix of [N, 3] new normals. Defaults to None, indicating
-they will be computed automatically.</p></li>
-<li><p><strong>mesh_id</strong> (<em>str</em><em>, </em><em>optional</em>) – a unique identifier for the new updated Mesh (will be
-automatically populated if not provided). Defaults to None.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>a reference to the MeshUpdate object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="graphics3d.html#scenepic.MeshUpdate" title="scenepic.MeshUpdate">MeshUpdate</a></p>
-</dd>
-</dl>
+<dd><p>Deprecated.</p>
 </dd></dl>
 
 </dd></dl>
