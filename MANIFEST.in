@@ -1,0 +1,5 @@
+include CMakeLists.txt *.js *.json VERSION RELEASE_NOTES cmake/scenepicConfig.cmake.in
+recursive-include ci *.in
+recursive-include src *.h *.cpp CMakeLists.txt *.in
+recursive-include test *.h *.cpp CMakeLists.txt
+recursive-include tssrc *.ts
