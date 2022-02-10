@@ -71,8 +71,6 @@ namespace scenepic
     /** Whether this update is quantized. */
     bool is_quantized() const;
 
-    void update(VertexBufferRef vertex_buffer) const;
-
     /** Quantize the mesh update in reference to a keyframe.
      *  \param keyframe_index the index of the keyframe
      *  \param fixed_point_range the range to use for the fixed point
