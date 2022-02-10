@@ -1,5 +1,18 @@
 # Changelog
 
+## [2022-02-10 - Version 1.0.7](https://github.com/microsoft/scenepic/releases/tag/v1.0.7)
+Point release improving `MeshUpdate` thus adding the ability to update colors
+per frame along with some minor additions.
+
+New Features:
+- Can now updated colors per frame for both meshes and instanced meshes
+- `quaternion_multiply` adds the long-missing code to combine quaternion rotations
+- `Camera.orbit` creates a sequence of orbiting cameras around a central point
+
+Deprecation:
+- `update_mesh_without_normals` has been deprecated in favor of the new method
+  `update_mesh_positions`
+
 ## [2021-12-11 - Version 1.0.6](https://github.com/microsoft/scenepic/releases/tag/v1.0.6)
 Point release adding new camera mode as well as some improvements.
 
