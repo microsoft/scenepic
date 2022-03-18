@@ -1,0 +1,6 @@
+@article{scenepic,
+url={https://github.com/microsoft/scenepic/},
+title={{ScenePic}: A lightweight and zero-install {3D} visualization library},
+author={Johnson, Matthew and Shotton, Jamie},
+year={2021}
+}
