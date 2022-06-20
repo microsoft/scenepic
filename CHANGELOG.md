@@ -1,5 +1,8 @@
 # Changelog
 
+## [2022-06-20 - Version 1.0.8](https://github.com/microsoft/scenepic/releases/tag/v1.0.8)
+Point release updating NPM and dependency versions to address security concerns.
+
 ## [2022-02-10 - Version 1.0.7](https://github.com/microsoft/scenepic/releases/tag/v1.0.7)
 Point release improving `MeshUpdate` thus adding the ability to update colors
 per frame along with some minor additions.

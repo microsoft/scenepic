@@ -7,9 +7,6 @@ jobs:
 - job: WindowsPython
   strategy: 
     matrix:
-      Python36_Win32:
-        python.version: '3.6'
-        python.arch: 'x86'
       Python37_Win32:
         python.version: '3.7'
         python.arch: 'x86'
@@ -19,9 +16,6 @@ jobs:
       Python39_Win32:
         python.version: '3.9'
         python.arch: 'x86'
-      Python36_x64:
-        python.version: '3.6'
-        python.arch: 'x64'
       Python37_x64:
         python.version: '3.7'
         python.arch: 'x64'
@@ -30,6 +24,9 @@ jobs:
         python.arch: 'x64'
       Python39_x64:
         python.version: '3.9'
+        python.arch: 'x64'
+      Python310_x64:
+        python.version: '3.10'
         python.arch: 'x64'
 
   pool:
@@ -92,7 +89,7 @@ jobs:
 
   - template: build-and-test-cpp.yml
     parameters:
-      cmake_args: '-G"Visual Studio 16 2019" -Ax64'
+      cmake_args: '-G"Visual Studio 17 2022" -Ax64'
       cmake_build: $(cmake.build)
 
   - task: CMake@1
