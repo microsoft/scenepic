@@ -16,9 +16,6 @@ jobs:
       Python39_Win32:
         python.version: '3.9'
         python.arch: 'x86'
-      Python310_Win32:
-        python.version: '3.10'
-        python.arch: 'x86'
       Python37_x64:
         python.version: '3.7'
         python.arch: 'x64'
