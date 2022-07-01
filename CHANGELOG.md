@@ -1,5 +1,8 @@
 # Changelog
 
+## [2022-06-30 - Version 1.0.9](https://github.com/microsoft/scenepic/releases/tag/v1.0.9)
+Point release to address breaking issue with numpy 1.23.0 (#34)
+
 ## [2022-06-20 - Version 1.0.8](https://github.com/microsoft/scenepic/releases/tag/v1.0.8)
 Point release updating NPM and dependency versions to address security concerns.
 
