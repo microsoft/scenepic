@@ -63,7 +63,7 @@ namespace scenepic
 
     /** Special value indicating that this layer has no specific rendering order
      */
-    static const int NO_RENDER_ORDER = std::numeric_limits<int>::max();
+    static const int NO_RENDER_ORDER;
 
   private:
     int m_render_order;

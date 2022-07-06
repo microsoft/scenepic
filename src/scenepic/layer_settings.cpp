@@ -78,4 +78,6 @@ namespace scenepic
     return *this;
   }
 
+  const int LayerSettings::NO_RENDER_ORDER = std::numeric_limits<int>::max();
+
 } // namespace scenepic
