@@ -138,7 +138,7 @@ and can be easily included into C++ projects where desired.
 ![ScenePic UI](docs/scenepic_ui.png)
 
 A ScenePic HTML page will look something like the image above. This example shows
-four *Canvas* objects, each of which contains several *Frame* objects (refering under the
+four *Canvas* objects, each of which contains several *Frame* objects (referring under the
 hood to a set of *Mesh* objects).
 
 The UI supports standard 3D mouse controls (drag to rotate, shift-drag to
