@@ -25,6 +25,7 @@ int test_image();
 int test_io();
 int test_label();
 int test_layer_settings();
+int test_matrix();
 int test_mesh_update();
 int test_primitives();
 int test_quantization();
