@@ -25,6 +25,7 @@ int test_image();
 int test_io();
 int test_label();
 int test_layer_settings();
+int test_matrix();
 int test_mesh_update();
 int test_primitives();
 int test_quantization();
@@ -114,6 +115,27 @@ namespace test
   {
     typename Derived::Scalar max_diff =
       (actual - expected).array().abs().maxCoeff();
+    if (max_diff > tolerance)
+    {
+      result = EXIT_FAILURE;
+      std::cerr << tag << " is incorrect, maximum difference is " << max_diff
+                << " which is not within tolerance of " << tolerance
+                << std::endl;
+      std::cerr << "actual: " << actual << std::endl;
+      std::cerr << "expected: " << expected << std::endl;
+    }
+  }
+
+  template<typename Derived>
+  void assert_allclose(
+    const Eigen::ArrayBase<Derived>& actual,
+    const Eigen::ArrayBase<Derived>& expected,
+    int& result,
+    const std::string& tag,
+    typename Derived::Scalar tolerance = 1e-6)
+  {
+    typename Derived::Scalar max_diff =
+      (actual - expected).abs().maxCoeff();
     if (max_diff > tolerance)
     {
       result = EXIT_FAILURE;
