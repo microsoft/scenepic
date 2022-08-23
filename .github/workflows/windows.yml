@@ -27,8 +27,11 @@ jobs:
     runs-on: ${{inputs.vmImage}}
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
       - name: Use Python ${{matrix.python_version}}
-        uses: actions/setup-python@4.2.0
+        uses: actions/setup-python@v4
         with:
           python-version: ${{matrix.python_version}}
           architecture: ${{matrix.python_arch}}
@@ -65,7 +68,7 @@ jobs:
         cmake_build: [Release, Debug]
 
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v3
 
       - name: Use Python 3.8
