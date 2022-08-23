@@ -26,6 +26,7 @@ REQUIRES_DEV = [
     "azure-common",
     "nbstripout",
     "pytest-md",
+    "pytest-emoji",
     "pytest-cov",
     "pytest",
     "requests",

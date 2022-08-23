@@ -50,7 +50,8 @@ jobs:
         uses: pavelzw/pytest-action@v1
         with:
           verbose: true
-          job-summary: true
+          job_summary: true
+          emoji: true
 
   MacCPP:
     runs-on: ${{inputs.vmImage}}
