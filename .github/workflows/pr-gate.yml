@@ -21,9 +21,7 @@ jobs:
         run: pip install -r requirements-flake8.txt
 
       - name: Run flake8
-        uses: suo/flake8-github-action@releases/v1
-        with:
-          checkName: "linting"
+        run: flake8 src/scenepic test
 
   cpp-format:
     runs-on: ubuntu-latest
