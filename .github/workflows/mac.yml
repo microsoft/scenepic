@@ -1,0 +1,72 @@
+name: Mac Workflow
+
+on:
+  workflow_call:
+    inputs:
+      vmImage:
+        required: true
+        type: string
+
+jobs:
+  MacPython:
+    strategy:
+      matrix:
+        python.version: ["3.7", "3.8", "3.9", "3.10"]
+
+    runs-on: ${{vmImage}}
+
+    steps:
+      - name: Use Python ${{python.version}}
+        uses: actions/setup-python@4.2.0
+        with:
+          python-version: ${{python.version}}
+
+      - name: Get dependencies
+        run: |
+          python -m pip install --upgrade pip
+          brew install doxygen
+
+      - name: NPM steps
+        run: |
+          npm install
+          npm run build
+
+      - name: Python build
+        run: |
+          pip install --use-deprecated=legacy-resolver -e .[dev]
+          python setup.py develop
+
+      - name: Python test
+        uses: pavelzw/pytest-action@v1
+        with:
+          verbose: true
+          job-summary: true
+
+  MacCPP:
+    runs-on: ${{vmImage}}
+
+    steps:
+      - name: Use Python 3.8
+        uses: actions/setup-python@4.2.0
+        with:
+          python-version: "3.8"
+
+      - name: Get dependencies
+        run: |
+          python -m pip install --upgrade pip
+          brew install doxygen
+
+      - name: NPM steps
+        run: |
+          npm install
+          npm run build
+
+      - name: CMake config
+        run: cmake -B ${{github.workspace}}/build -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=${{parameters.cmake_build}} -DSCENEPIC_BUILD_TESTS=1 -DSCENEPIC_BUILD_DOCUMENTATION=1
+
+      - name: CMake build
+        run: cmake --build ${{github.workspace}}/build --config ${{cmake_build}} --target cpp
+
+      - name: CMake test
+        working-directory: ${{github.workspace}}/build
+        run: ctest -V --build-config ${{cmake_build}} --timeout 120 --output-on-failure -T Test

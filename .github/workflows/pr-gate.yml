@@ -8,14 +8,54 @@ jobs:
   windows_job:
     uses: ./.github/workflows/reuseable/windows-job.yml
     with:
-      vmImage: "windows-latest"
+      vmImage: windows-latest
 
   linux_job:
     uses: ./.github/workflows/reuseable/linux-job.yml
     with:
-      vmImage: "ubuntu-latest"
+      vmImage: ubuntu-latest
 
   mac-job:
     uses: ./.github/workflows/reuseable/mac-job.yml
     with:
-      vmImage: "macOS-latest"
+      vmImage: macOS-latest
+
+  linting:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Use Python 3.8
+      uses: actions/setup-python@4.2.0
+      with:
+        python-version: 3.8
+
+    - name: Install flake8
+      run: pip install -r requirements-flake8.txt
+
+    - name: Run flake8
+      uses: suo/flake8-github-action@releases/v1
+      with:
+        checkName: 'linting'
+
+  cpp-format:
+    runs-on: ubuntu-latest
+    steps:
+      - name: NPM steps
+        run: |
+          npm install
+          npm run build
+      
+      - name: Install Clang tools
+        run: |
+          set -eo pipefail
+          sudo apt-get update
+          sudo apt-get install -y clang-format-10
+      
+      - name: CMake config
+        run: cmake -B ${{github.workspace}}/build -DSCENEPIC_FORMAT=1
+  
+      - name: Clang format
+        working-directory: ${{github.workspace}}/build
+        run: |
+          set -eo pipefail
+          make scenepic_format
+          git diff --exit-code ${{github.base_ref}}
