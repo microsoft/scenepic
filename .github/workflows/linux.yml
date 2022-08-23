@@ -6,6 +6,13 @@ on:
       vmImage:
         required: true
         type: string
+  workflow_dispatch:
+    inputs:
+      vmImage:
+        description: VM Image to use
+        required: true
+        type: string
+        default: ubuntu-latest
 
 jobs:
   LinuxPython:
