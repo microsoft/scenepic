@@ -18,7 +18,7 @@ jobs:
   WindowsPython:
     strategy:
       matrix:
-        python_version: ["3.7", "3.8", "3.9"]
+        python_version: ["3.8", "3.9"]
         python_arch: [x86, x64]
         include:
           - python_version: "3.10"
