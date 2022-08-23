@@ -6,21 +6,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  windows_job:
-    uses: ./.github/workflows/windows.yml
-    with:
-      vmImage: windows-latest
-
-  linux_job:
-    uses: ./.github/workflows/linux.yml
-    with:
-      vmImage: ubuntu-latest
-
-  mac-job:
-    uses: ./.github/workflows/mac.yml
-    with:
-      vmImage: macOS-latest
-
   linting:
     runs-on: ubuntu-latest
     steps:
@@ -66,3 +51,21 @@ jobs:
           set -eo pipefail
           make scenepic_format
           git diff --exit-code ${{github.base_ref}}
+
+  windows_job:
+    needs: [linting, cpp-format]
+    uses: ./.github/workflows/windows.yml
+    with:
+      vmImage: windows-latest
+
+  linux_job:
+    needs: [linting, cpp-format]
+    uses: ./.github/workflows/linux.yml
+    with:
+      vmImage: ubuntu-latest
+
+  mac-job:
+    needs: [linting, cpp-format]
+    uses: ./.github/workflows/mac.yml
+    with:
+      vmImage: macOS-latest
