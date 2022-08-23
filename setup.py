@@ -25,7 +25,7 @@ REQUIRES_DEV = [
     "azure-storage-blob>=12.0.0",
     "azure-common",
     "nbstripout",
-    "pytest-azurepipelines",
+    "pytest-md",
     "pytest-cov",
     "pytest",
     "requests",

@@ -1,0 +1,21 @@
+name: PR Gate
+
+on:
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  windows_job:
+    uses: ./.github/workflows/reuseable/windows-job.yml
+    with:
+      vmImage: "windows-latest"
+
+  linux_job:
+    uses: ./.github/workflows/reuseable/linux-job.yml
+    with:
+      vmImage: "ubuntu-latest"
+
+  mac-job:
+    uses: ./.github/workflows/reuseable/mac-job.yml
+    with:
+      vmImage: "macOS-latest"

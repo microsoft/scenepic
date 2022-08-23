@@ -276,7 +276,7 @@ dmypy.json
 
 examples/**/*.html
 .vscode
-**/build*
+**/build/*
 ci/downloads
 test-output.xml
 wheelhouse
