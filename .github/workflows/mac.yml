@@ -20,7 +20,7 @@ jobs:
       matrix:
         python.version: ["3.7", "3.8", "3.9", "3.10"]
 
-    runs-on: ${{vmImage}}
+    runs-on: ${{inputs.vmImage}}
 
     steps:
       - name: Use Python ${{python.version}}
@@ -50,7 +50,7 @@ jobs:
           job-summary: true
 
   MacCPP:
-    runs-on: ${{vmImage}}
+    runs-on: ${{inputs.vmImage}}
 
     steps:
       - name: Use Python 3.8
