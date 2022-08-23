@@ -65,7 +65,7 @@ jobs:
       - name: NPM steps
         uses: ./.github/workflows/reuseable/npm-steps.yml
 
-      - name: Build and Test Python
+      - name: Build and Test C++
         uses: ./.github/workflows/reuseable/build-and-test-cpp.yml
         with:
           cmake_args: -G"Visual Studio 17 2022" -Ax64
