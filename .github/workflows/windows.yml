@@ -1,0 +1,101 @@
+name: Windows Workflow
+
+on:
+  workflow_call:
+    inputs:
+      vmImage:
+        required: true
+        type: string
+  workflow_dispatch:
+    inputs:
+      vmImage:
+        description: VM Image to use
+        required: true
+        type: string
+        default: windows-latest
+
+jobs:
+  WindowsPython:
+    strategy:
+      matrix:
+        python.version: ["3.7", "3.8", "3.9"]
+        python.arch: [x86, x64]
+        include:
+          - python_version: "3.10"
+            python_arch: x64
+
+    runs-on: ${{inputs.vmImage}}
+
+    steps:
+      - name: Use Python ${{matrix.python_version}}
+        uses: actions/setup-python@4.2.0
+        with:
+          python-version: ${{matrix.python_version}}
+          architecture: ${{matrix.python_arch}}
+
+      - name: Get dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+              
+          cd ci
+          python download_deps.py
+
+      - name: NPM steps
+        run: |
+          npm install
+          npm run build
+
+      - name: Python build
+        run: |
+          pip install --use-deprecated=legacy-resolver -e .[dev]
+          python setup.py develop
+
+      - name: Python test
+        uses: pavelzw/pytest-action@v1
+        with:
+          verbose: true
+          job-summary: true
+
+  WindowsCPP:
+    runs-on: ${{inputs.vmImage}}
+
+    strategy:
+      matrix:
+        cmake_build: [Release, Debug]
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Use Python 3.8
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.8"
+          architecture: "x64"
+
+      - name: Get dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+          cd ci
+          python download_deps.py
+
+      - name: NPM steps
+        run: |
+          npm install
+          npm run build
+
+      - name: CMake config
+        run: cmake -B ${{github.workspace}}/build -G"Visual Studio 17 2022" -Ax64 -DCMAKE_BUILD_TYPE=${{matrix.cmake_build}} -DSCENEPIC_BUILD_TESTS=1 -DSCENEPIC_BUILD_DOCUMENTATION=1
+
+      - name: CMake build
+        run: cmake --build ${{github.workspace}}/build --config ${{matrix.cmake_build}} --target cpp
+
+      - name: CMake test
+        working-directory: ${{github.workspace}}/build
+        run: ctest -V --build-config ${{matrix.cmake_build}} --timeout 120 --output-on-failure -T Test
+
+      - name: CMake install
+        run: cmake --build ${{github.workspace}}/build --config ${{matrix.cmake_build}} --target INSTALL
