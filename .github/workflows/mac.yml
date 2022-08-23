@@ -47,11 +47,7 @@ jobs:
           python setup.py develop
 
       - name: Python test
-        uses: pavelzw/pytest-action@v1
-        with:
-          verbose: true
-          job_summary: true
-          emoji: true
+        run: pytest -vv --emoji
 
   MacCPP:
     runs-on: ${{inputs.vmImage}}
