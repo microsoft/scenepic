@@ -1,9 +1,0 @@
-on:
-  workflow_call:
-
-steps:
-- name: npm install
-  run: npm install
-
-- name: npm run build
-  run: npm run build
