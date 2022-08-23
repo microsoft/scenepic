@@ -3,6 +3,7 @@ name: PR Gate
 on:
   pull_request:
     branches: ["main"]
+  workflow_dispatch:    
 
 jobs:
   windows_job:
