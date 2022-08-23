@@ -50,13 +50,13 @@ jobs:
           make scenepic_format
           git diff --exit-code ${{github.base_ref}}
 
-  windows_job:
+  windows-job:
     needs: [linting, cpp-format]
     uses: ./.github/workflows/windows.yml
     with:
       vmImage: windows-latest
 
-  linux_job:
+  linux-job:
     needs: [linting, cpp-format]
     uses: ./.github/workflows/linux.yml
     with:
