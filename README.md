@@ -138,7 +138,7 @@ and can be easily included into C++ projects where desired.
 ![ScenePic UI](docs/scenepic_ui.png)
 
 A ScenePic HTML page will look something like the image above. This example shows
-four *Canvas* objects, each of which contains several *Frame* objects (refering under the
+four *Canvas* objects, each of which contains several *Frame* objects (referring under the
 hood to a set of *Mesh* objects).
 
 The UI supports standard 3D mouse controls (drag to rotate, shift-drag to
@@ -232,10 +232,11 @@ you if it is unable to find something, in which case you can manually
 point it at the correct location. You may find it easier to use a visual
 CMake configuration editor (CMake GUI ships with the Windows distributable,
 and there is CMake Curses for *nix) to customize the build, for example
-by disabling the documentation or Python build subsystems. Once you have
-successfully built the library, you can run the tests in the following fashion
-from the build directory:
+by disabling the documentation or Python build subsystems. 
 
+To run tests, set the cmake option `SCENEPIC_BUILD_TESTS=ON` when building and 
+run the test command once you have successfully built the library, in the following
+fashion from the build directory:
 ```
 ctest -C Debug
 ```
