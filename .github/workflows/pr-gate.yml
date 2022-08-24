@@ -23,7 +23,7 @@ jobs:
       - name: Run flake8
         run: flake8 src/scenepic test
 
-  cpp-formatting-check:
+  cpp-format:
     runs-on: ubuntu-latest
     strategy:
       matrix:
