@@ -48,7 +48,7 @@ jobs:
         run: |
           set -eo pipefail
           make scenepic_format
-          git diff --exit-code ${{github.base_ref}}
+          git diff --exit-code $GITHUB_REF_NAME
 
   windows-job:
     needs: [linting, cpp-format]
