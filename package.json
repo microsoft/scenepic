@@ -20,26 +20,25 @@
     "watch": "node watch.js"
   },
   "devDependencies": {
-    "@types/file-saver": "^2.0.1",
-    "@types/gl-matrix": "^2.4.5",
-    "@types/jquery": "^3.3.32",
-    "@types/node": "^13.13.5",
-    "@types/pako": "^1.0.1",
-    "browserify": "^16.5.0",
+    "@types/file-saver": "^2.0.5",
+    "@types/jquery": "^3.5.14",
+    "@types/node": "^18.7.13",
+    "@types/pako": "^2.0.0",
+    "browserify": "^17.0.0",
     "exorcist": "^2.0.0",
-    "file-saver": "^2.0.2",
+    "file-saver": "^2.0.5",
     "fs": "0.0.2",
-    "gl-matrix": "^3.1.0",
-    "jquery": "^3.5.1",
-    "jszip": "^3.7.1",
+    "gl-matrix": "^3.4.3",
+    "jquery": "^3.6.0",
+    "jszip": "^3.10.1",
     "make-dir": "^3.1.0",
+    "minify-stream": "^2.1.0",
     "pako": "^1.0.11",
-    "tsify": "^4.0.1",
-    "typescript": "^3.7.5",
-    "uglifyify": "^5.0.2",
+    "tsify": "^5.0.4",
+    "typescript": "^4.7.4",
     "watchify": "^4.0.0"
   },
   "dependencies": {
-    "npm": "^8.2.0"
+    "npm": "^8.18.0"
   }
 }
