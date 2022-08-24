@@ -28,8 +28,10 @@ jobs:
     strategy:
       matrix:
         path: 
-          - src
-          - test
+          - check: src
+            exclude: (/cpp-base64/|/json/|/miniz/|/tinyobj/)
+          - check: test
+            exclude: ''
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -43,7 +45,8 @@ jobs:
         uses: jidicula/clang-format-action@v4.8.0
         with:
           clang-format-version: '13'
-          check-path: ${{matrix.path}}
+          check-path: ${{matrix.path['check']}}
+          exclude-regex: ${{matrix.path['exclude']}}
 
   windows-job:
     needs: [linting, cpp-format]
