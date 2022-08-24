@@ -36,4 +36,5 @@ let b = browserify({
 .plugin(tsify)
 .bundle()
 .pipe(minify())
+.pipe(exorcist(mapFile))
 .pipe(stream)
