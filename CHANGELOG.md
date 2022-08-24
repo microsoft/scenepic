@@ -1,5 +1,8 @@
 # Changelog
 
+## [2022-08-24 - Version 1.0.11](https://github.com/microsoft/scenepic/releases/tag/v1.0.11)
+Point release to bump versions of NPM packages.
+
 ## [2022-07-06 - Version 1.0.10](https://github.com/microsoft/scenepic/releases/tag/v1.0.10)
 Point release to fix issues introduced by v1.0.9.
 
