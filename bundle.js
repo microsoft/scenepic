@@ -36,5 +36,7 @@ let b = browserify({
 .plugin(tsify)
 .bundle()
 .pipe(minify())
-.pipe(exorcist(mapFile))
+// commenting this line (i.e. disabling exorcist) can make debugging easier
+// by inlining the sourcemaps
+.pipe(exorcist(mapFile)) 
 .pipe(stream)
