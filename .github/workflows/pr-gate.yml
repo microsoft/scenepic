@@ -23,8 +23,13 @@ jobs:
       - name: Run flake8
         run: flake8 src/scenepic test
 
-  cpp-format:
+  cpp-formatting-check:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        path: 
+          - src
+          - test
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -34,21 +39,11 @@ jobs:
           npm install
           npm run build
 
-      - name: Install Clang tools
-        run: |
-          set -eo pipefail
-          sudo apt-get update
-          sudo apt-get install -y clang-format-10
-
-      - name: CMake config
-        run: cmake -B ${{github.workspace}}/build -DSCENEPIC_FORMAT=1
-
-      - name: Clang format
-        working-directory: ${{github.workspace}}/build
-        run: |
-          set -eo pipefail
-          make scenepic_format
-          git diff --exit-code $GITHUB_REF_NAME
+      - name: Run clang-format style check
+        uses: jidicula/clang-format-action@v4.8.0
+        with:
+          clang-format-version: '13'
+          check-path: ${{matrix.path}}
 
   windows-job:
     needs: [linting, cpp-format]
