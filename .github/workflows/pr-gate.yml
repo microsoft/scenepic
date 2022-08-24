@@ -3,60 +3,65 @@ name: PR Gate
 on:
   pull_request:
     branches: ["main"]
-  workflow_dispatch:    
+  workflow_dispatch:
 
 jobs:
-  windows_job:
+  linting:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Use Python 3.8
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.8
+
+      - name: Install flake8
+        run: pip install -r requirements-flake8.txt
+
+      - name: Run flake8
+        run: flake8 src/scenepic test
+
+  cpp-format:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        path: 
+          - check: src
+            exclude: (/cpp-base64/|/json/|/miniz/|/tinyobj/)
+          - check: test
+            exclude: ''
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: NPM steps
+        run: |
+          npm install
+          npm run build
+
+      - name: Run clang-format style check
+        uses: jidicula/clang-format-action@v4.8.0
+        with:
+          clang-format-version: '13'
+          check-path: ${{matrix.path['check']}}
+          exclude-regex: ${{matrix.path['exclude']}}
+
+  windows-job:
+    needs: [linting, cpp-format]
     uses: ./.github/workflows/windows.yml
     with:
       vmImage: windows-latest
 
-  linux_job:
+  linux-job:
+    needs: [linting, cpp-format]
     uses: ./.github/workflows/linux.yml
     with:
       vmImage: ubuntu-latest
 
   mac-job:
+    needs: [linting, cpp-format]
     uses: ./.github/workflows/mac.yml
     with:
       vmImage: macOS-latest
-
-  linting:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Use Python 3.8
-      uses: actions/setup-python@4.2.0
-      with:
-        python-version: 3.8
-
-    - name: Install flake8
-      run: pip install -r requirements-flake8.txt
-
-    - name: Run flake8
-      uses: suo/flake8-github-action@releases/v1
-      with:
-        checkName: 'linting'
-
-  cpp-format:
-    runs-on: ubuntu-latest
-    steps:
-      - name: NPM steps
-        run: |
-          npm install
-          npm run build
-      
-      - name: Install Clang tools
-        run: |
-          set -eo pipefail
-          sudo apt-get update
-          sudo apt-get install -y clang-format-10
-      
-      - name: CMake config
-        run: cmake -B ${{github.workspace}}/build -DSCENEPIC_FORMAT=1
-  
-      - name: Clang format
-        working-directory: ${{github.workspace}}/build
-        run: |
-          set -eo pipefail
-          make scenepic_format
-          git diff --exit-code ${{github.base_ref}}
