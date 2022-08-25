@@ -1,1 +1,6 @@
-Point release to bump versions of NPM packages.
+Point release to add a new script for generating the example scripts used on
+the documentation webpage.
+
+Bug Fixes:
+- Standalone scripts were missing a newline as a result of recent NPM changes.
+  This is now added in manually in the script generation process.
