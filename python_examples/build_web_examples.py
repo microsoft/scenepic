@@ -1,12 +1,4 @@
-"""
-Idea:
-1. Run the script to build the scene JS
-2. HTML template
-3. Delimiters in the script indicate when to start/end
-4. Remove prepending tabs
-5. Build page
-6. Write page and script to output dir
-"""
+"""Script which builds webpages + scripts for the documentation website."""
 
 import argparse
 import inspect

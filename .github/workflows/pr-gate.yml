@@ -21,7 +21,7 @@ jobs:
         run: pip install -r requirements-flake8.txt
 
       - name: Run flake8
-        run: flake8 src/scenepic test
+        run: flake8 src/scenepic test python_examples
 
   cpp-format:
     runs-on: ubuntu-latest
