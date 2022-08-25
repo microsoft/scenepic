@@ -6,16 +6,11 @@ import numpy as np
 import scenepic as sp
 
 
-def _parse_args():
-    parser = argparse.ArgumentParser("Getting Started with ScenePic")
-    parser.add_argument("--script", action="store_true",
-                        help="Whether to save the scenepic as a JS file")
-    return parser.parse_args()
+Name = "getting_started"
+Title = "Getting Started"
 
 
-def _main():
-    args = _parse_args()
-
+def build_scene() -> sp.Scene:
     # when we build a ScenePic we are essentially building a web
     # page, and the ScenePic will automatically populate parts of
     # that webpage.
@@ -106,18 +101,30 @@ def _main():
     scene.place(projx.canvas_id, "1", "2")
     scene.place(projy.canvas_id, "2", "2")
     scene.place(projz.canvas_id, "3", "2")
+    return scene
 
+
+def _parse_args():
+    parser = argparse.ArgumentParser(Title)
+    parser.add_argument("--script", action="store_true",
+                        help="Whether to save the scenepic as a JS file")
+    return parser.parse_args()
+
+
+def _main():
+    args = _parse_args()
+    scene = build_scene()
     # The scene is complete, so we write it to a standalone file.
     if args.script:
         # If you have an existing HTML page you want to add a scenepic
         # to, then you can save the scenepic as a self-contained
         # Javascript file.
-        scene.save_as_script("getting_started.js", standalone=True)
+        scene.save_as_script("{}.js".format(Name), standalone=True)
     else:
         # However, ScenePic will also create a basic HTML wrapper
         # and embed the Javascript into the file directly so you
         # have a single file containing everything.
-        scene.save_as_html("getting_started.html", title="Getting Started")
+        scene.save_as_html("{}.html".format(Name), title=Title)
 
 
 if __name__ == "__main__":
