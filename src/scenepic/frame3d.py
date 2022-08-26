@@ -11,13 +11,6 @@ from ._scenepic import Frame3D, LayerSettings, Mesh, MeshUpdate
 
 
 def add_meshes(self, meshes: List[Union[Mesh, MeshUpdate, str]], transform: np.ndarray = None):
-    """Adds meshes to the frame.
-
-    Args:
-        self (Frame3D): self reference
-        meshes (List[Union[Mesh, MeshUpdate, str]]): A list of meshes and mesh updates (or their IDs)
-        transform (np.ndarray, optional): an optional transform to apply to each mesh. Defaults to None.
-    """
     mesh_ids = [mesh if isinstance(mesh, str) else mesh.mesh_id
                 for mesh in meshes]
 
@@ -28,13 +21,6 @@ def add_meshes(self, meshes: List[Union[Mesh, MeshUpdate, str]], transform: np.n
 
 
 def add_mesh(self, mesh: Union[Mesh, MeshUpdate, str], transform: np.ndarray = None):
-    """Adds a mesh to the frame.
-
-    Args:
-        self (Frame3D): self reference
-        mesh (Union[Mesh, MeshUpdate, str]): The mesh, mesh update, or mesh ID
-        transform (np.ndarray, optional): An optional transform to apply to the mesh. Defaults to None.
-    """
     mesh_id = mesh if isinstance(mesh, str) else mesh.mesh_id
 
     if transform is None:
@@ -44,19 +30,6 @@ def add_mesh(self, mesh: Union[Mesh, MeshUpdate, str], transform: np.ndarray = N
 
 
 def set_layer_settings(self, layer_settings: Mapping[str, Union[dict, LayerSettings]]):
-    """Specify the visibilities and opacities of certain mesh layers.
-
-    Description:
-        Each Mesh object can optionally be part of a user-identified layer
-        (see Mesh constructor).
-        Calling set_layer_settings will result in an additional drop-down
-        selector in the ScenePic user interface.
-
-    Args:
-        self (Canvas3D): the self reference
-        layer_settings (Mapping[str, Union[dict, LayerSettings]]): a LayerSettings object
-            or a dictionary. See LayerSettings for details.
-    """
     updated_settings = {}
     for key, value in layer_settings.items():
         if isinstance(value, dict):
