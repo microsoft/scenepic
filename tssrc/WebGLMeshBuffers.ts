@@ -160,8 +160,10 @@ export default class WebGLMeshBuffers
         var labelDepth = Math.abs(v0V[2]);
 
         // Transform with alignment translation and scale factor
-        var translate = [this.labelTranslateScreenX * labelDepth / v2sMatrix[0] + this.labelTranslateWorldX, this.labelTranslateScreenY * labelDepth / v2sMatrix[5] + this.labelTranslateWorldY, 0.0];
-        var scale = [scaleFactorX, scaleFactorY, 1.0];
+        var translate = vec3.fromValues(this.labelTranslateScreenX * labelDepth / v2sMatrix[0] + this.labelTranslateWorldX,
+                                        this.labelTranslateScreenY * labelDepth / v2sMatrix[5] + this.labelTranslateWorldY,
+                                        0.0);
+        var scale = vec3.fromValues(scaleFactorX, scaleFactorY, 1.0);
         var transform = mat4.create();
         mat4.fromRotationTranslationScale(transform, quat.create(), translate, scale);
         mat4.mul(m2vMatrix, m2vMatrix, transform);

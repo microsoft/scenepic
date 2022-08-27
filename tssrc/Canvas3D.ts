@@ -491,7 +491,7 @@ export default class Canvas3D extends CanvasBase
         this.onCameraTrack = true;
         var currentFrame = this.currentFrameIndex;
         this.SetCamera(this.frameCameraParams[currentFrame]);
-        this.currentFocusPoints[currentFrame] = <vec3>new Float32Array(this.initialFocusPoints[currentFrame]);
+        this.currentFocusPoints[currentFrame] = new Float32Array(this.initialFocusPoints[currentFrame])
     }
 
     ToggleLockView(translation : boolean, orientation : boolean)
@@ -511,7 +511,7 @@ export default class Canvas3D extends CanvasBase
         if (focusPoint == null) return;
 
         this.initialFocusPoints[frameIndex] = focusPoint; // For reset support
-        this.currentFocusPoints[frameIndex] = <vec3>new Float32Array(focusPoint); // Copy
+        this.currentFocusPoints[frameIndex] = new Float32Array(focusPoint); // Copy
     }
 
     SetPerFrameCamera(frameIndex : number, value : Object)

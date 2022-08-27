@@ -1,5 +1,6 @@
 let browserify = require("browserify")
 let tsify = require("tsify")
+let minify = require("minify-stream")
 let fs = require("fs")
 let exorcist = require("exorcist")
 let makeDir = require('make-dir')
@@ -13,7 +14,9 @@ version = fs.readFileSync("VERSION")
 stream.write("// " + version + "\n")
 
 let b = browserify({
-    debug: true
+    // set this to true to produce a source map
+    // for debugging the TypeScript library
+    debug: false
 })
 .add([
     "tssrc/Canvas2D.ts",
@@ -31,7 +34,9 @@ let b = browserify({
     "tssrc/VertexBuffers.ts"
 ])
 .plugin(tsify)
-.transform('uglifyify', { global: true })
 .bundle()
-.pipe(exorcist(mapFile))
+.pipe(minify())
+// commenting this line (i.e. disabling exorcist) can make debugging easier
+// by inlining the sourcemaps
+.pipe(exorcist(mapFile)) 
 .pipe(stream)

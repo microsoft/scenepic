@@ -32,7 +32,7 @@ std::tuple<sp::Vector, sp::Vector> get_bounds(const sp::VectorBuffer& verts)
  *  Each is constructed in a separate method, but using shared elements.
  *  One element used in this particular animation is a pre-computed camera
  *  track. While the user can still move the camera around freely,
- *  this can be helpful for create videos from the SVT (e.g. the animated
+ *  this can be helpful for create videos from scenepic (e.g. the animated
  *  GIF in the README.)
  */
 class Animation
