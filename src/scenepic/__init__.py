@@ -34,30 +34,26 @@ from typing import Tuple, Union
 import numpy as np
 
 from . import _scenepic
-from ._scenepic import (
-    ColorFromBytes,
-    DropDownMenu,
-    FocusPoint,
-    Graph,
-    js_lib_src,
-    Label,
-    LayerSettings,
-    load_obj,
-    LoopSubdivisionStencil,
-    MeshInfo,
-    Shading,
-    TextPanel,
-    UIParameters,
-)
 from .audio_track import AudioTrack
 from .camera import Camera
 from .canvas2d import Canvas2D
 from .canvas3d import Canvas3D
+from .drop_down_menu import DropDownMenu
+from .focus_point import FocusPoint
 from .frame2d import Frame2D
 from .frame3d import Frame3D
+from .globals import ColorFromBytes, js_lib_src, load_obj
+from .graph import Graph
 from .image import Image
+from .label import Label
+from .layer_settings import LayerSettings
+from .loop_subdivision_stencil import LoopSubdivisionStencil
 from .mesh import Mesh, MeshUpdate, VertexBuffer
+from .mesh_info import MeshInfo
 from .scene import Scene
+from .shading import Shading
+from .text_panel import TextPanel
+from .ui_parameters import UIParameters
 from .version import __version__
 from .video import Video
 
@@ -83,6 +79,7 @@ __all__ = [
     "load_obj",
     "Shading",
     "UIParameters",
+    "QuantizationOptions",
     "Canvas3D",
     "Frame2D",
     "Image",
@@ -94,7 +91,6 @@ __all__ = [
     "VertexBuffer",
     "Video",
     "VideoWriter",
-    "WebSocketHandler",
 ]
 
 
