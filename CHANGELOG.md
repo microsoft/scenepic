@@ -1,5 +1,13 @@
 # Changelog
 
+## [2022-08-26 - Version 1.0.12](https://github.com/microsoft/scenepic/releases/tag/v1.0.13)
+Point release adding stub files for all Python classes. (#17)
+
+New Features:
+- Stub files for all classes properly expose the docstrings in VS Code and other
+  editors, thus making development in Python considerably easier.
+
+
 ## [2022-08-25 - Version 1.0.12](https://github.com/microsoft/scenepic/releases/tag/v1.0.12)
 Point release to add a new script for generating the example scripts used on
 the documentation webpage.

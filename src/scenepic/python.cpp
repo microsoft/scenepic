@@ -999,11 +999,7 @@ PYBIND11_MODULE(_scenepic, m)
       "add_icosphere",
       &Mesh::add_icosphere,
       R"scenepicdoc(
-            Add a unit diameter UV sphere to this Mesh.
-
-            Description:
-                If the mesh has a texture attached, this method will automatically create
-                a set of vertex UVs which unwraps the sphere to map to the full UV space.
+            Add a unit diameter ico-sphere to this Mesh
 
             Args:
                 color (np.ndarray, optional): required unless Mesh was constructed with shared_color argument. Defaults to None.
@@ -1022,6 +1018,10 @@ PYBIND11_MODULE(_scenepic, m)
       &Mesh::add_uv_sphere,
       R"scenepicdoc(
             Add a unit diameter UV sphere to this Mesh.
+
+            Description:
+                If the mesh has a texture attached, this method will automatically create
+                a set of vertex UVs which unwraps the sphere to map to the full UV space.
 
             Args:
                 color (np.ndarray, optional): required unless Mesh was constructed with shared_color argument. Defaults to None.
@@ -1828,11 +1828,11 @@ PYBIND11_MODULE(_scenepic, m)
     .def_readwrite(
       "top", &Graph::Margin::top, "float: The top margin in pixels")
     .def_readwrite(
-      "right", &Graph::Margin::right, "float: The top margin in pixels")
+      "right", &Graph::Margin::right, "float: The right margin in pixels")
     .def_readwrite(
-      "bottom", &Graph::Margin::bottom, "float: The top margin in pixels")
+      "bottom", &Graph::Margin::bottom, "float: The bottom margin in pixels")
     .def_readwrite(
-      "left", &Graph::Margin::left, "float: The top margin in pixels");
+      "left", &Graph::Margin::left, "float: The left margin in pixels");
 
   py::class_<Graph, std::shared_ptr<Graph>>(
     m, "Graph", "A 2D viewport that animates one or more sparklines.")
@@ -2115,7 +2115,7 @@ PYBIND11_MODULE(_scenepic, m)
       "update_mesh",
       &Scene::update_mesh,
       R"scenepicdoc(
-            Create a new mesh from an existing one by replacing its vector positions and normals.
+            Create a new mesh from an existing one by replacing its vector positions, normals, and/or colors.
 
             Args:
                 base_mesh_id (str): the unique identifier of the original base mesh. Must already have been created.
@@ -2343,7 +2343,7 @@ PYBIND11_MODULE(_scenepic, m)
                 per_frame_range (bool, optional): Whether to use the most accurate range per frame, increasing accuracy
                                                   but reducing compression. Defaults to True.
 
-            Return:
+            Returns:
                 Mapping[str, QuantizationInfo]: information on the per-mesh quantization process
         )scenepicdoc",
       "relative_error_threshold"_a = 1e-5,
