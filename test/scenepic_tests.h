@@ -134,8 +134,7 @@ namespace test
     const std::string& tag,
     typename Derived::Scalar tolerance = 1e-6)
   {
-    typename Derived::Scalar max_diff =
-      (actual - expected).abs().maxCoeff();
+    typename Derived::Scalar max_diff = (actual - expected).abs().maxCoeff();
     if (max_diff > tolerance)
     {
       result = EXIT_FAILURE;
@@ -146,6 +145,51 @@ namespace test
       std::cerr << "expected: " << expected << std::endl;
     }
   }
+
+  template<typename Derived>
+  void assert_range(
+    const Eigen::MatrixBase<Derived>& actual,
+    const float min,
+    const float max,
+    int& result,
+    const std::string& tag)
+  {
+    if (actual.maxCoeff() > max || actual.minCoeff() < min)
+    {
+      result = EXIT_FAILURE;
+      std::cerr << tag << "Random matrix is not within range " << min << " and "
+                << max << std::endl;
+      std::cerr << "actual: " << actual << std::endl;
+    }
+  }
+
+  template<typename Derived0, typename Derived1, typename Derived2>
+  void assert_range(
+    const Eigen::MatrixBase<Derived0>& actual,
+    const Eigen::MatrixBase<Derived1>& min,
+    const Eigen::MatrixBase<Derived2>& max,
+    int& result,
+    const std::string& tag)
+  {
+    assert_equal(min.size(), max.size(), result, tag + " size");
+    if (result == EXIT_SUCCESS)
+    {
+      for (std::size_t i = 0; i < min.size(); ++i)
+      {
+        assert_range(
+          actual.col(i),
+          min[i],
+          max[i],
+          result,
+          tag + "[" + std::to_string(i) + "]");
+        if (result == EXIT_FAILURE)
+        {
+          break;
+        }
+      }
+    }
+  }
+
 } // namespace test
 
 #endif
