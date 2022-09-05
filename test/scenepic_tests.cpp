@@ -288,6 +288,7 @@ int main(int argc, char** argv)
   tests["io"] = test_io;
   tests["label"] = test_label;
   tests["layer_settings"] = test_layer_settings;
+  tests["matrix"] = test_matrix;
   tests["mesh_update"] = test_mesh_update;
   tests["primitives"] = test_primitives;
   tests["quantization"] = test_quantization;

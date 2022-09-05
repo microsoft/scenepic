@@ -20,6 +20,7 @@ set( TESTS
   io
   label
   layer_settings
+  matrix
   mesh_update
   primitives
   quantization
