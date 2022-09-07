@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['yellow_0',['Yellow',['../namespacescenepic_1_1_colors.html#a26dc6aae7a0e1a1d32df3a53f60d72a7',1,'scenepic::Colors']]]
+  ['white_0',['White',['../namespacescenepic_1_1_colors.html#a9b5f2ff88f9cc501b3f984514916be8b',1,'scenepic::Colors']]]
 ];

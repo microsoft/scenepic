@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">scenepic<span id="projectnumber">&#160;1.0.7</span>
+   <div id="projectname">scenepic<span id="projectnumber">&#160;1.0.14</span>
    </div>
    <div id="projectbrief">3D Visualization Made Easy</div>
   </td>
@@ -86,15 +86,18 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structscenepic_1_1_graph_1_1_margin.html">Margin</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the margin along the edges of a graph.  <a href="structscenepic_1_1_graph_1_1_margin.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structscenepic_1_1_graph_1_1_vertical_rule.html">VerticalRule</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a vertical line in a sparkline graph.  <a href="structscenepic_1_1_graph_1_1_vertical_rule.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a83845c53183dc7d7138943a17a4840a8"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classscenepic_1_1_graph.html#a83845c53183dc7d7138943a17a4840a8">canvas_id</a> () const</td></tr>
 <tr class="memdesc:a83845c53183dc7d7138943a17a4840a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">A unique identifier for the canvas.  <a href="classscenepic_1_1_graph.html#a83845c53183dc7d7138943a17a4840a8">More...</a><br /></td></tr>
 <tr class="separator:a83845c53183dc7d7138943a17a4840a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ffeab89d1591ab2c224dc829c3796f0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classscenepic_1_1_graph.html#a7ffeab89d1591ab2c224dc829c3796f0">add_sparkline</a> (const std::string &amp;name, const std::vector&lt; float &gt; &amp;values, const <a class="el" href="classscenepic_1_1_color.html">scenepic::Color</a> &amp;line_color=<a class="el" href="namespacescenepic_1_1_colors.html#ab1e76f7f54afed7160790c05c3521c72">scenepic::Colors::Black</a>, float line_width=1.0f)</td></tr>
-<tr class="memdesc:a7ffeab89d1591ab2c224dc829c3796f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a sparkline to the graph.  <a href="classscenepic_1_1_graph.html#a7ffeab89d1591ab2c224dc829c3796f0">More...</a><br /></td></tr>
-<tr class="separator:a7ffeab89d1591ab2c224dc829c3796f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a349e97442e53a343e9ccaa562fd84bc5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classscenepic_1_1_graph.html#a349e97442e53a343e9ccaa562fd84bc5">add_sparkline</a> (const std::string &amp;name, const std::vector&lt; float &gt; &amp;values, const <a class="el" href="classscenepic_1_1_color.html">scenepic::Color</a> &amp;line_color=<a class="el" href="namespacescenepic_1_1_colors.html#ab1e76f7f54afed7160790c05c3521c72">scenepic::Colors::Black</a>, float line_width=1.0f, const std::vector&lt; <a class="el" href="structscenepic_1_1_graph_1_1_vertical_rule.html">VerticalRule</a> &gt; &amp;vertical_rules={})</td></tr>
+<tr class="memdesc:a349e97442e53a343e9ccaa562fd84bc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a sparkline to the graph.  <a href="classscenepic_1_1_graph.html#a349e97442e53a343e9ccaa562fd84bc5">More...</a><br /></td></tr>
+<tr class="separator:a349e97442e53a343e9ccaa562fd84bc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ad05c0da1c800185495ae5f58d787c6"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classscenepic_1_1_graph.html#a0ad05c0da1c800185495ae5f58d787c6">to_string</a> () const</td></tr>
 <tr class="memdesc:a0ad05c0da1c800185495ae5f58d787c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a JSON string representing the object.  <a href="classscenepic_1_1_graph.html#a0ad05c0da1c800185495ae5f58d787c6">More...</a><br /></td></tr>
 <tr class="separator:a0ad05c0da1c800185495ae5f58d787c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -113,18 +116,36 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae759db7d8e19d8faafaf9b3507cc8a92"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classscenepic_1_1_graph.html">Graph</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classscenepic_1_1_graph.html#ae759db7d8e19d8faafaf9b3507cc8a92">margin</a> (const <a class="el" href="structscenepic_1_1_graph_1_1_margin.html">Margin</a> &amp;margin)</td></tr>
 <tr class="memdesc:ae759db7d8e19d8faafaf9b3507cc8a92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the outside margin of the graph.  <a href="classscenepic_1_1_graph.html#ae759db7d8e19d8faafaf9b3507cc8a92">More...</a><br /></td></tr>
 <tr class="separator:ae759db7d8e19d8faafaf9b3507cc8a92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b40092330e5c1811857edeaadc64959"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classscenepic_1_1_graph.html#a5b40092330e5c1811857edeaadc64959">name_align</a> () const</td></tr>
+<tr class="memdesc:a5b40092330e5c1811857edeaadc64959"><td class="mdescLeft">&#160;</td><td class="mdescRight">How to align the sparkline label (one of 'left', 'right', 'top', 'bottom', or 'none')  <a href="classscenepic_1_1_graph.html#a5b40092330e5c1811857edeaadc64959">More...</a><br /></td></tr>
+<tr class="separator:a5b40092330e5c1811857edeaadc64959"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a310d328c6128f4c3ad6effa1c0d64e50"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classscenepic_1_1_graph.html">Graph</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classscenepic_1_1_graph.html#a310d328c6128f4c3ad6effa1c0d64e50">name_align</a> (const std::string &amp;name_align)</td></tr>
+<tr class="memdesc:a310d328c6128f4c3ad6effa1c0d64e50"><td class="mdescLeft">&#160;</td><td class="mdescRight">How to align the sparkline label (one of 'left', 'right', 'top', 'bottom', or 'none')  <a href="classscenepic_1_1_graph.html#a310d328c6128f4c3ad6effa1c0d64e50">More...</a><br /></td></tr>
+<tr class="separator:a310d328c6128f4c3ad6effa1c0d64e50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04081ea14ae08744a13d0798b334add4"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classscenepic_1_1_graph.html#a04081ea14ae08744a13d0798b334add4">value_align</a> () const</td></tr>
+<tr class="memdesc:a04081ea14ae08744a13d0798b334add4"><td class="mdescLeft">&#160;</td><td class="mdescRight">How to align the sparkline value (one of 'left', 'right', 'top', 'bottom', or 'none')  <a href="classscenepic_1_1_graph.html#a04081ea14ae08744a13d0798b334add4">More...</a><br /></td></tr>
+<tr class="separator:a04081ea14ae08744a13d0798b334add4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9774b920faa899280ca6f2347efd9a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classscenepic_1_1_graph.html">Graph</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classscenepic_1_1_graph.html#ac9774b920faa899280ca6f2347efd9a2">value_align</a> (const std::string &amp;value_align)</td></tr>
+<tr class="memdesc:ac9774b920faa899280ca6f2347efd9a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">How to align the sparkline value (one of 'left', 'right', 'top', 'bottom', or 'none')  <a href="classscenepic_1_1_graph.html#ac9774b920faa899280ca6f2347efd9a2">More...</a><br /></td></tr>
+<tr class="separator:ac9774b920faa899280ca6f2347efd9a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0cfca1b24605c4245579fb92881d6cfc"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classscenepic_1_1_graph.html#a0cfca1b24605c4245579fb92881d6cfc">font_family</a> () const</td></tr>
 <tr class="memdesc:a0cfca1b24605c4245579fb92881d6cfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">The font family used for the graph labels.  <a href="classscenepic_1_1_graph.html#a0cfca1b24605c4245579fb92881d6cfc">More...</a><br /></td></tr>
 <tr class="separator:a0cfca1b24605c4245579fb92881d6cfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae08a890eb5087d813f0c05354d09befe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classscenepic_1_1_graph.html">Graph</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classscenepic_1_1_graph.html#ae08a890eb5087d813f0c05354d09befe">font_family</a> (const std::string &amp;font_family)</td></tr>
 <tr class="memdesc:ae08a890eb5087d813f0c05354d09befe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the font family used for the graph labels.  <a href="classscenepic_1_1_graph.html#ae08a890eb5087d813f0c05354d09befe">More...</a><br /></td></tr>
 <tr class="separator:ae08a890eb5087d813f0c05354d09befe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af3509769e8f20f53a955b051788a48f0"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classscenepic_1_1_graph.html#af3509769e8f20f53a955b051788a48f0">text_size</a> () const</td></tr>
-<tr class="memdesc:af3509769e8f20f53a955b051788a48f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The size of the graph labels in pixels.  <a href="classscenepic_1_1_graph.html#af3509769e8f20f53a955b051788a48f0">More...</a><br /></td></tr>
-<tr class="separator:af3509769e8f20f53a955b051788a48f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95fd46798f9e7d9bdbea5af3199c5a9c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classscenepic_1_1_graph.html">Graph</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classscenepic_1_1_graph.html#a95fd46798f9e7d9bdbea5af3199c5a9c">text_size</a> (float text_size)</td></tr>
-<tr class="memdesc:a95fd46798f9e7d9bdbea5af3199c5a9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the size of the graph labels in pixels.  <a href="classscenepic_1_1_graph.html#a95fd46798f9e7d9bdbea5af3199c5a9c">More...</a><br /></td></tr>
-<tr class="separator:a95fd46798f9e7d9bdbea5af3199c5a9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f051b6b8c9b29229a300fcaa3750585"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classscenepic_1_1_graph.html#a5f051b6b8c9b29229a300fcaa3750585">name_size</a> () const</td></tr>
+<tr class="memdesc:a5f051b6b8c9b29229a300fcaa3750585"><td class="mdescLeft">&#160;</td><td class="mdescRight">The size of the graph labels in pixels.  <a href="classscenepic_1_1_graph.html#a5f051b6b8c9b29229a300fcaa3750585">More...</a><br /></td></tr>
+<tr class="separator:a5f051b6b8c9b29229a300fcaa3750585"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7140de6dd7624786c559d925c5355ad9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classscenepic_1_1_graph.html">Graph</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classscenepic_1_1_graph.html#a7140de6dd7624786c559d925c5355ad9">name_size</a> (float name_size)</td></tr>
+<tr class="memdesc:a7140de6dd7624786c559d925c5355ad9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the size of the graph labels in pixels.  <a href="classscenepic_1_1_graph.html#a7140de6dd7624786c559d925c5355ad9">More...</a><br /></td></tr>
+<tr class="separator:a7140de6dd7624786c559d925c5355ad9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d4217b62786825b5bfd501c5b8fa922"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classscenepic_1_1_graph.html#a1d4217b62786825b5bfd501c5b8fa922">value_size</a> () const</td></tr>
+<tr class="memdesc:a1d4217b62786825b5bfd501c5b8fa922"><td class="mdescLeft">&#160;</td><td class="mdescRight">The size of the graph labels in pixels.  <a href="classscenepic_1_1_graph.html#a1d4217b62786825b5bfd501c5b8fa922">More...</a><br /></td></tr>
+<tr class="separator:a1d4217b62786825b5bfd501c5b8fa922"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab786721499e0f612c680e3bae80e22db"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classscenepic_1_1_graph.html">Graph</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classscenepic_1_1_graph.html#ab786721499e0f612c680e3bae80e22db">value_size</a> (float value_size)</td></tr>
+<tr class="memdesc:ab786721499e0f612c680e3bae80e22db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the size of the graph labels in pixels.  <a href="classscenepic_1_1_graph.html#ab786721499e0f612c680e3bae80e22db">More...</a><br /></td></tr>
+<tr class="separator:ab786721499e0f612c680e3bae80e22db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2671c877d1293538726630be5690345c"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classscenepic_1_1_graph.html#a2671c877d1293538726630be5690345c">media_id</a> () const</td></tr>
 <tr class="memdesc:a2671c877d1293538726630be5690345c"><td class="mdescLeft">&#160;</td><td class="mdescRight">The unique ID of the media file associated with this canvas.  <a href="classscenepic_1_1_graph.html#a2671c877d1293538726630be5690345c">More...</a><br /></td></tr>
 <tr class="separator:a2671c877d1293538726630be5690345c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -140,8 +161,8 @@ Friends</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >A 2D viewport that animates one or more sparklines. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a7ffeab89d1591ab2c224dc829c3796f0" name="a7ffeab89d1591ab2c224dc829c3796f0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7ffeab89d1591ab2c224dc829c3796f0">&#9670;&nbsp;</a></span>add_sparkline()</h2>
+<a id="a349e97442e53a343e9ccaa562fd84bc5" name="a349e97442e53a343e9ccaa562fd84bc5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a349e97442e53a343e9ccaa562fd84bc5">&#9670;&nbsp;</a></span>add_sparkline()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -168,7 +189,13 @@ Friends</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>line_width</em> = <code>1.0f</code>&#160;</td>
+          <td class="paramname"><em>line_width</em> = <code>1.0f</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="structscenepic_1_1_graph_1_1_vertical_rule.html">VerticalRule</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>vertical_rules</em> = <code>{}</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -185,6 +212,7 @@ Friends</h2></td></tr>
     <tr><td class="paramname">values</td><td>a vector of measured values, one per frame </td></tr>
     <tr><td class="paramname">line_color</td><td>the color of the line (and its labels) </td></tr>
     <tr><td class="paramname">line_width</td><td>the width of the line </td></tr>
+    <tr><td class="paramname">vertical_rules</td><td>vertical rules to draw on the sparkline </td></tr>
   </table>
   </dd>
 </dl>
@@ -367,14 +395,53 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a id="af3509769e8f20f53a955b051788a48f0" name="af3509769e8f20f53a955b051788a48f0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af3509769e8f20f53a955b051788a48f0">&#9670;&nbsp;</a></span>text_size() <span class="overload">[1/2]</span></h2>
+<a id="a5b40092330e5c1811857edeaadc64959" name="a5b40092330e5c1811857edeaadc64959"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b40092330e5c1811857edeaadc64959">&#9670;&nbsp;</a></span>name_align() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float scenepic::Graph::text_size </td>
+          <td class="memname">const std::string &amp; scenepic::Graph::name_align </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>How to align the sparkline label (one of 'left', 'right', 'top', 'bottom', or 'none') </p>
+
+</div>
+</div>
+<a id="a310d328c6128f4c3ad6effa1c0d64e50" name="a310d328c6128f4c3ad6effa1c0d64e50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a310d328c6128f4c3ad6effa1c0d64e50">&#9670;&nbsp;</a></span>name_align() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classscenepic_1_1_graph.html">Graph</a> &amp; scenepic::Graph::name_align </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name_align</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>How to align the sparkline label (one of 'left', 'right', 'top', 'bottom', or 'none') </p>
+
+</div>
+</div>
+<a id="a5f051b6b8c9b29229a300fcaa3750585" name="a5f051b6b8c9b29229a300fcaa3750585"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f051b6b8c9b29229a300fcaa3750585">&#9670;&nbsp;</a></span>name_size() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float scenepic::Graph::name_size </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -386,17 +453,17 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a id="a95fd46798f9e7d9bdbea5af3199c5a9c" name="a95fd46798f9e7d9bdbea5af3199c5a9c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a95fd46798f9e7d9bdbea5af3199c5a9c">&#9670;&nbsp;</a></span>text_size() <span class="overload">[2/2]</span></h2>
+<a id="a7140de6dd7624786c559d925c5355ad9" name="a7140de6dd7624786c559d925c5355ad9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7140de6dd7624786c559d925c5355ad9">&#9670;&nbsp;</a></span>name_size() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classscenepic_1_1_graph.html">Graph</a> &amp; scenepic::Graph::text_size </td>
+          <td class="memname"><a class="el" href="classscenepic_1_1_graph.html">Graph</a> &amp; scenepic::Graph::name_size </td>
           <td>(</td>
           <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>text_size</em></td><td>)</td>
+          <td class="paramname"><em>name_size</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -445,6 +512,84 @@ Friends</h2></td></tr>
 
 </div>
 </div>
+<a id="a04081ea14ae08744a13d0798b334add4" name="a04081ea14ae08744a13d0798b334add4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04081ea14ae08744a13d0798b334add4">&#9670;&nbsp;</a></span>value_align() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string &amp; scenepic::Graph::value_align </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>How to align the sparkline value (one of 'left', 'right', 'top', 'bottom', or 'none') </p>
+
+</div>
+</div>
+<a id="ac9774b920faa899280ca6f2347efd9a2" name="ac9774b920faa899280ca6f2347efd9a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9774b920faa899280ca6f2347efd9a2">&#9670;&nbsp;</a></span>value_align() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classscenepic_1_1_graph.html">Graph</a> &amp; scenepic::Graph::value_align </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>value_align</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>How to align the sparkline value (one of 'left', 'right', 'top', 'bottom', or 'none') </p>
+
+</div>
+</div>
+<a id="a1d4217b62786825b5bfd501c5b8fa922" name="a1d4217b62786825b5bfd501c5b8fa922"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d4217b62786825b5bfd501c5b8fa922">&#9670;&nbsp;</a></span>value_size() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float scenepic::Graph::value_size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The size of the graph labels in pixels. </p>
+
+</div>
+</div>
+<a id="ab786721499e0f612c680e3bae80e22db" name="ab786721499e0f612c680e3bae80e22db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab786721499e0f612c680e3bae80e22db">&#9670;&nbsp;</a></span>value_size() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classscenepic_1_1_graph.html">Graph</a> &amp; scenepic::Graph::value_size </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>value_size</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the size of the graph labels in pixels. </p>
+
+</div>
+</div>
 <h2 class="groupheader">Friends And Related Function Documentation</h2>
 <a id="a032858ae1fe02d2d1170981c2af2d67c" name="a032858ae1fe02d2d1170981c2af2d67c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a032858ae1fe02d2d1170981c2af2d67c">&#9670;&nbsp;</a></span>Scene</h2>
@@ -474,7 +619,7 @@ Friends</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 10 2022 16:03:56 for scenepic by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
+Generated on Wed Sep 7 2022 22:07:49 for scenepic by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
 </small></address>
 </body>
 </html>

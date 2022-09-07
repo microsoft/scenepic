@@ -21,7 +21,7 @@ var searchData=
   ['add_5fmeshes_5fby_5fid_18',['add_meshes_by_id',['../classscenepic_1_1_frame3_d.html#a74241ec43c7cf3a3a0db8e6fd7a97281',1,'scenepic::Frame3D']]],
   ['add_5fquad_19',['add_quad',['../classscenepic_1_1_mesh.html#ab2439d08f2d59328dd0e0a0cc39feace',1,'scenepic::Mesh']]],
   ['add_5frectangle_20',['add_rectangle',['../classscenepic_1_1_frame2_d.html#a1207455110716130428791d01d7c938d',1,'scenepic::Frame2D']]],
-  ['add_5fsparkline_21',['add_sparkline',['../classscenepic_1_1_graph.html#a7ffeab89d1591ab2c224dc829c3796f0',1,'scenepic::Graph']]],
+  ['add_5fsparkline_21',['add_sparkline',['../classscenepic_1_1_graph.html#a349e97442e53a343e9ccaa562fd84bc5',1,'scenepic::Graph']]],
   ['add_5fsphere_22',['add_sphere',['../classscenepic_1_1_mesh.html#a2ec960914f66d080ce9b91b7f6f558a3',1,'scenepic::Mesh']]],
   ['add_5ftext_23',['add_text',['../classscenepic_1_1_frame2_d.html#aec5fc1d557fa0fe4d01de5e93b7143f8',1,'scenepic::Frame2D']]],
   ['add_5fthickline_24',['add_thickline',['../classscenepic_1_1_mesh.html#adecdbb4f80d286d0f9bd317413a314c2',1,'scenepic::Mesh']]],

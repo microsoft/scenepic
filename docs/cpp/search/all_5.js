@@ -6,11 +6,12 @@ var searchData=
   ['focus_5fpoint_2eh_3',['focus_point.h',['../focus__point_8h.html',1,'']]],
   ['focuspoint_4',['FocusPoint',['../classscenepic_1_1_focus_point.html#acf467b1abfeb81edc1ca1d3a57184271',1,'scenepic::FocusPoint::FocusPoint()'],['../classscenepic_1_1_focus_point.html',1,'scenepic::FocusPoint']]],
   ['font_5ffamily_5',['font_family',['../classscenepic_1_1_graph.html#a0cfca1b24605c4245579fb92881d6cfc',1,'scenepic::Graph::font_family() const'],['../classscenepic_1_1_graph.html#ae08a890eb5087d813f0c05354d09befe',1,'scenepic::Graph::font_family(const std::string &amp;font_family)'],['../classscenepic_1_1_label.html#ad55eb053a80aa98967d4dc0685b21a79',1,'scenepic::Label::font_family() const'],['../classscenepic_1_1_label.html#ab7959119ce285a586c4554e51e3a081d',1,'scenepic::Label::font_family(const std::string &amp;value)']]],
-  ['frame2d_6',['Frame2D',['../classscenepic_1_1_frame2_d.html',1,'scenepic']]],
-  ['frame2d_2eh_7',['frame2d.h',['../frame2d_8h.html',1,'']]],
-  ['frame3d_8',['Frame3D',['../classscenepic_1_1_frame3_d.html',1,'scenepic']]],
-  ['frame3d_2eh_9',['frame3d.h',['../frame3d_8h.html',1,'']]],
-  ['frame_5findex_10',['frame_index',['../classscenepic_1_1_mesh_update.html#afb875a9a10ed2b00a14ff6a5dc8b87a7',1,'scenepic::MeshUpdate']]],
-  ['framerate_11',['framerate',['../classscenepic_1_1_scene.html#a6535d8fe34529b2d022dfda7ce1d763e',1,'scenepic::Scene::framerate() const'],['../classscenepic_1_1_scene.html#a1137b71930ed2878d2ed7825ea93d8c0',1,'scenepic::Scene::framerate(float fps)']]],
-  ['from_5fbytes_12',['from_bytes',['../classscenepic_1_1_color.html#a0f4990124969d564b7241d849054eb83',1,'scenepic::Color']]]
+  ['frame_6',['frame',['../structscenepic_1_1_graph_1_1_vertical_rule.html#aeb8710f204c08187aee607f7af521c8b',1,'scenepic::Graph::VerticalRule']]],
+  ['frame2d_7',['Frame2D',['../classscenepic_1_1_frame2_d.html',1,'scenepic']]],
+  ['frame2d_2eh_8',['frame2d.h',['../frame2d_8h.html',1,'']]],
+  ['frame3d_9',['Frame3D',['../classscenepic_1_1_frame3_d.html',1,'scenepic']]],
+  ['frame3d_2eh_10',['frame3d.h',['../frame3d_8h.html',1,'']]],
+  ['frame_5findex_11',['frame_index',['../classscenepic_1_1_mesh_update.html#afb875a9a10ed2b00a14ff6a5dc8b87a7',1,'scenepic::MeshUpdate']]],
+  ['framerate_12',['framerate',['../classscenepic_1_1_scene.html#a6535d8fe34529b2d022dfda7ce1d763e',1,'scenepic::Scene::framerate() const'],['../classscenepic_1_1_scene.html#a1137b71930ed2878d2ed7825ea93d8c0',1,'scenepic::Scene::framerate(float fps)']]],
+  ['from_5fbytes_13',['from_bytes',['../classscenepic_1_1_color.html#a0f4990124969d564b7241d849054eb83',1,'scenepic::Color']]]
 ];

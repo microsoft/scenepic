@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Image &mdash; scenepic 1.0.7 documentation</title>
+  <title>Image &mdash; scenepic 1.0.14 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -86,33 +86,12 @@
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">Image</span></span><a class="headerlink" href="#scenepic.Image" title="Permalink to this definition"></a></dt>
 <dd><p>A ScenePic Image type</p>
 <dl class="py property">
-<dt class="sig sig-object py" id="scenepic.Image.data">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#scenepic.Image.data" title="Permalink to this definition"></a></dt>
-<dd><p>The binary image data</p>
-</dd></dl>
-
-<dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Image.ext">
 <em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">ext</span></span><a class="headerlink" href="#scenepic.Image.ext" title="Permalink to this definition"></a></dt>
 <dd><p>The extension of the image (e.g. JPG, PNG)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="scenepic.Image.from_numpy">
-<span class="sig-name descname"><span class="pre">from_numpy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format_str</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'png'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Image.from_numpy" title="Permalink to this definition"></a></dt>
-<dd><p>Loads the image object from raw RGB values provided as a numpy array.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>self</strong> (<a class="reference internal" href="#scenepic.Image" title="scenepic.Image"><em>Image</em></a>) – self reference</p></li>
-<li><p><strong>array</strong> (<em>np.ndarray</em>) – The raw pixel RGB as either 0-255 bytes or 0-1 floats.</p></li>
-<li><p><strong>format_str</strong> (<em>str</em><em>, </em><em>optional</em>) – The format to use when compressing the image. Defaults to “png”.</p></li>
-</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -139,21 +118,6 @@
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="scenepic.Image.load_from_buffer">
-<span class="sig-name descname"><span class="pre">load_from_buffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ext</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Image.load_from_buffer" title="Permalink to this definition"></a></dt>
-<dd><p>Load an image from a pre-existing data buffer and extension.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>self</strong> (<a class="reference internal" href="#scenepic.Image" title="scenepic.Image"><em>Image</em></a>) – self reference</p></li>
-<li><p><strong>data</strong> (<em>bytes</em>) – the binary data for the image</p></li>
-<li><p><strong>ext</strong> (<em>str</em>) – the format of the image data [e.g. “gif”, “jpg”, “png”]</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
 </dd></dl>
 
 </section>
@@ -174,12 +138,6 @@
 </dl>
 </dd></dl>
 
-<dl class="py property">
-<dt class="sig sig-object py" id="scenepic.AudioTrack.data">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#scenepic.AudioTrack.data" title="Permalink to this definition"></a></dt>
-<dd><p>The binary audio data</p>
-</dd></dl>
-
 <dl class="py method">
 <dt class="sig sig-object py" id="scenepic.AudioTrack.load">
 <span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.AudioTrack.load" title="Permalink to this definition"></a></dt>
@@ -187,21 +145,6 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – the path to the audio file</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="scenepic.AudioTrack.load_from_buffer">
-<span class="sig-name descname"><span class="pre">load_from_buffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ext</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.AudioTrack.load_from_buffer" title="Permalink to this definition"></a></dt>
-<dd><p>Load audio from a pre-existing data buffer and extension.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>self</strong> (<a class="reference internal" href="#scenepic.AudioTrack" title="scenepic.AudioTrack"><em>AudioTrack</em></a>) – self reference</p></li>
-<li><p><strong>data</strong> (<em>bytes</em>) – the binary data for the audio</p></li>
-<li><p><strong>ext</strong> (<em>str</em>) – the file extension (e.g. mp3, ogg, wav)</p></li>
-</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -215,12 +158,6 @@
 <dt class="sig sig-object py" id="scenepic.Video">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">Video</span></span><a class="headerlink" href="#scenepic.Video" title="Permalink to this definition"></a></dt>
 <dd><p>A ScenePic Video type</p>
-<dl class="py property">
-<dt class="sig sig-object py" id="scenepic.Video.data">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#scenepic.Video.data" title="Permalink to this definition"></a></dt>
-<dd><p>The binary audio data</p>
-</dd></dl>
-
 <dl class="py method">
 <dt class="sig sig-object py" id="scenepic.Video.load">
 <span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Video.load" title="Permalink to this definition"></a></dt>
@@ -228,21 +165,6 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – the path to the video file</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="scenepic.Video.load_from_buffer">
-<span class="sig-name descname"><span class="pre">load_from_buffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ext</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Video.load_from_buffer" title="Permalink to this definition"></a></dt>
-<dd><p>Load video from a pre-existing data buffer and extension.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>self</strong> (<a class="reference internal" href="#scenepic.Video" title="scenepic.Video"><em>Video</em></a>) – self reference</p></li>
-<li><p><strong>data</strong> (<em>bytes</em>) – the binary data for the video</p></li>
-<li><p><strong>ext</strong> (<em>str</em>) – the file extension (e.g. mp4, mkv)</p></li>
-</ul>
 </dd>
 </dl>
 </dd></dl>

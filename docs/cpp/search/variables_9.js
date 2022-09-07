@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['pink_0',['Pink',['../namespacescenepic_1_1_colors.html#ae6b3bd6441cf5c11bbfa4b510ef3e7a7',1,'scenepic::Colors']]],
-  ['purple_1',['Purple',['../namespacescenepic_1_1_colors.html#a8e10bcc29fc7d070a9ff0e9dccb19d13',1,'scenepic::Colors']]]
+  ['olive_0',['Olive',['../namespacescenepic_1_1_colors.html#a0f9b775570bf28c8e0ac8731dfa31013',1,'scenepic::Colors']]],
+  ['orange_1',['Orange',['../namespacescenepic_1_1_colors.html#ab3e06abe2ac6f65f17870038bf254194',1,'scenepic::Colors']]]
 ];

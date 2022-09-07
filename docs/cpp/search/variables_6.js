@@ -1,11 +1,7 @@
 var searchData=
 [
-  ['m_5fcamera_5fto_5fworld_0',['m_camera_to_world',['../classscenepic_1_1_camera.html#af533aa505339554f87834227c4396fbc',1,'scenepic::Camera']]],
-  ['m_5fprojection_1',['m_projection',['../classscenepic_1_1_camera.html#a435a7af57ff80e93cf474cd7abc8af89',1,'scenepic::Camera']]],
-  ['m_5fworld_5fto_5fcamera_2',['m_world_to_camera',['../classscenepic_1_1_camera.html#aa663c069fc6d2edfc7ce717b4425f593',1,'scenepic::Camera']]],
-  ['magenta_3',['Magenta',['../namespacescenepic_1_1_colors.html#a43b6d00cd4e17357627fb040a32e3787',1,'scenepic::Colors']]],
-  ['maroon_4',['Maroon',['../namespacescenepic_1_1_colors.html#a51e4f3e4cd92e2e39715ed805ed78b72',1,'scenepic::Colors']]],
-  ['max_5ferror_5',['max_error',['../structscenepic_1_1_quantization_info.html#a3c4d6428a621421359a9edaff466ff5b',1,'scenepic::QuantizationInfo']]],
-  ['mean_5ferror_6',['mean_error',['../structscenepic_1_1_quantization_info.html#a072673c384fa9c2553df9b2a98ddaf8e',1,'scenepic::QuantizationInfo']]],
-  ['mint_7',['Mint',['../namespacescenepic_1_1_colors.html#a7b2377640e5f8985d6bea1debf99d74b',1,'scenepic::Colors']]]
+  ['lavender_0',['Lavender',['../namespacescenepic_1_1_colors.html#ab867fb06fe043dfa9b53a46176f6f940',1,'scenepic::Colors']]],
+  ['left_1',['left',['../structscenepic_1_1_graph_1_1_margin.html#a8528843f782154408bd382a1c4c1c862',1,'scenepic::Graph::Margin']]],
+  ['lime_2',['Lime',['../namespacescenepic_1_1_colors.html#a485b94100538361e112fb853c8aa6014',1,'scenepic::Colors']]],
+  ['line_5fwidth_3',['line_width',['../structscenepic_1_1_graph_1_1_vertical_rule.html#abe192c735b7c70e2df162d943c9d1ce2',1,'scenepic::Graph::VerticalRule']]]
 ];

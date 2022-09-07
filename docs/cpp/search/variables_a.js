@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['quantizationbincount_0',['QuantizationBinCount',['../classscenepic_1_1_mesh_update.html#aee3b7401fec9d2112ebdf959362ee2e3',1,'scenepic::MeshUpdate']]]
+  ['pink_0',['Pink',['../namespacescenepic_1_1_colors.html#ae6b3bd6441cf5c11bbfa4b510ef3e7a7',1,'scenepic::Colors']]],
+  ['purple_1',['Purple',['../namespacescenepic_1_1_colors.html#a8e10bcc29fc7d070a9ff0e9dccb19d13',1,'scenepic::Colors']]]
 ];

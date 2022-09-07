@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>API &mdash; scenepic 1.0.7 documentation</title>
+  <title>API &mdash; scenepic 1.0.14 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -256,13 +256,20 @@ will simply be appended to document). Defaults to None.</p></li>
 automatically populated if not provided). Defaults to None.</p></li>
 <li><p><strong>width</strong> (<em>int</em><em>, </em><em>optional</em>) – the width in pixels of the Canvas on the HTML page. Defaults to 400.</p></li>
 <li><p><strong>height</strong> (<em>int</em><em>, </em><em>optional</em>) – the height in pixels of the Canvas on the HTML page. Defaults to 400.</p></li>
+<li><p><strong>name_align</strong> (<em>str</em><em>, </em><em>optional</em>) – How to align the sparkline label
+(one of ‘left’, ‘right’, ‘top’, or ‘bottom’).
+Defaults to ‘left’.</p></li>
+<li><p><strong>value_align</strong> (<em>str</em><em>, </em><em>optional</em>) – How to align the sparkline value
+(one of ‘left’, ‘right’, ‘top’, or ‘bottom’).
+Defaults to ‘right’.</p></li>
 <li><p><strong>html_id</strong> (<em>str</em><em>, </em><em>optional</em>) – id of an HTML element to use as this
 Canvas’s parent in the HTML DOM (otherwise simply
 appended to document). Defaults to None.</p></li>
 <li><p><strong>background_color</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – the background color of the canvas. Defaults to White.</p></li>
-<li><p><strong>margin</strong> (<em>Margin</em><em>, </em><em>optional</em>) – the outer margin of the graph. Defaults to Margin(10).</p></li>
+<li><p><strong>margin</strong> (<a class="reference internal" href="graphics2d.html#scenepic.Graph.Margin" title="scenepic.Graph.Margin"><em>Margin</em></a><em>, </em><em>optional</em>) – the outer margin of the graph. Defaults to Margin(10).</p></li>
 <li><p><strong>font_family</strong> (<em>str</em><em>, </em><em>optional</em>) – the font family used for the graph labels. Defaults to “sans-serif”.</p></li>
-<li><p><strong>text_size</strong> (<em>float</em><em>, </em><em>optional</em>) – the text size in pixels used for the graph labels. Defaults to 12.0.</p></li>
+<li><p><strong>name_size</strong> (<em>float</em><em>, </em><em>optional</em>) – the text size in pixels used for the graph labels. Defaults to 12.0.</p></li>
+<li><p><strong>value_size</strong> (<em>float</em><em>, </em><em>optional</em>) – the text size in pixels used for the graph values. Defaults to 12.0.</p></li>
 <li><p><strong>media_id</strong> (<em>str</em><em>, </em><em>optional</em>) – optional ID of a media file to attach to the canvas. This file will be
 used to drive playback, i.e. frames will be displayed in time with
 the playback of the media file.</p></li>
@@ -330,50 +337,6 @@ camera space. Defaults to False.</p></li>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="graphics3d.html#scenepic.Label" title="scenepic.Label">Label</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="scenepic.Scene.create_mesh">
-<span class="sig-name descname"><span class="pre">create_mesh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mesh_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.create_mesh" title="Permalink to this definition"></a></dt>
-<dd><p>Create a new Mesh and append to the Scene.</p>
-<dl class="simple">
-<dt>Description:</dt><dd><p>Meshes are Scene-wide resources that can be reused across multiple
-Frames in multiple Canvas3Ds.</p>
-</dd>
-</dl>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>mesh_id</strong> (<em>str</em><em>, </em><em>optional</em>) – a unique identifier for the Mesh (will be
-automatically populated if not provided). Defaults to None.</p></li>
-<li><p><strong>layer_id</strong> (<em>str</em><em>, </em><em>optional</em>) – an identifier to allow several Meshes to be grouped together
-into a “layer”.  Layers should be used in conjunction with
-Canvas3D.set_layer_settings(). Defaults to None.</p></li>
-<li><p><strong>double_sided</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether to turn off back face culling and draw the Mesh’s
-triangles as double sided. Defaults to False.</p></li>
-<li><p><strong>camera_space</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether this Mesh is defined in camera space (cannot
-be moved in the ScenePic user interface) or world space (standard).
-Defaults to False.</p></li>
-<li><p><strong>shared_color</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – see <cite>Mesh</cite> constructor.</p></li>
-<li><p><strong>texture_id</strong> (<em>str</em><em>, </em><em>optional</em>) – see <cite>Mesh</cite> constructor.</p></li>
-<li><p><strong>nn_texture</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether the shader should use nearest-neighbor
-texture interpolation. Defaults to True.</p></li>
-<li><p><strong>use_texture_alpha</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether to use the alpha channel in the texture
-for transparency (only relevant for textured Meshes).
-Defaults to True.</p></li>
-<li><p><strong>is_billboard</strong> (<em>bool</em><em>, </em><em>optional</em>) – draw this Mesh as a billboard (i.e. always facing the user)
-rather than rotating with the rest of the world. Defaults to False.</p></li>
-<li><p><strong>is_label</strong> (<em>bool</em><em>, </em><em>optional</em>) – this mesh will be treated specially as a label. Not for public use.
-Defaults to False.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>a reference to the new Mesh object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="graphics3d.html#scenepic.Mesh" title="scenepic.Mesh">Mesh</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -483,20 +446,6 @@ the Scene since the last call to clear_script().</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="scenepic.Scene.link_canvas_events">
-<span class="sig-name descname"><span class="pre">link_canvas_events</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">canvases</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.link_canvas_events" title="Permalink to this definition"></a></dt>
-<dd><p>Specify that all input events should be linked across the provided set of Canvases.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>self</strong> (<a class="reference internal" href="#scenepic.Scene" title="scenepic.Scene"><em>Scene</em></a>) – self reference</p></li>
-<li><p><strong>canvases</strong> – the canvases which should have linked events</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="scenepic.Scene.measure_command_size">
 <span class="sig-name descname"><span class="pre">measure_command_size</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.measure_command_size" title="Permalink to this definition"></a></dt>
 <dd><p>Measures the number of bytes used by command type.</p>
@@ -582,6 +531,12 @@ dependencies.</p>
 <li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – the HTML title. Defaults to “ScenePic”.</p></li>
 <li><p><strong>head_html</strong> (<em>str</em><em>, </em><em>optional</em>) – the raw HTML to place in the HEAD tag. Defaults to None.</p></li>
 <li><p><strong>body_html</strong> (<em>str</em><em>, </em><em>optional</em>) – the raw HTML to place in the BODY tag. Defaults to None.</p></li>
+<li><p><strong>script_path</strong> (<em>str</em><em>, </em><em>optional</em>) – desired relative path for the script. A value of None
+indicates to embed the script in the HTML page.
+Defaults to None.</p></li>
+<li><p><strong>library_path</strong> (<em>str</em><em>, </em><em>optional</em>) – desired relative path for the library. A value of None
+indicates to embed the library in the HTML page.
+Defaults to None.</p></li>
 </ul>
 </dd>
 </dl>
@@ -632,22 +587,6 @@ by including the library</p></li>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="scenepic.Scene.simulate_key_presses">
-<span class="sig-name descname"><span class="pre">simulate_key_presses</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">canvas_id</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">keypresses</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.simulate_key_presses" title="Permalink to this definition"></a></dt>
-<dd><p>Simulates one or more keypresses to fire off events in the ScenePic UI at startup, e.g. video playback.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>self</strong> (<a class="reference internal" href="#scenepic.Scene" title="scenepic.Scene"><em>Scene</em></a>) – self reference</p></li>
-<li><p><strong>canvas_id</strong> (<em>Union</em><em>[</em><a class="reference internal" href="graphics3d.html#scenepic.Canvas3D" title="scenepic.Canvas3D"><em>Canvas3D</em></a><em>, </em><a class="reference internal" href="graphics2d.html#scenepic.Canvas2D" title="scenepic.Canvas2D"><em>Canvas2D</em></a><em>, </em><em>str</em><em>]</em>) – ID of the canvas on which to fire off this
-event.</p></li>
-<li><p><strong>keypresses</strong> – the key values</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Scene.status_bar_visibility">
 <em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">status_bar_visibility</span></span><a class="headerlink" href="#scenepic.Scene.status_bar_visibility" title="Permalink to this definition"></a></dt>
@@ -688,7 +627,7 @@ automatically populated if not provided). Defaults to None.</p></li>
 <dl class="py method">
 <dt class="sig sig-object py" id="scenepic.Scene.update_mesh">
 <span class="sig-name descname"><span class="pre">update_mesh</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.update_mesh" title="Permalink to this definition"></a></dt>
-<dd><p>Create a new mesh from an existing one by replacing its vector positions and normals.</p>
+<dd><p>Create a new mesh from an existing one by replacing its vector positions, normals, and/or colors.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">

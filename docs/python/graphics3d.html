@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Canvas3D &mdash; scenepic 1.0.7 documentation</title>
+  <title>Canvas3D &mdash; scenepic 1.0.14 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -125,31 +125,6 @@ visualization into multiple files.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="scenepic.Canvas3D.create_frame">
-<span class="sig-name descname"><span class="pre">create_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">focus_point</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meshes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">camera</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Canvas3D.create_frame" title="Permalink to this definition"></a></dt>
-<dd><p>Creates a new Frame3D object and appends to the list of Frame3Ds in the Canvas3D.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>frame_id</strong> (<em>str</em>) – a unique identifier for the Frame3D (will be
-automatically populated if not provided).</p></li>
-<li><p><strong>focus_point</strong> (<a class="reference internal" href="#scenepic.FocusPoint" title="scenepic.FocusPoint"><em>FocusPoint</em></a>) – optional 3D focus point for this frame (with optional 3D
-rotation for orientation lock), used in the ScenePic user interface.</p></li>
-<li><p><strong>meshes</strong> (<em>List</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="#scenepic.Mesh" title="scenepic.Mesh"><em>Mesh</em></a><em>, </em><a class="reference internal" href="#scenepic.MeshUpdate" title="scenepic.MeshUpdate"><em>MeshUpdate</em></a><em>, </em><em>str</em><em>]</em><em>]</em>) – optionally pre-populate this Frame3D
-with a set of Meshes, for convenience.</p></li>
-<li><p><strong>camera</strong> (<a class="reference internal" href="#scenepic.Camera" title="scenepic.Camera"><em>Camera</em></a>) – optionally set a camera for this frame</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>a new Frame3D object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#scenepic.Frame3D" title="scenepic.Frame3D">Frame3D</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="scenepic.Canvas3D.create_frame_">
 <span class="sig-name descname"><span class="pre">create_frame_</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Canvas3D.create_frame_" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a new Frame3D object and appends to the list of Frame3Ds in the Canvas3D.</p>
@@ -206,28 +181,6 @@ displayed in time with the playback of the media file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="scenepic.Canvas3D.set_layer_settings">
-<span class="sig-name descname"><span class="pre">set_layer_settings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layer_settings</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Canvas3D.set_layer_settings" title="Permalink to this definition"></a></dt>
-<dd><p>Specify the visibilities and opacities of certain mesh layers.</p>
-<dl class="simple">
-<dt>Description:</dt><dd><p>Each Mesh object can optionally be part of a user-identified layer
-(see Mesh constructor).
-Calling set_layer_settings will result in an additional drop-down
-selector in the ScenePic user interface.</p>
-</dd>
-</dl>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>self</strong> (<a class="reference internal" href="#scenepic.Canvas3D" title="scenepic.Canvas3D"><em>Canvas3D</em></a>) – the self reference</p></li>
-<li><p><strong>layer_settings</strong> (<em>Mapping</em><em>[</em><em>str</em><em>, </em><em>Union</em><em>[</em><em>dict</em><em>, </em><a class="reference internal" href="ui.html#scenepic.LayerSettings" title="scenepic.LayerSettings"><em>LayerSettings</em></a><em>]</em><em>]</em>) – a LayerSettings object
-or a dictionary. See LayerSettings for details.</p></li>
-</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -299,21 +252,6 @@ transformed Mesh objects.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="scenepic.Frame3D.add_mesh">
-<span class="sig-name descname"><span class="pre">add_mesh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mesh</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Frame3D.add_mesh" title="Permalink to this definition"></a></dt>
-<dd><p>Adds a mesh to the frame.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>self</strong> (<a class="reference internal" href="#scenepic.Frame3D" title="scenepic.Frame3D"><em>Frame3D</em></a>) – self reference</p></li>
-<li><p><strong>mesh</strong> (<em>Union</em><em>[</em><a class="reference internal" href="#scenepic.Mesh" title="scenepic.Mesh"><em>Mesh</em></a><em>, </em><a class="reference internal" href="#scenepic.MeshUpdate" title="scenepic.MeshUpdate"><em>MeshUpdate</em></a><em>, </em><em>str</em><em>]</em>) – The mesh, mesh update, or mesh ID</p></li>
-<li><p><strong>transform</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – An optional transform to apply to the mesh. Defaults to None.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="scenepic.Frame3D.add_mesh_">
 <span class="sig-name descname"><span class="pre">add_mesh_</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Frame3D.add_mesh_" title="Permalink to this definition"></a></dt>
 <dd><p>Add a mesh to the frame.</p>
@@ -322,21 +260,6 @@ transformed Mesh objects.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>mesh_id</strong> (<em>str</em>) – the id of the mesh to add</p></li>
 <li><p><strong>transform</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – homogeneous 3D transform applied to the mesh. Defaulst to None.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="scenepic.Frame3D.add_meshes">
-<span class="sig-name descname"><span class="pre">add_meshes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meshes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Frame3D.add_meshes" title="Permalink to this definition"></a></dt>
-<dd><p>Adds meshes to the frame.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>self</strong> (<a class="reference internal" href="#scenepic.Frame3D" title="scenepic.Frame3D"><em>Frame3D</em></a>) – self reference</p></li>
-<li><p><strong>meshes</strong> (<em>List</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="#scenepic.Mesh" title="scenepic.Mesh"><em>Mesh</em></a><em>, </em><a class="reference internal" href="#scenepic.MeshUpdate" title="scenepic.MeshUpdate"><em>MeshUpdate</em></a><em>, </em><em>str</em><em>]</em><em>]</em>) – A list of meshes and mesh updates (or their IDs)</p></li>
-<li><p><strong>transform</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – an optional transform to apply to each mesh. Defaults to None.</p></li>
 </ul>
 </dd>
 </dl>
@@ -377,28 +300,6 @@ subsequent frames use the specified camera parameters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="#scenepic.FocusPoint" title="scenepic.FocusPoint">FocusPoint</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="scenepic.Frame3D.set_layer_settings">
-<span class="sig-name descname"><span class="pre">set_layer_settings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layer_settings</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Frame3D.set_layer_settings" title="Permalink to this definition"></a></dt>
-<dd><p>Specify the visibilities and opacities of certain mesh layers.</p>
-<dl class="simple">
-<dt>Description:</dt><dd><p>Each Mesh object can optionally be part of a user-identified layer
-(see Mesh constructor).
-Calling set_layer_settings will result in an additional drop-down
-selector in the ScenePic user interface.</p>
-</dd>
-</dl>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>self</strong> (<a class="reference internal" href="#scenepic.Canvas3D" title="scenepic.Canvas3D"><em>Canvas3D</em></a>) – the self reference</p></li>
-<li><p><strong>layer_settings</strong> (<em>Mapping</em><em>[</em><em>str</em><em>, </em><em>Union</em><em>[</em><em>dict</em><em>, </em><a class="reference internal" href="ui.html#scenepic.LayerSettings" title="scenepic.LayerSettings"><em>LayerSettings</em></a><em>]</em><em>]</em>) – a LayerSettings object
-or a dictionary. See LayerSettings for details.</p></li>
-</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -570,12 +471,7 @@ and apex at [-0.5, 0., 0.].</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="scenepic.Mesh.add_icosphere">
 <span class="sig-name descname"><span class="pre">add_icosphere</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Mesh.add_icosphere" title="Permalink to this definition"></a></dt>
-<dd><p>Add a unit diameter UV sphere to this Mesh.</p>
-<dl class="simple">
-<dt>Description:</dt><dd><p>If the mesh has a texture attached, this method will automatically create
-a set of vertex UVs which unwraps the sphere to map to the full UV space.</p>
-</dd>
-</dl>
+<dd><p>Add a unit diameter ico-sphere to this Mesh</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -777,6 +673,11 @@ All points are assumed to lie on the same plane.</p>
 <dt class="sig sig-object py" id="scenepic.Mesh.add_uv_sphere">
 <span class="sig-name descname"><span class="pre">add_uv_sphere</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Mesh.add_uv_sphere" title="Permalink to this definition"></a></dt>
 <dd><p>Add a unit diameter UV sphere to this Mesh.</p>
+<dl class="simple">
+<dt>Description:</dt><dd><p>If the mesh has a texture attached, this method will automatically create
+a set of vertex UVs which unwraps the sphere to map to the full UV space.</p>
+</dd>
+</dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -1007,17 +908,6 @@ Useful when interoping with existing codebases that use opposite convention</p>
 </dl>
 </dd></dl>
 
-<dl class="py property">
-<dt class="sig sig-object py" id="scenepic.Mesh.vertex_buffer">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">vertex_buffer</span></span><a class="headerlink" href="#scenepic.Mesh.vertex_buffer" title="Permalink to this definition"></a></dt>
-<dd><p>a reference to the vertex buffer.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#scenepic.VertexBuffer" title="scenepic.VertexBuffer">VertexBuffer</a></p>
-</dd>
-</dl>
-</dd></dl>
-
 </dd></dl>
 
 </section>
@@ -1034,30 +924,6 @@ Useful when interoping with existing codebases that use opposite convention</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="scenepic.MeshUpdate.difference_range">
-<span class="sig-name descname"><span class="pre">difference_range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vertex_buffer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.MeshUpdate.difference_range" title="Permalink to this definition"></a></dt>
-<dd><p>Returns the absolute range of values in the difference between this update and the buffer.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>self</strong> (<a class="reference internal" href="#scenepic.MeshUpdate" title="scenepic.MeshUpdate"><em>MeshUpdate</em></a>) – self reference</p></li>
-<li><p><strong>vertex_buffer</strong> (<a class="reference internal" href="#scenepic.VertexBuffer" title="scenepic.VertexBuffer"><em>VertexBuffer</em></a>) – the buffer to use in the comparison</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>the absolute range (from minimum to maximum) in the per-index difference between</dt><dd><p>this update and the reference.</p>
-</dd>
-</dl>
-</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1080,33 +946,6 @@ Useful when interoping with existing codebases that use opposite convention</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="scenepic.MeshUpdate.quantize">
-<span class="sig-name descname"><span class="pre">quantize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keyframe_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fixed_point_range</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keyframe_vertex_buffer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.MeshUpdate.quantize" title="Permalink to this definition"></a></dt>
-<dd><p>Quantize the mesh update.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>self</strong> (<a class="reference internal" href="#scenepic.MeshUpdate" title="scenepic.MeshUpdate"><em>MeshUpdate</em></a>) – self reference</p></li>
-<li><p><strong>keyframe_index</strong> (<em>int</em>) – Index of the keyframe to use in quantizing this update</p></li>
-<li><p><strong>fixed_point_range</strong> (<em>float</em>) – The range to use for the fixed point representation.</p></li>
-<li><p><strong>keyframe_vertex_buffer</strong> (<a class="reference internal" href="#scenepic.VertexBuffer" title="scenepic.VertexBuffer"><em>VertexBuffer</em></a>) – The keyframe vertex buffer</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="scenepic.MeshUpdate.vertex_buffer">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">vertex_buffer</span></span><a class="headerlink" href="#scenepic.MeshUpdate.vertex_buffer" title="Permalink to this definition"></a></dt>
-<dd><p>a reference to the vertex buffer.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#scenepic.VertexBuffer" title="scenepic.VertexBuffer">VertexBuffer</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1229,46 +1068,7 @@ limit surface in the final step of subdivision. Defaults to false.</p></li>
 <dl class="py class">
 <dt class="sig sig-object py" id="scenepic.VertexBuffer">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">VertexBuffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.VertexBuffer" title="Permalink to this definition"></a></dt>
-<dd><p>Class which provides dictionary access to vertex buffer blocks.</p>
-<dl class="simple">
-<dt>Description:</dt><dd><p>The different parts of the vertex buffer can be accessed via a dictionary
-interface:</p>
-<ul class="simple">
-<li><p>“pos”: the vertex positions</p></li>
-<li><p>“norm”: the vertex normals</p></li>
-<li><p>“rgb”: the vertex colors (if present)</p></li>
-<li><p>“uv”: the vertex uvs (if present)</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>values</strong> (<em>np.ndarray</em>) – The raw vertex buffer values</p>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="scenepic.VertexBuffer.copy">
-<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.VertexBuffer.copy" title="Permalink to this definition"></a></dt>
-<dd><p>Returns a copy of the vertex buffer.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#scenepic.VertexBuffer" title="scenepic.mesh.VertexBuffer"><code class="xref py py-class docutils literal notranslate"><span class="pre">VertexBuffer</span></code></a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="scenepic.VertexBuffer.shape">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">shape</span></span><em class="property"><span class="pre">:</span> <span class="pre">tuple</span></em><a class="headerlink" href="#scenepic.VertexBuffer.shape" title="Permalink to this definition"></a></dt>
-<dd><p>Shape of the entire vertex buffer.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
+<dd></dd></dl>
 
 </section>
 <section id="camera">

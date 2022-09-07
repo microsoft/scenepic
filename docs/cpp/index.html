@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">scenepic<span id="projectnumber">&#160;1.0.7</span>
+   <div id="projectname">scenepic<span id="projectnumber">&#160;1.0.14</span>
    </div>
    <div id="projectbrief">3D Visualization Made Easy</div>
   </td>
@@ -125,7 +125,7 @@ $(function() {
 <p >The main branch of the ScenePic git repository will be kept up-to-date with the latest version. We highly recommend, where possible, using the binary builds we provide. That said, the library is FetchContent compatible, and can be easily included into C++ projects where desired.</p>
 <h2>Using the HTML Client</h2>
 <p ><img src="docs/scenepic_ui.png" alt="ScenePic UI" class="inline"/></p>
-<p >A ScenePic HTML page will look something like the image above. This example shows four <em>Canvas</em> objects, each of which contains several <em>Frame</em> objects (refering under the hood to a set of <em>Mesh</em> objects).</p>
+<p >A ScenePic HTML page will look something like the image above. This example shows four <em>Canvas</em> objects, each of which contains several <em>Frame</em> objects (referring under the hood to a set of <em>Mesh</em> objects).</p>
 <p >The UI supports standard 3D mouse controls (drag to rotate, shift-drag to translate in xy, mousewheel to translate in z) to move the viewport camera. On touch screens: single finger to rotate, two fingers to translate in xyz. You can slow any of the mouse controls by holding down the Alt key. If you accidentally transform the camera too wildly, you can reset by pressing 'r'.</p>
 <p >In the top right of each canvas a <em>Layer</em> control will appear. This allows the user to toggle certain layers of meshes on and off interactively.</p>
 <p >Each <em>Frame</em> for a 3D canvas has an associated <em>Focus Point</em> - a 3D location about which the camera rotates. You can view the <em>Focus Point</em> by holding down the '`&lsquo;&rsquo; (backtick) key, and while holding this down it can be translated using the mouse. If you press 'l' then the camera is 'locked' to the focus point in xy, though you can still rotate and translate in z. Locking to the focus point is particularly useful to center useful content in animations where the focus point can be different in each frame. You can also toggle the camera automatically orbiting the focus point by pressing '\'.</p>
@@ -166,8 +166,8 @@ $(function() {
 <div class="line">cd build</div>
 <div class="line">cmake ..</div>
 <div class="line">cmake --build . --config Debug --target cpp</div>
-</div><!-- fragment --><p >CMake will attempt to find the dependencies on your system, and will tell you if it is unable to find something, in which case you can manually point it at the correct location. You may find it easier to use a visual CMake configuration editor (CMake GUI ships with the Windows distributable, and there is CMake Curses for *nix) to customize the build, for example by disabling the documentation or Python build subsystems. Once you have successfully built the library, you can run the tests in the following fashion from the build directory:</p>
-<div class="fragment"><div class="line">ctest -C Debug</div>
+</div><!-- fragment --><p >CMake will attempt to find the dependencies on your system, and will tell you if it is unable to find something, in which case you can manually point it at the correct location. You may find it easier to use a visual CMake configuration editor (CMake GUI ships with the Windows distributable, and there is CMake Curses for *nix) to customize the build, for example by disabling the documentation or Python build subsystems.</p>
+<p >To run tests, set the cmake option <code>SCENEPIC_BUILD_TESTS=ON</code> when building and run the test command once you have successfully built the library, in the following fashion from the build directory: </p><div class="fragment"><div class="line">ctest -C Debug</div>
 </div><!-- fragment --><h2>Contributing</h2>
 <p >This project welcomes contributions and suggestions. Most contributions require you to agree to a Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us the rights to use your contribution. For details, visit <a href="https://cla.opensource.microsoft.com">https://cla.opensource.microsoft.com</a>.</p>
 <p >When you submit a pull request, a CLA bot will automatically determine whether you need to provide a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions provided by the bot. You will only need to do this once across all repos using our CLA.</p>
@@ -178,7 +178,7 @@ $(function() {
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 10 2022 16:03:56 for scenepic by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
+Generated on Wed Sep 7 2022 22:07:49 for scenepic by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
 </small></address>
 </body>
 </html>

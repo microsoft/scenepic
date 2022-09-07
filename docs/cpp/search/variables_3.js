@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['gray_0',['Gray',['../namespacescenepic_1_1_colors.html#a87c9840fb3bd2fa758c6be32c920d961',1,'scenepic::Colors']]],
-  ['green_1',['Green',['../namespacescenepic_1_1_colors.html#a0b75318cc957685f9792510cd952a265',1,'scenepic::Colors']]]
+  ['frame_0',['frame',['../structscenepic_1_1_graph_1_1_vertical_rule.html#aeb8710f204c08187aee607f7af521c8b',1,'scenepic::Graph::VerticalRule']]]
 ];
