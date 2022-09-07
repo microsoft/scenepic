@@ -589,8 +589,12 @@ def test_ui_parameters(assert_json_equal):
 
 def test_graph(assert_json_equal):
     scene = sp.Scene()
-    graph = scene.create_graph()
+    graph = scene.create_graph(name_align="top", value_align="bottom",
+                               name_size=32, value_size=10)
     t = np.linspace(0, 1, 30)
-    graph.add_sparkline("cos", np.cos(t), sp.Colors.Red)
+    graph.add_sparkline("cos", np.cos(t), sp.Colors.Red,
+                        vertical_rules=[
+                            sp.Graph.VerticalRule(10, sp.Colors.Red, 2.0),
+                            sp.Graph.VerticalRule(20, sp.Colors.Green)])
     graph.add_sparkline("sin", np.sin(t), line_width=2)
     assert_json_equal(str(graph), "graph")

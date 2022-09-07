@@ -156,11 +156,14 @@ namespace scenepic
     const std::string& canvas_id_init,
     double width,
     double height,
+    const std::string& name_align,
+    const std::string& value_align,
     const std::string& html_id,
     const Color& background_color,
     const Graph::Margin& margin,
     const std::string& font_family,
-    float text_size,
+    float name_size,
+    float value_size,
     const std::string& media_id)
   {
     std::string canvas_id = canvas_id_init;
@@ -174,7 +177,10 @@ namespace scenepic
     canvas->media_id(media_id);
     canvas->margin(margin);
     canvas->font_family(font_family);
-    canvas->text_size(text_size);
+    canvas->name_align(name_align);
+    canvas->name_size(name_size);
+    canvas->value_align(value_align);
+    canvas->value_size(value_size);
     m_graphs.push_back(canvas);
     m_num_canvases += 1;
 
@@ -747,13 +753,25 @@ namespace scenepic
     const std::string& path,
     const std::string& title,
     const std::string& head_html,
-    const std::string& body_html)
+    const std::string& body_html,
+    const std::string& script_path,
+    const std::string& library_path)
   {
     if (m_script_cleared)
     {
       throw std::logic_error(
         "You should not call clear_script() on Scenes that you wish to "
         "save_as_html().");
+    }
+
+    std::string script = this->script();
+    std::string path_to_script = "";
+    if (!script_path.empty())
+    {
+      std::ofstream script_file(script_path);
+      script_file << script;
+      script = "";
+      path_to_script = " src='" + script_path + "'";
     }
 
     std::string lib = "";
@@ -765,6 +783,14 @@ namespace scenepic
     }
     lib = buff.str();
 
+    if (!library_path.empty())
+    {
+      std::ofstream lib_file(library_path);
+      lib_file << lib;
+      lib = "";
+      path_to_lib = " src='" + library_path + "'";
+    }
+
     std::ofstream html(path);
     html << "<!DOCTYPE html>" << std::endl
          << "<html lang=\"en\">" << std::endl
@@ -773,7 +799,8 @@ namespace scenepic
          << "      <title>" << title << "</title>" << std::endl
          << "      <script" << path_to_lib << ">" << lib << "</script>"
          << std::endl
-         << "      <script>" << this->script() << "</script>" << std::endl
+         << "      <script" << path_to_script << ">" << script << "</script>"
+         << std::endl
          << "      " << head_html << std::endl
          << "   </head>" << std::endl
          << "   <body>" << std::endl

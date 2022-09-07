@@ -1,3 +1,5 @@
+from typing import List
+
 import numpy as np
 
 
@@ -28,6 +30,25 @@ class Graph:
         left: float
         """The top margin in pixels."""
 
+    class VerticalRule:
+        """Represents a vertical line in a sparkline graph."""
+
+        def __init__(self, frame: int, color: np.ndarray, line_width: float):
+            """Constructor.
+
+            Args:
+                frame (int): Frame to add the vertical rule
+                color: (Color, optional): the line color. Defauts to black.
+                line_width: (float, optional): The line width in pixels. Defaults to 1.0f.
+            """
+
+        frame: int
+        """The frame at which to add the line."""
+        color: np.ndarray
+        """The color of the line."""
+        line_width: float
+        """The width of the line in pixels."""
+
     @property
     def canvas_id(self) -> str:
         """A unique identifier for the canvas."""
@@ -45,8 +66,25 @@ class Graph:
         """The font family used for the graph labels."""
 
     @property
-    def text_size(self) -> float:
-        """The size of the graph labels in pixels."""
+    def name_size(self) -> float:
+        """The size of the sparkline labels in pixels."""
+
+    @property
+    def value_size(self) -> float:
+        """The size of the sparkline values in pixels."""
+
+    @property
+    def name_align(self) -> str:
+        """The alignment of the sparkline labels.
+        One of ('left', 'right', 'top', 'bottom', or 'none')
+        """
+
+    @property
+    def value_align(self) -> str:
+        """The alignment of the sparkline values.        
+        One of ('left', 'right', 'top', 'bottom', or 'none')
+        """
+
 
     @property
     def media_id(self) -> str:
@@ -57,12 +95,14 @@ class Graph:
         """
 
     def add_sparkline(self, name: str, values: np.ndarray,
-                      line_color: np.ndarray, line_width: float) -> None:
+                      line_color: np.ndarray, line_width: float,
+                      vertical_rules: List[VerticalRule] = None) -> None:
         """Adds a sparkline to the graph.
 
         Args:
             name (str): the name of the measured quantity
             values (np.ndarray): the measured values
             line_color (Color, optional): the color of the line (and its labels). Defaults to Black.
-            line_width (float, optional): The width of the line. Defaults to 1.0.    
+            line_width (float, optional): The width of the line. Defaults to 1.0.
+            vertical_rules (List[VerticalRule], optional): the vertical rules to add. Defaults to None.
         """

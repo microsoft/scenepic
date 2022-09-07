@@ -1,5 +1,7 @@
-Point release adding stub files for all Python classes. (#17)
+Point release adding additional graph features.
 
 New Features:
-- Stub files for all classes properly expose the docstrings in VS Code and other
-  editors, thus making development in Python considerably easier.
+- Can specify text alignment and size for graph labels and values
+- Can add vertical rules to separate out horizontal regions of the graph
+- `save_html` can now separate out the script and library components
+  (for easier testing of new Typescript library features)

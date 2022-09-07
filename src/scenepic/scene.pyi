@@ -120,8 +120,10 @@ class Scene:
         """
 
     def create_graph(self, canvas_id: str, width: int, height: int,
+                     name_align: str, value_align: str,
                      html_id: str, background_color: np.ndarray,
-                     margin: Graph.Margin, font_family: str, text_size: float,
+                     margin: Graph.Margin, font_family: str,
+                     name_size: float, value_size: float,
                      media_id: str) -> Graph:
         """Create a new Graph canvas and append to the Scene.
 
@@ -130,13 +132,20 @@ class Scene:
                                         automatically populated if not provided). Defaults to None.
             width (int, optional): the width in pixels of the Canvas on the HTML page. Defaults to 400.
             height (int, optional): the height in pixels of the Canvas on the HTML page. Defaults to 400.
+            name_align (str, optional): How to align the sparkline label
+                                        (one of 'left', 'right', 'top', or 'bottom').
+                                        Defaults to 'left'.
+            value_align (str, optional): How to align the sparkline value
+                                        (one of 'left', 'right', 'top', or 'bottom').
+                                        Defaults to 'right'.
             html_id (str, optional): id of an HTML element to use as this
                                         Canvas's parent in the HTML DOM (otherwise simply
                                         appended to document). Defaults to None.
             background_color (np.ndarray, optional): the background color of the canvas. Defaults to White.
             margin (Margin, optional): the outer margin of the graph. Defaults to Margin(10).
             font_family (str, optional): the font family used for the graph labels. Defaults to "sans-serif".
-            text_size (float, optional): the text size in pixels used for the graph labels. Defaults to 12.0.
+            name_size (float, optional): the text size in pixels used for the graph labels. Defaults to 12.0.
+            value_size (float, optional): the text size in pixels used for the graph values. Defaults to 12.0.
             media_id (str, optional): optional ID of a media file to attach to the canvas. This file will be
                                         used to drive playback, i.e. frames will be displayed in time with
                                         the playback of the media file.
@@ -466,6 +475,12 @@ class Scene:
             title (str, optional): the HTML title. Defaults to "ScenePic".
             head_html (str, optional): the raw HTML to place in the HEAD tag. Defaults to None.
             body_html (str, optional): the raw HTML to place in the BODY tag. Defaults to None.
+            script_path (str, optional): desired relative path for the script. A value of None
+                                            indicates to embed the script in the HTML page.
+                                            Defaults to None.          
+            library_path (str, optional): desired relative path for the library. A value of None
+                                            indicates to embed the library in the HTML page.
+                                            Defaults to None.          
         """
 
     @property

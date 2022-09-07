@@ -1834,6 +1834,30 @@ PYBIND11_MODULE(_scenepic, m)
     .def_readwrite(
       "left", &Graph::Margin::left, "float: The left margin in pixels");
 
+  py::class_<Graph::VerticalRule>(m, "VerticalRule", R"scenepicdoc(
+        Represents a vertical rule drawn on a sparkline graph.
+
+        Args:
+          frame (int): Frame to add the vertical rule
+          color: (Color, optional): the line color. Defauts to black.
+          line_width: (float, optional): The line width in pixels. Defaults to 1.0f.
+  )scenepicdoc")
+    .def(
+      py::init<std::int64_t, const Color&, float>(),
+      "frame"_a,
+      "color"_a = scenepic::Colors::Black,
+      "line_width"_a = 1.0f)
+    .def_readwrite(
+      "frame",
+      &Graph::VerticalRule::frame,
+      "int: the frame at which to add the line")
+    .def_readwrite(
+      "color", &Graph::VerticalRule::color, "Color: the color of the line")
+    .def_readwrite(
+      "line_width",
+      &Graph::VerticalRule::line_width,
+      "float: the width of the line in pixels");
+
   py::class_<Graph, std::shared_ptr<Graph>>(
     m, "Graph", "A 2D viewport that animates one or more sparklines.")
     .def("__repr__", &Graph::to_string)
@@ -1855,10 +1879,31 @@ PYBIND11_MODULE(_scenepic, m)
       py::overload_cast<const std::string&>(&Graph::font_family),
       "str: The font family used for the graph labels")
     .def_property(
-      "text_size",
-      py::overload_cast<>(&Graph::text_size, py::const_),
-      py::overload_cast<float>(&Graph::text_size),
-      "float: The size of the graph labels in pixels")
+      "name_size",
+      py::overload_cast<>(&Graph::name_size, py::const_),
+      py::overload_cast<float>(&Graph::name_size),
+      "float: The size of the sparkline labels in pixels")
+    .def_property(
+      "value_size",
+      py::overload_cast<>(&Graph::value_size, py::const_),
+      py::overload_cast<float>(&Graph::value_size),
+      "float: The size of the sparkline labels in pixels")
+    .def_property(
+      "name_align",
+      py::overload_cast<>(&Graph::name_align, py::const_),
+      py::overload_cast<const std::string&>(&Graph::name_align),
+      R"scenepicdoc(
+        The alignment of the sparkline labels.
+        One of ('left', 'right', 'top', 'bottom', or 'none')
+      )scenepicdoc")
+    .def_property(
+      "value_align",
+      py::overload_cast<>(&Graph::value_align, py::const_),
+      py::overload_cast<const std::string&>(&Graph::value_align),
+      R"scenepicdoc(
+        The alignment of the sparkline values.
+        One of ('left', 'right', 'top', 'bottom', or 'none')
+      )scenepicdoc")
     .def_property(
       "media_id",
       py::overload_cast<>(&Graph::media_id, py::const_),
@@ -1880,11 +1925,13 @@ PYBIND11_MODULE(_scenepic, m)
                 values (np.ndarray): the measured values
                 line_color (Color, optional): the color of the line (and its labels). Defaults to Black.
                 line_width (float, optional): The width of the line. Defaults to 1.0.    
+                vertical_rules (List[VerticalRule], optional): the vertical rules to add. Defaults to None.
         )scenepicdoc",
       "name"_a,
       "values"_a,
       "line_color"_a = Colors::Black,
-      "line_width"_a = 1.0f);
+      "line_width"_a = 1.0f,
+      "vertical_rules"_a = std::vector<Graph::VerticalRule>{});
 
   py::class_<DropDownMenu, std::shared_ptr<DropDownMenu>>(
     m, "DropDownMenu", "Represents a ScenePic DropDownMenu UI component.")
@@ -2075,13 +2122,20 @@ PYBIND11_MODULE(_scenepic, m)
                                            automatically populated if not provided). Defaults to None.
                 width (int, optional): the width in pixels of the Canvas on the HTML page. Defaults to 400.
                 height (int, optional): the height in pixels of the Canvas on the HTML page. Defaults to 400.
+                name_align (str, optional): How to align the sparkline label
+                                            (one of 'left', 'right', 'top', or 'bottom').
+                                            Defaults to 'left'.
+                value_align (str, optional): How to align the sparkline value
+                                            (one of 'left', 'right', 'top', or 'bottom').
+                                            Defaults to 'right'.
                 html_id (str, optional): id of an HTML element to use as this
                                          Canvas's parent in the HTML DOM (otherwise simply
                                          appended to document). Defaults to None.
                 background_color (np.ndarray, optional): the background color of the canvas. Defaults to White.
                 margin (Margin, optional): the outer margin of the graph. Defaults to Margin(10).
                 font_family (str, optional): the font family used for the graph labels. Defaults to "sans-serif".
-                text_size (float, optional): the text size in pixels used for the graph labels. Defaults to 12.0.
+                name_size (float, optional): the text size in pixels used for the graph labels. Defaults to 12.0.
+                value_size (float, optional): the text size in pixels used for the graph values. Defaults to 12.0.
                 media_id (str, optional): optional ID of a media file to attach to the canvas. This file will be
                                           used to drive playback, i.e. frames will be displayed in time with
                                           the playback of the media file.
@@ -2092,11 +2146,14 @@ PYBIND11_MODULE(_scenepic, m)
       "canvas_id"_a = "",
       "width"_a = 400,
       "height"_a = 400,
+      "name_align"_a = "left",
+      "value_align"_a = "right",
       "html_id"_a = "",
       "background_color"_a = Colors::White,
       "margin"_a = Graph::Margin(10),
       "font_family"_a = "sans-serif",
-      "text_size"_a = 12.0,
+      "name_size"_a = 12.0,
+      "value_size"_a = 12.0,
       "media_id"_a = "")
     .def(
       "create_mesh_",
@@ -2454,11 +2511,19 @@ PYBIND11_MODULE(_scenepic, m)
                 title (str, optional): the HTML title. Defaults to "ScenePic".
                 head_html (str, optional): the raw HTML to place in the HEAD tag. Defaults to None.
                 body_html (str, optional): the raw HTML to place in the BODY tag. Defaults to None.
+                script_path (str, optional): desired relative path for the script. A value of None
+                                             indicates to embed the script in the HTML page.
+                                             Defaults to None.          
+                library_path (str, optional): desired relative path for the library. A value of None
+                                              indicates to embed the library in the HTML page.
+                                              Defaults to None.          
         )scenepicdoc",
       "path"_a,
       "title"_a = "ScenePic ",
       "head_html"_a = "",
-      "body_html"_a = "")
+      "body_html"_a = "",
+      "script_path"_a = "",
+      "library_path"_a = "")
     .def_property_readonly(
       "script_cleared",
       &Scene::script_cleared,
