@@ -34,8 +34,13 @@ namespace scenepic
     const std::string& name,
     const ValueBuffer& values,
     const Color& color,
-    float line_width)
-  : m_name(name), m_values(values), m_color(color), m_line_width(line_width)
+    float line_width,
+    const std::vector<VerticalRule>& vertical_rules)
+  : m_name(name),
+    m_values(values),
+    m_color(color),
+    m_line_width(line_width),
+    m_vertical_rules(vertical_rules)
   {}
 
   JsonValue Graph::Sparkline::to_json() const
@@ -46,7 +51,46 @@ namespace scenepic
     command["Name"] = m_name;
     command["StrokeStyle"] = m_color.to_html_hex();
     command["LineWidth"] = m_line_width;
+
+    JsonValue vertical_rules;
+    for (const auto& vertical_rule : m_vertical_rules)
+    {
+      vertical_rules.append(vertical_rule.to_json());
+    }
+
+    if (m_vertical_rules.size() == 0)
+    {
+      // this will force it to be an array
+      vertical_rules.resize(0);
+    }
+
+    command["VerticalRules"] = vertical_rules;
+
     return command;
+  }
+
+  std::string Graph::Sparkline::to_string() const
+  {
+    return this->to_json().to_string();
+  }
+
+  Graph::VerticalRule::VerticalRule(
+    std::int64_t frame, const Color& color, float line_width)
+  : frame(frame), color(color), line_width(line_width)
+  {}
+
+  JsonValue Graph::VerticalRule::to_json() const
+  {
+    JsonValue command;
+    command["FrameIndex"] = frame;
+    command["StrokeStyle"] = color.to_html_hex();
+    command["LineWidth"] = line_width;
+    return command;
+  }
+
+  std::string Graph::VerticalRule::to_string() const
+  {
+    return this->to_json().to_string();
   }
 
   const std::string& Graph::canvas_id() const
@@ -58,11 +102,13 @@ namespace scenepic
     const std::string& name,
     const std::vector<float>& values,
     const scenepic::Color& color,
-    float line_width)
+    float line_width,
+    const std::vector<VerticalRule>& vertical_rules)
   {
     ValueBuffer value_buffer(values.size(), 1);
     std::copy(values.begin(), values.end(), value_buffer.data());
-    m_sparklines.emplace_back(name, value_buffer, color, line_width);
+    m_sparklines.emplace_back(
+      name, value_buffer, color, line_width, vertical_rules);
   }
 
   Graph::Graph(const std::string& canvas_id) : m_canvas_id(canvas_id) {}
@@ -91,7 +137,10 @@ namespace scenepic
     JsonValue text;
     text["CommandType"] = "SetTextStyle";
     text["FontFamily"] = m_font_family;
-    text["SizeInPixels"] = m_text_size;
+    text["NameSizeInPixels"] = m_name_size;
+    text["ValueSizeInPixels"] = m_value_size;
+    text["NameAlign"] = m_name_align;
+    text["ValueAlign"] = m_value_align;
     canvas_commands.append(text);
 
     for (const auto& sparkline : m_sparklines)
@@ -135,6 +184,28 @@ namespace scenepic
     return *this;
   }
 
+  const std::string& Graph::name_align() const
+  {
+    return m_name_align;
+  }
+
+  Graph& Graph::name_align(const std::string& name_align)
+  {
+    m_name_align = name_align;
+    return *this;
+  }
+
+  const std::string& Graph::value_align() const
+  {
+    return m_value_align;
+  }
+
+  Graph& Graph::value_align(const std::string& value_align)
+  {
+    m_value_align = value_align;
+    return *this;
+  }
+
   const std::string& Graph::font_family() const
   {
     return m_font_family;
@@ -146,14 +217,25 @@ namespace scenepic
     return *this;
   }
 
-  float Graph::text_size() const
+  float Graph::name_size() const
   {
-    return m_text_size;
+    return m_name_size;
   }
 
-  Graph& Graph::text_size(float text_size)
+  Graph& Graph::name_size(float name_size)
   {
-    m_text_size = text_size;
+    m_name_size = name_size;
+    return *this;
+  }
+
+  float Graph::value_size() const
+  {
+    return m_value_size;
+  }
+
+  Graph& Graph::value_size(float value_size)
+  {
+    m_value_size = value_size;
     return *this;
   }
 

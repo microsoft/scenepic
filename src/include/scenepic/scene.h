@@ -144,13 +144,18 @@ namespace scenepic
      *                   automatically populated if not provided).
      *  \param width the width in pixels of the Canvas on the HTML page
      *  \param height the height in pixels of the Canvas on the HTML page
+     *  \param name_align How to align the sparkline label (one of 'left',
+     *                    'right', 'top', or 'bottom')
+     *  \param value_align How to align the sparkline value (one of 'left',
+     *                    'right', 'top', or 'bottom')
      *  \param html_id optional id of an HTML element to use as this Canvas's
      *                 parent in the HTML DOM (otherwise simply appended to
      *                 document).
      *  \param background_color optional background color for the canvas
      *  \param margin the outer margin of the graph
      *  \param font_family the font family used for the graph labels
-     *  \param text_size the text size in pixels used for the graph labels
+     *  \param name_size the text size in pixels used for the graph labels
+     *  \param value_size the text size in pixels used for the graph values
      *  \param media_id optional ID of a media file to attach to the canvas.
      *                  This file will be used to drive playback, i.e. frames
      *                  will be displayed in time with the playback of the
@@ -161,11 +166,14 @@ namespace scenepic
       const std::string& canvas_id = "",
       double width = 400,
       double height = 400,
+      const std::string& name_align = "left",
+      const std::string& value_align = "right",
       const std::string& html_id = "",
       const Color& background_color = Colors::White,
       const Graph::Margin& margin = Graph::Margin(),
       const std::string& font_family = "sans-serif",
-      float text_size = 12.0,
+      float name_size = 12.0,
+      float value_size = 12.0,
       const std::string& media_id = "");
 
     /** Create a new AudioTrack and add directly to the Scene.
@@ -480,17 +488,23 @@ namespace scenepic
     /** Returns a breakdown of the number of bytes used by each command type. */
     std::map<std::string, std::size_t> measure_command_size() const;
 
-    /** Save the scene as a self-contained html file with no dependencies.
+    /** Save the scene as a html file.
      *  \param path the path to the file on disk
      *  \param title the HTML title
      *  \param head_html the raw HTML to place in the HEAD tag
      *  \param body_html the raw HTML to place in the BODY tag
+     *  \param script_path desired relative path for the script. Empty string
+     *                     indicates to embed the script in the HTML page.
+     *  \param library_path desired relative path for the library. Empty string
+     *                      indicates to embed the library in the HTML page.
      */
     void save_as_html(
       const std::string& path,
       const std::string& title = "ScenePic",
       const std::string& head_html = "",
-      const std::string& body_html = "");
+      const std::string& body_html = "",
+      const std::string& script_path = "",
+      const std::string& library_path = "");
 
     /** Whether the script has been cleared */
     bool script_cleared() const;

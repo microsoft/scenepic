@@ -1,6 +1,16 @@
 # Changelog
 
-## [2022-08-26 - Version 1.0.12](https://github.com/microsoft/scenepic/releases/tag/v1.0.13)
+## [2022-09-07 - Version 1.0.14](https://github.com/microsoft/scenepic/releases/tag/v1.0.14)
+Point release adding additional graph features.
+
+New Features:
+- Can specify text alignment and size for graph labels and values
+- Can add vertical rules to separate out horizontal regions of the graph
+- `save_html` can now separate out the script and library components
+  (for easier testing of new Typescript library features)
+
+
+## [2022-08-26 - Version 1.0.13](https://github.com/microsoft/scenepic/releases/tag/v1.0.13)
 Point release adding stub files for all Python classes. (#17)
 
 New Features:

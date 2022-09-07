@@ -29,7 +29,11 @@ int test_graph()
 
   scenepic::Scene scene;
   auto graph = scene.create_graph();
-  graph->add_sparkline("cos", cos_t, scenepic::Colors::Red);
+  graph->name_align("top").value_align("bottom").name_size(32).value_size(10);
+  std::vector<scenepic::Graph::VerticalRule> rules;
+  rules.emplace_back(10, scenepic::Colors::Red, 2.0f);
+  rules.emplace_back(20, scenepic::Colors::Green, 1.0f);
+  graph->add_sparkline("cos", cos_t, scenepic::Colors::Red, 1.0, rules);
   graph->add_sparkline("sin", sin_t, scenepic::Colors::Black, 2.0f);
 
   test::assert_equal(graph->to_json(), "graph", result);

@@ -20,21 +20,38 @@
 		{
 			"CommandType": "SetTextStyle",
 			"FontFamily": "sans-serif",
-			"SizeInPixels": 12.0
+			"NameAlign": "top",
+			"NameSizeInPixels": 32.0,
+			"ValueAlign": "bottom",
+			"ValueSizeInPixels": 10.0
 		},
 		{
 			"CommandType": "AddSparkline",
 			"LineWidth": 1.0,
 			"Name": "cos",
 			"StrokeStyle": "#ff0000",
-			"ValueBuffer": "eAEBeACH/wAAgD8K2X8/NmR/P6Whfj+UkX0/VTR8P1OKej8PlHg/IlJ2PzzFcz8k7nA/t81tP+lkaj/DtGY/Zb5iPwODXj/nA1o/cEJVPxFAUD9O/ko/w35FPxvDPz8VzTk/gp4zP0M5LT9LnyY/nNIfP0jVGD9vqRE/QFEKP+lWLNseAAAAAQ=="
+			"ValueBuffer": "eAEBeACH/wAAgD8K2X8/NmR/P6Whfj+UkX0/VTR8P1OKej8PlHg/IlJ2PzzFcz8k7nA/t81tP+lkaj/DtGY/Zb5iPwODXj/nA1o/cEJVPxFAUD9O/ko/w35FPxvDPz8VzTk/gp4zP0M5LT9LnyY/nNIfP0jVGD9vqRE/QFEKP+lWLNseAAAAAQ==",
+			"VerticalRules": 
+			[
+				{
+					"FrameIndex": 10,
+					"LineWidth": 2.0,
+					"StrokeStyle": "#ff0000"
+				},
+				{
+					"FrameIndex": 20,
+					"LineWidth": 1.0,
+					"StrokeStyle": "#00be00"
+				}
+			]
 		},
 		{
 			"CommandType": "AddSparkline",
 			"LineWidth": 2.0,
 			"Name": "sin",
 			"StrokeStyle": "#000000",
-			"ValueBuffer": "eAEBeACH/wAAAAChNg09IyGNPQF80z1Byww+pq0vPpNaUj55x3Q+73SLPrBbnD7ZEq0+VJW9PhzezT476N0+z67tPgst/T4cLwY/254NP3/jFD/S+hs/q+IiP/GYKT+XGzA/pGg2Pyx+PD9UWkI/VftHP3hfTT8YhVI/pGpXPwyRL3seAAAAAQ=="
+			"ValueBuffer": "eAEBeACH/wAAAAChNg09IyGNPQF80z1Byww+pq0vPpNaUj55x3Q+73SLPrBbnD7ZEq0+VJW9PhzezT476N0+z67tPgst/T4cLwY/254NP3/jFD/S+hs/q+IiP/GYKT+XGzA/pGg2Pyx+PD9UWkI/VftHP3hfTT8YhVI/pGpXPwyRL3seAAAAAQ==",
+			"VerticalRules": []
 		}
 	]
 }

@@ -58,6 +58,35 @@ namespace scenepic
       double left;
     };
 
+    /** Represents a vertical line in a sparkline graph. */
+    struct VerticalRule
+    {
+      /** Constructor.
+       *  \param frame the frame at which to add the line
+       *  \param color the color of the line
+       *  \param line_width the width of the line in pixels
+       */
+      VerticalRule(
+        std::int64_t frame,
+        const Color& color = scenepic::Colors::Black,
+        float line_width = 1.0f);
+
+      /** Returns a string representation of the margin */
+      std::string to_string() const;
+
+      /** Convert this object into ScenePic json.
+       *  \return a json value
+       */
+      JsonValue to_json() const;
+
+      /** The frame at which to add the line. */
+      std::int64_t frame;
+      /** The color of the line. */
+      Color color;
+      /** The width of the line in pixels. */
+      float line_width;
+    };
+
     /** A unique identifier for the canvas */
     const std::string& canvas_id() const;
 
@@ -66,12 +95,14 @@ namespace scenepic
      *  \param values a vector of measured values, one per frame
      *  \param line_color the color of the line (and its labels)
      *  \param line_width the width of the line
+     *  \param vertical_rules vertical rules to draw on the sparkline
      */
     void add_sparkline(
       const std::string& name,
       const std::vector<float>& values,
       const scenepic::Color& line_color = scenepic::Colors::Black,
-      float line_width = 1.0f);
+      float line_width = 1.0f,
+      const std::vector<VerticalRule>& vertical_rules = {});
 
     /** Return a JSON string representing the object */
     std::string to_string() const;
@@ -93,6 +124,26 @@ namespace scenepic
     /** Set the outside margin of the graph */
     Graph& margin(const Margin& margin);
 
+    /** How to align the sparkline label (one of 'left', 'right', 'top',
+     * 'bottom', or 'none')
+     */
+    const std::string& name_align() const;
+
+    /** How to align the sparkline label (one of 'left', 'right', 'top',
+     * 'bottom', or 'none')
+     */
+    Graph& name_align(const std::string& name_align);
+
+    /** How to align the sparkline value (one of 'left', 'right', 'top',
+     * 'bottom', or 'none')
+     */
+    const std::string& value_align() const;
+
+    /** How to align the sparkline value (one of 'left', 'right', 'top',
+     * 'bottom', or 'none')
+     */
+    Graph& value_align(const std::string& value_align);
+
     /** The font family used for the graph labels */
     const std::string& font_family() const;
 
@@ -100,10 +151,16 @@ namespace scenepic
     Graph& font_family(const std::string& font_family);
 
     /** The size of the graph labels in pixels */
-    float text_size() const;
+    float name_size() const;
 
     /** Set the size of the graph labels in pixels */
-    Graph& text_size(float text_size);
+    Graph& name_size(float name_size);
+
+    /** The size of the graph labels in pixels */
+    float value_size() const;
+
+    /** Set the size of the graph labels in pixels */
+    Graph& value_size(float value_size);
 
     /** The unique ID of the media file associated with this canvas.
      *  This file will be used to drive playback, i.e. frames will be displayed
@@ -122,7 +179,8 @@ namespace scenepic
         const std::string& name,
         const ValueBuffer& values,
         const Color& color,
-        float line_width);
+        float line_width,
+        const std::vector<VerticalRule>& vertical_rules);
 
       std::string to_string() const;
       JsonValue to_json() const;
@@ -132,6 +190,7 @@ namespace scenepic
       ValueBuffer m_values;
       Color m_color;
       float m_line_width;
+      std::vector<VerticalRule> m_vertical_rules;
     };
 
     friend class Scene;
@@ -147,7 +206,10 @@ namespace scenepic
     Color m_background_color;
     Margin m_margin;
     std::string m_font_family;
-    float m_text_size;
+    std::string m_name_align;
+    std::string m_value_align;
+    float m_name_size;
+    float m_value_size;
   };
 } // namespace scenepic
 
