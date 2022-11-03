@@ -95,7 +95,7 @@ FetchContent_Declare(
 FetchContent_Declare(
   pybind11
   GIT_REPOSITORY https://github.com/pybind/pybind11/
-  GIT_TAG        479e9a50f38cfa8e525a697d7f5d850f851223b5 # includes fix for pybind/pybind11#4038
+  GIT_TAG        v2.10.1
 )
 
 set(CMAKE_POLICY_DEFAULT_CMP0077 NEW) 

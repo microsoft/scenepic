@@ -49,7 +49,28 @@ def difference_range(self, vertex_buffer: VertexBuffer) -> float:
     self.difference_range_(vertex_buffer._values)
 
 
-Mesh.vertex_buffer = property(vertex_buffer)
-MeshUpdate.vertex_buffer = property(vertex_buffer)
+Mesh.vertex_buffer = property(vertex_buffer, doc="""The raw vertex buffer.""")
+
+MeshUpdate.vertex_buffer = property(vertex_buffer, doc="""The raw vertex buffer.""")
+
 MeshUpdate.quantize = quantize
+MeshUpdate.quantize.__doc__ = """Quantize the mesh update.
+
+Args:
+    self (MeshUpdate): self reference
+    keyframe_index (int): Index of the keyframe to use in quantizing this update
+    fixed_point_range (float): The range to use for the fixed point representation.
+    keyframe_vertex_buffer (VertexBuffer): The keyframe vertex buffer
+"""
+
 MeshUpdate.difference_range = difference_range
+MeshUpdate.difference_range.__doc__ = """Returns the absolute range of values in the difference between this update and the buffer.
+
+Args:
+    self (MeshUpdate): self reference
+    vertex_buffer (VertexBuffer): the buffer to use in the comparison
+
+Return:
+    float: the absolute range (from minimum to maximum) in the per-index difference between
+        this update and the reference.
+"""

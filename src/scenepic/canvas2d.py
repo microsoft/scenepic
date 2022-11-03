@@ -24,3 +24,16 @@ def set_layer_settings(self, layer_settings: Mapping[str, Union[dict, LayerSetti
 
 
 Canvas2D.set_layer_settings = set_layer_settings
+Canvas2D.set_layer_settings.__doc__ = """Specify the visibilities and opacities of certain mesh layers.
+
+Description:
+    Each Mesh object can optionally be part of a user-identified layer
+    (see Mesh constructor).
+    Calling set_layer_settings will result in an additional drop-down
+    selector in the ScenePic user interface.
+
+Args:
+    self (Canvas2D): the self reference
+    layer_settings (Mapping[str, Union[dict, LayerSettings]]): a mapping from
+        layer IDs to layer settings.
+"""

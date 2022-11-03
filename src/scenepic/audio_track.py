@@ -20,4 +20,12 @@ def _data_set(self, data):
 
 
 AudioTrack.load_from_buffer = load_from_buffer
-AudioTrack.data = property(_data_get, _data_set)
+AudioTrack.load_from_buffer.__doc__ = """Load audio from a pre-existing data buffer and extension.
+
+Args:
+    self (AudioTrack): self reference
+    data (bytes): the binary data for the audio
+    ext (str): the file extension (e.g. mp3, ogg, wav)
+"""
+
+AudioTrack.data = property(_data_get, _data_set, doc="""The binary audio data.""")

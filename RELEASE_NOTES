@@ -1,7 +1,5 @@
-Point release adding additional graph features.
+Point release fixing the missing methods in Python documention.
 
-New Features:
-- Can specify text alignment and size for graph labels and values
-- Can add vertical rules to separate out horizontal regions of the graph
-- `save_html` can now separate out the script and library components
-  (for easier testing of new Typescript library features)
+New Features
+- The missing methods for a variety of classes have been added to the python docs
+- The version of pybind11 has been bumped to the latest release

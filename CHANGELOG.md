@@ -1,5 +1,12 @@
 # Changelog
 
+## [2022-11-03 - Version 1.0.15](https://github.com/microsoft/scenepic/releases/tag/v1.0.15)
+Point release fixing the missing methods in Python documention.
+
+New Features
+- The missing methods for a variety of classes have been added to the python docs
+- The version of pybind11 has been bumped to the latest release
+
 ## [2022-09-07 - Version 1.0.14](https://github.com/microsoft/scenepic/releases/tag/v1.0.14)
 Point release adding additional graph features.
 

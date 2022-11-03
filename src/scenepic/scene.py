@@ -51,6 +51,56 @@ window.Element = element;
 
 
 Scene.link_canvas_events = link_canvas_events
+Scene.link_canvas_events.__doc__ = """Specify that all input events should be linked across the provided set of Canvases.
+
+Args:
+    self (Scene): self reference
+    canvases: the canvases which should have linked events
+"""
+
 Scene.create_mesh = create_mesh
+Scene.create_mesh.__doc__ = """Create a new Mesh and append to the Scene.
+
+Description:
+    Meshes are Scene-wide resources that can be reused across multiple
+    Frames in multiple Canvas3Ds.
+
+Args:
+    mesh_id (str, optional): a unique identifier for the Mesh (will be
+                            automatically populated if not provided). Defaults to None.
+    layer_id (str, optional): an identifier to allow several Meshes to be grouped together
+                            into a "layer".  Layers should be used in conjunction with
+                            Canvas3D.set_layer_settings(). Defaults to None.
+    double_sided (bool, optional): whether to turn off back face culling and draw the Mesh's
+                                triangles as double sided. Defaults to False.
+    camera_space (bool, optional): whether this Mesh is defined in camera space (cannot
+                                be moved in the ScenePic user interface) or world space (standard).
+                                Defaults to False.
+    shared_color (np.ndarray, optional): see `Mesh` constructor.
+    texture_id (Union[Image, str], optional): see `Mesh` constructor.
+    nn_texture (bool, optional): whether the shader should use nearest-neighbor
+                texture interpolation. Defaults to True.
+    use_texture_alpha (bool, optional): whether to use the alpha channel in the texture
+                                        for transparency (only relevant for textured Meshes).
+                                        Defaults to True.
+    is_billboard (bool, optional): draw this Mesh as a billboard (i.e. always facing the user)
+                                rather than rotating with the rest of the world. Defaults to False.
+    is_label (bool, optional): this mesh will be treated specially as a label. Not for public use.
+                            Defaults to False.
+
+Returns:
+    Mesh: a reference to the new Mesh object
+"""
+
+
 Scene.simulate_key_presses = simulate_key_presses
+Scene.simulate_key_presses.__doc__ = """Simulates one or more keypresses to fire off events in the ScenePic UI at startup, e.g. video playback.
+
+Args:
+    self (Scene): self reference
+    canvas_id (Union[Canvas3D, Canvas2D, str]): ID of the canvas on which to fire off this
+                                                event.
+    keypresses: the key values
+"""
+
 Scene._repr_javascript_ = _repr_javascript_

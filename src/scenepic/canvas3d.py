@@ -53,4 +53,32 @@ def set_layer_settings(self, layer_settings: Mapping[str, Union[dict, LayerSetti
 
 
 Canvas3D.create_frame = create_frame
+Canvas3D.create_frame.__doc__ = """Creates a new Frame3D object and appends to the list of Frame3Ds in the Canvas3D.
+
+Args:
+    frame_id (str): a unique identifier for the Frame3D (will be
+                    automatically populated if not provided).
+    focus_point (FocusPoint): optional 3D focus point for this frame (with optional 3D
+                            rotation for orientation lock), used in the ScenePic user interface.
+    meshes (List[Union[Mesh, MeshUpdate, str]]): optionally pre-populate this Frame3D
+                                                with a set of Meshes, for convenience.
+    camera (Camera): optionally set a camera for this frame
+
+Returns:
+    Frame3D: a new Frame3D object
+"""
+
 Canvas3D.set_layer_settings = set_layer_settings
+Canvas3D.set_layer_settings.__doc__ = """Specify the visibilities and opacities of certain mesh layers.
+
+Description:
+    Each Mesh object can optionally be part of a user-identified layer
+    (see Mesh constructor).
+    Calling set_layer_settings will result in an additional drop-down
+    selector in the ScenePic user interface.
+
+Args:
+    self (Canvas3D): the self reference
+    layer_settings (Mapping[str, Union[dict, LayerSettings]]): a LayerSettings object
+        or a dictionary. See LayerSettings for details.
+"""
