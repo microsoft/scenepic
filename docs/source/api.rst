@@ -12,6 +12,7 @@ Scene
 
 .. autoclass:: Scene
     :members:
+    :exclude-members: create_mesh_, simulate_key_presses_, link_canvas_events_
 
 3D Graphics
 -----------

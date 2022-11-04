@@ -43,7 +43,7 @@ jobs:
 
       - name: Python build
         run: |
-          pip install --use-deprecated=legacy-resolver -e .[dev]
+          pip install -e .[dev]
           python setup.py develop
 
       - name: Python test

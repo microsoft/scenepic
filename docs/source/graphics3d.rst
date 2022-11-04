@@ -7,12 +7,14 @@ Canvas3D
 
 .. autoclass:: Canvas3D
     :members:
+    :exclude-members: set_layer_settings_, create_frame_
 
 Frame3D
 -------
 
 .. autoclass:: Frame3D
     :members:
+    :exclude-members: set_layer_settings_, add_meshes_, add_mesh_
 
 
 Mesh
@@ -28,7 +30,7 @@ MeshUpdate
 
 .. autoclass:: MeshUpdate
     :members:
-    :exclude-members: get_vertex_buffer
+    :exclude-members: get_vertex_buffer, quantize_, difference_range_
 
 MeshInfo
 --------

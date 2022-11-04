@@ -50,5 +50,43 @@ def add_text(self, text: str, left: float, bottom: float,
 
 
 Frame2D.add_image = add_image
+Frame2D.add_image.__doc__ = """Add an image to the frame.
+
+Args:
+    self (Frame2D): the self reference
+    image_id (str): the unique identifier of the image
+    position_type (str, optional): one of "fit", "fill", "stretch", or "manual". Defaults to "fit".
+    x (float, optional): x coordinate to draw image at if position_type == "manual". Defaults to 0.0.
+    y (float, optional): y coordinate to draw image at if position_type == "manual". Defaults to 0.0.
+    scale (float, optional): scale factor to draw image by if position_type == "manual". Defaults to 1.0.
+    smoothed (bool, optional): whether to draw an image with smoothing or using nearest neighbor. Defaults to False.
+    layer_id (str, optional): Unique ID of the layer associated with this primitive. Defaults to "".
+"""
+
 Frame2D.add_circle = add_circle
+Frame2D.add_circle.__doc__ = """Add a circle to the frame.
+
+Args:
+    self (Frame2D): the self reference
+    x (float): the center x coordinate
+    y (float): the center y coordinate
+    radius (float): the radius of the circle
+    line_color (np.ndarray, optional): the color of the line. Defaults to Black.
+    line_width (float, optional): the width of the line. Defaults to 1.0.
+    fill_color (np.ndarray, optional): the fill color to use. Defaults to None.
+    layer_id (str, optional): Unique ID of the layer associated with this primitive. Defaults to "".
+"""
+
 Frame2D.add_text = add_text
+Frame2D.add_text.__doc__ = """Add some text to the frame.
+
+Args:
+    self (Frame2D): The self reference
+    text (str): the text to display
+    left (float): the pixel position of the left side of the text
+    bottom (float): the pixel position of the bottom of the text
+    color (np.ndarray, optional): the color of the text. Defaults to White.
+    size_in_pixels (float, optional): the vertical size of the text in pixels. Defaults to 12.0.
+    font_family (str, optional): the font to use for the text. Defaults to "sans-serif".
+    layer_id (str, optional): Unique ID of the layer associated with this primitive. Defaults to "".
+"""

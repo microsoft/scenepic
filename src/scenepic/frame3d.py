@@ -42,5 +42,31 @@ def set_layer_settings(self, layer_settings: Mapping[str, Union[dict, LayerSetti
 
 
 Frame3D.add_meshes = add_meshes
+Frame3D.add_meshes.__doc__ = """Adds meshes to the frame.
+
+Args:
+    meshes (List[Union[Mesh, MeshUpdate, str]]): A list of meshes and mesh updates (or their IDs)
+    transform (np.ndarray, optional): an optional transform to apply to each mesh. Defaults to None.
+"""
+
 Frame3D.add_mesh = add_mesh
+Frame3D.add_mesh.__doc__ = """Adds a mesh to the frame.
+
+Args:
+    mesh (Union[Mesh, MeshUpdate, str]): The mesh, mesh update, or mesh ID
+    transform (np.ndarray, optional): An optional transform to apply to the mesh. Defaults to None.
+"""
+
 Frame3D.set_layer_settings = set_layer_settings
+Frame3D.set_layer_settings.__doc__ = """Specify the visibilities and opacities of certain mesh layers.
+
+Description:
+    Each Mesh object can optionally be part of a user-identified layer
+    (see Mesh constructor).
+    Calling set_layer_settings will result in an additional drop-down
+    selector in the ScenePic user interface.
+
+Args:
+    layer_settings (Mapping[str, Union[dict, LayerSettings]]): a LayerSettings object
+        or a dictionary. See LayerSettings for details.
+"""
