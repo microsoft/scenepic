@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>API &mdash; scenepic 1.0.14 documentation</title>
+  <title>API &mdash; scenepic 1.0.15 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -14,7 +14,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -39,7 +41,42 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#scene">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scene">Scene</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#scenepic.Scene"><code class="docutils literal notranslate"><span class="pre">Scene</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Scene.clear_script"><code class="docutils literal notranslate"><span class="pre">Scene.clear_script()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Scene.configure_user_interface"><code class="docutils literal notranslate"><span class="pre">Scene.configure_user_interface()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Scene.create_audio"><code class="docutils literal notranslate"><span class="pre">Scene.create_audio()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Scene.create_canvas_2d"><code class="docutils literal notranslate"><span class="pre">Scene.create_canvas_2d()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Scene.create_canvas_3d"><code class="docutils literal notranslate"><span class="pre">Scene.create_canvas_3d()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Scene.create_drop_down_menu"><code class="docutils literal notranslate"><span class="pre">Scene.create_drop_down_menu()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Scene.create_graph"><code class="docutils literal notranslate"><span class="pre">Scene.create_graph()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Scene.create_image"><code class="docutils literal notranslate"><span class="pre">Scene.create_image()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Scene.create_label"><code class="docutils literal notranslate"><span class="pre">Scene.create_label()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Scene.create_mesh"><code class="docutils literal notranslate"><span class="pre">Scene.create_mesh()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Scene.create_text_panel"><code class="docutils literal notranslate"><span class="pre">Scene.create_text_panel()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Scene.create_video"><code class="docutils literal notranslate"><span class="pre">Scene.create_video()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Scene.framerate"><code class="docutils literal notranslate"><span class="pre">Scene.framerate</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Scene.get_json"><code class="docutils literal notranslate"><span class="pre">Scene.get_json()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Scene.get_script"><code class="docutils literal notranslate"><span class="pre">Scene.get_script()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Scene.grid"><code class="docutils literal notranslate"><span class="pre">Scene.grid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Scene.link_canvas_events"><code class="docutils literal notranslate"><span class="pre">Scene.link_canvas_events()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Scene.measure_command_size"><code class="docutils literal notranslate"><span class="pre">Scene.measure_command_size()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Scene.place"><code class="docutils literal notranslate"><span class="pre">Scene.place()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Scene.quantize_updates"><code class="docutils literal notranslate"><span class="pre">Scene.quantize_updates()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Scene.save_as_html"><code class="docutils literal notranslate"><span class="pre">Scene.save_as_html()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Scene.save_as_json"><code class="docutils literal notranslate"><span class="pre">Scene.save_as_json()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Scene.save_as_script"><code class="docutils literal notranslate"><span class="pre">Scene.save_as_script()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Scene.script_cleared"><code class="docutils literal notranslate"><span class="pre">Scene.script_cleared</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Scene.simulate_key_presses"><code class="docutils literal notranslate"><span class="pre">Scene.simulate_key_presses()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Scene.status_bar_visibility"><code class="docutils literal notranslate"><span class="pre">Scene.status_bar_visibility</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Scene.update_instanced_mesh"><code class="docutils literal notranslate"><span class="pre">Scene.update_instanced_mesh()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Scene.update_mesh"><code class="docutils literal notranslate"><span class="pre">Scene.update_mesh()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Scene.update_mesh_positions"><code class="docutils literal notranslate"><span class="pre">Scene.update_mesh_positions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Scene.update_mesh_without_normals"><code class="docutils literal notranslate"><span class="pre">Scene.update_mesh_without_normals()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#d-graphics">3D Graphics</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="graphics3d.html">Canvas3D</a></li>
 <li class="toctree-l3"><a class="reference internal" href="graphics3d.html#frame3d">Frame3D</a></li>
@@ -75,7 +112,36 @@
 <li class="toctree-l3"><a class="reference internal" href="media.html#videowriter">VideoWriter</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#color">Color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#color">Color</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#scenepic.Colors"><code class="docutils literal notranslate"><span class="pre">Colors</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Colors.Black"><code class="docutils literal notranslate"><span class="pre">Colors.Black</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Colors.White"><code class="docutils literal notranslate"><span class="pre">Colors.White</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Colors.Red"><code class="docutils literal notranslate"><span class="pre">Colors.Red</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Colors.Maroon"><code class="docutils literal notranslate"><span class="pre">Colors.Maroon</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Colors.Pink"><code class="docutils literal notranslate"><span class="pre">Colors.Pink</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Colors.Brown"><code class="docutils literal notranslate"><span class="pre">Colors.Brown</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Colors.Orange"><code class="docutils literal notranslate"><span class="pre">Colors.Orange</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Colors.Coral"><code class="docutils literal notranslate"><span class="pre">Colors.Coral</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Colors.Olive"><code class="docutils literal notranslate"><span class="pre">Colors.Olive</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Colors.Yellow"><code class="docutils literal notranslate"><span class="pre">Colors.Yellow</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Colors.Beige"><code class="docutils literal notranslate"><span class="pre">Colors.Beige</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Colors.Lime"><code class="docutils literal notranslate"><span class="pre">Colors.Lime</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Colors.Green"><code class="docutils literal notranslate"><span class="pre">Colors.Green</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Colors.Mint"><code class="docutils literal notranslate"><span class="pre">Colors.Mint</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Colors.Teal"><code class="docutils literal notranslate"><span class="pre">Colors.Teal</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Colors.Cyan"><code class="docutils literal notranslate"><span class="pre">Colors.Cyan</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Colors.Navy"><code class="docutils literal notranslate"><span class="pre">Colors.Navy</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Colors.Blue"><code class="docutils literal notranslate"><span class="pre">Colors.Blue</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Colors.Purple"><code class="docutils literal notranslate"><span class="pre">Colors.Purple</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Colors.Lavender"><code class="docutils literal notranslate"><span class="pre">Colors.Lavender</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Colors.Magenta"><code class="docutils literal notranslate"><span class="pre">Colors.Magenta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Colors.Gray"><code class="docutils literal notranslate"><span class="pre">Colors.Gray</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#scenepic.Color"><code class="docutils literal notranslate"><span class="pre">Color()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scenepic.ColorFromBytes"><code class="docutils literal notranslate"><span class="pre">ColorFromBytes()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -105,13 +171,13 @@
            <div itemprop="articleBody">
              
   <section id="api">
-<span id="id1"></span><h1>API<a class="headerlink" href="#api" title="Permalink to this headline"></a></h1>
+<span id="id1"></span><h1>API<a class="headerlink" href="#api" title="Permalink to this heading"></a></h1>
 <span class="target" id="module-scenepic"></span><p>This part of the documentation covers all the interfaces of ScenePic.</p>
 <section id="scene">
-<h2>Scene<a class="headerlink" href="#scene" title="Permalink to this headline"></a></h2>
+<h2>Scene<a class="headerlink" href="#scene" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="scenepic.Scene">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">Scene</span></span><a class="headerlink" href="#scenepic.Scene" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">Scene</span></span><a class="headerlink" href="#scenepic.Scene" title="Permalink to this definition"></a></dt>
 <dd><p>Top level container representing an entire ScenePic Scene.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -342,6 +408,50 @@ camera space. Defaults to False.</p></li>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="scenepic.Scene.create_mesh">
+<span class="sig-name descname"><span class="pre">create_mesh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mesh_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.create_mesh" title="Permalink to this definition"></a></dt>
+<dd><p>Create a new Mesh and append to the Scene.</p>
+<dl class="simple">
+<dt>Description:</dt><dd><p>Meshes are Scene-wide resources that can be reused across multiple
+Frames in multiple Canvas3Ds.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mesh_id</strong> (<em>str</em><em>, </em><em>optional</em>) – a unique identifier for the Mesh (will be
+automatically populated if not provided). Defaults to None.</p></li>
+<li><p><strong>layer_id</strong> (<em>str</em><em>, </em><em>optional</em>) – an identifier to allow several Meshes to be grouped together
+into a “layer”.  Layers should be used in conjunction with
+Canvas3D.set_layer_settings(). Defaults to None.</p></li>
+<li><p><strong>double_sided</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether to turn off back face culling and draw the Mesh’s
+triangles as double sided. Defaults to False.</p></li>
+<li><p><strong>camera_space</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether this Mesh is defined in camera space (cannot
+be moved in the ScenePic user interface) or world space (standard).
+Defaults to False.</p></li>
+<li><p><strong>shared_color</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – see <cite>Mesh</cite> constructor.</p></li>
+<li><p><strong>texture_id</strong> (<em>Union</em><em>[</em><a class="reference internal" href="media.html#scenepic.Image" title="scenepic.Image"><em>Image</em></a><em>, </em><em>str</em><em>]</em><em>, </em><em>optional</em>) – see <cite>Mesh</cite> constructor.</p></li>
+<li><p><strong>nn_texture</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether the shader should use nearest-neighbor
+texture interpolation. Defaults to True.</p></li>
+<li><p><strong>use_texture_alpha</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether to use the alpha channel in the texture
+for transparency (only relevant for textured Meshes).
+Defaults to True.</p></li>
+<li><p><strong>is_billboard</strong> (<em>bool</em><em>, </em><em>optional</em>) – draw this Mesh as a billboard (i.e. always facing the user)
+rather than rotating with the rest of the world. Defaults to False.</p></li>
+<li><p><strong>is_label</strong> (<em>bool</em><em>, </em><em>optional</em>) – this mesh will be treated specially as a label. Not for public use.
+Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a reference to the new Mesh object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="graphics3d.html#scenepic.Mesh" title="scenepic.Mesh">Mesh</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="scenepic.Scene.create_text_panel">
 <span class="sig-name descname"><span class="pre">create_text_panel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.create_text_panel" title="Permalink to this definition"></a></dt>
 <dd><p>Create a new TextPanel and add directly to the HTML page.</p>
@@ -383,7 +493,7 @@ automatically populated if not provided). Defaults to None.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Scene.framerate">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">framerate</span></span><a class="headerlink" href="#scenepic.Scene.framerate" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">framerate</span></span><a class="headerlink" href="#scenepic.Scene.framerate" title="Permalink to this definition"></a></dt>
 <dd><p>Number of frames to display per second</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -440,6 +550,20 @@ the Scene since the last call to clear_script().</p>
 <li><p><strong>width</strong> (<em>str</em>) – CSS declaration for the width of the ScenePic.</p></li>
 <li><p><strong>grid_template_rows</strong> (<em>str</em>) – CSS declaration defining the rows of the ScenePic</p></li>
 <li><p><strong>grid_template_columns</strong> (<em>str</em>) – CSS declaration defining the columns of the ScenePic</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scenepic.Scene.link_canvas_events">
+<span class="sig-name descname"><span class="pre">link_canvas_events</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">canvases</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.link_canvas_events" title="Permalink to this definition"></a></dt>
+<dd><p>Specify that all input events should be linked across the provided set of Canvases.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>self</strong> (<a class="reference internal" href="#scenepic.Scene" title="scenepic.Scene"><em>Scene</em></a>) – self reference</p></li>
+<li><p><strong>canvases</strong> – the canvases which should have linked events</p></li>
 </ul>
 </dd>
 </dl>
@@ -578,7 +702,7 @@ by including the library</p></li>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Scene.script_cleared">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">script_cleared</span></span><a class="headerlink" href="#scenepic.Scene.script_cleared" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">script_cleared</span></span><a class="headerlink" href="#scenepic.Scene.script_cleared" title="Permalink to this definition"></a></dt>
 <dd><p>Whether the script has been cleared</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -587,9 +711,25 @@ by including the library</p></li>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="scenepic.Scene.simulate_key_presses">
+<span class="sig-name descname"><span class="pre">simulate_key_presses</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">canvas_id</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">keypresses</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.simulate_key_presses" title="Permalink to this definition"></a></dt>
+<dd><p>Simulates one or more keypresses to fire off events in the ScenePic UI at startup, e.g. video playback.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>self</strong> (<a class="reference internal" href="#scenepic.Scene" title="scenepic.Scene"><em>Scene</em></a>) – self reference</p></li>
+<li><p><strong>canvas_id</strong> (<em>Union</em><em>[</em><a class="reference internal" href="graphics3d.html#scenepic.Canvas3D" title="scenepic.Canvas3D"><em>Canvas3D</em></a><em>, </em><a class="reference internal" href="graphics2d.html#scenepic.Canvas2D" title="scenepic.Canvas2D"><em>Canvas2D</em></a><em>, </em><em>str</em><em>]</em>) – ID of the canvas on which to fire off this
+event.</p></li>
+<li><p><strong>keypresses</strong> – the key values</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Scene.status_bar_visibility">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">status_bar_visibility</span></span><a class="headerlink" href="#scenepic.Scene.status_bar_visibility" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">status_bar_visibility</span></span><a class="headerlink" href="#scenepic.Scene.status_bar_visibility" title="Permalink to this definition"></a></dt>
 <dd><p>CSS visibility for the status bar</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -680,61 +820,373 @@ automatically populated if not provided). Defaults to None.</p></li>
 
 </section>
 <section id="d-graphics">
-<h2>3D Graphics<a class="headerlink" href="#d-graphics" title="Permalink to this headline"></a></h2>
+<h2>3D Graphics<a class="headerlink" href="#d-graphics" title="Permalink to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="graphics3d.html">Canvas3D</a></li>
-<li class="toctree-l1"><a class="reference internal" href="graphics3d.html#frame3d">Frame3D</a></li>
-<li class="toctree-l1"><a class="reference internal" href="graphics3d.html#mesh">Mesh</a></li>
-<li class="toctree-l1"><a class="reference internal" href="graphics3d.html#meshupdate">MeshUpdate</a></li>
-<li class="toctree-l1"><a class="reference internal" href="graphics3d.html#meshinfo">MeshInfo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="graphics3d.html#vertexbuffer">VertexBuffer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="graphics3d.html#camera">Camera</a></li>
-<li class="toctree-l1"><a class="reference internal" href="graphics3d.html#focuspoint">FocusPoint</a></li>
-<li class="toctree-l1"><a class="reference internal" href="graphics3d.html#shading">Shading</a></li>
-<li class="toctree-l1"><a class="reference internal" href="graphics3d.html#transforms">Transforms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="graphics3d.html#label">Label</a></li>
-<li class="toctree-l1"><a class="reference internal" href="graphics3d.html#loopsubdivisionstencil">LoopSubdivisionStencil</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphics3d.html">Canvas3D</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="graphics3d.html#scenepic.Canvas3D"><code class="docutils literal notranslate"><span class="pre">Canvas3D</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Canvas3D.camera"><code class="docutils literal notranslate"><span class="pre">Canvas3D.camera</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Canvas3D.canvas_id"><code class="docutils literal notranslate"><span class="pre">Canvas3D.canvas_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Canvas3D.clear_script"><code class="docutils literal notranslate"><span class="pre">Canvas3D.clear_script()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Canvas3D.create_frame"><code class="docutils literal notranslate"><span class="pre">Canvas3D.create_frame()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Canvas3D.focus_point"><code class="docutils literal notranslate"><span class="pre">Canvas3D.focus_point</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Canvas3D.height"><code class="docutils literal notranslate"><span class="pre">Canvas3D.height</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Canvas3D.media_id"><code class="docutils literal notranslate"><span class="pre">Canvas3D.media_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Canvas3D.set_layer_settings"><code class="docutils literal notranslate"><span class="pre">Canvas3D.set_layer_settings()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Canvas3D.shading"><code class="docutils literal notranslate"><span class="pre">Canvas3D.shading</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Canvas3D.ui_parameters"><code class="docutils literal notranslate"><span class="pre">Canvas3D.ui_parameters</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Canvas3D.width"><code class="docutils literal notranslate"><span class="pre">Canvas3D.width</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="graphics3d.html#frame3d">Frame3D</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="graphics3d.html#scenepic.Frame3D"><code class="docutils literal notranslate"><span class="pre">Frame3D</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Frame3D.add_label"><code class="docutils literal notranslate"><span class="pre">Frame3D.add_label()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Frame3D.add_mesh"><code class="docutils literal notranslate"><span class="pre">Frame3D.add_mesh()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Frame3D.add_meshes"><code class="docutils literal notranslate"><span class="pre">Frame3D.add_meshes()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Frame3D.camera"><code class="docutils literal notranslate"><span class="pre">Frame3D.camera</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Frame3D.focus_point"><code class="docutils literal notranslate"><span class="pre">Frame3D.focus_point</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Frame3D.set_layer_settings"><code class="docutils literal notranslate"><span class="pre">Frame3D.set_layer_settings()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="graphics3d.html#mesh">Mesh</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="graphics3d.html#scenepic.Mesh"><code class="docutils literal notranslate"><span class="pre">Mesh</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.add_camera_frustum"><code class="docutils literal notranslate"><span class="pre">Mesh.add_camera_frustum()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.add_camera_image"><code class="docutils literal notranslate"><span class="pre">Mesh.add_camera_image()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.add_cone"><code class="docutils literal notranslate"><span class="pre">Mesh.add_cone()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.add_coordinate_axes"><code class="docutils literal notranslate"><span class="pre">Mesh.add_coordinate_axes()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.add_cube"><code class="docutils literal notranslate"><span class="pre">Mesh.add_cube()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.add_cylinder"><code class="docutils literal notranslate"><span class="pre">Mesh.add_cylinder()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.add_disc"><code class="docutils literal notranslate"><span class="pre">Mesh.add_disc()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.add_icosphere"><code class="docutils literal notranslate"><span class="pre">Mesh.add_icosphere()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.add_image"><code class="docutils literal notranslate"><span class="pre">Mesh.add_image()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.add_lines"><code class="docutils literal notranslate"><span class="pre">Mesh.add_lines()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.add_mesh"><code class="docutils literal notranslate"><span class="pre">Mesh.add_mesh()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.add_mesh_with_normals"><code class="docutils literal notranslate"><span class="pre">Mesh.add_mesh_with_normals()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.add_mesh_without_normals"><code class="docutils literal notranslate"><span class="pre">Mesh.add_mesh_without_normals()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.add_quad"><code class="docutils literal notranslate"><span class="pre">Mesh.add_quad()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.add_sphere"><code class="docutils literal notranslate"><span class="pre">Mesh.add_sphere()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.add_thickline"><code class="docutils literal notranslate"><span class="pre">Mesh.add_thickline()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.add_triangle"><code class="docutils literal notranslate"><span class="pre">Mesh.add_triangle()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.add_uv_sphere"><code class="docutils literal notranslate"><span class="pre">Mesh.add_uv_sphere()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.append_mesh"><code class="docutils literal notranslate"><span class="pre">Mesh.append_mesh()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.apply_rotation"><code class="docutils literal notranslate"><span class="pre">Mesh.apply_rotation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.apply_transform"><code class="docutils literal notranslate"><span class="pre">Mesh.apply_transform()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.camera_space"><code class="docutils literal notranslate"><span class="pre">Mesh.camera_space</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.center_of_mass"><code class="docutils literal notranslate"><span class="pre">Mesh.center_of_mass</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.count_vertices"><code class="docutils literal notranslate"><span class="pre">Mesh.count_vertices()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.double_sided"><code class="docutils literal notranslate"><span class="pre">Mesh.double_sided</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.enable_instancing"><code class="docutils literal notranslate"><span class="pre">Mesh.enable_instancing()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.get_rotated"><code class="docutils literal notranslate"><span class="pre">Mesh.get_rotated()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.get_transformed"><code class="docutils literal notranslate"><span class="pre">Mesh.get_transformed()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.is_billboard"><code class="docutils literal notranslate"><span class="pre">Mesh.is_billboard</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.layer_id"><code class="docutils literal notranslate"><span class="pre">Mesh.layer_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.mesh_id"><code class="docutils literal notranslate"><span class="pre">Mesh.mesh_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.nn_texture"><code class="docutils literal notranslate"><span class="pre">Mesh.nn_texture</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.reverse_triangle_order"><code class="docutils literal notranslate"><span class="pre">Mesh.reverse_triangle_order()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.shared_color"><code class="docutils literal notranslate"><span class="pre">Mesh.shared_color</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.texture_id"><code class="docutils literal notranslate"><span class="pre">Mesh.texture_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.use_texture_alpha"><code class="docutils literal notranslate"><span class="pre">Mesh.use_texture_alpha</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Mesh.vertex_buffer"><code class="docutils literal notranslate"><span class="pre">Mesh.vertex_buffer</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="graphics3d.html#meshupdate">MeshUpdate</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="graphics3d.html#scenepic.MeshUpdate"><code class="docutils literal notranslate"><span class="pre">MeshUpdate</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.MeshUpdate.base_mesh_id"><code class="docutils literal notranslate"><span class="pre">MeshUpdate.base_mesh_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.MeshUpdate.difference_range"><code class="docutils literal notranslate"><span class="pre">MeshUpdate.difference_range()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.MeshUpdate.frame_index"><code class="docutils literal notranslate"><span class="pre">MeshUpdate.frame_index</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.MeshUpdate.mesh_id"><code class="docutils literal notranslate"><span class="pre">MeshUpdate.mesh_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.MeshUpdate.quantize"><code class="docutils literal notranslate"><span class="pre">MeshUpdate.quantize()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.MeshUpdate.vertex_buffer"><code class="docutils literal notranslate"><span class="pre">MeshUpdate.vertex_buffer</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="graphics3d.html#meshinfo">MeshInfo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="graphics3d.html#scenepic.MeshInfo"><code class="docutils literal notranslate"><span class="pre">MeshInfo</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.MeshInfo.colors"><code class="docutils literal notranslate"><span class="pre">MeshInfo.colors</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.MeshInfo.has_normals"><code class="docutils literal notranslate"><span class="pre">MeshInfo.has_normals</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.MeshInfo.normals"><code class="docutils literal notranslate"><span class="pre">MeshInfo.normals</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.MeshInfo.positions"><code class="docutils literal notranslate"><span class="pre">MeshInfo.positions</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.MeshInfo.subdivide"><code class="docutils literal notranslate"><span class="pre">MeshInfo.subdivide()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.MeshInfo.triangles"><code class="docutils literal notranslate"><span class="pre">MeshInfo.triangles</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.MeshInfo.uvs"><code class="docutils literal notranslate"><span class="pre">MeshInfo.uvs</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="graphics3d.html#scenepic.load_obj"><code class="docutils literal notranslate"><span class="pre">load_obj()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="graphics3d.html#vertexbuffer">VertexBuffer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="graphics3d.html#scenepic.VertexBuffer"><code class="docutils literal notranslate"><span class="pre">VertexBuffer</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="graphics3d.html#camera">Camera</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="graphics3d.html#scenepic.Camera"><code class="docutils literal notranslate"><span class="pre">Camera</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Camera.aspect_ratio"><code class="docutils literal notranslate"><span class="pre">Camera.aspect_ratio</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Camera.camera_to_world"><code class="docutils literal notranslate"><span class="pre">Camera.camera_to_world</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Camera.center"><code class="docutils literal notranslate"><span class="pre">Camera.center</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Camera.look_at"><code class="docutils literal notranslate"><span class="pre">Camera.look_at</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Camera.orbit"><code class="docutils literal notranslate"><span class="pre">Camera.orbit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Camera.projection"><code class="docutils literal notranslate"><span class="pre">Camera.projection</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Camera.rotation"><code class="docutils literal notranslate"><span class="pre">Camera.rotation</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Camera.up_dir"><code class="docutils literal notranslate"><span class="pre">Camera.up_dir</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Camera.world_to_camera"><code class="docutils literal notranslate"><span class="pre">Camera.world_to_camera</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="graphics3d.html#focuspoint">FocusPoint</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="graphics3d.html#scenepic.FocusPoint"><code class="docutils literal notranslate"><span class="pre">FocusPoint</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.FocusPoint.orientation_axis_angle"><code class="docutils literal notranslate"><span class="pre">FocusPoint.orientation_axis_angle</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.FocusPoint.position"><code class="docutils literal notranslate"><span class="pre">FocusPoint.position</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="graphics3d.html#shading">Shading</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="graphics3d.html#scenepic.Shading"><code class="docutils literal notranslate"><span class="pre">Shading</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Shading.ambient_light_color"><code class="docutils literal notranslate"><span class="pre">Shading.ambient_light_color</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Shading.bg_color"><code class="docutils literal notranslate"><span class="pre">Shading.bg_color</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Shading.directional_light_color"><code class="docutils literal notranslate"><span class="pre">Shading.directional_light_color</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Shading.directional_light_dir"><code class="docutils literal notranslate"><span class="pre">Shading.directional_light_dir</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="graphics3d.html#transforms">Transforms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="graphics3d.html#scenepic.Transforms"><code class="docutils literal notranslate"><span class="pre">Transforms</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Transforms.AxisAngleRotationToRotateXAxisToAlignWithAxis"><code class="docutils literal notranslate"><span class="pre">Transforms.AxisAngleRotationToRotateXAxisToAlignWithAxis()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Transforms.QuaternionFromAxisAngle"><code class="docutils literal notranslate"><span class="pre">Transforms.QuaternionFromAxisAngle()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Transforms.QuaternionToRotateXAxisToAlignWithAxis"><code class="docutils literal notranslate"><span class="pre">Transforms.QuaternionToRotateXAxisToAlignWithAxis()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Transforms.RotationAboutXAxis"><code class="docutils literal notranslate"><span class="pre">Transforms.RotationAboutXAxis()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Transforms.RotationAboutYAxis"><code class="docutils literal notranslate"><span class="pre">Transforms.RotationAboutYAxis()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Transforms.RotationAboutZAxis"><code class="docutils literal notranslate"><span class="pre">Transforms.RotationAboutZAxis()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Transforms.RotationMatrixFromAxisAngle"><code class="docutils literal notranslate"><span class="pre">Transforms.RotationMatrixFromAxisAngle()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Transforms.RotationToRotateXAxisToAlignWithAxis"><code class="docutils literal notranslate"><span class="pre">Transforms.RotationToRotateXAxisToAlignWithAxis()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Transforms.Scale"><code class="docutils literal notranslate"><span class="pre">Transforms.Scale()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Transforms.Translate"><code class="docutils literal notranslate"><span class="pre">Transforms.Translate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Transforms.axis_angle_to_align_x_to_axis"><code class="docutils literal notranslate"><span class="pre">Transforms.axis_angle_to_align_x_to_axis()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Transforms.euler_angles_to_matrix"><code class="docutils literal notranslate"><span class="pre">Transforms.euler_angles_to_matrix()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Transforms.gl_projection"><code class="docutils literal notranslate"><span class="pre">Transforms.gl_projection()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Transforms.gl_world_to_camera"><code class="docutils literal notranslate"><span class="pre">Transforms.gl_world_to_camera()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Transforms.look_at_rotation"><code class="docutils literal notranslate"><span class="pre">Transforms.look_at_rotation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Transforms.quaternion_from_axis_angle"><code class="docutils literal notranslate"><span class="pre">Transforms.quaternion_from_axis_angle()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Transforms.quaternion_multiply"><code class="docutils literal notranslate"><span class="pre">Transforms.quaternion_multiply()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Transforms.quaternion_to_align_x_to_axis"><code class="docutils literal notranslate"><span class="pre">Transforms.quaternion_to_align_x_to_axis()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Transforms.quaternion_to_matrix"><code class="docutils literal notranslate"><span class="pre">Transforms.quaternion_to_matrix()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Transforms.rotation_about_x"><code class="docutils literal notranslate"><span class="pre">Transforms.rotation_about_x()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Transforms.rotation_about_y"><code class="docutils literal notranslate"><span class="pre">Transforms.rotation_about_y()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Transforms.rotation_about_z"><code class="docutils literal notranslate"><span class="pre">Transforms.rotation_about_z()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Transforms.rotation_matrix_from_axis_angle"><code class="docutils literal notranslate"><span class="pre">Transforms.rotation_matrix_from_axis_angle()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Transforms.rotation_to_align_x_to_axis"><code class="docutils literal notranslate"><span class="pre">Transforms.rotation_to_align_x_to_axis()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Transforms.scale"><code class="docutils literal notranslate"><span class="pre">Transforms.scale()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Transforms.translate"><code class="docutils literal notranslate"><span class="pre">Transforms.translate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="graphics3d.html#label">Label</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="graphics3d.html#scenepic.Label"><code class="docutils literal notranslate"><span class="pre">Label</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Label.fill_color"><code class="docutils literal notranslate"><span class="pre">Label.fill_color</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Label.font_family"><code class="docutils literal notranslate"><span class="pre">Label.font_family</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Label.horizontal_align"><code class="docutils literal notranslate"><span class="pre">Label.horizontal_align</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Label.label_id"><code class="docutils literal notranslate"><span class="pre">Label.label_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Label.mesh_id"><code class="docutils literal notranslate"><span class="pre">Label.mesh_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Label.offset_distance"><code class="docutils literal notranslate"><span class="pre">Label.offset_distance</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Label.size_in_pixels"><code class="docutils literal notranslate"><span class="pre">Label.size_in_pixels</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Label.text"><code class="docutils literal notranslate"><span class="pre">Label.text</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.Label.vertical_align"><code class="docutils literal notranslate"><span class="pre">Label.vertical_align</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="graphics3d.html#loopsubdivisionstencil">LoopSubdivisionStencil</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="graphics3d.html#scenepic.LoopSubdivisionStencil"><code class="docutils literal notranslate"><span class="pre">LoopSubdivisionStencil</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.LoopSubdivisionStencil.apply"><code class="docutils literal notranslate"><span class="pre">LoopSubdivisionStencil.apply()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.LoopSubdivisionStencil.create"><code class="docutils literal notranslate"><span class="pre">LoopSubdivisionStencil.create()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.LoopSubdivisionStencil.triangle_count"><code class="docutils literal notranslate"><span class="pre">LoopSubdivisionStencil.triangle_count</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.LoopSubdivisionStencil.triangles"><code class="docutils literal notranslate"><span class="pre">LoopSubdivisionStencil.triangles</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics3d.html#scenepic.LoopSubdivisionStencil.vertex_count"><code class="docutils literal notranslate"><span class="pre">LoopSubdivisionStencil.vertex_count</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
 <section id="id2">
-<h2>2D Graphics<a class="headerlink" href="#id2" title="Permalink to this headline"></a></h2>
+<h2>2D Graphics<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="graphics2d.html">Canvas2D</a></li>
-<li class="toctree-l1"><a class="reference internal" href="graphics2d.html#frame2d">Frame2D</a></li>
-<li class="toctree-l1"><a class="reference internal" href="graphics2d.html#graph">Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphics2d.html">Canvas2D</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="graphics2d.html#scenepic.Canvas2D"><code class="docutils literal notranslate"><span class="pre">Canvas2D</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="graphics2d.html#scenepic.Canvas2D.background_color"><code class="docutils literal notranslate"><span class="pre">Canvas2D.background_color</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics2d.html#scenepic.Canvas2D.canvas_id"><code class="docutils literal notranslate"><span class="pre">Canvas2D.canvas_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics2d.html#scenepic.Canvas2D.clear_script"><code class="docutils literal notranslate"><span class="pre">Canvas2D.clear_script()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics2d.html#scenepic.Canvas2D.create_frame"><code class="docutils literal notranslate"><span class="pre">Canvas2D.create_frame()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics2d.html#scenepic.Canvas2D.height"><code class="docutils literal notranslate"><span class="pre">Canvas2D.height</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics2d.html#scenepic.Canvas2D.media_id"><code class="docutils literal notranslate"><span class="pre">Canvas2D.media_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics2d.html#scenepic.Canvas2D.set_layer_settings"><code class="docutils literal notranslate"><span class="pre">Canvas2D.set_layer_settings()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics2d.html#scenepic.Canvas2D.width"><code class="docutils literal notranslate"><span class="pre">Canvas2D.width</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="graphics2d.html#frame2d">Frame2D</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="graphics2d.html#scenepic.Frame2D"><code class="docutils literal notranslate"><span class="pre">Frame2D</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="graphics2d.html#scenepic.Frame2D.add_circle"><code class="docutils literal notranslate"><span class="pre">Frame2D.add_circle()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics2d.html#scenepic.Frame2D.add_image"><code class="docutils literal notranslate"><span class="pre">Frame2D.add_image()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics2d.html#scenepic.Frame2D.add_line"><code class="docutils literal notranslate"><span class="pre">Frame2D.add_line()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics2d.html#scenepic.Frame2D.add_rectangle"><code class="docutils literal notranslate"><span class="pre">Frame2D.add_rectangle()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics2d.html#scenepic.Frame2D.add_text"><code class="docutils literal notranslate"><span class="pre">Frame2D.add_text()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics2d.html#scenepic.Frame2D.add_video"><code class="docutils literal notranslate"><span class="pre">Frame2D.add_video()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="graphics2d.html#graph">Graph</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="graphics2d.html#scenepic.Graph"><code class="docutils literal notranslate"><span class="pre">Graph</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="graphics2d.html#scenepic.Graph.Margin"><code class="docutils literal notranslate"><span class="pre">Graph.Margin</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="graphics2d.html#scenepic.Graph.Margin.bottom"><code class="docutils literal notranslate"><span class="pre">Graph.Margin.bottom</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="graphics2d.html#scenepic.Graph.Margin.left"><code class="docutils literal notranslate"><span class="pre">Graph.Margin.left</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="graphics2d.html#scenepic.Graph.Margin.right"><code class="docutils literal notranslate"><span class="pre">Graph.Margin.right</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="graphics2d.html#scenepic.Graph.Margin.top"><code class="docutils literal notranslate"><span class="pre">Graph.Margin.top</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="graphics2d.html#scenepic.Graph.VerticalRule"><code class="docutils literal notranslate"><span class="pre">Graph.VerticalRule</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="graphics2d.html#scenepic.Graph.VerticalRule.color"><code class="docutils literal notranslate"><span class="pre">Graph.VerticalRule.color</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="graphics2d.html#scenepic.Graph.VerticalRule.frame"><code class="docutils literal notranslate"><span class="pre">Graph.VerticalRule.frame</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="graphics2d.html#scenepic.Graph.VerticalRule.line_width"><code class="docutils literal notranslate"><span class="pre">Graph.VerticalRule.line_width</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="graphics2d.html#scenepic.Graph.add_sparkline"><code class="docutils literal notranslate"><span class="pre">Graph.add_sparkline()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics2d.html#scenepic.Graph.background_color"><code class="docutils literal notranslate"><span class="pre">Graph.background_color</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics2d.html#scenepic.Graph.canvas_id"><code class="docutils literal notranslate"><span class="pre">Graph.canvas_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics2d.html#scenepic.Graph.font_family"><code class="docutils literal notranslate"><span class="pre">Graph.font_family</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics2d.html#scenepic.Graph.margin"><code class="docutils literal notranslate"><span class="pre">Graph.margin</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics2d.html#scenepic.Graph.media_id"><code class="docutils literal notranslate"><span class="pre">Graph.media_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics2d.html#scenepic.Graph.name_align"><code class="docutils literal notranslate"><span class="pre">Graph.name_align</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics2d.html#scenepic.Graph.name_size"><code class="docutils literal notranslate"><span class="pre">Graph.name_size</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics2d.html#scenepic.Graph.value_align"><code class="docutils literal notranslate"><span class="pre">Graph.value_align</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphics2d.html#scenepic.Graph.value_size"><code class="docutils literal notranslate"><span class="pre">Graph.value_size</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
 <section id="user-interface">
-<h2>User Interface<a class="headerlink" href="#user-interface" title="Permalink to this headline"></a></h2>
+<h2>User Interface<a class="headerlink" href="#user-interface" title="Permalink to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="ui.html">LayerSettings</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ui.html#dropdownmenu">DropDownMenu</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ui.html#textpanel">TextPanel</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ui.html#uiparameters">UIParameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ui.html">LayerSettings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ui.html#scenepic.LayerSettings"><code class="docutils literal notranslate"><span class="pre">LayerSettings</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ui.html#scenepic.LayerSettings.filled"><code class="docutils literal notranslate"><span class="pre">LayerSettings.filled</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ui.html#scenepic.LayerSettings.opacity"><code class="docutils literal notranslate"><span class="pre">LayerSettings.opacity</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ui.html#scenepic.LayerSettings.render_order"><code class="docutils literal notranslate"><span class="pre">LayerSettings.render_order</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ui.html#scenepic.LayerSettings.wireframe"><code class="docutils literal notranslate"><span class="pre">LayerSettings.wireframe</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ui.html#dropdownmenu">DropDownMenu</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ui.html#scenepic.DropDownMenu"><code class="docutils literal notranslate"><span class="pre">DropDownMenu</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ui.html#scenepic.DropDownMenu.clear_script"><code class="docutils literal notranslate"><span class="pre">DropDownMenu.clear_script()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ui.html#scenepic.DropDownMenu.items"><code class="docutils literal notranslate"><span class="pre">DropDownMenu.items</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ui.html#scenepic.DropDownMenu.selection"><code class="docutils literal notranslate"><span class="pre">DropDownMenu.selection</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ui.html#scenepic.DropDownMenu.set_disabled"><code class="docutils literal notranslate"><span class="pre">DropDownMenu.set_disabled()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ui.html#scenepic.DropDownMenu.title"><code class="docutils literal notranslate"><span class="pre">DropDownMenu.title</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ui.html#textpanel">TextPanel</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ui.html#scenepic.TextPanel"><code class="docutils literal notranslate"><span class="pre">TextPanel</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ui.html#scenepic.TextPanel.clear_script"><code class="docutils literal notranslate"><span class="pre">TextPanel.clear_script()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ui.html#scenepic.TextPanel.input_text"><code class="docutils literal notranslate"><span class="pre">TextPanel.input_text</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ui.html#scenepic.TextPanel.text"><code class="docutils literal notranslate"><span class="pre">TextPanel.text</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ui.html#scenepic.TextPanel.title"><code class="docutils literal notranslate"><span class="pre">TextPanel.title</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ui.html#uiparameters">UIParameters</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ui.html#scenepic.UIParameters"><code class="docutils literal notranslate"><span class="pre">UIParameters</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ui.html#scenepic.UIParameters.key_press_speed"><code class="docutils literal notranslate"><span class="pre">UIParameters.key_press_speed</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ui.html#scenepic.UIParameters.layer_dropdown_visibility"><code class="docutils literal notranslate"><span class="pre">UIParameters.layer_dropdown_visibility</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ui.html#scenepic.UIParameters.mouse_wheel_translation_speed"><code class="docutils literal notranslate"><span class="pre">UIParameters.mouse_wheel_translation_speed</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ui.html#scenepic.UIParameters.pointer_alt_key_multiplier"><code class="docutils literal notranslate"><span class="pre">UIParameters.pointer_alt_key_multiplier</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ui.html#scenepic.UIParameters.pointer_rotation_speed"><code class="docutils literal notranslate"><span class="pre">UIParameters.pointer_rotation_speed</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
 <section id="media">
-<h2>Media<a class="headerlink" href="#media" title="Permalink to this headline"></a></h2>
+<h2>Media<a class="headerlink" href="#media" title="Permalink to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="media.html">Image</a></li>
-<li class="toctree-l1"><a class="reference internal" href="media.html#audiotrack">AudioTrack</a></li>
-<li class="toctree-l1"><a class="reference internal" href="media.html#video">Video</a></li>
-<li class="toctree-l1"><a class="reference internal" href="media.html#videowriter">VideoWriter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="media.html">Image</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="media.html#scenepic.Image"><code class="docutils literal notranslate"><span class="pre">Image</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="media.html#scenepic.Image.data"><code class="docutils literal notranslate"><span class="pre">Image.data</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="media.html#scenepic.Image.ext"><code class="docutils literal notranslate"><span class="pre">Image.ext</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="media.html#scenepic.Image.from_numpy"><code class="docutils literal notranslate"><span class="pre">Image.from_numpy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="media.html#scenepic.Image.image_id"><code class="docutils literal notranslate"><span class="pre">Image.image_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="media.html#scenepic.Image.load"><code class="docutils literal notranslate"><span class="pre">Image.load()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="media.html#scenepic.Image.load_from_buffer"><code class="docutils literal notranslate"><span class="pre">Image.load_from_buffer()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="media.html#audiotrack">AudioTrack</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="media.html#scenepic.AudioTrack"><code class="docutils literal notranslate"><span class="pre">AudioTrack</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="media.html#scenepic.AudioTrack.audio_id"><code class="docutils literal notranslate"><span class="pre">AudioTrack.audio_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="media.html#scenepic.AudioTrack.data"><code class="docutils literal notranslate"><span class="pre">AudioTrack.data</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="media.html#scenepic.AudioTrack.load"><code class="docutils literal notranslate"><span class="pre">AudioTrack.load()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="media.html#scenepic.AudioTrack.load_from_buffer"><code class="docutils literal notranslate"><span class="pre">AudioTrack.load_from_buffer()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="media.html#video">Video</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="media.html#scenepic.Video"><code class="docutils literal notranslate"><span class="pre">Video</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="media.html#scenepic.Video.data"><code class="docutils literal notranslate"><span class="pre">Video.data</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="media.html#scenepic.Video.load"><code class="docutils literal notranslate"><span class="pre">Video.load()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="media.html#scenepic.Video.load_from_buffer"><code class="docutils literal notranslate"><span class="pre">Video.load_from_buffer()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="media.html#scenepic.Video.video_id"><code class="docutils literal notranslate"><span class="pre">Video.video_id</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="media.html#videowriter">VideoWriter</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="media.html#scenepic.VideoWriter"><code class="docutils literal notranslate"><span class="pre">VideoWriter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="media.html#scenepic.VideoWriter.clear_frame"><code class="docutils literal notranslate"><span class="pre">VideoWriter.clear_frame()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="media.html#scenepic.VideoWriter.frame"><code class="docutils literal notranslate"><span class="pre">VideoWriter.frame</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="media.html#scenepic.VideoWriter.start"><code class="docutils literal notranslate"><span class="pre">VideoWriter.start()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="media.html#scenepic.VideoWriter.stop"><code class="docutils literal notranslate"><span class="pre">VideoWriter.stop()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="media.html#scenepic.VideoWriter.text"><code class="docutils literal notranslate"><span class="pre">VideoWriter.text</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="media.html#scenepic.VideoWriter.text_color"><code class="docutils literal notranslate"><span class="pre">VideoWriter.text_color</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="media.html#scenepic.VideoWriter.write_frame"><code class="docutils literal notranslate"><span class="pre">VideoWriter.write_frame()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
 <section id="color">
-<h2>Color<a class="headerlink" href="#color" title="Permalink to this headline"></a></h2>
+<h2>Color<a class="headerlink" href="#color" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="scenepic.Colors">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">Colors</span></span><a class="headerlink" href="#scenepic.Colors" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">Colors</span></span><a class="headerlink" href="#scenepic.Colors" title="Permalink to this definition"></a></dt>
 <dd><p>Class containing standard colors.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="scenepic.Colors.Black">

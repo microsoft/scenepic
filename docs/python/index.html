@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ScenePic: 3D Visualization Made Easy &mdash; scenepic 1.0.14 documentation</title>
+  <title>ScenePic: 3D Visualization Made Easy &mdash; scenepic 1.0.15 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -14,7 +14,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -65,7 +67,7 @@
            <div itemprop="articleBody">
              
   <section id="scenepic-3d-visualization-made-easy">
-<h1>ScenePic: 3D Visualization Made Easy<a class="headerlink" href="#scenepic-3d-visualization-made-easy" title="Permalink to this headline"></a></h1>
+<h1>ScenePic: 3D Visualization Made Easy<a class="headerlink" href="#scenepic-3d-visualization-made-easy" title="Permalink to this heading"></a></h1>
 <img alt="_images/hello_scenepic.gif" src="_images/hello_scenepic.gif" />
 <p>© Microsoft 2021</p>
 <p>Primary Contact: &lt;<a class="reference external" href="mailto:scenepic&#37;&#52;&#48;microsoft&#46;com">scenepic<span>&#64;</span>microsoft<span>&#46;</span>com</a>&gt;</p>
@@ -105,7 +107,7 @@ library, with the following desiderata in mind:</p>
 </ul>
 <img alt="_images/example_render.png" src="_images/example_render.png" />
 <section id="getting-started">
-<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline"></a></h2>
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this heading"></a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="sd">&quot;&quot;&quot;Example script demonstrating the basic ScenePic functionality.&quot;&quot;&quot;</span>
 <span class="linenos">  2</span>
 <span class="linenos">  3</span><span class="kn">import</span> <span class="nn">argparse</span>
@@ -243,7 +245,7 @@ library, with the following desiderata in mind:</p>
 <img alt="_images/getting_started.gif" src="_images/getting_started.gif" />
 </section>
 <section id="using-the-html-client">
-<h2>Using the HTML Client<a class="headerlink" href="#using-the-html-client" title="Permalink to this headline"></a></h2>
+<h2>Using the HTML Client<a class="headerlink" href="#using-the-html-client" title="Permalink to this heading"></a></h2>
 <img alt="_images/scenepic_ui.png" src="_images/scenepic_ui.png" />
 <p>A ScenePic HTML page will look something like the image above. This example shows
 four <em>Canvas</em> objects, each of which contains several <em>Frame</em> objects (refering under the
@@ -271,7 +273,10 @@ widget.  You can also use the scrollbar to select different frames.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api.html#scene">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#scene">Scene</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.html#scenepic.Scene"><code class="docutils literal notranslate"><span class="pre">Scene</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#d-graphics">3D Graphics</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="graphics3d.html">Canvas3D</a></li>
 <li class="toctree-l3"><a class="reference internal" href="graphics3d.html#frame3d">Frame3D</a></li>
@@ -307,7 +312,12 @@ widget.  You can also use the scrollbar to select different frames.</p>
 <li class="toctree-l3"><a class="reference internal" href="media.html#videowriter">VideoWriter</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#color">Color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#color">Color</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.html#scenepic.Colors"><code class="docutils literal notranslate"><span class="pre">Colors</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#scenepic.Color"><code class="docutils literal notranslate"><span class="pre">Color()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#scenepic.ColorFromBytes"><code class="docutils literal notranslate"><span class="pre">ColorFromBytes()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

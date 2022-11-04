@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Canvas3D &mdash; scenepic 1.0.14 documentation</title>
+  <title>Canvas3D &mdash; scenepic 1.0.15 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -14,7 +14,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -41,18 +43,55 @@
 <li class="toctree-l1 current"><a class="reference internal" href="api.html">API</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="api.html#scene">Scene</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="api.html#d-graphics">3D Graphics</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Canvas3D</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#frame3d">Frame3D</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#mesh">Mesh</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#meshupdate">MeshUpdate</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#meshinfo">MeshInfo</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#vertexbuffer">VertexBuffer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#camera">Camera</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#focuspoint">FocusPoint</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#shading">Shading</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#transforms">Transforms</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#label">Label</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#loopsubdivisionstencil">LoopSubdivisionStencil</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Canvas3D</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Canvas3D"><code class="docutils literal notranslate"><span class="pre">Canvas3D</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#frame3d">Frame3D</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Frame3D"><code class="docutils literal notranslate"><span class="pre">Frame3D</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#mesh">Mesh</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Mesh"><code class="docutils literal notranslate"><span class="pre">Mesh</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#meshupdate">MeshUpdate</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.MeshUpdate"><code class="docutils literal notranslate"><span class="pre">MeshUpdate</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#meshinfo">MeshInfo</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.MeshInfo"><code class="docutils literal notranslate"><span class="pre">MeshInfo</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.load_obj"><code class="docutils literal notranslate"><span class="pre">load_obj()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vertexbuffer">VertexBuffer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.VertexBuffer"><code class="docutils literal notranslate"><span class="pre">VertexBuffer</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#camera">Camera</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Camera"><code class="docutils literal notranslate"><span class="pre">Camera</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#focuspoint">FocusPoint</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.FocusPoint"><code class="docutils literal notranslate"><span class="pre">FocusPoint</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#shading">Shading</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Shading"><code class="docutils literal notranslate"><span class="pre">Shading</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#transforms">Transforms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Transforms"><code class="docutils literal notranslate"><span class="pre">Transforms</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#label">Label</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.Label"><code class="docutils literal notranslate"><span class="pre">Label</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#loopsubdivisionstencil">LoopSubdivisionStencil</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.LoopSubdivisionStencil"><code class="docutils literal notranslate"><span class="pre">LoopSubdivisionStencil</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#id2">2D Graphics</a></li>
@@ -89,14 +128,14 @@
            <div itemprop="articleBody">
              
   <section id="canvas3d">
-<span id="graphics3d"></span><h1>Canvas3D<a class="headerlink" href="#canvas3d" title="Permalink to this headline"></a></h1>
+<span id="graphics3d"></span><h1>Canvas3D<a class="headerlink" href="#canvas3d" title="Permalink to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="scenepic.Canvas3D">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">Canvas3D</span></span><a class="headerlink" href="#scenepic.Canvas3D" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">Canvas3D</span></span><a class="headerlink" href="#scenepic.Canvas3D" title="Permalink to this definition"></a></dt>
 <dd><p>Represents a ScenePic Canvas3D - a 3D viewport that can contain a number of Frame3Ds.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Canvas3D.camera">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">camera</span></span><a class="headerlink" href="#scenepic.Canvas3D.camera" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">camera</span></span><a class="headerlink" href="#scenepic.Canvas3D.camera" title="Permalink to this definition"></a></dt>
 <dd><p>Set of Camera parameters for the Canvas.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -107,7 +146,7 @@
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Canvas3D.canvas_id">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">canvas_id</span></span><a class="headerlink" href="#scenepic.Canvas3D.canvas_id" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">canvas_id</span></span><a class="headerlink" href="#scenepic.Canvas3D.canvas_id" title="Permalink to this definition"></a></dt>
 <dd><p>A unique identifier for the canvas</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -125,20 +164,19 @@ visualization into multiple files.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="scenepic.Canvas3D.create_frame_">
-<span class="sig-name descname"><span class="pre">create_frame_</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Canvas3D.create_frame_" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="scenepic.Canvas3D.create_frame">
+<span class="sig-name descname"><span class="pre">create_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">focus_point</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meshes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">camera</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Canvas3D.create_frame" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a new Frame3D object and appends to the list of Frame3Ds in the Canvas3D.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>frame_id</strong> (<em>str</em><em>, </em><em>optional</em>) – a unique identifier for the Frame3D (will be
-automatically populated if not provided). Defaults to None.</p></li>
-<li><p><strong>focus_point</strong> (<a class="reference internal" href="#scenepic.FocusPoint" title="scenepic.FocusPoint"><em>FocusPoint</em></a><em>, </em><em>optional</em>) – optional 3D focus point for this frame (with optional 3D
-rotation for orientation lock), used in the ScenePic user interface.
-Defaults to None.</p></li>
-<li><p><strong>mesh_ids</strong> (<em>List</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – optionally pre-populate this Frame3D with a set of Meshes,
-for convenience. Defaults to None.</p></li>
-<li><p><strong>camera</strong> (<a class="reference internal" href="#scenepic.Camera" title="scenepic.Camera"><em>Camera</em></a><em>, </em><em>optional</em>) – optional default camera for the frame. Defaults to None.</p></li>
+<li><p><strong>frame_id</strong> (<em>str</em>) – a unique identifier for the Frame3D (will be
+automatically populated if not provided).</p></li>
+<li><p><strong>focus_point</strong> (<a class="reference internal" href="#scenepic.FocusPoint" title="scenepic.FocusPoint"><em>FocusPoint</em></a>) – optional 3D focus point for this frame (with optional 3D
+rotation for orientation lock), used in the ScenePic user interface.</p></li>
+<li><p><strong>meshes</strong> (<em>List</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="#scenepic.Mesh" title="scenepic.Mesh"><em>Mesh</em></a><em>, </em><a class="reference internal" href="#scenepic.MeshUpdate" title="scenepic.MeshUpdate"><em>MeshUpdate</em></a><em>, </em><em>str</em><em>]</em><em>]</em>) – optionally pre-populate this Frame3D
+with a set of Meshes, for convenience.</p></li>
+<li><p><strong>camera</strong> (<a class="reference internal" href="#scenepic.Camera" title="scenepic.Camera"><em>Camera</em></a>) – optionally set a camera for this frame</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -152,7 +190,7 @@ for convenience. Defaults to None.</p></li>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Canvas3D.focus_point">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">focus_point</span></span><a class="headerlink" href="#scenepic.Canvas3D.focus_point" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">focus_point</span></span><a class="headerlink" href="#scenepic.Canvas3D.focus_point" title="Permalink to this definition"></a></dt>
 <dd><p>Default focus point for the canvas.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -163,7 +201,7 @@ for convenience. Defaults to None.</p></li>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Canvas3D.height">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">height</span></span><a class="headerlink" href="#scenepic.Canvas3D.height" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">height</span></span><a class="headerlink" href="#scenepic.Canvas3D.height" title="Permalink to this definition"></a></dt>
 <dd><p>The height of the Canvas</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -174,7 +212,7 @@ for convenience. Defaults to None.</p></li>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Canvas3D.media_id">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">media_id</span></span><a class="headerlink" href="#scenepic.Canvas3D.media_id" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media_id</span></span><a class="headerlink" href="#scenepic.Canvas3D.media_id" title="Permalink to this definition"></a></dt>
 <dd><p>The ID of the attached media file.</p>
 <p>This file will be used to drive playback, i.e. frames will be
 displayed in time with the playback of the media file.</p>
@@ -186,17 +224,30 @@ displayed in time with the playback of the media file.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="scenepic.Canvas3D.set_layer_settings_">
-<span class="sig-name descname"><span class="pre">set_layer_settings_</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Canvas3D.set_layer_settings_" title="Permalink to this definition"></a></dt>
-<dd><p>Specify the visibilities and opacities of certain mesh layers.
-Each Mesh object can optionally be part of a user-identified layer
-(see Mesh constructor). Calling set_layer_settings will result in an
-additional drop-down selector in the ScenePic user interface.</p>
+<dt class="sig sig-object py" id="scenepic.Canvas3D.set_layer_settings">
+<span class="sig-name descname"><span class="pre">set_layer_settings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layer_settings</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Canvas3D.set_layer_settings" title="Permalink to this definition"></a></dt>
+<dd><p>Specify the visibilities and opacities of certain mesh layers.</p>
+<dl class="simple">
+<dt>Description:</dt><dd><p>Each Mesh object can optionally be part of a user-identified layer
+(see Mesh constructor).
+Calling set_layer_settings will result in an additional drop-down
+selector in the ScenePic user interface.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>self</strong> (<a class="reference internal" href="#scenepic.Canvas3D" title="scenepic.Canvas3D"><em>Canvas3D</em></a>) – the self reference</p></li>
+<li><p><strong>layer_settings</strong> (<em>Mapping</em><em>[</em><em>str</em><em>, </em><em>Union</em><em>[</em><em>dict</em><em>, </em><a class="reference internal" href="ui.html#scenepic.LayerSettings" title="scenepic.LayerSettings"><em>LayerSettings</em></a><em>]</em><em>]</em>) – a LayerSettings object
+or a dictionary. See LayerSettings for details.</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Canvas3D.shading">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">shading</span></span><a class="headerlink" href="#scenepic.Canvas3D.shading" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shading</span></span><a class="headerlink" href="#scenepic.Canvas3D.shading" title="Permalink to this definition"></a></dt>
 <dd><p>Set of Shading parameters for the Canvas.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -207,7 +258,7 @@ additional drop-down selector in the ScenePic user interface.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Canvas3D.ui_parameters">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">ui_parameters</span></span><a class="headerlink" href="#scenepic.Canvas3D.ui_parameters" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ui_parameters</span></span><a class="headerlink" href="#scenepic.Canvas3D.ui_parameters" title="Permalink to this definition"></a></dt>
 <dd><p>Set of user interface parameters</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -218,7 +269,7 @@ additional drop-down selector in the ScenePic user interface.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Canvas3D.width">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">width</span></span><a class="headerlink" href="#scenepic.Canvas3D.width" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">width</span></span><a class="headerlink" href="#scenepic.Canvas3D.width" title="Permalink to this definition"></a></dt>
 <dd><p>The width of the Canvas</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -231,10 +282,10 @@ additional drop-down selector in the ScenePic user interface.</p>
 
 </section>
 <section id="frame3d">
-<h1>Frame3D<a class="headerlink" href="#frame3d" title="Permalink to this headline"></a></h1>
+<h1>Frame3D<a class="headerlink" href="#frame3d" title="Permalink to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="scenepic.Frame3D">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">Frame3D</span></span><a class="headerlink" href="#scenepic.Frame3D" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">Frame3D</span></span><a class="headerlink" href="#scenepic.Frame3D" title="Permalink to this definition"></a></dt>
 <dd><p>Represents a frame of an animation which contains a number of
 transformed Mesh objects.</p>
 <dl class="py method">
@@ -252,28 +303,28 @@ transformed Mesh objects.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="scenepic.Frame3D.add_mesh_">
-<span class="sig-name descname"><span class="pre">add_mesh_</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Frame3D.add_mesh_" title="Permalink to this definition"></a></dt>
-<dd><p>Add a mesh to the frame.</p>
+<dt class="sig sig-object py" id="scenepic.Frame3D.add_mesh">
+<span class="sig-name descname"><span class="pre">add_mesh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mesh</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Frame3D.add_mesh" title="Permalink to this definition"></a></dt>
+<dd><p>Adds a mesh to the frame.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>mesh_id</strong> (<em>str</em>) – the id of the mesh to add</p></li>
-<li><p><strong>transform</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – homogeneous 3D transform applied to the mesh. Defaulst to None.</p></li>
+<li><p><strong>mesh</strong> (<em>Union</em><em>[</em><a class="reference internal" href="#scenepic.Mesh" title="scenepic.Mesh"><em>Mesh</em></a><em>, </em><a class="reference internal" href="#scenepic.MeshUpdate" title="scenepic.MeshUpdate"><em>MeshUpdate</em></a><em>, </em><em>str</em><em>]</em>) – The mesh, mesh update, or mesh ID</p></li>
+<li><p><strong>transform</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – An optional transform to apply to the mesh. Defaults to None.</p></li>
 </ul>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="scenepic.Frame3D.add_meshes_">
-<span class="sig-name descname"><span class="pre">add_meshes_</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Frame3D.add_meshes_" title="Permalink to this definition"></a></dt>
-<dd><p>Add meshes to the frame.</p>
+<dt class="sig sig-object py" id="scenepic.Frame3D.add_meshes">
+<span class="sig-name descname"><span class="pre">add_meshes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meshes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Frame3D.add_meshes" title="Permalink to this definition"></a></dt>
+<dd><p>Adds meshes to the frame.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>mesh_ids</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – the ids of the meshes to add</p></li>
-<li><p><strong>transform</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – homogeneous 3D transform applied to all the meshes. Defaults to None.</p></li>
+<li><p><strong>meshes</strong> (<em>List</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="#scenepic.Mesh" title="scenepic.Mesh"><em>Mesh</em></a><em>, </em><a class="reference internal" href="#scenepic.MeshUpdate" title="scenepic.MeshUpdate"><em>MeshUpdate</em></a><em>, </em><em>str</em><em>]</em><em>]</em>) – A list of meshes and mesh updates (or their IDs)</p></li>
+<li><p><strong>transform</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – an optional transform to apply to each mesh. Defaults to None.</p></li>
 </ul>
 </dd>
 </dl>
@@ -281,7 +332,7 @@ transformed Mesh objects.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Frame3D.camera">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">camera</span></span><a class="headerlink" href="#scenepic.Frame3D.camera" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">camera</span></span><a class="headerlink" href="#scenepic.Frame3D.camera" title="Permalink to this definition"></a></dt>
 <dd><p>The camera for the frame. This property can be used to create cinematic
 camera movement within a ScenePic, but the user can choose to override the camera
 track at any time. If they reset to the original camera, however, it will make
@@ -295,7 +346,7 @@ subsequent frames use the specified camera parameters.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Frame3D.focus_point">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">focus_point</span></span><a class="headerlink" href="#scenepic.Frame3D.focus_point" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">focus_point</span></span><a class="headerlink" href="#scenepic.Frame3D.focus_point" title="Permalink to this definition"></a></dt>
 <dd><p>The focus point of the frame</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -305,22 +356,32 @@ subsequent frames use the specified camera parameters.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="scenepic.Frame3D.set_layer_settings_">
-<span class="sig-name descname"><span class="pre">set_layer_settings_</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Frame3D.set_layer_settings_" title="Permalink to this definition"></a></dt>
-<dd><p>Specify the visibilities and opacities of certain mesh layers.
-Each Mesh object can optionally be part of a user-identified layer
-(see Mesh constructor). Calling set_layer_settings will result in an
-additional drop-down selector in the ScenePic user interface.</p>
+<dt class="sig sig-object py" id="scenepic.Frame3D.set_layer_settings">
+<span class="sig-name descname"><span class="pre">set_layer_settings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layer_settings</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Frame3D.set_layer_settings" title="Permalink to this definition"></a></dt>
+<dd><p>Specify the visibilities and opacities of certain mesh layers.</p>
+<dl class="simple">
+<dt>Description:</dt><dd><p>Each Mesh object can optionally be part of a user-identified layer
+(see Mesh constructor).
+Calling set_layer_settings will result in an additional drop-down
+selector in the ScenePic user interface.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>layer_settings</strong> (<em>Mapping</em><em>[</em><em>str</em><em>, </em><em>Union</em><em>[</em><em>dict</em><em>, </em><a class="reference internal" href="ui.html#scenepic.LayerSettings" title="scenepic.LayerSettings"><em>LayerSettings</em></a><em>]</em><em>]</em>) – a LayerSettings object
+or a dictionary. See LayerSettings for details.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
 
 </section>
 <section id="mesh">
-<h1>Mesh<a class="headerlink" href="#mesh" title="Permalink to this headline"></a></h1>
+<h1>Mesh<a class="headerlink" href="#mesh" title="Permalink to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="scenepic.Mesh">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">Mesh</span></span><a class="headerlink" href="#scenepic.Mesh" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">Mesh</span></span><a class="headerlink" href="#scenepic.Mesh" title="Permalink to this definition"></a></dt>
 <dd><p>The basic ScenePic mesh class, containing vertex, triangle, and line buffers.
 To allow for compatibility with Numpy, we use row major order, so each
 data point is stored as a row for efficiency. Vertex buffer contains
@@ -730,7 +791,7 @@ Separated out from apply_transform() so that a matrix inverse is not required, f
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Mesh.camera_space">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">camera_space</span></span><a class="headerlink" href="#scenepic.Mesh.camera_space" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">camera_space</span></span><a class="headerlink" href="#scenepic.Mesh.camera_space" title="Permalink to this definition"></a></dt>
 <dd><p>Whether this Mesh is defined in camera space (cannot be moved in the ScenePic user
 interface) or world space (standard).</p>
 <dl class="field-list simple">
@@ -742,7 +803,7 @@ interface) or world space (standard).</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Mesh.center_of_mass">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">center_of_mass</span></span><a class="headerlink" href="#scenepic.Mesh.center_of_mass" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">center_of_mass</span></span><a class="headerlink" href="#scenepic.Mesh.center_of_mass" title="Permalink to this definition"></a></dt>
 <dd><p>The mean of mesh vertex positions</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -759,7 +820,7 @@ interface) or world space (standard).</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Mesh.double_sided">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">double_sided</span></span><a class="headerlink" href="#scenepic.Mesh.double_sided" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">double_sided</span></span><a class="headerlink" href="#scenepic.Mesh.double_sided" title="Permalink to this definition"></a></dt>
 <dd><p>Whether to turn off back face culling and draw the Mesh’s triangles as double sided.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -822,7 +883,7 @@ or per-vertex color. Defaults to None.</p></li>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Mesh.is_billboard">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">is_billboard</span></span><a class="headerlink" href="#scenepic.Mesh.is_billboard" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_billboard</span></span><a class="headerlink" href="#scenepic.Mesh.is_billboard" title="Permalink to this definition"></a></dt>
 <dd><p>Draw this Mesh as a billboard (i.e. always facing the user) rather than
 rotating with the rest of the world.</p>
 <dl class="field-list simple">
@@ -834,7 +895,7 @@ rotating with the rest of the world.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Mesh.layer_id">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">layer_id</span></span><a class="headerlink" href="#scenepic.Mesh.layer_id" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">layer_id</span></span><a class="headerlink" href="#scenepic.Mesh.layer_id" title="Permalink to this definition"></a></dt>
 <dd><p>An identifier to allow several Meshes to be grouped
 together into a “layer”.  Layers should be used in
 conjunction with Canvas3D.set_layer_settings().</p>
@@ -847,7 +908,7 @@ conjunction with Canvas3D.set_layer_settings().</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Mesh.mesh_id">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">mesh_id</span></span><a class="headerlink" href="#scenepic.Mesh.mesh_id" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mesh_id</span></span><a class="headerlink" href="#scenepic.Mesh.mesh_id" title="Permalink to this definition"></a></dt>
 <dd><p>A unique identifier for the Mesh</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -858,7 +919,7 @@ conjunction with Canvas3D.set_layer_settings().</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Mesh.nn_texture">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">nn_texture</span></span><a class="headerlink" href="#scenepic.Mesh.nn_texture" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nn_texture</span></span><a class="headerlink" href="#scenepic.Mesh.nn_texture" title="Permalink to this definition"></a></dt>
 <dd><p>Whether the shader should use nearest-neighbor texture interpolation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -876,7 +937,7 @@ Useful when interoping with existing codebases that use opposite convention</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Mesh.shared_color">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">shared_color</span></span><a class="headerlink" href="#scenepic.Mesh.shared_color" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shared_color</span></span><a class="headerlink" href="#scenepic.Mesh.shared_color" title="Permalink to this definition"></a></dt>
 <dd><p>Whole-mesh color (reduces memory requirements but makes Mesh monochrome).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -887,7 +948,7 @@ Useful when interoping with existing codebases that use opposite convention</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Mesh.texture_id">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">texture_id</span></span><a class="headerlink" href="#scenepic.Mesh.texture_id" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">texture_id</span></span><a class="headerlink" href="#scenepic.Mesh.texture_id" title="Permalink to this definition"></a></dt>
 <dd><p>Specifies the id of a ScenePic Image to be used as a texture in this Mesh.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -898,7 +959,7 @@ Useful when interoping with existing codebases that use opposite convention</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Mesh.use_texture_alpha">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">use_texture_alpha</span></span><a class="headerlink" href="#scenepic.Mesh.use_texture_alpha" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">use_texture_alpha</span></span><a class="headerlink" href="#scenepic.Mesh.use_texture_alpha" title="Permalink to this definition"></a></dt>
 <dd><p>Whether to use the alpha channel in the texture for transparency
 (only relevant for textured Meshes).</p>
 <dl class="field-list simple">
@@ -908,18 +969,24 @@ Useful when interoping with existing codebases that use opposite convention</p>
 </dl>
 </dd></dl>
 
+<dl class="py property">
+<dt class="sig sig-object py" id="scenepic.Mesh.vertex_buffer">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vertex_buffer</span></span><a class="headerlink" href="#scenepic.Mesh.vertex_buffer" title="Permalink to this definition"></a></dt>
+<dd><p>The raw vertex buffer.</p>
+</dd></dl>
+
 </dd></dl>
 
 </section>
 <section id="meshupdate">
-<h1>MeshUpdate<a class="headerlink" href="#meshupdate" title="Permalink to this headline"></a></h1>
+<h1>MeshUpdate<a class="headerlink" href="#meshupdate" title="Permalink to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="scenepic.MeshUpdate">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">MeshUpdate</span></span><a class="headerlink" href="#scenepic.MeshUpdate" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">MeshUpdate</span></span><a class="headerlink" href="#scenepic.MeshUpdate" title="Permalink to this definition"></a></dt>
 <dd><p>A new mesh formed by updated an existing mesh.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.MeshUpdate.base_mesh_id">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">base_mesh_id</span></span><a class="headerlink" href="#scenepic.MeshUpdate.base_mesh_id" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">base_mesh_id</span></span><a class="headerlink" href="#scenepic.MeshUpdate.base_mesh_id" title="Permalink to this definition"></a></dt>
 <dd><p>The unique identifier for the base mesh</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -928,9 +995,33 @@ Useful when interoping with existing codebases that use opposite convention</p>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="scenepic.MeshUpdate.difference_range">
+<span class="sig-name descname"><span class="pre">difference_range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vertex_buffer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.MeshUpdate.difference_range" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the absolute range of values in the difference between this update and the buffer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>self</strong> (<a class="reference internal" href="#scenepic.MeshUpdate" title="scenepic.MeshUpdate"><em>MeshUpdate</em></a>) – self reference</p></li>
+<li><p><strong>vertex_buffer</strong> (<a class="reference internal" href="#scenepic.VertexBuffer" title="scenepic.VertexBuffer"><em>VertexBuffer</em></a>) – the buffer to use in the comparison</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>the absolute range (from minimum to maximum) in the per-index difference between</dt><dd><p>this update and the reference.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.MeshUpdate.frame_index">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">frame_index</span></span><a class="headerlink" href="#scenepic.MeshUpdate.frame_index" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">frame_index</span></span><a class="headerlink" href="#scenepic.MeshUpdate.frame_index" title="Permalink to this definition"></a></dt>
 <dd><p>The position in the creation order for this update</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -941,7 +1032,7 @@ Useful when interoping with existing codebases that use opposite convention</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.MeshUpdate.mesh_id">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">mesh_id</span></span><a class="headerlink" href="#scenepic.MeshUpdate.mesh_id" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mesh_id</span></span><a class="headerlink" href="#scenepic.MeshUpdate.mesh_id" title="Permalink to this definition"></a></dt>
 <dd><p>The unique identifier of the newly created mesh</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -950,20 +1041,42 @@ Useful when interoping with existing codebases that use opposite convention</p>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="scenepic.MeshUpdate.quantize">
+<span class="sig-name descname"><span class="pre">quantize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keyframe_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fixed_point_range</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keyframe_vertex_buffer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.MeshUpdate.quantize" title="Permalink to this definition"></a></dt>
+<dd><p>Quantize the mesh update.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>self</strong> (<a class="reference internal" href="#scenepic.MeshUpdate" title="scenepic.MeshUpdate"><em>MeshUpdate</em></a>) – self reference</p></li>
+<li><p><strong>keyframe_index</strong> (<em>int</em>) – Index of the keyframe to use in quantizing this update</p></li>
+<li><p><strong>fixed_point_range</strong> (<em>float</em>) – The range to use for the fixed point representation.</p></li>
+<li><p><strong>keyframe_vertex_buffer</strong> (<a class="reference internal" href="#scenepic.VertexBuffer" title="scenepic.VertexBuffer"><em>VertexBuffer</em></a>) – The keyframe vertex buffer</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="scenepic.MeshUpdate.vertex_buffer">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vertex_buffer</span></span><a class="headerlink" href="#scenepic.MeshUpdate.vertex_buffer" title="Permalink to this definition"></a></dt>
+<dd><p>The raw vertex buffer.</p>
+</dd></dl>
+
 </dd></dl>
 
 </section>
 <section id="meshinfo">
-<h1>MeshInfo<a class="headerlink" href="#meshinfo" title="Permalink to this headline"></a></h1>
+<h1>MeshInfo<a class="headerlink" href="#meshinfo" title="Permalink to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="scenepic.MeshInfo">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">MeshInfo</span></span><a class="headerlink" href="#scenepic.MeshInfo" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">MeshInfo</span></span><a class="headerlink" href="#scenepic.MeshInfo" title="Permalink to this definition"></a></dt>
 <dd><p>Class which holds information needed to construct a mesh object, like
 the vertex positions, the triangulation, and either per-vertex UV coordinates
 or Color (if present).</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.MeshInfo.colors">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">colors</span></span><a class="headerlink" href="#scenepic.MeshInfo.colors" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">colors</span></span><a class="headerlink" href="#scenepic.MeshInfo.colors" title="Permalink to this definition"></a></dt>
 <dd><p>A reference to the color buffer.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -974,13 +1087,13 @@ or Color (if present).</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.MeshInfo.has_normals">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">has_normals</span></span><a class="headerlink" href="#scenepic.MeshInfo.has_normals" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">has_normals</span></span><a class="headerlink" href="#scenepic.MeshInfo.has_normals" title="Permalink to this definition"></a></dt>
 <dd><p>Whether the mesh info contains vertex normals.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.MeshInfo.normals">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">normals</span></span><a class="headerlink" href="#scenepic.MeshInfo.normals" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">normals</span></span><a class="headerlink" href="#scenepic.MeshInfo.normals" title="Permalink to this definition"></a></dt>
 <dd><p>A reference to the normal buffer</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -991,7 +1104,7 @@ or Color (if present).</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.MeshInfo.positions">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">positions</span></span><a class="headerlink" href="#scenepic.MeshInfo.positions" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">positions</span></span><a class="headerlink" href="#scenepic.MeshInfo.positions" title="Permalink to this definition"></a></dt>
 <dd><p>A reference to the position buffer.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -1023,7 +1136,7 @@ limit surface in the final step of subdivision. Defaults to false.</p></li>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.MeshInfo.triangles">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">triangles</span></span><a class="headerlink" href="#scenepic.MeshInfo.triangles" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">triangles</span></span><a class="headerlink" href="#scenepic.MeshInfo.triangles" title="Permalink to this definition"></a></dt>
 <dd><p>A reference to the triangle buffer.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -1034,7 +1147,7 @@ limit surface in the final step of subdivision. Defaults to false.</p></li>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.MeshInfo.uvs">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">uvs</span></span><a class="headerlink" href="#scenepic.MeshInfo.uvs" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">uvs</span></span><a class="headerlink" href="#scenepic.MeshInfo.uvs" title="Permalink to this definition"></a></dt>
 <dd><p>A reference to the uv buffer.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -1064,18 +1177,18 @@ limit surface in the final step of subdivision. Defaults to false.</p></li>
 
 </section>
 <section id="vertexbuffer">
-<h1>VertexBuffer<a class="headerlink" href="#vertexbuffer" title="Permalink to this headline"></a></h1>
+<h1>VertexBuffer<a class="headerlink" href="#vertexbuffer" title="Permalink to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="scenepic.VertexBuffer">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">VertexBuffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.VertexBuffer" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">VertexBuffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.VertexBuffer" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </section>
 <section id="camera">
-<h1>Camera<a class="headerlink" href="#camera" title="Permalink to this headline"></a></h1>
+<h1>Camera<a class="headerlink" href="#camera" title="Permalink to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="scenepic.Camera">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">Camera</span></span><a class="headerlink" href="#scenepic.Camera" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">Camera</span></span><a class="headerlink" href="#scenepic.Camera" title="Permalink to this definition"></a></dt>
 <dd><p>A camera type</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1101,7 +1214,7 @@ world-to-camera matrix.</p>
 </dl>
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Camera.aspect_ratio">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">aspect_ratio</span></span><a class="headerlink" href="#scenepic.Camera.aspect_ratio" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">aspect_ratio</span></span><a class="headerlink" href="#scenepic.Camera.aspect_ratio" title="Permalink to this definition"></a></dt>
 <dd><p>Update the aspect ratio of the camera</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -1112,7 +1225,7 @@ world-to-camera matrix.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Camera.camera_to_world">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">camera_to_world</span></span><a class="headerlink" href="#scenepic.Camera.camera_to_world" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">camera_to_world</span></span><a class="headerlink" href="#scenepic.Camera.camera_to_world" title="Permalink to this definition"></a></dt>
 <dd><p>Homogeneous 3D transform that places the camera in the scene</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -1123,7 +1236,7 @@ world-to-camera matrix.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Camera.center">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">center</span></span><a class="headerlink" href="#scenepic.Camera.center" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">center</span></span><a class="headerlink" href="#scenepic.Camera.center" title="Permalink to this definition"></a></dt>
 <dd><p>The camera center</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -1134,7 +1247,7 @@ world-to-camera matrix.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Camera.look_at">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">look_at</span></span><a class="headerlink" href="#scenepic.Camera.look_at" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">look_at</span></span><a class="headerlink" href="#scenepic.Camera.look_at" title="Permalink to this definition"></a></dt>
 <dd><p>Where the camera is looking</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -1174,7 +1287,7 @@ world-to-camera matrix.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Camera.projection">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">projection</span></span><a class="headerlink" href="#scenepic.Camera.projection" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">projection</span></span><a class="headerlink" href="#scenepic.Camera.projection" title="Permalink to this definition"></a></dt>
 <dd><p>WebGL projection matrix from camera view coordinates to NDC</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -1185,7 +1298,7 @@ world-to-camera matrix.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Camera.rotation">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">rotation</span></span><a class="headerlink" href="#scenepic.Camera.rotation" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rotation</span></span><a class="headerlink" href="#scenepic.Camera.rotation" title="Permalink to this definition"></a></dt>
 <dd><p>The rotation matrix</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -1196,7 +1309,7 @@ world-to-camera matrix.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Camera.up_dir">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">up_dir</span></span><a class="headerlink" href="#scenepic.Camera.up_dir" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">up_dir</span></span><a class="headerlink" href="#scenepic.Camera.up_dir" title="Permalink to this definition"></a></dt>
 <dd><p>The direction that is “up” for the camera</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -1207,7 +1320,7 @@ world-to-camera matrix.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Camera.world_to_camera">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">world_to_camera</span></span><a class="headerlink" href="#scenepic.Camera.world_to_camera" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">world_to_camera</span></span><a class="headerlink" href="#scenepic.Camera.world_to_camera" title="Permalink to this definition"></a></dt>
 <dd><p>Homogeneous 3D transform mapping world coordinates to camera space</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -1220,15 +1333,15 @@ world-to-camera matrix.</p>
 
 </section>
 <section id="focuspoint">
-<h1>FocusPoint<a class="headerlink" href="#focuspoint" title="Permalink to this headline"></a></h1>
+<h1>FocusPoint<a class="headerlink" href="#focuspoint" title="Permalink to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="scenepic.FocusPoint">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">FocusPoint</span></span><a class="headerlink" href="#scenepic.FocusPoint" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">FocusPoint</span></span><a class="headerlink" href="#scenepic.FocusPoint" title="Permalink to this definition"></a></dt>
 <dd><p>3D focus point for this frame (with optional 3D
 rotation for orientation lock), used in the ScenePic user interface.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.FocusPoint.orientation_axis_angle">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">orientation_axis_angle</span></span><a class="headerlink" href="#scenepic.FocusPoint.orientation_axis_angle" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">orientation_axis_angle</span></span><a class="headerlink" href="#scenepic.FocusPoint.orientation_axis_angle" title="Permalink to this definition"></a></dt>
 <dd><p>The orientation axis angle</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -1239,7 +1352,7 @@ rotation for orientation lock), used in the ScenePic user interface.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.FocusPoint.position">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">position</span></span><a class="headerlink" href="#scenepic.FocusPoint.position" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">position</span></span><a class="headerlink" href="#scenepic.FocusPoint.position" title="Permalink to this definition"></a></dt>
 <dd><p>The position of the focus point</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -1252,10 +1365,10 @@ rotation for orientation lock), used in the ScenePic user interface.</p>
 
 </section>
 <section id="shading">
-<h1>Shading<a class="headerlink" href="#shading" title="Permalink to this headline"></a></h1>
+<h1>Shading<a class="headerlink" href="#shading" title="Permalink to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="scenepic.Shading">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">Shading</span></span><a class="headerlink" href="#scenepic.Shading" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">Shading</span></span><a class="headerlink" href="#scenepic.Shading" title="Permalink to this definition"></a></dt>
 <dd><p>Parameters of the shaders</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1269,7 +1382,7 @@ rotation for orientation lock), used in the ScenePic user interface.</p>
 </dl>
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Shading.ambient_light_color">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">ambient_light_color</span></span><a class="headerlink" href="#scenepic.Shading.ambient_light_color" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ambient_light_color</span></span><a class="headerlink" href="#scenepic.Shading.ambient_light_color" title="Permalink to this definition"></a></dt>
 <dd><p>the color of ambient light</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -1280,7 +1393,7 @@ rotation for orientation lock), used in the ScenePic user interface.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Shading.bg_color">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">bg_color</span></span><a class="headerlink" href="#scenepic.Shading.bg_color" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bg_color</span></span><a class="headerlink" href="#scenepic.Shading.bg_color" title="Permalink to this definition"></a></dt>
 <dd><p>the background color</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -1291,7 +1404,7 @@ rotation for orientation lock), used in the ScenePic user interface.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Shading.directional_light_color">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">directional_light_color</span></span><a class="headerlink" href="#scenepic.Shading.directional_light_color" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">directional_light_color</span></span><a class="headerlink" href="#scenepic.Shading.directional_light_color" title="Permalink to this definition"></a></dt>
 <dd><p>the directional light color</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -1302,7 +1415,7 @@ rotation for orientation lock), used in the ScenePic user interface.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Shading.directional_light_dir">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">directional_light_dir</span></span><a class="headerlink" href="#scenepic.Shading.directional_light_dir" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">directional_light_dir</span></span><a class="headerlink" href="#scenepic.Shading.directional_light_dir" title="Permalink to this definition"></a></dt>
 <dd><p>the direction of the directional light</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -1315,14 +1428,14 @@ rotation for orientation lock), used in the ScenePic user interface.</p>
 
 </section>
 <section id="transforms">
-<h1>Transforms<a class="headerlink" href="#transforms" title="Permalink to this headline"></a></h1>
+<h1>Transforms<a class="headerlink" href="#transforms" title="Permalink to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="scenepic.Transforms">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">Transforms</span></span><a class="headerlink" href="#scenepic.Transforms" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">Transforms</span></span><a class="headerlink" href="#scenepic.Transforms" title="Permalink to this definition"></a></dt>
 <dd><p>Static class with convenience methods for creating various 3D homogeneous transforms.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="scenepic.Transforms.AxisAngleRotationToRotateXAxisToAlignWithAxis">
-<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">AxisAngleRotationToRotateXAxisToAlignWithAxis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">axis</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.AxisAngleRotationToRotateXAxisToAlignWithAxis" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AxisAngleRotationToRotateXAxisToAlignWithAxis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">axis</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.AxisAngleRotationToRotateXAxisToAlignWithAxis" title="Permalink to this definition"></a></dt>
 <dd><p>Find the axis and angle of rotation that will ensure the x-axis aligns with the provided axis.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1343,7 +1456,7 @@ rotation for orientation lock), used in the ScenePic user interface.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="scenepic.Transforms.QuaternionFromAxisAngle">
-<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">QuaternionFromAxisAngle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">axis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.QuaternionFromAxisAngle" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">QuaternionFromAxisAngle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">axis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.QuaternionFromAxisAngle" title="Permalink to this definition"></a></dt>
 <dd><p>Convert rotation axis and angle to a quaternion.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1363,7 +1476,7 @@ rotation for orientation lock), used in the ScenePic user interface.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="scenepic.Transforms.QuaternionToRotateXAxisToAlignWithAxis">
-<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">QuaternionToRotateXAxisToAlignWithAxis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">axis</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.QuaternionToRotateXAxisToAlignWithAxis" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">QuaternionToRotateXAxisToAlignWithAxis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">axis</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.QuaternionToRotateXAxisToAlignWithAxis" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a quaternion rotation vector that will ensure the x-axis aligns with the provided axis.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1384,7 +1497,7 @@ rotation for orientation lock), used in the ScenePic user interface.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="scenepic.Transforms.RotationAboutXAxis">
-<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">RotationAboutXAxis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.RotationAboutXAxis" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RotationAboutXAxis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.RotationAboutXAxis" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a 3D homogeneous rotation matrix about the x-axis.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1401,7 +1514,7 @@ rotation for orientation lock), used in the ScenePic user interface.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="scenepic.Transforms.RotationAboutYAxis">
-<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">RotationAboutYAxis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.RotationAboutYAxis" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RotationAboutYAxis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.RotationAboutYAxis" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a 3D homogeneous rotation matrix about the y-axis.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1418,7 +1531,7 @@ rotation for orientation lock), used in the ScenePic user interface.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="scenepic.Transforms.RotationAboutZAxis">
-<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">RotationAboutZAxis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.RotationAboutZAxis" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RotationAboutZAxis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.RotationAboutZAxis" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a 3D homogeneous rotation matrix about the z-axis.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1435,7 +1548,7 @@ rotation for orientation lock), used in the ScenePic user interface.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="scenepic.Transforms.RotationMatrixFromAxisAngle">
-<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">RotationMatrixFromAxisAngle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">axis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.RotationMatrixFromAxisAngle" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RotationMatrixFromAxisAngle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">axis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.RotationMatrixFromAxisAngle" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a 3D homogeneous scale matrix from axis and angle.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1455,7 +1568,7 @@ rotation for orientation lock), used in the ScenePic user interface.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="scenepic.Transforms.RotationToRotateXAxisToAlignWithAxis">
-<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">RotationToRotateXAxisToAlignWithAxis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">axis</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.RotationToRotateXAxisToAlignWithAxis" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RotationToRotateXAxisToAlignWithAxis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">axis</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.RotationToRotateXAxisToAlignWithAxis" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a 3D homogeneous rotation matrix that will ensure the x-axis aligns with the provided axis.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1476,7 +1589,7 @@ rotation for orientation lock), used in the ScenePic user interface.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="scenepic.Transforms.Scale">
-<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">Scale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scale</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.Scale" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Scale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scale</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.Scale" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a 3D homogeneous scale matrix.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1493,7 +1606,7 @@ rotation for orientation lock), used in the ScenePic user interface.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="scenepic.Transforms.Translate">
-<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">Translate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.Translate" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Translate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.Translate" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a 3D homogeneous scale matrix.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1880,14 +1993,14 @@ the up direction as given.</p>
 
 </section>
 <section id="label">
-<h1>Label<a class="headerlink" href="#label" title="Permalink to this headline"></a></h1>
+<h1>Label<a class="headerlink" href="#label" title="Permalink to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="scenepic.Label">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">Label</span></span><a class="headerlink" href="#scenepic.Label" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">Label</span></span><a class="headerlink" href="#scenepic.Label" title="Permalink to this definition"></a></dt>
 <dd><p>A ScenePic label type</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Label.fill_color">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">fill_color</span></span><a class="headerlink" href="#scenepic.Label.fill_color" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fill_color</span></span><a class="headerlink" href="#scenepic.Label.fill_color" title="Permalink to this definition"></a></dt>
 <dd><p>The color to use.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -1898,7 +2011,7 @@ the up direction as given.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Label.font_family">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">font_family</span></span><a class="headerlink" href="#scenepic.Label.font_family" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">font_family</span></span><a class="headerlink" href="#scenepic.Label.font_family" title="Permalink to this definition"></a></dt>
 <dd><p>HTML font family name.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -1909,7 +2022,7 @@ the up direction as given.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Label.horizontal_align">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">horizontal_align</span></span><a class="headerlink" href="#scenepic.Label.horizontal_align" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">horizontal_align</span></span><a class="headerlink" href="#scenepic.Label.horizontal_align" title="Permalink to this definition"></a></dt>
 <dd><p>How to align the label horizontally (one of ‘left’, ‘center’, ‘right’)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -1920,7 +2033,7 @@ the up direction as given.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Label.label_id">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">label_id</span></span><a class="headerlink" href="#scenepic.Label.label_id" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">label_id</span></span><a class="headerlink" href="#scenepic.Label.label_id" title="Permalink to this definition"></a></dt>
 <dd><p>A unique identifier for the Label</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -1931,7 +2044,7 @@ the up direction as given.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Label.mesh_id">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">mesh_id</span></span><a class="headerlink" href="#scenepic.Label.mesh_id" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mesh_id</span></span><a class="headerlink" href="#scenepic.Label.mesh_id" title="Permalink to this definition"></a></dt>
 <dd><p>The mesh associated with this label</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -1942,7 +2055,7 @@ the up direction as given.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Label.offset_distance">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">offset_distance</span></span><a class="headerlink" href="#scenepic.Label.offset_distance" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">offset_distance</span></span><a class="headerlink" href="#scenepic.Label.offset_distance" title="Permalink to this definition"></a></dt>
 <dd><p>Distance in world space to offset the label by when using left/right/top/bottom alignment.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -1953,7 +2066,7 @@ the up direction as given.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Label.size_in_pixels">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">size_in_pixels</span></span><a class="headerlink" href="#scenepic.Label.size_in_pixels" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">size_in_pixels</span></span><a class="headerlink" href="#scenepic.Label.size_in_pixels" title="Permalink to this definition"></a></dt>
 <dd><p>The size in pixels to display the label at.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -1964,7 +2077,7 @@ the up direction as given.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Label.text">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">text</span></span><a class="headerlink" href="#scenepic.Label.text" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">text</span></span><a class="headerlink" href="#scenepic.Label.text" title="Permalink to this definition"></a></dt>
 <dd><p>The text to use in the label.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -1975,7 +2088,7 @@ the up direction as given.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.Label.vertical_align">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">vertical_align</span></span><a class="headerlink" href="#scenepic.Label.vertical_align" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vertical_align</span></span><a class="headerlink" href="#scenepic.Label.vertical_align" title="Permalink to this definition"></a></dt>
 <dd><p>How to align the label vertically (one of ‘top’, ‘middle’, ‘bottom’)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -1988,10 +2101,10 @@ the up direction as given.</p>
 
 </section>
 <section id="loopsubdivisionstencil">
-<h1>LoopSubdivisionStencil<a class="headerlink" href="#loopsubdivisionstencil" title="Permalink to this headline"></a></h1>
+<h1>LoopSubdivisionStencil<a class="headerlink" href="#loopsubdivisionstencil" title="Permalink to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="scenepic.LoopSubdivisionStencil">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">LoopSubdivisionStencil</span></span><a class="headerlink" href="#scenepic.LoopSubdivisionStencil" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">LoopSubdivisionStencil</span></span><a class="headerlink" href="#scenepic.LoopSubdivisionStencil" title="Permalink to this definition"></a></dt>
 <dd><p>This class enables efficient Loop subdivision of triangle meshes.</p>
 <p>The subdivision stencil specifies what linear combinations of existing vertices are needed, and
 stencils can be reused across meshes with different vertex positions but identical triangle topologies.
@@ -2021,7 +2134,7 @@ create the vertices of a more detailed mesh.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="scenepic.LoopSubdivisionStencil.create">
-<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.LoopSubdivisionStencil.create" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.LoopSubdivisionStencil.create" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a new stencil by subdividing the provided triangles.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -2040,7 +2153,7 @@ limit surface in the final step of subdivision. Defaults to false.</p></li>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.LoopSubdivisionStencil.triangle_count">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">triangle_count</span></span><a class="headerlink" href="#scenepic.LoopSubdivisionStencil.triangle_count" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">triangle_count</span></span><a class="headerlink" href="#scenepic.LoopSubdivisionStencil.triangle_count" title="Permalink to this definition"></a></dt>
 <dd><p>The number of triangles in the subdivided mesh</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -2051,7 +2164,7 @@ limit surface in the final step of subdivision. Defaults to false.</p></li>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.LoopSubdivisionStencil.triangles">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">triangles</span></span><a class="headerlink" href="#scenepic.LoopSubdivisionStencil.triangles" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">triangles</span></span><a class="headerlink" href="#scenepic.LoopSubdivisionStencil.triangles" title="Permalink to this definition"></a></dt>
 <dd><p>The triangles of the subdivided mesh</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -2062,7 +2175,7 @@ limit surface in the final step of subdivision. Defaults to false.</p></li>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.LoopSubdivisionStencil.vertex_count">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">vertex_count</span></span><a class="headerlink" href="#scenepic.LoopSubdivisionStencil.vertex_count" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vertex_count</span></span><a class="headerlink" href="#scenepic.LoopSubdivisionStencil.vertex_count" title="Permalink to this definition"></a></dt>
 <dd><p>The number of vertices in the subdivided mesh</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>

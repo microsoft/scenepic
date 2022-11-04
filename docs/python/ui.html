@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LayerSettings &mdash; scenepic 1.0.14 documentation</title>
+  <title>LayerSettings &mdash; scenepic 1.0.15 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -14,7 +14,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -43,10 +45,22 @@
 <li class="toctree-l2"><a class="reference internal" href="api.html#d-graphics">3D Graphics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#id2">2D Graphics</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="api.html#user-interface">User Interface</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">LayerSettings</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#dropdownmenu">DropDownMenu</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#textpanel">TextPanel</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#uiparameters">UIParameters</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">LayerSettings</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.LayerSettings"><code class="docutils literal notranslate"><span class="pre">LayerSettings</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#dropdownmenu">DropDownMenu</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.DropDownMenu"><code class="docutils literal notranslate"><span class="pre">DropDownMenu</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#textpanel">TextPanel</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.TextPanel"><code class="docutils literal notranslate"><span class="pre">TextPanel</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#uiparameters">UIParameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#scenepic.UIParameters"><code class="docutils literal notranslate"><span class="pre">UIParameters</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#media">Media</a></li>
@@ -81,10 +95,10 @@
            <div itemprop="articleBody">
              
   <section id="layersettings">
-<span id="ui"></span><h1>LayerSettings<a class="headerlink" href="#layersettings" title="Permalink to this headline"></a></h1>
+<span id="ui"></span><h1>LayerSettings<a class="headerlink" href="#layersettings" title="Permalink to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="scenepic.LayerSettings">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">LayerSettings</span></span><a class="headerlink" href="#scenepic.LayerSettings" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">LayerSettings</span></span><a class="headerlink" href="#scenepic.LayerSettings" title="Permalink to this definition"></a></dt>
 <dd><p>Settings used for customizing canvas drawing by layer.
 Currently, opacity is only guaranteed to be correct for Meshes
 that do not overlap.
@@ -105,7 +119,7 @@ without wireframe, at opacity 1.0, and after any layers with renderOrder set.</p
 </dl>
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.LayerSettings.filled">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">filled</span></span><a class="headerlink" href="#scenepic.LayerSettings.filled" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">filled</span></span><a class="headerlink" href="#scenepic.LayerSettings.filled" title="Permalink to this definition"></a></dt>
 <dd><p>Specifies whether to draw the layer with filled triangles</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -116,7 +130,7 @@ without wireframe, at opacity 1.0, and after any layers with renderOrder set.</p
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.LayerSettings.opacity">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">opacity</span></span><a class="headerlink" href="#scenepic.LayerSettings.opacity" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">opacity</span></span><a class="headerlink" href="#scenepic.LayerSettings.opacity" title="Permalink to this definition"></a></dt>
 <dd><p>In [0,1] specifies the opacity with which to draw the layer</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -127,7 +141,7 @@ without wireframe, at opacity 1.0, and after any layers with renderOrder set.</p
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.LayerSettings.render_order">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">render_order</span></span><a class="headerlink" href="#scenepic.LayerSettings.render_order" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">render_order</span></span><a class="headerlink" href="#scenepic.LayerSettings.render_order" title="Permalink to this definition"></a></dt>
 <dd><p>Specifies a fixed order to draw transparency.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -138,7 +152,7 @@ without wireframe, at opacity 1.0, and after any layers with renderOrder set.</p
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.LayerSettings.wireframe">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">wireframe</span></span><a class="headerlink" href="#scenepic.LayerSettings.wireframe" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">wireframe</span></span><a class="headerlink" href="#scenepic.LayerSettings.wireframe" title="Permalink to this definition"></a></dt>
 <dd><p>Specifies whether to draw the layer with a wireframe outline</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -151,10 +165,10 @@ without wireframe, at opacity 1.0, and after any layers with renderOrder set.</p
 
 </section>
 <section id="dropdownmenu">
-<h1>DropDownMenu<a class="headerlink" href="#dropdownmenu" title="Permalink to this headline"></a></h1>
+<h1>DropDownMenu<a class="headerlink" href="#dropdownmenu" title="Permalink to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="scenepic.DropDownMenu">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">DropDownMenu</span></span><a class="headerlink" href="#scenepic.DropDownMenu" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">DropDownMenu</span></span><a class="headerlink" href="#scenepic.DropDownMenu" title="Permalink to this definition"></a></dt>
 <dd><p>Represents a ScenePic DropDownMenu UI component.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="scenepic.DropDownMenu.clear_script">
@@ -166,7 +180,7 @@ visualization into multiple files.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.DropDownMenu.items">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">items</span></span><a class="headerlink" href="#scenepic.DropDownMenu.items" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">items</span></span><a class="headerlink" href="#scenepic.DropDownMenu.items" title="Permalink to this definition"></a></dt>
 <dd><p>The items in the dropdown menu.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -177,7 +191,7 @@ visualization into multiple files.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.DropDownMenu.selection">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">selection</span></span><a class="headerlink" href="#scenepic.DropDownMenu.selection" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">selection</span></span><a class="headerlink" href="#scenepic.DropDownMenu.selection" title="Permalink to this definition"></a></dt>
 <dd><p>The currently selected item.</p>
 </dd></dl>
 
@@ -189,7 +203,7 @@ visualization into multiple files.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.DropDownMenu.title">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">title</span></span><a class="headerlink" href="#scenepic.DropDownMenu.title" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">title</span></span><a class="headerlink" href="#scenepic.DropDownMenu.title" title="Permalink to this definition"></a></dt>
 <dd><p>The title of the dropdown menu.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -202,10 +216,10 @@ visualization into multiple files.</p>
 
 </section>
 <section id="textpanel">
-<h1>TextPanel<a class="headerlink" href="#textpanel" title="Permalink to this headline"></a></h1>
+<h1>TextPanel<a class="headerlink" href="#textpanel" title="Permalink to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="scenepic.TextPanel">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">TextPanel</span></span><a class="headerlink" href="#scenepic.TextPanel" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">TextPanel</span></span><a class="headerlink" href="#scenepic.TextPanel" title="Permalink to this definition"></a></dt>
 <dd><p>Represents a ScenePic TextPanel UI component.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="scenepic.TextPanel.clear_script">
@@ -217,7 +231,7 @@ visualization into multiple files.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.TextPanel.input_text">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">input_text</span></span><a class="headerlink" href="#scenepic.TextPanel.input_text" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">input_text</span></span><a class="headerlink" href="#scenepic.TextPanel.input_text" title="Permalink to this definition"></a></dt>
 <dd><p>Text for the optional input textbox.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -228,7 +242,7 @@ visualization into multiple files.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.TextPanel.text">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">text</span></span><a class="headerlink" href="#scenepic.TextPanel.text" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">text</span></span><a class="headerlink" href="#scenepic.TextPanel.text" title="Permalink to this definition"></a></dt>
 <dd><p>The text within the text panel.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -239,7 +253,7 @@ visualization into multiple files.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.TextPanel.title">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">title</span></span><a class="headerlink" href="#scenepic.TextPanel.title" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">title</span></span><a class="headerlink" href="#scenepic.TextPanel.title" title="Permalink to this definition"></a></dt>
 <dd><p>The title of the text panel.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -252,10 +266,10 @@ visualization into multiple files.</p>
 
 </section>
 <section id="uiparameters">
-<h1>UIParameters<a class="headerlink" href="#uiparameters" title="Permalink to this headline"></a></h1>
+<h1>UIParameters<a class="headerlink" href="#uiparameters" title="Permalink to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="scenepic.UIParameters">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">UIParameters</span></span><a class="headerlink" href="#scenepic.UIParameters" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">UIParameters</span></span><a class="headerlink" href="#scenepic.UIParameters" title="Permalink to this definition"></a></dt>
 <dd><p>Per-Canvas3D parameters of the ScenePic user interface.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -273,7 +287,7 @@ Defaults to “visible”.</p></li>
 </dl>
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.UIParameters.key_press_speed">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">key_press_speed</span></span><a class="headerlink" href="#scenepic.UIParameters.key_press_speed" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">key_press_speed</span></span><a class="headerlink" href="#scenepic.UIParameters.key_press_speed" title="Permalink to this definition"></a></dt>
 <dd><p>movement speed from key presses</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -284,7 +298,7 @@ Defaults to “visible”.</p></li>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.UIParameters.layer_dropdown_visibility">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">layer_dropdown_visibility</span></span><a class="headerlink" href="#scenepic.UIParameters.layer_dropdown_visibility" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">layer_dropdown_visibility</span></span><a class="headerlink" href="#scenepic.UIParameters.layer_dropdown_visibility" title="Permalink to this definition"></a></dt>
 <dd><p>the CSS visibility setting for the layer dropdown menu</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -295,7 +309,7 @@ Defaults to “visible”.</p></li>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.UIParameters.mouse_wheel_translation_speed">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">mouse_wheel_translation_speed</span></span><a class="headerlink" href="#scenepic.UIParameters.mouse_wheel_translation_speed" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mouse_wheel_translation_speed</span></span><a class="headerlink" href="#scenepic.UIParameters.mouse_wheel_translation_speed" title="Permalink to this definition"></a></dt>
 <dd><p>linear scale factor of mouse wheel input into camera translation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -306,7 +320,7 @@ Defaults to “visible”.</p></li>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.UIParameters.pointer_alt_key_multiplier">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">pointer_alt_key_multiplier</span></span><a class="headerlink" href="#scenepic.UIParameters.pointer_alt_key_multiplier" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pointer_alt_key_multiplier</span></span><a class="headerlink" href="#scenepic.UIParameters.pointer_alt_key_multiplier" title="Permalink to this definition"></a></dt>
 <dd><p>When the Alt key is pressed, mouse movement is scaled by this factor.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -317,7 +331,7 @@ Defaults to “visible”.</p></li>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="scenepic.UIParameters.pointer_rotation_speed">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">pointer_rotation_speed</span></span><a class="headerlink" href="#scenepic.UIParameters.pointer_rotation_speed" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pointer_rotation_speed</span></span><a class="headerlink" href="#scenepic.UIParameters.pointer_rotation_speed" title="Permalink to this definition"></a></dt>
 <dd><p>linear scale factor of pointer translation into camera rotation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
