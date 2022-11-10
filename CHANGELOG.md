@@ -1,5 +1,23 @@
 # Changelog
 
+## [2022-11-10 - Version 1.0.16](https://github.com/microsoft/scenepic/releases/tag/v1.0.16)
+Point release fixing an issue with Jupyter rendering order.
+
+Previously, when a Jupyter notebook containing Scenepic cells was
+loaded after having been saved, the notebooks would appear out
+of order within the notebook. Also, the full library was written into
+each cell, resulting in a lot of duplicate Javascript for notebooks
+which included heavy use of the library. The new solution uses a few
+elements to avoid this:
+
+- The library is written as an external script file in the same directory
+  as the notebook. This has the advantage of making debugging the
+  Typescript library easier (this is a return to previous functionality).
+- The library is loaded once via a single `script` tag
+- Each cell is assigned a unique ID that is used by scenepic to target it
+- When reloading a saved notebook, order is preserved due to the use of
+  the unique ids.
+
 ## [2022-11-03 - Version 1.0.15](https://github.com/microsoft/scenepic/releases/tag/v1.0.15)
 Point release fixing the missing methods in Python documention.
 

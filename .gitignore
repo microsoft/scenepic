@@ -280,3 +280,4 @@ examples/**/*.html
 ci/downloads
 test-output.xml
 wheelhouse
+python_examples/*.js

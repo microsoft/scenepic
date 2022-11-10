@@ -1,4 +1,3 @@
-import * as $ from "jquery"
 import {ObjectCache, CanvasBase} from "./CanvasBase"
 import Canvas3D from "./Canvas3D";
 import Canvas2D from "./Canvas2D";
@@ -36,13 +35,13 @@ export default class SPScene
     objectCache : ObjectCache;
 
     // Text panels by id
-    textPanels = {};
+    textPanels : Map<string, TextPanel> = new Map<string, TextPanel>();
 
     // Drop down menus by id
-    dropDownMenus = {};
+    dropDownMenus : Map<string, DropDownMenu> = new Map<string, DropDownMenu>();
 
     // Canvases (3D and 2D)
-    canvases = {};
+    canvases : Map<string, CanvasBase> = new Map<string, CanvasBase>();
 
     // Mesh keyframes
     meshKeyframes = {};
@@ -77,7 +76,7 @@ export default class SPScene
     currentRecordingFrame : number;
     maxFrames : number;
 
-    constructor(element = null) // element is passed in if being used from Jupyter
+    constructor(element : HTMLElement = null) // element is passed in if being used from Jupyter
     {
         // Create image and label cache
         var self : SPScene = this; // Since the lambda below would have a different "this"
@@ -97,14 +96,14 @@ export default class SPScene
         // Create html placeholder
         this.div = document.createElement("div"); // Main div for canvases and user-provided text panels
         this.div.className = "scenepic";
-        if (element != null) element.append(this.div); else document.body.appendChild(this.div);
+        if (element != null) element.appendChild(this.div); else document.body.appendChild(this.div);
 
         this.statusDiv = document.createElement("div");
         this.statusDiv.classList.add("scenepic");
         if (element == null)
             this.statusDiv.classList.add("scenepic-status-bar");
         this.statusDivNeedsPadding = element == null;
-        if (element != null) element.append(this.statusDiv); else document.body.appendChild(this.statusDiv);
+        if (element != null) element.appendChild(this.statusDiv); else document.body.appendChild(this.statusDiv);
 
         let controls = document.createElement("div");
         controls.className = "scenepic-controls";
@@ -431,15 +430,12 @@ export default class SPScene
 
         // Create
         this.textPanels[id] = new TextPanel(id, title, style, parent != null ? parent : this.div, startMinimized, addInputBox);
+        let panel = this.textPanels[id];
 
         // Add event to report
         var host = this;
-        var inputBox = this.textPanels[id].inputBox;
-        $(inputBox).on('input', function()
-        {
-            host.ReportInputBoxChange(id, inputBox.value);
-        });
-        this.textPanels[id].header.addEventListener("click", event => this.UpdateStatusPadding());
+        panel.inputBox.oninput = () => host.ReportInputBoxChange(id, panel.inputBox.value);
+        panel.header.addEventListener("click", () => this.UpdateStatusPadding());
 
         // Update padding
         this.UpdateStatusPadding();
@@ -490,12 +486,10 @@ export default class SPScene
 
         // Add event to report
         var host = this;
-        var menu = this.dropDownMenus[id].dropDownMenu;
-        $(menu).on('change', function()
-        {
-            host.ReportDropDownMenuChange(id, menu.selectedIndex);
-        });
-        this.dropDownMenus[id].header.addEventListener("click", event => this.UpdateStatusPadding());
+        let menu = this.dropDownMenus.get(id)
+        
+        menu.dropDownMenu.onchange = () => host.ReportDropDownMenuChange(id, menu.dropDownMenu.selectedIndex);
+        menu.header.addEventListener("click", () => this.UpdateStatusPadding());
 
         // Update padding
         this.UpdateStatusPadding();

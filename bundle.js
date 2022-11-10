@@ -1,6 +1,7 @@
 let browserify = require("browserify")
 let tsify = require("tsify")
 let minify = require("minify-stream")
+let derequire = require("browserify-derequire")
 let fs = require("fs")
 let exorcist = require("exorcist")
 let makeDir = require('make-dir')
@@ -33,6 +34,7 @@ let b = browserify({
         "tssrc/VertexBuffers.ts"
     ])
     .plugin(tsify)
+    .plugin(derequire)
     .bundle()
 
 if (!debug) {

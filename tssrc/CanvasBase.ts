@@ -1,4 +1,3 @@
-import * as $ from "jquery"
 import Misc from "./Misc"
 
 export abstract class CachedObject
@@ -458,12 +457,20 @@ export abstract class CanvasBase
         // Create dropdown menu
         this.dropdown = document.createElement("div");
         this.dropdown.className = "scenepic-dropdown";
-        this.dropdown.addEventListener("click", event => { if (event.target == this.dropdown) { $(this.dropdown).toggleClass("is-active"); this.htmlCanvas.focus(); } });
+        this.dropdown.addEventListener("click", event => { 
+            if (event.target == this.dropdown) { 
+                this.dropdown.classList.toggle("is-active");
+                this.htmlCanvas.focus(); 
+            } 
+        });
         this.dropdownTable = document.createElement("table");
         this.dropdownTable.className = "scenepic-dropdown-table";
         this.dropdown.appendChild(this.dropdownTable);
         this.container.appendChild(this.dropdown);
-        this.htmlCanvas.addEventListener("click", event => { $(this.dropdown).removeClass("is-active"); this.htmlCanvas.focus(); });
+        this.htmlCanvas.addEventListener("click", () => {
+             this.dropdown.classList.remove("is-active");
+             this.htmlCanvas.focus(); 
+        });
 
         // Create slider
         this.slider = document.createElement("input");
