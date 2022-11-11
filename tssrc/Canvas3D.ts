@@ -1,4 +1,3 @@
-import * as $ from "jquery"
 import {mat3, mat4, vec3, vec4, quat} from "gl-matrix";
 import Misc from "./Misc"
 import {ObjectCache, CanvasBase} from "./CanvasBase"

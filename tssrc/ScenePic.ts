@@ -1,10 +1,21 @@
-import * as $ from "jquery"
 import SPScene from "./SPScene"
 
 
-$(document).ready(function(){
-    let currentWindow = <any>window
-    let scene = new SPScene(currentWindow.Element)
-    let commands = currentWindow.ScriptCommands
-    scene.ExecuteSceneCommands(commands)
-})
+function scenepic(id: string, commands: any, wait=100){
+    let element : HTMLElement | null = null;
+    if(id != null){
+        element = document.getElementById(id);
+        if(element == null){
+            console.warn(id + " does not exist in the DOM, retrying");
+            setTimeout(() => { scenepic(id, commands, wait * 2); }, wait);
+        }else{
+            let scene = new SPScene(element);
+            scene.ExecuteSceneCommands(commands);
+        }
+    }else{
+        let scene = new SPScene();
+        scene.ExecuteSceneCommands(commands);
+    }
+}
+
+window["scenepic"] = scenepic;

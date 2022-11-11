@@ -151,7 +151,7 @@ setup(
     long_description_content_type="text/markdown",
     packages=find_packages("src"),
     package_dir={"": "src"},
-    package_data={"scenepic": ["*.pyi"]},
+    package_data={"scenepic": ["*.pyi", "*.js"]},
     python_requires=">=3.6, <4",
     ext_modules=[CMakeExtension("scenepic._scenepic")],
     classifiers=[

@@ -15,7 +15,6 @@
         "outDir": "build",
         "types": [
             "node",
-            "jquery",
             "gl-matrix"
         ]
     }

@@ -1,4 +1,3 @@
-import * as $ from "jquery"
 import Misc from "./Misc"
 import {ObjectCache, CanvasBase} from "./CanvasBase"
 

@@ -723,7 +723,13 @@ namespace scenepic
 
   std::string Scene::script() const
   {
-    return "window.Element = null\nwindow.ScriptCommands = \n" + this->json();
+    std::stringstream buff;
+    buff << "window.onload = function(){\n"
+         << "    let commands = " << this->json() << ";\n"
+         << "    scenepic(null, commands);\n"
+         << "}\n";
+
+    return buff.str();
   }
 
   void Scene::save_as_json(const std::string& path) const

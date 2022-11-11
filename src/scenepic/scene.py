@@ -3,6 +3,7 @@
 # Copyright (c) Microsoft Corporation.
 # Licensed under the MIT License.
 
+import os
 from typing import Union
 
 from ._scenepic import (
@@ -42,11 +43,16 @@ def _repr_javascript_(self):
         raise Exception("You should not call clear_script() on Scenes that "
                         "you wish to use in Jupyter.")
 
-    script = """
-{};
-window.Element = element;
-{}
-""".format(self.get_script(), js_lib_src())
+    # Jupyter notebooks need to load the library as an external file
+    with open("scenepic.min.js", "wb") as file:
+        src = js_lib_src()
+        file.write(src.encode())
+
+    loader_path = os.path.join(os.path.dirname(__file__),
+                               "scene_jupyter_template.js")
+    with open(loader_path) as file:
+        script = file.read() % self.get_json()
+
     return script
 
 
