@@ -59,7 +59,8 @@ export default class Canvas3D extends CanvasBase
     sp : ShaderProgram;
 
     // Dictionary from layerId to layer settings (wireframe, filled, opacity)
-    layerSettings = {};
+    layerSettings : {[layerId: string]: {[key: string]: number|boolean}} = {};
+    layerIds : string[] = [];
 
     // Shading parameters
     bgColor : vec4;
@@ -282,6 +283,10 @@ export default class Canvas3D extends CanvasBase
             this.dropdownTable.removeChild(this.dropdownTable.lastChild);
 
         this.layerSettings = layerSettings;
+        this.layerIds = [null];
+        for(let layerId in layerSettings){
+            this.layerIds.push(layerId);
+        }
 
         // Add header row
         var BorderStyle = "1px solid #cccccc";
@@ -876,6 +881,17 @@ export default class Canvas3D extends CanvasBase
         var showWireframe = this.ShowLayerWireframe(layerId) || (this.ShowLayerFilled(layerId) && this.globalWireframe);
         var opacity = this.GetLayerOpacity(layerId) * this.globalOpacity;
         return (showFilled || showWireframe) && opacity > 0.0;
+    }
+
+    ToggleLayerFilled(index: number)
+    {
+        if(index >= this.layerIds.length) {
+            return
+        }
+
+        let layerId = this.layerIds[index];
+        let filled = this.ShowLayerFilled(layerId);
+        this.SetLayerFilled(layerId, !filled);
     }
 
     ShowLayerFilled(layerId : string) : boolean

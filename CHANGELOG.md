@@ -1,5 +1,8 @@
 # Changelog
 
+## [2022-11-10 - Version 1.0.17](https://github.com/microsoft/scenepic/releases/tag/v1.0.17)
+Point release adding keyboard shortcuts for toggling layer visibility.
+
 ## [2022-11-10 - Version 1.0.16](https://github.com/microsoft/scenepic/releases/tag/v1.0.16)
 Point release fixing an issue with Jupyter rendering order.
 

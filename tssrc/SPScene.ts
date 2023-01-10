@@ -174,6 +174,7 @@ export default class SPScene
         helpHtml += 'ctrl: twist<br>';
         helpHtml += 'alt: slow translation/rotation<br>';
         helpHtml += 'tab: toggle between first person/focus cameras<br>';
+        helpHtml += 'alt+#: toggle visibility of layer #<br>';
         helpHtml += 'r: reset view';
         helpHtml += '</span><span class="scenepic-textbox-content">';
         helpHtml += '\\: toggle orbit camera<br>';
@@ -1151,6 +1152,14 @@ export default class SPScene
                 // Mark event as handled
                 if (handled)
                     returnValue = false;
+            }
+        }
+
+        if (altKey) {
+            let index = Number.parseInt(key);
+            for(var canvas of canvases)
+            {
+                canvas.ToggleLayerFilled(index);
             }
         }
 
