@@ -368,6 +368,17 @@ export default class Canvas2D extends CanvasBase
         return true;
     }
 
+    ToggleLayerFilled(index: number)
+    {
+        if(index >= this.layerIds.length) {
+            return
+        }
+
+        let layerId = this.layerIds[index];
+        let filled = this.ShowLayerFilled(layerId);
+        this.SetLayerFilled(layerId, !filled);
+    }    
+
     SetLayerFilled(layerId : string, filled : boolean)
     {
         if (layerId == null)
