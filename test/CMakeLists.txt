@@ -45,6 +45,10 @@ if (TARGET scenepic_examples )
 endif()
 
 target_link_libraries( ${TEST_DRIVER} scenepic::scenepic )
+if(WIN32)
+    target_link_options(${TEST_DRIVER} PRIVATE /Profile)
+endif(WIN32)
+    
 target_compile_features(${TEST_DRIVER} PRIVATE cxx_std_14)
 target_include_directories(${TEST_DRIVER} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../src/scenepic/)
 

@@ -281,3 +281,5 @@ ci/downloads
 test-output.xml
 wheelhouse
 python_examples/*.js
+.vs
+TestResults
