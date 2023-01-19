@@ -17,6 +17,7 @@
   "scripts": {
     "compile": "tsc -p .",
     "build": "node bundle.js",
+    "debug": "node debug.js",
     "watch": "node watch.js"
   },
   "devDependencies": {

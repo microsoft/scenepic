@@ -8,11 +8,8 @@ export class MeshPicker {
     readonly program : ShaderProgram;
     data : Uint8Array;
 
-    constructor(gl : WebGL2RenderingContext){
-        this.program = new ShaderProgram(gl, "pick-vertex-shader", "pick-fragment-shader");
-
-        const width = gl.canvas.width;
-        const height = gl.canvas.height;
+    constructor(gl : WebGL2RenderingContext, width: number, height: number){
+        this.program = new ShaderProgram(gl, "pickerVertex", "pickerFragment");
 
         let targetTexture = Misc.AssertNotNull(gl.createTexture(), "WebGL returned a null texture");
         gl.bindTexture(gl.TEXTURE_2D, targetTexture);
@@ -50,6 +47,7 @@ export class MeshPicker {
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
         const program = this.program;
+        gl.useProgram(program.program);
 
         meshes.forEach(function([buffer, w2vMatrix]) {
             buffer.RenderPicker(program, v2sMatrix, w2vMatrix)
@@ -58,6 +56,7 @@ export class MeshPicker {
         const pixelX = mouseX * canvas.width / canvas.clientWidth;
         const pixelY = canvas.height - mouseY * canvas.height / canvas.clientHeight - 1;
         gl.readPixels(pixelX, pixelY, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, this.data);
+
         gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 
         return this.data[0] + (this.data[1] << 8) + (this.data[2] << 16);

@@ -193,13 +193,13 @@ void main()
     "pickerVertex": {
         type: "x-shader/x-vertex",
         script:
-            `
+`#version 300 es
 // Vertex inputs
-attribute vec3 vertexPositionIn;
+in vec3 vertexPositionIn;
 
 // Instance inputs
-attribute vec3 instancePositionIn;
-attribute vec4 instanceRotationIn; // Quaternion
+in vec3 instancePositionIn;
+in vec4 instanceRotationIn; // Quaternion
 
 // Transformation matrices
 uniform int useInstanceRotation;
@@ -210,13 +210,11 @@ void main()
 {
     // Rotation by quaternion
     vec3 vertexPosition = vertexPositionIn;
-    vec3 vertexNormal = vertexNormalIn;
     if (useInstanceRotation == 1)
     {
         // Apply quaternion rotation to position and normal
         // https://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation
         vertexPosition += 2.0 * cross(instanceRotationIn.xyz, cross(instanceRotationIn.xyz, vertexPosition) + instanceRotationIn.w * vertexPosition);
-        vertexNormal += 2.0 * cross(instanceRotationIn.xyz, cross(instanceRotationIn.xyz, vertexNormal) + instanceRotationIn.w * vertexNormal); 
     }
     vertexPosition += instancePositionIn;
 
@@ -258,8 +256,8 @@ function makeShader(gl: WebGL2RenderingContext, shaderDef: ShaderDef) {
     gl.shaderSource(shader, shaderDef.script);
     gl.compileShader(shader);
     if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-        alert(gl.getShaderInfoLog(shader));
-        return null;
+        console.error(gl.getShaderInfoLog(shader));
+        throw new Error("WebGL shader compilation error");
     }
 
     return shader;
@@ -305,6 +303,11 @@ export default class ShaderProgram {
         gl.attachShader(this.program, this.vertexShader);
         gl.attachShader(this.program, this.fragmentShader);
         gl.linkProgram(this.program);
+        if (!gl.getProgramParameter(this.program, gl.LINK_STATUS)) {
+            console.error(gl.getProgramInfoLog(this.program));
+            throw new Error("WebGL Program linking error");
+        }
+
         gl.useProgram(this.program);
 
         // Store attributes

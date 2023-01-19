@@ -80,7 +80,7 @@ class MeshData
         let centroid = vec3.create();
         const norm = 1.0 / this.mesh.CountVertices();
         for(let i=0, j=0; i<this.mesh.CountVertices(); i++, j += this.mesh.ElementsPerVertex){
-            let p = <vec3>this.mesh.vertexBuffer.subarray(j, 3);
+            let p = <vec3>this.mesh.vertexBuffer.subarray(j, j + 3);
             vec3.transformMat4(p, p, this.m2wMatrix);
             vec3.scale(p, p, norm)
             vec3.add(centroid, centroid, p);
@@ -93,7 +93,7 @@ class MeshData
         let instanceCentroid = vec3.create();
         const instanceNorm = 1.0 / this.mesh.CountInstances();
         for(let i=0, j=0; i < this.mesh.CountInstances(); i++, j += this.mesh.ElementsPerInstance){
-            let p = <vec3>this.mesh.instanceBuffer.subarray(j, 3);
+            let p = <vec3>this.mesh.instanceBuffer.subarray(j, j + 3);
             vec3.add(p, instanceCentroid, p);
             vec3.scale(p, p, instanceNorm);
             vec3.add(instanceCentroid, instanceCentroid, p);
@@ -241,7 +241,7 @@ export default class Canvas3D extends CanvasBase
         this.focusPointMeshBuffer = new WebGLMeshBuffers(this.gl, this.sp, focusPointMesh);
 
         // Create picker
-        this.meshPicker = new MeshPicker(this.gl);
+        this.meshPicker = new MeshPicker(this.gl, this.width, this.height);
 
         // Recreate buffers
         this.PrepareBuffers();
@@ -802,27 +802,10 @@ export default class Canvas3D extends CanvasBase
     SetFocusPointPositionFromPixelCoordinates(pixelX : number, pixelY : number)
     {
         if (this.lockViewXY || this.lockViewOrientation) return;
-
-        var focusPointView = this.GetCurrentFocusPointInViewSpace();
-
-        var s2vMatrix = mat4.create();
-        var v2wMatrix = mat4.create();
-        mat4.invert(s2vMatrix, this.v2sMatrix);
-        mat4.invert(v2wMatrix, this.w2vMatrix);
-
-        // Convert from pixel to screen coordinates
-        var clientRect = this.htmlCanvas.getBoundingClientRect();
-        var screen = vec3.fromValues(2.0 * (pixelX / clientRect.width - 0.5), 2.0 * (0.5 - pixelY / clientRect.height), 1.0);
-
-        // Convert from screen to view coordinates
-        var view = vec3.create();
-        vec3.transformMat4(view, screen, s2vMatrix);
-        vec3.scale(view, view, focusPointView[2] / view[2]) // Fix z value to existing focus point z value
-
-        // Convert from view to world coordinates
-        var focusPoint = this.currentFocusPoints[this.currentFrameIndex];
-        var focusPointPosition = <vec3>focusPoint.subarray(0, 3);
-        vec3.transformMat4(focusPointPosition, view, v2wMatrix);
+    
+        this.pickMouseX = pixelX;
+        this.pickMouseY = pixelY;
+        this.setFocusToPicked = true;
     }
 
     ComputeFocusPointRelativeViewSpaceTranslation(oldX : number, oldY : number, newX : number, newY : number)
@@ -1189,6 +1172,7 @@ export default class Canvas3D extends CanvasBase
 
 
         // Set up rendering parameters
+        gl.useProgram(this.sp.program);
         gl.enable(gl.DEPTH_TEST);
         gl.cullFace(gl.BACK);
         gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
@@ -1312,19 +1296,37 @@ export default class Canvas3D extends CanvasBase
         if (this.setFocusToPicked && opaqueMeshData.length > 0){
             let buffers: [WebGLMeshBuffers, mat4][] = [];
             for(let i=0; i<opaqueMeshData.length; i++){
-                let mesh = opaqueMeshData[i][0];
-                if(mesh.cameraSpace) {
+                let meshData = opaqueMeshData[i];
+                if(meshData.mesh.cameraSpace) {
                     continue;
                 }
 
-                let w2vMatrix = opaqueMeshData[i][1];
-                let buffer = opaqueMeshData[i][2];
-                buffer.id = i + 1;
-                buffers.push([buffer, w2vMatrix]);
+                meshData.buffer.id = i + 1;
+                buffers.push([meshData.buffer, meshData.m2vMatrix]);
             }
             const picked = this.meshPicker.Pick(gl, buffers, this.pickMouseX, this.pickMouseY, v2sMatrix)
             if(picked == 0){
-                this.SetFocusPointPositionFromPixelCoordinates(this.pickMouseX, this.pickMouseY);
+                var focusPointView = this.GetCurrentFocusPointInViewSpace();
+
+                var s2vMatrix = mat4.create();
+                var v2wMatrix = mat4.create();
+                mat4.invert(s2vMatrix, this.v2sMatrix);
+                mat4.invert(v2wMatrix, this.w2vMatrix);
+        
+                // Convert from pixel to screen coordinates
+                var clientRect = this.htmlCanvas.getBoundingClientRect();
+                var screen = vec3.fromValues(2.0 * (this.pickMouseX / clientRect.width - 0.5),
+                                             2.0 * (0.5 - this.pickMouseY / clientRect.height), 1.0);
+        
+                // Convert from screen to view coordinates
+                var view = vec3.create();
+                vec3.transformMat4(view, screen, s2vMatrix);
+                vec3.scale(view, view, focusPointView[2] / view[2]) // Fix z value to existing focus point z value
+        
+                // Convert from view to world coordinates
+                var focusPoint = this.currentFocusPoints[this.currentFrameIndex];
+                var focusPointPosition = <vec3>focusPoint.subarray(0, 3);
+                vec3.transformMat4(focusPointPosition, view, v2wMatrix);
             }else{
                 const pickedCentroid = opaqueMeshData[picked - 1].ComputeCentroid();
                 var focusPoint = this.currentFocusPoints[this.currentFrameIndex];
