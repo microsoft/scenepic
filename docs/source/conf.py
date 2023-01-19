@@ -22,7 +22,7 @@ copyright = "2021, Microsoft"
 author = "ScenePic Team"
 
 # The full version, including alpha/beta/rc tags
-release = "1.0.17"
+release = "1.0.18"
 
 
 # -- General configuration ---------------------------------------------------

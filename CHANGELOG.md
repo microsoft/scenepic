@@ -1,6 +1,10 @@
 # Changelog
 
-## [2022-11-10 - Version 1.0.17](https://github.com/microsoft/scenepic/releases/tag/v1.0.17)
+## [2023-01-19 - Version 1.0.18](https://github.com/microsoft/scenepic/releases/tag/v1.0.18)
+Point release adding the ability to pick the centroid of a mesh as
+a focus point by clicking on it while in focus point selection mode.
+
+## [2023-01-11 - Version 1.0.17](https://github.com/microsoft/scenepic/releases/tag/v1.0.17)
 Point release adding keyboard shortcuts for toggling layer visibility.
 
 ## [2022-11-10 - Version 1.0.16](https://github.com/microsoft/scenepic/releases/tag/v1.0.16)
