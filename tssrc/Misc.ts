@@ -196,4 +196,13 @@ export default class Misc
         var l = Math.log(val) / Math.log(2);
         return l == Math.floor(l);
     }
+
+    static AssertNotNull<T>(value: T | null, error: string) : T {
+        if(value == null){
+            throw new Error(error)
+        }
+    
+        return value
+    }
+    
 }

@@ -1,11 +1,11 @@
-import {quat, vec3, vec4, mat3, mat4} from "gl-matrix";
+import {quat, vec3, mat3, mat4} from "gl-matrix";
 import Mesh from "./Mesh";
 import Misc from "./Misc"
 import ShaderProgram from "./Shaders";
 
 export default class WebGLMeshBuffers
 {
-    gl : WebGLRenderingContext;
+    gl : WebGL2RenderingContext;
     sp : ShaderProgram;
     m : Mesh;
 
@@ -24,6 +24,8 @@ export default class WebGLMeshBuffers
 
     m2wMatrix : mat4;
 
+    id : number;
+
     // Used for label computations
     labelWidthNormalized : number = -1.0;
     labelHeightNormalized : number = -1.0;
@@ -32,7 +34,7 @@ export default class WebGLMeshBuffers
     labelTranslateWorldX : number = 0.0;
     labelTranslateWorldY : number = 0.0;
 
-    constructor(gl : WebGLRenderingContext, sp : ShaderProgram, m : Mesh, textureSrc = null)
+    constructor(gl : WebGL2RenderingContext, sp : ShaderProgram, m : Mesh, textureSrc = null)
     {
         this.gl = gl;
         this.sp = sp;
@@ -177,6 +179,9 @@ export default class WebGLMeshBuffers
 
         var ext = gl.getExtension("ANGLE_instanced_arrays");
 
+        // set the id
+        gl.uniform1i(sp.idPtr, this.id);
+
         // Ensure we have wireframe buffer if needed
         if (renderWireframe && this.wireframeEdgeIndexBuffer == null)
         {
@@ -320,5 +325,73 @@ export default class WebGLMeshBuffers
         gl.bindBuffer(gl.ARRAY_BUFFER, null);
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
         gl.bindTexture(gl.TEXTURE_2D, null);
+    }
+
+    RenderPicker(program: ShaderProgram, v2sMatrix : mat4, w2vMatrix : mat4)
+    {
+        var gl = this.gl;
+        var sp = program;
+        var m = this.m;
+
+        var ext = gl.getExtension("ANGLE_instanced_arrays");
+
+        // Compute projection matrix (i.e. concatenation of m2w, w2v, v2s)
+        var m2vMatrix = mat4.create();
+        var projMatrix = mat4.create();
+        mat4.multiply(m2vMatrix, w2vMatrix, this.m2wMatrix);
+        if (this.m.isBillboard) // Turn off rotation for billboard objects
+            this.ApplyBillboardEffect(m2vMatrix);
+        if (this.m.isLabel && this.hasTexture) // Deal with labels specially
+            this.ApplyLabel(m2vMatrix, v2sMatrix);
+        mat4.multiply(projMatrix, v2sMatrix, m2vMatrix);
+        gl.uniformMatrix4fv(sp.projMatrixPtr, false, projMatrix);
+
+        // Set model view matrix (i.e. concatenation of m2w, w2v)
+        gl.uniformMatrix4fv(sp.m2vMatrixPtr, false, m2vMatrix);
+        
+        // Bind vertex buffers
+        gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexDataBuffer);
+        if (true)
+        {
+            gl.enableVertexAttribArray(sp.vertexPositionAttribLoc);
+            gl.vertexAttribPointer(sp.vertexPositionAttribLoc, 3, gl.FLOAT, false, m.ElementsPerVertex * 4, m.VertexOffsetPosition * 4);
+        }
+        
+        // Bind instance buffers
+        gl.bindBuffer(gl.ARRAY_BUFFER, this.instanceDataBuffer);
+        if (m.instanceBuffer != null)
+        {
+            gl.enableVertexAttribArray(sp.instancePositionAttribLoc);
+            gl.vertexAttribPointer(sp.instancePositionAttribLoc, 3, gl.FLOAT, false, m.ElementsPerInstance * 4, m.InstanceOffsetPosition * 4);
+            ext.vertexAttribDivisorANGLE(sp.instancePositionAttribLoc, 1);
+        }
+        else
+        {
+            gl.disableVertexAttribArray(sp.instancePositionAttribLoc);
+            ext.vertexAttribDivisorANGLE(sp.instancePositionAttribLoc, 0);
+        }
+        if (m.instanceBufferHasRotations)
+        {
+            gl.enableVertexAttribArray(sp.instanceRotationAttribLoc);
+            gl.vertexAttribPointer(sp.instanceRotationAttribLoc, 4, gl.FLOAT, false, m.ElementsPerInstance * 4, m.InstanceOffsetRotation * 4);
+            ext.vertexAttribDivisorANGLE(sp.instanceRotationAttribLoc, 1);
+        }
+        else
+        {
+            gl.disableVertexAttribArray(sp.instanceRotationAttribLoc);
+            ext.vertexAttribDivisorANGLE(sp.instanceRotationAttribLoc, 0);
+        }
+    
+        // Set use instance rotation uniform1i
+        gl.uniform1i(sp.useInstanceRotation, m.instanceBufferHasRotations ? 1 : 0);
+
+        gl.uniform1i(sp.shadingTypePtr, this.m.isLabel ? 2 : (this.hasTexture ? 1 : 0));
+        gl.uniform1f(sp.lightingMultiplierPtr, 1.0);
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.triangleIndexBuffer);
+        ext.drawElementsInstancedANGLE(gl.TRIANGLES, m.CountTriangles() * Mesh.ElementsPerTriangle, this.indexType, 0, m.CountInstances());
+
+        // Unbind buffers
+        gl.bindBuffer(gl.ARRAY_BUFFER, null);
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
     }
 }

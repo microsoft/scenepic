@@ -1,14 +1,13 @@
-interface ShaderDef
-{
-    type : string;
-    script : string;
+interface ShaderDef {
+    type: string;
+    script: string;
 }
 
-var defaultVertexShader : ShaderDef =
-{
-    type: "x-shader/x-vertex",
-    script:
-`
+const SHADERS = {
+    "defaultVertex": {
+        type: "x-shader/x-vertex",
+        script:
+            `
 // Vertex inputs
 attribute vec3 vertexPositionIn;
 attribute vec3 vertexNormalIn;
@@ -80,14 +79,12 @@ void main()
     // Copy texture coordinates
     vertexTextureCoord = vertexTextureIn;
 }
-`
-};
-
-var defaultFragmentShader : ShaderDef =
-{
-    type : "x-shader/x-fragment",
-    script : 
-`
+`},
+    "defaultFragment":
+    {
+        type: "x-shader/x-fragment",
+        script:
+            `
 precision mediump float;
 
 // Lighting
@@ -192,13 +189,64 @@ void main()
     }
 }
 `
+    },
+    "pickerVertex": {
+        type: "x-shader/x-vertex",
+        script:
+            `
+// Vertex inputs
+attribute vec3 vertexPositionIn;
+
+// Instance inputs
+attribute vec3 instancePositionIn;
+attribute vec4 instanceRotationIn; // Quaternion
+
+// Transformation matrices
+uniform int useInstanceRotation;
+uniform mat4 projMatrix; // Incorporates: model to world to view to screen
+uniform mat4 m2vMatrix; // Incorporates: model to world to view
+
+void main()
+{
+    // Rotation by quaternion
+    vec3 vertexPosition = vertexPositionIn;
+    vec3 vertexNormal = vertexNormalIn;
+    if (useInstanceRotation == 1)
+    {
+        // Apply quaternion rotation to position and normal
+        // https://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation
+        vertexPosition += 2.0 * cross(instanceRotationIn.xyz, cross(instanceRotationIn.xyz, vertexPosition) + instanceRotationIn.w * vertexPosition);
+        vertexNormal += 2.0 * cross(instanceRotationIn.xyz, cross(instanceRotationIn.xyz, vertexNormal) + instanceRotationIn.w * vertexNormal); 
+    }
+    vertexPosition += instancePositionIn;
+
+    // Transform position and normal
+    gl_Position = projMatrix * vec4(vertexPosition, 1.0);
+}
+`},
+    "pickerFragment": {
+        type: "x-shader/x-fragment",
+        script: 
+`#version 300 es
+precision mediump float;
+  
+uniform int u_id;
+out vec4 o_fragColor;  
+
+void main() {
+  float r = float(u_id & 0xFF);
+  float g = float((u_id >> 8) & 0xFF);
+  float b = float((u_id >> 16) & 0xFF);
+  o_fragColor = vec4(vec3(r, g, b) / 255.0, 1.0);
+}
+`
+    }
 };
 
 // Generates a shader from the webgl context and id of an html script element containing the shader code 
-function makeShader(gl : WebGLRenderingContext, shaderDef : ShaderDef)
-{
+function makeShader(gl: WebGL2RenderingContext, shaderDef: ShaderDef) {
     // Create shader object
-    var shader : WebGLShader;
+    var shader: WebGLShader;
     if (shaderDef.type == "x-shader/x-fragment")
         shader = gl.createShader(gl.FRAGMENT_SHADER);
     else if (shaderDef.type == "x-shader/x-vertex")
@@ -217,41 +265,40 @@ function makeShader(gl : WebGLRenderingContext, shaderDef : ShaderDef)
     return shader;
 }
 
-export default class ShaderProgram
-{
-    vertexShader : WebGLShader;
-    fragmentShader : WebGLShader;
-    program : WebGLProgram;
+export default class ShaderProgram {
+    vertexShader: WebGLShader;
+    fragmentShader: WebGLShader;
+    program: WebGLProgram;
 
     // Cached attribute locations
-    vertexPositionAttribLoc : number;
-    vertexNormalAttribLoc : number;
-    vertexColorAttribLoc : number;
-    vertexTextureAttribLoc : number;
-    instancePositionAttribLoc : number;
-    instanceRotationAttribLoc : number;
-    instanceColorAttribLoc : number;
+    vertexPositionAttribLoc: number;
+    vertexNormalAttribLoc: number;
+    vertexColorAttribLoc: number;
+    vertexTextureAttribLoc: number;
+    instancePositionAttribLoc: number;
+    instanceRotationAttribLoc: number;
+    instanceColorAttribLoc: number;
 
     // Cached uniform pointers
-    useInstanceRotation : WebGLUniformLocation;
-    projMatrixPtr : WebGLUniformLocation;
-    m2vMatrixPtr : WebGLUniformLocation;
-    normMatrixPtr : WebGLUniformLocation;
-    ambientLightColorPtr : WebGLUniformLocation;
-    directionalLightDirPtr : WebGLUniformLocation;
-    directionalLightColorPtr : WebGLUniformLocation;
-    lightingMultiplierPtr : WebGLUniformLocation;
-    alphaPtr : WebGLUniformLocation;
-    sharedColorPtr : WebGLUniformLocation;
-    colorSourcePtr : WebGLUniformLocation;
-    shadingTypePtr : WebGLUniformLocation;
-    samplerPtr : WebGLUniformLocation;
+    useInstanceRotation: WebGLUniformLocation;
+    projMatrixPtr: WebGLUniformLocation;
+    m2vMatrixPtr: WebGLUniformLocation;
+    normMatrixPtr: WebGLUniformLocation;
+    ambientLightColorPtr: WebGLUniformLocation;
+    directionalLightDirPtr: WebGLUniformLocation;
+    directionalLightColorPtr: WebGLUniformLocation;
+    lightingMultiplierPtr: WebGLUniformLocation;
+    alphaPtr: WebGLUniformLocation;
+    sharedColorPtr: WebGLUniformLocation;
+    colorSourcePtr: WebGLUniformLocation;
+    shadingTypePtr: WebGLUniformLocation;
+    samplerPtr: WebGLUniformLocation;
+    idPtr: WebGLUniformLocation;
 
-    constructor(gl : WebGLRenderingContext)
-    {
+    constructor(gl: WebGL2RenderingContext, vertexShader: string, fragmentShader: string) {
         // Create shaders
-        this.vertexShader = makeShader(gl, defaultVertexShader);
-        this.fragmentShader = makeShader(gl, defaultFragmentShader);
+        this.vertexShader = makeShader(gl, SHADERS[vertexShader]);
+        this.fragmentShader = makeShader(gl, SHADERS[fragmentShader]);
 
         // Create and use program
         this.program = gl.createProgram();
@@ -283,5 +330,6 @@ export default class ShaderProgram
         this.sharedColorPtr = gl.getUniformLocation(this.program, "sharedColor");
         this.shadingTypePtr = gl.getUniformLocation(this.program, "shadingType");
         this.samplerPtr = gl.getUniformLocation(this.program, "sampler");
+        this.idPtr = gl.getUniformLocation(this.program, "u_id");
     }
 }
