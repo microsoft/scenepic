@@ -1,6 +1,7 @@
 """Example script demonstrating the basic ScenePic functionality."""
 
 import argparse
+import os
 
 import numpy as np
 import scenepic as sp
@@ -106,8 +107,11 @@ def build_scene() -> sp.Scene:
 
 def _parse_args():
     parser = argparse.ArgumentParser(Title)
-    parser.add_argument("--script", action="store_true",
-                        help="Whether to save the scenepic as a JS file")
+    parser.add_argument("--mode", choices=["script", "standalone", "debug"],
+                        default="standalone",
+                        help="Whether to output a script, standalone HTML, or a debug page")
+    parser.add_argument("--output-dir", default=".",
+                        help="output directory")
     return parser.parse_args()
 
 
@@ -115,16 +119,28 @@ def _main():
     args = _parse_args()
     scene = build_scene()
     # The scene is complete, so we write it to a standalone file.
-    if args.script:
+    if args.mode == "script":
         # If you have an existing HTML page you want to add a scenepic
         # to, then you can save the scenepic as a self-contained
         # Javascript file.
-        scene.save_as_script("{}.js".format(Name), standalone=True)
+        path = os.path.join(args.output_dir, "{}.js".format(Name))
+        scene.save_as_script(path, standalone=True)
+    elif args.mode == "debug":
+        # Sometimes for debug purposes it is useful to output the
+        # webpage as a combination of HTML, script (which is mostly
+        # JSON) and library.
+        path = os.path.join(args.output_dir, "{}.html".format(Name))
+        script_path = os.path.join(args.output_dir, "{}.js".format(Name))
+        library_path = os.path.join(args.output_dir, "scenepic.js")
+        scene.save_as_html(path, title=Title,
+                           script_path=script_path,
+                           library_path=library_path)
     else:
-        # However, ScenePic will also create a basic HTML wrapper
+        # Finally, ScenePic can also create a basic HTML wrapper
         # and embed the Javascript into the file directly so you
         # have a single file containing everything.
-        scene.save_as_html("{}.html".format(Name), title=Title)
+        path = os.path.join(args.output_dir, "{}.html".format(Name))
+        scene.save_as_html(path, title=Title)
 
 
 if __name__ == "__main__":

@@ -14,31 +14,13 @@ let mapFile = "dist/scenepic.min.js.map"
 version = fs.readFileSync("VERSION")
 stream.write("// " + version + "\n")
 
-let debug = false
-let b = browserify({
-    debug: debug
-})
+let b = browserify()
     .add([
-        "tssrc/Canvas2D.ts",
-        "tssrc/Canvas3D.ts",
-        "tssrc/CanvasBase.ts",
-        "tssrc/CSSStyles.ts",
-        "tssrc/DropDownMenu.ts",
-        "tssrc/Mesh.ts",
-        "tssrc/Misc.ts",
-        "tssrc/Shaders.ts",
-        "tssrc/SPScene.ts",
-        "tssrc/TextPanel.ts",
-        "tssrc/WebGLMeshBuffers.ts",
         "tssrc/ScenePic.ts",
-        "tssrc/VertexBuffers.ts"
     ])
     .plugin(tsify)
     .plugin(derequire)
     .bundle()
-
-if (!debug) {
-    b = b.pipe(minify()).pipe(exorcist(mapFile))
-}
-
-b.pipe(stream)
+    .pipe(minify())
+    .pipe(exorcist(mapFile))
+    .pipe(stream)

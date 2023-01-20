@@ -1,1 +1,2 @@
-Point release adding keyboard shortcuts for toggling layer visibility.
+Point release adding the ability to pick the centroid of a mesh as
+a focus point by clicking on it while in focus point selection mode.
