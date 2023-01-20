@@ -80,8 +80,9 @@ class MeshData
         let centroid = vec3.create();
         const norm = 1.0 / this.mesh.CountVertices();
         for(let i=0, j=0; i<this.mesh.CountVertices(); i++, j += this.mesh.ElementsPerVertex){
-            let p = <vec3>this.mesh.vertexBuffer.subarray(j, j + 3);
-            vec3.transformMat4(p, p, this.m2wMatrix);
+            let p = vec3.transformMat4(vec3.create(),
+                                       <vec3>this.mesh.vertexBuffer.subarray(j, j + 3),
+                                       this.m2wMatrix);
             vec3.scale(p, p, norm)
             vec3.add(centroid, centroid, p);
         }
@@ -93,8 +94,9 @@ class MeshData
         let instanceCentroid = vec3.create();
         const instanceNorm = 1.0 / this.mesh.CountInstances();
         for(let i=0, j=0; i < this.mesh.CountInstances(); i++, j += this.mesh.ElementsPerInstance){
-            let p = <vec3>this.mesh.instanceBuffer.subarray(j, j + 3);
-            vec3.add(p, instanceCentroid, p);
+            let p = vec3.add(vec3.create(),
+                             <vec3>this.mesh.instanceBuffer.subarray(j, j + 3),
+                             instanceCentroid);
             vec3.scale(p, p, instanceNorm);
             vec3.add(instanceCentroid, instanceCentroid, p);
         }
@@ -843,7 +845,7 @@ export default class Canvas3D extends CanvasBase
         // Translate to be centered on focus point
         mat4.translate(transform, transform, focusPointView);
 
-        // Apply rotation
+        // 3 rotation
         mat4.rotateZ(transform, transform, delta[2]); // Rotate Z
         mat4.rotateY(transform, transform, delta[1]); // Rotate Y
         mat4.rotateX(transform, transform, delta[0]); // Rotate X
