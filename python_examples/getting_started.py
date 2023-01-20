@@ -134,7 +134,7 @@ def _main():
         library_path = os.path.join(args.output_dir, "scenepic.js")
         scene.save_as_html(path, title=Title,
                            script_path=script_path,
-                           library_path=library_path)   
+                           library_path=library_path)
     else:
         # Finally, ScenePic can also create a basic HTML wrapper
         # and embed the Javascript into the file directly so you
