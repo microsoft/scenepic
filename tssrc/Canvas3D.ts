@@ -1,4 +1,4 @@
-import {mat3, mat4, vec3, vec4, quat} from "gl-matrix";
+import {mat3, mat4, vec3, vec4, quat, vec2} from "gl-matrix";
 import Misc from "./Misc"
 import {ObjectCache, CanvasBase} from "./CanvasBase"
 import Mesh from "./Mesh";
@@ -126,8 +126,7 @@ export default class Canvas3D extends CanvasBase
 
     // Mesh picker
     setFocusToPicked : boolean;
-    pickMouseX : number;
-    pickMouseY : number;
+    pickPoint : vec2;
     meshPicker : MeshPicker;    
 
     // Frame instances
@@ -149,8 +148,8 @@ export default class Canvas3D extends CanvasBase
     buttonScaleSpeed = 1.01;
 
     // first person mode
-    cameraVelocity = [0.0, 0.0, 0.0];
-    cameraRotationalVelocity = [0.0, 0.0];
+    cameraVelocity = vec3.fromValues(0.0, 0.0, 0.0);
+    cameraRotationalVelocity = vec2.fromValues(0.0, 0.0);
     dirKeyPresses = {
         "w": 0,
         "a": 0,
@@ -280,6 +279,93 @@ export default class Canvas3D extends CanvasBase
         this.updateCameraVelocityValue("w", "s", 0);
         this.updateCameraVelocityValue("a", "d", 1);
         this.updateCameraVelocityValue("q", "e", 2);
+    }
+    
+    HandlePointerMove(point: vec2, twistAngle: number, event: PointerEvent)
+    {
+        var countPointers = Object.keys(this.pointerCoords).length;
+        if (countPointers == 0) return;
+
+        const old = this.pointerCoords[event.pointerId];
+        let delta = vec2.subtract(vec2.create(), point, old);
+        if (event.altKey)
+        {
+            vec2.scale(delta, delta, this.pointerAltKeyMultiplier);
+        }
+
+        if(this.FirstPerson)
+        {
+            const init = this.initPointerCoords[event.pointerId];
+            let diff = vec2.subtract(vec2.create(), point, init);
+
+            const length = vec2.length(diff);
+            const deadZone = 10;
+            if(length > deadZone)
+            {
+                let scale = Math.min(2, (length - deadZone) / deadZone);
+                vec2.scale(diff, diff, scale / length);
+            }
+            else
+            {
+                diff = vec2.create();
+            }
+
+            vec2.scale(diff, diff, this.pointerRotationSpeed);
+            this.SetCameraRotationalVelocity(diff);
+        }
+        else
+        {
+            // Deal with basic events
+            if (event.ctrlKey)
+            {
+                // Treat as twist of camera
+                this.RotateCamera(0.0, 0.0, twistAngle);
+            }
+            else if (this.showFocusPoint) 
+            {
+                // Translate the 3D center of rotation
+                this.SetFocusPointPositionFromPixelCoordinates(point);
+            }
+            else if (event.shiftKey || countPointers > 1) // Treat as translation of camera
+            {
+                const focusDelta = this.ComputeFocusPointRelativeViewSpaceTranslation(old, point);
+                this.TranslateCamera(focusDelta);
+            }
+            else // Treat as rotation of camera about center of rotation
+            {
+                vec2.scale(delta, delta, this.pointerRotationSpeed);
+                // NB y and x are deliberately crossed over
+                this.RotateCamera(delta[1], delta[0], 0.0); 
+            }
+
+            // Deal with pinch-zoom
+            if (countPointers == 2)
+            {
+                // Get other coordinate
+                let other : vec2;
+                for (var pid in this.pointerCoords)
+                {
+                    if (pid == event.pointerId.toString()) continue;
+                    other = this.pointerCoords[pid];
+                }
+
+                // Compute delta between two points
+                const oldDist = vec2.distance(old, other);
+                const pointDist = vec2.distance(point, other);
+
+                // Change in distances
+                var zOld = this.GetCurrentFocusPointInViewSpace()[2];
+                var zNew = zOld * oldDist / pointDist;
+                this.TranslateCamera(vec3.fromValues(0.0, 0.0, zNew - zOld));
+            }
+        }
+
+        super.HandlePointerMove(point, twistAngle, event);
+    }
+
+    HandlePointerUp(event: PointerEvent) {
+        this.SetCameraRotationalVelocity(vec2.create());        
+        super.HandlePointerUp(event);
     }
 
     HandleKeyUp(key: string)
@@ -787,30 +873,32 @@ export default class Canvas3D extends CanvasBase
         return focusPointView;
     }
 
-    ComputeCameraTwist(oldX : number, oldY : number, newX : number, newY : number)
+    ComputeCameraTwist(point: vec2, event: PointerEvent)
     {
+        const old = this.pointerCoords[event.pointerId];
         // Compute projection of focal point into canvas image
         var focusPointImage = vec3.create();
         vec3.transformMat4(focusPointImage, this.GetCurrentFocusPointInViewSpace(), this.v2sMatrix);
-        var focusX = (focusPointImage[0] + 1.0) * 0.5 * this.width;
-        var focusY = (-focusPointImage[1] + 1.0) * 0.5 * this.height;
+        const focus = vec2.fromValues((focusPointImage[0] + 1.0) * 0.5 * this.width,
+                                      (-focusPointImage[1] + 1.0) * 0.5 * this.height);
 
         // Compute rotation angle
-        var angleInitial = Math.atan2(oldY - focusY, oldX - focusX);
-        var angleNew = Math.atan2(newY - focusY, newX - focusX);
+        const angleInitial = vec2.angle(old, focus);
+        const angleNew = vec2.angle(point, focus);
+        //var angleInitial = Math.atan2(oldY - focusY, oldX - focusX);
+        //var angleNew = Math.atan2(newY - focusY, newX - focusX);
         return angleInitial - angleNew;
     }
 
-    SetFocusPointPositionFromPixelCoordinates(pixelX : number, pixelY : number)
+    SetFocusPointPositionFromPixelCoordinates(pixel: vec2)
     {
         if (this.lockViewXY || this.lockViewOrientation) return;
     
-        this.pickMouseX = pixelX;
-        this.pickMouseY = pixelY;
+        this.pickPoint = pixel;
         this.setFocusToPicked = true;
     }
 
-    ComputeFocusPointRelativeViewSpaceTranslation(oldX : number, oldY : number, newX : number, newY : number)
+    ComputeFocusPointRelativeViewSpaceTranslation(old : vec2, point: vec2)
     {
         var focusPointZ = Math.abs(this.GetCurrentFocusPointInViewSpace()[2]);
 
@@ -818,12 +906,12 @@ export default class Canvas3D extends CanvasBase
         var s2vMatrix = mat4.create();
         mat4.invert(s2vMatrix, this.v2sMatrix);
 
-        var oldScreen = vec3.fromValues(2.0 * (oldX / clientRect.width - 0.5), 2.0 * (0.5 - oldY / clientRect.height), 1.0);
+        var oldScreen = vec3.fromValues(2.0 * (old[0] / clientRect.width - 0.5), 2.0 * (0.5 - old[1] / clientRect.height), 1.0);
         var oldView = vec3.create();
         vec3.transformMat4(oldView, oldScreen, s2vMatrix);
         vec3.scale(oldView, oldView, focusPointZ / oldView[2]) // Fix z
 
-        var newScreen = vec3.fromValues(2.0 * (newX / clientRect.width - 0.5), 2.0 * (0.5 - newY / clientRect.height), 1.0);
+        var newScreen = vec3.fromValues(2.0 * (point[0] / clientRect.width - 0.5), 2.0 * (0.5 - point[1] / clientRect.height), 1.0);
         var newView = vec3.create();
         vec3.transformMat4(newView, newScreen, s2vMatrix);
         vec3.scale(newView, newView, focusPointZ / newView[2]) // Fix z
@@ -858,19 +946,18 @@ export default class Canvas3D extends CanvasBase
         mat4.multiply(this.w2vMatrix, transform, this.w2vMatrix);
     }
 
-    SetCameraRotationalVelocity(rotateLeft: number, rotateDown: number)
+    SetCameraRotationalVelocity(rotate: vec2)
     {
-        this.cameraRotationalVelocity[0] = rotateLeft;
-        this.cameraRotationalVelocity[1] = rotateDown;
+        vec2.copy(this.cameraRotationalVelocity, rotate);
     }
 
-    SwivelCamera(rotateLeft: number, rotateDown: number)
+    SwivelCamera(rotate: vec2)
     {
         this.onCameraTrack = false;
 
         let transform = mat4.create();
-        mat4.rotateY(transform, transform, rotateLeft);
-        mat4.rotateX(transform, transform, rotateDown);
+        mat4.rotateY(transform, transform, rotate[0]);
+        mat4.rotateX(transform, transform, rotate[1]);
         
         mat4.multiply(this.w2vMatrix, transform, this.w2vMatrix);
     }
@@ -1148,7 +1235,7 @@ export default class Canvas3D extends CanvasBase
             this.MoveCamera(this.cameraVelocity[0], this.cameraVelocity[1], this.cameraVelocity[2]);
             if(this.cameraRotationalVelocity[0] != 0 || this.cameraRotationalVelocity[1] != 0)
             {
-                this.SwivelCamera(this.cameraRotationalVelocity[0], this.cameraRotationalVelocity[1]);
+                this.SwivelCamera(this.cameraRotationalVelocity);
             }
         }
 
@@ -1306,7 +1393,7 @@ export default class Canvas3D extends CanvasBase
                 meshData.buffer.id = i + 1;
                 buffers.push([meshData.buffer, meshData.m2vMatrix]);
             }
-            const picked = this.meshPicker.Pick(gl, buffers, this.pickMouseX, this.pickMouseY, v2sMatrix)
+            const picked = this.meshPicker.Pick(gl, buffers, this.pickPoint, v2sMatrix)
             if(picked == 0){
                 var focusPointView = this.GetCurrentFocusPointInViewSpace();
 
@@ -1317,8 +1404,8 @@ export default class Canvas3D extends CanvasBase
         
                 // Convert from pixel to screen coordinates
                 var clientRect = this.htmlCanvas.getBoundingClientRect();
-                var screen = vec3.fromValues(2.0 * (this.pickMouseX / clientRect.width - 0.5),
-                                             2.0 * (0.5 - this.pickMouseY / clientRect.height), 1.0);
+                var screen = vec3.fromValues(2.0 * (this.pickPoint[0] / clientRect.width - 0.5),
+                                             2.0 * (0.5 - this.pickPoint[1] / clientRect.height), 1.0);
         
                 // Convert from screen to view coordinates
                 var view = vec3.create();

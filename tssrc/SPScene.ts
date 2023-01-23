@@ -8,7 +8,7 @@ import InitializeCSSStyles from "./CSSStyles";
 import Misc from "./Misc"
 import Mesh from "./Mesh";
 import { VertexBufferType } from "./VertexBuffers";
-import {vec3} from "gl-matrix";
+import {vec2, vec3} from "gl-matrix";
 import {saveAs} from "file-saver";
 import * as JSZip from "jszip";
 
@@ -48,10 +48,6 @@ export default class SPScene
 
     // Canvas groups (used to link events across canvases)
     canvasGroups = {};
-
-    // Pointer events
-    pointerCoords = {};
-    initPointerCoords = {};
 
     // WebSocket for use in interactive mode
     ws : WebSocket = null;  
@@ -1281,8 +1277,11 @@ export default class SPScene
         var targetCanvas = (<Canvas3D>this.canvases[targetCanvasId]);
         var clientRect = targetCanvas.htmlCanvas.getBoundingClientRect();
 
-        this.pointerCoords[event.pointerId] = [event.clientX - clientRect.left, event.clientY - clientRect.top];
-        this.initPointerCoords[event.pointerId] = [event.clientX - clientRect.left, event.clientY - clientRect.top];
+        const point = vec2.fromValues(event.clientX - clientRect.left, event.clientY - clientRect.top);
+
+        canvases.forEach(function(canvas) {
+            canvas.HandlePointerDown(point, event)
+        })
 
         this.HandlePointerMove(event);
     }
@@ -1292,16 +1291,9 @@ export default class SPScene
         var canvases = this.GetTargetCanvases(this.GetEventCanvasId(event));
         if (canvases == null) return;
 
-        delete this.pointerCoords[event.pointerId];
-        delete this.initPointerCoords[event.pointerId];
-
-        for(var canvas of canvases)
-        {
-            if (!canvas.handlesMouse)
-                continue;
-
-            canvas.SetCameraRotationalVelocity(0, 0);
-        }
+        canvases.forEach(function(canvas) {
+            canvas.HandlePointerUp(event)
+        })
     }
 
     private HandlePointerMove(event : PointerEvent)
@@ -1312,112 +1304,13 @@ export default class SPScene
         var targetCanvas = (<Canvas3D>this.canvases[targetCanvasId]);
         var clientRect = targetCanvas.htmlCanvas.getBoundingClientRect();
 
-        // Determine number of pointers (e.g. multi-touch)
-        var countPointers = Object.keys(this.pointerCoords).length;
-        if (countPointers == 0) return;
+        const point = vec2.fromValues(event.clientX - clientRect.left, event.clientY - clientRect.top);
 
-        var old = this.pointerCoords[event.pointerId];
-        var oldX = old[0];
-        var oldY = old[1];
+        const twistAngle = event.ctrlKey ? targetCanvas.ComputeCameraTwist(point, event) : 0;
 
-        var newX = event.clientX - clientRect.left;
-        var newY = event.clientY - clientRect.top;
-
-        var deltaX = newX - oldX;
-        var deltaY = newY - oldY;
-
-        // Handle twists specially
-        var twistAngle = 0.0;
-        if (event.ctrlKey)
-            twistAngle = targetCanvas.ComputeCameraTwist(oldX, oldY, newX, newY);
-
-        for(var canvas of canvases)
-        {
-            if (!canvas.handlesMouse)
-                continue;
-
-            if (event.altKey)
-            {
-                deltaX *= canvas.pointerAltKeyMultiplier;
-                deltaY *= canvas.pointerAltKeyMultiplier;
-            }
-
-            if(canvas.FirstPerson)
-            {
-                let init = this.initPointerCoords[event.pointerId];
-                let initX = init[0];
-                let initY = init[1];
-
-                let diffX = newX - initX;
-                let diffY = newY - initY;
-
-                let length = Math.sqrt(diffX * diffX + diffY * diffY);
-                let deadZone = 10;
-                if(length > deadZone)
-                {
-                    let scale = Math.min(2, (length - deadZone) / deadZone);
-                    diffX *= scale / length;
-                    diffY *= scale / length;
-                }
-                else
-                {
-                    diffX = 0;
-                    diffY = 0;
-                }
-
-                canvas.SetCameraRotationalVelocity(diffX * canvas.pointerRotationSpeed, diffY * canvas.pointerRotationSpeed);
-            }
-            else
-            {
-                // Deal with basic events
-                if (event.ctrlKey) // Treat as twist of camera
-                {
-                    canvas.RotateCamera(0.0, 0.0, twistAngle);
-                }
-                else if (canvas.showFocusPoint) // Translate the 3D center of rotation
-                {
-                    canvas.SetFocusPointPositionFromPixelCoordinates(newX, newY);
-                }
-                else if (event.shiftKey || countPointers > 1) // Treat as translation of camera
-                {
-                    var delta = canvas.ComputeFocusPointRelativeViewSpaceTranslation(oldX, oldY, newX, newY);
-                    canvas.TranslateCamera(delta);
-                }
-                else // Treat as rotation of camera about center of rotation
-                {
-                    canvas.RotateCamera(deltaY * canvas.pointerRotationSpeed, deltaX * canvas.pointerRotationSpeed, 0.0); // NB y and x are deliberately crossed over
-                }
-
-                // Deal with pinch-zoom
-                if (countPointers == 2)
-                {
-                    // Get other coordinate
-                    var otherX : number, otherY : number;
-                    for (var pid in this.pointerCoords)
-                    {
-                        if (pid == event.pointerId.toString()) continue;
-                        otherX = this.pointerCoords[pid][0];
-                        otherY = this.pointerCoords[pid][1];
-                    }
-
-                    // Compute delta between two points
-                    var oldDX = oldX - otherX;
-                    var oldDY = oldY - otherY;
-                    var oldDist = Math.sqrt(oldDX*oldDX + oldDY*oldDY);
-                    var newDX = newX - otherX;
-                    var newDY = newY - otherY;
-                    var newDist = Math.sqrt(newDX*newDX + newDY*newDY);
-
-                    // Change in distances
-                    var zOld = canvas.GetCurrentFocusPointInViewSpace()[2];
-                    var zNew = zOld * oldDist / newDist;
-                    canvas.TranslateCamera(vec3.fromValues(0.0, 0.0, zNew - zOld));
-                }
-            }
-        }
-
-        // Store updated coords
-        this.pointerCoords[event.pointerId] = [newX, newY];
+        canvases.forEach(function(canvas){
+            canvas.HandlePointerMove(point, twistAngle, event);
+        })
 
         event.preventDefault();
     }

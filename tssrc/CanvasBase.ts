@@ -1,3 +1,4 @@
+import { vec2 } from "gl-matrix";
 import Misc from "./Misc"
 
 export abstract class CachedObject
@@ -357,6 +358,10 @@ export abstract class CanvasBase
     startTime: number;
     lastFrameTime: number;
 
+    // Pointer events
+    pointerCoords : Map<number, vec2>;
+    initPointerCoords : Map<number, vec2>;    
+
     // media
     mediaElement : HTMLMediaElement = null;
     mediaToken : string;
@@ -496,6 +501,10 @@ export abstract class CanvasBase
 
         // Search for a goto frame command
         this.gotoFrame = parseInt(Misc.GetSearchValue("frame"));
+
+        // pointers
+        this.pointerCoords = new Map<number, vec2>();
+        this.initPointerCoords = new Map<number, vec2>();
     }
 
     private addCameraModeUI()
@@ -560,6 +569,23 @@ export abstract class CanvasBase
         this.volumeContainer.appendChild(label);
         this.volumeContainer.appendChild(slider);
         this.dropdownTable.appendChild(this.volumeContainer);
+    }
+
+    HandlePointerDown(point: vec2, event: PointerEvent)
+    {
+        this.pointerCoords[event.pointerId] = point;
+        this.initPointerCoords[event.pointerId] = point;
+    }
+
+    HandlePointerMove(point: vec2, twistAngle: number, event: PointerEvent)
+    {
+        this.pointerCoords[event.pointerId] = point;
+    }
+
+    HandlePointerUp(event: PointerEvent)
+    {
+        delete this.pointerCoords[event.pointerId];
+        delete this.initPointerCoords[event.pointerId];
     }
 
     SetMedia(mediaId: string)
