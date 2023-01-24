@@ -304,8 +304,8 @@ export default class SPScene
 
             this.recordingZip.generateAsync({type:"blob"})
             .then(function(content) {
-                let filename = document.title.replace(' ', '_').toLowerCase() + ".zip";
-                 saveAs(content, filename);
+                const filename = document.title.replace(' ', '_').toLowerCase() + ".zip";
+                saveAs(content, filename);
              });
 
              this.progressDiv.style.visibility = "hidden";
@@ -575,7 +575,7 @@ export default class SPScene
         var canvas = new Canvas2D(canvasId, this.frameRate, width, height, this.objectCache, status => this.SetStatus(status), msg => this.AddWarning(msg), () => this.RequestRedraw(), (cid, fid) => this.ReportFrameIdChange(cid, fid));
 
         // Store canvas
-        this.InitializeCanvas(canvas, canvasId, parent, false);
+        this.InitializeCanvas(canvas, canvasId, parent, true);
     }
 
     private AddGraph(canvasId : string, width : number, height : number, parent : HTMLElement)
@@ -1024,12 +1024,23 @@ export default class SPScene
         return (<HTMLElement>event.target).getAttribute("SPCanvasId");
     }
 
-    private GetTargetCanvases(canvasId : string)
+    private GetTargetCanvases(canvasId : string) : Canvas2D[] | Canvas3D[] | null
     {
         if (canvasId == null) return null;
-        var canvasGroup = this.canvasGroups[canvasId];
-        var canvasIds = Object.keys(canvasGroup);
-        return canvasIds.map(id => <Canvas3D>this.canvases[id]);
+        const canvasGroup = this.canvasGroups[canvasId];
+        const canvasIds = Object.keys(canvasGroup);
+        const source = this.canvases[canvasId];
+        if(source instanceof Canvas3D){
+            return canvasIds.map(id => this.canvases[id])
+                            .filter(canvas => canvas instanceof Canvas3D)
+                            .map(canvas => <Canvas3D>canvas)
+        }else if(source instanceof Canvas2D){
+            return canvasIds.map(id => this.canvases[id])
+                            .filter(canvas => canvas instanceof Canvas2D)
+                            .map(canvas => <Canvas2D>canvas)
+        }else {
+            return null
+        }
     }
 
     private ReportReceived(ack_data : any)
@@ -1089,12 +1100,10 @@ export default class SPScene
 
     private HandleKeyUp(canvasId: string, event: KeyboardEvent)
     {
-        var canvases = this.GetTargetCanvases(canvasId);
+        const canvases = this.GetTargetCanvases(canvasId);
         if (canvases == null) return;
-        for(var canvas of canvases)
-        {
-            canvas.HandleKeyUp(event.key);
-        }
+
+        canvases.forEach((canvas: CanvasBase) => canvas.HandleKeyUp(event.key));
     }
 
     private HandleKeyDown(canvasId : string, key : string, altKey : boolean, ctrlKey : boolean, shiftKey : boolean, metaKey : boolean, reportToServer : boolean = true)
@@ -1169,7 +1178,7 @@ export default class SPScene
         // Send message to any open server connections for interactive sessions
         if (reportToServer)
         {
-            var canvas : Canvas3D = this.canvases[canvasId];
+            var canvas : Canvas3D | Canvas2D = this.canvases[canvasId];
             var frameId = canvas.GetCurrentFrameId()
             this.ReportKeyPress(key, altKey, ctrlKey, shiftKey, metaKey, canvasId, frameId);
         }
@@ -1263,10 +1272,7 @@ export default class SPScene
         if (canvases == null) return;
 
         // Loop over attached canvases
-        for(var canvas of canvases)
-        {
-            canvas.ShowFrame(value);
-        }
+        canvases.forEach((canvas: CanvasBase) => canvas.ShowFrame(value));
     }
 
     private HandlePointerDown(event : PointerEvent)
@@ -1279,9 +1285,7 @@ export default class SPScene
 
         const point = vec2.fromValues(event.clientX - clientRect.left, event.clientY - clientRect.top);
 
-        canvases.forEach(function(canvas) {
-            canvas.HandlePointerDown(point, event)
-        })
+        canvases.forEach((canvas: CanvasBase) => canvas.HandlePointerDown(point, event)); 
 
         this.HandlePointerMove(event);
     }
@@ -1291,26 +1295,26 @@ export default class SPScene
         var canvases = this.GetTargetCanvases(this.GetEventCanvasId(event));
         if (canvases == null) return;
 
-        canvases.forEach(function(canvas) {
-            canvas.HandlePointerUp(event)
-        })
+        canvases.forEach((canvas: CanvasBase) => canvas.HandlePointerUp(event));
+
     }
 
     private HandlePointerMove(event : PointerEvent)
     {
-        var targetCanvasId = this.GetEventCanvasId(event);
-        var canvases = this.GetTargetCanvases(targetCanvasId);
+        const targetCanvasId = this.GetEventCanvasId(event);
+        const canvases = this.GetTargetCanvases(targetCanvasId);
         if (canvases == null) return;
-        var targetCanvas = (<Canvas3D>this.canvases[targetCanvasId]);
-        var clientRect = targetCanvas.htmlCanvas.getBoundingClientRect();
 
+        const targetCanvas = this.canvases[targetCanvasId];
+        const clientRect = targetCanvas.htmlCanvas.getBoundingClientRect();
         const point = vec2.fromValues(event.clientX - clientRect.left, event.clientY - clientRect.top);
-
-        const twistAngle = event.ctrlKey ? targetCanvas.ComputeCameraTwist(point, event) : 0;
-
-        canvases.forEach(function(canvas){
-            canvas.HandlePointerMove(point, twistAngle, event);
-        })
+        if(targetCanvas instanceof Canvas3D){
+            const canvases3D = canvases as Canvas3D[];
+            const twistAngle = event.ctrlKey ? targetCanvas.ComputeCameraTwist(point, event) : 0;
+            canvases3D.forEach((canvas: Canvas3D) => canvas.HandlePointerMoveWithTwist(point, twistAngle, event));
+        }else{
+            canvases.forEach((canvas: CanvasBase) => canvas.HandlePointerMove(point, event));
+        }
 
         event.preventDefault();
     }
@@ -1320,21 +1324,7 @@ export default class SPScene
         var canvases = this.GetTargetCanvases(this.GetEventCanvasId(event));
         if (canvases == null) return;
 
-        for(var canvas of canvases)
-        {
-            if (!canvas.handlesMouse)
-                continue;
-
-            
-            var deltaZ = -event.deltaY * canvas.mouseWheelTranslationSpeed;
-
-            if (event.altKey)
-                deltaZ *= canvas.pointerAltKeyMultiplier;
-
-            var delta = vec3.fromValues(0.0, 0.0, deltaZ);
-
-            canvas.TranslateCamera(delta);
-        }
+        canvases.forEach((canvas: CanvasBase) => canvas.HandleMouseWheel(event));
 
         event.preventDefault();
     }

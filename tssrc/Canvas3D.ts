@@ -281,12 +281,12 @@ export default class Canvas3D extends CanvasBase
         this.updateCameraVelocityValue("q", "e", 2);
     }
     
-    HandlePointerMove(point: vec2, twistAngle: number, event: PointerEvent)
+    HandlePointerMoveWithTwist(point: vec2, twistAngle: number, event: PointerEvent)
     {
-        var countPointers = Object.keys(this.pointerCoords).length;
+        const countPointers = this.pointerCoords.size;
         if (countPointers == 0) return;
 
-        const old = this.pointerCoords[event.pointerId];
+        const old = this.pointerCoords.get(event.pointerId);
         let delta = vec2.subtract(vec2.create(), point, old);
         if (event.altKey)
         {
@@ -295,7 +295,7 @@ export default class Canvas3D extends CanvasBase
 
         if(this.FirstPerson)
         {
-            const init = this.initPointerCoords[event.pointerId];
+            const init = this.initPointerCoords.get(event.pointerId);
             let diff = vec2.subtract(vec2.create(), point, init);
 
             const length = vec2.length(diff);
@@ -343,10 +343,10 @@ export default class Canvas3D extends CanvasBase
             {
                 // Get other coordinate
                 let other : vec2;
-                for (var pid in this.pointerCoords)
+                for (let pid of this.pointerCoords.keys())
                 {
-                    if (pid == event.pointerId.toString()) continue;
-                    other = this.pointerCoords[pid];
+                    if (pid == event.pointerId) continue;
+                    other = this.pointerCoords.get(pid);
                 }
 
                 // Compute delta between two points
@@ -360,12 +360,24 @@ export default class Canvas3D extends CanvasBase
             }
         }
 
-        super.HandlePointerMove(point, twistAngle, event);
+        super.HandlePointerMove(point, event);
     }
 
     HandlePointerUp(event: PointerEvent) {
         this.SetCameraRotationalVelocity(vec2.create());        
         super.HandlePointerUp(event);
+    }
+
+    HandleMouseWheel(event: WheelEvent) {
+        let deltaZ = -event.deltaY * this.mouseWheelTranslationSpeed;
+
+        if (event.altKey){
+            deltaZ *= this.pointerAltKeyMultiplier;
+        }
+
+        var delta = vec3.fromValues(0.0, 0.0, deltaZ);
+
+        this.TranslateCamera(delta);        
     }
 
     HandleKeyUp(key: string)
@@ -385,7 +397,7 @@ export default class Canvas3D extends CanvasBase
         }
     }
 
-    HandleKeyDown(key : string)
+    HandleKeyDown(key : string) : [boolean, boolean]
     {
         var result = super.HandleKeyDown(key);
         if (result[0]) return result; // Already handled
@@ -875,7 +887,7 @@ export default class Canvas3D extends CanvasBase
 
     ComputeCameraTwist(point: vec2, event: PointerEvent)
     {
-        const old = this.pointerCoords[event.pointerId];
+        const old = this.pointerCoords.get(event.pointerId);
         // Compute projection of focal point into canvas image
         var focusPointImage = vec3.create();
         vec3.transformMat4(focusPointImage, this.GetCurrentFocusPointInViewSpace(), this.v2sMatrix);
@@ -883,10 +895,10 @@ export default class Canvas3D extends CanvasBase
                                       (-focusPointImage[1] + 1.0) * 0.5 * this.height);
 
         // Compute rotation angle
-        const angleInitial = vec2.angle(old, focus);
-        const angleNew = vec2.angle(point, focus);
-        //var angleInitial = Math.atan2(oldY - focusY, oldX - focusX);
-        //var angleNew = Math.atan2(newY - focusY, newX - focusX);
+        //const angleInitial = vec2.angle(old, focus);
+        //const angleNew = vec2.angle(point, focus);
+        const angleInitial = Math.atan2(old[1] - focus[1], old[0] - focus[0]);
+        const angleNew = Math.atan2(point[1] - focus[1], point[0] - focus[0]);
         return angleInitial - angleNew;
     }
 
@@ -970,7 +982,7 @@ export default class Canvas3D extends CanvasBase
         mat4.fromTranslation(transform, [moveRight, moveUp, moveForward])
         mat4.multiply(this.w2vMatrix, transform, this.w2vMatrix);
     }
-
+rotateCamera
     ScaleCamera(factor : number)
     {
         this.onCameraTrack = false;
@@ -1344,17 +1356,13 @@ export default class Canvas3D extends CanvasBase
         gl.depthMask(true);
         gl.disable(gl.BLEND);
 
-        opaqueMeshData.forEach(function(data){
-            data.Render(gl, v2sMatrix);
-        })
+        opaqueMeshData.forEach(data => data.Render(gl, v2sMatrix));
 
         // Draw transparent meshes, sorted by decreasing distance from camera
         gl.depthMask(false);
         gl.enable(gl.BLEND);
         var sortedTransparentMeshData = transparentMeshData.sort((a,b) => a.viewDistance - b.viewDistance);
-        sortedTransparentMeshData.forEach(function(data){
-            data.Render(gl, v2sMatrix);
-        })
+        sortedTransparentMeshData.forEach(data => data.Render(gl, v2sMatrix));
 
         // Show focus point
         if (this.showFocusPoint)

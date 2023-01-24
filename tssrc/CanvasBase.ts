@@ -573,19 +573,27 @@ export abstract class CanvasBase
 
     HandlePointerDown(point: vec2, event: PointerEvent)
     {
-        this.pointerCoords[event.pointerId] = point;
-        this.initPointerCoords[event.pointerId] = point;
+        this.pointerCoords.set(event.pointerId, point);
+        this.initPointerCoords.set(event.pointerId, point);
     }
 
-    HandlePointerMove(point: vec2, twistAngle: number, event: PointerEvent)
+    HandlePointerMove(point: vec2, event: PointerEvent)
     {
-        this.pointerCoords[event.pointerId] = point;
+        if(this.pointerCoords.size == 0){
+            return;
+        }
+
+        this.pointerCoords.set(event.pointerId, point);
     }
 
     HandlePointerUp(event: PointerEvent)
     {
-        delete this.pointerCoords[event.pointerId];
-        delete this.initPointerCoords[event.pointerId];
+        this.pointerCoords.delete(event.pointerId);
+        this.initPointerCoords.delete(event.pointerId);
+    }
+
+    HandleMouseWheel(event: WheelEvent)
+    {        
     }
 
     SetMedia(mediaId: string)
@@ -663,7 +671,7 @@ export abstract class CanvasBase
     {        
     }
 
-    HandleKeyDown(key : string)
+    HandleKeyDown(key : string) : [boolean, boolean]
     {
         var handled = true;
         var changedFrame = true;
