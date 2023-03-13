@@ -1,4 +1,4 @@
-import { mat4 } from "gl-matrix";
+import { mat4, vec2 } from "gl-matrix";
 import Misc from "./Misc";
 import ShaderProgram from "./Shaders";
 import WebGLMeshBuffers from "./WebGLMeshBuffers";
@@ -35,7 +35,7 @@ export class MeshPicker {
         gl.bindFramebuffer(gl.FRAMEBUFFER, null);
     }
 
-    Pick(gl : WebGL2RenderingContext, meshes: [WebGLMeshBuffers, mat4][], mouseX: number, mouseY: number, v2sMatrix: mat4) : number {
+    Pick(gl : WebGL2RenderingContext, meshes: [WebGLMeshBuffers, mat4][], point: vec2, v2sMatrix: mat4) : number {
         const canvas = <HTMLCanvasElement>gl.canvas;
 
         gl.bindFramebuffer(gl.FRAMEBUFFER, this.frameBuffer);
@@ -54,8 +54,8 @@ export class MeshPicker {
             buffer.RenderPicker(program, v2sMatrix, w2vMatrix)
         });
 
-        const pixelX = mouseX * canvas.width / canvas.clientWidth;
-        const pixelY = canvas.height - mouseY * canvas.height / canvas.clientHeight - 1;
+        const pixelX = point[0] * canvas.width / canvas.clientWidth;
+        const pixelY = canvas.height - point[1] * canvas.height / canvas.clientHeight - 1;
         gl.readPixels(pixelX, pixelY, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, this.data);
 
         gl.bindFramebuffer(gl.FRAMEBUFFER, null);

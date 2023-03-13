@@ -1,5 +1,6 @@
 import Misc from "./Misc"
 import {ObjectCache, CanvasBase} from "./CanvasBase"
+import { mat3, vec2 } from "gl-matrix";
 
 abstract class Primitive
 {
@@ -265,6 +266,10 @@ export default class Canvas2D extends CanvasBase
 
     frameCoordinates : Float32Array[] = []; // The coordinates for each frame [frameIndex]
 
+    scale : number;
+    focusPoint : vec2;
+    initFocusPoint : vec2;
+
     constructor(canvasId : string, public frameRate : number, public width : number, public height : number, objectCache : ObjectCache, public SetStatus : (status : string) => void, public SetWarning : (message : string) => void, public RequestRedraw : () => void, public ReportFrameIdChange : (canvasId : string, frameId : string) => void)
     {
         // Base class constructor
@@ -274,6 +279,8 @@ export default class Canvas2D extends CanvasBase
         this.context = this.htmlCanvas.getContext('2d');
 
         this.backgroundStyle = "#000000";
+
+        this.ResetView();
 
         // Start render loop
         this.StartRenderLoop();
@@ -677,12 +684,56 @@ export default class Canvas2D extends CanvasBase
         this.currentPrimitives = newPrimitives;
     }
 
+    ResetView() : void
+    {
+        this.focusPoint = vec2.fromValues(this.width / 2, this.height / 2);
+        this.scale = 1;
+        this.setTransform();
+    }
+
+    private getTransform() : mat3
+    {
+        const focusPixel = vec2.fromValues(
+            this.htmlCanvas.clientWidth / 2,
+            this.htmlCanvas.clientHeight / 2)
+
+        const translate = vec2.scale(vec2.create(), this.focusPoint, this.scale);
+        vec2.subtract(translate, focusPixel, translate);
+
+        return mat3.fromValues(
+            this.scale, 0, 0,
+            0, this.scale, 0,
+            translate[0], translate[1], 1)
+    }
+
+    private setTransform() : void
+    {
+        let transform = this.getTransform();
+        this.context.setTransform(
+            transform[0], transform[1],
+            transform[3], transform[4],
+            transform[6], transform[7])
+    }
+
     // Render scene method
     Render()
     {
         // Clear
         this.context.fillStyle = this.backgroundStyle;
-        this.context.fillRect(0, 0, this.htmlCanvas.clientWidth * window.devicePixelRatio, this.htmlCanvas.clientHeight * window.devicePixelRatio);
+        const inv = mat3.invert(mat3.create(), this.getTransform());
+        let x = 0;
+        let y = 0;
+        let width = this.htmlCanvas.clientWidth * window.devicePixelRatio;
+        let height = this.htmlCanvas.clientHeight * window.devicePixelRatio;
+        if(inv[0] > 1){
+            const tl = vec2.transformMat3(vec2.create(), vec2.fromValues(0, 0), inv);
+            const br = vec2.transformMat3(vec2.create(), vec2.fromValues(width, height), inv);
+            x = tl[0];
+            y = tl[1];
+            width = br[0] - x;
+            height = br[1] - y;
+        }
+        this.context.fillRect(x, y, width, height);
 
         // Composite primitives
         if (this.currentPrimitives == null) return;
@@ -729,5 +780,55 @@ export default class Canvas2D extends CanvasBase
                 }
             }
         }
+    }
+
+    HandleKeyDown(key : string) : [boolean, boolean]
+    {
+        var result = super.HandleKeyDown(key);
+        if (result[0]) return result; // Already handled
+
+        let handled = true;
+        key = key.toLowerCase();
+        switch(key)
+        {
+            case "r":
+                this.ResetView();
+                break;
+            
+            default:
+                handled = false;
+                break;
+        }
+
+        return [handled, false];
+    }
+
+    HandlePointerDown(point: vec2, event: PointerEvent) : void {
+        this.initFocusPoint = vec2.copy(vec2.create(), this.focusPoint);
+        super.HandlePointerDown(point, event);
+    }
+
+    HandlePointerMove(point: vec2, event: PointerEvent): void {
+        const countPointers = this.pointerCoords.size;
+        if (countPointers == 0) return;
+
+        const init = this.initPointerCoords.get(event.pointerId);
+        const transform = this.getTransform();
+        const inv = mat3.invert(mat3.create(), transform);
+
+        const source = vec2.transformMat3(vec2.create(), init, inv);
+        const dest = vec2.transformMat3(vec2.create(), point, inv);
+        const delta = vec2.subtract(vec2.create(), source, dest);   
+        
+        vec2.add(this.focusPoint, this.initFocusPoint, delta);
+        this.setTransform();
+        
+        super.HandlePointerMove(point, event);
+    }
+
+    HandleMouseWheel(event: WheelEvent): void {
+        const factor = Math.pow(1.1, event.deltaY > 0 ? -1 : 1);
+        this.scale *= factor;
+        this.setTransform();
     }
 }

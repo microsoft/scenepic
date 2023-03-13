@@ -1,2 +1,1 @@
-Point release adding the ability to pick the centroid of a mesh as
-a focus point by clicking on it while in focus point selection mode.
+Point release adding pan/zoom functionality to 2D canvases.

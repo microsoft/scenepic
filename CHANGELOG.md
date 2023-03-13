@@ -1,5 +1,8 @@
 # Changelog
 
+## [2023-03-13 - Version 1.0.19](https://github.com/microsoft/scenepic/releases/tag/v1.0.19)
+Point release adding pan/zoom functionality to 2D canvases.
+
 ## [2023-01-19 - Version 1.0.18](https://github.com/microsoft/scenepic/releases/tag/v1.0.18)
 Point release adding the ability to pick the centroid of a mesh as
 a focus point by clicking on it while in focus point selection mode.

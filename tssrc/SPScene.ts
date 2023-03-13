@@ -8,7 +8,7 @@ import InitializeCSSStyles from "./CSSStyles";
 import Misc from "./Misc"
 import Mesh from "./Mesh";
 import { VertexBufferType } from "./VertexBuffers";
-import {vec3} from "gl-matrix";
+import {vec2, vec3} from "gl-matrix";
 import {saveAs} from "file-saver";
 import * as JSZip from "jszip";
 
@@ -48,10 +48,6 @@ export default class SPScene
 
     // Canvas groups (used to link events across canvases)
     canvasGroups = {};
-
-    // Pointer events
-    pointerCoords = {};
-    initPointerCoords = {};
 
     // WebSocket for use in interactive mode
     ws : WebSocket = null;  
@@ -308,8 +304,8 @@ export default class SPScene
 
             this.recordingZip.generateAsync({type:"blob"})
             .then(function(content) {
-                let filename = document.title.replace(' ', '_').toLowerCase() + ".zip";
-                 saveAs(content, filename);
+                const filename = document.title.replace(' ', '_').toLowerCase() + ".zip";
+                saveAs(content, filename);
              });
 
              this.progressDiv.style.visibility = "hidden";
@@ -579,7 +575,7 @@ export default class SPScene
         var canvas = new Canvas2D(canvasId, this.frameRate, width, height, this.objectCache, status => this.SetStatus(status), msg => this.AddWarning(msg), () => this.RequestRedraw(), (cid, fid) => this.ReportFrameIdChange(cid, fid));
 
         // Store canvas
-        this.InitializeCanvas(canvas, canvasId, parent, false);
+        this.InitializeCanvas(canvas, canvasId, parent, true);
     }
 
     private AddGraph(canvasId : string, width : number, height : number, parent : HTMLElement)
@@ -1028,12 +1024,23 @@ export default class SPScene
         return (<HTMLElement>event.target).getAttribute("SPCanvasId");
     }
 
-    private GetTargetCanvases(canvasId : string)
+    private GetTargetCanvases(canvasId : string) : Canvas2D[] | Canvas3D[] | null
     {
         if (canvasId == null) return null;
-        var canvasGroup = this.canvasGroups[canvasId];
-        var canvasIds = Object.keys(canvasGroup);
-        return canvasIds.map(id => <Canvas3D>this.canvases[id]);
+        const canvasGroup = this.canvasGroups[canvasId];
+        const canvasIds = Object.keys(canvasGroup);
+        const source = this.canvases[canvasId];
+        if(source instanceof Canvas3D){
+            return canvasIds.map(id => this.canvases[id])
+                            .filter(canvas => canvas instanceof Canvas3D)
+                            .map(canvas => <Canvas3D>canvas)
+        }else if(source instanceof Canvas2D){
+            return canvasIds.map(id => this.canvases[id])
+                            .filter(canvas => canvas instanceof Canvas2D)
+                            .map(canvas => <Canvas2D>canvas)
+        }else {
+            return null
+        }
     }
 
     private ReportReceived(ack_data : any)
@@ -1093,12 +1100,10 @@ export default class SPScene
 
     private HandleKeyUp(canvasId: string, event: KeyboardEvent)
     {
-        var canvases = this.GetTargetCanvases(canvasId);
+        const canvases = this.GetTargetCanvases(canvasId);
         if (canvases == null) return;
-        for(var canvas of canvases)
-        {
-            canvas.HandleKeyUp(event.key);
-        }
+
+        canvases.forEach((canvas: CanvasBase) => canvas.HandleKeyUp(event.key));
     }
 
     private HandleKeyDown(canvasId : string, key : string, altKey : boolean, ctrlKey : boolean, shiftKey : boolean, metaKey : boolean, reportToServer : boolean = true)
@@ -1173,7 +1178,7 @@ export default class SPScene
         // Send message to any open server connections for interactive sessions
         if (reportToServer)
         {
-            var canvas : Canvas3D = this.canvases[canvasId];
+            var canvas : Canvas3D | Canvas2D = this.canvases[canvasId];
             var frameId = canvas.GetCurrentFrameId()
             this.ReportKeyPress(key, altKey, ctrlKey, shiftKey, metaKey, canvasId, frameId);
         }
@@ -1267,10 +1272,7 @@ export default class SPScene
         if (canvases == null) return;
 
         // Loop over attached canvases
-        for(var canvas of canvases)
-        {
-            canvas.ShowFrame(value);
-        }
+        canvases.forEach((canvas: CanvasBase) => canvas.ShowFrame(value));
     }
 
     private HandlePointerDown(event : PointerEvent)
@@ -1281,8 +1283,9 @@ export default class SPScene
         var targetCanvas = (<Canvas3D>this.canvases[targetCanvasId]);
         var clientRect = targetCanvas.htmlCanvas.getBoundingClientRect();
 
-        this.pointerCoords[event.pointerId] = [event.clientX - clientRect.left, event.clientY - clientRect.top];
-        this.initPointerCoords[event.pointerId] = [event.clientX - clientRect.left, event.clientY - clientRect.top];
+        const point = vec2.fromValues(event.clientX - clientRect.left, event.clientY - clientRect.top);
+
+        canvases.forEach((canvas: CanvasBase) => canvas.HandlePointerDown(point, event)); 
 
         this.HandlePointerMove(event);
     }
@@ -1292,132 +1295,26 @@ export default class SPScene
         var canvases = this.GetTargetCanvases(this.GetEventCanvasId(event));
         if (canvases == null) return;
 
-        delete this.pointerCoords[event.pointerId];
-        delete this.initPointerCoords[event.pointerId];
+        canvases.forEach((canvas: CanvasBase) => canvas.HandlePointerUp(event));
 
-        for(var canvas of canvases)
-        {
-            if (!canvas.handlesMouse)
-                continue;
-
-            canvas.SetCameraRotationalVelocity(0, 0);
-        }
     }
 
     private HandlePointerMove(event : PointerEvent)
     {
-        var targetCanvasId = this.GetEventCanvasId(event);
-        var canvases = this.GetTargetCanvases(targetCanvasId);
+        const targetCanvasId = this.GetEventCanvasId(event);
+        const canvases = this.GetTargetCanvases(targetCanvasId);
         if (canvases == null) return;
-        var targetCanvas = (<Canvas3D>this.canvases[targetCanvasId]);
-        var clientRect = targetCanvas.htmlCanvas.getBoundingClientRect();
 
-        // Determine number of pointers (e.g. multi-touch)
-        var countPointers = Object.keys(this.pointerCoords).length;
-        if (countPointers == 0) return;
-
-        var old = this.pointerCoords[event.pointerId];
-        var oldX = old[0];
-        var oldY = old[1];
-
-        var newX = event.clientX - clientRect.left;
-        var newY = event.clientY - clientRect.top;
-
-        var deltaX = newX - oldX;
-        var deltaY = newY - oldY;
-
-        // Handle twists specially
-        var twistAngle = 0.0;
-        if (event.ctrlKey)
-            twistAngle = targetCanvas.ComputeCameraTwist(oldX, oldY, newX, newY);
-
-        for(var canvas of canvases)
-        {
-            if (!canvas.handlesMouse)
-                continue;
-
-            if (event.altKey)
-            {
-                deltaX *= canvas.pointerAltKeyMultiplier;
-                deltaY *= canvas.pointerAltKeyMultiplier;
-            }
-
-            if(canvas.FirstPerson)
-            {
-                let init = this.initPointerCoords[event.pointerId];
-                let initX = init[0];
-                let initY = init[1];
-
-                let diffX = newX - initX;
-                let diffY = newY - initY;
-
-                let length = Math.sqrt(diffX * diffX + diffY * diffY);
-                let deadZone = 10;
-                if(length > deadZone)
-                {
-                    let scale = Math.min(2, (length - deadZone) / deadZone);
-                    diffX *= scale / length;
-                    diffY *= scale / length;
-                }
-                else
-                {
-                    diffX = 0;
-                    diffY = 0;
-                }
-
-                canvas.SetCameraRotationalVelocity(diffX * canvas.pointerRotationSpeed, diffY * canvas.pointerRotationSpeed);
-            }
-            else
-            {
-                // Deal with basic events
-                if (event.ctrlKey) // Treat as twist of camera
-                {
-                    canvas.RotateCamera(0.0, 0.0, twistAngle);
-                }
-                else if (canvas.showFocusPoint) // Translate the 3D center of rotation
-                {
-                    canvas.SetFocusPointPositionFromPixelCoordinates(newX, newY);
-                }
-                else if (event.shiftKey || countPointers > 1) // Treat as translation of camera
-                {
-                    var delta = canvas.ComputeFocusPointRelativeViewSpaceTranslation(oldX, oldY, newX, newY);
-                    canvas.TranslateCamera(delta);
-                }
-                else // Treat as rotation of camera about center of rotation
-                {
-                    canvas.RotateCamera(deltaY * canvas.pointerRotationSpeed, deltaX * canvas.pointerRotationSpeed, 0.0); // NB y and x are deliberately crossed over
-                }
-
-                // Deal with pinch-zoom
-                if (countPointers == 2)
-                {
-                    // Get other coordinate
-                    var otherX : number, otherY : number;
-                    for (var pid in this.pointerCoords)
-                    {
-                        if (pid == event.pointerId.toString()) continue;
-                        otherX = this.pointerCoords[pid][0];
-                        otherY = this.pointerCoords[pid][1];
-                    }
-
-                    // Compute delta between two points
-                    var oldDX = oldX - otherX;
-                    var oldDY = oldY - otherY;
-                    var oldDist = Math.sqrt(oldDX*oldDX + oldDY*oldDY);
-                    var newDX = newX - otherX;
-                    var newDY = newY - otherY;
-                    var newDist = Math.sqrt(newDX*newDX + newDY*newDY);
-
-                    // Change in distances
-                    var zOld = canvas.GetCurrentFocusPointInViewSpace()[2];
-                    var zNew = zOld * oldDist / newDist;
-                    canvas.TranslateCamera(vec3.fromValues(0.0, 0.0, zNew - zOld));
-                }
-            }
+        const targetCanvas = this.canvases[targetCanvasId];
+        const clientRect = targetCanvas.htmlCanvas.getBoundingClientRect();
+        const point = vec2.fromValues(event.clientX - clientRect.left, event.clientY - clientRect.top);
+        if(targetCanvas instanceof Canvas3D){
+            const canvases3D = canvases as Canvas3D[];
+            const twistAngle = event.ctrlKey ? targetCanvas.ComputeCameraTwist(point, event) : 0;
+            canvases3D.forEach((canvas: Canvas3D) => canvas.HandlePointerMoveWithTwist(point, twistAngle, event));
+        }else{
+            canvases.forEach((canvas: CanvasBase) => canvas.HandlePointerMove(point, event));
         }
-
-        // Store updated coords
-        this.pointerCoords[event.pointerId] = [newX, newY];
 
         event.preventDefault();
     }
@@ -1427,21 +1324,7 @@ export default class SPScene
         var canvases = this.GetTargetCanvases(this.GetEventCanvasId(event));
         if (canvases == null) return;
 
-        for(var canvas of canvases)
-        {
-            if (!canvas.handlesMouse)
-                continue;
-
-            
-            var deltaZ = -event.deltaY * canvas.mouseWheelTranslationSpeed;
-
-            if (event.altKey)
-                deltaZ *= canvas.pointerAltKeyMultiplier;
-
-            var delta = vec3.fromValues(0.0, 0.0, deltaZ);
-
-            canvas.TranslateCamera(delta);
-        }
+        canvases.forEach((canvas: CanvasBase) => canvas.HandleMouseWheel(event));
 
         event.preventDefault();
     }
