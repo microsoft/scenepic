@@ -1,7 +1,6 @@
 {
-  "_comment0": "This file is used by npm to specify the project and npm dependencies",
   "name": "scenepic",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "description": "3D Visualization Made Easy",
   "author": "ScenePic Team",
   "license": "MIT",
@@ -36,9 +35,7 @@
     "pako": "^1.0.11",
     "tsify": "^5.0.4",
     "typescript": "^4.7.4",
-    "watchify": "^4.0.0"
-  },
-  "dependencies": {
+    "watchify": "^4.0.0",
     "npm": "^8.18.0"
   }
 }
