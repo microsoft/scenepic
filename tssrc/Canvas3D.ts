@@ -895,8 +895,6 @@ export default class Canvas3D extends CanvasBase
                                       (-focusPointImage[1] + 1.0) * 0.5 * this.height);
 
         // Compute rotation angle
-        //const angleInitial = vec2.angle(old, focus);
-        //const angleNew = vec2.angle(point, focus);
         const angleInitial = Math.atan2(old[1] - focus[1], old[0] - focus[0]);
         const angleNew = Math.atan2(point[1] - focus[1], point[0] - focus[0]);
         return angleInitial - angleNew;
@@ -982,7 +980,7 @@ export default class Canvas3D extends CanvasBase
         mat4.fromTranslation(transform, [moveRight, moveUp, moveForward])
         mat4.multiply(this.w2vMatrix, transform, this.w2vMatrix);
     }
-rotateCamera
+
     ScaleCamera(factor : number)
     {
         this.onCameraTrack = false;
