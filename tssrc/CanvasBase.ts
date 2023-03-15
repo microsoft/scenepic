@@ -469,7 +469,12 @@ export abstract class CanvasBase
             } 
         });
         this.dropdownTable = document.createElement("table");
-        this.dropdownTable.className = "scenepic-dropdown-table";
+        this.dropdownTable.classList.add("scenepic-dropdown-table");
+        if(width < 300) {
+            this.dropdownTable.classList.add("scenepic-left-table");
+        }else{
+            this.dropdownTable.classList.add("scenepic-right-table");
+        }
         this.dropdown.appendChild(this.dropdownTable);
         this.container.appendChild(this.dropdown);
         this.htmlCanvas.addEventListener("click", () => {

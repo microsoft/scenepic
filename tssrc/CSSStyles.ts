@@ -79,6 +79,7 @@ var css = `
   top: 5px;
   right: 5px;
   user-select: none;
+  z-index: 10;
 }
 
 .scenepic-dropdown:after {
@@ -99,6 +100,14 @@ var css = `
   margin-top: -9px;
 }
 
+.scenepic-left-table {
+  left: 1px
+}
+
+.scenepic-right-table {
+  right: -1px
+}
+
 .scenepic-dropdown-table {
   list-style: none !important;
   margin: 0 !important;
@@ -106,7 +115,6 @@ var css = `
   position: absolute;
   top: 100%;
   border: inherit;
-  right: -1px;
   visibility: hidden;
   background-color: white;
   pointer-events: none;
