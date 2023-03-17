@@ -1308,13 +1308,8 @@ export default class SPScene
         const targetCanvas = this.canvases[targetCanvasId];
         const clientRect = targetCanvas.htmlCanvas.getBoundingClientRect();
         const point = vec2.fromValues(event.clientX - clientRect.left, event.clientY - clientRect.top);
-        if(targetCanvas instanceof Canvas3D){
-            const canvases3D = canvases as Canvas3D[];
-            const twistAngle = event.ctrlKey ? targetCanvas.ComputeCameraTwist(point, event) : 0;
-            canvases3D.forEach((canvas: Canvas3D) => canvas.HandlePointerMoveWithTwist(point, twistAngle, event));
-        }else{
-            canvases.forEach((canvas: CanvasBase) => canvas.HandlePointerMove(point, event));
-        }
+        const twistAngle = event.ctrlKey ? targetCanvas.ComputeCameraTwist(point, event) : 0;
+        canvases.forEach((canvas: Canvas2D | Canvas3D) => canvas.HandlePointerMoveWithTwist(point, twistAngle, event));
 
         event.preventDefault();
     }

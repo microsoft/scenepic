@@ -313,6 +313,21 @@ export default class Canvas3D extends CanvasBase
             vec2.scale(diff, diff, this.pointerRotationSpeed);
             this.SetCameraRotationalVelocity(diff);
         }
+        else if(countPointers == 2)
+        {
+            // Deal with pinch-zoom
+            const pinchZoom = this.PinchZoom(point, event);
+
+            // Change in distances
+            var zOld = this.GetCurrentFocusPointInViewSpace()[2];
+            var zNew = zOld / pinchZoom.distanceRatio;
+            this.TranslateCamera(vec3.fromValues(0.0, 0.0, zNew - zOld));
+
+            const focusDelta = this.ComputeFocusPointRelativeViewSpaceTranslation(old, point);
+            this.TranslateCamera(focusDelta);
+
+            this.RotateCamera(0.0, 0.0, -pinchZoom.angleDelta);
+        }
         else
         {
             // Deal with basic events
@@ -326,37 +341,16 @@ export default class Canvas3D extends CanvasBase
                 // Translate the 3D center of rotation
                 this.SetFocusPointPositionFromPixelCoordinates(point);
             }
-            else if (event.shiftKey || countPointers > 1) // Treat as translation of camera
+            else if (event.shiftKey) // Treat as translation of camera
             {
                 const focusDelta = this.ComputeFocusPointRelativeViewSpaceTranslation(old, point);
                 this.TranslateCamera(focusDelta);
             }
-            else // Treat as rotation of camera about center of rotation
+            else if(countPointers == 1) // Treat as rotation of camera about center of rotation
             {
                 vec2.scale(delta, delta, this.pointerRotationSpeed);
                 // NB y and x are deliberately crossed over
                 this.RotateCamera(delta[1], delta[0], 0.0); 
-            }
-
-            // Deal with pinch-zoom
-            if (countPointers == 2)
-            {
-                // Get other coordinate
-                let other : vec2;
-                for (let pid of this.pointerCoords.keys())
-                {
-                    if (pid == event.pointerId) continue;
-                    other = this.pointerCoords.get(pid);
-                }
-
-                // Compute delta between two points
-                const oldDist = vec2.distance(old, other);
-                const pointDist = vec2.distance(point, other);
-
-                // Change in distances
-                var zOld = this.GetCurrentFocusPointInViewSpace()[2];
-                var zNew = zOld * oldDist / pointDist;
-                this.TranslateCamera(vec3.fromValues(0.0, 0.0, zNew - zOld));
             }
         }
 
@@ -885,9 +879,13 @@ export default class Canvas3D extends CanvasBase
         return focusPointView;
     }
 
-    ComputeCameraTwist(point: vec2, event: PointerEvent)
+    ComputeCameraTwist(point: vec2, event: PointerEvent) : number
     {
         const old = this.pointerCoords.get(event.pointerId);
+        if(old == undefined){
+            return 0;
+        }
+
         // Compute projection of focal point into canvas image
         var focusPointImage = vec3.create();
         vec3.transformMat4(focusPointImage, this.GetCurrentFocusPointInViewSpace(), this.v2sMatrix);

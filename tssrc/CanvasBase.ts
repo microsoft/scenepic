@@ -327,6 +327,10 @@ export class ObjectCache
     }
 }
 
+export class PinchZoomInfo {
+    constructor(public distanceRatio: number, public angleDelta: number, public center: vec2){}
+}
+
 export abstract class CanvasBase
 {
     objectCache : ObjectCache = null // Maps from ids to image/bitmap objects
@@ -360,7 +364,9 @@ export abstract class CanvasBase
 
     // Pointer events
     pointerCoords : Map<number, vec2>;
-    initPointerCoords : Map<number, vec2>;    
+    initPointerCoords : Map<number, vec2>;   
+    pid0 : number;
+    pid1 : number; 
 
     // media
     mediaElement : HTMLMediaElement = null;
@@ -576,10 +582,33 @@ export abstract class CanvasBase
         this.dropdownTable.appendChild(this.volumeContainer);
     }
 
+    PinchZoom(point : vec2, event : PointerEvent) : PinchZoomInfo {
+        const old0 = this.pointerCoords.get(this.pid0);
+        const old1 = this.pointerCoords.get(this.pid1);
+        const new0 = this.pid0 == event.pointerId ? point : old0;
+        const new1 = this.pid1 == event.pointerId ? point : old1;
+        
+        const oldDist = vec2.distance(old0, old1);
+        const newDist = vec2.distance(new0, new1);
+
+        const oldAngle = Math.atan2(old1[1] - old0[1], old1[0] - old0[0]);
+        const newAngle = Math.atan2(new1[1] - new0[1], new1[0] - new0[0]);
+
+        let center = vec2.add(vec2.create(), new0, new1);
+        vec2.scale(center, center, 0.5);
+        return new PinchZoomInfo(newDist / oldDist, newAngle - oldAngle, center);
+    }
+
     HandlePointerDown(point: vec2, event: PointerEvent)
     {
         this.pointerCoords.set(event.pointerId, point);
         this.initPointerCoords.set(event.pointerId, point);
+
+        if(this.pointerCoords.size == 1){
+            this.pid0 = event.pointerId;
+        }else if(this.pointerCoords.size == 2){
+            this.pid1 = event.pointerId;
+        }        
     }
 
     HandlePointerMove(point: vec2, event: PointerEvent)
@@ -595,6 +624,16 @@ export abstract class CanvasBase
     {
         this.pointerCoords.delete(event.pointerId);
         this.initPointerCoords.delete(event.pointerId);
+
+        if(this.pointerCoords.size == 1){
+            if(this.pid0 == event.pointerId){
+                this.pid0 = this.pid1;
+            }
+        }else if(this.pointerCoords.size == 2){
+            const pids = this.pointerCoords.keys();
+            this.pid0 = pids.next().value;
+            this.pid1 = pids.next().value;
+        }
     }
 
     HandleMouseWheel(event: WheelEvent)

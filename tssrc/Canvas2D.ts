@@ -266,9 +266,12 @@ export default class Canvas2D extends CanvasBase
 
     frameCoordinates : Float32Array[] = []; // The coordinates for each frame [frameIndex]
 
+    center : vec2;
     scale : number;
+    angle : number;
     focusPoint : vec2;
-    initFocusPoint : vec2;
+    focusPointDelta : vec2;
+    transform : mat3;
 
     constructor(canvasId : string, public frameRate : number, public width : number, public height : number, objectCache : ObjectCache, public SetStatus : (status : string) => void, public SetWarning : (message : string) => void, public RequestRedraw : () => void, public ReportFrameIdChange : (canvasId : string, frameId : string) => void)
     {
@@ -279,6 +282,8 @@ export default class Canvas2D extends CanvasBase
         this.context = this.htmlCanvas.getContext('2d');
 
         this.backgroundStyle = "#000000";
+        this.center = vec2.fromValues(width, height);
+        vec2.scale(this.center, this.center, window.devicePixelRatio / 2);
 
         this.ResetView();
 
@@ -686,33 +691,50 @@ export default class Canvas2D extends CanvasBase
 
     ResetView() : void
     {
-        this.focusPoint = vec2.fromValues(this.width / 2, this.height / 2);
+        this.focusPointDelta = vec2.create();
+        this.focusPoint = vec2.copy(vec2.create(), this.center);
         this.scale = 1;
+        this.angle = 0;
+        this.updateTransform();
         this.setTransform();
     }
 
-    private getTransform() : mat3
+    ComputeCameraTwist(point: vec2, event: PointerEvent)
     {
-        const focusPixel = vec2.fromValues(
-            this.htmlCanvas.clientWidth / 2,
-            this.htmlCanvas.clientHeight / 2)
+        const old = this.pointerCoords.get(event.pointerId);
+        if(old == undefined){
+            return 0;
+        }
 
-        const translate = vec2.scale(vec2.create(), this.focusPoint, this.scale);
-        vec2.subtract(translate, focusPixel, translate);
+        const dx = point[0] - old[0];
+        const dy = old[1] - point[1];
+        let delta = dx;
+        if(Math.abs(dy) > Math.abs(dx)){
+            delta = dy;
+        }
+        return 2 * delta / (window.devicePixelRatio * this.htmlCanvas.clientWidth);
+    }
 
-        return mat3.fromValues(
-            this.scale, 0, 0,
-            0, this.scale, 0,
-            translate[0], translate[1], 1)
+    private updateTransform()
+    {
+        const toFocus = mat3.fromTranslation(mat3.create(), this.focusPoint);
+        const fromCenter = mat3.fromTranslation(mat3.create(), vec2.negate(vec2.create(), this.center));
+        const scale = mat3.fromScaling(mat3.create(), vec2.fromValues(this.scale, this.scale));
+        const rotate = mat3.fromRotation(mat3.create(), this.angle);
+        
+        this.transform = mat3.create();
+        mat3.multiply(this.transform, fromCenter, this.transform);
+        mat3.multiply(this.transform, scale, this.transform);
+        mat3.multiply(this.transform, rotate, this.transform);
+        mat3.multiply(this.transform, toFocus, this.transform);
     }
 
     private setTransform() : void
     {
-        let transform = this.getTransform();
         this.context.setTransform(
-            transform[0], transform[1],
-            transform[3], transform[4],
-            transform[6], transform[7])
+            this.transform[0], this.transform[1],
+            this.transform[3], this.transform[4],
+            this.transform[6], this.transform[7])
     }
 
     // Render scene method
@@ -720,20 +742,11 @@ export default class Canvas2D extends CanvasBase
     {
         // Clear
         this.context.fillStyle = this.backgroundStyle;
-        const inv = mat3.invert(mat3.create(), this.getTransform());
-        let x = 0;
-        let y = 0;
+        this.context.resetTransform();
         let width = this.htmlCanvas.clientWidth * window.devicePixelRatio;
         let height = this.htmlCanvas.clientHeight * window.devicePixelRatio;
-        if(inv[0] > 1){
-            const tl = vec2.transformMat3(vec2.create(), vec2.fromValues(0, 0), inv);
-            const br = vec2.transformMat3(vec2.create(), vec2.fromValues(width, height), inv);
-            x = tl[0];
-            y = tl[1];
-            width = br[0] - x;
-            height = br[1] - y;
-        }
-        this.context.fillRect(x, y, width, height);
+        this.context.fillRect(0, 0, width, height);
+        this.setTransform();
 
         // Composite primitives
         if (this.currentPrimitives == null) return;
@@ -803,32 +816,75 @@ export default class Canvas2D extends CanvasBase
         return [handled, false];
     }
 
-    HandlePointerDown(point: vec2, event: PointerEvent) : void {
-        this.initFocusPoint = vec2.copy(vec2.create(), this.focusPoint);
-        super.HandlePointerDown(point, event);
+    pointerCenter() : vec2 {
+        if(this.pointerCoords.size == 1){
+            return this.pointerCoords.get(this.pid0);
+        }else{
+            const p0 = this.pointerCoords.get(this.pid0);
+            const p1 = this.pointerCoords.get(this.pid1);
+            let center = vec2.add(vec2.create(), p0, p1);
+            vec2.scale(center, center, 0.5);
+            return center;
+        }
     }
 
-    HandlePointerMove(point: vec2, event: PointerEvent): void {
+    updateFocusPointDelta() : void {
+        if(this.pointerCoords.size == 0)
+        {
+            return
+        }
+
+        const center = this.pointerCenter();
+        const focusPoint = vec2.scale(vec2.create(), this.focusPoint, 1 / window.devicePixelRatio);
+        this.focusPointDelta = vec2.subtract(vec2.create(), focusPoint, center);        
+    }
+
+    HandlePointerDown(point: vec2, event: PointerEvent) : void {
+        super.HandlePointerDown(point, event);
+
+        this.updateFocusPointDelta();
+        this.updateTransform();
+    }
+
+    HandlePointerUp(event: PointerEvent) : void
+    {
+        super.HandlePointerUp(event);
+
+        this.updateFocusPointDelta();
+        this.updateTransform();
+    }
+
+    HandlePointerMoveWithTwist(point: vec2, twistAngle: number, event: PointerEvent) : void {
         const countPointers = this.pointerCoords.size;
-        if (countPointers == 0) return;
+        if (countPointers == 0 || countPointers > 2) return;
 
-        const init = this.initPointerCoords.get(event.pointerId);
-        const transform = this.getTransform();
-        const inv = mat3.invert(mat3.create(), transform);
+        if (countPointers == 2)
+        {
+            const pinchZoom = this.PinchZoom(point, event);
+            this.scale = this.scale * pinchZoom.distanceRatio;
+            this.angle = this.angle + pinchZoom.angleDelta;
 
-        const source = vec2.transformMat3(vec2.create(), init, inv);
-        const dest = vec2.transformMat3(vec2.create(), point, inv);
-        const delta = vec2.subtract(vec2.create(), source, dest);   
-        
-        vec2.add(this.focusPoint, this.initFocusPoint, delta);
-        this.setTransform();
-        
+            // Set focus to mean of two points
+            vec2.add(this.focusPoint, pinchZoom.center, this.focusPointDelta);
+            vec2.scale(this.focusPoint, this.focusPoint, window.devicePixelRatio);
+        }else{
+            this.angle += twistAngle;
+
+            if(twistAngle == 0){
+                vec2.add(this.focusPoint, point, this.focusPointDelta);
+                vec2.scale(this.focusPoint, this.focusPoint, window.devicePixelRatio);
+            }
+        }
+
+        this.updateTransform();
+        this.setTransform();        
         super.HandlePointerMove(point, event);
     }
 
     HandleMouseWheel(event: WheelEvent): void {
         const factor = Math.pow(1.1, event.deltaY > 0 ? -1 : 1);
         this.scale *= factor;
+        this.updateTransform();
         this.setTransform();
     }
 }
