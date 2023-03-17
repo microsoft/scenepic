@@ -1,5 +1,16 @@
 # Changelog
 
+## [2023-03-13 - Version 1.1.0](https://github.com/microsoft/scenepic/releases/tag/v1.1.0)
+As part of this 1.1 minor release a few final issues were addressed:
+
+New Features
+- Full pinch, zoom and rotate with two fingers is now supported
+
+Bug fixes
+- Dropdown menus will now correctly appear on top of canvases in the z-order
+- Dropdown menus will align on the opposite side if not doing so would result
+  appearing outside the viewbox
+
 ## [2023-03-13 - Version 1.0.19](https://github.com/microsoft/scenepic/releases/tag/v1.0.19)
 Point release adding pan/zoom functionality to 2D canvases.
 
