@@ -29,19 +29,19 @@ class Rect {
         this.height = height;
     }
 
-    get topEdge() : number {
+    get topEdge(): number {
         return this.y;
     }
 
-    get bottomEdge() : number {
+    get bottomEdge(): number {
         return this.y + this.height;
     }
 
-    get leftEdge() : number {
+    get leftEdge(): number {
         return this.x;
     }
 
-    get rightEdge() : number {
+    get rightEdge(): number {
         return this.x + this.width;
     }
 
@@ -93,27 +93,27 @@ class Layout {
     width: number;
     height: number;
 
-    get topEdge() : number {
+    get topEdge(): number {
         return this.y;
     }
 
-    get bottomEdge() : number {
+    get bottomEdge(): number {
         return this.y + this.height;
     }
 
-    get leftEdge() : number {
+    get leftEdge(): number {
         return this.x;
     }
 
-    get rightEdge() : number {
+    get rightEdge(): number {
         return this.x + this.width;
     }
 
-    constructor({top = new Rect(),
-                 right = new Rect(),
-                 bottom = new Rect(),
-                 left = new Rect(),
-                 center = new Rect()} : {top? : Rect | Layout, right? : Rect | Layout, bottom? : Rect | Layout, left? : Rect | Layout, center? : Rect | Layout} = {}) {
+    constructor({ top = new Rect(),
+        right = new Rect(),
+        bottom = new Rect(),
+        left = new Rect(),
+        center = new Rect() }: { top?: Rect | Layout, right?: Rect | Layout, bottom?: Rect | Layout, left?: Rect | Layout, center?: Rect | Layout } = {}) {
         this.x = this.y = this.width = this.height = 0;
         this.top = top;
         this.right = right;
@@ -404,7 +404,7 @@ export default class Graph extends CanvasBase {
             let layout = new Layout();
 
             let nameRect = new Rect(0, 0, nameColumnWidth, nameHeight);
-            let nameLayout = new Layout({left: nameRect});
+            let nameLayout = new Layout({ left: nameRect });
             switch (this.nameAlign) {
                 case "top":
                     layout.top = nameLayout;
@@ -426,34 +426,34 @@ export default class Graph extends CanvasBase {
             let valueRect = new Rect(0, 0, valueColumnWidth, valueHeight);
             switch (this.valueAlign) {
                 case "top":
-                    if(layout.top instanceof Layout){
+                    if (layout.top instanceof Layout) {
                         layout.top.right = valueRect;
-                    }else{
-                        layout.top = new Layout({right: valueRect})
+                    } else {
+                        layout.top = new Layout({ right: valueRect })
                     }
                     break;
 
                 case "bottom":
-                    if(layout.bottom instanceof Layout){
+                    if (layout.bottom instanceof Layout) {
                         layout.bottom.right = valueRect;
-                    }else{
-                        layout.bottom = new Layout({right: valueRect})
+                    } else {
+                        layout.bottom = new Layout({ right: valueRect })
                     }
                     break;
 
                 case "left":
-                    if(layout.left instanceof Layout){
+                    if (layout.left instanceof Layout) {
                         layout.left.right = valueRect;
-                    }else{
-                        layout.left = new Layout({right: valueRect})
+                    } else {
+                        layout.left = new Layout({ right: valueRect })
                     }
                     break;
 
                 case "right":
-                    if(layout.right instanceof Layout){
+                    if (layout.right instanceof Layout) {
                         layout.right.right = valueRect;
-                    }else{
-                        layout.right = new Layout({right: valueRect})
+                    } else {
+                        layout.right = new Layout({ right: valueRect })
                     }
                     break;
             }

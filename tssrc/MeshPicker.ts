@@ -4,11 +4,11 @@ import ShaderProgram from "./Shaders";
 import WebGLMeshBuffers from "./WebGLMeshBuffers";
 
 export class MeshPicker {
-    readonly frameBuffer : WebGLFramebuffer;
-    readonly program : ShaderProgram;
-    data : Uint8Array;
+    readonly frameBuffer: WebGLFramebuffer;
+    readonly program: ShaderProgram;
+    data: Uint8Array;
 
-    constructor(gl : WebGL2RenderingContext, width: number, height: number){
+    constructor(gl: WebGL2RenderingContext, width: number, height: number) {
         this.program = new ShaderProgram(gl, "pickerVertex", "pickerFragment");
 
         let targetTexture = Misc.AssertNotNull(gl.createTexture(), "WebGL returned a null texture");
@@ -17,9 +17,9 @@ export class MeshPicker {
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA,
-                      width, height, 0,
-                      gl.RGBA, gl.UNSIGNED_BYTE, null);
-        
+            width, height, 0,
+            gl.RGBA, gl.UNSIGNED_BYTE, null);
+
         let depthBuffer = Misc.AssertNotNull(gl.createRenderbuffer(), "WebGL returned a null render buffer");
         gl.bindRenderbuffer(gl.RENDERBUFFER, depthBuffer);
         gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH_COMPONENT16, width, height);
@@ -28,14 +28,14 @@ export class MeshPicker {
         gl.bindFramebuffer(gl.FRAMEBUFFER, this.frameBuffer);
 
         gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, targetTexture, 0);
-        gl.framebufferRenderbuffer(gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT, gl.RENDERBUFFER, depthBuffer);           
+        gl.framebufferRenderbuffer(gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT, gl.RENDERBUFFER, depthBuffer);
 
         this.data = new Uint8Array(4);
 
         gl.bindFramebuffer(gl.FRAMEBUFFER, null);
     }
 
-    Pick(gl : WebGL2RenderingContext, meshes: [WebGLMeshBuffers, mat4][], point: vec2, v2sMatrix: mat4) : number {
+    Pick(gl: WebGL2RenderingContext, meshes: [WebGLMeshBuffers, mat4][], point: vec2, v2sMatrix: mat4): number {
         const canvas = <HTMLCanvasElement>gl.canvas;
 
         gl.bindFramebuffer(gl.FRAMEBUFFER, this.frameBuffer);
@@ -50,7 +50,7 @@ export class MeshPicker {
         const program = this.program;
         gl.useProgram(program.program);
 
-        meshes.forEach(function([buffer, w2vMatrix]) {
+        meshes.forEach(function ([buffer, w2vMatrix]) {
             buffer.RenderPicker(program, v2sMatrix, w2vMatrix)
         });
 

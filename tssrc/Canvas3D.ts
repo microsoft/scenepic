@@ -1,6 +1,6 @@
-import {mat3, mat4, vec3, vec4, quat, vec2} from "gl-matrix";
+import { mat3, mat4, vec3, vec4, quat, vec2 } from "gl-matrix";
 import Misc from "./Misc"
-import {ObjectCache, CanvasBase} from "./CanvasBase"
+import { ObjectCache, CanvasBase } from "./CanvasBase"
 import Mesh from "./Mesh";
 import ShaderProgram from "./Shaders";
 import WebGLMeshBuffers from "./WebGLMeshBuffers";
@@ -21,10 +21,10 @@ var FocusPointMeshDefinition = {
 var DefaultCamera =
 {
     "WorldToCamera": mat4.fromValues(1.0, 0.0, 0.0, 0.0,
-                                     0.0, 1.0, 0.0, 0.0,
-                                     0.0, 0.0, 1.0, 0.0,
-                                     0.0, 0.0, -4.0, 1.0),
-    "FoVYDegrees" : 45.0
+        0.0, 1.0, 0.0, 0.0,
+        0.0, 0.0, 1.0, 0.0,
+        0.0, 0.0, -4.0, 1.0),
+    "FoVYDegrees": 45.0
 };
 
 var DefaultNearCropDistance = 0.01;
@@ -34,36 +34,33 @@ var DegreesToRadians = Math.PI / 180.0;
 // Default shading parameters
 var DefaultShading =
 {
-    "BackgroundColor" : [0.0, 0.0, 0.0, 1.0],
-    "AmbientLightColor" : [0.5, 0.5, 0.5],
-    "DirectionalLightColor" : [0.5, 0.5, 0.5],
-    "DirectionalLightDir" : [2.0, -1.0, 1.0]
+    "BackgroundColor": [0.0, 0.0, 0.0, 1.0],
+    "AmbientLightColor": [0.5, 0.5, 0.5],
+    "DirectionalLightColor": [0.5, 0.5, 0.5],
+    "DirectionalLightDir": [2.0, -1.0, 1.0]
 };
 
 // Represents an instantiation of a mesh in a frame
-class MeshInstance
-{
-    meshId : string;
-    transform : mat4;
+class MeshInstance {
+    meshId: string;
+    transform: mat4;
 
-    constructor(meshId : string, transform : mat4)
-    {
+    constructor(meshId: string, transform: mat4) {
         this.meshId = meshId;
         this.transform = transform;
     }
 }
 
-class MeshData
-{
+class MeshData {
     constructor(
-    public mesh : Mesh,
-    public m2wMatrix : mat4,
-    public m2vMatrix : mat4,
-    public buffer : WebGLMeshBuffers,
-    public opacity : number,
-    public filled : boolean,
-    public wireframe : boolean,
-    public viewDistance : number){}
+        public mesh: Mesh,
+        public m2wMatrix: mat4,
+        public m2vMatrix: mat4,
+        public buffer: WebGLMeshBuffers,
+        public opacity: number,
+        public filled: boolean,
+        public wireframe: boolean,
+        public viewDistance: number) { }
 
     public Render(gl: WebGL2RenderingContext, v2sMatrix: mat4) {
         // Optionally turn off back-face culling
@@ -76,27 +73,27 @@ class MeshData
         this.buffer.RenderBuffer(v2sMatrix, this.m2vMatrix, this.opacity, this.filled, this.wireframe);
     }
 
-    public ComputeCentroid() : vec3 {
+    public ComputeCentroid(): vec3 {
         let centroid = vec3.create();
         const norm = 1.0 / this.mesh.CountVertices();
-        for(let i=0, j=0; i<this.mesh.CountVertices(); i++, j += this.mesh.ElementsPerVertex){
+        for (let i = 0, j = 0; i < this.mesh.CountVertices(); i++, j += this.mesh.ElementsPerVertex) {
             let p = vec3.transformMat4(vec3.create(),
-                                       <vec3>this.mesh.vertexBuffer.subarray(j, j + 3),
-                                       this.m2wMatrix);
+                <vec3>this.mesh.vertexBuffer.subarray(j, j + 3),
+                this.m2wMatrix);
             vec3.scale(p, p, norm)
             vec3.add(centroid, centroid, p);
         }
 
-        if(this.mesh.CountInstances() == 1){
+        if (this.mesh.CountInstances() == 1) {
             return centroid;
         }
 
         let instanceCentroid = vec3.create();
         const instanceNorm = 1.0 / this.mesh.CountInstances();
-        for(let i=0, j=0; i < this.mesh.CountInstances(); i++, j += this.mesh.ElementsPerInstance){
+        for (let i = 0, j = 0; i < this.mesh.CountInstances(); i++, j += this.mesh.ElementsPerInstance) {
             let p = vec3.add(vec3.create(),
-                             <vec3>this.mesh.instanceBuffer.subarray(j, j + 3),
-                             instanceCentroid);
+                <vec3>this.mesh.instanceBuffer.subarray(j, j + 3),
+                instanceCentroid);
             vec3.scale(p, p, instanceNorm);
             vec3.add(instanceCentroid, instanceCentroid, p);
         }
@@ -105,35 +102,34 @@ class MeshData
     }
 }
 
-export default class Canvas3D extends CanvasBase
-{
-    allMeshes : any = null // Maps from meshIds to mesh objects
-    gl : WebGL2RenderingContext;
-    sp : ShaderProgram;
+export default class Canvas3D extends CanvasBase {
+    allMeshes: any = null // Maps from meshIds to mesh objects
+    gl: WebGL2RenderingContext;
+    sp: ShaderProgram;
 
     // Dictionary from layerId to layer settings (wireframe, filled, opacity)
-    layerSettings : {[layerId: string]: {[key: string]: number|boolean}} = {};
-    layerIds : string[] = [];
+    layerSettings: { [layerId: string]: { [key: string]: number | boolean } } = {};
+    layerIds: string[] = [];
 
     // Shading parameters
-    bgColor : vec4;
-    ambientLightColor : vec3;
-    directionalLightColor : vec3;
-    directionalLightDir : vec3;
+    bgColor: vec4;
+    ambientLightColor: vec3;
+    directionalLightColor: vec3;
+    directionalLightDir: vec3;
     globalFill = true;
     globalWireframe = false;
     globalOpacity = 1.0;
 
     // Mesh picker
-    setFocusToPicked : boolean;
-    pickPoint : vec2;
-    meshPicker : MeshPicker;    
+    setFocusToPicked: boolean;
+    pickPoint: vec2;
+    meshPicker: MeshPicker;
 
     // Frame instances
-    frameInstances : MeshInstance[][] = []; // [frameIndex][mesh instance within frame]
+    frameInstances: MeshInstance[][] = []; // [frameIndex][mesh instance within frame]
 
     // Mesh buffers *for the current frame*
-    meshBuffers : any = {}; // The webgl mesh buffers for the currently selected frame: dictionary from meshId to webGLMeshBuffer
+    meshBuffers: any = {}; // The webgl mesh buffers for the currently selected frame: dictionary from meshId to webGLMeshBuffer
 
     // Pointer speeds
     pointerAltKeyMultiplier = 0.2;
@@ -160,19 +156,19 @@ export default class Canvas3D extends CanvasBase
     }
 
     // Focus points for user interaction: center of rotation and used for locking view
-    globalFocusPoint : Float32Array = new Float32Array([0.0, 0.0, 0.0]);
-    initialFocusPoints : Float32Array[] = []; // Per-frame focus points (initial version - used for reset camera)
-    currentFocusPoints : Float32Array[] = []; // Per-frame focus points (current version - used for display)
-    focusPointMeshBuffer : WebGLMeshBuffers;
-    showFocusPoint : boolean = false;
+    globalFocusPoint: Float32Array = new Float32Array([0.0, 0.0, 0.0]);
+    initialFocusPoints: Float32Array[] = []; // Per-frame focus points (initial version - used for reset camera)
+    currentFocusPoints: Float32Array[] = []; // Per-frame focus points (current version - used for display)
+    focusPointMeshBuffer: WebGLMeshBuffers;
+    showFocusPoint: boolean = false;
 
     // Copy of last set camera config
-    globalCameraParams : Object = null;
-    frameCameraParams : Object[] = []; // Per-frame cameras
-    onCameraTrack : boolean = false;
+    globalCameraParams: Object = null;
+    frameCameraParams: Object[] = []; // Per-frame cameras
+    onCameraTrack: boolean = false;
 
     // Frame layer settings
-    frameLayerSettings : Object[] = [];
+    frameLayerSettings: Object[] = [];
 
     // Lock view settings
     lockViewXY = false;
@@ -180,14 +176,13 @@ export default class Canvas3D extends CanvasBase
 
     // Orbit settings
     orbitCamera = false;
-    lastOrbitTime : Date = null;
+    lastOrbitTime: Date = null;
 
     // View matrices
-    w2vMatrix : mat4; // World to view (i.e. camera)
-    v2sMatrix : mat4; // View to screen (i.e. projection)
+    w2vMatrix: mat4; // World to view (i.e. camera)
+    v2sMatrix: mat4; // View to screen (i.e. projection)
 
-    constructor(canvasId : string, public frameRate : number, public width : number, public height : number, allMeshes : any, objectCache : ObjectCache, public SetStatus : (status : string) => void, public SetWarning : (message : string) => void, public RequestRedraw : () => void, public ReportFrameIdChange : (canvasId : string, frameId : string) => void, public SimulateKeyPress : (canvasId : string, key : string) => void)
-    {
+    constructor(canvasId: string, public frameRate: number, public width: number, public height: number, allMeshes: any, objectCache: ObjectCache, public SetStatus: (status: string) => void, public SetWarning: (message: string) => void, public RequestRedraw: () => void, public ReportFrameIdChange: (canvasId: string, frameId: string) => void, public SimulateKeyPress: (canvasId: string, key: string) => void) {
         // Base class constructor
         super(canvasId, frameRate, width, height, objectCache, SetStatus, SetWarning, RequestRedraw, ReportFrameIdChange);
 
@@ -210,17 +205,15 @@ export default class Canvas3D extends CanvasBase
         this.cameraModeDisplay.style.visibility = "visible";
 
         // Create dropdown
-        this.SetLayerSettings({});        
+        this.SetLayerSettings({});
 
         // Start render loop
         this.StartRenderLoop();
     }
 
-    InitializeWebGL()
-    {
+    InitializeWebGL() {
         // Init gl
-        try
-        {
+        try {
             // Get gl context
             this.gl = this.htmlCanvas.getContext("webgl2");
 
@@ -228,8 +221,7 @@ export default class Canvas3D extends CanvasBase
             this.gl.getExtension("OES_element_index_uint");
         }
         catch (e) { }
-        if (this.gl == null)
-        {
+        if (this.gl == null) {
             this.SetWarning("Could not init WebGL");
             return;
         }
@@ -248,8 +240,7 @@ export default class Canvas3D extends CanvasBase
         this.PrepareBuffers();
     }
 
-    TearDownWebGL()
-    {
+    TearDownWebGL() {
         this.gl = null;
         this.sp = null;
         if (this.focusPointMeshBuffer != null)
@@ -258,63 +249,52 @@ export default class Canvas3D extends CanvasBase
         this.PrepareBuffers();
     }
 
-    private updateCameraVelocityValue(keyPlus: string, keyMinus: string, index: number)
-    {
-        if (this.dirKeyPresses[keyPlus] > this.dirKeyPresses[keyMinus])
-        {
+    private updateCameraVelocityValue(keyPlus: string, keyMinus: string, index: number) {
+        if (this.dirKeyPresses[keyPlus] > this.dirKeyPresses[keyMinus]) {
             this.cameraVelocity[index] = this.keyDownSpeed
         }
-        else if(this.dirKeyPresses[keyMinus] > 0)
-        {
+        else if (this.dirKeyPresses[keyMinus] > 0) {
             this.cameraVelocity[index] = -this.keyDownSpeed;
         }
-        else
-        {
+        else {
             this.cameraVelocity[index] = 0;
-        }                   
+        }
     }
 
-    private updateCameraVelocity()
-    {
+    private updateCameraVelocity() {
         this.updateCameraVelocityValue("w", "s", 0);
         this.updateCameraVelocityValue("a", "d", 1);
         this.updateCameraVelocityValue("q", "e", 2);
     }
-    
-    HandlePointerMoveWithTwist(point: vec2, twistAngle: number, event: PointerEvent)
-    {
+
+    HandlePointerMoveWithTwist(point: vec2, twistAngle: number, event: PointerEvent) {
         const countPointers = this.pointerCoords.size;
         if (countPointers == 0) return;
 
         const old = this.pointerCoords.get(event.pointerId);
         let delta = vec2.subtract(vec2.create(), point, old);
-        if (event.altKey)
-        {
+        if (event.altKey) {
             vec2.scale(delta, delta, this.pointerAltKeyMultiplier);
         }
 
-        if(this.FirstPerson)
-        {
+        if (this.FirstPerson) {
             const init = this.initPointerCoords.get(event.pointerId);
             let diff = vec2.subtract(vec2.create(), point, init);
 
             const length = vec2.length(diff);
             const deadZone = 10;
-            if(length > deadZone)
-            {
+            if (length > deadZone) {
                 let scale = Math.min(2, (length - deadZone) / deadZone);
                 vec2.scale(diff, diff, scale / length);
             }
-            else
-            {
+            else {
                 diff = vec2.create();
             }
 
             vec2.scale(diff, diff, this.pointerRotationSpeed);
             this.SetCameraRotationalVelocity(diff);
         }
-        else if(countPointers == 2)
-        {
+        else if (countPointers == 2) {
             // Deal with pinch-zoom
             const pinchZoom = this.PinchZoom(point, event);
 
@@ -328,16 +308,13 @@ export default class Canvas3D extends CanvasBase
 
             this.RotateCamera(0.0, 0.0, -pinchZoom.angleDelta);
         }
-        else
-        {
+        else {
             // Deal with basic events
-            if (event.ctrlKey)
-            {
+            if (event.ctrlKey) {
                 // Treat as twist of camera
                 this.RotateCamera(0.0, 0.0, twistAngle);
             }
-            else if (this.showFocusPoint) 
-            {
+            else if (this.showFocusPoint) {
                 // Translate the 3D center of rotation
                 this.SetFocusPointPositionFromPixelCoordinates(point);
             }
@@ -346,11 +323,11 @@ export default class Canvas3D extends CanvasBase
                 const focusDelta = this.ComputeFocusPointRelativeViewSpaceTranslation(old, point);
                 this.TranslateCamera(focusDelta);
             }
-            else if(countPointers == 1) // Treat as rotation of camera about center of rotation
+            else if (countPointers == 1) // Treat as rotation of camera about center of rotation
             {
                 vec2.scale(delta, delta, this.pointerRotationSpeed);
                 // NB y and x are deliberately crossed over
-                this.RotateCamera(delta[1], delta[0], 0.0); 
+                this.RotateCamera(delta[1], delta[0], 0.0);
             }
         }
 
@@ -358,48 +335,42 @@ export default class Canvas3D extends CanvasBase
     }
 
     HandlePointerUp(event: PointerEvent) {
-        this.SetCameraRotationalVelocity(vec2.create());        
+        this.SetCameraRotationalVelocity(vec2.create());
         super.HandlePointerUp(event);
     }
 
     HandleMouseWheel(event: WheelEvent) {
         let deltaZ = -event.deltaY * this.mouseWheelTranslationSpeed;
 
-        if (event.altKey){
+        if (event.altKey) {
             deltaZ *= this.pointerAltKeyMultiplier;
         }
 
         var delta = vec3.fromValues(0.0, 0.0, deltaZ);
 
-        this.TranslateCamera(delta);        
+        this.TranslateCamera(delta);
     }
 
-    HandleKeyUp(key: string)
-    {
+    HandleKeyUp(key: string) {
         key = key.toLowerCase();
-        if(this.firstPerson && key in this.dirKeyPresses)
-        {
+        if (this.firstPerson && key in this.dirKeyPresses) {
             this.dirKeyPresses[key] = 0;
             this.updateCameraVelocity();
         }
-        else
-        {
-            for(let key in this.dirKeyPresses)
-            {
+        else {
+            for (let key in this.dirKeyPresses) {
                 this.dirKeyPresses[key] = 0;
             }
         }
     }
 
-    HandleKeyDown(key : string) : [boolean, boolean]
-    {
+    HandleKeyDown(key: string): [boolean, boolean] {
         var result = super.HandleKeyDown(key);
         if (result[0]) return result; // Already handled
 
         var handled = true;
         key = key.toLowerCase();
-        switch(key)
-        {
+        switch (key) {
             case "r":
                 this.ResetView();
                 break;
@@ -420,8 +391,7 @@ export default class Canvas3D extends CanvasBase
                 break;
         }
 
-        if(this.firstPerson && key in this.dirKeyPresses)
-        {
+        if (this.firstPerson && key in this.dirKeyPresses) {
             this.dirKeyPresses[key] = Date.now();
             this.updateCameraVelocity();
         }
@@ -430,15 +400,14 @@ export default class Canvas3D extends CanvasBase
     }
 
     // Adds UI for the control of certain layers
-    SetLayerSettings(layerSettings : any)
-    {
+    SetLayerSettings(layerSettings: any) {
         // Delete any previous controls
         while (this.dropdownTable.childElementCount > 2)
             this.dropdownTable.removeChild(this.dropdownTable.lastChild);
 
         this.layerSettings = layerSettings;
         this.layerIds = [null];
-        for(let layerId in layerSettings){
+        for (let layerId in layerSettings) {
             this.layerIds.push(layerId);
         }
 
@@ -446,8 +415,7 @@ export default class Canvas3D extends CanvasBase
         var BorderStyle = "1px solid #cccccc";
         var headerRow = document.createElement("tr");
         headerRow.style.borderBottom = BorderStyle;
-        for(var headerName of ["Wire", "Fill", "Opacity", "Layer Id"])
-        {
+        for (var headerName of ["Wire", "Fill", "Opacity", "Layer Id"]) {
             var headerItem = document.createElement("th");
             headerItem.className = "scenepic-dropdown-header";
             headerItem.innerHTML = headerName;
@@ -456,8 +424,7 @@ export default class Canvas3D extends CanvasBase
         this.dropdownTable.appendChild(headerRow);
 
         // Create row helper function
-        var createRow = (id, label) =>
-        {
+        var createRow = (id, label) => {
             // Create wireframe checkbox
             var checkboxWireframe = document.createElement("input");
             checkboxWireframe.type = "checkbox";
@@ -488,14 +455,12 @@ export default class Canvas3D extends CanvasBase
             return [checkboxWireframe, checkboxFill, sliderOpacity, labelLayer];
         };
 
-        var addRow = (rowItems, border) =>
-        {
+        var addRow = (rowItems, border) => {
             // Create table row
             var tr = document.createElement("tr");
             if (border)
                 tr.style.borderTop = BorderStyle;
-            var addControl = (el, className) =>
-            {
+            var addControl = (el, className) => {
                 var td = document.createElement("td");
                 td.appendChild(el);
                 td.className = className;
@@ -513,8 +478,7 @@ export default class Canvas3D extends CanvasBase
         addRow(createRow("<<<GLOBAL>>>", "Global"), true);
     }
 
-    ConfigureUserInterface(command : any)
-    {
+    ConfigureUserInterface(command: any) {
         if ("PointerAltKeyMultiplier" in command) this.pointerAltKeyMultiplier = command["PointerAltKeyMultiplier"];
         if ("PointerRotationSpeed" in command) this.pointerRotationSpeed = command["PointerRotationSpeed"];
         if ("MouseWheelTranslationSpeed" in command) this.mouseWheelTranslationSpeed = command["MouseWheelTranslationSpeed"];
@@ -522,24 +486,20 @@ export default class Canvas3D extends CanvasBase
         if ("LayerDropdownVisibility" in command) this.dropdown.style.visibility = command["LayerDropdownVisibility"]
     }
 
-    ParseFocusPoint(command : any)
-    {
+    ParseFocusPoint(command: any) {
         var position = Misc.Base64ToFloat32Array(command["Position"]);
-        if ("OrientationAxisAngle" in command)
-        {
+        if ("OrientationAxisAngle" in command) {
             var focusPoint = new Float32Array(6);
             focusPoint.set(position, 0);
             focusPoint.set(Misc.Base64ToFloat32Array(command["OrientationAxisAngle"]), 3);
             return focusPoint;
         }
-        else
-        {
+        else {
             return position;
         }
     }
 
-    SetGlobalCamera(value : Object)
-    {
+    SetGlobalCamera(value: Object) {
         if (value == null) return;
 
         this.globalCameraParams = value;
@@ -550,10 +510,8 @@ export default class Canvas3D extends CanvasBase
     }
 
     // Execute a single canvas command
-    ExecuteCanvasCommand(command : any)
-    {
-        switch(command["CommandType"])
-        {
+    ExecuteCanvasCommand(command: any) {
+        switch (command["CommandType"]) {
             case "ConfigureUserInterface":
                 this.ConfigureUserInterface(command);
                 break;
@@ -586,10 +544,8 @@ export default class Canvas3D extends CanvasBase
     }
 
     // Execute a single frame command
-    ExecuteFrameCommand(command : any, frameIndex : number)
-    {
-        switch(command["CommandType"])
-        {
+    ExecuteFrameCommand(command: any, frameIndex: number) {
+        switch (command["CommandType"]) {
             case "SetFocusPoint":
                 var focusPoint = this.ParseFocusPoint(command);
                 this.SetPerFrameFocusPoint(frameIndex, focusPoint);
@@ -613,7 +569,7 @@ export default class Canvas3D extends CanvasBase
 
             case "SetLayerSettings":
                 var layerSettings = Misc.GetDefault(command, "Value", null);
-                if (layerSettings != null){
+                if (layerSettings != null) {
                     this.SetPerFrameLayerSettings(frameIndex, layerSettings);
                     break;
                 }
@@ -624,15 +580,14 @@ export default class Canvas3D extends CanvasBase
         }
     }
 
-    SetCamera(params : Object)
-    {
+    SetCamera(params: Object) {
         if (params == null) return;
 
-        if (params.hasOwnProperty("WorldToCamera")){
+        if (params.hasOwnProperty("WorldToCamera")) {
             this.w2vMatrix = <mat4>Misc.Base64ToFloat32Array(params["WorldToCamera"]);
             this.v2sMatrix = <mat4>Misc.Base64ToFloat32Array(params["Projection"]);
         }
-        else{
+        else {
             console.warn("The legacy SetCamera command is deprecated.")
             var camCenter = <vec3>Misc.Base64ToFloat32Array(params["Center"]);
             var camLookAt = <vec3>Misc.Base64ToFloat32Array(params["LookAt"]);
@@ -644,50 +599,43 @@ export default class Canvas3D extends CanvasBase
         }
     }
 
-    ResetView()
-    {
+    ResetView() {
         this.onCameraTrack = true;
         var currentFrame = this.currentFrameIndex;
         this.SetCamera(this.frameCameraParams[currentFrame]);
         this.currentFocusPoints[currentFrame] = new Float32Array(this.initialFocusPoints[currentFrame])
     }
 
-    ToggleLockView(translation : boolean, orientation : boolean)
-    {
+    ToggleLockView(translation: boolean, orientation: boolean) {
         if (translation) this.lockViewXY = !this.lockViewXY;
         if (orientation) this.lockViewOrientation = !this.lockViewOrientation;
     }
 
-    ToggleOrbitCamera()
-    {
+    ToggleOrbitCamera() {
         this.orbitCamera = !this.orbitCamera;
         this.lastOrbitTime = null;
     }
 
-    SetPerFrameFocusPoint(frameIndex : number, focusPoint : Float32Array)
-    {
+    SetPerFrameFocusPoint(frameIndex: number, focusPoint: Float32Array) {
         if (focusPoint == null) return;
 
         this.initialFocusPoints[frameIndex] = focusPoint; // For reset support
         this.currentFocusPoints[frameIndex] = new Float32Array(focusPoint); // Copy
     }
 
-    SetPerFrameCamera(frameIndex : number, value : Object)
-    {
-        if ( value == null) return;
+    SetPerFrameCamera(frameIndex: number, value: Object) {
+        if (value == null) return;
 
         this.frameCameraParams[frameIndex] = value; // For reset support
     }
 
-    SetPerFrameLayerSettings(frameIndex : number, value : Object)
-    {
-        if ( value == null) return;
-    
+    SetPerFrameLayerSettings(frameIndex: number, value: Object) {
+        if (value == null) return;
+
         this.frameLayerSettings[frameIndex] = value;
     }
 
-    SetGlobalFocusPoint(focusPoint : Float32Array)
-    {
+    SetGlobalFocusPoint(focusPoint: Float32Array) {
         if (focusPoint == null) return;
 
         this.globalFocusPoint = focusPoint;
@@ -695,8 +643,7 @@ export default class Canvas3D extends CanvasBase
             this.SetPerFrameFocusPoint(frameIndex, focusPoint); // Nice side-effect: object is aliased so will stay shared when user moves focus point
     }
 
-    SetShading(params : Object)
-    {
+    SetShading(params: Object) {
         // Background color
         this.bgColor = <vec4>Misc.Base64ToFloat32Array(params["BackgroundColor"]);
 
@@ -707,35 +654,31 @@ export default class Canvas3D extends CanvasBase
         vec3.normalize(this.directionalLightDir, this.directionalLightDir);
     }
 
-    AllocateFrame()
-    {
+    AllocateFrame() {
         this.frameInstances.push([]);
         this.initialFocusPoints.push(this.globalFocusPoint);
         this.currentFocusPoints.push(this.globalFocusPoint);
         this.frameCameraParams.push(this.globalCameraParams);
     }
 
-    DeallocateFrame(frameIndex : number)
-    {
+    DeallocateFrame(frameIndex: number) {
         this.frameInstances[frameIndex] = [];
     }
 
-    AddMesh(frameIndex : number, meshId : string, meshTransform : mat4)
-    {
+    AddMesh(frameIndex: number, meshId: string, meshTransform: mat4) {
         // Add the mesh instance
         var instance = new MeshInstance(meshId, meshTransform);
         var instances = this.frameInstances[frameIndex];
         instances.push(instance);
 
         let mesh = <Mesh>this.allMeshes[meshId];
-        if(mesh.layerId != null && !(mesh.layerId in this.layerSettings)){
+        if (mesh.layerId != null && !(mesh.layerId in this.layerSettings)) {
             this.layerSettings[mesh.layerId] = {};
             this.SetLayerSettings(this.layerSettings);
         }
 
         // Update display if this is the selected mesh
-        if (this.currentFrameIndex == frameIndex)
-        {
+        if (this.currentFrameIndex == frameIndex) {
             if (!(meshId in this.allMeshes))
                 this.SetWarning("Mesh " + meshId + " does not exist!");
 
@@ -744,22 +687,18 @@ export default class Canvas3D extends CanvasBase
         }
     }
 
-    RemoveMesh(frameIndex : number, meshId : string)
-    {
+    RemoveMesh(frameIndex: number, meshId: string) {
         // Add the mesh id
         var instances = this.frameInstances[frameIndex];
         var meshIndex = 0;
         var edited = false;
-        while (meshIndex < instances.length)
-        {
-            if (instances[meshIndex].meshId == meshId)
-            {
+        while (meshIndex < instances.length) {
+            if (instances[meshIndex].meshId == meshId) {
                 // Remove
                 instances.splice(meshIndex, 1);
                 edited = true;
             }
-            else
-            {
+            else {
                 meshIndex++;
             }
         }
@@ -769,17 +708,14 @@ export default class Canvas3D extends CanvasBase
             this.PrepareBuffers();
     }
 
-    NotifyMeshUpdated(meshId : string)
-    {
+    NotifyMeshUpdated(meshId: string) {
         if (this.frameInstances.length == 0) return; // No frames
         var currentFrameInstances = this.frameInstances[this.currentFrameIndex];
-        for(var instance of currentFrameInstances)
-        {
-            if (instance.meshId == meshId)
-            {
+        for (var instance of currentFrameInstances) {
+            if (instance.meshId == meshId) {
                 // Clear up any existing buffers
                 if (meshId in this.meshBuffers && this.meshBuffers[meshId] != null)
-                this.meshBuffers[meshId].Finalize();
+                    this.meshBuffers[meshId].Finalize();
 
                 // Recreate new buffers using updated mesh data
                 this.meshBuffers[meshId] = this.GetMeshBuffers(this.allMeshes[meshId]);
@@ -787,12 +723,10 @@ export default class Canvas3D extends CanvasBase
         }
     }
 
-    private GetMeshBuffers(mesh : Mesh)
-    {
+    private GetMeshBuffers(mesh: Mesh) {
         var textureId = mesh.textureId;
         var textureSrc = null;
-        if (textureId != null)
-        {
+        if (textureId != null) {
             var textureSrc = this.objectCache.GetObject(textureId);
             if (textureSrc == null)
                 return null; // Not able to create buffers yet
@@ -800,17 +734,14 @@ export default class Canvas3D extends CanvasBase
         return new WebGLMeshBuffers(this.gl, this.sp, mesh, textureSrc);
     }
 
-    NotifyTextureUpdated(textureId : string)
-    {
+    NotifyTextureUpdated(textureId: string) {
         if (this.frameInstances.length == 0) return; // No frames
         var currentFrameInstances = this.frameInstances[this.currentFrameIndex];
-        for(var instance of currentFrameInstances)
-        {
+        for (var instance of currentFrameInstances) {
             var meshId = instance.meshId;
             var mesh = <Mesh>this.allMeshes[meshId];
 
-            if (mesh.textureId == textureId)
-            {
+            if (mesh.textureId == textureId) {
                 if (this.meshBuffers[meshId] != null)
                     this.meshBuffers[meshId].Finalize(); // Clear up existing buffers
                 this.meshBuffers[meshId] = this.GetMeshBuffers(mesh); // Recreate
@@ -818,21 +749,19 @@ export default class Canvas3D extends CanvasBase
         }
     }
 
-    PrepareBuffers() : void
-    {
+    PrepareBuffers(): void {
         super.PrepareBuffers();
         // Get new set of meshIds
-        var meshIds : string[] = [];
+        var meshIds: string[] = [];
         if (this.gl != null && this.currentFrameIndex < this.frameInstances.length) // Check for e.g. webgl context lost
         {
-            for(var instance of this.frameInstances[this.currentFrameIndex])
+            for (var instance of this.frameInstances[this.currentFrameIndex])
                 meshIds.push(instance.meshId);
         }
 
         // Get set of meshIds that need turning in to buffers
-        var meshIdsToAdd : string[] = [];
-        for(var meshId of meshIds)
-        {
+        var meshIdsToAdd: string[] = [];
+        for (var meshId of meshIds) {
             var mesh = <Mesh>this.allMeshes[meshId];
             if (mesh != null && this.IsLayerVisible(mesh.layerId) && !(meshId in this.meshBuffers)) // Visible and not already cached
             {
@@ -845,13 +774,11 @@ export default class Canvas3D extends CanvasBase
         }
 
         // Finalize meshIds not currently used
-        for(var meshId in this.meshBuffers)
-        {
+        for (var meshId in this.meshBuffers) {
             var mesh = <Mesh>this.allMeshes[meshId];
             if (!this.IsLayerVisible(mesh.layerId) || meshIds.indexOf(meshId) == -1) // Invisible or no longer present
             {
-                if (meshId in this.meshBuffers)
-                {
+                if (meshId in this.meshBuffers) {
                     if (this.meshBuffers[meshId] != null)
                         this.meshBuffers[meshId].Finalize();
                     delete this.meshBuffers[meshId];
@@ -863,15 +790,13 @@ export default class Canvas3D extends CanvasBase
         }
 
         // Loop over meshes
-        for(var meshId of meshIdsToAdd)
-        {
+        for (var meshId of meshIdsToAdd) {
             var mesh = <Mesh>this.allMeshes[meshId];
             this.meshBuffers[meshId] = this.GetMeshBuffers(mesh);
         }
     }
 
-    GetCurrentFocusPointInViewSpace()
-    {
+    GetCurrentFocusPointInViewSpace() {
         var focusPoint = this.currentFocusPoints[this.currentFrameIndex];
         var focusPointPosition = <vec3>focusPoint.subarray(0, 3);
         var focusPointView = vec3.create();
@@ -879,10 +804,9 @@ export default class Canvas3D extends CanvasBase
         return focusPointView;
     }
 
-    ComputeCameraTwist(point: vec2, event: PointerEvent) : number
-    {
+    ComputeCameraTwist(point: vec2, event: PointerEvent): number {
         const old = this.pointerCoords.get(event.pointerId);
-        if(old == undefined){
+        if (old == undefined) {
             return 0;
         }
 
@@ -890,7 +814,7 @@ export default class Canvas3D extends CanvasBase
         var focusPointImage = vec3.create();
         vec3.transformMat4(focusPointImage, this.GetCurrentFocusPointInViewSpace(), this.v2sMatrix);
         const focus = vec2.fromValues((focusPointImage[0] + 1.0) * 0.5 * this.width,
-                                      (-focusPointImage[1] + 1.0) * 0.5 * this.height);
+            (-focusPointImage[1] + 1.0) * 0.5 * this.height);
 
         // Compute rotation angle
         const angleInitial = Math.atan2(old[1] - focus[1], old[0] - focus[0]);
@@ -898,16 +822,14 @@ export default class Canvas3D extends CanvasBase
         return angleInitial - angleNew;
     }
 
-    SetFocusPointPositionFromPixelCoordinates(pixel: vec2)
-    {
+    SetFocusPointPositionFromPixelCoordinates(pixel: vec2) {
         if (this.lockViewXY || this.lockViewOrientation) return;
-    
+
         this.pickPoint = pixel;
         this.setFocusToPicked = true;
     }
 
-    ComputeFocusPointRelativeViewSpaceTranslation(old : vec2, point: vec2)
-    {
+    ComputeFocusPointRelativeViewSpaceTranslation(old: vec2, point: vec2) {
         var focusPointZ = Math.abs(this.GetCurrentFocusPointInViewSpace()[2]);
 
         var clientRect = this.htmlCanvas.getBoundingClientRect();
@@ -927,8 +849,7 @@ export default class Canvas3D extends CanvasBase
         return vec3.fromValues(oldView[0] - newView[0], oldView[1] - newView[1], 0.0); // oldView[2] - newView[2] should be == 0.0
     }
 
-    RotateCamera(rotateAboutX : number, rotateAboutY : number, rotateAboutZ : number)
-    {
+    RotateCamera(rotateAboutX: number, rotateAboutY: number, rotateAboutZ: number) {
         this.onCameraTrack = false;
         var delta = vec3.fromValues(rotateAboutX, rotateAboutY, rotateAboutZ);
 
@@ -954,24 +875,21 @@ export default class Canvas3D extends CanvasBase
         mat4.multiply(this.w2vMatrix, transform, this.w2vMatrix);
     }
 
-    SetCameraRotationalVelocity(rotate: vec2)
-    {
+    SetCameraRotationalVelocity(rotate: vec2) {
         vec2.copy(this.cameraRotationalVelocity, rotate);
     }
 
-    SwivelCamera(rotate: vec2)
-    {
+    SwivelCamera(rotate: vec2) {
         this.onCameraTrack = false;
 
         let transform = mat4.create();
         mat4.rotateY(transform, transform, rotate[0]);
         mat4.rotateX(transform, transform, rotate[1]);
-        
+
         mat4.multiply(this.w2vMatrix, transform, this.w2vMatrix);
     }
 
-    MoveCamera(moveForward: number, moveRight: number, moveUp: number)
-    {
+    MoveCamera(moveForward: number, moveRight: number, moveUp: number) {
         this.onCameraTrack = false;
 
         let transform = mat4.create();
@@ -979,8 +897,7 @@ export default class Canvas3D extends CanvasBase
         mat4.multiply(this.w2vMatrix, transform, this.w2vMatrix);
     }
 
-    ScaleCamera(factor : number)
-    {
+    ScaleCamera(factor: number) {
         this.onCameraTrack = false;
 
         // Compute focus point location in view space
@@ -1003,8 +920,7 @@ export default class Canvas3D extends CanvasBase
         mat4.multiply(this.w2vMatrix, transform, this.w2vMatrix);
     }
 
-    TranslateCamera(delta : vec3)
-    {
+    TranslateCamera(delta: vec3) {
         this.onCameraTrack = false;
 
         // Compute translation matrix
@@ -1015,17 +931,15 @@ export default class Canvas3D extends CanvasBase
         mat4.multiply(this.w2vMatrix, transform, this.w2vMatrix);
     }
 
-    IsLayerVisible(layerId : string) : boolean
-    {
+    IsLayerVisible(layerId: string): boolean {
         var showFilled = this.ShowLayerFilled(layerId) && this.globalFill;
         var showWireframe = this.ShowLayerWireframe(layerId) || (this.ShowLayerFilled(layerId) && this.globalWireframe);
         var opacity = this.GetLayerOpacity(layerId) * this.globalOpacity;
         return (showFilled || showWireframe) && opacity > 0.0;
     }
 
-    ToggleLayerFilled(index: number)
-    {
-        if(index >= this.layerIds.length) {
+    ToggleLayerFilled(index: number) {
+        if (index >= this.layerIds.length) {
             return
         }
 
@@ -1034,8 +948,7 @@ export default class Canvas3D extends CanvasBase
         this.SetLayerFilled(layerId, !filled);
     }
 
-    ShowLayerFilled(layerId : string) : boolean
-    {
+    ShowLayerFilled(layerId: string): boolean {
         if (layerId == "<<<GLOBAL>>>")
             return this.globalFill;
         if (layerId == null)
@@ -1047,16 +960,13 @@ export default class Canvas3D extends CanvasBase
         return true;
     }
 
-    SetLayerFilled(layerId : string, filled : boolean)
-    {
+    SetLayerFilled(layerId: string, filled: boolean) {
         if (layerId == null)
             return;
-        if (layerId == "<<<GLOBAL>>>")
-        {
+        if (layerId == "<<<GLOBAL>>>") {
             this.globalFill = filled;
         }
-        else
-        {
+        else {
             if (!(layerId in this.layerSettings))
                 this.layerSettings[layerId] = {};
             this.layerSettings[layerId]["filled"] = filled;
@@ -1066,8 +976,7 @@ export default class Canvas3D extends CanvasBase
         this.PrepareBuffers();
     }
 
-    ShowLayerWireframe(layerId : string) : boolean
-    {
+    ShowLayerWireframe(layerId: string): boolean {
         if (layerId == "<<<GLOBAL>>>")
             return this.globalWireframe;
         if (layerId == null)
@@ -1079,17 +988,14 @@ export default class Canvas3D extends CanvasBase
         return false;
     }
 
-    SetLayerWireframe(layerId : string, wireframe : boolean)
-    {
+    SetLayerWireframe(layerId: string, wireframe: boolean) {
         if (layerId == null)
             return;
 
-        if (layerId == "<<<GLOBAL>>>")
-        {
+        if (layerId == "<<<GLOBAL>>>") {
             this.globalWireframe = wireframe;
         }
-        else
-        {
+        else {
             if (!(layerId in this.layerSettings))
                 this.layerSettings[layerId] = {};
             this.layerSettings[layerId]["wireframe"] = wireframe;
@@ -1099,8 +1005,7 @@ export default class Canvas3D extends CanvasBase
         this.PrepareBuffers();
     }
 
-    GetLayerOpacity(layerId : string)
-    {
+    GetLayerOpacity(layerId: string) {
         if (layerId == "<<<GLOBAL>>>")
             return this.globalOpacity;
         if (layerId == null || !(layerId in this.layerSettings) || !("opacity" in this.layerSettings[layerId]))
@@ -1109,17 +1014,14 @@ export default class Canvas3D extends CanvasBase
             return <number>this.layerSettings[layerId]["opacity"];
     }
 
-    SetLayerOpacity(layerId : string, opacity : number)
-    {
+    SetLayerOpacity(layerId: string, opacity: number) {
         if (layerId == null)
             return;
 
-        if (layerId == "<<<GLOBAL>>>")
-        {
+        if (layerId == "<<<GLOBAL>>>") {
             this.globalOpacity = opacity;
         }
-        else
-        {
+        else {
             if (!(layerId in this.layerSettings))
                 this.layerSettings[layerId] = {};
             this.layerSettings[layerId]["opacity"] = opacity;
@@ -1129,20 +1031,16 @@ export default class Canvas3D extends CanvasBase
         this.PrepareBuffers();
     }
 
-    GetLayerRenderOrder(layerId : string)
-    {
+    GetLayerRenderOrder(layerId: string) {
         if (layerId == null || !(layerId in this.layerSettings) || !("renderOrder" in this.layerSettings[layerId]))
             return 1e3; // Last layer - bit of a hack
         else
             return <number>this.layerSettings[layerId]["renderOrder"];
     }
 
-    AllMeshBuffersReady()
-    {
-        if (this.frameInstances.length > 0)
-        {
-            for(var instance of this.frameInstances[this.currentFrameIndex])
-            {
+    AllMeshBuffersReady() {
+        if (this.frameInstances.length > 0) {
+            for (var instance of this.frameInstances[this.currentFrameIndex]) {
                 // Look up mesh
                 var meshId = instance.meshId;
                 var mesh = <Mesh>this.allMeshes[meshId];
@@ -1160,24 +1058,20 @@ export default class Canvas3D extends CanvasBase
     }
 
     // Override base class implementation to deal with focus point lock
-    ShowFrame(frameIndex : number)
-    {
+    ShowFrame(frameIndex: number) {
         frameIndex = Math.min(frameIndex, this.frameIds.length - 1); // Just in case
 
         // Get old and new focus points
         var oldFocusPoint = this.currentFocusPoints[this.currentFrameIndex];
         var newFocusPoint = this.currentFocusPoints[frameIndex];
 
-        if (this.frameLayerSettings[frameIndex])
-        {
+        if (this.frameLayerSettings[frameIndex]) {
             let layerSettings = this.frameLayerSettings[frameIndex];
-            for(let layerId in layerSettings)
-            {
+            for (let layerId in layerSettings) {
                 this.SetLayerFilled(layerId, layerSettings[layerId]["filled"]);
                 this.SetLayerWireframe(layerId, layerSettings[layerId]["wireframe"]);
                 this.SetLayerOpacity(layerId, layerSettings[layerId]["opacity"]);
-                if ( "renderOrder" in layerSettings )
-                {
+                if ("renderOrder" in layerSettings) {
                     this.layerSettings[layerId]["renderOrder"] = layerSettings[layerId]["renderOrder"]
                 }
 
@@ -1191,7 +1085,7 @@ export default class Canvas3D extends CanvasBase
         // Lock camera rotation to focus point?
         if (this.lockViewOrientation && oldFocusPoint.length == 6 && newFocusPoint.length == 6) // Does the focus point contain an axis angle rotation?
         {
-            var aaToMat = (axisAngle : vec3) => { var angle = vec3.length(axisAngle); var axis = vec3.create(); vec3.normalize(axis, axisAngle); var rotation = mat4.create(); mat4.fromRotation(rotation, angle, axis); return rotation; }
+            var aaToMat = (axisAngle: vec3) => { var angle = vec3.length(axisAngle); var axis = vec3.create(); vec3.normalize(axis, axisAngle); var rotation = mat4.create(); mat4.fromRotation(rotation, angle, axis); return rotation; }
 
             var oldRotation = aaToMat(<vec3>oldFocusPoint.subarray(3));
             var newRotation = aaToMat(<vec3>newFocusPoint.subarray(3));
@@ -1206,8 +1100,7 @@ export default class Canvas3D extends CanvasBase
         }
 
         // Lock camera translation to focus point?
-        if (this.lockViewXY || this.lockViewOrientation)
-        {
+        if (this.lockViewXY || this.lockViewOrientation) {
             var oldFPView = vec3.create();
             vec3.transformMat4(oldFPView, <vec3>oldFocusPoint.subarray(0, 3), w2vMatrixOld);
 
@@ -1228,8 +1121,7 @@ export default class Canvas3D extends CanvasBase
         return super.ShowFrame(frameIndex);
     }
 
-    Render()
-    {
+    Render() {
         // Check for gl to be ready
         if (this.gl == null)
             return;
@@ -1238,11 +1130,9 @@ export default class Canvas3D extends CanvasBase
         if (!this.AllMeshBuffersReady())
             return;
 
-        if(this.firstPerson)
-        {
+        if (this.firstPerson) {
             this.MoveCamera(this.cameraVelocity[0], this.cameraVelocity[1], this.cameraVelocity[2]);
-            if(this.cameraRotationalVelocity[0] != 0 || this.cameraRotationalVelocity[1] != 0)
-            {
+            if (this.cameraRotationalVelocity[0] != 0 || this.cameraRotationalVelocity[1] != 0) {
                 this.SwivelCamera(this.cameraRotationalVelocity);
             }
         }
@@ -1254,12 +1144,11 @@ export default class Canvas3D extends CanvasBase
     }
 
     // Render scene method with given w2v and v2s matrices
-    RenderViewport()
-    {
+    RenderViewport() {
         const gl = this.gl;
         const v2sMatrix = this.v2sMatrix;
 
-        if (this.onCameraTrack){
+        if (this.onCameraTrack) {
             this.SetCamera(this.frameCameraParams[this.currentFrameIndex])
         }
 
@@ -1280,13 +1169,12 @@ export default class Canvas3D extends CanvasBase
         gl.uniform3fv(this.sp.directionalLightDirPtr, this.directionalLightDir);
 
         // Get list of meshes to draw
-        let opaqueMeshData : MeshData[] = [];
-        let transparentMeshData : MeshData[] = [];
-        if (this.frameInstances.length > 0)
-        {
+        let opaqueMeshData: MeshData[] = [];
+        let transparentMeshData: MeshData[] = [];
+        if (this.frameInstances.length > 0) {
             var instances = this.frameInstances[this.currentFrameIndex];
 
-            for(var meshInstance of instances) // Loop over mesh instances
+            for (var meshInstance of instances) // Loop over mesh instances
             {
                 // Look up mesh
                 var meshId = meshInstance.meshId;
@@ -1312,11 +1200,9 @@ export default class Canvas3D extends CanvasBase
                     mat4.multiply(m2vMatrix, w2vMatrix, meshInstance.transform);
 
                 // Set properties for labels
-                if (mesh.isLabel)
-                {
+                if (mesh.isLabel) {
                     var textureSrc = this.objectCache.GetObject(mesh.textureId);
-                    if (textureSrc != null)
-                    {
+                    if (textureSrc != null) {
                         buffer.labelWidthNormalized = textureSrc.desiredWidthPixels / this.htmlCanvas.width;
                         buffer.labelHeightNormalized = textureSrc.desiredHeightPixels / this.htmlCanvas.height;
 
@@ -1328,8 +1214,7 @@ export default class Canvas3D extends CanvasBase
                 }
 
                 // Is this transparent or not?
-                if (opacity < 1.0 || (mesh.textureId != null && (mesh.useTextureAlpha || mesh.isLabel)))
-                {
+                if (opacity < 1.0 || (mesh.textureId != null && (mesh.useTextureAlpha || mesh.isLabel))) {
                     // Transform center of mass to view coordinates to get z-ordering
                     var viewCoM = vec3.create();
                     vec3.transformMat4(viewCoM, mesh.centerOfMass, m2vMatrix);
@@ -1341,8 +1226,7 @@ export default class Canvas3D extends CanvasBase
 
                     transparentMeshData.push(new MeshData(mesh, meshInstance.transform, m2vMatrix, buffer, opacity, filled, wireframe, viewDistance));
                 }
-                else
-                {
+                else {
                     opaqueMeshData.push(new MeshData(mesh, meshInstance.transform, m2vMatrix, buffer, 1.0, filled, wireframe, 0));
                 }
             }
@@ -1357,12 +1241,11 @@ export default class Canvas3D extends CanvasBase
         // Draw transparent meshes, sorted by decreasing distance from camera
         gl.depthMask(false);
         gl.enable(gl.BLEND);
-        var sortedTransparentMeshData = transparentMeshData.sort((a,b) => a.viewDistance - b.viewDistance);
+        var sortedTransparentMeshData = transparentMeshData.sort((a, b) => a.viewDistance - b.viewDistance);
         sortedTransparentMeshData.forEach(data => data.Render(gl, v2sMatrix));
 
         // Show focus point
-        if (this.showFocusPoint)
-        {
+        if (this.showFocusPoint) {
             gl.disable(gl.DEPTH_TEST);
             var focusPoint = this.currentFocusPoints[this.currentFrameIndex];
             var focusPointPosition = <vec3>focusPoint.subarray(0, 3);
@@ -1374,23 +1257,21 @@ export default class Canvas3D extends CanvasBase
         }
 
         // If enabled, orbit the camera
-        if (this.orbitCamera)
-        {
+        if (this.orbitCamera) {
             // Adjust for any framerate changes
             var now = new Date();
-            if (this.lastOrbitTime != null)
-            {
+            if (this.lastOrbitTime != null) {
                 var deltaTime = now.getTime() - this.lastOrbitTime.getTime();
                 this.RotateCamera(0.0, 0.0025 * deltaTime, 0.0); // Rotate about y axis
             }
             this.lastOrbitTime = now;
         }
 
-        if (this.setFocusToPicked && opaqueMeshData.length > 0){
+        if (this.setFocusToPicked && opaqueMeshData.length > 0) {
             let buffers: [WebGLMeshBuffers, mat4][] = [];
-            for(let i=0; i<opaqueMeshData.length; i++){
+            for (let i = 0; i < opaqueMeshData.length; i++) {
                 let meshData = opaqueMeshData[i];
-                if(meshData.mesh.cameraSpace) {
+                if (meshData.mesh.cameraSpace) {
                     continue;
                 }
 
@@ -1398,29 +1279,29 @@ export default class Canvas3D extends CanvasBase
                 buffers.push([meshData.buffer, meshData.m2vMatrix]);
             }
             const picked = this.meshPicker.Pick(gl, buffers, this.pickPoint, v2sMatrix)
-            if(picked == 0){
+            if (picked == 0) {
                 var focusPointView = this.GetCurrentFocusPointInViewSpace();
 
                 var s2vMatrix = mat4.create();
                 var v2wMatrix = mat4.create();
                 mat4.invert(s2vMatrix, this.v2sMatrix);
                 mat4.invert(v2wMatrix, this.w2vMatrix);
-        
+
                 // Convert from pixel to screen coordinates
                 var clientRect = this.htmlCanvas.getBoundingClientRect();
                 var screen = vec3.fromValues(2.0 * (this.pickPoint[0] / clientRect.width - 0.5),
-                                             2.0 * (0.5 - this.pickPoint[1] / clientRect.height), 1.0);
-        
+                    2.0 * (0.5 - this.pickPoint[1] / clientRect.height), 1.0);
+
                 // Convert from screen to view coordinates
                 var view = vec3.create();
                 vec3.transformMat4(view, screen, s2vMatrix);
                 vec3.scale(view, view, focusPointView[2] / view[2]) // Fix z value to existing focus point z value
-        
+
                 // Convert from view to world coordinates
                 var focusPoint = this.currentFocusPoints[this.currentFrameIndex];
                 var focusPointPosition = <vec3>focusPoint.subarray(0, 3);
                 vec3.transformMat4(focusPointPosition, view, v2wMatrix);
-            }else{
+            } else {
                 const pickedCentroid = opaqueMeshData[picked - 1].ComputeCentroid();
                 var focusPoint = this.currentFocusPoints[this.currentFrameIndex];
                 focusPoint[0] = pickedCentroid[0];

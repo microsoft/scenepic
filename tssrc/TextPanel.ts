@@ -1,15 +1,13 @@
 
-export default class TextPanel
-{
-    minimized : boolean;
-    title : string;
-    header : HTMLSpanElement;
-    wrapper : HTMLDivElement; // Contains both contents and inputBox
-    contents : HTMLSpanElement;
-    inputBox : HTMLTextAreaElement;
+export default class TextPanel {
+    minimized: boolean;
+    title: string;
+    header: HTMLSpanElement;
+    wrapper: HTMLDivElement; // Contains both contents and inputBox
+    contents: HTMLSpanElement;
+    inputBox: HTMLTextAreaElement;
 
-    constructor(id : string, title : string, style : string, parent : HTMLElement, startMinimized = false, addInputBox = false)
-    {
+    constructor(id: string, title: string, style: string, parent: HTMLElement, startMinimized = false, addInputBox = false) {
         // Create div
         var div = document.createElement("div");
         div.className = "scenepic"; // CSS style class name
@@ -50,30 +48,26 @@ export default class TextPanel
         parent.appendChild(div);
     }
 
-    SetContents(htmlContents : string, append = false)
-    {
+    SetContents(htmlContents: string, append = false) {
         if (append)
             this.contents.innerHTML += htmlContents;
         else
             this.contents.innerHTML = htmlContents;
     }
 
-    SetTitle(htmlTitle : string)
-    {
+    SetTitle(htmlTitle: string) {
         this.title = htmlTitle;
         this.Update();
     }
 
-    Update()
-    {
+    Update() {
         this.header.style.display = (this.title == null || this.title == "") ? "none" : "";
         this.header.innerHTML = this.title + (this.minimized ? " &#9661;" : " &#9655;");
         var newDisplayValue = this.minimized ? "none" : "inline-block";
         this.wrapper.style.display = newDisplayValue;
     }
 
-    SetInputBoxContents(htmlContents : string)
-    {
+    SetInputBoxContents(htmlContents: string) {
         this.inputBox.value = htmlContents;
     }
 }

@@ -1,4 +1,4 @@
-import {ObjectCache, CanvasBase} from "./CanvasBase"
+import { ObjectCache, CanvasBase } from "./CanvasBase"
 import Canvas3D from "./Canvas3D";
 import Canvas2D from "./Canvas2D";
 import Graph from "./Graph";
@@ -8,40 +8,39 @@ import InitializeCSSStyles from "./CSSStyles";
 import Misc from "./Misc"
 import Mesh from "./Mesh";
 import { VertexBufferType } from "./VertexBuffers";
-import {vec2, vec3} from "gl-matrix";
-import {saveAs} from "file-saver";
+import { vec2, vec3 } from "gl-matrix";
+import { saveAs } from "file-saver";
 import * as JSZip from "jszip";
 
 const StatusPanelName = "___STATUS___";
 const LogPanelName = "___LOG___";
 const HelpPanelName = "___HELP___";
 
-export default class SPScene
-{
-    div : HTMLDivElement;
-    statusDiv : HTMLDivElement;
-    progressDiv : HTMLDivElement;
-    progressBar : HTMLSpanElement;
-    canvasDiv : HTMLDivElement = null;
-    statusDivNeedsPadding : boolean;
+export default class SPScene {
+    div: HTMLDivElement;
+    statusDiv: HTMLDivElement;
+    progressDiv: HTMLDivElement;
+    progressBar: HTMLSpanElement;
+    canvasDiv: HTMLDivElement = null;
+    statusDivNeedsPadding: boolean;
 
     // Scene identifier
-    sceneId : string;
+    sceneId: string;
 
     // Set of global meshes
     allMeshes = {};
 
     // Set of global images and text labels that can be used as textures
-    objectCache : ObjectCache;
+    objectCache: ObjectCache;
 
     // Text panels by id
-    textPanels : Map<string, TextPanel> = new Map<string, TextPanel>();
+    textPanels: Map<string, TextPanel> = new Map<string, TextPanel>();
 
     // Drop down menus by id
-    dropDownMenus : Map<string, DropDownMenu> = new Map<string, DropDownMenu>();
+    dropDownMenus: Map<string, DropDownMenu> = new Map<string, DropDownMenu>();
 
     // Canvases (3D and 2D)
-    canvases : Map<string, CanvasBase> = new Map<string, CanvasBase>();
+    canvases: Map<string, CanvasBase> = new Map<string, CanvasBase>();
 
     // Mesh keyframes
     meshKeyframes = {};
@@ -50,38 +49,36 @@ export default class SPScene
     canvasGroups = {};
 
     // WebSocket for use in interactive mode
-    ws : WebSocket = null;  
+    ws: WebSocket = null;
 
     // Playback rate
-    playbackRate : number = 1.0;
-    media : HTMLMediaElement[] = [];
-    isPlaying : boolean = false;
-    frameRate : number = 30.0;
-    timePerFrame : number = 1.0 / 30.0;
+    playbackRate: number = 1.0;
+    media: HTMLMediaElement[] = [];
+    isPlaying: boolean = false;
+    frameRate: number = 30.0;
+    timePerFrame: number = 1.0 / 30.0;
 
     // Global controls
-    recordButton : HTMLButtonElement;
-    playPauseToggle : HTMLInputElement;
-    volumeToggle : HTMLInputElement;
-    volumeSlider : HTMLInputElement;
+    recordButton: HTMLButtonElement;
+    playPauseToggle: HTMLInputElement;
+    volumeToggle: HTMLInputElement;
+    volumeSlider: HTMLInputElement;
 
     // Recording
-    recordingZip : JSZip;
-    canvasZipFolders : {[id: string] : JSZip};
-    numFramesPerCanvas : {[id: string]: number};
-    currentRecordingFrame : number;
-    maxFrames : number;
+    recordingZip: JSZip;
+    canvasZipFolders: { [id: string]: JSZip };
+    numFramesPerCanvas: { [id: string]: number };
+    currentRecordingFrame: number;
+    maxFrames: number;
 
-    constructor(element : HTMLElement = null) // element is passed in if being used from Jupyter
+    constructor(element: HTMLElement = null) // element is passed in if being used from Jupyter
     {
         // Create image and label cache
-        var self : SPScene = this; // Since the lambda below would have a different "this"
-        this.objectCache = new ObjectCache(textureId =>
-        {
+        var self: SPScene = this; // Since the lambda below would have a different "this"
+        this.objectCache = new ObjectCache(textureId => {
             // Update all canvases that are consuming this image
-            for(var canvasId in self.canvases)
-            {
-                var canvas : CanvasBase = self.canvases[canvasId];
+            for (var canvasId in self.canvases) {
+                var canvas: CanvasBase = self.canvases[canvasId];
                 canvas.NotifyTextureUpdated(textureId);
             }
         });
@@ -185,8 +182,7 @@ export default class SPScene
         this.UpdateStatusPadding();
     }
 
-    private createToggleButton(title: string, icon: string) : [HTMLLabelElement, HTMLInputElement]
-    {
+    private createToggleButton(title: string, icon: string): [HTMLLabelElement, HTMLInputElement] {
         let label = document.createElement("label");
         label.className = "scenepic-toggle-button";
         label.title = title;
@@ -202,46 +198,37 @@ export default class SPScene
         return [label, checkbox];
     }
 
-    ResetAllViews()
-    {
-        for(let canvasId in this.canvases)
-        {
+    ResetAllViews() {
+        for (let canvasId in this.canvases) {
             let canvas = this.canvases[canvasId];
-            if(canvas instanceof Canvas3D)
-            {
+            if (canvas instanceof Canvas3D) {
                 canvas.ResetView();
             }
         }
     }
 
-    UpdateVolume()
-    {
+    UpdateVolume() {
         let volume = undefined;
-        if(this.volumeToggle.checked)
-        {
+        if (this.volumeToggle.checked) {
             volume = this.volumeSlider.valueAsNumber;
         }
 
-        for(let canvasId in this.canvases)
-        {
-            let canvas : CanvasBase = this.canvases[canvasId];
+        for (let canvasId in this.canvases) {
+            let canvas: CanvasBase = this.canvases[canvasId];
             canvas.Volume = volume;
         }
     }
 
-    Record()
-    {
+    Record() {
         this.numFramesPerCanvas = {}
         this.canvasZipFolders = {}
         this.maxFrames = 0;
         this.recordingZip = new JSZip();
-        for(let canvasId in this.canvases)
-        {
+        for (let canvasId in this.canvases) {
             this.canvasZipFolders[canvasId] = this.recordingZip.folder(canvasId);
-            let canvas : CanvasBase = this.canvases[canvasId];
+            let canvas: CanvasBase = this.canvases[canvasId];
             canvas.IsRecording = true;
-            if(canvas.FrameCount > this.maxFrames)
-            {
+            if (canvas.FrameCount > this.maxFrames) {
                 this.maxFrames = canvas.FrameCount;
             }
 
@@ -255,40 +242,34 @@ export default class SPScene
         setTimeout(() => this.recordFrame(), 1);
     }
 
-    recordFrame()
-    {
+    recordFrame() {
         let imageName = "frame_" + String(this.currentRecordingFrame).padStart(4, "0") + ".png";
         let allDefined = true;
-        for(let canvasId in this.canvases)
-        {
-            let canvas : CanvasBase = this.canvases[canvasId];
+        for (let canvasId in this.canvases) {
+            let canvas: CanvasBase = this.canvases[canvasId];
             canvas.ShowFrame(this.currentRecordingFrame % this.numFramesPerCanvas[canvasId]);
-            if(canvas.DataUrl != null)
-            {
+            if (canvas.DataUrl != null) {
                 let imageBlob = Misc.DataUrlToBlob(canvas.DataUrl);
                 this.canvasZipFolders[canvasId].file(imageName, imageBlob);
             }
-            else
-            {
+            else {
                 console.warn("Frame " + this.currentRecordingFrame + " undefined for canvas " + canvasId);
                 allDefined = false;
             }
         }
 
-        if(allDefined){
+        if (allDefined) {
             this.currentRecordingFrame += 1;
         }
 
         let percentComplete = 100 * this.currentRecordingFrame / this.maxFrames;
         this.progressBar.style.width = percentComplete + "%";
-        if(this.currentRecordingFrame == this.maxFrames)
-        {
-            let media : Set<string> = new Set<string>();
+        if (this.currentRecordingFrame == this.maxFrames) {
+            let media: Set<string> = new Set<string>();
             this.recordButton.classList.remove("is-blinking");
-            for(let canvasId in this.canvases)
-            {
-                let canvas : CanvasBase = this.canvases[canvasId];
-                if(canvas.mediaId != null){
+            for (let canvasId in this.canvases) {
+                let canvas: CanvasBase = this.canvases[canvasId];
+                if (canvas.mediaId != null) {
                     media.add(canvas.mediaId);
                 }
 
@@ -296,34 +277,30 @@ export default class SPScene
                 canvas.ShowFrame(0);
             }
 
-            for(let mediaId of media)
-            {
+            for (let mediaId of media) {
                 let blob = this.objectCache.GetBlob(mediaId);
                 this.recordingZip.file(mediaId + "." + blob.type, blob);
             }
 
-            this.recordingZip.generateAsync({type:"blob"})
-            .then(function(content) {
-                const filename = document.title.replace(' ', '_').toLowerCase() + ".zip";
-                saveAs(content, filename);
-             });
+            this.recordingZip.generateAsync({ type: "blob" })
+                .then(function (content) {
+                    const filename = document.title.replace(' ', '_').toLowerCase() + ".zip";
+                    saveAs(content, filename);
+                });
 
-             this.progressDiv.style.visibility = "hidden";
+            this.progressDiv.style.visibility = "hidden";
         }
-        else
-        {
+        else {
             setTimeout(() => this.recordFrame(), 0);
         }
     }
 
-    UpdateStatusPadding()
-    {
+    UpdateStatusPadding() {
         if (this.statusDivNeedsPadding)
             this.div.setAttribute("style", `padding-bottom:${this.statusDiv.offsetHeight}px;`);
     }
 
-    SetStatus(status : string)
-    {
+    SetStatus(status: string) {
         var html = "";
         html += "<span class='scenepic-textbox-content'>";
         html += status;
@@ -332,8 +309,7 @@ export default class SPScene
         this.UpdateStatusPadding();
     }
 
-    AddLogMessage(message : string, color : string)
-    {
+    AddLogMessage(message: string, color: string) {
         if (!(LogPanelName in this.textPanels))
             this.AddTextPanel(LogPanelName, "Log", null, this.statusDiv);
 
@@ -348,29 +324,24 @@ export default class SPScene
         this.UpdateStatusPadding();
     }
 
-    AddWarning(message : string)
-    {
+    AddWarning(message: string) {
         this.AddLogMessage("WARNING: " + message, "red");
     }
 
-    ConnectToServer(address : string)
-    {
+    ConnectToServer(address: string) {
         // Try to create websocket connection to server
         this.SetStatus("Connecting to " + address);
         this.ws = new WebSocket(address);
         this.ws.onerror = event => this.AddWarning("WebSockets connection to " + address + " failed to open!");
         this.ws.onmessage = event => this.MessageReceived(event);
-        this.ws.onopen = event =>
-        {
+        this.ws.onopen = event => {
             this.AddLogMessage("WebSockets connection to " + address + "opened successfully", "green");
-            if (this.sceneId != null)
-            {
+            if (this.sceneId != null) {
                 this.SetSceneId(this.sceneId);
             }
 
             // Send initial frame id for all canvases
-            for(var canvasId in this.canvases)
-            {
+            for (var canvasId in this.canvases) {
                 var canvas = this.canvases[canvasId];
                 this.ReportFrameIdChange(canvasId, canvas.GetCurrentFrameId());
             }
@@ -379,8 +350,7 @@ export default class SPScene
         this.SetStatus("done");
     }
 
-    MessageReceived(event : MessageEvent)
-    {
+    MessageReceived(event: MessageEvent) {
         // Decode from json
         var timeReceived = new Date().getTime();
         var data = JSON.parse(event.data);
@@ -401,12 +371,11 @@ export default class SPScene
         this.ExecuteSceneCommands(commands);
 
         // Compute timings
-        var jsonEncodeDuration : any = "Unknown";
-        var transmitDuration : any = "Unknown";
+        var jsonEncodeDuration: any = "Unknown";
+        var transmitDuration: any = "Unknown";
         var jsonDecodeDuration = timeParsed - timeReceived;
         var sceneParseDuration = new Date().getTime() - timeParsed;
-        if ("Timings" in data)
-        {
+        if ("Timings" in data) {
             var timings = data["Timings"]
             var jsonEncodeStart = timings[0];
             var messageSendStart = timings[1];
@@ -416,11 +385,9 @@ export default class SPScene
         this.SetStatus("Updated.  Timings: enc:" + jsonEncodeDuration + "ms, tx:" + transmitDuration + "ms, dec:" + jsonDecodeDuration + "ms, parse:" + sceneParseDuration + "ms");
     }
 
-    private AddTextPanel(id : string, title : string, style : string, parent : HTMLElement, startMinimized = false, addInputBox = false)
-    {
+    private AddTextPanel(id: string, title: string, style: string, parent: HTMLElement, startMinimized = false, addInputBox = false) {
         // Check unique
-        if (id in this.textPanels)
-        {
+        if (id in this.textPanels) {
             this.AddWarning("TextPanel id " + id + " already exists in SPScene");
             return;
         }
@@ -438,8 +405,7 @@ export default class SPScene
         this.UpdateStatusPadding();
     }
 
-    private SetTextPanelValue(id : string, htmlContents : string, append = false)
-    {
+    private SetTextPanelValue(id: string, htmlContents: string, append = false) {
         // Check exists
         if (!(id in this.textPanels))
             this.AddWarning("TextPanel id " + id + " not found. Try AddTextPanel first.");
@@ -449,8 +415,7 @@ export default class SPScene
         this.UpdateStatusPadding();
     }
 
-    private SetTextPanelTitle(id : string, title : string)
-    {
+    private SetTextPanelTitle(id: string, title: string) {
         // Check exists
         if (!(id in this.textPanels))
             this.AddWarning("TextPanel id " + id + " not found. Try AddTextPanel first.");
@@ -459,8 +424,7 @@ export default class SPScene
         this.UpdateStatusPadding();
     }
 
-    private SetTextPanelInputText(id : string, text : string)
-    {
+    private SetTextPanelInputText(id: string, text: string) {
         // Check exists
         if (!(id in this.textPanels))
             this.AddWarning("TextPanel id " + id + " not found. Try AddTextPanel first.");
@@ -469,11 +433,9 @@ export default class SPScene
         this.UpdateStatusPadding();
     }
 
-    private AddDropDownMenu(id : string, title : string, style : string, parent : HTMLElement)
-    {
+    private AddDropDownMenu(id: string, title: string, style: string, parent: HTMLElement) {
         // Check unique
-        if (id in this.dropDownMenus)
-        {
+        if (id in this.dropDownMenus) {
             this.AddWarning("DropDownMenu id " + id + " already exists in SPScene");
             return;
         }
@@ -484,7 +446,7 @@ export default class SPScene
         // Add event to report
         var host = this;
         let menu = this.dropDownMenus.get(id)
-        
+
         menu.dropDownMenu.onchange = () => host.ReportDropDownMenuChange(id, menu.dropDownMenu.selectedIndex);
         menu.header.addEventListener("click", () => this.UpdateStatusPadding());
 
@@ -492,8 +454,7 @@ export default class SPScene
         this.UpdateStatusPadding();
     }
 
-    private SetDropDownMenuItems(id : string, items : string[])
-    {
+    private SetDropDownMenuItems(id: string, items: string[]) {
         // Check exists
         if (!(id in this.dropDownMenus))
             this.AddWarning("DropDownMenu id " + id + " not found. Try AddDropDownMenu first.");
@@ -503,8 +464,7 @@ export default class SPScene
         this.UpdateStatusPadding();
     }
 
-    private SetDropDownMenuItemDisabled(id : string, index : number, disabled : boolean)
-    {
+    private SetDropDownMenuItemDisabled(id: string, index: number, disabled: boolean) {
         // Check exists
         if (!(id in this.dropDownMenus))
             this.AddWarning("DropDownMenu id " + id + " not found. Try AddDropDownMenu first.");
@@ -514,8 +474,7 @@ export default class SPScene
         this.UpdateStatusPadding();
     }
 
-    private SetDropDownMenuSelection(id : string, index : number)
-    {
+    private SetDropDownMenuSelection(id: string, index: number) {
         // Check exists
         if (!(id in this.dropDownMenus))
             this.AddWarning("DropDownMenu id " + id + " not found. Try AddDropDownMenu first.");
@@ -526,13 +485,10 @@ export default class SPScene
     }
 
 
-    private GetParentDOMElement(htmlId : string)
-    {
+    private GetParentDOMElement(htmlId: string) {
         var parent = htmlId != null ? document.getElementById(htmlId) : null;
-        if (parent == null)
-        {
-            if (this.canvasDiv == null)
-            {
+        if (parent == null) {
+            if (this.canvasDiv == null) {
                 this.canvasDiv = document.createElement("div");
                 this.canvasDiv.className = "scenepic"; // CSS style class name
                 this.div.appendChild(this.canvasDiv);
@@ -542,12 +498,10 @@ export default class SPScene
         return parent;
     }
 
-    private RequestRedraw()
-    {
+    private RequestRedraw() {
     }
 
-    private AddCanvas3D(canvasId : string, width : number, height : number, parent : HTMLElement)
-    {
+    private AddCanvas3D(canvasId: string, width: number, height: number, parent: HTMLElement) {
         // Check unique
         if (canvasId in this.canvases) // Loops over keys (ids) in dictionary
         {
@@ -562,8 +516,7 @@ export default class SPScene
         this.InitializeCanvas(canvas, canvasId, parent, true);
     }
 
-    private AddCanvas2D(canvasId : string, width : number, height : number, parent : HTMLElement)
-    {
+    private AddCanvas2D(canvasId: string, width: number, height: number, parent: HTMLElement) {
         // Check unique
         if (canvasId in this.canvases) // Loops over keys (ids) in dictionary
         {
@@ -578,8 +531,7 @@ export default class SPScene
         this.InitializeCanvas(canvas, canvasId, parent, true);
     }
 
-    private AddGraph(canvasId : string, width : number, height : number, parent : HTMLElement)
-    {
+    private AddGraph(canvasId: string, width: number, height: number, parent: HTMLElement) {
         // Check unique
         if (canvasId in this.canvases) // Loops over keys (ids) in dictionary
         {
@@ -594,8 +546,7 @@ export default class SPScene
         this.InitializeCanvas(canvas, canvasId, parent, false);
     }
 
-    InitializeCanvas(canvas : CanvasBase, canvasId : string,  parent : HTMLElement, pointerEvents : boolean)
-    {
+    InitializeCanvas(canvas: CanvasBase, canvasId: string, parent: HTMLElement, pointerEvents: boolean) {
         // Save
         this.canvases[canvasId] = canvas;
         canvas.handlesMouse = pointerEvents;
@@ -605,26 +556,25 @@ export default class SPScene
 
         // Add event handlers
         var htmlCanvas = canvas.htmlCanvas;
-        if (pointerEvents)
-        {
+        if (pointerEvents) {
             htmlCanvas.addEventListener("pointerdown", event => this.HandlePointerDown(event), true);
             htmlCanvas.addEventListener("pointerup", event => this.HandlePointerUp(event), true);
             htmlCanvas.addEventListener("pointermove", event => this.HandlePointerMove(event), true);
             htmlCanvas.addEventListener("pointerout", event => this.HandlePointerUp(event), true);
             htmlCanvas.addEventListener("wheel", event => this.HandleMouseWheel(event), true);
         }
-        htmlCanvas.addEventListener("keydown", event => { 
+        htmlCanvas.addEventListener("keydown", event => {
             let propagate = this.HandleKeyDown(canvasId, event.key, event.altKey, event.ctrlKey, event.shiftKey, event.metaKey);
-            if(!propagate)
+            if (!propagate)
                 event.preventDefault()
         }, true);
         htmlCanvas.addEventListener("keyup", event => { this.HandleKeyUp(canvasId, event); })
         htmlCanvas.addEventListener("mousemove", event => { event.preventDefault(); }, true); // Consume drag in IE
         htmlCanvas.addEventListener("mousedown", event => { htmlCanvas.focus(); event.preventDefault(); }, true); // Consume drag in IE
         canvas.slider.oninput = event => this.SliderChanged(event);
-        canvas.slider.onkeydown = event => { 
-            let propagate = this.HandleKeyDown(canvasId, event.key, event.altKey, event.ctrlKey, event.shiftKey, event.metaKey); 
-            if(!propagate)
+        canvas.slider.onkeydown = event => {
+            let propagate = this.HandleKeyDown(canvasId, event.key, event.altKey, event.ctrlKey, event.shiftKey, event.metaKey);
+            if (!propagate)
                 event.preventDefault()
         };
         htmlCanvas.focus(); // Ensure keypresses are dealt with
@@ -634,15 +584,13 @@ export default class SPScene
         canvas.slider.setAttribute("SPCanvasId", canvasId);
 
         // Store in canvas group for event linking
-        this.canvasGroups[canvasId] = { };
+        this.canvasGroups[canvasId] = {};
         this.canvasGroups[canvasId][canvasId] = true;
     }
 
     // Add new or replace existing mesh
-    DefineMesh(meshId : string, layerId : string, definition : any, cameraSpace : boolean, doubleSided : boolean, isBillboard : boolean, isLabel : boolean)
-    {
-        try
-        {
+    DefineMesh(meshId: string, layerId: string, definition: any, cameraSpace: boolean, doubleSided: boolean, isBillboard: boolean, isLabel: boolean) {
+        try {
             var mesh = Mesh.Parse(definition);
             mesh.cameraSpace = cameraSpace;
             mesh.layerId = layerId;
@@ -651,29 +599,25 @@ export default class SPScene
             mesh.isLabel = isLabel;
             this.allMeshes[meshId] = mesh;
         }
-        catch (e)
-        {
+        catch (e) {
             this.AddWarning(e);
         }
 
         // Update all canvases that are consuming this mesh
-        for(var canvasId in this.canvases)
-        {
+        for (var canvasId in this.canvases) {
             var canvas = this.canvases[canvasId];
             canvas.NotifyMeshUpdated(meshId);
         }
     }
 
     // Update an existing mesh to create a new mesh
-    UpdateMesh(baseMeshId: string, meshId: string, buffer: Float32Array|Uint16Array, frameIndex: number, keyframeIndex: number, min: number, max: number, updateFlags: VertexBufferType)
-    {
+    UpdateMesh(baseMeshId: string, meshId: string, buffer: Float32Array | Uint16Array, frameIndex: number, keyframeIndex: number, min: number, max: number, updateFlags: VertexBufferType) {
         let unquantizedBuffer: Float32Array;
         if (buffer instanceof Uint16Array) {
             let range = (max - min) / 65535.0;
             unquantizedBuffer = new Float32Array(buffer.length);
             let keyframeVertexBuffer = this.meshKeyframes[baseMeshId + keyframeIndex];
-            for(let i=0; i < unquantizedBuffer.length; ++i)
-            {
+            for (let i = 0; i < unquantizedBuffer.length; ++i) {
                 unquantizedBuffer[i] = buffer[i] * range + min + keyframeVertexBuffer[i];
             }
         } else {
@@ -681,31 +625,26 @@ export default class SPScene
             this.meshKeyframes[baseMeshId + frameIndex] = unquantizedBuffer;
         }
 
-        try
-        {
+        try {
             var mesh = this.allMeshes[baseMeshId];
             this.allMeshes[meshId] = mesh.Update(unquantizedBuffer, updateFlags);
         }
-        catch (e)
-        {
+        catch (e) {
             this.AddWarning(e);
         }
 
         // Update all canvases that are consuming this mesh
-        for(var canvasId in this.canvases)
-        {
+        for (var canvasId in this.canvases) {
             var canvas = this.canvases[canvasId];
             canvas.NotifyMeshUpdated(meshId);
         }
     }
 
     // Execute commands
-    ExecuteSceneCommands(command : any)
-    {
+    ExecuteSceneCommands(command: any) {
         // Support recursive parsing of sub-lists of commands
-        if (Array.isArray(command))
-        {
-            for(var com of command)
+        if (Array.isArray(command)) {
+            for (var com of command)
                 this.ExecuteSceneCommands(com);
             return;
         }
@@ -714,11 +653,9 @@ export default class SPScene
         if (!("CommandType" in command))
             this.AddWarning("Expecting \"CommandType\" in Scene Command object: " + JSON.stringify(command));
 
-        switch(command["CommandType"])
-        {
+        switch (command["CommandType"]) {
             case "ConfigureUserInterface": // Provided for convenience - really a per canvas option
-                for(var canvasId in this.canvases)
-                {
+                for (var canvasId in this.canvases) {
                     var canvas = this.canvases[canvasId];
                     if (canvas instanceof Canvas3D)
                         canvas.ConfigureUserInterface(command);
@@ -744,7 +681,7 @@ export default class SPScene
                 var isBillboard = Misc.GetDefault(command, "IsBillboard", false);
                 var isLabel = Misc.GetDefault(command, "IsLabel", false);
                 this.DefineMesh(meshId, layerId, definition, cameraSpace, doubleSided, isBillboard, isLabel);
-                break;             
+                break;
 
             case "UpdateMesh":
                 var baseMeshId = String(command["BaseMeshId"]);
@@ -754,8 +691,8 @@ export default class SPScene
                 var min = Misc.GetDefault(command, "MinValue", 0);
                 var max = Misc.GetDefault(command, "MaxValue", 0);
                 var updateFlags = command["UpdateFlags"] as number as VertexBufferType;
-                var buffer: Float32Array|Uint16Array;
-                if ("QuantizedBuffer" in command) 
+                var buffer: Float32Array | Uint16Array;
+                if ("QuantizedBuffer" in command)
                     buffer = Misc.Base64ToUInt16Array(command["QuantizedBuffer"])
                 else
                     buffer = Misc.Base64ToFloat32Array(command["VertexBuffer"])
@@ -943,11 +880,9 @@ export default class SPScene
     }
 
     // Close down the webpage
-    ShutDown()
-    {
+    ShutDown() {
         var children = document.body.children;
-        for (var i = 0; i < children.length; ++i)
-        {
+        for (var i = 0; i < children.length; ++i) {
             document.body.removeChild(children[i]);
         }
         document.write("Session closed.  Window closing...");
@@ -955,10 +890,8 @@ export default class SPScene
     }
 
     // Load scripts from file
-    LoadScripts(filenames : string[])
-    {
-        var loadJSON = (id : string, filename : string, successHandler, failureHandler) =>
-        {
+    LoadScripts(filenames: string[]) {
+        var loadJSON = (id: string, filename: string, successHandler, failureHandler) => {
             var elm = document.createElement("script");
             elm.id = id;
             elm.setAttribute("type", "text/javascript");
@@ -968,13 +901,11 @@ export default class SPScene
             document.body.appendChild(elm);
         };
 
-        var loadScript = (index : number) =>
-        {
+        var loadScript = (index: number) => {
             if (index >= filenames.length) { this.SetStatus("done"); return; }
             var id = "__loaded-script-" + index.toString() + "__";
 
-            var success = event =>
-            {
+            var success = event => {
                 // Execute the script
                 var commands = (<any>window).ScriptCommands;
                 if (commands != null)
@@ -997,21 +928,17 @@ export default class SPScene
         loadScript(0);
     }
 
-    private SetSceneId(id : string)
-    {
+    private SetSceneId(id: string) {
         this.sceneId = id;
         this.ReportSceneIdChange();
         this.SetStatus("SceneId: " + this.sceneId);
     }
 
     // Link events across multiple canvases
-    private LinkCanvasEvents(ids : string[])
-    {
-        for (var i = 0; i < ids.length; i++)
-        {
+    private LinkCanvasEvents(ids: string[]) {
+        for (var i = 0; i < ids.length; i++) {
             var group = this.canvasGroups[ids[i]];
-            for (var j = 0; j < ids.length; j++)
-            {
+            for (var j = 0; j < ids.length; j++) {
                 var id = ids[j];
                 if (id in group) continue;
                 group[id] = true;
@@ -1019,95 +946,79 @@ export default class SPScene
         }
     }
 
-    private GetEventCanvasId(event : any)
-    {
+    private GetEventCanvasId(event: any) {
         return (<HTMLElement>event.target).getAttribute("SPCanvasId");
     }
 
-    private GetTargetCanvases(canvasId : string) : Canvas2D[] | Canvas3D[] | null
-    {
+    private GetTargetCanvases(canvasId: string): Canvas2D[] | Canvas3D[] | null {
         if (canvasId == null) return null;
         const canvasGroup = this.canvasGroups[canvasId];
         const canvasIds = Object.keys(canvasGroup);
         const source = this.canvases[canvasId];
-        if(source instanceof Canvas3D){
+        if (source instanceof Canvas3D) {
             return canvasIds.map(id => this.canvases[id])
-                            .filter(canvas => canvas instanceof Canvas3D)
-                            .map(canvas => <Canvas3D>canvas)
-        }else if(source instanceof Canvas2D){
+                .filter(canvas => canvas instanceof Canvas3D)
+                .map(canvas => <Canvas3D>canvas)
+        } else if (source instanceof Canvas2D) {
             return canvasIds.map(id => this.canvases[id])
-                            .filter(canvas => canvas instanceof Canvas2D)
-                            .map(canvas => <Canvas2D>canvas)
-        }else {
+                .filter(canvas => canvas instanceof Canvas2D)
+                .map(canvas => <Canvas2D>canvas)
+        } else {
             return null
         }
     }
 
-    private ReportReceived(ack_data : any)
-    {
-        if (this.ws != null && this.ws.readyState == WebSocket.OPEN)
-        {
-            var obj = { "Type" : "AcknowledgeCommand", "AckData" : ack_data };
+    private ReportReceived(ack_data: any) {
+        if (this.ws != null && this.ws.readyState == WebSocket.OPEN) {
+            var obj = { "Type": "AcknowledgeCommand", "AckData": ack_data };
             this.ws.send(JSON.stringify(obj));
         }
     }
 
-    private ReportSceneIdChange()
-    {
-        if (this.ws != null && this.ws.readyState == WebSocket.OPEN && this.sceneId != null)
-        {
-            var obj = { "Type" : "SceneIdChange", "SceneId" : this.sceneId };
+    private ReportSceneIdChange() {
+        if (this.ws != null && this.ws.readyState == WebSocket.OPEN && this.sceneId != null) {
+            var obj = { "Type": "SceneIdChange", "SceneId": this.sceneId };
             this.ws.send(JSON.stringify(obj));
         }
     }
 
-    private ReportKeyPress(key, altKey : boolean, ctrlKey : boolean, shiftKey : boolean, metaKey : boolean, canvasId : string, frameId : string)
-    {
-        if (this.ws != null && this.ws.readyState == WebSocket.OPEN)
-        {
-            var obj = { "Type" : "KeyPress", "Key" : key, "Alt" : altKey, "Ctrl" : ctrlKey, "Shift" : shiftKey, "Meta" : metaKey, "CanvasId" : canvasId };
+    private ReportKeyPress(key, altKey: boolean, ctrlKey: boolean, shiftKey: boolean, metaKey: boolean, canvasId: string, frameId: string) {
+        if (this.ws != null && this.ws.readyState == WebSocket.OPEN) {
+            var obj = { "Type": "KeyPress", "Key": key, "Alt": altKey, "Ctrl": ctrlKey, "Shift": shiftKey, "Meta": metaKey, "CanvasId": canvasId };
             if (frameId != null) obj["FrameId"] = frameId;
             this.ws.send(JSON.stringify(obj));
         }
     }
 
-    private ReportInputBoxChange(textPanelId : string, value : string)
-    {
-        if (this.ws != null && this.ws.readyState == WebSocket.OPEN)
-        {
-            var obj = { "Type" : "InputBoxChange", "TextPanelId" : textPanelId, "Value" : value };
+    private ReportInputBoxChange(textPanelId: string, value: string) {
+        if (this.ws != null && this.ws.readyState == WebSocket.OPEN) {
+            var obj = { "Type": "InputBoxChange", "TextPanelId": textPanelId, "Value": value };
             this.ws.send(JSON.stringify(obj));
         }
     }
 
-    private ReportDropDownMenuChange(dropDownMenuId : string, index : number)
-    {
-        if (this.ws != null && this.ws.readyState == WebSocket.OPEN)
-        {
-            var obj = { "Type" : "DropDownMenuChange", "DropDownMenuId" : dropDownMenuId, "Index" : index };
+    private ReportDropDownMenuChange(dropDownMenuId: string, index: number) {
+        if (this.ws != null && this.ws.readyState == WebSocket.OPEN) {
+            var obj = { "Type": "DropDownMenuChange", "DropDownMenuId": dropDownMenuId, "Index": index };
             this.ws.send(JSON.stringify(obj));
         }
     }
 
-    private ReportFrameIdChange(canvasId : string, frameId : string)
-    {
-        if (this.ws != null && this.ws.readyState == WebSocket.OPEN)
-        {
-            var obj = { "Type" : "FrameIdChange", "CanvasId" : canvasId, "FrameId" : frameId };
+    private ReportFrameIdChange(canvasId: string, frameId: string) {
+        if (this.ws != null && this.ws.readyState == WebSocket.OPEN) {
+            var obj = { "Type": "FrameIdChange", "CanvasId": canvasId, "FrameId": frameId };
             this.ws.send(JSON.stringify(obj));
         }
     }
 
-    private HandleKeyUp(canvasId: string, event: KeyboardEvent)
-    {
+    private HandleKeyUp(canvasId: string, event: KeyboardEvent) {
         const canvases = this.GetTargetCanvases(canvasId);
         if (canvases == null) return;
 
         canvases.forEach((canvas: CanvasBase) => canvas.HandleKeyUp(event.key));
     }
 
-    private HandleKeyDown(canvasId : string, key : string, altKey : boolean, ctrlKey : boolean, shiftKey : boolean, metaKey : boolean, reportToServer : boolean = true)
-    {
+    private HandleKeyDown(canvasId: string, key: string, altKey: boolean, ctrlKey: boolean, shiftKey: boolean, metaKey: boolean, reportToServer: boolean = true) {
         var returnValue = true;
 
         var canvases = this.GetTargetCanvases(canvasId);
@@ -1118,11 +1029,9 @@ export default class SPScene
 
         let toggleFirstPerson = false;
         // Only handle unmodified keypresses
-        if (!altKey && !ctrlKey && !shiftKey && !metaKey)
-        {
+        if (!altKey && !ctrlKey && !shiftKey && !metaKey) {
             // Global keypresses
-            switch(key)
-            {
+            switch (key) {
                 case " ":
                     this.playPauseToggle.checked = !this.playPauseToggle.checked;
                     this.PlayVideo();
@@ -1142,10 +1051,8 @@ export default class SPScene
             }
 
             // Canvas-local keypresses
-            for(var canvas of canvases)
-            {
-                if(toggleFirstPerson)
-                {
+            for (var canvas of canvases) {
+                if (toggleFirstPerson) {
                     canvas.FirstPerson = !canvas.FirstPerson;
                 }
 
@@ -1162,23 +1069,20 @@ export default class SPScene
 
         if (altKey) {
             let index = Number.parseInt(key);
-            for(var canvas of canvases)
-            {
+            for (var canvas of canvases) {
                 canvas.ToggleLayerFilled(index);
             }
         }
 
         // Display timings
-        if (showTimings)
-        {
+        if (showTimings) {
             var timeTaken = new Date().getTime() - timeStarted;
             this.SetStatus("Updated.  Timings: " + timeTaken + "ms");
         }
 
         // Send message to any open server connections for interactive sessions
-        if (reportToServer)
-        {
-            var canvas : Canvas3D | Canvas2D = this.canvases[canvasId];
+        if (reportToServer) {
+            var canvas: Canvas3D | Canvas2D = this.canvases[canvasId];
             var frameId = canvas.GetCurrentFrameId()
             this.ReportKeyPress(key, altKey, ctrlKey, shiftKey, metaKey, canvasId, frameId);
         }
@@ -1186,83 +1090,67 @@ export default class SPScene
         return returnValue;
     }
 
-    private updatePlaybackRate()
-    {
-        for(let canvasId in this.canvases){
-            let canvas : CanvasBase = this.canvases[canvasId];
+    private updatePlaybackRate() {
+        for (let canvasId in this.canvases) {
+            let canvas: CanvasBase = this.canvases[canvasId];
             canvas.PlaybackRate = this.playbackRate;
         }
     }
 
-    private faster()
-    {
+    private faster() {
         this.playbackRate = Math.min(2, this.playbackRate * 1.2);
         this.updatePlaybackRate();
     }
 
-    private slower()
-    {
+    private slower() {
         this.playbackRate = Math.max(0.03, this.playbackRate / 1.2);
         this.updatePlaybackRate();
     }
 
-    private PlayVideo()
-    {
-        if(this.playPauseToggle.checked)
-        {
-            for(var canvasId in this.canvases)
-            {
-                let canvas : CanvasBase = this.canvases[canvasId];
+    private PlayVideo() {
+        if (this.playPauseToggle.checked) {
+            for (var canvasId in this.canvases) {
+                let canvas: CanvasBase = this.canvases[canvasId];
                 canvas.StartPlaying();
             }
 
             this.isPlaying = true;
-            if(this.media.length > 1)
-            {
+            if (this.media.length > 1) {
                 this.sync(0);
             }
         }
-        else
-        {
+        else {
             this.isPlaying = false;
-            for(var canvasId in this.canvases)
-            {
-                let canvas : CanvasBase = this.canvases[canvasId];
+            for (var canvasId in this.canvases) {
+                let canvas: CanvasBase = this.canvases[canvasId];
                 canvas.StopPlaying();
-            } 
+            }
         }
     }
 
-    private sync(mainIndex)
-    {
+    private sync(mainIndex) {
         let main = this.media[mainIndex];
         let timestamp = main.currentTime;
-        for(let element of this.media)
-        {
-            if(element == main)
-            {
+        for (let element of this.media) {
+            if (element == main) {
                 continue;
             }
 
-            if(Math.abs(element.currentTime - timestamp) < this.timePerFrame)
-            {
+            if (Math.abs(element.currentTime - timestamp) < this.timePerFrame) {
                 continue;
             }
 
-            if(element.readyState === 4)
-            {
+            if (element.readyState === 4) {
                 element.currentTime = timestamp;
             }
         }
 
-        if(this.isPlaying)
-        {
+        if (this.isPlaying) {
             requestAnimationFrame(() => this.sync(mainIndex));
         }
     }
 
-    private SliderChanged(event : Event)
-    {
+    private SliderChanged(event: Event) {
         // Get new value
         var slider = <HTMLInputElement>event.target;
         var value = slider.valueAsNumber;
@@ -1275,8 +1163,7 @@ export default class SPScene
         canvases.forEach((canvas: CanvasBase) => canvas.ShowFrame(value));
     }
 
-    private HandlePointerDown(event : PointerEvent)
-    {
+    private HandlePointerDown(event: PointerEvent) {
         var targetCanvasId = this.GetEventCanvasId(event);
         var canvases = this.GetTargetCanvases(targetCanvasId);
         if (canvases == null) return;
@@ -1285,13 +1172,12 @@ export default class SPScene
 
         const point = vec2.fromValues(event.clientX - clientRect.left, event.clientY - clientRect.top);
 
-        canvases.forEach((canvas: CanvasBase) => canvas.HandlePointerDown(point, event)); 
+        canvases.forEach((canvas: CanvasBase) => canvas.HandlePointerDown(point, event));
 
         this.HandlePointerMove(event);
     }
 
-    private HandlePointerUp(event : PointerEvent)
-    {
+    private HandlePointerUp(event: PointerEvent) {
         var canvases = this.GetTargetCanvases(this.GetEventCanvasId(event));
         if (canvases == null) return;
 
@@ -1299,8 +1185,7 @@ export default class SPScene
 
     }
 
-    private HandlePointerMove(event : PointerEvent)
-    {
+    private HandlePointerMove(event: PointerEvent) {
         const targetCanvasId = this.GetEventCanvasId(event);
         const canvases = this.GetTargetCanvases(targetCanvasId);
         if (canvases == null) return;
@@ -1314,8 +1199,7 @@ export default class SPScene
         event.preventDefault();
     }
 
-    private HandleMouseWheel(event : WheelEvent)
-    {
+    private HandleMouseWheel(event: WheelEvent) {
         var canvases = this.GetTargetCanvases(this.GetEventCanvasId(event));
         if (canvases == null) return;
 

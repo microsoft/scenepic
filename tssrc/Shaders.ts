@@ -193,7 +193,7 @@ void main()
     "pickerVertex": {
         type: "x-shader/x-vertex",
         script:
-`#version 300 es
+            `#version 300 es
 // Vertex inputs
 in vec3 vertexPositionIn;
 
@@ -224,8 +224,8 @@ void main()
 `},
     "pickerFragment": {
         type: "x-shader/x-fragment",
-        script: 
-`#version 300 es
+        script:
+            `#version 300 es
 precision mediump float;
   
 uniform int u_id;
