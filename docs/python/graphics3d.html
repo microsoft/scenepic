@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Canvas3D &mdash; scenepic 1.0.15 documentation</title>
+  <title>Canvas3D &mdash; scenepic 1.1.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -12,9 +12,6 @@
   <![endif]-->
   
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
@@ -29,11 +26,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> scenepic
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            scenepic
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -115,9 +116,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="api.html">API</a> &raquo;</li>
-      <li>Canvas3D</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="api.html">API</a></li>
+      <li class="breadcrumb-item active">Canvas3D</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/graphics3d.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -138,7 +139,7 @@
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">camera</span></span><a class="headerlink" href="#scenepic.Canvas3D.camera" title="Permalink to this definition"></a></dt>
 <dd><p>Set of Camera parameters for the Canvas.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#scenepic.Camera" title="scenepic.Camera">Camera</a></p>
 </dd>
 </dl>
@@ -149,7 +150,7 @@
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">canvas_id</span></span><a class="headerlink" href="#scenepic.Canvas3D.canvas_id" title="Permalink to this definition"></a></dt>
 <dd><p>A unique identifier for the canvas</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -168,7 +169,7 @@ visualization into multiple files.</p>
 <span class="sig-name descname"><span class="pre">create_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">focus_point</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meshes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">camera</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Canvas3D.create_frame" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a new Frame3D object and appends to the list of Frame3Ds in the Canvas3D.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>frame_id</strong> (<em>str</em>) – a unique identifier for the Frame3D (will be
 automatically populated if not provided).</p></li>
@@ -179,10 +180,10 @@ with a set of Meshes, for convenience.</p></li>
 <li><p><strong>camera</strong> (<a class="reference internal" href="#scenepic.Camera" title="scenepic.Camera"><em>Camera</em></a>) – optionally set a camera for this frame</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a new Frame3D object</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#scenepic.Frame3D" title="scenepic.Frame3D">Frame3D</a></p>
 </dd>
 </dl>
@@ -193,7 +194,7 @@ with a set of Meshes, for convenience.</p></li>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">focus_point</span></span><a class="headerlink" href="#scenepic.Canvas3D.focus_point" title="Permalink to this definition"></a></dt>
 <dd><p>Default focus point for the canvas.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#scenepic.FocusPoint" title="scenepic.FocusPoint">FocusPoint</a></p>
 </dd>
 </dl>
@@ -204,7 +205,7 @@ with a set of Meshes, for convenience.</p></li>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">height</span></span><a class="headerlink" href="#scenepic.Canvas3D.height" title="Permalink to this definition"></a></dt>
 <dd><p>The height of the Canvas</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
@@ -217,7 +218,7 @@ with a set of Meshes, for convenience.</p></li>
 <p>This file will be used to drive playback, i.e. frames will be
 displayed in time with the playback of the media file.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -235,7 +236,7 @@ selector in the ScenePic user interface.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>self</strong> (<a class="reference internal" href="#scenepic.Canvas3D" title="scenepic.Canvas3D"><em>Canvas3D</em></a>) – the self reference</p></li>
 <li><p><strong>layer_settings</strong> (<em>Mapping</em><em>[</em><em>str</em><em>, </em><em>Union</em><em>[</em><em>dict</em><em>, </em><a class="reference internal" href="ui.html#scenepic.LayerSettings" title="scenepic.LayerSettings"><em>LayerSettings</em></a><em>]</em><em>]</em>) – a LayerSettings object
@@ -250,7 +251,7 @@ or a dictionary. See LayerSettings for details.</p></li>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shading</span></span><a class="headerlink" href="#scenepic.Canvas3D.shading" title="Permalink to this definition"></a></dt>
 <dd><p>Set of Shading parameters for the Canvas.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#scenepic.Shading" title="scenepic.Shading">Shading</a></p>
 </dd>
 </dl>
@@ -261,7 +262,7 @@ or a dictionary. See LayerSettings for details.</p></li>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ui_parameters</span></span><a class="headerlink" href="#scenepic.Canvas3D.ui_parameters" title="Permalink to this definition"></a></dt>
 <dd><p>Set of user interface parameters</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="ui.html#scenepic.UIParameters" title="scenepic.UIParameters">UIParameters</a></p>
 </dd>
 </dl>
@@ -272,7 +273,7 @@ or a dictionary. See LayerSettings for details.</p></li>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">width</span></span><a class="headerlink" href="#scenepic.Canvas3D.width" title="Permalink to this definition"></a></dt>
 <dd><p>The width of the Canvas</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
@@ -293,7 +294,7 @@ transformed Mesh objects.</p>
 <span class="sig-name descname"><span class="pre">add_label</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Frame3D.add_label" title="Permalink to this definition"></a></dt>
 <dd><p>Add a label to the frame.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>label</strong> (<a class="reference internal" href="#scenepic.Label" title="scenepic.Label"><em>Label</em></a>) – the label to add</p></li>
 <li><p><strong>position</strong> (<em>np.ndarray</em>) – the float32 [x, y, z] position at which to put the label</p></li>
@@ -307,7 +308,7 @@ transformed Mesh objects.</p>
 <span class="sig-name descname"><span class="pre">add_mesh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mesh</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Frame3D.add_mesh" title="Permalink to this definition"></a></dt>
 <dd><p>Adds a mesh to the frame.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>mesh</strong> (<em>Union</em><em>[</em><a class="reference internal" href="#scenepic.Mesh" title="scenepic.Mesh"><em>Mesh</em></a><em>, </em><a class="reference internal" href="#scenepic.MeshUpdate" title="scenepic.MeshUpdate"><em>MeshUpdate</em></a><em>, </em><em>str</em><em>]</em>) – The mesh, mesh update, or mesh ID</p></li>
 <li><p><strong>transform</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – An optional transform to apply to the mesh. Defaults to None.</p></li>
@@ -321,7 +322,7 @@ transformed Mesh objects.</p>
 <span class="sig-name descname"><span class="pre">add_meshes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meshes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Frame3D.add_meshes" title="Permalink to this definition"></a></dt>
 <dd><p>Adds meshes to the frame.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>meshes</strong> (<em>List</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="#scenepic.Mesh" title="scenepic.Mesh"><em>Mesh</em></a><em>, </em><a class="reference internal" href="#scenepic.MeshUpdate" title="scenepic.MeshUpdate"><em>MeshUpdate</em></a><em>, </em><em>str</em><em>]</em><em>]</em>) – A list of meshes and mesh updates (or their IDs)</p></li>
 <li><p><strong>transform</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – an optional transform to apply to each mesh. Defaults to None.</p></li>
@@ -338,7 +339,7 @@ camera movement within a ScenePic, but the user can choose to override the camer
 track at any time. If they reset to the original camera, however, it will make
 subsequent frames use the specified camera parameters.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#scenepic.Camera" title="scenepic.Camera">Camera</a></p>
 </dd>
 </dl>
@@ -349,7 +350,7 @@ subsequent frames use the specified camera parameters.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">focus_point</span></span><a class="headerlink" href="#scenepic.Frame3D.focus_point" title="Permalink to this definition"></a></dt>
 <dd><p>The focus point of the frame</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#scenepic.FocusPoint" title="scenepic.FocusPoint">FocusPoint</a></p>
 </dd>
 </dl>
@@ -367,7 +368,7 @@ selector in the ScenePic user interface.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>layer_settings</strong> (<em>Mapping</em><em>[</em><em>str</em><em>, </em><em>Union</em><em>[</em><em>dict</em><em>, </em><a class="reference internal" href="ui.html#scenepic.LayerSettings" title="scenepic.LayerSettings"><em>LayerSettings</em></a><em>]</em><em>]</em>) – a LayerSettings object
 or a dictionary. See LayerSettings for details.</p>
 </dd>
@@ -394,7 +395,7 @@ the uv buffer are omitted to save memory.</p>
 <p>Right handed coordinate system used throughout.</p>
 <p>Triangle winding order is counter clockwise.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>shared_color</strong> (<em>Color</em><em>, </em><em>optional</em>) – shared color for all objects in the mesh. Defaults to None.</p></li>
 <li><p><strong>texture_id</strong> (<em>str</em><em>, </em><em>optional</em>) – The ID of the Image to use as a texture. Defaults to None.</p></li>
@@ -406,7 +407,7 @@ the uv buffer are omitted to save memory.</p>
 <span class="sig-name descname"><span class="pre">add_camera_frustum</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Mesh.add_camera_frustum" title="Permalink to this definition"></a></dt>
 <dd><p>Add a camera frustum visualization to this Mesh.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>color</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – required unless Mesh was constructed with shared_color argument. Defaults to None.</p></li>
 <li><p><strong>fov_y_degrees</strong> (<em>float</em><em>, </em><em>optional</em>) – vertical field of view in degrees. Defaults to 45.0.</p></li>
@@ -419,7 +420,7 @@ the uv buffer are omitted to save memory.</p>
 </dl>
 <p>Add a camera frustum visualization to this Mesh.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>camera</strong> (<a class="reference internal" href="#scenepic.Camera" title="scenepic.Camera"><em>Camera</em></a><em>, </em><em>optional</em>) – the camera to use for the frustum</p></li>
 <li><p><strong>color</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – required unless Mesh was constructed with shared_color argument. Defaults to None.</p></li>
@@ -435,7 +436,7 @@ the uv buffer are omitted to save memory.</p>
 <span class="sig-name descname"><span class="pre">add_camera_image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Mesh.add_camera_image" title="Permalink to this definition"></a></dt>
 <dd><p>Add the image plane for a camera into the scene.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>camera</strong> (<a class="reference internal" href="#scenepic.Camera" title="scenepic.Camera"><em>Camera</em></a><em>, </em><em>optional</em>) – the ScenePic Camera corresponding to the image.</p></li>
 <li><p><strong>depth</strong> (<em>float</em><em>, </em><em>optional</em>) – depth of the frustum. Defaults to 1.0.</p></li>
@@ -450,7 +451,7 @@ the uv buffer are omitted to save memory.</p>
 <dd><p>Add a cone to this Mesh. The cone has base center at [0.5, 0., 0.]
 and apex at [-0.5, 0., 0.].</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>color</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – required unless Mesh was constructed with shared_color argument. Defaults to None.</p></li>
 <li><p><strong>transform</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – homogeneous 3D transform. Defaults to None.</p></li>
@@ -469,7 +470,7 @@ and apex at [-0.5, 0., 0.].</p>
 <span class="sig-name descname"><span class="pre">add_coordinate_axes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Mesh.add_coordinate_axes" title="Permalink to this definition"></a></dt>
 <dd><p>Add a set of coordinate axes to this Mesh. xyz axes map to RGB colors.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>length</strong> (<em>float</em><em>, </em><em>optional</em>) – length of axes. Defaults to 1.0.</p></li>
 <li><p><strong>thickness</strong> (<em>float</em><em>, </em><em>optional</em>) – thickness of axes. Defaults to 0.1.</p></li>
@@ -484,7 +485,7 @@ and apex at [-0.5, 0., 0.].</p>
 <span class="sig-name descname"><span class="pre">add_cube</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Mesh.add_cube" title="Permalink to this definition"></a></dt>
 <dd><p>Add a unit diameter cube to this mesh.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>color</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – required unless Mesh was constructed with shared_color argument. Defaults to None.</p></li>
 <li><p><strong>transform</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – homogeneous 3D transform matrix. Defaults to None.</p></li>
@@ -500,7 +501,7 @@ and apex at [-0.5, 0., 0.].</p>
 <span class="sig-name descname"><span class="pre">add_cylinder</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Mesh.add_cylinder" title="Permalink to this definition"></a></dt>
 <dd><p>Add a x-axis aligned unit diameter cylinder to this Mesh.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>color</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – required unless Mesh was constructed with shared_color argument. Defaults to None.</p></li>
 <li><p><strong>transform</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – homogeneous 3D transform. Defaults to None.</p></li>
@@ -517,7 +518,7 @@ and apex at [-0.5, 0., 0.].</p>
 <span class="sig-name descname"><span class="pre">add_disc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Mesh.add_disc" title="Permalink to this definition"></a></dt>
 <dd><p>Add a x-axis aligned unit diameter disc to this Mesh.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>color</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – required unless Mesh was constructed with shared_color argument. Defaults to None.</p></li>
 <li><p><strong>transform</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – homogeneous 3D transform. Defaults to None.</p></li>
@@ -534,7 +535,7 @@ and apex at [-0.5, 0., 0.].</p>
 <span class="sig-name descname"><span class="pre">add_icosphere</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Mesh.add_icosphere" title="Permalink to this definition"></a></dt>
 <dd><p>Add a unit diameter ico-sphere to this Mesh</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>color</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – required unless Mesh was constructed with shared_color argument. Defaults to None.</p></li>
 <li><p><strong>transform</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – homogeneous 3D transform. Defaults to None.</p></li>
@@ -552,7 +553,7 @@ and apex at [-0.5, 0., 0.].</p>
 <dd><p>Add an image as a textured quad to this Mesh.
 The Mesh must have a texture_id.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>origin</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – bottom left corner of image. Defaults to (-0.5, -0.5, 0).</p></li>
 <li><p><strong>x_axis</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – direction and length of the x-axis of the image in world space.
@@ -576,7 +577,7 @@ Defaults to (0, 1, 0).</p></li>
 <span class="sig-name descname"><span class="pre">add_lines</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Mesh.add_lines" title="Permalink to this definition"></a></dt>
 <dd><p>Add a line cloud to this Mesh.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>start_points</strong> (<em>np.ndarray</em>) – float32 matrix of [N, 3] line start positions (or [N, 6] positions with colors)</p></li>
 <li><p><strong>end_points</strong> (<em>np.ndarray</em>) – float32 matrix of [N, 3] line end positions (or [N, 6] positions with colors)</p></li>
@@ -593,7 +594,7 @@ Defaults to None.</p></li>
 <span class="sig-name descname"><span class="pre">add_mesh</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Mesh.add_mesh" title="Permalink to this definition"></a></dt>
 <dd><p>Add a triangle mesh to this ScenePic Mesh, with normals computed automatically.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>mesh_info</strong> (<a class="reference internal" href="#scenepic.MeshInfo" title="scenepic.MeshInfo"><em>MeshInfo</em></a>) – object containing the vertices, triangles, and uvs/colors.</p></li>
 <li><p><strong>transform</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – homogeneous 3D transform. Defaults to None.</p></li>
@@ -610,7 +611,7 @@ Defaults to None.</p></li>
 <span class="sig-name descname"><span class="pre">add_mesh_with_normals</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Mesh.add_mesh_with_normals" title="Permalink to this definition"></a></dt>
 <dd><p>Add a triangle mesh to this ScenePic Mesh.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>vertices</strong> (<em>np.ndarray</em>) – float32 matrix of [N, 3] vertex positions</p></li>
 <li><p><strong>normals</strong> (<em>np.ndarray</em>) – float32 matrix of [N, 3] vertex normals</p></li>
@@ -631,7 +632,7 @@ Defaults to None.</p></li>
 <span class="sig-name descname"><span class="pre">add_mesh_without_normals</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Mesh.add_mesh_without_normals" title="Permalink to this definition"></a></dt>
 <dd><p>Add a triangle mesh to this ScenePic Mesh, with normals computed automatically.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>vertices</strong> (<em>np.ndarray</em>) – float32 matrix of [N, 3] vertex positions</p></li>
 <li><p><strong>triangles</strong> (<em>np.ndarray</em>) – uint32 matrix of [N, 3] triangle vertex indices</p></li>
@@ -652,7 +653,7 @@ Defaults to None.</p></li>
 <dd><p>Adds a quad to the mesh.
 All points are assumed to lie on the same plane.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>color</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – required unless Mesh was constructed with shared_color argument. Defaults to None.</p></li>
 <li><p><strong>p0</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – the first vertex. Defaults to [0, -0.5, -0.5].</p></li>
@@ -677,7 +678,7 @@ All points are assumed to lie on the same plane.</p>
 <span class="sig-name descname"><span class="pre">add_sphere</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Mesh.add_sphere" title="Permalink to this definition"></a></dt>
 <dd><p>Add a default (ico) unit diameter sphere primitive to the mesh.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>color</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – required unless Mesh was constructed with shared_color argument. Defaults to None.</p></li>
 <li><p><strong>transform</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – homogeneous 3D transform. Defaults to None.</p></li>
@@ -693,7 +694,7 @@ All points are assumed to lie on the same plane.</p>
 <span class="sig-name descname"><span class="pre">add_thickline</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Mesh.add_thickline" title="Permalink to this definition"></a></dt>
 <dd><p>Add a thick line to this Mesh.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>color</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – required unless Mesh was constructed with shared_color argument. Defaults to None.</p></li>
 <li><p><strong>start_point</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – the start point of the line. Defaults to [-0.5, 0, 0].</p></li>
@@ -713,7 +714,7 @@ All points are assumed to lie on the same plane.</p>
 <span class="sig-name descname"><span class="pre">add_triangle</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Mesh.add_triangle" title="Permalink to this definition"></a></dt>
 <dd><p>Adds a triangle to the mesh.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>color</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – required unless Mesh was constructed with shared_color argument. Defaults to None.</p></li>
 <li><p><strong>p0</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – the first vertex. Defaults to [0, 0, 0].</p></li>
@@ -740,7 +741,7 @@ a set of vertex UVs which unwraps the sphere to map to the full UV space.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>color</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – required unless Mesh was constructed with shared_color argument. Defaults to None.</p></li>
 <li><p><strong>transform</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – homogeneous 3D transform. Defaults to None.</p></li>
@@ -758,7 +759,7 @@ a set of vertex UVs which unwraps the sphere to map to the full UV space.</p>
 <span class="sig-name descname"><span class="pre">append_mesh</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Mesh.append_mesh" title="Permalink to this definition"></a></dt>
 <dd><p>Append another mesh object to this mesh</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>mesh</strong> (<a class="reference internal" href="#scenepic.Mesh" title="scenepic.Mesh"><em>Mesh</em></a>) – the mesh to append</p>
 </dd>
 </dl>
@@ -771,7 +772,7 @@ a set of vertex UVs which unwraps the sphere to map to the full UV space.</p>
 (and appropriately to the normals) in the Mesh.
 Separated out from apply_transform() so that a matrix inverse is not required, for speed.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>transform</strong> (<em>np.ndarray</em>) – a 3D homogeneous rotation matrix</p>
 </dd>
 </dl>
@@ -783,7 +784,7 @@ Separated out from apply_transform() so that a matrix inverse is not required, f
 <dd><p>Apply a 3D homogeneous matrix transform (i.e. 4x4 matrix) to all vertices
 (and appropriately to the normals) in the Mesh.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>transform</strong> (<em>np.ndarray</em>) – a 3D homogeneous transform</p>
 </dd>
 </dl>
@@ -795,7 +796,7 @@ Separated out from apply_transform() so that a matrix inverse is not required, f
 <dd><p>Whether this Mesh is defined in camera space (cannot be moved in the ScenePic user
 interface) or world space (standard).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
@@ -806,7 +807,7 @@ interface) or world space (standard).</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">center_of_mass</span></span><a class="headerlink" href="#scenepic.Mesh.center_of_mass" title="Permalink to this definition"></a></dt>
 <dd><p>The mean of mesh vertex positions</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -823,7 +824,7 @@ interface) or world space (standard).</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">double_sided</span></span><a class="headerlink" href="#scenepic.Mesh.double_sided" title="Permalink to this definition"></a></dt>
 <dd><p>Whether to turn off back face culling and draw the Mesh’s triangles as double sided.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
@@ -836,7 +837,7 @@ interface) or world space (standard).</p>
 Can be used to make point clouds, for example.
 The whole contents of the Mesh will be rendered multiple times.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>positions</strong> (<em>np.ndarray</em>) – float32 matrix of [N, 3] instance positions</p></li>
 <li><p><strong>rotations</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – float32 matrix of [N, 4] per-point quaternion rotations. Defaults to None.</p></li>
@@ -852,13 +853,13 @@ or per-vertex color. Defaults to None.</p></li>
 <span class="sig-name descname"><span class="pre">get_rotated</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Mesh.get_rotated" title="Permalink to this definition"></a></dt>
 <dd><p>Get a rotated copy of this Mesh.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>transform</strong> (<em>np.ndarray</em>) – a 3D homogeneous transform</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a transformed copy of this mesh</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#scenepic.Mesh" title="scenepic.Mesh">Mesh</a></p>
 </dd>
 </dl>
@@ -869,13 +870,13 @@ or per-vertex color. Defaults to None.</p></li>
 <span class="sig-name descname"><span class="pre">get_transformed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Mesh.get_transformed" title="Permalink to this definition"></a></dt>
 <dd><p>Get a transformed copy of this Mesh.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>transform</strong> (<em>np.ndarray</em>) – a 3D homogeneous transform</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a transformed copy of this mesh</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#scenepic.Mesh" title="scenepic.Mesh">Mesh</a></p>
 </dd>
 </dl>
@@ -887,7 +888,7 @@ or per-vertex color. Defaults to None.</p></li>
 <dd><p>Draw this Mesh as a billboard (i.e. always facing the user) rather than
 rotating with the rest of the world.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
@@ -900,7 +901,7 @@ rotating with the rest of the world.</p>
 together into a “layer”.  Layers should be used in
 conjunction with Canvas3D.set_layer_settings().</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -911,7 +912,7 @@ conjunction with Canvas3D.set_layer_settings().</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mesh_id</span></span><a class="headerlink" href="#scenepic.Mesh.mesh_id" title="Permalink to this definition"></a></dt>
 <dd><p>A unique identifier for the Mesh</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -922,7 +923,7 @@ conjunction with Canvas3D.set_layer_settings().</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nn_texture</span></span><a class="headerlink" href="#scenepic.Mesh.nn_texture" title="Permalink to this definition"></a></dt>
 <dd><p>Whether the shader should use nearest-neighbor texture interpolation.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
@@ -940,7 +941,7 @@ Useful when interoping with existing codebases that use opposite convention</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shared_color</span></span><a class="headerlink" href="#scenepic.Mesh.shared_color" title="Permalink to this definition"></a></dt>
 <dd><p>Whole-mesh color (reduces memory requirements but makes Mesh monochrome).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -951,7 +952,7 @@ Useful when interoping with existing codebases that use opposite convention</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">texture_id</span></span><a class="headerlink" href="#scenepic.Mesh.texture_id" title="Permalink to this definition"></a></dt>
 <dd><p>Specifies the id of a ScenePic Image to be used as a texture in this Mesh.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -963,7 +964,7 @@ Useful when interoping with existing codebases that use opposite convention</p>
 <dd><p>Whether to use the alpha channel in the texture for transparency
 (only relevant for textured Meshes).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
@@ -989,7 +990,7 @@ Useful when interoping with existing codebases that use opposite convention</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">base_mesh_id</span></span><a class="headerlink" href="#scenepic.MeshUpdate.base_mesh_id" title="Permalink to this definition"></a></dt>
 <dd><p>The unique identifier for the base mesh</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -1000,20 +1001,20 @@ Useful when interoping with existing codebases that use opposite convention</p>
 <span class="sig-name descname"><span class="pre">difference_range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vertex_buffer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.MeshUpdate.difference_range" title="Permalink to this definition"></a></dt>
 <dd><p>Returns the absolute range of values in the difference between this update and the buffer.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>self</strong> (<a class="reference internal" href="#scenepic.MeshUpdate" title="scenepic.MeshUpdate"><em>MeshUpdate</em></a>) – self reference</p></li>
 <li><p><strong>vertex_buffer</strong> (<a class="reference internal" href="#scenepic.VertexBuffer" title="scenepic.VertexBuffer"><em>VertexBuffer</em></a>) – the buffer to use in the comparison</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><dl class="simple">
 <dt>the absolute range (from minimum to maximum) in the per-index difference between</dt><dd><p>this update and the reference.</p>
 </dd>
 </dl>
 </p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
@@ -1024,7 +1025,7 @@ Useful when interoping with existing codebases that use opposite convention</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">frame_index</span></span><a class="headerlink" href="#scenepic.MeshUpdate.frame_index" title="Permalink to this definition"></a></dt>
 <dd><p>The position in the creation order for this update</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
@@ -1035,7 +1036,7 @@ Useful when interoping with existing codebases that use opposite convention</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mesh_id</span></span><a class="headerlink" href="#scenepic.MeshUpdate.mesh_id" title="Permalink to this definition"></a></dt>
 <dd><p>The unique identifier of the newly created mesh</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -1046,7 +1047,7 @@ Useful when interoping with existing codebases that use opposite convention</p>
 <span class="sig-name descname"><span class="pre">quantize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keyframe_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fixed_point_range</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keyframe_vertex_buffer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.MeshUpdate.quantize" title="Permalink to this definition"></a></dt>
 <dd><p>Quantize the mesh update.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>self</strong> (<a class="reference internal" href="#scenepic.MeshUpdate" title="scenepic.MeshUpdate"><em>MeshUpdate</em></a>) – self reference</p></li>
 <li><p><strong>keyframe_index</strong> (<em>int</em>) – Index of the keyframe to use in quantizing this update</p></li>
@@ -1079,7 +1080,7 @@ or Color (if present).</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">colors</span></span><a class="headerlink" href="#scenepic.MeshInfo.colors" title="Permalink to this definition"></a></dt>
 <dd><p>A reference to the color buffer.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1096,7 +1097,7 @@ or Color (if present).</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">normals</span></span><a class="headerlink" href="#scenepic.MeshInfo.normals" title="Permalink to this definition"></a></dt>
 <dd><p>A reference to the normal buffer</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1107,7 +1108,7 @@ or Color (if present).</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">positions</span></span><a class="headerlink" href="#scenepic.MeshInfo.positions" title="Permalink to this definition"></a></dt>
 <dd><p>A reference to the position buffer.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1118,17 +1119,17 @@ or Color (if present).</p>
 <span class="sig-name descname"><span class="pre">subdivide</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.MeshInfo.subdivide" title="Permalink to this definition"></a></dt>
 <dd><p>Subdivide this mesh using loop subdivision.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>steps</strong> (<em>int</em><em>, </em><em>optional</em>) – specifies how many steps of subdivision to apply. Defaults to 1.</p></li>
 <li><p><strong>project_to_limit</strong> (<em>bool</em><em>, </em><em>optional</em>) – specifies whether the vertices should be projected onto the
 limit surface in the final step of subdivision. Defaults to false.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a subdivided version of this mesh</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#scenepic.MeshInfo" title="scenepic.MeshInfo">MeshInfo</a></p>
 </dd>
 </dl>
@@ -1139,7 +1140,7 @@ limit surface in the final step of subdivision. Defaults to false.</p></li>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">triangles</span></span><a class="headerlink" href="#scenepic.MeshInfo.triangles" title="Permalink to this definition"></a></dt>
 <dd><p>A reference to the triangle buffer.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1150,7 +1151,7 @@ limit surface in the final step of subdivision. Defaults to false.</p></li>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">uvs</span></span><a class="headerlink" href="#scenepic.MeshInfo.uvs" title="Permalink to this definition"></a></dt>
 <dd><p>A reference to the uv buffer.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1163,13 +1164,13 @@ limit surface in the final step of subdivision. Defaults to false.</p></li>
 <span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">load_obj</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.load_obj" title="Permalink to this definition"></a></dt>
 <dd><p>Loads a WaveFront OBJ file from disk as a MeshInfo object.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – the path to the OBJ file on disk</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>contains the positions, a triangulation, and UVs (if present)</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#scenepic.MeshInfo" title="scenepic.MeshInfo">MeshInfo</a></p>
 </dd>
 </dl>
@@ -1197,7 +1198,7 @@ look_at, up_dir), with center and rotation, or with an explicit
 world-to-camera matrix.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>center</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – the camera center. Defaults to [0, 0, 4].</p></li>
 <li><p><strong>look_at</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – where the camera is looking. Defaults to [0, 0, 0].</p></li>
@@ -1217,7 +1218,7 @@ world-to-camera matrix.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">aspect_ratio</span></span><a class="headerlink" href="#scenepic.Camera.aspect_ratio" title="Permalink to this definition"></a></dt>
 <dd><p>Update the aspect ratio of the camera</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
@@ -1228,7 +1229,7 @@ world-to-camera matrix.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">camera_to_world</span></span><a class="headerlink" href="#scenepic.Camera.camera_to_world" title="Permalink to this definition"></a></dt>
 <dd><p>Homogeneous 3D transform that places the camera in the scene</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1239,7 +1240,7 @@ world-to-camera matrix.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">center</span></span><a class="headerlink" href="#scenepic.Camera.center" title="Permalink to this definition"></a></dt>
 <dd><p>The camera center</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1250,7 +1251,7 @@ world-to-camera matrix.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">look_at</span></span><a class="headerlink" href="#scenepic.Camera.look_at" title="Permalink to this definition"></a></dt>
 <dd><p>Where the camera is looking</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1261,7 +1262,7 @@ world-to-camera matrix.</p>
 <span class="sig-name descname"><span class="pre">orbit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Camera.orbit" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a sequence of cameras which move in an orbit around the origin.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>num_frames</strong> (<em>int</em>) – the number of frames in the sequence</p></li>
 <li><p><strong>distance</strong> (<em>float</em>) – the distance of the camera from the origin</p></li>
@@ -1276,10 +1277,10 @@ world-to-camera matrix.</p>
 <li><p><strong>far_crop_distance</strong> (<em>float</em>) – the far clipping plane of the view frustum</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a sequence of cameras moving in an orbit</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List[<a class="reference internal" href="#scenepic.Camera" title="scenepic.Camera">Camera</a>]</p>
 </dd>
 </dl>
@@ -1290,7 +1291,7 @@ world-to-camera matrix.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">projection</span></span><a class="headerlink" href="#scenepic.Camera.projection" title="Permalink to this definition"></a></dt>
 <dd><p>WebGL projection matrix from camera view coordinates to NDC</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1301,7 +1302,7 @@ world-to-camera matrix.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rotation</span></span><a class="headerlink" href="#scenepic.Camera.rotation" title="Permalink to this definition"></a></dt>
 <dd><p>The rotation matrix</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1312,7 +1313,7 @@ world-to-camera matrix.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">up_dir</span></span><a class="headerlink" href="#scenepic.Camera.up_dir" title="Permalink to this definition"></a></dt>
 <dd><p>The direction that is “up” for the camera</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1323,7 +1324,7 @@ world-to-camera matrix.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">world_to_camera</span></span><a class="headerlink" href="#scenepic.Camera.world_to_camera" title="Permalink to this definition"></a></dt>
 <dd><p>Homogeneous 3D transform mapping world coordinates to camera space</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1344,7 +1345,7 @@ rotation for orientation lock), used in the ScenePic user interface.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">orientation_axis_angle</span></span><a class="headerlink" href="#scenepic.FocusPoint.orientation_axis_angle" title="Permalink to this definition"></a></dt>
 <dd><p>The orientation axis angle</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1355,7 +1356,7 @@ rotation for orientation lock), used in the ScenePic user interface.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">position</span></span><a class="headerlink" href="#scenepic.FocusPoint.position" title="Permalink to this definition"></a></dt>
 <dd><p>The position of the focus point</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1371,7 +1372,7 @@ rotation for orientation lock), used in the ScenePic user interface.</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">Shading</span></span><a class="headerlink" href="#scenepic.Shading" title="Permalink to this definition"></a></dt>
 <dd><p>Parameters of the shaders</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>bg_color</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – background color. Defaults to Black.</p></li>
 <li><p><strong>ambient_light_color</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – color of ambient light. Defaults to [0.7, 0.7, 0.7].</p></li>
@@ -1385,7 +1386,7 @@ rotation for orientation lock), used in the ScenePic user interface.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ambient_light_color</span></span><a class="headerlink" href="#scenepic.Shading.ambient_light_color" title="Permalink to this definition"></a></dt>
 <dd><p>the color of ambient light</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1396,7 +1397,7 @@ rotation for orientation lock), used in the ScenePic user interface.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bg_color</span></span><a class="headerlink" href="#scenepic.Shading.bg_color" title="Permalink to this definition"></a></dt>
 <dd><p>the background color</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1407,7 +1408,7 @@ rotation for orientation lock), used in the ScenePic user interface.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">directional_light_color</span></span><a class="headerlink" href="#scenepic.Shading.directional_light_color" title="Permalink to this definition"></a></dt>
 <dd><p>the directional light color</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1418,7 +1419,7 @@ rotation for orientation lock), used in the ScenePic user interface.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">directional_light_dir</span></span><a class="headerlink" href="#scenepic.Shading.directional_light_dir" title="Permalink to this definition"></a></dt>
 <dd><p>the direction of the directional light</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1442,13 +1443,13 @@ rotation for orientation lock), used in the ScenePic user interface.</p>
 <p>One degree of freedom is underconstrained.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>axis</strong> (<em>np.ndarray</em>) – the axis to which to align the x-axis</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a 3D homogeneous transform matrix</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1459,16 +1460,16 @@ rotation for orientation lock), used in the ScenePic user interface.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">QuaternionFromAxisAngle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">axis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.QuaternionFromAxisAngle" title="Permalink to this definition"></a></dt>
 <dd><p>Convert rotation axis and angle to a quaternion.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>axis</strong> (<em>np.ndarray</em>) – the axis of rotation</p></li>
 <li><p><strong>angle</strong> (<em>float</em>) – the angle to rotate in radians</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a 3D homgenous transform matrix</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1483,13 +1484,13 @@ rotation for orientation lock), used in the ScenePic user interface.</p>
 <p>One degree of freedom is underconstrained.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>axis</strong> (<em>np.ndarray</em>) – the axis to which to align the x-axis</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a quaternion</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1500,13 +1501,13 @@ rotation for orientation lock), used in the ScenePic user interface.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RotationAboutXAxis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.RotationAboutXAxis" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a 3D homogeneous rotation matrix about the x-axis.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>angle</strong> (<em>float</em>) – the angle to rotation in radians</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a 3D homogeous transform matrix</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1517,13 +1518,13 @@ rotation for orientation lock), used in the ScenePic user interface.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RotationAboutYAxis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.RotationAboutYAxis" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a 3D homogeneous rotation matrix about the y-axis.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>angle</strong> (<em>float</em>) – the angle to rotation in radians</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a 3D homogeous transform matrix</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1534,13 +1535,13 @@ rotation for orientation lock), used in the ScenePic user interface.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RotationAboutZAxis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.RotationAboutZAxis" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a 3D homogeneous rotation matrix about the z-axis.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>angle</strong> (<em>float</em>) – the angle to rotation in radians</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a 3D homogeous transform matrix</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1551,16 +1552,16 @@ rotation for orientation lock), used in the ScenePic user interface.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RotationMatrixFromAxisAngle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">axis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.RotationMatrixFromAxisAngle" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a 3D homogeneous scale matrix from axis and angle.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>axis</strong> (<em>np.ndarray</em>) – the axis of rotation</p></li>
 <li><p><strong>angle</strong> (<em>float</em>) – the angle to rotate in radians</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a 3D homogeneous transform matrix</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1575,13 +1576,13 @@ rotation for orientation lock), used in the ScenePic user interface.</p>
 <p>One degree of freedom is underconstrained.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>axis</strong> (<em>np.ndarray</em>) – the axis to which to align the x-axis</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a 3D homogeneous transform matrix</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1592,13 +1593,13 @@ rotation for orientation lock), used in the ScenePic user interface.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Scale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scale</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.Scale" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a 3D homogeneous scale matrix.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>scale</strong> (<em>Union</em><em>[</em><em>np.ndarray</em><em>, </em><em>float</em><em>]</em>) – the axis-specific scale values</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a 3D homogeneous transform matrix</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1609,13 +1610,13 @@ rotation for orientation lock), used in the ScenePic user interface.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Translate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.Translate" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a 3D homogeneous scale matrix.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>vec</strong> (<em>np.ndarray</em>) – the movement vector</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a 3D homogeneous transform matrix</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1630,13 +1631,13 @@ rotation for orientation lock), used in the ScenePic user interface.</p>
 <p>One degree of freedom is underconstrained.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>axis</strong> (<em>np.ndarray</em>) – the axis to which to align the x-axis</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a 3D homogeneous transform matrix</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1655,17 +1656,17 @@ values taken from [X, Y, Z].</p>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>euler_angles</strong> (<em>np.ndarray</em>) – the Euler angles to use in constructing the matrix</p></li>
 <li><p><strong>convention</strong> (<em>str</em><em>, </em><em>optional</em>) – the convention to use in interpreting the angles.
 Defaults to “XYZ”</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a 3D homogeneous transform matrix</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1682,7 +1683,7 @@ be found here: <a class="reference external" href="http://ksimek.github.io/2013/
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fov_y_degrees</strong> (<em>float</em>) – the field of view of the camera in degrees</p></li>
 <li><p><strong>aspect_ratio</strong> (<em>float</em>) – the aspect ratio of the camera</p></li>
@@ -1690,10 +1691,10 @@ be found here: <a class="reference external" href="http://ksimek.github.io/2013/
 <li><p><strong>zfar</strong> (<em>float</em>) – the z value of the far clipping plane of the view frustum</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a 3D WebGL projection matrix</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1705,7 +1706,7 @@ be found here: <a class="reference external" href="http://ksimek.github.io/2013/
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>camera_matrix</strong> (<em>np.ndarray</em>) – an OpenCV-style camera intrinsic matrix</p></li>
 <li><p><strong>width</strong> (<em>int</em>) – the width of the calibration image</p></li>
@@ -1714,10 +1715,10 @@ be found here: <a class="reference external" href="http://ksimek.github.io/2013/
 <li><p><strong>zfar</strong> (<em>float</em>) – the z value of the far clipping plane of the view frustum</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a 3D WebGL projection matrix</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1733,14 +1734,14 @@ This method will create one from an OpenCV-style camera extrinsic matrix.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>extrinsic</strong> (<em>np.ndarray</em>) – the camera-to-world matrix, which places the camera
 in the scene</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a WebGL view matrix</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1757,17 +1758,17 @@ the up direction as given.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>center</strong> (<em>np.ndarray</em>) – the center of the object</p></li>
 <li><p><strong>look_at</strong> (<em>np.ndarray</em>) – the position to look at</p></li>
 <li><p><strong>up_dir</strong> (<em>np.ndarray</em>) – the position that is “up”</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a 3D homogeneous transform matrix</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1778,16 +1779,16 @@ the up direction as given.</p>
 <span class="sig-name descname"><span class="pre">quaternion_from_axis_angle</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.quaternion_from_axis_angle" title="Permalink to this definition"></a></dt>
 <dd><p>Convert rotation axis and angle to a quaternion.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>axis</strong> (<em>np.ndarray</em>) – the axis of rotation</p></li>
 <li><p><strong>angle</strong> (<em>float</em>) – the angle to rotate in radians</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a 3D homogenous transform matrix</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1798,16 +1799,16 @@ the up direction as given.</p>
 <span class="sig-name descname"><span class="pre">quaternion_multiply</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.quaternion_multiply" title="Permalink to this definition"></a></dt>
 <dd><p>Multiply two quaternions together.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>a</strong> (<em>np.ndarray</em>) – the first quaternion</p></li>
 <li><p><strong>b</strong> (<em>np.ndarray</em>) – the second quaternion</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>the result of a * b</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1822,13 +1823,13 @@ the up direction as given.</p>
 <p>One degree of freedom is underconstrained.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>axis</strong> (<em>np.ndarray</em>) – the axis to which to align the x-axis</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a quaternion</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1839,13 +1840,13 @@ the up direction as given.</p>
 <span class="sig-name descname"><span class="pre">quaternion_to_matrix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.quaternion_to_matrix" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a 3D homogeneous rotation matrix from a quaternion.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>quaternion</strong> (<em>np.ndarray</em>) – the quaternion to use in constructing the matrix</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a 3D homogeneous transform matrix</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1856,13 +1857,13 @@ the up direction as given.</p>
 <span class="sig-name descname"><span class="pre">rotation_about_x</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.rotation_about_x" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a 3D homogeneous rotation matrix about the x-axis.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>angle</strong> (<em>float</em>) – the angle to rotation in radians</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a 3D homogeous transform matrix</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1873,13 +1874,13 @@ the up direction as given.</p>
 <span class="sig-name descname"><span class="pre">rotation_about_y</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.rotation_about_y" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a 3D homogeneous rotation matrix about the y-axis.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>angle</strong> (<em>float</em>) – the angle to rotation in radians</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a 3D homogeous transform matrix</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1890,13 +1891,13 @@ the up direction as given.</p>
 <span class="sig-name descname"><span class="pre">rotation_about_z</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.rotation_about_z" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a 3D homogeneous rotation matrix about the z-axis.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>angle</strong> (<em>float</em>) – the angle to rotation in radians</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a 3D homogeous transform matrix</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1907,16 +1908,16 @@ the up direction as given.</p>
 <span class="sig-name descname"><span class="pre">rotation_matrix_from_axis_angle</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.rotation_matrix_from_axis_angle" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a 3D homogeneous scale matrix from axis and angle.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>axis</strong> (<em>np.ndarray</em>) – the axis of rotation</p></li>
 <li><p><strong>angle</strong> (<em>float</em>) – the angle to rotate in radians</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a 3D homogeneous transform matrix</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1931,13 +1932,13 @@ the up direction as given.</p>
 <p>One degree of freedom is underconstrained.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>axis</strong> (<em>np.ndarray</em>) – the axis to which to align the x-axis</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a 3D homogeneous transform matrix</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1948,25 +1949,25 @@ the up direction as given.</p>
 <span class="sig-name descname"><span class="pre">scale</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.scale" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a 3D homogeneous scale matrix.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>scale</strong> (<em>float</em>) – the scale to use across all axes</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a 3D homogeneous transform matrix</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
 <p>Creates a 3D homogeneous scale matrix.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>scale</strong> (<em>np.ndarray</em>) – the axis-specific scale values</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a 3D homogeneous transform matrix</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1977,13 +1978,13 @@ the up direction as given.</p>
 <span class="sig-name descname"><span class="pre">translate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Transforms.translate" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a 3D homogeneous scale matrix.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>vec</strong> (<em>np.ndarray</em>) – the movement vector</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a 3D homogeneous transform matrix</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -2003,7 +2004,7 @@ the up direction as given.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fill_color</span></span><a class="headerlink" href="#scenepic.Label.fill_color" title="Permalink to this definition"></a></dt>
 <dd><p>The color to use.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -2014,7 +2015,7 @@ the up direction as given.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">font_family</span></span><a class="headerlink" href="#scenepic.Label.font_family" title="Permalink to this definition"></a></dt>
 <dd><p>HTML font family name.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -2025,7 +2026,7 @@ the up direction as given.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">horizontal_align</span></span><a class="headerlink" href="#scenepic.Label.horizontal_align" title="Permalink to this definition"></a></dt>
 <dd><p>How to align the label horizontally (one of ‘left’, ‘center’, ‘right’)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -2036,7 +2037,7 @@ the up direction as given.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">label_id</span></span><a class="headerlink" href="#scenepic.Label.label_id" title="Permalink to this definition"></a></dt>
 <dd><p>A unique identifier for the Label</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -2047,7 +2048,7 @@ the up direction as given.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mesh_id</span></span><a class="headerlink" href="#scenepic.Label.mesh_id" title="Permalink to this definition"></a></dt>
 <dd><p>The mesh associated with this label</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -2058,7 +2059,7 @@ the up direction as given.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">offset_distance</span></span><a class="headerlink" href="#scenepic.Label.offset_distance" title="Permalink to this definition"></a></dt>
 <dd><p>Distance in world space to offset the label by when using left/right/top/bottom alignment.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
@@ -2069,7 +2070,7 @@ the up direction as given.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">size_in_pixels</span></span><a class="headerlink" href="#scenepic.Label.size_in_pixels" title="Permalink to this definition"></a></dt>
 <dd><p>The size in pixels to display the label at.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
@@ -2080,7 +2081,7 @@ the up direction as given.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">text</span></span><a class="headerlink" href="#scenepic.Label.text" title="Permalink to this definition"></a></dt>
 <dd><p>The text to use in the label.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -2091,7 +2092,7 @@ the up direction as given.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vertical_align</span></span><a class="headerlink" href="#scenepic.Label.vertical_align" title="Permalink to this definition"></a></dt>
 <dd><p>How to align the label vertically (one of ‘top’, ‘middle’, ‘bottom’)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -2120,13 +2121,13 @@ create the vertices of a more detailed mesh.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>vertices</strong> (<em>np.ndarray</em>) – a (N, 3) buffer of vertices</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a (S, 3) buffer of subdivided vertices</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -2137,7 +2138,7 @@ create the vertices of a more detailed mesh.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.LoopSubdivisionStencil.create" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a new stencil by subdividing the provided triangles.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>triangles</strong> (<em>np.ndarray</em>) – the initial triangle indices</p></li>
 <li><p><strong>steps</strong> (<em>int</em><em>, </em><em>optional</em>) – specifies how many steps of subdivision to apply. Defaults to 1.</p></li>
@@ -2145,7 +2146,7 @@ create the vertices of a more detailed mesh.</p>
 limit surface in the final step of subdivision. Defaults to false.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>LoopSubdivisionStencil</p>
 </dd>
 </dl>
@@ -2156,7 +2157,7 @@ limit surface in the final step of subdivision. Defaults to false.</p></li>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">triangle_count</span></span><a class="headerlink" href="#scenepic.LoopSubdivisionStencil.triangle_count" title="Permalink to this definition"></a></dt>
 <dd><p>The number of triangles in the subdivided mesh</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
@@ -2167,7 +2168,7 @@ limit surface in the final step of subdivision. Defaults to false.</p></li>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">triangles</span></span><a class="headerlink" href="#scenepic.LoopSubdivisionStencil.triangles" title="Permalink to this definition"></a></dt>
 <dd><p>The triangles of the subdivided mesh</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -2178,7 +2179,7 @@ limit surface in the final step of subdivision. Defaults to false.</p></li>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vertex_count</span></span><a class="headerlink" href="#scenepic.LoopSubdivisionStencil.vertex_count" title="Permalink to this definition"></a></dt>
 <dd><p>The number of vertices in the subdivided mesh</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>

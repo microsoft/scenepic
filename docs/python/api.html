@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>API &mdash; scenepic 1.0.15 documentation</title>
+  <title>API &mdash; scenepic 1.1.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -12,9 +12,6 @@
   <![endif]-->
   
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
@@ -29,11 +26,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> scenepic
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            scenepic
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -159,8 +160,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>API</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">API</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -180,7 +181,7 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">Scene</span></span><a class="headerlink" href="#scenepic.Scene" title="Permalink to this definition"></a></dt>
 <dd><p>Top level container representing an entire ScenePic Scene.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>scene_id</strong> (<em>str</em><em>, </em><em>optional</em>) – a unique identifier for the Scene (will be
 automatically populated if not provided). Defaults to None.</p>
 </dd>
@@ -200,7 +201,7 @@ call to get_script() will returnempty.</p>
 <dd><p>Set user interface parameters across all Canvases with given
 UIParameters instance.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>ui_parameters</strong> (<a class="reference internal" href="ui.html#scenepic.UIParameters" title="scenepic.UIParameters"><em>UIParameters</em></a>) – global UI parameters to set</p>
 </dd>
 </dl>
@@ -212,14 +213,14 @@ UIParameters instance.</p>
 <dd><p>Create a new AudioTrack object and append it to the Scene.
 Audio tracks are Scene-wide resources that can be attached to multiple canvases.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>audio_id</strong> (<em>str</em><em>, </em><em>optional</em>) – a unique identifier for the Audio track (will be
 automatically populated if not provided). Defaults to None.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a reference to an Audio track object</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="media.html#scenepic.AudioTrack" title="scenepic.AudioTrack">AudioTrack</a></p>
 </dd>
 </dl>
@@ -230,7 +231,7 @@ automatically populated if not provided). Defaults to None.</p>
 <span class="sig-name descname"><span class="pre">create_canvas_2d</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.create_canvas_2d" title="Permalink to this definition"></a></dt>
 <dd><p>Create a new 2D Canvas and append to the Scene.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>canvas_id</strong> (<em>str</em><em>, </em><em>optional</em>) – a unique identifier for the Canvas (will be
 automatically populated if not provided). Defaults to None.</p></li>
@@ -245,10 +246,10 @@ used to drive playback, i.e. frames will be displayed in time with
 the playback of the media file.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a reference to the new Canvas object</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="graphics2d.html#scenepic.Canvas2D" title="scenepic.Canvas2D">Canvas2D</a></p>
 </dd>
 </dl>
@@ -259,7 +260,7 @@ the playback of the media file.</p></li>
 <span class="sig-name descname"><span class="pre">create_canvas_3d</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.create_canvas_3d" title="Permalink to this definition"></a></dt>
 <dd><p>Create a new 3D Canvas and append to the Scene.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>canvas_id</strong> (<em>str</em><em>, </em><em>optional</em>) – a unique identifier for the Canvas (will be
 automatically populated if not provided). Defaults to None.</p></li>
@@ -277,10 +278,10 @@ used to drive playback, i.e. frames will be displayed in time with
 the playback of the media file.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a reference to the new Canvas object</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="graphics3d.html#scenepic.Canvas3D" title="scenepic.Canvas3D">Canvas3D</a></p>
 </dd>
 </dl>
@@ -291,7 +292,7 @@ the playback of the media file.</p></li>
 <span class="sig-name descname"><span class="pre">create_drop_down_menu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.create_drop_down_menu" title="Permalink to this definition"></a></dt>
 <dd><p>Create a new DropDownMenu and add directly to the HTML page.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Keyword Arguments</dt>
+<dt class="field-odd">Keyword Arguments<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>drop_down_menu_id</strong> (<em>str</em><em>, </em><em>optional</em>) – a unique identifier for the DropDownMenu
 (will be automatically populated if not
@@ -302,10 +303,10 @@ TextPanel’s parent in the HTML DOM (otherwise
 will simply be appended to document). Defaults to None.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a reference to the new DropDownMenu object</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="ui.html#scenepic.DropDownMenu" title="scenepic.DropDownMenu">DropDownMenu</a></p>
 </dd>
 </dl>
@@ -316,7 +317,7 @@ will simply be appended to document). Defaults to None.</p></li>
 <span class="sig-name descname"><span class="pre">create_graph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.create_graph" title="Permalink to this definition"></a></dt>
 <dd><p>Create a new Graph canvas and append to the Scene.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>canvas_id</strong> (<em>str</em><em>, </em><em>optional</em>) – a unique identifier for the Canvas (will be
 automatically populated if not provided). Defaults to None.</p></li>
@@ -341,10 +342,10 @@ used to drive playback, i.e. frames will be displayed in time with
 the playback of the media file.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a reference to the new Graph object</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="graphics2d.html#scenepic.Graph" title="scenepic.Graph">Graph</a></p>
 </dd>
 </dl>
@@ -357,14 +358,14 @@ the playback of the media file.</p></li>
 Images are Scene-wide resources that can be reused as textures
 across multiple Meshes and Frame2Ds.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>image_id</strong> (<em>str</em><em>, </em><em>optional</em>) – a unique identifier for the Image (will be
 automatically populated if not provided). Defaults to None.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a reference to the Image object</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="media.html#scenepic.Image" title="scenepic.Image">Image</a></p>
 </dd>
 </dl>
@@ -377,7 +378,7 @@ automatically populated if not provided). Defaults to None.</p>
 Labels are Scene-wide resources that can be reused across
 multiple Meshes.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>label_id</strong> (<em>str</em><em>, </em><em>optional</em>) – a unique identifier for the Label (will be
 automatically populated if not provided). Defaults to None.</p></li>
@@ -398,10 +399,10 @@ using left/right/top/bottom alignment. Defaults to 0.1.</p></li>
 camera space. Defaults to False.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a reference to the new Label object</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="graphics3d.html#scenepic.Label" title="scenepic.Label">Label</a></p>
 </dd>
 </dl>
@@ -417,7 +418,7 @@ Frames in multiple Canvas3Ds.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>mesh_id</strong> (<em>str</em><em>, </em><em>optional</em>) – a unique identifier for the Mesh (will be
 automatically populated if not provided). Defaults to None.</p></li>
@@ -442,10 +443,10 @@ rather than rotating with the rest of the world. Defaults to False.</p></li>
 Defaults to False.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a reference to the new Mesh object</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="graphics3d.html#scenepic.Mesh" title="scenepic.Mesh">Mesh</a></p>
 </dd>
 </dl>
@@ -456,7 +457,7 @@ Defaults to False.</p></li>
 <span class="sig-name descname"><span class="pre">create_text_panel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.create_text_panel" title="Permalink to this definition"></a></dt>
 <dd><p>Create a new TextPanel and add directly to the HTML page.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>text_panel_id</strong> (<em>str</em><em>, </em><em>optional</em>) – a unique identifier for the TextPanel (will be
 automatically populated if not provided). Defaults to None.</p></li>
@@ -466,7 +467,7 @@ simply be appended to document). Defaults to None.</p></li>
 <li><p><strong>add_input_box</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether to add an input box to the TextPanel. Defaults to False.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a reference to the new TextPanel object</p>
 </dd>
 </dl>
@@ -478,14 +479,14 @@ simply be appended to document). Defaults to None.</p></li>
 <dd><p>Create a new Video object and append it to the Scene.
 Videos are Scene-wide resources that can be attached to multiple canvases.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>video_id</strong> (<em>str</em><em>, </em><em>optional</em>) – a unique identifier for the Video (will be
 automatically populated if not provided). Defaults to None.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a reference to an Video object</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="media.html#scenepic.Video" title="scenepic.Video">Video</a></p>
 </dd>
 </dl>
@@ -496,7 +497,7 @@ automatically populated if not provided). Defaults to None.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">framerate</span></span><a class="headerlink" href="#scenepic.Scene.framerate" title="Permalink to this definition"></a></dt>
 <dd><p>Number of frames to display per second</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
@@ -509,10 +510,10 @@ automatically populated if not provided). Defaults to None.</p>
 <p>If you use clear_script() then this will return updates to
 the Scene since thelast call to clear_script().</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>a JSON string representing the Scene</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>str</p>
 </dd>
 </dl>
@@ -526,10 +527,10 @@ representing the Scene.
 If you use clear_script() then this will return updates to
 the Scene since the last call to clear_script().</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>a JSONP script representing the Scene</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>str</p>
 </dd>
 </dl>
@@ -545,7 +546,7 @@ the Scene since the last call to clear_script().</p>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>width</strong> (<em>str</em>) – CSS declaration for the width of the ScenePic.</p></li>
 <li><p><strong>grid_template_rows</strong> (<em>str</em>) – CSS declaration defining the rows of the ScenePic</p></li>
@@ -560,7 +561,7 @@ the Scene since the last call to clear_script().</p>
 <span class="sig-name descname"><span class="pre">link_canvas_events</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">canvases</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.link_canvas_events" title="Permalink to this definition"></a></dt>
 <dd><p>Specify that all input events should be linked across the provided set of Canvases.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>self</strong> (<a class="reference internal" href="#scenepic.Scene" title="scenepic.Scene"><em>Scene</em></a>) – self reference</p></li>
 <li><p><strong>canvases</strong> – the canvases which should have linked events</p></li>
@@ -574,10 +575,10 @@ the Scene since the last call to clear_script().</p>
 <span class="sig-name descname"><span class="pre">measure_command_size</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.measure_command_size" title="Permalink to this definition"></a></dt>
 <dd><p>Measures the number of bytes used by command type.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>the number of bytes per command type</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>Mapping[str, int]</p>
 </dd>
 </dl>
@@ -592,7 +593,7 @@ the Scene since the last call to clear_script().</p>
 <p>For use with Scene.grid</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>canvas_id</strong> (<em>str</em>) – The unique ID of the canvas to place</p></li>
 <li><p><strong>grid_row</strong> (<em>str</em>) – the CSS row specification for the Canvas</p></li>
@@ -624,7 +625,7 @@ minimize the expected error across the remaining (quantized) meshes.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>relative_error_threshold</strong> (<em>float</em><em>, </em><em>optional</em>) – the maximum expected error as a multiple of the range of
 values in the base mesh. Defaults to 1e-5.</p></li>
@@ -634,10 +635,10 @@ values in the base mesh. Defaults to 1e-5.</p></li>
 but reducing compression. Defaults to True.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>information on the per-mesh quantization process</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Mapping[str, QuantizationInfo]</p>
 </dd>
 </dl>
@@ -649,7 +650,7 @@ but reducing compression. Defaults to True.</p></li>
 <dd><p>Save the scene as a self-contained html file with no
 dependencies.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>path</strong> (<em>str</em>) – the path to the file on disk</p></li>
 <li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – the HTML title. Defaults to “ScenePic”.</p></li>
@@ -674,7 +675,7 @@ wrapper html and provide the scenepic.min.js library file.
 Alternatively, use save_as_html() to make a self-contained
 HTML file.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – the path to the file on disk</p>
 </dd>
 </dl>
@@ -690,7 +691,7 @@ the wrapper html.
 Alternatively, use save_as_html() to make a self-contained
 HTML file.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>path</strong> (<em>str</em>) – the path to the file on disk</p></li>
 <li><p><strong>standalone</strong> (<em>bool</em>) – whether to make the script standalone
@@ -705,7 +706,7 @@ by including the library</p></li>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">script_cleared</span></span><a class="headerlink" href="#scenepic.Scene.script_cleared" title="Permalink to this definition"></a></dt>
 <dd><p>Whether the script has been cleared</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
@@ -716,7 +717,7 @@ by including the library</p></li>
 <span class="sig-name descname"><span class="pre">simulate_key_presses</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">canvas_id</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">keypresses</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.simulate_key_presses" title="Permalink to this definition"></a></dt>
 <dd><p>Simulates one or more keypresses to fire off events in the ScenePic UI at startup, e.g. video playback.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>self</strong> (<a class="reference internal" href="#scenepic.Scene" title="scenepic.Scene"><em>Scene</em></a>) – self reference</p></li>
 <li><p><strong>canvas_id</strong> (<em>Union</em><em>[</em><a class="reference internal" href="graphics3d.html#scenepic.Canvas3D" title="scenepic.Canvas3D"><em>Canvas3D</em></a><em>, </em><a class="reference internal" href="graphics2d.html#scenepic.Canvas2D" title="scenepic.Canvas2D"><em>Canvas2D</em></a><em>, </em><em>str</em><em>]</em>) – ID of the canvas on which to fire off this
@@ -732,7 +733,7 @@ event.</p></li>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">status_bar_visibility</span></span><a class="headerlink" href="#scenepic.Scene.status_bar_visibility" title="Permalink to this definition"></a></dt>
 <dd><p>CSS visibility for the status bar</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -743,7 +744,7 @@ event.</p></li>
 <span class="sig-name descname"><span class="pre">update_instanced_mesh</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.update_instanced_mesh" title="Permalink to this definition"></a></dt>
 <dd><p>Create a new mesh from an existing one by replacing its vector positions and normals.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>base_mesh_id</strong> (<em>str</em>) – the unique identifier of the original base mesh. Must already have been created.</p></li>
 <li><p><strong>positions</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – float32 matrix of [N, 3] new positions</p></li>
@@ -755,10 +756,10 @@ the rotations.</p></li>
 automatically populated if not provided). Defaults to None.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a reference to the MeshUpdate object</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="graphics3d.html#scenepic.MeshUpdate" title="scenepic.MeshUpdate">MeshUpdate</a></p>
 </dd>
 </dl>
@@ -769,7 +770,7 @@ automatically populated if not provided). Defaults to None.</p></li>
 <span class="sig-name descname"><span class="pre">update_mesh</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.update_mesh" title="Permalink to this definition"></a></dt>
 <dd><p>Create a new mesh from an existing one by replacing its vector positions, normals, and/or colors.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>base_mesh_id</strong> (<em>str</em>) – the unique identifier of the original base mesh. Must already have been created.</p></li>
 <li><p><strong>positions</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – float32 matrix of [N, 3] new positions</p></li>
@@ -779,10 +780,10 @@ automatically populated if not provided). Defaults to None.</p></li>
 automatically populated if not provided). Defaults to None.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a reference to the MeshUpdate object</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="graphics3d.html#scenepic.MeshUpdate" title="scenepic.MeshUpdate">MeshUpdate</a></p>
 </dd>
 </dl>
@@ -793,7 +794,7 @@ automatically populated if not provided). Defaults to None.</p></li>
 <span class="sig-name descname"><span class="pre">update_mesh_positions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Scene.update_mesh_positions" title="Permalink to this definition"></a></dt>
 <dd><p>Create a new mesh from an existing one by replacing its vector positions and compute normal values.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>base_mesh_id</strong> (<em>str</em>) – the unique identifier of the original base mesh. Must already have been created.</p></li>
 <li><p><strong>positions</strong> (<em>np.ndarray</em>) – float32 matrix of [N, 3] new positions</p></li>
@@ -801,10 +802,10 @@ automatically populated if not provided). Defaults to None.</p></li>
 automatically populated if not provided). Defaults to None.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a reference to the MeshUpdate object</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="graphics3d.html#scenepic.MeshUpdate" title="scenepic.MeshUpdate">MeshUpdate</a></p>
 </dd>
 </dl>
@@ -1193,7 +1194,7 @@ automatically populated if not provided). Defaults to None.</p></li>
 <span class="sig-name descname"><span class="pre">Black</span></span><a class="headerlink" href="#scenepic.Colors.Black" title="Permalink to this definition"></a></dt>
 <dd><p>(0, 0, 0)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1204,7 +1205,7 @@ automatically populated if not provided). Defaults to None.</p></li>
 <span class="sig-name descname"><span class="pre">White</span></span><a class="headerlink" href="#scenepic.Colors.White" title="Permalink to this definition"></a></dt>
 <dd><p>(255, 255, 255)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1215,7 +1216,7 @@ automatically populated if not provided). Defaults to None.</p></li>
 <span class="sig-name descname"><span class="pre">Red</span></span><a class="headerlink" href="#scenepic.Colors.Red" title="Permalink to this definition"></a></dt>
 <dd><p>(255, 0, 0)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1226,7 +1227,7 @@ automatically populated if not provided). Defaults to None.</p></li>
 <span class="sig-name descname"><span class="pre">Maroon</span></span><a class="headerlink" href="#scenepic.Colors.Maroon" title="Permalink to this definition"></a></dt>
 <dd><p>(128, 0, 0)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1237,7 +1238,7 @@ automatically populated if not provided). Defaults to None.</p></li>
 <span class="sig-name descname"><span class="pre">Pink</span></span><a class="headerlink" href="#scenepic.Colors.Pink" title="Permalink to this definition"></a></dt>
 <dd><p>(255, 200, 220)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1248,7 +1249,7 @@ automatically populated if not provided). Defaults to None.</p></li>
 <span class="sig-name descname"><span class="pre">Brown</span></span><a class="headerlink" href="#scenepic.Colors.Brown" title="Permalink to this definition"></a></dt>
 <dd><p>(170, 110, 40)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1259,7 +1260,7 @@ automatically populated if not provided). Defaults to None.</p></li>
 <span class="sig-name descname"><span class="pre">Orange</span></span><a class="headerlink" href="#scenepic.Colors.Orange" title="Permalink to this definition"></a></dt>
 <dd><p>(255, 150, 0)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1270,7 +1271,7 @@ automatically populated if not provided). Defaults to None.</p></li>
 <span class="sig-name descname"><span class="pre">Coral</span></span><a class="headerlink" href="#scenepic.Colors.Coral" title="Permalink to this definition"></a></dt>
 <dd><p>(255, 215, 180)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1281,7 +1282,7 @@ automatically populated if not provided). Defaults to None.</p></li>
 <span class="sig-name descname"><span class="pre">Olive</span></span><a class="headerlink" href="#scenepic.Colors.Olive" title="Permalink to this definition"></a></dt>
 <dd><p>(128, 128, 0)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1292,7 +1293,7 @@ automatically populated if not provided). Defaults to None.</p></li>
 <span class="sig-name descname"><span class="pre">Yellow</span></span><a class="headerlink" href="#scenepic.Colors.Yellow" title="Permalink to this definition"></a></dt>
 <dd><p>(255, 235, 0)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1303,7 +1304,7 @@ automatically populated if not provided). Defaults to None.</p></li>
 <span class="sig-name descname"><span class="pre">Beige</span></span><a class="headerlink" href="#scenepic.Colors.Beige" title="Permalink to this definition"></a></dt>
 <dd><p>(255, 250, 200)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1314,7 +1315,7 @@ automatically populated if not provided). Defaults to None.</p></li>
 <span class="sig-name descname"><span class="pre">Lime</span></span><a class="headerlink" href="#scenepic.Colors.Lime" title="Permalink to this definition"></a></dt>
 <dd><p>(190, 255, 0)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1325,7 +1326,7 @@ automatically populated if not provided). Defaults to None.</p></li>
 <span class="sig-name descname"><span class="pre">Green</span></span><a class="headerlink" href="#scenepic.Colors.Green" title="Permalink to this definition"></a></dt>
 <dd><p>(0, 190, 0)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1336,7 +1337,7 @@ automatically populated if not provided). Defaults to None.</p></li>
 <span class="sig-name descname"><span class="pre">Mint</span></span><a class="headerlink" href="#scenepic.Colors.Mint" title="Permalink to this definition"></a></dt>
 <dd><p>(170, 255, 195)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1347,7 +1348,7 @@ automatically populated if not provided). Defaults to None.</p></li>
 <span class="sig-name descname"><span class="pre">Teal</span></span><a class="headerlink" href="#scenepic.Colors.Teal" title="Permalink to this definition"></a></dt>
 <dd><p>(0, 128, 128)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1358,7 +1359,7 @@ automatically populated if not provided). Defaults to None.</p></li>
 <span class="sig-name descname"><span class="pre">Cyan</span></span><a class="headerlink" href="#scenepic.Colors.Cyan" title="Permalink to this definition"></a></dt>
 <dd><p>(100, 255, 255)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1369,7 +1370,7 @@ automatically populated if not provided). Defaults to None.</p></li>
 <span class="sig-name descname"><span class="pre">Navy</span></span><a class="headerlink" href="#scenepic.Colors.Navy" title="Permalink to this definition"></a></dt>
 <dd><p>(0, 0, 128)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1380,7 +1381,7 @@ automatically populated if not provided). Defaults to None.</p></li>
 <span class="sig-name descname"><span class="pre">Blue</span></span><a class="headerlink" href="#scenepic.Colors.Blue" title="Permalink to this definition"></a></dt>
 <dd><p>(67, 133, 255)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1391,7 +1392,7 @@ automatically populated if not provided). Defaults to None.</p></li>
 <span class="sig-name descname"><span class="pre">Purple</span></span><a class="headerlink" href="#scenepic.Colors.Purple" title="Permalink to this definition"></a></dt>
 <dd><p>(130, 0, 150)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1402,7 +1403,7 @@ automatically populated if not provided). Defaults to None.</p></li>
 <span class="sig-name descname"><span class="pre">Lavender</span></span><a class="headerlink" href="#scenepic.Colors.Lavender" title="Permalink to this definition"></a></dt>
 <dd><p>(230, 190, 255)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1413,7 +1414,7 @@ automatically populated if not provided). Defaults to None.</p></li>
 <span class="sig-name descname"><span class="pre">Magenta</span></span><a class="headerlink" href="#scenepic.Colors.Magenta" title="Permalink to this definition"></a></dt>
 <dd><p>(255, 0, 255)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1424,7 +1425,7 @@ automatically populated if not provided). Defaults to None.</p></li>
 <span class="sig-name descname"><span class="pre">Gray</span></span><a class="headerlink" href="#scenepic.Colors.Gray" title="Permalink to this definition"></a></dt>
 <dd><p>(128, 128, 128)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1437,20 +1438,20 @@ automatically populated if not provided). Defaults to None.</p></li>
 <span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">Color</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Color" title="Permalink to this definition"></a></dt>
 <dd><p>Convenience method for creating a numpy 3-vector from R,G,B float values.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>r</strong> (<em>float</em>) – red value [0,1].</p></li>
 <li><p><strong>g</strong> (<em>float</em>) – green value [0,1].</p></li>
 <li><p><strong>b</strong> (<em>float</em>) – blue value [0,1].</p></li>
 </ul>
 </dd>
-<dt class="field-even">Raises</dt>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>ValueError</strong> – Will raise this if the values are out of range</p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>a color array</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -1461,17 +1462,17 @@ automatically populated if not provided). Defaults to None.</p></li>
 <span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">ColorFromBytes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.ColorFromBytes" title="Permalink to this definition"></a></dt>
 <dd><p>Construct a color object from byte values.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>red</strong> – Red channel</p></li>
 <li><p><strong>green</strong> – Green channel</p></li>
 <li><p><strong>blue</strong> – Blue channel</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a valid color object</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Canvas2D &mdash; scenepic 1.0.15 documentation</title>
+  <title>Canvas2D &mdash; scenepic 1.1.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -12,9 +12,6 @@
   <![endif]-->
   
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
@@ -29,11 +26,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> scenepic
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            scenepic
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -78,9 +79,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="api.html">API</a> &raquo;</li>
-      <li>Canvas2D</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="api.html">API</a></li>
+      <li class="breadcrumb-item active">Canvas2D</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/graphics2d.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -101,7 +102,7 @@
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">background_color</span></span><a class="headerlink" href="#scenepic.Canvas2D.background_color" title="Permalink to this definition"></a></dt>
 <dd><p>The background color of the frame</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -112,7 +113,7 @@
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">canvas_id</span></span><a class="headerlink" href="#scenepic.Canvas2D.canvas_id" title="Permalink to this definition"></a></dt>
 <dd><p>A unique identifier for the canvas</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -132,14 +133,14 @@ visualization into multiple files.</p>
 <dd><p>Creates a new Frame2D object and appends to the list of Frame2Ds in
 the Canvas2D.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>frame_id</strong> (<em>str</em>) – a unique identifier for the Frame2D (will be
 automatically populated if not provided).</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a new Frame2D object</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#scenepic.Frame2D" title="scenepic.Frame2D">Frame2D</a></p>
 </dd>
 </dl>
@@ -150,7 +151,7 @@ automatically populated if not provided).</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">height</span></span><a class="headerlink" href="#scenepic.Canvas2D.height" title="Permalink to this definition"></a></dt>
 <dd><p>The height of the Canvas</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
@@ -163,7 +164,7 @@ automatically populated if not provided).</p>
 <p>This file will be used to drive playback, i.e. frames will be
 displayed in time with the playback of the media file.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -181,7 +182,7 @@ selector in the ScenePic user interface.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>self</strong> (<a class="reference internal" href="#scenepic.Canvas2D" title="scenepic.Canvas2D"><em>Canvas2D</em></a>) – the self reference</p></li>
 <li><p><strong>layer_settings</strong> (<em>Mapping</em><em>[</em><em>str</em><em>, </em><em>Union</em><em>[</em><em>dict</em><em>, </em><a class="reference internal" href="ui.html#scenepic.LayerSettings" title="scenepic.LayerSettings"><em>LayerSettings</em></a><em>]</em><em>]</em>) – a mapping from
@@ -196,7 +197,7 @@ layer IDs to layer settings.</p></li>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">width</span></span><a class="headerlink" href="#scenepic.Canvas2D.width" title="Permalink to this definition"></a></dt>
 <dd><p>The width of the Canvas</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
@@ -216,7 +217,7 @@ layer IDs to layer settings.</p></li>
 <span class="sig-name descname"><span class="pre">add_circle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Frame2D.add_circle" title="Permalink to this definition"></a></dt>
 <dd><p>Add a circle to the frame.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>self</strong> (<a class="reference internal" href="#scenepic.Frame2D" title="scenepic.Frame2D"><em>Frame2D</em></a>) – the self reference</p></li>
 <li><p><strong>x</strong> (<em>float</em>) – the center x coordinate</p></li>
@@ -236,7 +237,7 @@ layer IDs to layer settings.</p></li>
 <span class="sig-name descname"><span class="pre">add_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'fit'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smoothed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Frame2D.add_image" title="Permalink to this definition"></a></dt>
 <dd><p>Add an image to the frame.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>self</strong> (<a class="reference internal" href="#scenepic.Frame2D" title="scenepic.Frame2D"><em>Frame2D</em></a>) – the self reference</p></li>
 <li><p><strong>image_id</strong> (<em>str</em>) – the unique identifier of the image</p></li>
@@ -256,7 +257,7 @@ layer IDs to layer settings.</p></li>
 <span class="sig-name descname"><span class="pre">add_line</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Frame2D.add_line" title="Permalink to this definition"></a></dt>
 <dd><p>Add a line to the frame.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>coordinates</strong> (<em>np.ndarray</em>) – float32 matrix of [N, 2] coordinates of the line</p></li>
 <li><p><strong>line_color</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – the color of the line. Defaults to Black.</p></li>
@@ -274,7 +275,7 @@ layer IDs to layer settings.</p></li>
 <span class="sig-name descname"><span class="pre">add_rectangle</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Frame2D.add_rectangle" title="Permalink to this definition"></a></dt>
 <dd><p>Add a rectangle to the frame.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>x</strong> (<em>float</em>) – the upper left corner x coordinate</p></li>
 <li><p><strong>y</strong> (<em>float</em>) – the upper left corner y coordinate</p></li>
@@ -294,7 +295,7 @@ layer IDs to layer settings.</p></li>
 <span class="sig-name descname"><span class="pre">add_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">left</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bottom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size_in_pixels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">12.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_family</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sans-serif'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Frame2D.add_text" title="Permalink to this definition"></a></dt>
 <dd><p>Add some text to the frame.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>self</strong> (<a class="reference internal" href="#scenepic.Frame2D" title="scenepic.Frame2D"><em>Frame2D</em></a>) – The self reference</p></li>
 <li><p><strong>text</strong> (<em>str</em>) – the text to display</p></li>
@@ -314,7 +315,7 @@ layer IDs to layer settings.</p></li>
 <span class="sig-name descname"><span class="pre">add_video</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Frame2D.add_video" title="Permalink to this definition"></a></dt>
 <dd><p>Add an frame from a video to the frame.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>position_type</strong> (<em>str</em><em>, </em><em>optional</em>) – one of “fit”, “fill”, “stretch”, or “manual”. Defaults to “fit”.</p></li>
 <li><p><strong>x</strong> (<em>float</em><em>, </em><em>optional</em>) – x coordinate to draw video at if position_type == “manual”. Defaults to 0.0.</p></li>
@@ -341,7 +342,7 @@ layer IDs to layer settings.</p></li>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Margin</span></span><a class="headerlink" href="#scenepic.Graph.Margin" title="Permalink to this definition"></a></dt>
 <dd><p>Represents the margin along the edges of a graph.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>size</strong> (<em>float</em><em>, </em><em>optional</em>) – space in pixels to use for all margins. Default 10.</p></li>
 <li><p><strong>top</strong> (<em>float</em><em>, </em><em>optional</em>) – the top margin value in pixels</p></li>
@@ -356,7 +357,7 @@ layer IDs to layer settings.</p></li>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bottom</span></span><a class="headerlink" href="#scenepic.Graph.Margin.bottom" title="Permalink to this definition"></a></dt>
 <dd><p>The bottom margin in pixels</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
@@ -367,7 +368,7 @@ layer IDs to layer settings.</p></li>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">left</span></span><a class="headerlink" href="#scenepic.Graph.Margin.left" title="Permalink to this definition"></a></dt>
 <dd><p>The left margin in pixels</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
@@ -378,7 +379,7 @@ layer IDs to layer settings.</p></li>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">right</span></span><a class="headerlink" href="#scenepic.Graph.Margin.right" title="Permalink to this definition"></a></dt>
 <dd><p>The right margin in pixels</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
@@ -389,7 +390,7 @@ layer IDs to layer settings.</p></li>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">top</span></span><a class="headerlink" href="#scenepic.Graph.Margin.top" title="Permalink to this definition"></a></dt>
 <dd><p>The top margin in pixels</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
@@ -402,7 +403,7 @@ layer IDs to layer settings.</p></li>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">VerticalRule</span></span><a class="headerlink" href="#scenepic.Graph.VerticalRule" title="Permalink to this definition"></a></dt>
 <dd><p>Represents a vertical rule drawn on a sparkline graph.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>frame</strong> (<em>int</em>) – Frame to add the vertical rule</p></li>
 <li><p><strong>color</strong> – (Color, optional): the line color. Defauts to black.</p></li>
@@ -415,7 +416,7 @@ layer IDs to layer settings.</p></li>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">color</span></span><a class="headerlink" href="#scenepic.Graph.VerticalRule.color" title="Permalink to this definition"></a></dt>
 <dd><p>the color of the line</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Color</p>
 </dd>
 </dl>
@@ -426,7 +427,7 @@ layer IDs to layer settings.</p></li>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">frame</span></span><a class="headerlink" href="#scenepic.Graph.VerticalRule.frame" title="Permalink to this definition"></a></dt>
 <dd><p>the frame at which to add the line</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
@@ -437,7 +438,7 @@ layer IDs to layer settings.</p></li>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">line_width</span></span><a class="headerlink" href="#scenepic.Graph.VerticalRule.line_width" title="Permalink to this definition"></a></dt>
 <dd><p>the width of the line in pixels</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
@@ -450,7 +451,7 @@ layer IDs to layer settings.</p></li>
 <span class="sig-name descname"><span class="pre">add_sparkline</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scenepic.Graph.add_sparkline" title="Permalink to this definition"></a></dt>
 <dd><p>Adds a sparkline to the graph.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> (<em>str</em>) – the name of the measured quantity</p></li>
 <li><p><strong>values</strong> (<em>np.ndarray</em>) – the measured values</p></li>
@@ -467,7 +468,7 @@ layer IDs to layer settings.</p></li>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">background_color</span></span><a class="headerlink" href="#scenepic.Graph.background_color" title="Permalink to this definition"></a></dt>
 <dd><p>The background color of the frame</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -478,7 +479,7 @@ layer IDs to layer settings.</p></li>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">canvas_id</span></span><a class="headerlink" href="#scenepic.Graph.canvas_id" title="Permalink to this definition"></a></dt>
 <dd><p>A unique identifier for the canvas</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -489,7 +490,7 @@ layer IDs to layer settings.</p></li>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">font_family</span></span><a class="headerlink" href="#scenepic.Graph.font_family" title="Permalink to this definition"></a></dt>
 <dd><p>The font family used for the graph labels</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -500,7 +501,7 @@ layer IDs to layer settings.</p></li>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">margin</span></span><a class="headerlink" href="#scenepic.Graph.margin" title="Permalink to this definition"></a></dt>
 <dd><p>The outside margin of the graph</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#scenepic.Graph.Margin" title="scenepic.Graph.Margin">Margin</a></p>
 </dd>
 </dl>
@@ -513,7 +514,7 @@ layer IDs to layer settings.</p></li>
 <p>This file will be used to drive playback, i.e. frames will be
 displayed in time with the playback of the media file.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -531,7 +532,7 @@ One of (‘left’, ‘right’, ‘top’, ‘bottom’, or ‘none’)</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name_size</span></span><a class="headerlink" href="#scenepic.Graph.name_size" title="Permalink to this definition"></a></dt>
 <dd><p>The size of the sparkline labels in pixels</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
@@ -549,7 +550,7 @@ One of (‘left’, ‘right’, ‘top’, ‘bottom’, or ‘none’)</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">value_size</span></span><a class="headerlink" href="#scenepic.Graph.value_size" title="Permalink to this definition"></a></dt>
 <dd><p>The size of the sparkline labels in pixels</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>

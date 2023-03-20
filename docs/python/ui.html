@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LayerSettings &mdash; scenepic 1.0.15 documentation</title>
+  <title>LayerSettings &mdash; scenepic 1.1.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -12,9 +12,6 @@
   <![endif]-->
   
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
@@ -29,11 +26,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> scenepic
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            scenepic
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -82,9 +83,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="api.html">API</a> &raquo;</li>
-      <li>LayerSettings</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="api.html">API</a></li>
+      <li class="breadcrumb-item active">LayerSettings</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/ui.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -108,7 +109,7 @@ and layers with no renderOrder set will be drawn last. Meshes without layer ids,
 or with layer ids that are not specified in this dictionary, will be drawn filled,
 without wireframe, at opacity 1.0, and after any layers with renderOrder set.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>filled</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether to draw the layer with filled polygons. Defaults to True.</p></li>
 <li><p><strong>wireframe</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether to draw the layer with a frame outline. Defaults to False.</p></li>
@@ -122,7 +123,7 @@ without wireframe, at opacity 1.0, and after any layers with renderOrder set.</p
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">filled</span></span><a class="headerlink" href="#scenepic.LayerSettings.filled" title="Permalink to this definition"></a></dt>
 <dd><p>Specifies whether to draw the layer with filled triangles</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
@@ -133,7 +134,7 @@ without wireframe, at opacity 1.0, and after any layers with renderOrder set.</p
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">opacity</span></span><a class="headerlink" href="#scenepic.LayerSettings.opacity" title="Permalink to this definition"></a></dt>
 <dd><p>In [0,1] specifies the opacity with which to draw the layer</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
@@ -144,7 +145,7 @@ without wireframe, at opacity 1.0, and after any layers with renderOrder set.</p
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">render_order</span></span><a class="headerlink" href="#scenepic.LayerSettings.render_order" title="Permalink to this definition"></a></dt>
 <dd><p>Specifies a fixed order to draw transparency.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
@@ -155,7 +156,7 @@ without wireframe, at opacity 1.0, and after any layers with renderOrder set.</p
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">wireframe</span></span><a class="headerlink" href="#scenepic.LayerSettings.wireframe" title="Permalink to this definition"></a></dt>
 <dd><p>Specifies whether to draw the layer with a wireframe outline</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
@@ -183,7 +184,7 @@ visualization into multiple files.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">items</span></span><a class="headerlink" href="#scenepic.DropDownMenu.items" title="Permalink to this definition"></a></dt>
 <dd><p>The items in the dropdown menu.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List[str]</p>
 </dd>
 </dl>
@@ -206,7 +207,7 @@ visualization into multiple files.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">title</span></span><a class="headerlink" href="#scenepic.DropDownMenu.title" title="Permalink to this definition"></a></dt>
 <dd><p>The title of the dropdown menu.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -234,7 +235,7 @@ visualization into multiple files.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">input_text</span></span><a class="headerlink" href="#scenepic.TextPanel.input_text" title="Permalink to this definition"></a></dt>
 <dd><p>Text for the optional input textbox.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -245,7 +246,7 @@ visualization into multiple files.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">text</span></span><a class="headerlink" href="#scenepic.TextPanel.text" title="Permalink to this definition"></a></dt>
 <dd><p>The text within the text panel.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -256,7 +257,7 @@ visualization into multiple files.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">title</span></span><a class="headerlink" href="#scenepic.TextPanel.title" title="Permalink to this definition"></a></dt>
 <dd><p>The title of the text panel.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -272,7 +273,7 @@ visualization into multiple files.</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">scenepic.</span></span><span class="sig-name descname"><span class="pre">UIParameters</span></span><a class="headerlink" href="#scenepic.UIParameters" title="Permalink to this definition"></a></dt>
 <dd><p>Per-Canvas3D parameters of the ScenePic user interface.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>pointer_alt_key_multiplier</strong> (<em>float</em><em>, </em><em>optional</em>) – when the Alt key is pressed, mouse movement
 is scaled by this factor. Defaults to 0.2.</p></li>
@@ -290,7 +291,7 @@ Defaults to “visible”.</p></li>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">key_press_speed</span></span><a class="headerlink" href="#scenepic.UIParameters.key_press_speed" title="Permalink to this definition"></a></dt>
 <dd><p>movement speed from key presses</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
@@ -301,7 +302,7 @@ Defaults to “visible”.</p></li>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">layer_dropdown_visibility</span></span><a class="headerlink" href="#scenepic.UIParameters.layer_dropdown_visibility" title="Permalink to this definition"></a></dt>
 <dd><p>the CSS visibility setting for the layer dropdown menu</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -312,7 +313,7 @@ Defaults to “visible”.</p></li>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mouse_wheel_translation_speed</span></span><a class="headerlink" href="#scenepic.UIParameters.mouse_wheel_translation_speed" title="Permalink to this definition"></a></dt>
 <dd><p>linear scale factor of mouse wheel input into camera translation.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
@@ -323,7 +324,7 @@ Defaults to “visible”.</p></li>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pointer_alt_key_multiplier</span></span><a class="headerlink" href="#scenepic.UIParameters.pointer_alt_key_multiplier" title="Permalink to this definition"></a></dt>
 <dd><p>When the Alt key is pressed, mouse movement is scaled by this factor.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
@@ -334,7 +335,7 @@ Defaults to “visible”.</p></li>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pointer_rotation_speed</span></span><a class="headerlink" href="#scenepic.UIParameters.pointer_rotation_speed" title="Permalink to this definition"></a></dt>
 <dd><p>linear scale factor of pointer translation into camera rotation.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
