@@ -1,30 +1,26 @@
 import Misc from "./Misc"
-import {ObjectCache, CanvasBase} from "./CanvasBase"
+import { ObjectCache, CanvasBase } from "./CanvasBase"
 import { mat3, vec2 } from "gl-matrix";
 
-abstract class Primitive
-{
-    readonly layerId : string;
+abstract class Primitive {
+    readonly layerId: string;
 
-    constructor(layerId: string)
-    {
+    constructor(layerId: string) {
         this.layerId = layerId;
     }
 
-    GetObjectCacheId() : string { return null; }
+    GetObjectCacheId(): string { return null; }
     abstract Draw(HTMLCanvasElement, CanvasRenderingContext2D, ObjectCache);
 }
 
-class LinesPrimitive extends Primitive
-{
-    readonly strokeStyle : string;
-    readonly lineWidth : number;
-    readonly fillStyle : string;
-    readonly coordinates : Float32Array;
-    readonly closePath : boolean;
+class LinesPrimitive extends Primitive {
+    readonly strokeStyle: string;
+    readonly lineWidth: number;
+    readonly fillStyle: string;
+    readonly coordinates: Float32Array;
+    readonly closePath: boolean;
 
-    constructor(strokeStyle : string, lineWidth : number, fillStyle : string, coordinates : Float32Array, closePath : boolean, layerId : string)
-    {
+    constructor(strokeStyle: string, lineWidth: number, fillStyle: string, coordinates: Float32Array, closePath: boolean, layerId: string) {
         super(layerId);
         this.strokeStyle = strokeStyle;
         this.lineWidth = lineWidth;
@@ -32,22 +28,19 @@ class LinesPrimitive extends Primitive
         this.coordinates = coordinates;
         this.closePath = closePath;
     }
-    
-    Draw(canvas : HTMLCanvasElement, context : CanvasRenderingContext2D, objectCache : ObjectCache)
-    {
+
+    Draw(canvas: HTMLCanvasElement, context: CanvasRenderingContext2D, objectCache: ObjectCache) {
         context.beginPath();
         context.moveTo(this.coordinates[0] * window.devicePixelRatio, this.coordinates[1] * window.devicePixelRatio);
-        for(var i = 0; i < this.coordinates.length; i += 2)
+        for (var i = 0; i < this.coordinates.length; i += 2)
             context.lineTo(this.coordinates[i] * window.devicePixelRatio, this.coordinates[i + 1] * window.devicePixelRatio);
         if (this.closePath)
             context.closePath();
-        if (this.fillStyle != null)
-        {
+        if (this.fillStyle != null) {
             context.fillStyle = this.fillStyle;
             context.fill();
         }
-        if (this.strokeStyle != null && this.lineWidth > 0)
-        {
+        if (this.strokeStyle != null && this.lineWidth > 0) {
             context.strokeStyle = this.strokeStyle;
             context.lineWidth = this.lineWidth;
             context.stroke();
@@ -55,16 +48,14 @@ class LinesPrimitive extends Primitive
     }
 }
 
-class CirclePrimitive extends Primitive
-{
-    readonly strokeStyle : string;
-    readonly lineWidth : number;
-    readonly fillStyle : string;
-    readonly center : Float32Array;
-    readonly radius : number;
+class CirclePrimitive extends Primitive {
+    readonly strokeStyle: string;
+    readonly lineWidth: number;
+    readonly fillStyle: string;
+    readonly center: Float32Array;
+    readonly radius: number;
 
-    constructor(strokeStyle : string, lineWidth : number, fillStyle : string, center : Float32Array, radius : number, layerId : string)
-    {
+    constructor(strokeStyle: string, lineWidth: number, fillStyle: string, center: Float32Array, radius: number, layerId: string) {
         super(layerId);
         this.strokeStyle = strokeStyle;
         this.lineWidth = lineWidth;
@@ -72,18 +63,15 @@ class CirclePrimitive extends Primitive
         this.center = center;
         this.radius = radius;
     }
-    
-    Draw(canvas : HTMLCanvasElement, context : CanvasRenderingContext2D, objectCache : ObjectCache)
-    {
+
+    Draw(canvas: HTMLCanvasElement, context: CanvasRenderingContext2D, objectCache: ObjectCache) {
         context.beginPath();
         context.arc(this.center[0] * window.devicePixelRatio, this.center[1] * window.devicePixelRatio, this.radius * window.devicePixelRatio, 0.0, 2.0 * Math.PI, false);
-        if (this.fillStyle != null)
-        {
+        if (this.fillStyle != null) {
             context.fillStyle = this.fillStyle;
             context.fill();
         }
-        if (this.strokeStyle != null && this.lineWidth > 0)
-        {
+        if (this.strokeStyle != null && this.lineWidth > 0) {
             context.strokeStyle = this.strokeStyle;
             context.lineWidth = this.lineWidth;
             context.stroke();
@@ -91,16 +79,14 @@ class CirclePrimitive extends Primitive
     }
 }
 
-class TextPrimitive extends Primitive
-{
-    readonly text : string;
-    readonly fillStyle : string;
-    readonly sizeInPixels : number;
-    readonly fontFamily : string;
-    readonly position : Float32Array;
+class TextPrimitive extends Primitive {
+    readonly text: string;
+    readonly fillStyle: string;
+    readonly sizeInPixels: number;
+    readonly fontFamily: string;
+    readonly position: Float32Array;
 
-    constructor(text : string, fillStyle : string, sizeInPixels : number, fontFamily : string, position : Float32Array, layerId : string)
-    {
+    constructor(text: string, fillStyle: string, sizeInPixels: number, fontFamily: string, position: Float32Array, layerId: string) {
         super(layerId);
         this.text = text;
         this.fillStyle = fillStyle;
@@ -109,8 +95,7 @@ class TextPrimitive extends Primitive
         this.position = position;
     }
 
-    Draw(canvas : HTMLCanvasElement, context : CanvasRenderingContext2D, objectCache : ObjectCache)
-    {
+    Draw(canvas: HTMLCanvasElement, context: CanvasRenderingContext2D, objectCache: ObjectCache) {
         context.fillStyle = this.fillStyle;
         let sizeInPixels = this.sizeInPixels * window.devicePixelRatio;
         let left = this.position[0] * window.devicePixelRatio;
@@ -121,16 +106,14 @@ class TextPrimitive extends Primitive
     }
 }
 
-class ImagePrimitive extends Primitive
-{
-    readonly imageId : string;
-    readonly positionType : string;
-    readonly position : Float32Array
-    readonly scale : number;
-    readonly smoothed : boolean;
+class ImagePrimitive extends Primitive {
+    readonly imageId: string;
+    readonly positionType: string;
+    readonly position: Float32Array
+    readonly scale: number;
+    readonly smoothed: boolean;
 
-    constructor(imageId : string, positionType : string, position : Float32Array, scale : number, smoothed : boolean, layerId : string)
-    {
+    constructor(imageId: string, positionType: string, position: Float32Array, scale: number, smoothed: boolean, layerId: string) {
         super(layerId);
         this.imageId = imageId;
         this.positionType = positionType;
@@ -139,13 +122,11 @@ class ImagePrimitive extends Primitive
         this.smoothed = smoothed;
     }
 
-    GetObjectCacheId()
-    {
+    GetObjectCacheId() {
         return this.imageId;
     }
 
-    Draw(canvas : HTMLCanvasElement, context : CanvasRenderingContext2D, objectCache : ObjectCache)
-    {
+    Draw(canvas: HTMLCanvasElement, context: CanvasRenderingContext2D, objectCache: ObjectCache) {
         // Get current image
         var currentImage = objectCache.GetObject(this.imageId);
         if (currentImage == null) return; // Indicates image not available (e.g. not completely loaded yet)
@@ -157,8 +138,7 @@ class ImagePrimitive extends Primitive
         var centered = true;
         var scaleX = canvas.clientWidth / currentImage.naturalWidth;
         var scaleY = canvas.clientHeight / currentImage.naturalHeight;
-        switch(this.positionType)
-        {
+        switch (this.positionType) {
             case "fill":
                 scaleX = scaleY = Math.max(scaleX, scaleY);
                 break;
@@ -184,16 +164,14 @@ class ImagePrimitive extends Primitive
     }
 }
 
-class VideoPrimitive extends Primitive
-{
-    readonly videoId : string;
-    readonly positionType : string;
-    readonly position : Float32Array
-    readonly scale : number;
-    readonly smoothed : boolean;
+class VideoPrimitive extends Primitive {
+    readonly videoId: string;
+    readonly positionType: string;
+    readonly position: Float32Array
+    readonly scale: number;
+    readonly smoothed: boolean;
 
-    constructor(videoId : string, positionType : string, position : Float32Array, scale : number, smoothed : boolean, layerId : string)
-    {
+    constructor(videoId: string, positionType: string, position: Float32Array, scale: number, smoothed: boolean, layerId: string) {
         super(layerId);
         this.videoId = videoId;
         this.positionType = positionType;
@@ -202,15 +180,13 @@ class VideoPrimitive extends Primitive
         this.smoothed = smoothed;
     }
 
-    GetObjectCacheId()
-    {
+    GetObjectCacheId() {
         return this.videoId;
     }
 
-    Draw(canvas : HTMLCanvasElement, context : CanvasRenderingContext2D, objectCache : ObjectCache)
-    {
+    Draw(canvas: HTMLCanvasElement, context: CanvasRenderingContext2D, objectCache: ObjectCache) {
         // Get current image
-        let currentVideo : HTMLVideoElement = objectCache.GetObject(this.videoId);
+        let currentVideo: HTMLVideoElement = objectCache.GetObject(this.videoId);
         if (currentVideo == null) return; // Indicates video not available (e.g. not completely loaded yet)
 
         // Turn off image smoothing
@@ -220,8 +196,7 @@ class VideoPrimitive extends Primitive
         let centered = true;
         let scaleX = canvas.clientWidth / currentVideo.videoWidth;
         let scaleY = canvas.clientHeight / currentVideo.videoHeight;
-        switch(this.positionType)
-        {
+        switch (this.positionType) {
             case "fill":
                 scaleX = scaleY = Math.max(scaleX, scaleY);
                 break;
@@ -248,30 +223,31 @@ class VideoPrimitive extends Primitive
 }
 
 
-export default class Canvas2D extends CanvasBase
-{
-    context : CanvasRenderingContext2D = null; // Rendering context
+export default class Canvas2D extends CanvasBase {
+    context: CanvasRenderingContext2D = null; // Rendering context
 
-    backgroundStyle : string; // Background color
+    backgroundStyle: string; // Background color
 
     // Dictionary from primitiveId to layer settings (wireframe, filled, opacity)
-    layerSettings : {[layerId: string]: {[key: string]: number|boolean}} = {};
-    layerIds : string[] = [];
+    layerSettings: { [layerId: string]: { [key: string]: number | boolean } } = {};
+    layerIds: string[] = [];
     globalFill = true;
     globalOpacity = 1.0;
 
-    framePrimitives : Primitive[][] = []; // The primitives for each frame [frameIndex]
+    framePrimitives: Primitive[][] = []; // The primitives for each frame [frameIndex]
 
-    currentPrimitives : Primitive[] = null; // The primitives for the currently displayed frame
+    currentPrimitives: Primitive[] = null; // The primitives for the currently displayed frame
 
-    frameCoordinates : Float32Array[] = []; // The coordinates for each frame [frameIndex]
+    frameCoordinates: Float32Array[] = []; // The coordinates for each frame [frameIndex]
 
-    scale : number;
-    focusPoint : vec2;
-    initFocusPoint : vec2;
+    center: vec2;
+    scale: number;
+    angle: number;
+    focusPoint: vec2;
+    focusPointDelta: vec2;
+    transform: mat3;
 
-    constructor(canvasId : string, public frameRate : number, public width : number, public height : number, objectCache : ObjectCache, public SetStatus : (status : string) => void, public SetWarning : (message : string) => void, public RequestRedraw : () => void, public ReportFrameIdChange : (canvasId : string, frameId : string) => void)
-    {
+    constructor(canvasId: string, public frameRate: number, public width: number, public height: number, objectCache: ObjectCache, public SetStatus: (status: string) => void, public SetWarning: (message: string) => void, public RequestRedraw: () => void, public ReportFrameIdChange: (canvasId: string, frameId: string) => void) {
         // Base class constructor
         super(canvasId, frameRate, width, height, objectCache, SetStatus, SetWarning, RequestRedraw, ReportFrameIdChange);
 
@@ -279,6 +255,8 @@ export default class Canvas2D extends CanvasBase
         this.context = this.htmlCanvas.getContext('2d');
 
         this.backgroundStyle = "#000000";
+        this.center = vec2.fromValues(width, height);
+        vec2.scale(this.center, this.center, window.devicePixelRatio / 2);
 
         this.ResetView();
 
@@ -287,15 +265,14 @@ export default class Canvas2D extends CanvasBase
     }
 
     // Adds UI for the control of certain layers
-    SetLayerSettings(layerSettings : any)
-    {
+    SetLayerSettings(layerSettings: any) {
         // Delete any previous controls
         while (this.dropdownTable.childElementCount > 2)
             this.dropdownTable.removeChild(this.dropdownTable.lastChild);
 
         this.layerSettings = layerSettings;
         this.layerIds = [null];
-        for(let layerId in layerSettings){
+        for (let layerId in layerSettings) {
             this.layerIds.push(layerId);
         }
 
@@ -303,8 +280,7 @@ export default class Canvas2D extends CanvasBase
         var BorderStyle = "1px solid #cccccc";
         var headerRow = document.createElement("tr");
         headerRow.style.borderBottom = BorderStyle;
-        for(var headerName of ["Visible", "Opacity", "Layer Id"])
-        {
+        for (var headerName of ["Visible", "Opacity", "Layer Id"]) {
             var headerItem = document.createElement("th");
             headerItem.className = "scenepic-dropdown-header";
             headerItem.innerHTML = headerName;
@@ -313,8 +289,7 @@ export default class Canvas2D extends CanvasBase
         this.dropdownTable.appendChild(headerRow);
 
         // Create row helper function
-        var createRow = (id, label) =>
-        {
+        var createRow = (id, label) => {
             // Create fill checkbox
             var checkboxFill = document.createElement("input");
             checkboxFill.type = "checkbox";
@@ -338,14 +313,12 @@ export default class Canvas2D extends CanvasBase
             return [checkboxFill, sliderOpacity, labelLayer];
         };
 
-        var addRow = (rowItems, border) =>
-        {
+        var addRow = (rowItems, border) => {
             // Create table row
             var tr = document.createElement("tr");
             if (border)
                 tr.style.borderTop = BorderStyle;
-            var addControl = (el, className) =>
-            {
+            var addControl = (el, className) => {
                 var td = document.createElement("td");
                 td.appendChild(el);
                 td.className = className;
@@ -362,8 +335,7 @@ export default class Canvas2D extends CanvasBase
         addRow(createRow("<<<GLOBAL>>>", "Global"), true);
     }
 
-    ShowLayerFilled(layerId : string) : boolean
-    {
+    ShowLayerFilled(layerId: string): boolean {
         if (layerId == "<<<GLOBAL>>>")
             return this.globalFill;
         if (layerId == null)
@@ -375,28 +347,24 @@ export default class Canvas2D extends CanvasBase
         return true;
     }
 
-    ToggleLayerFilled(index: number)
-    {
-        if(index >= this.layerIds.length) {
+    ToggleLayerFilled(index: number) {
+        if (index >= this.layerIds.length) {
             return
         }
 
         let layerId = this.layerIds[index];
         let filled = this.ShowLayerFilled(layerId);
         this.SetLayerFilled(layerId, !filled);
-    }    
+    }
 
-    SetLayerFilled(layerId : string, filled : boolean)
-    {
+    SetLayerFilled(layerId: string, filled: boolean) {
         if (layerId == null)
             return;
 
-        if (layerId == "<<<GLOBAL>>>")
-        {
+        if (layerId == "<<<GLOBAL>>>") {
             this.globalFill = filled;
         }
-        else
-        {
+        else {
             if (!(layerId in this.layerSettings))
                 this.layerSettings[layerId] = {};
 
@@ -407,8 +375,7 @@ export default class Canvas2D extends CanvasBase
         this.PrepareBuffers();
     }
 
-    GetLayerOpacity(layerId : string) : number
-    {
+    GetLayerOpacity(layerId: string): number {
         if (layerId == "<<<GLOBAL>>>")
             return this.globalOpacity;
         if (layerId == null || !(layerId in this.layerSettings) || !("opacity" in this.layerSettings[layerId]))
@@ -417,17 +384,14 @@ export default class Canvas2D extends CanvasBase
             return <number>this.layerSettings[layerId]["opacity"];
     }
 
-    SetLayerOpacity(layerId : string, opacity : number)
-    {
+    SetLayerOpacity(layerId: string, opacity: number) {
         if (layerId == null)
             return;
 
-        if (layerId == "<<<GLOBAL>>>")
-        {
+        if (layerId == "<<<GLOBAL>>>") {
             this.globalOpacity = opacity;
         }
-        else
-        {
+        else {
             if (!(layerId in this.layerSettings))
                 this.layerSettings[layerId] = {};
             this.layerSettings[layerId]["opacity"] = opacity;
@@ -435,10 +399,9 @@ export default class Canvas2D extends CanvasBase
 
         // Prepare buffers and force redraw
         this.PrepareBuffers();
-    }    
+    }
 
-    GetLayerRenderOrder(layerId : string) : number
-    {
+    GetLayerRenderOrder(layerId: string): number {
         if (layerId == null || !(layerId in this.layerSettings) || !("renderOrder" in this.layerSettings[layerId]))
             return -1e3; // Backmost layer - bit of a hack
         else
@@ -446,10 +409,8 @@ export default class Canvas2D extends CanvasBase
     }
 
     // Execute a single canvas command
-    ExecuteCanvasCommand(command : any)
-    {
-        switch(command["CommandType"])
-        {
+    ExecuteCanvasCommand(command: any) {
+        switch (command["CommandType"]) {
             case "SetBackgroundStyle":
                 this.backgroundStyle = String(command["Value"]);
                 break;
@@ -470,32 +431,31 @@ export default class Canvas2D extends CanvasBase
         }
     }
 
-    AddPrimitive(frameIndex : number, primitive : Primitive)
-    {
-        if(primitive.layerId == null){
+    AddPrimitive(frameIndex: number, primitive: Primitive) {
+        if (primitive.layerId == null) {
             this.framePrimitives[frameIndex].push(primitive);
-        }else{
-            if(!(primitive.layerId in this.layerSettings)){
+        } else {
+            if (!(primitive.layerId in this.layerSettings)) {
                 this.layerSettings[primitive.layerId] = {};
                 this.SetLayerSettings(this.layerSettings);
             }
 
             let renderOrder = this.GetLayerRenderOrder(primitive.layerId);
             let index = 0;
-            let lastId : string = null;
-            for(let other of this.framePrimitives[frameIndex]){
-                if(other.layerId == lastId){
+            let lastId: string = null;
+            for (let other of this.framePrimitives[frameIndex]) {
+                if (other.layerId == lastId) {
                     index += 1;
                     continue;
                 }
-                
-                if(other.layerId == primitive.layerId){
+
+                if (other.layerId == primitive.layerId) {
                     break;
                 }
 
                 lastId = other.layerId;
                 let otherOrder = this.GetLayerRenderOrder(other.layerId);
-                if(renderOrder < otherOrder){
+                if (renderOrder < otherOrder) {
                     break;
                 }
 
@@ -505,41 +465,37 @@ export default class Canvas2D extends CanvasBase
         }
 
         if (this.currentFrameIndex == frameIndex)
-            this.PrepareBuffers();    
+            this.PrepareBuffers();
     }
 
-    SetCoordinates(frameIndex: number, coordinates: Float32Array)
-    {
+    SetCoordinates(frameIndex: number, coordinates: Float32Array) {
         this.frameCoordinates[frameIndex] = coordinates;
     }
 
-    GetCoordinate(frameIndex: number, index: number)
-    {
+    GetCoordinate(frameIndex: number, index: number) {
         let start = index * 2;
         let end = start + 2;
         return this.frameCoordinates[frameIndex].slice(start, end);
     }
 
-    AddLines(frameIndex: number, lines: Uint16Array, style: Uint8Array, width: Float32Array, layerIds: [string, number][])
-    {
+    AddLines(frameIndex: number, lines: Uint16Array, style: Uint8Array, width: Float32Array, layerIds: [string, number][]) {
         let numLines = width.length;
         let layerId = null;
         let nextLayer = numLines;
         let currentLayer = 0;
-        if(layerIds != null){
+        if (layerIds != null) {
             layerId = layerIds[0][0];
             nextLayer = currentLayer + layerIds[0][1];
         }
 
-        for(let i=0; i<numLines; ++i)
-        {
-            let info = lines.slice(i*3, i*3 + 3);
-            let coordinates = this.frameCoordinates[frameIndex].slice(info[0]*2, info[1]*2);
+        for (let i = 0; i < numLines; ++i) {
+            let info = lines.slice(i * 3, i * 3 + 3);
+            let coordinates = this.frameCoordinates[frameIndex].slice(info[0] * 2, info[1] * 2);
             let closePath = info[2] == 1;
-            let strokeStyle = Misc.StyleToHtmlHex(style.slice(i*8, i*8 + 4));
-            let fillStyle = Misc.StyleToHtmlHex(style.slice(i*8 + 4, i*8 + 8));
+            let strokeStyle = Misc.StyleToHtmlHex(style.slice(i * 8, i * 8 + 4));
+            let fillStyle = Misc.StyleToHtmlHex(style.slice(i * 8 + 4, i * 8 + 8));
             let lineWidth = width[i];
-            if(i == nextLayer){
+            if (i == nextLayer) {
                 currentLayer += 1;
                 layerId = layerIds[currentLayer][0];
                 nextLayer = i + layerIds[currentLayer][1]
@@ -549,26 +505,24 @@ export default class Canvas2D extends CanvasBase
         }
     }
 
-    AddCircles(frameIndex: number, circles: Float32Array, style: Uint8Array, layerIds: [string, number][])
-    {
+    AddCircles(frameIndex: number, circles: Float32Array, style: Uint8Array, layerIds: [string, number][]) {
         let numCircles = style.length / 8;
         let layerId = null;
         let nextLayer = numCircles;
         let currentLayer = 0;
-        if(layerIds != null){
+        if (layerIds != null) {
             layerId = layerIds[0][0];
             nextLayer = currentLayer + layerIds[0][1];
         }
 
-        for(let i=0; i<numCircles; ++i)
-        {
-            let info = circles.slice(i*4, i*4 + 4);
+        for (let i = 0; i < numCircles; ++i) {
+            let info = circles.slice(i * 4, i * 4 + 4);
             let center = info.slice(0, 2);
             let radius = info[2];
             let lineWidth = info[3];
-            let strokeStyle = Misc.StyleToHtmlHex(style.slice(i*8, i*8 + 4));
-            let fillStyle = Misc.StyleToHtmlHex(style.slice(i*8 + 4, i*8 + 8));
-            if(i == nextLayer){
+            let strokeStyle = Misc.StyleToHtmlHex(style.slice(i * 8, i * 8 + 4));
+            let fillStyle = Misc.StyleToHtmlHex(style.slice(i * 8 + 4, i * 8 + 8));
+            if (i == nextLayer) {
                 currentLayer += 1;
                 layerId = layerIds[currentLayer][0];
                 nextLayer = i + layerIds[currentLayer][1]
@@ -579,10 +533,8 @@ export default class Canvas2D extends CanvasBase
     }
 
     // Execute a single frame command
-    ExecuteFrameCommand(command : any, frameIndex : number)
-    {
-        switch(command["CommandType"])
-        {
+    ExecuteFrameCommand(command: any, frameIndex: number) {
+        switch (command["CommandType"]) {
             case "SetCoordinates":
                 var coordinates = Misc.Base64ToFloat32Array(command["CoordinateBuffer"])
                 this.SetCoordinates(frameIndex, coordinates);
@@ -640,24 +592,20 @@ export default class Canvas2D extends CanvasBase
         }
     }
 
-    AllocateFrame()
-    {
+    AllocateFrame() {
         this.framePrimitives.push([]);
         this.frameCoordinates.push(null);
     }
 
-    DeallocateFrame(frameIndex : number)
-    {
+    DeallocateFrame(frameIndex: number) {
         this.framePrimitives[frameIndex] = [];
         this.frameCoordinates[frameIndex] = null;
     }
 
-    NotifyTextureUpdated(textureId : string)
-    {
+    NotifyTextureUpdated(textureId: string) {
     }
 
-    PrepareBuffers() : void
-    {
+    PrepareBuffers(): void {
         super.PrepareBuffers();
 
         var currentFrameIndex = this.currentFrameIndex;
@@ -666,15 +614,12 @@ export default class Canvas2D extends CanvasBase
         var newPrimitives = this.framePrimitives[currentFrameIndex].slice();
 
         // Deal with image caching (only applies if primitives are actually ImagePrimitives or VideoPrimitives)
-        for(var primitive of newPrimitives)
-        {
+        for (var primitive of newPrimitives) {
             var cacheId = primitive.GetObjectCacheId();
             if (cacheId != null) this.objectCache.AddUser(cacheId);
         }
-        if (this.currentPrimitives != null)
-        {
-            for(var primitive of this.currentPrimitives)
-            {
+        if (this.currentPrimitives != null) {
+            for (var primitive of this.currentPrimitives) {
                 var cacheId = primitive.GetObjectCacheId();
                 if (cacheId != null) this.objectCache.RemoveUser(cacheId);
             }
@@ -684,63 +629,66 @@ export default class Canvas2D extends CanvasBase
         this.currentPrimitives = newPrimitives;
     }
 
-    ResetView() : void
-    {
-        this.focusPoint = vec2.fromValues(this.width / 2, this.height / 2);
+    ResetView(): void {
+        this.focusPointDelta = vec2.create();
+        this.focusPoint = vec2.copy(vec2.create(), this.center);
         this.scale = 1;
+        this.angle = 0;
+        this.updateTransform();
         this.setTransform();
     }
 
-    private getTransform() : mat3
-    {
-        const focusPixel = vec2.fromValues(
-            this.htmlCanvas.clientWidth / 2,
-            this.htmlCanvas.clientHeight / 2)
+    ComputeCameraTwist(point: vec2, event: PointerEvent) {
+        const old = this.pointerCoords.get(event.pointerId);
+        if (old == undefined) {
+            return 0;
+        }
 
-        const translate = vec2.scale(vec2.create(), this.focusPoint, this.scale);
-        vec2.subtract(translate, focusPixel, translate);
-
-        return mat3.fromValues(
-            this.scale, 0, 0,
-            0, this.scale, 0,
-            translate[0], translate[1], 1)
+        const dx = point[0] - old[0];
+        const dy = old[1] - point[1];
+        let delta = dx;
+        if (Math.abs(dy) > Math.abs(dx)) {
+            delta = dy;
+        }
+        return 2 * delta / (window.devicePixelRatio * this.htmlCanvas.clientWidth);
     }
 
-    private setTransform() : void
-    {
-        let transform = this.getTransform();
+    private updateTransform() {
+        const toFocus = mat3.fromTranslation(mat3.create(), this.focusPoint);
+        const fromCenter = mat3.fromTranslation(mat3.create(), vec2.negate(vec2.create(), this.center));
+        const scale = mat3.fromScaling(mat3.create(), vec2.fromValues(this.scale, this.scale));
+        const rotate = mat3.fromRotation(mat3.create(), this.angle);
+
+        this.transform = mat3.create();
+        mat3.multiply(this.transform, fromCenter, this.transform);
+        mat3.multiply(this.transform, scale, this.transform);
+        mat3.multiply(this.transform, rotate, this.transform);
+        mat3.multiply(this.transform, toFocus, this.transform);
+    }
+
+    private setTransform(): void {
         this.context.setTransform(
-            transform[0], transform[1],
-            transform[3], transform[4],
-            transform[6], transform[7])
+            this.transform[0], this.transform[1],
+            this.transform[3], this.transform[4],
+            this.transform[6], this.transform[7])
     }
 
     // Render scene method
-    Render()
-    {
+    Render() {
         // Clear
         this.context.fillStyle = this.backgroundStyle;
-        const inv = mat3.invert(mat3.create(), this.getTransform());
-        let x = 0;
-        let y = 0;
+        this.context.resetTransform();
         let width = this.htmlCanvas.clientWidth * window.devicePixelRatio;
         let height = this.htmlCanvas.clientHeight * window.devicePixelRatio;
-        if(inv[0] > 1){
-            const tl = vec2.transformMat3(vec2.create(), vec2.fromValues(0, 0), inv);
-            const br = vec2.transformMat3(vec2.create(), vec2.fromValues(width, height), inv);
-            x = tl[0];
-            y = tl[1];
-            width = br[0] - x;
-            height = br[1] - y;
-        }
-        this.context.fillRect(x, y, width, height);
+        this.context.fillRect(0, 0, width, height);
+        this.setTransform();
 
         // Composite primitives
         if (this.currentPrimitives == null) return;
-        for(var primitive of this.currentPrimitives){
+        for (var primitive of this.currentPrimitives) {
             let opacity = this.GetLayerOpacity(primitive.layerId) * this.globalOpacity;
             let filled = this.ShowLayerFilled(primitive.layerId) && this.globalFill;
-            if(!filled || opacity == 0.0){
+            if (!filled || opacity == 0.0) {
                 continue;
             }
 
@@ -750,14 +698,12 @@ export default class Canvas2D extends CanvasBase
         }
     }
 
-    StartPlaying()
-    {
+    StartPlaying() {
         // pre-cache
-        for(let primitives of this.framePrimitives){
-            for(let primitive of primitives){
+        for (let primitives of this.framePrimitives) {
+            for (let primitive of primitives) {
                 let cacheId = primitive.GetObjectCacheId();
-                if(cacheId != null)
-                {
+                if (cacheId != null) {
                     this.objectCache.AddUser(cacheId);
                 }
             }
@@ -766,35 +712,31 @@ export default class Canvas2D extends CanvasBase
         super.StartPlaying();
     }
 
-    StopPlaying()
-    {
-        super.StopPlaying();        
+    StopPlaying() {
+        super.StopPlaying();
 
         // free up the cache
-        for(let primitives of this.framePrimitives){
-            for(let primitive of primitives){
+        for (let primitives of this.framePrimitives) {
+            for (let primitive of primitives) {
                 let imageId = primitive.GetObjectCacheId();
-                if(imageId != null)
-                {
+                if (imageId != null) {
                     this.objectCache.RemoveUser(imageId);
                 }
             }
         }
     }
 
-    HandleKeyDown(key : string) : [boolean, boolean]
-    {
+    HandleKeyDown(key: string): [boolean, boolean] {
         var result = super.HandleKeyDown(key);
         if (result[0]) return result; // Already handled
 
         let handled = true;
         key = key.toLowerCase();
-        switch(key)
-        {
+        switch (key) {
             case "r":
                 this.ResetView();
                 break;
-            
+
             default:
                 handled = false;
                 break;
@@ -803,32 +745,72 @@ export default class Canvas2D extends CanvasBase
         return [handled, false];
     }
 
-    HandlePointerDown(point: vec2, event: PointerEvent) : void {
-        this.initFocusPoint = vec2.copy(vec2.create(), this.focusPoint);
-        super.HandlePointerDown(point, event);
+    pointerCenter(): vec2 {
+        if (this.pointerCoords.size == 1) {
+            return this.pointerCoords.get(this.pid0);
+        } else {
+            const p0 = this.pointerCoords.get(this.pid0);
+            const p1 = this.pointerCoords.get(this.pid1);
+            let center = vec2.add(vec2.create(), p0, p1);
+            vec2.scale(center, center, 0.5);
+            return center;
+        }
     }
 
-    HandlePointerMove(point: vec2, event: PointerEvent): void {
+    updateFocusPointDelta(): void {
+        if (this.pointerCoords.size == 0) {
+            return
+        }
+
+        const center = this.pointerCenter();
+        const focusPoint = vec2.scale(vec2.create(), this.focusPoint, 1 / window.devicePixelRatio);
+        this.focusPointDelta = vec2.subtract(vec2.create(), focusPoint, center);
+    }
+
+    HandlePointerDown(point: vec2, event: PointerEvent): void {
+        super.HandlePointerDown(point, event);
+
+        this.updateFocusPointDelta();
+        this.updateTransform();
+    }
+
+    HandlePointerUp(event: PointerEvent): void {
+        super.HandlePointerUp(event);
+
+        this.updateFocusPointDelta();
+        this.updateTransform();
+    }
+
+    HandlePointerMoveWithTwist(point: vec2, twistAngle: number, event: PointerEvent): void {
         const countPointers = this.pointerCoords.size;
-        if (countPointers == 0) return;
+        if (countPointers == 0 || countPointers > 2) return;
 
-        const init = this.initPointerCoords.get(event.pointerId);
-        const transform = this.getTransform();
-        const inv = mat3.invert(mat3.create(), transform);
+        if (countPointers == 2) {
+            const pinchZoom = this.PinchZoom(point, event);
+            this.scale = this.scale * pinchZoom.distanceRatio;
+            this.angle = this.angle + pinchZoom.angleDelta;
 
-        const source = vec2.transformMat3(vec2.create(), init, inv);
-        const dest = vec2.transformMat3(vec2.create(), point, inv);
-        const delta = vec2.subtract(vec2.create(), source, dest);   
-        
-        vec2.add(this.focusPoint, this.initFocusPoint, delta);
+            // Set focus to mean of two points
+            vec2.add(this.focusPoint, pinchZoom.center, this.focusPointDelta);
+            vec2.scale(this.focusPoint, this.focusPoint, window.devicePixelRatio);
+        } else {
+            this.angle += twistAngle;
+
+            if (twistAngle == 0) {
+                vec2.add(this.focusPoint, point, this.focusPointDelta);
+                vec2.scale(this.focusPoint, this.focusPoint, window.devicePixelRatio);
+            }
+        }
+
+        this.updateTransform();
         this.setTransform();
-        
         super.HandlePointerMove(point, event);
     }
 
     HandleMouseWheel(event: WheelEvent): void {
         const factor = Math.pow(1.1, event.deltaY > 0 ? -1 : 1);
         this.scale *= factor;
+        this.updateTransform();
         this.setTransform();
     }
 }

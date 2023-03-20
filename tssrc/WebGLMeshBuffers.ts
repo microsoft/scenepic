@@ -1,47 +1,45 @@
-import {quat, vec3, mat3, mat4} from "gl-matrix";
+import { quat, vec3, mat3, mat4 } from "gl-matrix";
 import Mesh from "./Mesh";
 import Misc from "./Misc"
 import ShaderProgram from "./Shaders";
 
-export default class WebGLMeshBuffers
-{
-    gl : WebGL2RenderingContext;
-    sp : ShaderProgram;
-    m : Mesh;
+export default class WebGLMeshBuffers {
+    gl: WebGL2RenderingContext;
+    sp: ShaderProgram;
+    m: Mesh;
 
-    color : vec3;
+    color: vec3;
 
-    vertexDataBuffer : WebGLBuffer;
-    triangleIndexBuffer : WebGLBuffer;
-    lineIndexBuffer : WebGLBuffer;
-    wireframeEdgeIndexBuffer : WebGLBuffer;
-    instanceDataBuffer : WebGLBuffer;
+    vertexDataBuffer: WebGLBuffer;
+    triangleIndexBuffer: WebGLBuffer;
+    lineIndexBuffer: WebGLBuffer;
+    wireframeEdgeIndexBuffer: WebGLBuffer;
+    instanceDataBuffer: WebGLBuffer;
 
-    hasTexture : boolean;
-    texture : WebGLTexture;
-    
-    indexType : number;
+    hasTexture: boolean;
+    texture: WebGLTexture;
 
-    m2wMatrix : mat4;
+    indexType: number;
 
-    id : number;
+    m2wMatrix: mat4;
+
+    id: number;
 
     // Used for label computations
-    labelWidthNormalized : number = -1.0;
-    labelHeightNormalized : number = -1.0;
-    labelTranslateScreenX : number = 0.0;
-    labelTranslateScreenY : number = 0.0;
-    labelTranslateWorldX : number = 0.0;
-    labelTranslateWorldY : number = 0.0;
+    labelWidthNormalized: number = -1.0;
+    labelHeightNormalized: number = -1.0;
+    labelTranslateScreenX: number = 0.0;
+    labelTranslateScreenY: number = 0.0;
+    labelTranslateWorldX: number = 0.0;
+    labelTranslateWorldY: number = 0.0;
 
-    constructor(gl : WebGL2RenderingContext, sp : ShaderProgram, m : Mesh, textureSrc = null)
-    {
+    constructor(gl: WebGL2RenderingContext, sp: ShaderProgram, m: Mesh, textureSrc = null) {
         this.gl = gl;
         this.sp = sp;
         this.m = m;
 
         this.color = m.color;
-        
+
         this.indexType = m.bytesPerIndex == 2 ? gl.UNSIGNED_SHORT : gl.UNSIGNED_INT;
 
         // Create and bind vertex buffer
@@ -85,18 +83,16 @@ export default class WebGLMeshBuffers
         else
             gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([1, 1, 1, 1])); // Dummy texture
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, m.nnTexture ? gl.NEAREST : gl.LINEAR);
-        if (textureSrc != null && (Misc.IsPow2(textureSrc.width) && Misc.IsPow2(textureSrc.height)))
-        {
+        if (textureSrc != null && (Misc.IsPow2(textureSrc.width) && Misc.IsPow2(textureSrc.height))) {
             gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
             gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT);
             gl.generateMipmap(gl.TEXTURE_2D);
             gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, m.nnTexture ? gl.NEAREST : gl.LINEAR_MIPMAP_NEAREST)
         }
-        else
-        {
+        else {
             gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
             gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, m.nnTexture ? gl.NEAREST : gl.LINEAR);            
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, m.nnTexture ? gl.NEAREST : gl.LINEAR);
         }
         gl.bindTexture(gl.TEXTURE_2D, null);
 
@@ -104,8 +100,7 @@ export default class WebGLMeshBuffers
         this.m2wMatrix = mat4.create();
     }
 
-    Finalize()
-    {
+    Finalize() {
         var gl = this.gl;
         gl.deleteBuffer(this.vertexDataBuffer);
         gl.deleteBuffer(this.triangleIndexBuffer);
@@ -117,8 +112,7 @@ export default class WebGLMeshBuffers
             gl.deleteTexture(this.texture);
     }
 
-    ApplyBillboardEffect(m2vMatrix : mat4)
-    {
+    ApplyBillboardEffect(m2vMatrix: mat4) {
         // Get rotational matrix component of m2vMatrix
         var det = mat4.determinant(m2vMatrix);
         var scale = det != 0.0 ? 1.0 / Math.pow(det, 1.0 / 3.0) : 1.0;
@@ -132,12 +126,11 @@ export default class WebGLMeshBuffers
         // Invert and transform
         quat.invert(q, q);
         var transform = mat4.create();
-        mat4.fromRotationTranslationScaleOrigin(transform, q, [0,0,0], [1,1,1], this.m.centerOfMass);
+        mat4.fromRotationTranslationScaleOrigin(transform, q, [0, 0, 0], [1, 1, 1], this.m.centerOfMass);
         mat4.multiply(m2vMatrix, m2vMatrix, transform);
     }
 
-    ApplyLabel(m2vMatrix : mat4, v2sMatrix : mat4)
-    {
+    ApplyLabel(m2vMatrix: mat4, v2sMatrix: mat4) {
         this.ApplyBillboardEffect(m2vMatrix);
 
         // Helper function - careful - this references, not copies the array
@@ -163,23 +156,21 @@ export default class WebGLMeshBuffers
 
         // Transform with alignment translation and scale factor
         var translate = vec3.fromValues(this.labelTranslateScreenX * labelDepth / v2sMatrix[0] + this.labelTranslateWorldX,
-                                        this.labelTranslateScreenY * labelDepth / v2sMatrix[5] + this.labelTranslateWorldY,
-                                        0.0);
+            this.labelTranslateScreenY * labelDepth / v2sMatrix[5] + this.labelTranslateWorldY,
+            0.0);
         var scale = vec3.fromValues(scaleFactorX, scaleFactorY, 1.0);
         var transform = mat4.create();
         mat4.fromRotationTranslationScale(transform, quat.create(), translate, scale);
         mat4.mul(m2vMatrix, m2vMatrix, transform);
     }
 
-    RenderBuffer(v2sMatrix : mat4, w2vMatrix : mat4, opacity : number, renderFilled : boolean, renderWireframe : boolean)
-    {
+    RenderBuffer(v2sMatrix: mat4, w2vMatrix: mat4, opacity: number, renderFilled: boolean, renderWireframe: boolean) {
         const gl = this.gl;
         const sp = this.sp;
         const m = this.m;
 
         // Ensure we have wireframe buffer if needed
-        if (renderWireframe && this.wireframeEdgeIndexBuffer == null)
-        {
+        if (renderWireframe && this.wireframeEdgeIndexBuffer == null) {
             this.wireframeEdgeIndexBuffer = gl.createBuffer();
             var cpuBuffer = m.GetWireframeEdgeBuffer();
             gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.wireframeEdgeIndexBuffer);
@@ -199,7 +190,7 @@ export default class WebGLMeshBuffers
 
         // Set model view matrix (i.e. concatenation of m2w, w2v)
         gl.uniformMatrix4fv(sp.m2vMatrixPtr, false, m2vMatrix);
-        
+
         // Compute normals transformation matrix
         var normMatrix = Misc.Mat3FromMat4(m2vMatrix);
         mat3.invert(normMatrix, normMatrix);
@@ -213,71 +204,59 @@ export default class WebGLMeshBuffers
 
         // Bind vertex buffers
         gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexDataBuffer);
-        if (true)
-        {
+        if (true) {
             gl.enableVertexAttribArray(sp.vertexPositionAttribLoc);
             gl.vertexAttribPointer(sp.vertexPositionAttribLoc, 3, gl.FLOAT, false, m.ElementsPerVertex * 4, m.VertexOffsetPosition * 4);
         }
-        if (true)
-        {
+        if (true) {
             gl.enableVertexAttribArray(sp.vertexNormalAttribLoc);
             gl.vertexAttribPointer(sp.vertexNormalAttribLoc, 3, gl.FLOAT, false, m.ElementsPerVertex * 4, m.VertexOffsetNormal * 4);
         }
-        if (m.VertexOffsetColor != 0)
-        {
+        if (m.VertexOffsetColor != 0) {
             gl.enableVertexAttribArray(sp.vertexColorAttribLoc);
             gl.vertexAttribPointer(sp.vertexColorAttribLoc, 3, gl.FLOAT, false, m.ElementsPerVertex * 4, m.VertexOffsetColor * 4);
         }
-        else
-        {
+        else {
             gl.disableVertexAttribArray(sp.vertexColorAttribLoc);
         }
-        if (m.VertexOffsetTexture != 0)
-        {
+        if (m.VertexOffsetTexture != 0) {
             gl.enableVertexAttribArray(sp.vertexTextureAttribLoc);
             gl.vertexAttribPointer(sp.vertexTextureAttribLoc, 2, gl.FLOAT, false, m.ElementsPerVertex * 4, m.VertexOffsetTexture * 4); // VertexOffsetTexture = 0 when no texture used
         }
-        else
-        {
+        else {
             gl.disableVertexAttribArray(sp.vertexTextureAttribLoc);
         }
-        
+
         // Bind instance buffers
         gl.bindBuffer(gl.ARRAY_BUFFER, this.instanceDataBuffer);
-        if (m.instanceBuffer != null)
-        {
+        if (m.instanceBuffer != null) {
             gl.enableVertexAttribArray(sp.instancePositionAttribLoc);
             gl.vertexAttribPointer(sp.instancePositionAttribLoc, 3, gl.FLOAT, false, m.ElementsPerInstance * 4, m.InstanceOffsetPosition * 4);
             gl.vertexAttribDivisor(sp.instancePositionAttribLoc, 1);
         }
-        else
-        {
+        else {
             gl.disableVertexAttribArray(sp.instancePositionAttribLoc);
             gl.vertexAttribDivisor(sp.instancePositionAttribLoc, 0);
         }
-        if (m.instanceBufferHasRotations)
-        {
+        if (m.instanceBufferHasRotations) {
             gl.enableVertexAttribArray(sp.instanceRotationAttribLoc);
             gl.vertexAttribPointer(sp.instanceRotationAttribLoc, 4, gl.FLOAT, false, m.ElementsPerInstance * 4, m.InstanceOffsetRotation * 4);
             gl.vertexAttribDivisor(sp.instanceRotationAttribLoc, 1);
         }
-        else
-        {
+        else {
             gl.disableVertexAttribArray(sp.instanceRotationAttribLoc);
             gl.vertexAttribDivisor(sp.instanceRotationAttribLoc, 0);
         }
-        if (m.instanceBufferHasColors)
-        {
+        if (m.instanceBufferHasColors) {
             gl.enableVertexAttribArray(sp.instanceColorAttribLoc);
             gl.vertexAttribPointer(sp.instanceColorAttribLoc, 3, gl.FLOAT, false, m.ElementsPerInstance * 4, m.InstanceOffsetColor * 4);
             gl.vertexAttribDivisor(sp.instanceColorAttribLoc, 1);
         }
-        else
-        {
+        else {
             gl.disableVertexAttribArray(sp.instanceColorAttribLoc);
             gl.vertexAttribDivisor(sp.instanceColorAttribLoc, 0);
         }
-    
+
         // Set use instance rotation uniform1i
         gl.uniform1i(sp.useInstanceRotation, m.instanceBufferHasRotations ? 1 : 0);
 
@@ -293,8 +272,7 @@ export default class WebGLMeshBuffers
         gl.uniform1f(sp.alphaPtr, opacity);
 
         // Draw triangles
-        if (renderFilled)
-        {
+        if (renderFilled) {
             gl.uniform1i(sp.shadingTypePtr, this.m.isLabel ? 2 : (this.hasTexture ? 1 : 0));
             gl.uniform1f(sp.lightingMultiplierPtr, 1.0);
             gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.triangleIndexBuffer);
@@ -302,8 +280,7 @@ export default class WebGLMeshBuffers
         }
 
         // Draw wireframe edges
-        if (renderWireframe)
-        {
+        if (renderWireframe) {
             gl.uniform1i(sp.shadingTypePtr, -1);
             gl.uniform1f(sp.lightingMultiplierPtr, opacity == 1.0 ? 0.4 : 0.5);
             gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.wireframeEdgeIndexBuffer);
@@ -322,8 +299,7 @@ export default class WebGLMeshBuffers
         gl.bindTexture(gl.TEXTURE_2D, null);
     }
 
-    RenderPicker(program: ShaderProgram, v2sMatrix : mat4, w2vMatrix : mat4)
-    {
+    RenderPicker(program: ShaderProgram, v2sMatrix: mat4, w2vMatrix: mat4) {
         const gl = this.gl;
         const sp = program;
         const m = this.m;
@@ -344,40 +320,35 @@ export default class WebGLMeshBuffers
 
         // Set model view matrix (i.e. concatenation of m2w, w2v)
         gl.uniformMatrix4fv(sp.m2vMatrixPtr, false, m2vMatrix);
-        
+
         // Bind vertex buffers
         gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexDataBuffer);
-        if (true)
-        {
+        if (true) {
             gl.enableVertexAttribArray(sp.vertexPositionAttribLoc);
             gl.vertexAttribPointer(sp.vertexPositionAttribLoc, 3, gl.FLOAT, false, m.ElementsPerVertex * 4, m.VertexOffsetPosition * 4);
         }
-        
+
         // Bind instance buffers
         gl.bindBuffer(gl.ARRAY_BUFFER, this.instanceDataBuffer);
-        if (m.instanceBuffer != null)
-        {
+        if (m.instanceBuffer != null) {
             gl.enableVertexAttribArray(sp.instancePositionAttribLoc);
             gl.vertexAttribPointer(sp.instancePositionAttribLoc, 3, gl.FLOAT, false, m.ElementsPerInstance * 4, m.InstanceOffsetPosition * 4);
             gl.vertexAttribDivisor(sp.instancePositionAttribLoc, 1);
         }
-        else
-        {
+        else {
             gl.disableVertexAttribArray(sp.instancePositionAttribLoc);
             gl.vertexAttribDivisor(sp.instancePositionAttribLoc, 0);
         }
-        if (m.instanceBufferHasRotations)
-        {
+        if (m.instanceBufferHasRotations) {
             gl.enableVertexAttribArray(sp.instanceRotationAttribLoc);
             gl.vertexAttribPointer(sp.instanceRotationAttribLoc, 4, gl.FLOAT, false, m.ElementsPerInstance * 4, m.InstanceOffsetRotation * 4);
             gl.vertexAttribDivisor(sp.instanceRotationAttribLoc, 1);
         }
-        else
-        {
+        else {
             gl.disableVertexAttribArray(sp.instanceRotationAttribLoc);
             gl.vertexAttribDivisor(sp.instanceRotationAttribLoc, 0);
         }
-    
+
         // Set use instance rotation uniform1i
         gl.uniform1i(sp.useInstanceRotation, m.instanceBufferHasRotations ? 1 : 0);
 

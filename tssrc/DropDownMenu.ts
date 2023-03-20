@@ -1,14 +1,12 @@
 
-export default class DropDownMenu
-{
-    title : string;
-    header : HTMLSpanElement;
-    wrapper : HTMLDivElement; // Contains both contents and inputBox
-    contents : HTMLSpanElement;
-    dropDownMenu : HTMLSelectElement;
+export default class DropDownMenu {
+    title: string;
+    header: HTMLSpanElement;
+    wrapper: HTMLDivElement; // Contains both contents and inputBox
+    contents: HTMLSpanElement;
+    dropDownMenu: HTMLSelectElement;
 
-    constructor(title : string, style : string, parent : HTMLElement)
-    {
+    constructor(title: string, style: string, parent: HTMLElement) {
         // Create div
         var div = document.createElement("div");
         div.className = "scenepic"; // CSS style class name
@@ -40,10 +38,8 @@ export default class DropDownMenu
         parent.appendChild(div);
     }
 
-    SetItems(items : string[])
-    {
-        items.forEach(item =>
-        {
+    SetItems(items: string[]) {
+        items.forEach(item => {
             // Create table row
             var option = document.createElement("option");
             option.value = item;
@@ -54,24 +50,20 @@ export default class DropDownMenu
         this.Update();
     }
 
-    SetItemDisabled(index : number, disabled : boolean)
-    {
+    SetItemDisabled(index: number, disabled: boolean) {
         this.dropDownMenu.options[index].disabled = disabled;
     }
 
-    SetSelection(index : number)
-    {
+    SetSelection(index: number) {
         this.dropDownMenu.selectedIndex = index;
     }
 
-    SetTitle(htmlTitle : string)
-    {
+    SetTitle(htmlTitle: string) {
         this.title = htmlTitle;
         this.Update();
     }
 
-    Update()
-    {
+    Update() {
         this.header.style.display = (this.title == null || this.title == "") ? "none" : "";
         this.header.innerHTML = this.title;
         this.wrapper.style.display = "inline-block";

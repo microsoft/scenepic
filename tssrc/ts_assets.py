@@ -1,4 +1,4 @@
-"""Script to create the holodeck assets."""
+"""Script to create the embedded TypeScript assets."""
 
 import scenepic as sp
 
