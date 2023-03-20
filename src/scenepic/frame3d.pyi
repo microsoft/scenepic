@@ -1,6 +1,7 @@
 from typing import List, Mapping, Union
 
 import numpy as np
+from typing import Optional
 
 from .camera import Camera
 from .focus_point import FocusPoint
@@ -12,7 +13,7 @@ from .layer_settings import LayerSettings
 class Frame3D:
     """Represents a frame of an animation which contains a number of transformed Mesh objects."""
 
-    def add_meshes(self, meshes: List[Union[Mesh, MeshUpdate, str]], transform: np.ndarray):
+    def add_meshes(self, meshes: List[Union[Mesh, MeshUpdate, str]], transform: Optional[np.ndarray] = None):
         """Adds meshes to the frame.
 
         Args:
@@ -20,7 +21,7 @@ class Frame3D:
             transform (np.ndarray, optional): an optional transform to apply to each mesh. Defaults to None.
         """
 
-    def add_mesh(self, mesh: Union[Mesh, MeshUpdate, str], transform: np.ndarray):
+    def add_mesh(self, mesh: Union[Mesh, MeshUpdate, str], transform: Optional[np.ndarray] = None):
         """Adds a mesh to the frame.
 
         Args:

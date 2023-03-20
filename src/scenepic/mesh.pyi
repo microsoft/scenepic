@@ -1,4 +1,5 @@
 import numpy as np
+from typing import Optional
 from .camera import Camera
 from .mesh_info import MeshInfo
 
@@ -68,7 +69,7 @@ class Mesh:
     Triangle winding order is counter clockwise.
     """
 
-    def __init__(self, shared_color: np.ndarray, texture_id: str):
+    def __init__(self, shared_color: Optional[np.ndarray] = None, texture_id: Optional[str] = None):
         """A Mesh created in this way will not be added to the scene.
 
         Args:
@@ -133,10 +134,10 @@ class Mesh:
             mesh (Mesh): the mesh to append
         """
 
-    def add_triangle(self, color: np.ndarray,
-                     p0: np.ndarray, p1: np.ndarray, p2: np.ndarray,
-                     normal: np.ndarray, fill_triangles: bool, add_wireframe: bool,
-                     uv0: np.ndarray, uv1: np.ndarray, uv2: np.ndarray) -> None:
+    def add_triangle(self, color: Optional[np.ndarray] = None,
+                     p0: np.ndarray = [0, 0, 0], p1: np.ndarray = [1, 0, 0], p2: np.ndarray = [0, 1, 0],
+                     normal: Optional[np.ndarray] = None, fill_triangles: bool = True, add_wireframe: bool = False,
+                     uv0: np.ndarray = (0, 0), uv1: np.ndarray = (1, 0), uv2: np.ndarray = (0, 1)) -> None:
         """Adds a triangle to the mesh.
 
         Args:
@@ -152,10 +153,10 @@ class Mesh:
             uv_2 (np.ndarray, optional): third UV coordinate (for UV meshes). Defaults to (0, 1).
         """
 
-    def add_quad(self, color: np.ndarray,
-                 p0: np.ndarray, p1: np.ndarray, p2: np.ndarray, p3: np.ndarray,
-                 normal: np.ndarray, fill_triangles: bool, add_wireframe: bool, transform: np.ndarray,
-                 uv_0: np.ndarray, uv_1: np.ndarray, uv_2: np.ndarray, uv_3: np.ndarray) -> None:
+    def add_quad(self, color: Optional[np.ndarray] = None,
+                 p0: np.ndarray = [0, -0.5, -0.5], p1: np.ndarray = [0, 0.5, -0.5], p2: np.ndarray = [0, 0.5, 0.5], p3: np.ndarray = [0, -0.5, 0.5],
+                 normal: Optional[np.ndarray] = None, fill_triangles: bool = True, add_wireframe: bool = False, transform: Optional[np.ndarray] = None,
+                 uv_0: np.ndarray = (0, 0), uv_1: np.ndarray = (1, 0), uv_2: np.ndarray = (1, 1), uv_3: np.ndarray = (0, 1)) -> None:
         """Adds a quad to the mesh.
         All points are assumed to lie on the same plane.
 
@@ -175,10 +176,10 @@ class Mesh:
             uv_3 (np.ndarray, optional): fourth UV coordinate (for UV meshes). Defaults to (0, 1).        
         """
 
-    def add_image(self, origin: np.ndarray, x_axis: np.ndarray,
-                  y_axis: np.ndarray, normal: np.ndarray,
-                  uv_0: np.ndarray, uv_1: np.ndarray, uv_2: np.ndarray, uv_3: np.ndarray,
-                  double_sided: bool, transform: np.ndarray) -> None:
+    def add_image(self, origin: np.ndarray = (-0.5, -0.5, 0), x_axis: np.ndarray = (1, 0, 0),
+                  y_axis: np.ndarray = (0, 1, 0), normal: Optional[np.ndarray] = None,
+                  uv_0: np.ndarray = (0, 0), uv_1: np.ndarray = (1, 0), uv_2: np.ndarray = (1, 1), uv_3: np.ndarray =(0, 1),
+                  double_sided: bool = True, transform: Optional[np.ndarray] = None) -> None:
         """Add an image as a textured quad to this Mesh.
         The Mesh must have a texture_id.
 
@@ -197,8 +198,8 @@ class Mesh:
             transform (np.ndarray, optional): a 3D homogeneous transform matrix. Defaults to None.
         """
 
-    def add_cube(self, color: np.ndarray, transform: np.ndarray,
-                 fill_triangles: bool, add_wireframe: bool) -> None:
+    def add_cube(self, color: Optional[np.ndarray] = None, transform: Optional[np.ndarray] = None,
+                 fill_triangles: bool = True, add_wireframe: bool = False) -> None:
         """Add a unit diameter cube to this mesh.
 
         Args:
@@ -208,10 +209,10 @@ class Mesh:
             add_wireframe (bool, optional): whether to add a wireframe outline. Defaults to False.
         """
 
-    def add_thickline(self, color: np.ndarray, start_point: np.ndarray,
-                      end_point: np.ndarray, start_thickness: float,
-                      end_thickness: float, transform: np.ndarray,
-                      fill_triangles: bool, add_wireframe: bool) -> None:
+    def add_thickline(self, color: Optional[np.ndarray] = None, start_point: np.ndarray = [-0.5, 0, 0],
+                      end_point: np.ndarray = [0.5, 0, 0], start_thickness: float = 0.1,
+                      end_thickness: float = 0.1, transform: Optional[np.ndarray] = None,
+                      fill_triangles: bool = True, add_wireframe: bool = False) -> None:
         """Add a thick line to this Mesh.
 
         Args:
@@ -225,9 +226,9 @@ class Mesh:
             add_wireframe (bool, optional): whether to add a wireframe outline. Defaults to False.
         """
 
-    def add_cone(self, color: np.ndarray, transform: np.ndarray,
-                 truncation_height: float, lat_count: int, long_count: int,
-                 fill_triangles: bool, add_wireframe: bool) -> None:
+    def add_cone(self, color: Optional[np.ndarray] = None, transform: Optional[np.ndarray] = None,
+                 truncation_height: float = 1.0, lat_count: int = 10, long_count: int = 10,
+                 fill_triangles: bool = True, add_wireframe: bool = False) -> None:
         """Add a cone to this Mesh.
         The cone has base center at [0.5, 0., 0.] and apex at [-0.5, 0., 0.].
 
@@ -241,7 +242,7 @@ class Mesh:
             add_wireframe (bool, optional): whether to add a wireframe outline. Defaults to False.
         """
 
-    def add_coordinate_axes(self, length: float, thickness: float, transform: np.ndarray) -> None:
+    def add_coordinate_axes(self, length: float, thickness: float, transform: Optional[np.ndarray] = None) -> None:
         """Add a set of coordinate axes to this Mesh.
         xyz axes map to RGB colors.
 
@@ -251,9 +252,9 @@ class Mesh:
             transform (np.ndarray, optional): homogeneous 3D transform. Defaults to None.
         """
 
-    def add_camera_frustum(self, camera: Camera, color: np.ndarray, fov_y_degrees: float,
-                           aspect_ratio: float, depth: float, thickness: float,
-                           transform: np.ndarray) -> None:
+    def add_camera_frustum(self, camera: Camera, color: Optional[np.ndarray] = None, fov_y_degrees: float = 45,
+                           aspect_ratio: float = 16/9, depth: float = 1.0, thickness: float = 0.02,
+                           transform: Optional[np.ndarray] = None) -> None:
         """Adds a camera frustum visualization to this mesh.
 
         You can either specify the camera parameters using a Camera object
@@ -277,8 +278,8 @@ class Mesh:
             depth (float, optional): depth of the frustum. Defaults to 1.0.
         """
 
-    def add_disc(self, color: np.ndarray, transform: np.ndarray, segment_count: int,
-                 fill_triangles: bool, add_wireframe: bool) -> None:
+    def add_disc(self, color: Optional[np.ndarray] = None, transform: Optional[np.ndarray] = None, segment_count: int = 10,
+                 fill_triangles: bool = True, add_wireframe: bool = False) -> None:
         """Add a x-axis aligned unit diameter disc to this Mesh.
 
         Args:
@@ -289,8 +290,8 @@ class Mesh:
             add_wireframe (bool, optional): whether to add a wireframe outline. Defaults to False.
         """
 
-    def add_cylinder(self, color: np.ndarray, transform: np.ndarray, segment_count: int,
-                     fill_triangles: bool, add_wireframe: bool) -> None:
+    def add_cylinder(self, color: Optional[np.ndarray] = None, transform: Optional[np.ndarray] = None, segment_count: int = 10,
+                     fill_triangles: bool = True, add_wireframe: bool = False) -> None:
         """Add a x-axis aligned unit diameter cylinder to this Mesh.
 
         Args:
@@ -301,8 +302,8 @@ class Mesh:
             add_wireframe (bool, optional): whether to add a wireframe outline. Defaults to False.
         """
 
-    def add_sphere(self, color: np.ndarray, transform: np.ndarray,
-                   fill_triangles: bool, add_wireframe: bool) -> None:
+    def add_sphere(self, color: Optional[np.ndarray] = None, transform: Optional[np.ndarray] = None,
+                   fill_triangles: bool = True, add_wireframe: bool = False) -> None:
         """Add a default (ico) unit diameter sphere primitive to the mesh.
 
         Args:
@@ -312,8 +313,8 @@ class Mesh:
             add_wireframe (bool, optional): whether to add a wireframe outline. Defaults to False.
         """
 
-    def add_icosphere(self, color: np.ndarray, transform: np.ndarray, steps: int,
-                      fill_triangles: bool, add_wireframe: bool) -> None:
+    def add_icosphere(self, color: Optional[np.ndarray] = None, transform: Optional[np.ndarray] = None, steps: int = 0,
+                      fill_triangles: bool = True, add_wireframe: bool= False) -> None:
         """Add a unit diameter ico-sphere to this Mesh.
 
         Args:
@@ -324,9 +325,9 @@ class Mesh:
             add_wireframe (bool, optional): whether to add a wireframe outline. Defaults to False.
         """
 
-    def add_uv_sphere(self, color: np.ndarray, transform: np.ndarray,
-                      lat_count: int, long_count: int,
-                      fill_triangles: bool, add_wireframe: bool) -> None:
+    def add_uv_sphere(self, color: Optional[np.ndarray] = None, transform: Optional[np.ndarray] = None,
+                      lat_count: int = 10, long_count: int = 10,
+                      fill_triangles: bool = True, add_wireframe: bool = False) -> None:
         """Add a unit diameter UV sphere to this Mesh.
 
         Description:
@@ -342,8 +343,8 @@ class Mesh:
             add_wireframe (bool, optional): whether to add a wireframe outline. Defaults to False.
         """
 
-    def add_mesh(self, mesh_info: MeshInfo, transform: np.ndarray, reverse_triangle_order: bool,
-                 fill_triangles: bool, add_wireframe: bool) -> None:
+    def add_mesh(self, mesh_info: MeshInfo, transform: Optional[np.ndarray] = None, reverse_triangle_order: bool = False,
+                 fill_triangles: bool = True, add_wireframe: bool = False) -> None:
         """Add a triangle mesh to this ScenePic Mesh, with normals computed automatically.
 
         Args:
@@ -355,9 +356,9 @@ class Mesh:
         """
 
     def add_mesh_without_normals(self, vertices: np.ndarray, triangles: np.ndarray,
-                                 colors: np.ndarray, uvs: np.ndarray,
-                                 transform: np.ndarray, reverse_triangle_order: bool,
-                                 fill_triangles: bool, add_wireframe: bool) -> None:
+                                 colors: Optional[np.ndarray] = None, uvs: Optional[np.ndarray] = None,
+                                 transform: Optional[np.ndarray] = None, reverse_triangle_order: bool = False,
+                                 fill_triangles: bool = True, add_wireframe: bool = False) -> None:
         """Add a triangle mesh to this ScenePic Mesh, with normals computed automatically.
 
         Args:
@@ -372,9 +373,9 @@ class Mesh:
         """
 
     def add_mesh_with_normals(self, vertices: np.ndarray, normals: np.ndarray,
-                              triangles: np.ndarray, colors: np.ndarray, uvs: np.ndarray,
-                              transform: np.ndarray, reverse_triangle_order: bool,
-                              fill_triangles: bool, add_wireframe: bool) -> None:
+                              triangles: np.ndarray, colors: Optional[np.ndarray] = None, uvs: Optional[np.ndarray] = None,
+                              transform: Optional[np.ndarray] = None, reverse_triangle_order: bool = False,
+                              fill_triangles: bool = True, add_wireframe: bool = False) -> None:
         """Add a triangle mesh to this ScenePic Mesh.
 
         Args:
@@ -390,7 +391,7 @@ class Mesh:
         """
 
     def add_lines(self, start_points: np.ndarray, end_points: np.ndarray,
-                  color: np.ndarray, transform: np.ndarray) -> None:
+                  color: Optional[np.ndarray] = None, transform: Optional[np.ndarray] = None) -> None:
         """Add a line cloud to this Mesh.
 
         Args:
@@ -401,8 +402,8 @@ class Mesh:
             transform (np.ndarray): homogeneous 3D transform. Defaults to None.
         """
 
-    def enable_instancing(self, positions: np.ndarray, rotations: np.ndarray,
-                          colors: np.ndarray) -> None:
+    def enable_instancing(self, positions: np.ndarray, rotations: Optional[np.ndarray] = None,
+                          colors: Optional[np.ndarray] = None) -> None:
         """Makes ScenePic render this Mesh with multiple instances, e.g. for point-cloud visualizations.
         Can be used to make point clouds, for example.
         The whole contents of the Mesh will be rendered multiple times.

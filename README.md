@@ -17,10 +17,13 @@ We currently support Python and C++:
 
 ### Python
 We provide up-to-date Python wheels via
-[PyPi](https://pypi.org/project/scenepic/):
+[PyPi](https://pypi.org/project/scenepic/) and also [conda packages](https://anaconda.org/conda-forge/scenepic):
 
 ```
 pip install scenepic
+```
+```
+conda install -c conda-forge scenepic
 ```
 
 If you want to build the library yourself (e.g. for development reasons)

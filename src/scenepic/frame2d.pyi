@@ -1,6 +1,7 @@
 from typing import Union
 
 import numpy as np
+from typing import Optional
 
 from .image import Image
 
@@ -9,8 +10,8 @@ class Frame2D:
     """Represents a frame of a 2D animation."""
 
     def add_line(self, coordinates: np.ndarray, line_color: np.ndarray,
-                 line_width: float, fill_color: np.ndarray, close_path: bool,
-                 layer_id: str) -> None:
+                 line_width: float, fill_color: Optional[np.ndarray] = None, close_path: bool = False ,
+                 layer_id: str = "") -> None:
         """Add a line to the frame.
 
         Args:
@@ -24,7 +25,7 @@ class Frame2D:
 
     def add_rectangle(self, x: float, y: float, w: float, h: float,
                       line_color: np.ndarray, line_width: float,
-                      fill_color: np.ndarray, layer_id: str) -> None:
+                      fill_color: Optional[np.ndarray] = None, layer_id: str = "") -> None:
         """Add a rectangle to the frame.
 
         Args:
@@ -69,7 +70,7 @@ class Frame2D:
 
     def add_circle(self, x: float, y: float, radius: float,
                    line_color: np.ndarray, line_width: float,
-                   fill_color: np.ndarray, layer_id: str) -> None:
+                   fill_color: Optional[np.ndarray] = None, layer_id: str = "") -> None:
         """Add a circle to the frame.
 
         Args:

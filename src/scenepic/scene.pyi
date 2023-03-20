@@ -1,6 +1,7 @@
 from typing import Mapping, Union
 
 import numpy as np
+from typing import Optional
 
 from .audio_track import AudioTrack
 from .camera import Camera
@@ -14,6 +15,7 @@ from .mesh import Mesh, MeshUpdate
 from .text_panel import TextPanel
 from .ui_parameters import UIParameters
 from .video import Video
+
 
 
 class QuantizationInfo:
@@ -39,7 +41,7 @@ class QuantizationInfo:
 class Scene:
     """Top level container representing an entire ScenePic Scene."""
 
-    def __init__(self, scene_id: str):
+    def __init__(self, scene_id: Optional[str] = None):
         """Constructor.
 
         Args:
@@ -72,9 +74,9 @@ class Scene:
             grid_column (str): the CSS column specification for the Canvas
         """
 
-    def create_canvas_3d(self, canvas_id: str, width: int, height: int,
-                         html_id: str, camera: Camera,
-                         ui_parameters: UIParameters, media_id: str) -> Canvas3D:
+    def create_canvas_3d(self, canvas_id: Optional[str] = None, width: int = 400, height: int = 400,
+                         html_id: Optional[str] = None, camera: Camera = Camera(),
+                         ui_parameters: UIParameters = UIParameters(), media_id: Optional[str] = None) -> Canvas3D:
         """Create a new 3D Canvas and append to the Scene.
 
         Args:
@@ -97,9 +99,9 @@ class Scene:
             Canvas3D: a reference to the new Canvas object
         """
 
-    def create_canvas_2d(self, canvas_id: str, width: int, height: int,
-                         html_id: str, background_color: np.ndarray,
-                         media_id: str) -> Canvas2D:
+    def create_canvas_2d(self, canvas_id: Optional[str] = None, width: int = 400, height: int = 400,
+                         html_id: Optional[str] = None, background_color: np.ndarray = (0, 0, 0),
+                         media_id: Optional[str] = None) -> Canvas2D:
         """Create a new 2D Canvas and append to the Scene.
 
         Args:
@@ -119,12 +121,12 @@ class Scene:
             Canvas2D: a reference to the new Canvas object
         """
 
-    def create_graph(self, canvas_id: str, width: int, height: int,
-                     name_align: str, value_align: str,
-                     html_id: str, background_color: np.ndarray,
-                     margin: Graph.Margin, font_family: str,
-                     name_size: float, value_size: float,
-                     media_id: str) -> Graph:
+    def create_graph(self, canvas_id: Optional[str] = None, width: int= 400, height: int = 400,
+                     name_align: str = "left" , value_align: Optional[str] = "right",
+                     html_id: Optional[str] = None, background_color: np.ndarray = (255, 255, 255),
+                     margin: Graph.Margin = 10 , font_family: str = "sans-serif",
+                     name_size: float = 12.0, value_size: float = 12.0,
+                     media_id: Optional[str] = None) -> Graph:
         """Create a new Graph canvas and append to the Scene.
 
         Args:
@@ -154,11 +156,11 @@ class Scene:
             Graph: a reference to the new Graph object
         """
 
-    def create_mesh(self, mesh_id: str, layer_id: str, double_sided: bool,
-                    camera_space: bool, shared_color: np.ndarray,
-                    texture_id: Union[Image, str], nn_texture: bool,
-                    use_texture_alpha: bool, is_billboard: bool,
-                    is_label: bool) -> Mesh:
+    def create_mesh(self, mesh_id: Optional[str] = None, layer_id: Optional[str] = None, double_sided: bool = False,
+                    camera_space: bool = False, shared_color: Optional[np.ndarray] = None,
+                    texture_id: Optional[Union[Image, str]] = None, nn_texture: bool = True,
+                    use_texture_alpha: bool = True, is_billboard: bool = False,
+                    is_label: bool = False) -> Mesh:
         """Create a new Mesh and append to the Scene.
 
         Description:
@@ -194,7 +196,7 @@ class Scene:
 
     def update_mesh(self, base_mesh_id: str, positions: np.ndarray,
                     normals: np.ndarray, colors: np.ndarray,
-                    mesh_id: str) -> MeshUpdate:
+                    mesh_id: Optional[str] = None) -> MeshUpdate:
         """Create a new mesh from an existing one by replacing its vector positions, normals, and/or colors.
 
         Args:
@@ -211,7 +213,7 @@ class Scene:
 
     def update_instanced_mesh(self, base_mesh_id: str, positions: np.ndarray,
                               rotations: np.ndarray, colors: np.ndarray,
-                              mesh_id: str) -> MeshUpdate:
+                              mesh_id: Optional[str] = None) -> MeshUpdate:
         """Create a new mesh from an existing one by replacing its vector positions, normals, and/or colors.
 
         Args:
@@ -226,8 +228,8 @@ class Scene:
             MeshUpdate: a reference to the MeshUpdate object
         """
 
-    def update_mesh_positions(self, base_mesh_id: str, positiosn: np.ndarray,
-                              mesh_id: str) -> MeshUpdate:
+    def update_mesh_positions(self, base_mesh_id: str, positions: np.ndarray,
+                              mesh_id: Optional[str] = None) -> MeshUpdate:
         """Create a new mesh from an existing one by replacing its vector positions and compute normal values.
 
         Args:
@@ -240,7 +242,7 @@ class Scene:
             MeshUpdate: a reference to the MeshUpdate object
         """
 
-    def create_audio(self, audio_id: str) -> AudioTrack:
+    def create_audio(self, audio_id: Optional[str] = None) -> AudioTrack:
         """Create a new AudioTrack object and append it to the Scene.
 
         Audio tracks are Scene-wide resources that can be attached to multiple canvases.
@@ -253,7 +255,7 @@ class Scene:
             AudioTrack: a reference to an Audio track object
         """
 
-    def create_video(self, video_id: str) -> Video:
+    def create_video(self, video_id: Optional[str] = None) -> Video:
         """Create a new Video object and append it to the Scene.
 
         Videos are Scene-wide resources that can be attached to multiple canvases.
@@ -266,7 +268,7 @@ class Scene:
             Video: a reference to an Video object
         """
 
-    def create_image(self, image_id: str) -> Image:
+    def create_image(self, image_id: Optional[str] = None) -> Image:
         """Create a new Image and append to the Scene.
 
         Images are Scene-wide resources that can be reused as textures
@@ -280,10 +282,10 @@ class Scene:
             Image: a reference to the Image object
         """
 
-    def create_label(self, label_id: str, text: str, color: np.ndarray,
-                     size_in_pixels: float, font_family: str,
-                     layer_id: str, horizontal_align: str, vertical_align: str,
-                     offset_distance: float, camera_space: bool) -> Label:
+    def create_label(self, label_id:  Optional[str] = None, text: str = "Text", color: np.ndarray = (255, 255, 255),
+                     size_in_pixels: float = 12.0, font_family: str = "sans-serif",
+                     layer_id:  Optional[str] = None, horizontal_align: str = "left", vertical_align: str = "middle",
+                     offset_distance: float = 0.1, camera_space: bool = False) -> Label:
         """Create a new Label and append to the Scene.
 
         Labels are Scene-wide resources that can be reused across
@@ -312,8 +314,8 @@ class Scene:
             Label: a reference to the new Label object
         """
 
-    def create_text_panel(self, text_panel_id: str, html_id: str,
-                          add_input_box: bool) -> TextPanel:
+    def create_text_panel(self, text_panel_id: Optional[str] = None, html_id: Optional[str] = None,
+                          add_input_box: bool = False) -> TextPanel:
         """Create a new TextPanel and add directly to the HTML page.
 
         Args:
@@ -328,8 +330,8 @@ class Scene:
             TextPanel: a reference to the new TextPanel object
         """
 
-    def create_drop_down_menu(self, drop_down_menu_id: str, title: str,
-                              html_id: str) -> DropDownMenu:
+    def create_drop_down_menu(self, drop_down_menu_id: Optional[str] = None, title: Optional[str] = None,
+                              html_id: Optional[str] = None) -> DropDownMenu:
         """Create a new DropDownMenu and add directly to the HTML page.
 
         Args:
@@ -344,10 +346,10 @@ class Scene:
             DropDownMenu: a reference to the new DropDownMenu object
         """
 
-    def quantize_updates(self, relative_error_threshold: float,
-                         absolute_error_threshold: float,
-                         base_mesh_id: str,
-                         per_frame_range: bool) -> Mapping[str, QuantizationInfo]:
+    def quantize_updates(self, relative_error_threshold: float = 1e-5,
+                         absolute_error_threshold: float = -1.0,
+                         base_mesh_id: Optional[str] = None,
+                         per_frame_range: bool = True) -> Mapping[str, QuantizationInfo]:
         """Quantize the mesh updates.
 
         Description:
@@ -466,8 +468,8 @@ class Scene:
             standalone (bool): whether to make the script standalone by including the library
         """
 
-    def save_as_html(self, path: str, title: str,
-                     head_html: str, body_html: str) -> None:
+    def save_as_html(self, path: Optional[str] = None, title: Optional[str] = None,
+                     head_html: Optional[str] = None, body_html: Optional[str] = None) -> None:
         """Save the scene as a self-contained html file with no dependencies.
 
         Args:
