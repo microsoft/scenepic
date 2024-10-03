@@ -10,12 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Use Python 3.8
-        uses: actions/setup-python@v4
+      - name: Use Python 3.11
+        uses: actions/setup-python@v5
         with:
-          python-version: 3.8
+          python-version: 3.11
 
       - name: Install flake8
         run: pip install -r requirements-flake8.txt
@@ -34,7 +34,7 @@ jobs:
             exclude: ''
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: NPM steps
         run: |
@@ -64,4 +64,4 @@ jobs:
     needs: [linting, cpp-format]
     uses: ./.github/workflows/mac.yml
     with:
-      vmImage: macOS-latest
+      vmImage: macos-latest

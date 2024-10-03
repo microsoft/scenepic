@@ -22,7 +22,7 @@ jobs:
 - job: macos
   variables:
     CIBW_ARCHS_MACOS: x86_64 arm64
-  pool: {vmImage: 'macOS-latest'}
+  pool: {vmImage: 'macos-latest'}
   steps:
     - task: UsePythonVersion@0
     - template: templates/npm-steps.yml

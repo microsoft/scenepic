@@ -31,7 +31,7 @@ can clone the repository and follow most of the instructions
 to [build the c++ client library](#c-client-build-how-to),
 but then run
 ```
-python setup.py develop
+pip install -e .[dev]
 ```
 which will then build and install the library locally.
 

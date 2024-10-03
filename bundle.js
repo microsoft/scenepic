@@ -1,15 +1,24 @@
-let browserify = require("browserify")
-let tsify = require("tsify")
-let minify = require("minify-stream")
-let derequire = require("browserify-derequire")
-let fs = require("fs")
-let exorcist = require("exorcist")
-let makeDir = require('make-dir')
+let browserify = require("browserify");
+let tsify = require("tsify");
+let minify = require("minify-stream");
+let derequire = require("browserify-derequire");
+let fs = require("fs");
+let exorcist = require("exorcist");
+const { mkdir } = require("node:fs/promises");
+const { join } = require('node:path');
 
-makeDir.sync("dist")
+async function createDist() {
+    const dirCreation = await mkdir("dist")
+    console.log(dirCreation)
+    return dirCreation    
+}
 
-let stream = fs.createWriteStream("dist/scenepic.min.js")
-let mapFile = "dist/scenepic.min.js.map"
+if (!fs.existsSync("dist")){
+    createDist().catch(console.error)
+}
+
+let stream = fs.createWriteStream(join("dist", "scenepic.min.js"))
+let mapFile = join("dist", "scenepic.min.js.map")
 
 version = fs.readFileSync("VERSION")
 stream.write("// " + version + "\n")

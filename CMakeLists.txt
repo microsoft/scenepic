@@ -37,7 +37,7 @@ endif()
 
 # ------------------- Detect the system -----------------------
 
-set (CMAKE_CXX_STANDARD 14)
+set (CMAKE_CXX_STANDARD 17)
 
 if( APPLE )
   add_definitions( -DAPPLE )
@@ -95,7 +95,7 @@ FetchContent_Declare(
 FetchContent_Declare(
   pybind11
   GIT_REPOSITORY https://github.com/pybind/pybind11/
-  GIT_TAG        v2.10.1
+  GIT_TAG        v2.13.6
 )
 
 set(CMAKE_POLICY_DEFAULT_CMP0077 NEW) 
