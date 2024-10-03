@@ -5,7 +5,6 @@ steps:
   displayName: 'Build wheel'
 
 - bash: |
-    python setup.py develop
     python -m pytest test
 
   displayName: PyTest

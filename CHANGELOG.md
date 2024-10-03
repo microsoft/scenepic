@@ -1,5 +1,12 @@
 # Changelog
 
+## [2024-10-03 - Version 1.1.1](https://github.com/microsoft/scenepic/releases/tag/v1.1.1)
+Updating CI and dependencies.
+
+This point release updates to the latest versions of most dependencies,
+including compatibility with the latest NPM, pybind11, and updates
+the pipelines to be compatible with more up-to-date practices.
+
 ## [2023-03-13 - Version 1.1.0](https://github.com/microsoft/scenepic/releases/tag/v1.1.0)
 As part of this 1.1 minor release a few final issues were addressed:
 

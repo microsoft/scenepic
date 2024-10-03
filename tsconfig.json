@@ -6,6 +6,7 @@
         "target": "es6",
         "module": "commonjs",
         "moduleResolution": "node",
+        "forceConsistentCasingInFileNames": false,
         "noImplicitAny": false,
         "removeComments": true,
         "preserveConstEnums": true,

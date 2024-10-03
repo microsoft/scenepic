@@ -1,18 +1,18 @@
-name: Build Wheels for Release
+name: Build Python Wheels for Release
 
 on:
   workflow_dispatch:
 
 jobs:
-  build_wheels:
-    name: Build wheels on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
+  build_windows_wheels:
+    name: Build wheels on windows
+    runs-on: windows-latest
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        python: [cp37, cp38, cp39, cp310, cp311, cp312]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: NPM steps
         run: |
@@ -20,10 +20,126 @@ jobs:
           npm run build
 
       - name: Build wheels
-        uses: pypa/cibuildwheel@v2.12.0
+        uses: pypa/cibuildwheel@v2.21.1
         env:
-          CIBW_ARCHS_MACOS: x86_64 arm64
-
-      - uses: actions/upload-artifact@v3
+          CIBW_BUILD: ${{ matrix.python }}-win*
         with:
+          package-dir: ${{github.workspace}}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wheels-${{ matrix.python }}-windows
           path: ./wheelhouse/*.whl
+  build_mac_wheels:
+    name: Build wheels on mac
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        python: [cp310, cp311, cp312]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        id: python
+        with:
+          python-version: "3.10 - 3.12"
+          update-environment: false
+      
+      - name: NPM steps
+        run: |
+          npm install
+          npm run build
+
+      - name: Fix path
+        run: |
+          export PATH=$(python3 -m site --user-base)/bin:$PATH
+
+      - name: Build wheels
+        uses: pypa/cibuildwheel@v2.21.1
+        env:
+          CIBW_BUILD: ${{ matrix.python }}-macosx*
+          CIBW_ARCHS_MACOS: arm64
+          CIBW_ENVIRONMENT_MACOS : >
+            MACOSX_DEPLOYMENT_TARGET=11.0
+        with:
+          package-dir: ${{github.workspace}}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wheels-${{ matrix.python }}-mac
+          path: ./wheelhouse/*.whl
+  build_manylinux_wheels:
+    name: Build wheels on manylinux
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: [cp37, cp38, cp39, cp310, cp311, cp312, pp39, pp310]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: NPM steps
+        run: |
+          npm install
+          npm run build
+
+      - name: Build wheels
+        uses: pypa/cibuildwheel@v2.21.1
+        env:
+          CIBW_BUILD: ${{ matrix.python }}-manylinux*
+          CIBW_BEFORE_ALL: yum makecache && yum -y install devtoolset-10-libatomic-devel
+        with:
+          package-dir: ${{github.workspace}}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wheels-${{ matrix.python }}-manylinux
+          path: ./wheelhouse/*.whl
+
+  build_musllinux_wheels:
+    name: Build wheels on musllinux
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: [cp37, cp38, cp39, cp310, cp311, cp312]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: NPM steps
+        run: |
+          npm install
+          npm run build
+
+      - name: Build wheels
+        uses: pypa/cibuildwheel@v2.21.1
+        env:
+          CIBW_BUILD: ${{ matrix.python }}-musllinux*
+        with:
+          package-dir: ${{github.workspace}}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wheels-${{ matrix.python }}-musllinux
+          path: ./wheelhouse/*.whl
+
+  merge:
+      needs:
+        - build_windows_wheels
+        - build_mac_wheels
+        - build_manylinux_wheels
+        - build_musllinux_wheels
+      runs-on: ubuntu-latest
+      steps:
+      - name: Download Wheels
+        uses: actions/download-artifact@v4
+        with:
+          path: wheelhouse
+          pattern: wheels-*
+          merge-multiple: true
+      - run: ls -R wheelhouse
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wheels
+          path: ./wheelhouse/*

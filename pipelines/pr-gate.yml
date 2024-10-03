@@ -12,4 +12,4 @@ jobs:
 
 - template: templates/mac-job.yml
   parameters:
-    vmImage: 'macOS-latest'
+    vmImage: 'macos-latest'

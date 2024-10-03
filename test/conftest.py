@@ -6,6 +6,7 @@
 import base64
 import json
 import os
+import platform
 import zlib
 
 import numpy as np
@@ -31,7 +32,12 @@ def _decode_and_decompress(buffer: bytes) -> np.ndarray:
 def _assert_buffer_equal(actual, expected):
     actual = _decode_and_decompress(actual)
     expected = _decode_and_decompress(expected)
-    np.testing.assert_array_almost_equal(actual, expected)
+    decimal = 6
+    if platform.system() == "Darwin" and platform.processor() == "arm":
+        # Apple silicon appears to be less precise
+        decimal = 5
+
+    np.testing.assert_array_almost_equal(actual, expected, decimal=decimal)
 
 
 def _assert_dict_equal(actual, expected):
