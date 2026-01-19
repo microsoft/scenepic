@@ -10,7 +10,7 @@ import Mesh from "./Mesh";
 import { VertexBufferType } from "./VertexBuffers";
 import { vec2, vec3 } from "gl-matrix";
 import { saveAs } from "file-saver";
-import * as JSZip from "jszip";
+import JSZip from "jszip";
 
 const StatusPanelName = "___STATUS___";
 const LogPanelName = "___LOG___";

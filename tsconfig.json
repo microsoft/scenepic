@@ -11,6 +11,8 @@
         "removeComments": true,
         "preserveConstEnums": true,
         "allowJs": false,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
         "declaration": true,
         "rootDir": ".",
         "outDir": "build",

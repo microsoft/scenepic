@@ -1,6 +1,6 @@
 {
   "name": "scenepic",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "3D Visualization Made Easy",
   "author": "ScenePic Team",
   "license": "MIT",
@@ -23,19 +23,11 @@
     "@types/file-saver": "^2.0.7",
     "@types/node": "^22.7.4",
     "@types/pako": "^2.0.3",
-    "browserify": "^17.0.0",
-    "browserify-derequire": "^1.1.1",
-    "exorcist": "^2.0.0",
+    "esbuild": "^0.27.2",
     "file-saver": "^2.0.5",
-    "fs": "0.0.2",
     "gl-matrix": "^3.4.3",
     "jszip": "^3.10.1",
-    "make-dir": "^5.0.0",
-    "minify-stream": "^2.1.0",
     "pako": "^1.0.11",
-    "tsify": "^5.0.4",
-    "typescript": "^5.6.2",
-    "watchify": "^4.0.0",
-    "npm": "^10.8.3"
+    "typescript": "^5.6.2"
   }
 }
