@@ -1,11 +1,26 @@
-let browserify = require("browserify")
-let tsify = require("tsify")
-let fs = require("fs")
+const esbuild = require("esbuild");
+const { mkdir } = require("node:fs/promises");
+const { readFileSync } = require("node:fs");
+const { join } = require("node:path");
 
-stream = fs.createWriteStream("dist/scenepic.js")
+async function build() {
+    await mkdir("dist", { recursive: true });
+    const version = readFileSync("VERSION", "utf8").trim();
 
-let b = browserify()
-    .add('./tssrc/ScenePic.ts')
-    .plugin(tsify)
-    .bundle()
-    .pipe(stream)
+    await esbuild.build({
+        entryPoints: ["tssrc/ScenePic.ts"],
+        bundle: true,
+        platform: "browser",
+        format: "iife",
+        outfile: join("dist", "scenepic.js"),
+        sourcemap: true,
+        banner: { js: `// ${version}\n` }
+    });
+
+    console.info("Built dist/scenepic.js");
+}
+
+build().catch(err => {
+    console.error(err);
+    process.exit(1);
+});
