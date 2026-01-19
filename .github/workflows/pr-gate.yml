@@ -65,3 +65,9 @@ jobs:
     uses: ./.github/workflows/mac.yml
     with:
       vmImage: macos-latest
+
+  mac-intel-job:
+    needs: [linting, cpp-format]
+    uses: ./.github/workflows/mac.yml
+    with:
+      vmImage: macos-15-intel

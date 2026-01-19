@@ -1,41 +1,25 @@
-let browserify = require("browserify")
-let tsify = require("tsify")
-let fs = require("fs")
-let exorcist = require("exorcist")
-let watchify = require("watchify")
+const esbuild = require("esbuild");
+const { mkdir } = require("node:fs/promises");
+const { join } = require("node:path");
 
-let stream = fs.createWriteStream("build/scenepic.js")
-let mapFile = "build/scenepic.js.map"
+async function watch() {
+    await mkdir("build", { recursive: true });
 
-let b = browserify({
-    debug: true,
-    cache: {},
-    packageCache: {},
-    plugin: [watchify]
-})
-.add([
-    "tssrc/Canvas2D.ts",
-    "tssrc/Canvas3D.ts",
-    "tssrc/CanvasBase.ts",
-    "tssrc/CSSStyles.ts",
-    "tssrc/DropDownMenu.ts",
-    "tssrc/Mesh.ts",
-    "tssrc/Misc.ts",
-    "tssrc/Shaders.ts",
-    "tssrc/SPScene.ts",
-    "tssrc/TextPanel.ts",
-    "tssrc/WebGLMeshBuffers.ts",
-    "tssrc/ScenePic.ts"
-])
-.plugin(tsify)
+    const ctx = await esbuild.context({
+        entryPoints: ["tssrc/ScenePic.ts"],
+        bundle: true,
+        platform: "browser",
+        format: "iife",
+        sourcemap: true,
+        outfile: join("build", "scenepic.js"),
+        logLevel: "info"
+    });
 
-b.on('update', bundle)
-bundle()
-
-function bundle() {
-    console.info("File updated")
-    b.bundle()
-    .on('error', console.error)
-    .pipe(exorcist(mapFile))
-    .pipe(stream)
+    await ctx.watch();
+    console.info("Watching tssrc -> build/scenepic.js");
 }
+
+watch().catch(err => {
+    console.error(err);
+    process.exit(1);
+});
